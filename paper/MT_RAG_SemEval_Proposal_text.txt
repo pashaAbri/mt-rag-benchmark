@@ -1,0 +1,296 @@
+
+--- Page 1 ---
+MTRAGEval: Evaluating Multi-Turn RAG Conversations
+SaraRosenthal,YannisKatsis,VrajShah,MarinaDanilevsky
+IBMResearch,USA
+sjrosenthal@us.ibm.com
+1 Overview
+? Question: where does doctor strange get his powers from
+LargeLanguageModels(LLMs)havebecomeex-
+tremelypopularaschat-basedassistants. Onecom-
+monuseisseekinginformationwhereitisimpor-
+tanttoreceiveareliableandtrustworthyresponse
+bygroundingtheanswerinrelevantpassages. Re-
+trievalaugmentedgeneration(RAG)hastherefore ----SUBTASK A ----- ----SUBTASK B -----
+become an important and popular field in recent
+years,includingtherecentsharedtask,TRECRAG A
+Corpus
+eval(Pradeepetal.,2024),onasinglequestion. prompt
+Workhasalsoshiftedbeyondquestionanswer-
+----SUBTASK C -----
+ingtoMulti-TurnRAGconversations(Aliannejadi
+et al., 2024; Dziri et al., 2022; Feng et al., 2021;
+Kuoetal.,2024;Katsisetal.,2025). Thisincludes Corpus A
+the TREC iKAT (Aliannejadi et al., 2024) task, prompt
+which focused on personalized Multi-Turn RAG.
+Inthemoregeneralsetting,arecentlyreleasednew
+benchmark called MTRAG (Katsis et al., 2025)
+showsthatthereisstillaneedforimprovementin
+RAG-basedchat. Forinstance,ithighlightssome
+openareasofimprovementsuchasanswerability
+(knowing when to answer a question or not) and
+later turns (turns beyond the first turn are more
+challenging due to non-standalone information).
+Tothebestofourknowledge,MTRAGisthefirst
+benchmarkthatusesactiveretrieval(i.e.,real-time
+retrieval), provides long answers, includes unan-
+swerables,andhasmultipledomains. Theseprop-
+erties make it an ideal benchmark for evaluating
+allaspects ofthe RAG pipeline: A) Retrieval, B)
+Generation,andC)RAG.Inthistask,wewillex-
+pand on this work by presenting three subtasks
+(seeFigure1)alignedwithevaluatingtheseRAG
+properties:
+• SubtaskA)-Retrieval
+• SubtaskB)-GenerationwithReferencePas-
+sages(Reference)
+• SubtaskC)-GenerationwithRetrievedPas-
+sages(RAG)
+--------
+A Doctor Strange's powers come from mystical entities such as
+Agamotto, Cyttorak, Ikonn, Oshtur, Raggadorr, and
+Watoomb, who lend their energies for spells. He also wields
+Task mystical artifacts including the Cloak of Levitation, the Eye of
+Agamotto, the Book of the Vishanti, and the Orb of Agamotto
+which give him additional powers.
+? How many films does he appear in
+Task
+Task
+Task
+Task
+Figure 1: A description of the input and task for the
+three proposed subtasks. A TASK with two turns is
+shown. SubtaskA)GivenaTASK,Retrievetherelevant
+passagesforthelastturninthetask. SubtaskB)Given
+ATASKandthereferencepassages(ingold),generate
+ananswertothelastturninthetask. SubtaskC)Given
+aTASK,retrievepassagesandthengenerateananswer
+tothelastturninthetask. Inputprovidedtoparticipants
+isshowninblue(andgold),modeloutputthatwillbe
+evaluatedisinwhite,andintermediateinputisingrey.
+ThesetaskswillpromoteresearchinMulti-Turn
+RAG,particularlysolutionsthataddresschallenges
+such as answerability and later turns as well as
+othernewchallenges(toremainhidden)thatwere
+nothighlightedinthebenchmark. PriorRAGtasks,
+TRECRAGandiKAT,had45and24submissions
+respectively,weexpectsimilarparticipationinour
+task. Thistaskwillalsoprovideadditionalmulti-
+turn conversations which is a valuable resource
+whichwewillreleasepubliclytothecommunity.
+2 DataandResources
+WewillbeprovidingtheMTRAGbenchmark(Kat-
+sis et al., 2025) and its corresponding corpora
+--- Page 2 ---
+acrossfourdomainsastrialanddevelopmentdata. Recall nDCG
+All evaluation data for the test phase will come @5 @10 @5 @10
+from new unseen conversations targeting areas BM25 0.20 0.27 0.18 0.21
+foundchallenginginMTRAG(answerability,later BGE-base1.5 0.30 0.38 0.27 0.30
+turns) as well as new unseen challenges that will
+Elser 0.49 0.58 0.45 0.49
+remainhiddentoparticipants. Theconversations
+in MTRAG and the new test set are all manually Table1: RetrievalPerformancebaselinesofmodelsonour
+benchmarkusingRecallandnDCGmetricswiththelastturn
+created and reviewed by human annotators toen-
+questiononly.Retrievalperformanceisonlycomputedonthe
+surehighqualityasdescribedinthepaper(Katsis
+777answerableandpartialtasksofMTRAG
+etal.,2025).
+Given a conversation, a task is a conversation
+turncontainingallpreviousturnstogetherwiththe
+usedifferentresourcessuchasnewtrainedmodels,
+lastuserquestion(e.g.,thetaskcreatedforturnk
+promptengineering,queryrewriting,andagentic
+includesalluserandagentquestions/responsesfor
+RAG(repeatedquerying). Wewillnotallowsub-
+thefirstk-1turnsplustheuserquestionforturn
+missions using Mixtral 8x7B as this model was
+k). Anexampleofataskwithtwoturnsisshown
+usedasthegeneratorduringdatasetcreation.
+inFigure1. Allofoursubtaskswillbeperformed
+atthetasklevel. Thetestsetwillconsistofapprox-
+imately 200 tasks, each coming from a different 4 Evaluation
+conversation. Wewillintentionallyincludetasks
+thatarechallengingforSOTALLMsintheevalu-
+Wewillprovidetheteamswithanevaluationscript
+ation. Wewillnotevaluateonafullconversation
+torunontheirownonthedevelopmentset. During
+becauseotherwiseataskwillrevealanswerstoa
+the evaluation period, we will provide the teams
+previoustaskintheconversation. Wewillrelease
+with the test data. Due to the sequential nature
+thefullconversations,notjustthetasks,following
+of the task, we will have two phases, a retrieval
+theevaluationperiod.
+phase (Subtask A, C), followed by a generation
+3 Subtasks phase(SubtaskB).Wewillonlybeevaluatingone
+submissionpersubtask,butparticipantscankeep
+Using the data described in the previous section,
+submittinguntiltheendoftheevaluationphaseand
+wewillorganizethefollowingthreesubtasks(See
+wewillonlyevaluatetheirfinalsubmission. Once
+Figure1): A)Retrieval,B)Generationwithrefer-
+theevaluationphaseiscomplete,wewillevaluate
+encepassages,andC)fullRAG-retrievalfollowed
+eachsubtaskonthesamescriptprovidedtothepar-
+bygeneration:
+ticipantswiththereferencepassagesandanswers.
+The results for the test leaderboard will only be-
+• SubtaskA-Retrieval: Givenataskthatisan-
+comevisibleafterthecompetitionhasconcluded.
+swerableandhasasetofrelevantpassages,eval-
+uate whether the retrieval system retrieves the Theretrievalsubtaskwillbeevaluatedusingthe
+relevantpassages. commonretrievalmetrics,nDCGandRecall. The
+twogenerationsubtaskswillbeevaluatedusingthe
+• Subtask B - Generation with Reference Pas-
+threemainmetricsreportedinthepaper,(1)RB :
+alg
+sages(Reference): Givenataskwithasetofrel-
+TheharmonicmeanofBert-Recall,Rouge ,and
+L
+evantpassagesandatargetanswer,evaluatethe
+Bert-K-Prec,(2)RB : AReference-BasedLLM
+llm
+predicted answer of the generator system com-
+judgeadaptedfromRAD-Bench(Kuoetal.,2024)
+paredtothereferenceanswer.
+and(3)RL : TheRAGAS(Esetal.,2024)Faith-
+f
+fulnessLLMjudge. Allmetricswillbeconditioned
+• Subtask C - Generation with Retrieved Pas-
+onanIDKLLMjudgethatfirstdeterminesifthe
+sages(RAG):Givenataskwithatargetanswer,
+response contains an answer. In addition, due to
+firstretrieve5passages,thengenerateananswer.
+thereference-lessnatureofthefullRAGtaskwe
+Evaluate the predicted answer of the generator
+willhaveasmallhumanevaluation(approximately
+systemtothereferenceanswer.
+20tasks)onallparticipatingmodels. Fulldetails
+Participants can participate in one or multiple regarding the evaluation metrics are available in
+subtasks. Weencouragecreativesubmissionsthat thebenchmarkpaper(Katsisetal.,2025).
+--- Page 3 ---
+RLF RBllm RBalg Vraj Shah is a Staff Research Scientist at IBM
+• ◦ • ◦ • ◦ Almaden Research Center with experience in
+Reference 0.87 0.65 0.95 0.95 0.88 0.85 RAG systems, LLM-based evaluation meth-
+ods, and data management. He has served as
+GPT-4o 0.76 0.71 0.76 0.70 0.45 0.40
+Llama3.1405B 0.75 0.72 0.74 0.68 0.48 0.42 program committee member at several data
+Llama3.18B 0.55 0.56 0.59 0.59 0.37 0.35
+managementvenuessuchasVLDBandSIGMOD.
+Qwen2.57B 0.68 0.67 0.66 0.68 0.44 0.39
+Vraj will be a co-organizer of the task with a
+Table 2: Generationresultsbyretrievalsettingonthe842 focusonevaluationmetricsandrunningevaluation.
+tasks:Reference(•)andRAG(◦),w/IDKconditionedmet-
+rics.Percolumn,thebestresultisinboldandsecondbestis
+MarinaDanilevskyisaSeniorResearchScientist
+underlined.
+at the IBM Almaden Research Center, and the
+manager of the Core Language Technologies
+5 TrialDataandBaselines group. Sheworksonavarietyofresearchprojects
+on language modeling and text understanding
+We will be releasing the MTRAG bench-
+withinmultipledomains,withaparticularfocuson
+mark (Katsis et al., 2025) as trial/training data
+evaluation,modelexplainabilityandhuman-in-the-
+along with scripts for evaluation. The bench-
+looptechniques. Shehasco-organizedaprevious
+mark is available at https://github.com/IBM/
+SemEvaltask(TableFactVerification)andco-led
+mt-rag-benchmark. Thebenchmarkcontains110
+multipletutorialsandonlinecourses. Marinawill
+conversationswhichis842tasks. Weprovidebase-
+betheadvisoryorganizerforthetask.
+lines in Table 1 and Table 2 respectively for re-
+trievalandgeneration. Evenwiththebestmodel,
+theretrievalresultsarelow,showingthatthereis 7 EthicalConsiderations
+room for improvement. In the generation results,
+there is room for improvement compared to the 7.1 Impact
+referenceansweracrossbothgenerationtasks. We Hallucination is a key challenge associated with
+plan to include in the leaderboard different base- LLMs. RAGisanimportantframeworkforavoid-
+linesbasedonmodelsize(small/large). inghallucinationbyremainingfaithfultothepro-
+vided context. Improving RAG performance can
+6 TaskOrganizersandRoles
+helpavoidthespreadofmisinformationmakingit
+animportanttaskthatcanhaveasignificantimpact
+Sara Rosenthal is a Staff Research Scientist at
+forthedevelopmentofLLMs.
+IBMResearchinNewYork. Shehasconsiderable
+experience in building benchmarks and human
+7.2 DataandAnnotators
+annotation. She has co-organized eight SemEval
+Theannotatorsarehighlyskilledindividualswhose
+tasks: SentimentAnalysisinTwitter,OffensEval,
+solejobistoperformannotationtasksandtheyare
+and Table Fact Verification. She is currently an
+paidwellaboveminimumwage. Allannotatorin-
+organizer for the SemEval Workshop 2024-2025.
+formationisanonymizedtoavoidPII.Further,the
+She has also served as an Area Chair, SAC, and
+questionsinthebenchmarkandtestdataaregen-
+D&I chair at several *ACL conferences and is
+eralandnotspecifictoanyindividual. Anymention
+anActionEditorforTACL.Sarawillbethelead
+ofinformationthatlookspersonalisfictitious(e.g.
+organizerforthetask.
+HowcanIavoidbankruptcy?).
+AlldatawillbereleasedundertheApache2.0
+Yannis Katsis is a Senior Research Scientist
+license and all costs associated with the task, in-
+at IBM Research - Almaden with experience
+cludingannotationandevaluationresource,willbe
+in management, integration, and knowledge
+coveredunderongoingworkprocessesatIBM.
+extraction from both structured and unstructured
+data. His recent work includes evaluating and
+improvingRAGsystems,includingthereleaseof References
+theMTRAGbenchmark,whichwillformthebasis
+MohammadAliannejadi,ZahraAbbasiantaeb,Shubham
+of this task. Yannis will be a co-organizer of the
+Chatterjee,JeffreyDalton,andLeifAzzopardi.2024.
+taskwithafocusondatasetselectionandquality.
+TRECiKAT2023: Atestcollectionforevaluating
+conversationalandinteractiveknowledgeassistants.
+--- Page 4 ---
+InProceedingsofthe47thInternationalACMSIGIR
+ConferenceonResearchandDevelopmentinInfor-
+mation Retrieval, SIGIR ’24, page 819–829, New
+York,NY,USA.AssociationforComputingMachin-
+ery.
+Nouha Dziri, Ehsan Kamalloo, Sivan Milton, Os-
+mar Zaiane, Mo Yu, Edoardo M. Ponti, and Siva
+Reddy.2022. FaithDial: Afaithfulbenchmarkfor
+information-seeking dialogue. Transactions of the
+AssociationforComputationalLinguistics,10:1473–
+1490.
+Shahul Es, Jithin James, Luis Espinosa Anke, and
+StevenSchockaert.2024. RAGAs: Automatedevalu-
+ationofretrievalaugmentedgeneration. InProceed-
+ingsofthe18thConferenceoftheEuropeanChap-
+teroftheAssociationforComputationalLinguistics:
+SystemDemonstrations,pages150–158,St.Julians,
+Malta.AssociationforComputationalLinguistics.
+SongFeng,SivaSankalpPatel,HuiWan,andSachindra
+Joshi. 2021. MultiDoc2Dial: Modeling dialogues
+groundedinmultipledocuments. InProceedingsof
+the2021ConferenceonEmpiricalMethodsinNatu-
+ralLanguageProcessing,pages6162–6176,Online
+andPuntaCana,DominicanRepublic.Association
+forComputationalLinguistics.
+Yannis Katsis, Sara Rosenthal, Kshitij Fadnis, Chu-
+lakaGunasekara,Young-SukLee,LucianPopa,Vraj
+Shah,HuaiyuZhu,DanishContractor,andMarina
+Danilevsky.2025. MTRAG:Amulti-turnconversa-
+tionalbenchmarkforevaluatingretrieval-augmented
+generationsystems. Preprint,arXiv:2501.03468.
+Tzu-Lin Kuo, Feng-Ting Liao, Mu-Wei Hsieh, Fu-
+ChiehChang,Po-ChunHsu,andDa-ShanShiu.2024.
+RAD-Bench: Evaluatinglargelanguagemodelsca-
+pabilitiesinretrievalaugmenteddialogues. Preprint,
+arXiv:2409.12558.
+RonakPradeep,NandanThakur,SahelSharifymoghad-
+dam, Eric Zhang, Ryan Nguyen, Daniel Campos,
+Nick Craswell, and Jimmy Lin. 2024. Ragnaro¨k:
+A reusable rag framework and baselines for trec
+2024retrieval-augmentedgenerationtrack. Preprint,
+arXiv:2406.16828.
