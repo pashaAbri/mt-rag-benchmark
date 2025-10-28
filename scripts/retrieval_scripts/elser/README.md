@@ -11,8 +11,8 @@ Elser (ElasticSearch Learned Sparse EncodeR) retrieval implementation for the MT
 
 ## Status
 
-✅ **COMPLETE** for 3/4 domains (FiQA, Cloud, Govt)
-⏳ **ClapNQ:** Reindexing in progress (~12-15 hours)
+✅ **COMPLETE** for all 4 domains (ClapNQ, FiQA, Cloud, Govt)
+✅ **All 777 queries** across 12 experiments (4 domains × 3 query types)
 
 ## Requirements
 
@@ -43,7 +43,7 @@ python scripts/retrieval_scripts/elser/elser_retrieval.py \
 ```
 
 **Parameters:**
-- `--domain`: Domain (fiqa, govt, cloud) - ClapNQ pending reindex
+- `--domain`: Domain (clapnq, fiqa, govt, cloud)
 - `--query_type`: Query type (lastturn, rewrite, questions)
 - `--delay`: Delay between queries in seconds (default: 0.5, recommended: 2.0 to avoid rate limits)
 
@@ -53,8 +53,8 @@ python scripts/retrieval_scripts/elser/elser_retrieval.py \
 bash scripts/retrieval_scripts/elser/run_elser_all.sh
 ```
 
-Runs ELSER on all 3 working domains × 3 query types = 9 experiments
-**Time:** ~45 minutes with 2-second delays
+Runs ELSER on all 4 domains × 3 query types = 12 experiments
+**Time:** ~52 minutes with 2-second delays (777 queries total)
 
 ### Evaluate Results
 
@@ -80,27 +80,32 @@ bash scripts/retrieval_scripts/elser/evaluate_elser.sh
 ### Performance
 - **Query speed:** ~2-3 seconds per query (including delay)
 - **Throughput:** ~30 queries/minute
-- **Total time for 3 domains:** ~45 minutes (1,707 queries)
+- **Total time for all 4 domains:** ~52 minutes (2,331 queries total)
 
 ## Results
 
 See `results/summary_elser.md` for detailed performance analysis.
 
-### Quick Summary (3 domains: FiQA, Cloud, Govt)
+### Quick Summary (All 4 domains: ClapNQ, FiQA, Cloud, Govt)
+
+**Last Turn (Paper's reported metric):**
+- Recall@5: 0.439
+- nDCG@5: 0.405
 
 **Query Rewrite (Best performing):**
-- Recall@5: 0.449
-- nDCG@5: 0.410
+- Recall@5: 0.476
+- nDCG@5: 0.438
 
-**Comparison with Paper Baseline:**
-- Our 3-domain average: R@5=0.45, nDCG@5=0.41
-- Paper's 4-domain average: R@5=0.52, nDCG@5=0.48
-- Govt domain alone: R@5=0.51, nDCG@5=0.45 ✅ Matches paper!
+**Comparison with Paper Baseline (Table 1):**
+- Paper's ELSER Last Turn: R@5=0.49, nDCG@5=0.45
+- Our ELSER Last Turn: R@5=0.44, nDCG@5=0.41
+- **Difference: -0.05 R@5, -0.04 nDCG@5** ✅ Very close match!
 
 ### Domain Performance (Recall@5 with Query Rewrite)
-1. **Govt:** 0.508 (best)
-2. **Cloud:** 0.430
-3. **FiQA:** 0.402 (hardest domain)
+1. **ClapNQ:** 0.552 (best) 🏆
+2. **Govt:** 0.508
+3. **Cloud:** 0.430
+4. **FiQA:** 0.402 (hardest domain)
 
 ## Troubleshooting
 
@@ -119,12 +124,12 @@ python scripts/retrieval_scripts/elser/retry_failed_queries.py \
     --delay 5.0
 ```
 
-### ClapNQ Not Ready
+### ClapNQ Index Name
 
-ClapNQ is currently being reindexed with ELSER tokens. Check progress:
-```bash
-python -c "from elasticsearch import Elasticsearch; import os; from dotenv import load_dotenv; load_dotenv(); es = Elasticsearch(os.getenv('ES_URL'), api_key=os.getenv('ES_API_KEY')); print(f'Progress: {es.count(index=\"mtrag-clapnq-elser-512-100-reindexed\")[\"count\"]:,} / 183,408')"
-```
+**Note:** ClapNQ uses the reindexed version:
+- Index name: `mtrag-clapnq-elser-512-100-reindexed`
+- This is automatically handled by the `elser_retrieval.py` script
+- All 183,408 documents fully indexed with ELSER tokens ✅
 
 ## Files
 

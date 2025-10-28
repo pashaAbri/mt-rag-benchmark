@@ -179,7 +179,11 @@ def main():
     print(f"✅ Connected successfully\n")
     
     # Determine index name (for ES query)
-    index_name = f"mtrag-{args.domain}-elser-512-100"
+    # ClapNQ uses the reindexed version
+    if args.domain == 'clapnq':
+        index_name = "mtrag-clapnq-elser-512-100-reindexed"
+    else:
+        index_name = f"mtrag-{args.domain}-elser-512-100"
     
     # Collection name for results (must match what evaluation script expects)
     collection_mapping = {

@@ -1,15 +1,13 @@
 #!/bin/bash
-# Run ELSER retrieval on all working domains and query types
-# Note: ClapNQ is excluded as it's currently being reindexed
+# Run ELSER retrieval on all domains and query types
 
 set -e  # Exit on error
 
-# Only include domains that have ELSER fully indexed
-DOMAINS=("fiqa" "govt" "cloud")
+# All 4 domains with ELSER fully indexed
+DOMAINS=("clapnq" "fiqa" "govt" "cloud")
 QUERY_TYPES=("lastturn" "rewrite" "questions")
 
-echo "Running ELSER retrieval on all working domains and query types..."
-echo "Note: ClapNQ excluded (currently reindexing)"
+echo "Running ELSER retrieval on all domains and query types..."
 echo "Total experiments: $((${#DOMAINS[@]} * ${#QUERY_TYPES[@]}))"
 echo ""
 
@@ -26,7 +24,8 @@ for domain in "${DOMAINS[@]}"; do
             --query_type "$query_type" \
             --query_file "human/retrieval_tasks/${domain}/${domain}_${query_type}.jsonl" \
             --output_file "scripts/retrieval_scripts/elser/results/elser_${domain}_${query_type}.jsonl" \
-            --top_k 10
+            --top_k 10 \
+            --delay 2.0
         
         echo "✓ Completed: elser_${domain}_${query_type}.jsonl"
         echo ""
@@ -35,9 +34,10 @@ done
 
 echo "All ELSER experiments complete!"
 echo "Results saved to: scripts/retrieval_scripts/elser/results/"
-ls -lh scripts/retrieval_scripts/elser/results/elser_*.jsonl
-
 echo ""
-echo "Note: ClapNQ will be available once reindexing completes (~12-15 hours)"
-echo "Check progress: python -c \"from elasticsearch import Elasticsearch; import os; es = Elasticsearch(os.getenv('ES_URL'), api_key=os.getenv('ES_API_KEY')); print(f'Progress: {es.count(index=\\\"mtrag-clapnq-elser-512-100-reindexed\\\")[\\\"count\\\"]:,} / 183,408')\""
+echo "Summary:"
+wc -l scripts/retrieval_scripts/elser/results/elser_*.jsonl | tail -1
+echo ""
+echo "Run evaluation with:"
+echo "  bash scripts/retrieval_scripts/elser/evaluate_elser.sh"
 
