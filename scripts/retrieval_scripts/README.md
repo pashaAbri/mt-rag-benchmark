@@ -13,15 +13,21 @@ scripts/retrieval_scripts/
 │   ├── results/                 # BM25 outputs (12 experiments + evaluations)
 │   └── README.md                # BM25-specific documentation
 │
-├── bge/                         # BGE-base 1.5 dense retrieval (TODO)
+├── bge/                         # BGE-base 1.5 dense retrieval ✅ COMPLETE
 │   ├── bge_retrieval.py         # Main BGE implementation
-│   ├── results/                 # BGE outputs (when ready)
+│   ├── run_bge_all.sh           # Run all BGE experiments
+│   ├── evaluate_bge.sh          # Evaluate all BGE results
+│   ├── results/                 # BGE outputs (12 experiments + evaluations)
 │   └── README.md                # BGE-specific documentation
 │
-├── elser/                       # Elser sparse retrieval (TODO)
-│   ├── elser_retrieval.py       # Main Elser implementation
-│   ├── results/                 # Elser outputs (when ready)
-│   └── README.md                # Elser-specific documentation
+├── elser/                       # ELSER learned sparse retrieval ✅ COMPLETE (3/4 domains)
+│   ├── elser_retrieval.py       # Main ELSER implementation
+│   ├── retry_failed_queries.py  # Retry script for rate-limited queries
+│   ├── reindex_clapnq.py        # Re-index ClapNQ with ELSER
+│   ├── run_elser_all.sh         # Run all ELSER experiments (3 domains)
+│   ├── evaluate_elser.sh        # Evaluate all ELSER results
+│   ├── results/                 # ELSER outputs (9 experiments + evaluations)
+│   └── README.md                # ELSER-specific documentation
 │
 ├── utils.py                     # Shared utilities for all retrievers
 └── run_all_baselines.py         # Master script to run all retrievers
@@ -37,9 +43,23 @@ bash scripts/retrieval_scripts/bm25/run_bm25_all.sh
 bash scripts/retrieval_scripts/bm25/evaluate_bm25.sh
 ```
 
-### Other Retrievers (Coming Soon)
+### BGE (Dense Retrieval)
 
-BGE and Elser implementations are placeholders and will be organized in similar subdirectories.
+Run all BGE experiments:
+```bash
+bash scripts/retrieval_scripts/bge/run_bge_all.sh
+bash scripts/retrieval_scripts/bge/evaluate_bge.sh
+```
+
+### ELSER (Learned Sparse Retrieval)
+
+Run all ELSER experiments (3 domains - ClapNQ pending):
+```bash
+bash scripts/retrieval_scripts/elser/run_elser_all.sh
+bash scripts/retrieval_scripts/elser/evaluate_elser.sh
+```
+
+**Note:** ELSER requires Elasticsearch Cloud with `.env` credentials configured.
 
 ## Output Format
 
