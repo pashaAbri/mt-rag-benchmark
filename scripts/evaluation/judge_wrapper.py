@@ -144,16 +144,29 @@ def run_ragas_judges_local(judge_model, input_file, output_file):
     
     model = LangchainLLMWrapper(LocalLLM(judge_model), run_config)
 
-    score = evaluate(
-        dataset,
-        metrics=[faithfulness],
-        llm=model,
-        run_config=run_config,
-    )
+    try:
+        score = evaluate(
+            dataset,
+            metrics=[faithfulness],
+            llm=model,
+            run_config=run_config,
+        )
 
-    df_score = score.to_pandas()
-
-    model_predictions['RL_F'] = df_score['faithfulness'].values
+        df_score = score.to_pandas()
+        
+        # Handle NaN values from failed RAGAS evaluations
+        faithfulness_scores = df_score['faithfulness'].values
+        # Replace NaN with 0.0 and log which tasks failed
+        for i, val in enumerate(faithfulness_scores):
+            if pd.isna(val):
+                faithfulness_scores[i] = 0.0
+                print(f"WARNING: RAGAS faithfulness failed for task {i}, setting to 0.0")
+        
+        model_predictions['RL_F'] = faithfulness_scores
+    except Exception as e:
+        print(f"ERROR: RAGAS evaluation failed completely: {e}")
+        # If RAGAS fails completely, set all scores to 0.0
+        model_predictions['RL_F'] = [0.0] * len(model_predictions)
     
     if 'metrics' not in model_predictions:
         model_predictions['metrics'] = None
@@ -202,18 +215,31 @@ def run_ragas_judges_openai(input_file, output_file, openai_key, azure_host):
 
     run_config = RunConfig(timeout=120) 
 
-    score = evaluate(
-        dataset,
-        llm=llm,
-        # embeddings=azure_embeddings,
-        metrics=[
-            faithfulness,
-            ],
-        run_config = RunConfig(timeout=120)
-        )
-    df_score = score.to_pandas()
+    try:
+        score = evaluate(
+            dataset,
+            llm=llm,
+            # embeddings=azure_embeddings,
+            metrics=[
+                faithfulness,
+                ],
+            run_config = RunConfig(timeout=120)
+            )
+        df_score = score.to_pandas()
 
-    model_predictions['RL_F'] = df_score['faithfulness'].values
+        # Handle NaN values from failed RAGAS evaluations
+        faithfulness_scores = df_score['faithfulness'].values
+        # Replace NaN with 0.0 and log which tasks failed
+        for i, val in enumerate(faithfulness_scores):
+            if pd.isna(val):
+                faithfulness_scores[i] = 0.0
+                print(f"WARNING: RAGAS faithfulness failed for task {i}, setting to 0.0")
+        
+        model_predictions['RL_F'] = faithfulness_scores
+    except Exception as e:
+        print(f"ERROR: RAGAS evaluation failed completely: {e}")
+        # If RAGAS fails completely, set all scores to 0.0
+        model_predictions['RL_F'] = [0.0] * len(model_predictions)
 
     if 'metrics' not in model_predictions:
         model_predictions['metrics'] = None

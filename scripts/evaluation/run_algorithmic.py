@@ -177,7 +177,26 @@ def rb_agg(row):
         extractiveness = 0
     else:
         extractiveness = (max([0 if value == None else value for value in row['metrics']['BertKPrec']])+1)/2
-    agg = 3 * recall * rouge * extractiveness / ((recall * rouge) + (recall * extractiveness) + (rouge * extractiveness))
+    
+    # Calculate denominator - handle edge case where it could be zero
+    denominator = (recall * rouge) + (recall * extractiveness) + (rouge * extractiveness)
+    
+    if denominator == 0:
+        # If denominator is 0, that means at least 2 of the 3 metrics are 0
+        # In this case, set aggregate to 0 and flag it
+        agg = 0
+        row['metrics']['RB_agg_zero_denominator'] = [True]
+        
+        # Log warning for debugging
+        logger = logging.getLogger(__name__)
+        logger.warning(
+            f"RB_agg denominator is zero for task_id={row.get('task_id', 'unknown')}, "
+            f"recall={recall:.4f}, rouge={rouge:.4f}, extractiveness={extractiveness:.4f}"
+        )
+    else:
+        agg = 3 * recall * rouge * extractiveness / denominator
+        row['metrics']['RB_agg_zero_denominator'] = [False]
+    
     row['metrics']['RB_agg'] = [agg]
 
 
