@@ -1,0 +1,377 @@
+mtRAG: A Multi-Turn Conversational Benchmark for Evaluating RAG Systems
+
+The Research Problem
+Current RAG benchmarks focus on single-turn question answering
+Don't reflect real conversation properties:
+Questions referencing conversation history
+Changing relevant passages across turns
+Unanswerable questions (hallucination risk)
+Multi-domain evaluation
+
+The Benchmark at a Glance
+Component
+Count
+Conversation
+110 Human generated
+Evaluation tasks 
+842
+Avg turns/conversations
+7.7
+Domains
+4
+Total passages
+366,479
+Unique Passages/conversatoin
+16.9 avg
+
+Four Diverse Corpora
+Domain
+Source
+Documents
+Passages
+Style
+ClapNQ
+Wikipedia
+4,293
+183,408
+Encyclopedic
+FiQA
+StackExchange
+7,661
+49,607
+Conversational QA
+Cloud
+IBM Docs (NEW)
+57,638
+61,022
+Technical
+Govt
+.gov/.mil (NEW)
+8,578
+72,422
+Official/Legal
+
+Three Subtasks: Complete RAG Pipeline Evaluation
+Subtask A: Retrieval
+Challenge: Non-standalone questions require conversation context
+Subtask B: Generation with Reference Passages
+Question: Can LLMs generate good answers when given perfect passages?
+Subtask C: Generation with Retrieved Passages (Full RAG)
+Question: How do complete RAG systems perform in production?
+
+Subtask A: Retrieval
+Input: Conversation task (multi-turn context + current question)
+Output: Ranked list of relevant passages from corpus
+Goal: Evaluate retrieval system's ability to find relevant passages
+Metrics: Recall at k=[5,10] and nDCG at k=[1, 3, 5, 10]
+
+Subtask B: Generation with Reference Passages
+Input: Conversation task + gold (human-curated) passages
+Output: Generated answer to current question
+Goal: Test pure generation capabilities with perfect retrieval
+Metrics:
+RB_alg: Algorithmic (BERTScore Recall + RougeL + BERT-K-Precision)
+RB_llm: LLM-as-Judge (reference-based, adapted from RAD-Bench)
+RL_f: Faithfulness (RAGAS - grounds answer in passages?)
+
+Subtask C: Generation with Ret. Passages (Full RAG)
+Input: Conversation task only
+Pipeline: 
+Retrieve passages (using Subtask A methods)
+Generate answer from retrieved passages
+Output: Generated answer
+Goal: End-to-end RAG evaluation in realistic scenario
+Metrics:
+RB_alg, RB_llm, RL_f (same as Subtask B)
+Human evaluation (~20 tasks per model)
+Why does C need human evaluation (kinda like ground truth)
+The retrieved passages differ from gold passages
+The answer is correct but phrased very differently
+The system uses valid information not in the reference answer
+
+Today’s Focus: Subtask A - Retrieval Baselines
+Evaluation Framework – Three retrieval query strategies:
+Last Turn: Current question only (loses context)
+Query Rewrite: Rewritten with full conversation context
+Full Questions: All questions from conversation
+
+Retrieval Methods
+Method 1: BM25 (Lexical - PyTerrier)
+Default parameters: k1=1.2, b=0.75
+Method 2: BM25 (Lexical - Elasticsearch)
+Default parameters: k1=1.2, b=0.75
+Method 3: BGE (Dense - Neural Embeddings)
+BGE-base-en-v1.5 (768-dim embeddings)
+Semantic understanding via dense vectors
+Method 4: ELSER (Learned Sparse)
+Elasticsearch Learned Sparse EncodeR v2
+
+Results - Last Turn Query Strategy
+Method
+Source
+R@5
+R@10
+nDCG@5
+nDCG@10
+vs Paper (R@5 / nDCG@5)
+BM25
+Paper
+0.20
+0.27
+0.18
+0.21
+-
+BM25 (PyTerrier)
+Ours
+0.231
+0.323
+0.209
+0.247
++15.5% / +16.1%
+BM25 (Elasticsearch)
+Ours
+0.197
+0.261
+0.178
+0.204
+-1.5% / -1.1%
+BGE
+Paper
+0.30
+0.38
+0.27
+0.30
+-
+BGE
+Ours
+0.327
+0.428
+0.301
+0.344
++9.0% / +11.5%
+ELSER
+Paper
+0.49
+0.58
+0.45
+0.49
+-
+ELSER
+Ours
+0.439
+0.562
+0.405
+0.453
+-10.4% / -10.0%
+
+Results - Query Rewrite Strategy
+Method
+Source
+R@5
+R@10
+nDCG@5
+nDCG@10
+vs Paper (R@5 / nDCG@5)
+BM25
+Paper
+0.25
+0.33
+0.22
+0.25
+-
+BM25 (PyTerrier)
+Ours
+0.261
+0.362
+0.234
+0.257
++4.4% / +6.4%
+BM25 (Elasticsearch)
+Ours
+0.235
+0.308
+0.206
+0.237
+-6.0% / -6.4%
+BGE
+Paper
+0.37
+0.47
+0.34
+0.38
+-
+BGE
+Ours
+0.381
+0.498
+0.354
+0.404
++3.0% / +4.1%
+ELSER
+Paper
+0.52
+-
+0.48
+-
+-
+ELSER
+Ours
+0.476
+0.604
+0.438
+0.502
+-8.5% /-8.8%
+
+Results - Full Questions Strategy (Ours - Not in Paper)
+Method
+Source
+R@5
+R@10
+nDCG@5
+nDCG@10
+vs Paper
+BM25 (PyTerrier)
+Ours
+0.193
+0.266
+0.168
+0.200
+-
+BM25 (Elasticsearch)
+Ours
+0.167
+0.225
+0.147
+0.172
+-
+BGE
+Ours
+0.211
+0.283
+0.181
+0.212
+-
+ELSER
+Ours
+0.269
+0.359
+0.237
+0.278
+-
+
+Observations
+Best Performer: ELSER (R@5: 0.476 Rewrite, 0.439 Last Turn)
+PyTerrier BM25 exceeds paper baseline (+4-15%)
+BGE exceeds paper baseline (+10%)
+ELSER v2 below paper's v1 baseline (-8 to -10%)
+Query Rewrite consistently outperforms Last Turn across all methods
+Full Questions performs worst (new finding not in paper)
+
+Finding 1: Query Rewrite is Essential for Multi-Turn RAG
+Improvement from Last Turn to Query Rewrite (R@5):
+ELSER: 0.439 → 0.476 (+8.4%)
+BGE: 0.327 → 0.381 (+16.5%)
+BM25 (PyTerrier): 0.231 → 0.261 (+13.0%)
+BM25 (ES): 0.197 → 0.235 (+19.3%)
+Why Rewrite Wins:
+Makes non-standalone questions standalone
+Integrates conversation context explicitly
+Removes ambiguous pronouns and references
+
+Finding 2: Full Questions Format Fails Dramatically
+Performance drop from Rewrite to Full Questions (R@5):
+ELSER: 0.476 → 0.269 (-43.5%)
+BGE: 0.381 → 0.211 (-44.6%)
+BM25: 0.261 → 0.193 (-26.1%)
+Why Full Questions Fails:
+Simply concatenating conversation history doesn't work
+Questions become less standalone in later turns
+Pronouns and references create ambiguity
+Retrieval systems can't handle raw conversational format
+Implication: RAG systems MUST reformulate queries, not just append history
+
+Finding 3: ELSER Leads, Dense Beats Lexical
+Method Performance Ranking (R@5, Query Rewrite):
+ELSER: 0.476 (learned sparse)
+BGE: 0.381 (dense) → +62% vs BM25 ES
+BM25 PyTerrier: 0.261 (lexical)
+BM25 ES: 0.235 (lexical)
+
+Finding 3: ELSER Leads, Dense Beats Lexical
+Why Dense Outperforms Lexical (+62% for BGE vs BM25):
+Captures semantic meaning beyond keywords
+Handles paraphrasing and synonyms
+Encodes contextual information
+Why ELSER Leads (+25% vs BGE):
+Learned sparse combines interpretability + semantics
+Benefits from both exact matching and learned representations
+Optimized for retrieval efficiency
+Takeaway: Semantic methods (dense/learned sparse) essential for conversational retrieval
+
+Finding 4: Domain Characteristics Impact Retrieval
+Domain Performance (R@5, ELSER Rewrite):
+ClapNQ: 0.552 (Wikipedia - encyclopedic)
+Govt: 0.508 (Government - formal/legal)
+Cloud: 0.430 (Technical docs)
+FiQA: 0.402 (Financial QA - informal forums)
+
+Performance Gap: 0.552 - 0.402 = 0.150 (37% difference)
+
+Finding 4: Domain Chars. Significantly Impact Retrieval
+Why Formal Domains Perform Better:
+Structured, clear language
+Consistent terminology
+Less ambiguity and slang
+Well-defined concepts
+Why FiQA is Challenging:
+Informal forum posts with slang
+Multiple ways to phrase financial concepts
+Conversational and fragmented text
+Domain-specific jargon mixed with casual language
+Takeaway: Semantic methods slightly reduce but don't eliminate domain gaps
+
+
+
+Finding 4: Domain Chars. Significantly Impact Retrieval
+Domain Gap Across Methods (Best - Worst R@5):
+BM25: 0.155 gap (0.338 Govt - 0.183 FiQA)
+BGE: 0.154 gap (0.462 ClapNQ - 0.308 FiQA)
+ELSER: 0.150 gap (0.552 ClapNQ - 0.402 FiQA)
+
+
+Finding 5: More Retrieved Passages = Better Coverage
+Recall improvement from R@5 to R@10:
+ELSER: 0.476 → 0.604 (+26.9%)
+BGE: 0.381 → 0.498 (+30.7%)
+BM25 (PyTerrier): 0.261 → 0.362 (+38.7%)
+BM25 (ES): 0.235 → 0.308 (+31.1%)
+Pattern: Lexical methods benefit more from higher k
+BM25 needs more results to find relevant passages
+Dense/learned sparse methods rank relevant passages higher
+
+Implication for RAG System Design
+Top-5 may be insufficient for complex queries
+Consider top-10 or top-20 for multi-turn conversations
+Trade-off: More context vs generation quality
+LLMs with larger context windows can leverage more passages
+
+Future Directions
+Hybrid Retrieval (?):
+Ensemble methods (BM25 + BGE + ELSER)
+Dynamic weighting strategies
+Domain-adaptive retrieval
+Generation Evaluation (in parallel):
+9 LLMs to evaluate
+Passage type breakdown:
+10 Question Types 
+Answerability analysis (4 types)
+Multi-turn dependency patterns
+Error propagation through conversation
+
+The three enrichment dimensions:
+1. Question Type (10 categories):
+Factoid, Explanation, Composite, Comparative, How-To, Keyword, Opinion, Summarization, Troubleshooting, Non-Question
+2. Multi-Turn (3 categories):
+N/A (first turn), Follow-up, Clarification
+3. Answerability (4 categories):
+ANSWERABLE, UNANSWERABLE, PARTIAL, CONVERSATIONAL

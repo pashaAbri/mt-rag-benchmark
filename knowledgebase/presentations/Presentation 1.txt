@@ -1,0 +1,232 @@
+mtRAG: A Multi-Turn Conversational Benchmark for Evaluating RAG Systems
+
+The Research Problem
+Current RAG Benchmarks
+Focus on single-turn question answering
+Don't reflect real conversation properties
+Limited evaluation of multi-turn dependencies
+What's Missing:
+Questions that reference conversation history
+Changing relevant passages across turns
+Unanswerable questions (hallucination risk)
+Multi-domain evaluation
+
+The Benchmark at a Glance
+Component
+Count
+Conversation
+110 Human generated
+Avg turns/conversations
+7.7
+Evaluation tasks
+842
+Domains
+4
+Total passages
+366,479
+Unique Passages/conversatoin
+16.9 avg
+
+What makes it unique
+First end-to-end human-generated multi-turn RAG benchmark
+Active retrieval (passages change per turn)
+Real-world conversation properties
+
+Four Diverse Corpora
+Domain
+Source
+Documents
+Passages
+Style
+ClapNQ
+Wikipedia
+4,293
+183,408
+Encyclopedic
+FiQA
+StackExchange
+7,661
+49,607
+Conversational QA
+Cloud
+IBM Docs (NEW)
+57,638
+61,022
+Technical
+Govt
+.gov/.mil (NEW)
+8,578
+72,422
+Official/Legal
+
+Design
+512-token passages, 100-token overlap
+Inter-connected pages for natural flow
+Tests generalization across domains
+
+Question Enrichments
+Three Classification Dimensions
+Answerability (4 types)
+Answerable, Unanswerable, Partial, Conversational
+Question Type (10 types)
+Factoid, Explanation, Composite, Comparative, How-To, Keyword, Opinion, Summarization, Troubleshooting, Non-Question
+Multi-Turn (3 types)
+Follow-up, Clarification, N/A (first turn)
+Purpose: Fine-grained evaluation of model capabilities
+
+Human Data Creation
+Process
+Annotators interact with live RAG system
+Check retrieved passages → modify for relevance & diversity
+Review & repair generated responses
+Add enrichments (answerability, question type, multi-turn)
+Quality Control
+All conversations reviewed
+Average 7.3 edited responses per conversation
+Ensures natural conversation flow
+Distribution
+ClapNQ: 29 conv
+FiQA: 27 conv
+Cloud: 26 conv
+Govt: 28 conv
+
+Retrieval Evaluation
+Three Methods Tested
+Method
+Type
+Example
+BM25
+Lexical
+Keyword matching
+SPLADE
+Sparse
+Learned sparse vectors
+BGE/ELSER
+Dense
+Neural Embeddings
+
+Retrieval Evaluation
+
+Two Settings
+
+
+
+
+Format: BEIR
+Setting
+Description
+Challenge
+Last Turn
+Use current Q only
+Loses Context
+Query Rewrite
+Rewrite with full context
+Requires Underestanding
+
+Generation Evaluation
+Three Retrieval Settings
+
+
+
+
+
+Models Tested: 9 LLMs evaluated
+Setting
+Passeges Provided
+Purpose
+Tasks
+Reference
+Gold Standard (human curated)
+Test pure generation
+842
+Reference + RAG
+Gold + auto-retrieval
+Test if RAG helps/hurts
+436
+Full RAG
+Auto-Retrieved only
+Real-world scenario
+842
+
+Generation Evaluation
+Key Questions
+Where do systems break? Retrieval or generation?
+Do perfect passages solve the problem?
+How do errors propagate?
+
+Key Insights - Where RAGs Fail
+Retrieval Bottleneck: 
+If retrieval fails → LLM can't answer
+Generation Bottleneck:
+Even with perfect passages → LLMs struggle with:
+Later turns
+Unanswerable questions
+Questions referencing conversation history
+Error Propagation:
+Retrieval errors compound generation problems
+
+Automation Exploration
+Reference-Based Metrics:
+RB_llm (LLM-as-Judge)
+RB_alg (Algorithmic)
+Reference-Less Metrics:
+Faithfulness (grounds in passages?)
+Answer Relevance
+Multi-Turn Bias
+Finding: Some metrics correlate with human scores, many don't
+
+Synthetic Data (mtRAG-S)
+
+
+
+
+
+
+Challenge: Hard to generate unanswerable questions
+Metric
+Human
+Synthetic
+Avg Turns
+7.7
+5.9
+Unique passages
+16.9
+4.6
+Human edits
+7.3
+0
+
+Benchmark Structure - Available Data
+Conversations:
+- `conversations.json` - 110 full conversations with metadata
+Generation Tasks:
+`reference.jsonl` - 842 tasks with gold passages
+`reference+RAG.jsonl` - 436 tasks (≤2 contexts)
+`RAG.jsonl` - 842 tasks with auto-retrieval
+Retrieval Tasks (BEIR format):
+Queries: lastturn, rewrite, questions
+Qrels: 2,132 relevance judgments
+Per domain organization/files
+Evaluations:
+Pre-computed results from 9 LLMs
+Human evaluation subset included
+
+Timeline & References
+SemEval 2026 page
+Published: January 2025
+Evaluation: January 2026
+Original Paper
+Proposal (by organizers)
+Github Page
+
+Why Multi-Turn RAG is hard
+Key Problems
+Later turns depend on conversation history
+Questions reference previous context ("What about their pricing?")
+Relevant passages change throughout conversation
+Models must handle unanswerable questions
+Goals
+Test retrieval and generation on realistic conversations
+Evaluate across multiple domains
+Handle non-standalone questions
+
