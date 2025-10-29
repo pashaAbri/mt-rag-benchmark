@@ -1,7 +1,7 @@
 import argparse
 import os
 from judge_wrapper_v2 import *
-from run_algorithmic import run_algorithmic_judges
+from run_algorithmic_v2 import run_algorithmic_judges
 
 def args_parser():
     parser = argparse.ArgumentParser()
