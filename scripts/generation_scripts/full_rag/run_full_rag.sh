@@ -7,9 +7,9 @@ set -e
 # Navigate to project root
 cd "$(dirname "$0")/../../.."
 
-MODEL_CONFIG="scripts/generation_scripts/model_invocation/llm_configs/llama_3.1_405b.yaml"
+MODEL_CONFIG="scripts/generation_scripts/model_invocation/llm_configs/gpt4o.yaml"
 INPUT_FILE="human/generation_tasks/RAG.jsonl"
-OUTPUT_FILE="scripts/generation_scripts/full_rag/results/llama_3.1_405b_full_rag.jsonl"
+OUTPUT_FILE="scripts/generation_scripts/full_rag/results/gpt_4o_full_rag.jsonl"
 
 echo "=========================================="
 echo "Full RAG Setting - Real-World Pipeline"
@@ -26,6 +26,7 @@ python scripts/generation_scripts/model_invocation/llm_caller.py \
     --input_file "$INPUT_FILE" \
     --output_file "$OUTPUT_FILE" \
     --batch_size 10 \
+    --concurrency 5 \
     --resume
 
 echo ""

@@ -7,9 +7,9 @@ set -e
 # Navigate to project root
 cd "$(dirname "$0")/../../.."
 
-MODEL_CONFIG="scripts/generation_scripts/model_invocation/llm_configs/llama_3.1_405b.yaml"
+MODEL_CONFIG="scripts/generation_scripts/model_invocation/llm_configs/gpt4o.yaml"
 INPUT_FILE="human/generation_tasks/reference.jsonl"
-OUTPUT_FILE="scripts/generation_scripts/reference/results/llama_3.1_405b_reference.jsonl"
+OUTPUT_FILE="scripts/generation_scripts/reference/results/gpt_4o_reference.jsonl"
 
 echo "=========================================="
 echo "Reference Setting - Perfect Retriever"
@@ -25,6 +25,7 @@ python scripts/generation_scripts/model_invocation/llm_caller.py \
     --input_file "$INPUT_FILE" \
     --output_file "$OUTPUT_FILE" \
     --batch_size 10 \
+    --concurrency 5 \
     --resume
 
 echo ""

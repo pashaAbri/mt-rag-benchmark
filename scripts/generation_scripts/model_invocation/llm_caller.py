@@ -10,6 +10,8 @@ import sys
 from pathlib import Path
 from tqdm import tqdm
 from dotenv import load_dotenv
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import threading
 
 # Load environment variables from .env file
 load_dotenv()
@@ -21,6 +23,7 @@ from utils import (
     load_prompt_module,
     get_prompt_id,
     call_together_ai,
+    call_openai,
     load_tasks,
     save_results_with_predictions,
     load_existing_results,
@@ -75,6 +78,13 @@ def parse_args():
         help='Resume from existing output file if interrupted'
     )
     
+    parser.add_argument(
+        '--concurrency',
+        type=int,
+        default=1,
+        help='Number of concurrent API calls (default: 1)'
+    )
+    
     return parser.parse_args()
 
 
@@ -106,12 +116,26 @@ def main():
         metadata = prompt_module.PROMPT_METADATA
         print(f"Description: {metadata.get('description', 'N/A')}")
     
-    # Get API key from environment variable only
-    api_key = os.environ.get('TOGETHER_API_KEY')
-    if not api_key:
-        print("\nError: TOGETHER_API_KEY environment variable not set.")
-        print("Please add it to your .env file or export it:")
-        print("  export TOGETHER_API_KEY='your-api-key'")
+    # Get API key based on provider
+    provider = config.get('provider', 'together_ai')
+    
+    if provider == 'openai':
+        api_key = os.environ.get('OPENAI_API_KEY')
+        if not api_key:
+            print("\nError: OPENAI_API_KEY environment variable not set.")
+            print("Please add it to your .env file or export it:")
+            print("  export OPENAI_API_KEY='your-api-key'")
+            sys.exit(1)
+    elif provider == 'together_ai':
+        api_key = os.environ.get('TOGETHER_API_KEY')
+        if not api_key:
+            print("\nError: TOGETHER_API_KEY environment variable not set.")
+            print("Please add it to your .env file or export it:")
+            print("  export TOGETHER_API_KEY='your-api-key'")
+            sys.exit(1)
+    else:
+        print(f"\nError: Unsupported provider '{provider}'")
+        print("Supported providers: 'openai', 'together_ai'")
         sys.exit(1)
     
     # Load tasks
@@ -137,42 +161,64 @@ def main():
     
     print(f"\nProcessing {len(tasks_to_process)} tasks...")
     print(f"Batch size: {args.batch_size} (checkpoint every {args.batch_size} tasks)")
+    print(f"Concurrency: {args.concurrency} parallel requests")
     print("")
     
     # Process tasks
     processed_count = 0
     all_results = completed_tasks.copy()  # Start with already completed tasks
+    results_lock = threading.Lock()  # Thread-safe access to all_results
+    
+    def process_single_task(task):
+        """Process a single task - construct prompt and call API."""
+        # Construct prompt using the loaded prompt module's function
+        prompt = prompt_module.construct_prompt(task)
+        
+        # Call API based on provider
+        if provider == 'openai':
+            generated_text = call_openai(prompt, config, api_key)
+        else:  # together_ai
+            generated_text = call_together_ai(prompt, config, api_key)
+        
+        # Add predictions and prompt_id fields while preserving all original fields
+        task['predictions'] = [
+            {
+                "text": generated_text
+            }
+        ]
+        task['prompt_id'] = prompt_id
+        
+        return task
     
     try:
-        for idx, task in enumerate(tqdm(tasks_to_process, desc="Generating responses")):
-            # Construct prompt using the loaded prompt module's function
-            prompt = prompt_module.construct_prompt(task)
+        with ThreadPoolExecutor(max_workers=args.concurrency) as executor:
+            # Submit all tasks
+            future_to_task = {executor.submit(process_single_task, task): task for task in tasks_to_process}
             
-            # Call API
-            try:
-                generated_text = call_together_ai(prompt, config, api_key)
-                
-                # Add predictions and prompt_id fields while preserving all original fields
-                task['predictions'] = [
-                    {
-                        "text": generated_text
-                    }
-                ]
-                task['prompt_id'] = prompt_id
-                
-                all_results.append(task)
-                processed_count += 1
-                
-                # Save checkpoint
-                if processed_count % args.batch_size == 0:
-                    save_results_with_predictions(all_results, args.output_file)
-                    tqdm.write(f"Checkpoint saved: {processed_count}/{len(tasks_to_process)} tasks completed")
-                
-            except Exception as e:
-                tqdm.write(f"Error processing task {task['task_id']}: {e}")
-                tqdm.write("Saving progress and exiting...")
-                save_results_with_predictions(all_results, args.output_file)
-                sys.exit(1)
+            # Process completed tasks
+            with tqdm(total=len(tasks_to_process), desc="Generating responses") as pbar:
+                for future in as_completed(future_to_task):
+                    original_task = future_to_task[future]
+                    try:
+                        result_task = future.result()
+                        
+                        with results_lock:
+                            all_results.append(result_task)
+                            processed_count += 1
+                            
+                            # Save checkpoint
+                            if processed_count % args.batch_size == 0:
+                                save_results_with_predictions(all_results, args.output_file)
+                                tqdm.write(f"Checkpoint saved: {processed_count}/{len(tasks_to_process)} tasks completed")
+                        
+                        pbar.update(1)
+                        
+                    except Exception as e:
+                        tqdm.write(f"Error processing task {original_task['task_id']}: {e}")
+                        tqdm.write("Saving progress and exiting...")
+                        with results_lock:
+                            save_results_with_predictions(all_results, args.output_file)
+                        sys.exit(1)
         
         # Final save
         save_results_with_predictions(all_results, args.output_file)

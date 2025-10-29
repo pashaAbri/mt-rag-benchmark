@@ -145,6 +145,59 @@ def call_together_ai(prompt: str, config: Dict[str, Any], api_key: str,
             raise APIResponseError(f"Unexpected API response format: {e}")
 
 
+def call_openai(prompt: str, config: Dict[str, Any], api_key: str,
+                max_retries: int = 3, retry_delay: int = 2) -> str:
+    """
+    Call OpenAI API with the given prompt using the official OpenAI Python package.
+    
+    Args:
+        prompt: The formatted prompt
+        config: LLM configuration dictionary
+        api_key: OpenAI API key
+        max_retries: Maximum number of retry attempts
+        retry_delay: Delay in seconds between retries
+        
+    Returns:
+        Generated response text
+        
+    Raises:
+        APICallError: If all retry attempts fail
+        APIResponseError: If response format is unexpected
+    """
+    from openai import OpenAI
+    
+    client = OpenAI(api_key=api_key)
+    
+    # Format as chat messages
+    messages = [
+        {
+            "role": "user",
+            "content": prompt
+        }
+    ]
+    
+    for attempt in range(max_retries):
+        try:
+            response = client.chat.completions.create(
+                model=config['api_model_id'],
+                messages=messages,
+                max_tokens=config.get('max_tokens', 200),
+                temperature=config.get('temperature', 0.0),
+                top_p=config.get('top_p', 1.0),
+            )
+            
+            generated_text = response.choices[0].message.content
+            return generated_text
+            
+        except Exception as e:
+            if attempt < max_retries - 1:
+                print(f"  API call failed (attempt {attempt + 1}/{max_retries}): {e}")
+                print(f"  Retrying in {retry_delay} seconds...")
+                time.sleep(retry_delay)
+            else:
+                raise APICallError(f"API call failed after {max_retries} attempts: {e}")
+
+
 def load_tasks(input_file: str) -> List[Dict[str, Any]]:
     """
     Load tasks from JSONL file.
