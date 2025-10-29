@@ -7,9 +7,9 @@ set -e
 # Navigate to project root
 cd "$(dirname "$0")/../../.."
 
-MODEL_CONFIG="scripts/generation_scripts/model_invocation/llm_configs/llama_3.1_70b.yaml"
+MODEL_CONFIG="scripts/generation_scripts/model_invocation/llm_configs/llama_3.1_405b.yaml"
 INPUT_FILE="human/generation_tasks/reference+RAG.jsonl"
-OUTPUT_FILE="scripts/generation_scripts/reference_rag/results/llama_3.1_70b_reference_rag.jsonl"
+OUTPUT_FILE="scripts/generation_scripts/reference_rag/results/llama_3.1_405b_reference_rag.jsonl"
 
 echo "=========================================="
 echo "Reference+RAG Setting - Hybrid Retrieval"
