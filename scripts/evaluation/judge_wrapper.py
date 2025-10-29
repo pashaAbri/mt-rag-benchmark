@@ -44,15 +44,27 @@ class LocalLLM(LLM):
 
     def __init__(self, mode_name_or_path: str):
         super().__init__()
-        self.tokenizer = AutoTokenizer.from_pretrained(mode_name_or_path)
+        self.tokenizer = AutoTokenizer.from_pretrained(mode_name_or_path, trust_remote_code=True)
         
         if self.tokenizer.pad_token_id is None:
             self.tokenizer.pad_token_id = self.tokenizer.eos_token_id
 
-        self.model = AutoModelForCausalLM.from_pretrained(mode_name_or_path,attn_implementation="flash_attention_2", device_map="auto",  torch_dtype="bfloat16", 
-                                                            load_in_4bit=True,
-                                                            bnb_4bit_compute_dtype=torch.bfloat16,
-                                                          )
+        # Use BitsAndBytesConfig for proper 4-bit quantization
+        from transformers import BitsAndBytesConfig
+        quantization_config = BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_compute_dtype=torch.float16,
+            bnb_4bit_quant_type="nf4"
+        )
+        
+        self.model = AutoModelForCausalLM.from_pretrained(
+            mode_name_or_path,
+            attn_implementation="flash_attention_2",
+            device_map="auto",
+            dtype=torch.float16,
+            quantization_config=quantization_config,
+            trust_remote_code=True
+        )
         self.model.generation_config = GenerationConfig.from_pretrained(mode_name_or_path)
 
     def _call(
