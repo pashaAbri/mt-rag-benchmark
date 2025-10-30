@@ -7,9 +7,9 @@ set -e
 # Navigate to project root
 cd "$(dirname "$0")/../../.."
 
-MODEL_CONFIG="scripts/generation_scripts/model_invocation/llm_configs/gpt4o.yaml"
+MODEL_CONFIG="scripts/generation_scripts/model_invocation/llm_configs/command_r_plus.yaml"
 INPUT_FILE="human/generation_tasks/reference.jsonl"
-OUTPUT_FILE="scripts/generation_scripts/reference/results/gpt_4o_reference.jsonl"
+OUTPUT_FILE="scripts/generation_scripts/reference/results/command_r_plus_reference.jsonl"
 
 echo "=========================================="
 echo "Reference Setting - Perfect Retriever"

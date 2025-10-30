@@ -7,9 +7,9 @@ set -e
 # Navigate to project root
 cd "$(dirname "$0")/../../.."
 
-MODEL_CONFIG="scripts/generation_scripts/model_invocation/llm_configs/gpt4o.yaml"
+MODEL_CONFIG="scripts/generation_scripts/model_invocation/llm_configs/command_r_plus.yaml"
 INPUT_FILE="human/generation_tasks/reference+RAG.jsonl"
-OUTPUT_FILE="scripts/generation_scripts/reference_rag/results/gpt_4o_reference_rag.jsonl"
+OUTPUT_FILE="scripts/generation_scripts/reference_rag/results/command_r_plus_reference_rag.jsonl"
 
 echo "=========================================="
 echo "Reference+RAG Setting - Hybrid Retrieval"

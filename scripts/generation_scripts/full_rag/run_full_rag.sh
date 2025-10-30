@@ -7,9 +7,9 @@ set -e
 # Navigate to project root
 cd "$(dirname "$0")/../../.."
 
-MODEL_CONFIG="scripts/generation_scripts/model_invocation/llm_configs/gpt4o.yaml"
+MODEL_CONFIG="scripts/generation_scripts/model_invocation/llm_configs/command_r_plus.yaml"
 INPUT_FILE="human/generation_tasks/RAG.jsonl"
-OUTPUT_FILE="scripts/generation_scripts/full_rag/results/gpt_4o_full_rag.jsonl"
+OUTPUT_FILE="scripts/generation_scripts/full_rag/results/command_r_plus_full_rag.jsonl"
 
 echo "=========================================="
 echo "Full RAG Setting - Real-World Pipeline"
