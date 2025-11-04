@@ -68,27 +68,31 @@ This is a standalone script to run the evaluation metrics reported in the paper.
 
 The `scripts/evaluation/responses-10.jsonl` is sample input with predictions on the first 10 reference tasks.
 
-To run OpenAI GPT4o-mini as Judge
+To run OpenAI GPT-4o-mini as Judge
 
 ```
-python scripts/evaluation/run_generation_eval.py -i <INPUT_FILE> -o <OUTPUT_FILE> -e scripts/evaluation/config.yaml --provider openai --openai_key <OPENAI_KEY> --azure_host <AZURE_ENDPOINT>
-```
+# Reads OPENAI_API_KEY from .env file automatically
+python scripts/evaluation/run_generation_eval.py -i <INPUT_FILE> -o <OUTPUT_FILE> -e scripts/evaluation/config.yaml --provider openai
 
-> [!TIP]
-> Our implementation for evaluting with GPT assumes an Azure endpoint. If you are using an alternate endpoint, you will need to modify the client [see here](azure_openai_client.py#L8). 
+# Or pass the key explicitly
+python scripts/evaluation/run_generation_eval.py -i <INPUT_FILE> -o <OUTPUT_FILE> -e scripts/evaluation/config.yaml --provider openai --openai_key <OPENAI_KEY>
+``` 
 
 
 To run HuggingFace model as Judge
 
 ```
-python scripts/evaluation/run_generation_eval.py -i <INPUT_FILE> -o <OUTPUT_FILE> -e scripts/evaluation/config.yaml --provider hf --judge_model ibm-granite/granite-3.3-8b-instruct
+python scripts/evaluation/run_generation_eval.py -i <INPUT_FILE> -o <OUTPUT_FILE> -e scripts/evaluation/config.yaml --provider hf --judge_model <HF_MODEL_NAME>
 ```
 
 
 Arguments
 * input_file: Path to a JSONL file containing predictions from the generative model under `predictions`.
 * output_file: Path to the output file, which would contain all the evaluated metrics under `metrics`
-* OpenAI key and Azure Endpoint if provider is openai
+* OpenAI key if provider is openai (optional, reads from .env file if not provided)
 * Huggingface model name if provider is hf
+
+Setup
+* Create a `.env` file in the project root with `OPENAI_API_KEY=your-key-here`
 
 Please see [paper](https://arxiv.org/abs/2501.03468) for the explanation of the metrics.

@@ -7,22 +7,17 @@ from ragas import evaluate, RunConfig
 from ragas.metrics import faithfulness, answer_relevancy, context_precision, context_recall
 from judge_utils import *
 
-from langchain.chat_models import AzureChatOpenAI
-from langchain.embeddings.openai import OpenAIEmbeddings
-from langchain_openai.embeddings import AzureOpenAIEmbeddings
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from langchain_core.callbacks.manager import CallbackManagerForLLMRun
+from langchain_core.language_models.llms import LLM
 
 from huggingface_client import HuggingFaceLLMClient
-from azure_openai_client import AzureOpenAIClient
+from openai_client import OpenAIClient
 
-from datasets import Dataset
 from typing import List, Optional, Any
 from transformers import AutoModelForCausalLM, AutoTokenizer, GenerationConfig
-from langchain.callbacks.manager import CallbackManagerForLLMRun
-from ragas.metrics import faithfulness, context_recall, context_precision, answer_relevancy
-from ragas import evaluate
 from ragas.llms import LangchainLLMWrapper
-from ragas.run_config import RunConfig
-from langchain.llms.base import LLM
+
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -195,20 +190,22 @@ def run_ragas_judges_local(judge_model, input_file, output_file):
 # ================================================
 # Compute RAGAS w/ OpenAI
 # ================================================
-def run_ragas_judges_openai(input_file, output_file, openai_key, azure_host):
+def run_ragas_judges_openai(input_file, output_file, openai_key=None):
+    from dotenv import load_dotenv
+    load_dotenv()
+    
+    # Use provided key or read from environment
+    api_key = openai_key if openai_key else os.environ.get('OPENAI_API_KEY')
 
-    llm = AzureChatOpenAI(
-        deployment_name="gpt-4o-mini-2024-07-18",
-        openai_api_base=azure_host,
-        openai_api_version="2024-09-01-preview",
-        openai_api_key=openai_key, 
+    llm = ChatOpenAI(
+        model="gpt-4o-mini",
+        openai_api_key=api_key,
+        temperature=0.0,
         timeout=120 
     )
 
-    # azure_embeddings = AzureOpenAIEmbeddings(
-    #     openai_api_version="2024-08-01-preview",
-    #     azure_endpoint=azure_host, 
-    #     model= "text-embedding-ada-002-2", 
+    # openai_embeddings = OpenAIEmbeddings(
+    #     openai_api_key=api_key,
     # )
     
     model_predictions = read_json_with_pandas(filepath=f"{input_file}")
@@ -231,7 +228,7 @@ def run_ragas_judges_openai(input_file, output_file, openai_key, azure_host):
         score = evaluate(
             dataset,
             llm=llm,
-            # embeddings=azure_embeddings,
+            # embeddings=openai_embeddings,
             metrics=[
                 faithfulness,
                 ],
@@ -286,7 +283,7 @@ def run_radbench_judge(judge_model, input_file, output_file):
     for model_name in model_name_lst:
         
         if model_name.startswith("gpt-"):
-            client = AzureOpenAIClient('gpt-4o-mini-2024-07-18')
+            client = OpenAIClient('gpt-4o-mini')
         else:
             clear_cuda()
             client = HuggingFaceLLMClient(model_name)
@@ -323,7 +320,7 @@ def run_radbench_judge(judge_model, input_file, output_file):
 def run_idk_judge(model_name, input_file, output_file):    
     
     if model_name == "openai":
-        client = AzureOpenAIClient('gpt-4o-mini-2024-07-18')
+        client = OpenAIClient('gpt-4o-mini')
     else:
         clear_cuda()
         client = HuggingFaceLLMClient(model_name)

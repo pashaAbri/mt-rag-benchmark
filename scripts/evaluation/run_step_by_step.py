@@ -7,20 +7,20 @@ Usage examples:
   # Run only algorithmic metrics
   python run_step_by_step.py --step algorithmic -i input.jsonl -o output.jsonl
   
-  # Run only IDK judge
-  python run_step_by_step.py --step idk -i output.jsonl -o output.jsonl --provider hf --judge_model ibm-granite/granite-3.3-8b-instruct
+  # Run only IDK judge (reads OPENAI_API_KEY from .env)
+  python run_step_by_step.py --step idk -i output.jsonl -o output.jsonl --provider openai
   
-  # Run only RAGAS
-  python run_step_by_step.py --step ragas -i output.jsonl -o output.jsonl --provider openai --openai_key KEY --azure_host HOST
+  # Run only RAGAS (reads OPENAI_API_KEY from .env)
+  python run_step_by_step.py --step ragas -i output.jsonl -o output.jsonl --provider openai
   
-  # Run only RADBench
-  python run_step_by_step.py --step radbench -i output.jsonl -o output.jsonl --provider hf --judge_model ibm-granite/granite-3.3-8b-instruct
+  # Run only RADBench (reads OPENAI_API_KEY from .env)
+  python run_step_by_step.py --step radbench -i output.jsonl -o output.jsonl --provider openai
   
   # Run only IDK conditioning
   python run_step_by_step.py --step idk_condition -i output.jsonl -o output.jsonl
   
-  # Run all steps (same as run_generation_eval.py)
-  python run_step_by_step.py --step all -i input.jsonl -o output.jsonl --provider hf --judge_model ibm-granite/granite-3.3-8b-instruct
+  # Run all steps (reads OPENAI_API_KEY from .env)
+  python run_step_by_step.py --step all -i input.jsonl -o output.jsonl --provider openai
 """
 
 import argparse
@@ -80,13 +80,7 @@ def main():
     parser.add_argument(
         "--openai_key",
         type=str,
-        help="OpenAI API key (required if provider=openai)"
-    )
-    
-    parser.add_argument(
-        "--azure_host",
-        type=str,
-        help="Azure OpenAI endpoint (required if provider=openai)"
+        help="OpenAI API key (optional, reads from .env if not provided)"
     )
     
     args = parser.parse_args()
@@ -97,10 +91,9 @@ def main():
             parser.error(f"--step {args.step} requires --provider")
         
         if args.provider == "openai":
-            if not args.openai_key or not args.azure_host:
-                parser.error("--provider openai requires --openai_key and --azure_host")
-            os.environ["AZURE_OPENAI_API_KEY"] = args.openai_key
-            os.environ["OPENAI_AZURE_HOST"] = args.azure_host
+            # Only set if provided via CLI, otherwise will be read from .env
+            if args.openai_key:
+                os.environ["OPENAI_API_KEY"] = args.openai_key
         elif args.provider == "hf":
             if not args.judge_model:
                 parser.error("--provider hf requires --judge_model")
@@ -130,8 +123,7 @@ def main():
             run_ragas_judges_openai(
                 args.output if args.step == "all" else args.input,
                 args.output,
-                args.openai_key,
-                args.azure_host
+                args.openai_key if args.openai_key else None
             )
         else:
             run_ragas_judges_local(
