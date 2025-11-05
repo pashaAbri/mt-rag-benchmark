@@ -46,7 +46,7 @@ def generate_table_5(data: Dict[str, Any], output_dir: Path):
     with open(output_file, 'w') as f:
         # Header
         f.write("# Table 5: Generation Results by Retrieval Setting\n\n")
-        f.write("<style>\ntable { color: #0066CC; }\n</style>\n\n")
+        f.write("<style>\ntable { color: #009900; font-weight: bold; }  /* Green bold for experimental results */\n</style>\n\n")
         f.write("**Generated from experimental results**\n\n")
         f.write("Generation results by retrieval setting: Reference (•), Reference+RAG (◐), and RAG (○), ")
         f.write("w/ IDK conditioned metrics. Per column, the best result is in **bold** and second best is <u>underlined</u>.\n\n")
@@ -70,7 +70,7 @@ def generate_table_5(data: Dict[str, Any], output_dir: Path):
                     row.append(format_value(val))
                 else:
                     row.append("NA")
-            row.append("|")
+            row.append("")  # Empty column for spacing
             
             # RLF for each scenario  
             for scenario in scenarios:
@@ -81,7 +81,7 @@ def generate_table_5(data: Dict[str, Any], output_dir: Path):
                     row.append(format_value(val))
                 else:
                     row.append("NA")
-            row.append("|")
+            row.append("")  # Empty column for spacing
             
             # RBllm for each scenario
             for scenario in scenarios:
@@ -92,7 +92,7 @@ def generate_table_5(data: Dict[str, Any], output_dir: Path):
                     row.append(format_value(val))
                 else:
                     row.append("NA")
-            row.append("|")
+            row.append("")  # Empty column for spacing
             
             # RBalg for each scenario
             for scenario in scenarios:
@@ -103,9 +103,8 @@ def generate_table_5(data: Dict[str, Any], output_dir: Path):
                     row.append(format_value(val))
                 else:
                     row.append("NA")
-            row.append("|")
             
-            f.write(" | ".join(row) + "\n")
+            f.write(" | ".join(row) + " |\n")
         
         # Add legend
         f.write("\n## Legend\n\n")
@@ -140,7 +139,7 @@ def generate_table_16a(data: Dict[str, Any], output_dir: Path):
     with open(output_file, 'w') as f:
         # Header
         f.write("# Table 16a: Generation Results by Answerability\n\n")
-        f.write("<style>\ntable { color: #0066CC; }\n</style>\n\n")
+        f.write("<style>\ntable { color: #009900; font-weight: bold; }  /* Green bold for experimental results */\n</style>\n\n")
         f.write("**Generated from experimental results**\n\n")
         f.write("Detailed generation results in the Reference (•) retrieval setting using three metrics ")
         f.write("(RLF, RBllm, RBalg) broken down by question answerability.\n\n")
@@ -168,28 +167,27 @@ def generate_table_16a(data: Dict[str, Any], output_dir: Path):
             row.append(format_value(total.get('RL_F_idk')))
             row.append(format_value(total.get('RB_llm_idk')))
             row.append(format_value(total.get('RB_agg_idk')))
-            row.append("|")
+            row.append("")  # Empty column for spacing
             
             # Answerable
             answerable = model_data.get('by_answerability', {}).get('ANSWERABLE', {})
             row.append(format_value(answerable.get('RL_F_idk')))
             row.append(format_value(answerable.get('RB_llm_idk')))
             row.append(format_value(answerable.get('RB_agg_idk')))
-            row.append("|")
+            row.append("")  # Empty column for spacing
             
             # Partially answerable
             partial = model_data.get('by_answerability', {}).get('PARTIAL', {})
             row.append(format_value(partial.get('RL_F_idk')))
             row.append(format_value(partial.get('RB_llm_idk')))
             row.append(format_value(partial.get('RB_agg_idk')))
-            row.append("|")
+            row.append("")  # Empty column for spacing
             
             # Unanswerable (just RL_F_idk)
             unanswerable = model_data.get('by_answerability', {}).get('UNANSWERABLE', {})
             row.append(format_value(unanswerable.get('RL_F_idk')))
-            row.append("|")
             
-            f.write(" | ".join(row) + "\n")
+            f.write(" | ".join(row) + " |\n")
     
     print(f"  ✓ Generated: {output_file}")
 
@@ -218,7 +216,7 @@ def generate_table_16b(data: Dict[str, Any], output_dir: Path):
     with open(output_file, 'w') as f:
         # Header
         f.write("# Table 16b: Generation Results by Turn Position\n\n")
-        f.write("<style>\ntable { color: #0066CC; }\n</style>\n\n")
+        f.write("<style>\ntable { color: #009900; font-weight: bold; }  /* Green bold for experimental results */\n</style>\n\n")
         f.write("**Generated from experimental results**\n\n")
         f.write("Detailed generation results in the Reference (•) retrieval setting using three metrics ")
         f.write("(RLF, RBllm, RBalg) broken down by first turn vs subsequent turns.\n\n")
@@ -256,8 +254,7 @@ def generate_table_16b(data: Dict[str, Any], output_dir: Path):
             row.append(format_value(turn_1.get('RB_agg_idk')))
             row.append(format_value(turn_gt_1.get('RB_agg_idk')))
             
-            row.append("|")
-            f.write(" | ".join(row) + "\n")
+            f.write(" | ".join(row) + " |\n")
     
     print(f"  ✓ Generated: {output_file}")
 
@@ -287,7 +284,7 @@ def generate_table_16c(data: Dict[str, Any], output_dir: Path):
     with open(output_file, 'w') as f:
         # Header
         f.write("# Table 16c: Generation Results by Domain\n\n")
-        f.write("<style>\ntable { color: #0066CC; }\n</style>\n\n")
+        f.write("<style>\ntable { color: #009900; font-weight: bold; }  /* Green bold for experimental results */\n</style>\n\n")
         f.write("**Generated from experimental results**\n\n")
         f.write("Detailed generation results in the Reference (•) retrieval setting using three metrics ")
         f.write("(RLF, RBllm, RBalg) broken down by domain.\n\n")
@@ -316,21 +313,20 @@ def generate_table_16c(data: Dict[str, Any], output_dir: Path):
             for domain in domains:
                 domain_data = by_domain.get(domain, {})
                 row.append(format_value(domain_data.get('RL_F_idk')))
-            row.append("|")
+            row.append("")  # Empty column for spacing
             
             # RBllm for each domain
             for domain in domains:
                 domain_data = by_domain.get(domain, {})
                 row.append(format_value(domain_data.get('RB_llm_idk')))
-            row.append("|")
+            row.append("")  # Empty column for spacing
             
             # RBalg for each domain
             for domain in domains:
                 domain_data = by_domain.get(domain, {})
                 row.append(format_value(domain_data.get('RB_agg_idk')))
-            row.append("|")
             
-            f.write(" | ".join(row) + "\n")
+            f.write(" | ".join(row) + " |\n")
     
     print(f"  ✓ Generated: {output_file}")
 
