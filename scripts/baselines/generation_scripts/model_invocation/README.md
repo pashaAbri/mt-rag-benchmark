@@ -21,10 +21,10 @@ This module is called by scenario-specific scripts. It is not meant to be run di
 ### Example
 
 ```bash
-python scripts/generation_scripts/model_invocation/llm_caller.py \
-    --model_config scripts/generation_scripts/model_invocation/llm_configs/llama_3.1_8b.yaml \
+python scripts/baselines/generation_scripts/model_invocation/llm_caller.py \
+    --model_config scripts/baselines/generation_scripts/model_invocation/llm_configs/llama_3.1_8b.yaml \
     --input_file human/generation_tasks/reference.jsonl \
-    --output_file scripts/generation_scripts/reference/results/llama_3.1_8b_reference.jsonl \
+    --output_file scripts/baselines/generation_scripts/reference/results/llama_3.1_8b_reference.jsonl \
     --batch_size 10
 ```
 

@@ -5,11 +5,11 @@
 set -e
 
 # Navigate to project root
-cd "$(dirname "$0")/../../.."
+cd "$(dirname "$0")/../../../../"
 
-MODEL_CONFIG="scripts/generation_scripts/model_invocation/llm_configs/command_r_plus.yaml"
+MODEL_CONFIG="scripts/baselines/generation_scripts/model_invocation/llm_configs/command_r_plus.yaml"
 INPUT_FILE="human/generation_tasks/RAG.jsonl"
-OUTPUT_FILE="scripts/generation_scripts/full_rag/results/command_r_plus_full_rag.jsonl"
+OUTPUT_FILE="scripts/baselines/generation_scripts/full_rag/results/command_r_plus_full_rag.jsonl"
 
 echo "=========================================="
 echo "Full RAG Setting - Real-World Pipeline"
@@ -20,9 +20,9 @@ echo "Model Config: $MODEL_CONFIG"
 echo "Note: End-to-end RAG with Elser retrieval"
 echo ""
 
-python scripts/generation_scripts/model_invocation/llm_caller.py \
+python scripts/baselines/generation_scripts/model_invocation/llm_caller.py \
     --model_config "$MODEL_CONFIG" \
-    --prompt_file "scripts/generation_scripts/model_invocation/prompts/baseline.py" \
+    --prompt_file "scripts/baselines/generation_scripts/model_invocation/prompts/baseline.py" \
     --input_file "$INPUT_FILE" \
     --output_file "$OUTPUT_FILE" \
     --batch_size 10 \

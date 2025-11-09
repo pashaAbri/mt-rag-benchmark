@@ -23,14 +23,14 @@ This is the **standard RAG setting** used in production systems.
 ### Run Generation
 
 ```bash
-cd scripts/generation_scripts/full_rag
+cd scripts/baselines/generation_scripts/full_rag
 ./run_full_rag.sh
 ```
 
 ### Evaluate Results
 
 ```bash
-cd scripts/generation_scripts/full_rag
+cd scripts/baselines/generation_scripts/full_rag
 ./evaluate_full_rag.sh
 ```
 

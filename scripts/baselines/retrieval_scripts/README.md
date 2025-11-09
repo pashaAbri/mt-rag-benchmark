@@ -5,7 +5,7 @@ This directory contains implementations for various retrieval baselines on the M
 ## Structure
 
 ```
-scripts/retrieval_scripts/
+scripts/baselines/retrieval_scripts/
 ├── bm25/                        # BM25 lexical retrieval (PyTerrier)
 │   ├── bm25_retrieval.py        # Main BM25 implementation
 │   ├── run_bm25_all.sh          # Run all BM25 experiments (4 domains × 3 query types)
@@ -37,24 +37,24 @@ scripts/retrieval_scripts/
 
 Run all BM25 experiments:
 ```bash
-bash scripts/retrieval_scripts/bm25/run_bm25_all.sh
-bash scripts/retrieval_scripts/bm25/evaluate_bm25.sh
+bash scripts/baselines/retrieval_scripts/bm25/run_bm25_all.sh
+bash scripts/baselines/retrieval_scripts/bm25/evaluate_bm25.sh
 ```
 
 ### BGE (Dense Retrieval)
 
 Run all BGE experiments:
 ```bash
-bash scripts/retrieval_scripts/bge/run_bge_all.sh
-bash scripts/retrieval_scripts/bge/evaluate_bge.sh
+bash scripts/baselines/retrieval_scripts/bge/run_bge_all.sh
+bash scripts/baselines/retrieval_scripts/bge/evaluate_bge.sh
 ```
 
 ### ELSER (Learned Sparse Retrieval)
 
 Run all ELSER experiments (all 4 domains):
 ```bash
-bash scripts/retrieval_scripts/elser/run_elser_all.sh
-bash scripts/retrieval_scripts/elser/evaluate_elser.sh
+bash scripts/baselines/retrieval_scripts/elser/run_elser_all.sh
+bash scripts/baselines/retrieval_scripts/elser/evaluate_elser.sh
 ```
 
 **Note:** ELSER requires Elasticsearch Cloud with `.env` credentials configured.

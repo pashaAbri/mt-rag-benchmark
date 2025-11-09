@@ -18,12 +18,12 @@ for domain in "${DOMAINS[@]}"; do
         COUNT=$((COUNT + 1))
         echo "[$COUNT/$TOTAL] Running BM25 on $domain with $query_type queries..."
         
-        python scripts/retrieval_scripts/bm25/bm25_retrieval.py \
+        python scripts/baselines/retrieval_scripts/bm25/bm25_retrieval.py \
             --domain "$domain" \
             --query_type "$query_type" \
             --corpus_file "corpora/passage_level/${domain}.jsonl" \
             --query_file "human/retrieval_tasks/${domain}/${domain}_${query_type}.jsonl" \
-            --output_file "scripts/retrieval_scripts/bm25/results/bm25_${domain}_${query_type}.jsonl" \
+            --output_file "scripts/baselines/retrieval_scripts/bm25/results/bm25_${domain}_${query_type}.jsonl" \
             --top_k 10 2>&1 | grep -E "(Loaded|Building|built|Running|complete|saved)"
         
         echo "✓ Completed: bm25_${domain}_${query_type}.jsonl"
@@ -32,6 +32,6 @@ for domain in "${DOMAINS[@]}"; do
 done
 
 echo "All BM25 experiments complete!"
-echo "Results saved to: scripts/retrieval_scripts/bm25/results/"
-ls -lh scripts/retrieval_scripts/bm25/results/bm25_*.jsonl
+echo "Results saved to: scripts/baselines/retrieval_scripts/bm25/results/"
+ls -lh scripts/baselines/retrieval_scripts/bm25/results/bm25_*.jsonl
 

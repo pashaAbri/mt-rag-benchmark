@@ -7,7 +7,7 @@ echo "Evaluating Reference+RAG generation results..."
 echo ""
 
 # Navigate to project root
-cd "$(dirname "$0")/../../.."
+cd "$(dirname "$0")/../../../../"
 
 # Load environment variables from .env (including HF_TOKEN)
 if [ -f .env ]; then
@@ -15,16 +15,16 @@ if [ -f .env ]; then
 fi
 
 # Set HuggingFace cache to scripts/generation_scripts directory
-export HF_HOME="$(pwd)/scripts/generation_scripts/.cache/huggingface"
-export HF_DATASETS_CACHE="$(pwd)/scripts/generation_scripts/.cache/huggingface/datasets"
-export TRANSFORMERS_CACHE="$(pwd)/scripts/generation_scripts/.cache/huggingface/transformers"
+export HF_HOME="$(pwd)/scripts/baselines/generation_scripts/.cache/huggingface"
+export HF_DATASETS_CACHE="$(pwd)/scripts/baselines/generation_scripts/.cache/huggingface/datasets"
+export TRANSFORMERS_CACHE="$(pwd)/scripts/baselines/generation_scripts/.cache/huggingface/transformers"
 export HF_HUB_ENABLE_HF_TRANSFER=0  # Disable hf-xet to avoid crashes
 
-for result_file in scripts/generation_scripts/reference_rag/results/llama_3.1_8b_*.jsonl; do
+for result_file in scripts/baselines/generation_scripts/reference_rag/results/llama_3.1_8b_*.jsonl; do
     # Skip already evaluated files
     if [[ ! "$result_file" =~ _evaluated\.jsonl$ ]]; then
         base_name=$(basename "$result_file" .jsonl)
-        output_file="scripts/generation_scripts/reference_rag/results/${base_name}_evaluated.jsonl"
+        output_file="scripts/baselines/generation_scripts/reference_rag/results/${base_name}_evaluated.jsonl"
         
         echo "Evaluating: $base_name"
         
@@ -42,5 +42,5 @@ done
 echo "All evaluations complete!"
 echo ""
 echo "Evaluated results:"
-ls -lh scripts/generation_scripts/reference_rag/results/llama_3.1_8b_*_evaluated.jsonl
+ls -lh scripts/baselines/generation_scripts/reference_rag/results/llama_3.1_8b_*_evaluated.jsonl
 

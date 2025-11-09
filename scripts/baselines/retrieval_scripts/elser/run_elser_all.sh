@@ -19,11 +19,11 @@ for domain in "${DOMAINS[@]}"; do
         COUNT=$((COUNT + 1))
         echo "[$COUNT/$TOTAL] Running ELSER on $domain with $query_type queries..."
         
-        python scripts/retrieval_scripts/elser/elser_retrieval.py \
+        python scripts/baselines/retrieval_scripts/elser/elser_retrieval.py \
             --domain "$domain" \
             --query_type "$query_type" \
             --query_file "human/retrieval_tasks/${domain}/${domain}_${query_type}.jsonl" \
-            --output_file "scripts/retrieval_scripts/elser/results/elser_${domain}_${query_type}.jsonl" \
+            --output_file "scripts/baselines/retrieval_scripts/elser/results/elser_${domain}_${query_type}.jsonl" \
             --top_k 10 \
             --delay 2.0
         
@@ -33,11 +33,11 @@ for domain in "${DOMAINS[@]}"; do
 done
 
 echo "All ELSER experiments complete!"
-echo "Results saved to: scripts/retrieval_scripts/elser/results/"
+echo "Results saved to: scripts/baselines/retrieval_scripts/elser/results/"
 echo ""
 echo "Summary:"
-wc -l scripts/retrieval_scripts/elser/results/elser_*.jsonl | tail -1
+wc -l scripts/baselines/retrieval_scripts/elser/results/elser_*.jsonl | tail -1
 echo ""
 echo "Run evaluation with:"
-echo "  bash scripts/retrieval_scripts/elser/evaluate_elser.sh"
+echo "  bash scripts/baselines/retrieval_scripts/elser/evaluate_elser.sh"
 

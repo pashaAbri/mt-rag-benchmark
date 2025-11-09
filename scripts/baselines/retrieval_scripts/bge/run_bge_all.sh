@@ -21,12 +21,12 @@ for domain in "${DOMAINS[@]}"; do
         COUNT=$((COUNT + 1))
         echo "[$COUNT/$TOTAL] Running BGE on $domain with $query_type queries..."
         
-        python scripts/retrieval_scripts/bge/bge_retrieval.py \
+        python scripts/baselines/retrieval_scripts/bge/bge_retrieval.py \
             --domain "$domain" \
             --query_type "$query_type" \
             --corpus_file "corpora/passage_level/${domain}.jsonl" \
             --query_file "human/retrieval_tasks/${domain}/${domain}_${query_type}.jsonl" \
-            --output_file "scripts/retrieval_scripts/bge/results/bge_${domain}_${query_type}.jsonl" \
+            --output_file "scripts/baselines/retrieval_scripts/bge/results/bge_${domain}_${query_type}.jsonl" \
             --top_k 10
         
         echo "✓ Completed: bge_${domain}_${query_type}.jsonl"
@@ -35,7 +35,7 @@ for domain in "${DOMAINS[@]}"; do
 done
 
 echo "All BGE experiments complete!"
-echo "Results saved to: scripts/retrieval_scripts/bge/results/"
-ls -lh scripts/retrieval_scripts/bge/results/bge_*.jsonl
+echo "Results saved to: scripts/baselines/retrieval_scripts/bge/results/"
+ls -lh scripts/baselines/retrieval_scripts/bge/results/bge_*.jsonl
 
 

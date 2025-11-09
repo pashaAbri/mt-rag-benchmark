@@ -23,14 +23,14 @@ This scenario tests generation with **gold passages mixed with retrieved passage
 ### Run Generation
 
 ```bash
-cd scripts/generation_scripts/reference_rag
+cd scripts/baselines/generation_scripts/reference_rag
 ./run_reference_rag.sh
 ```
 
 ### Evaluate Results
 
 ```bash
-cd scripts/generation_scripts/reference_rag
+cd scripts/baselines/generation_scripts/reference_rag
 ./evaluate_reference_rag.sh
 ```
 

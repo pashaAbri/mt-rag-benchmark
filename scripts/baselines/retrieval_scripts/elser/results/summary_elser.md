@@ -133,7 +133,7 @@ ELSER (ElasticSearch Learned Sparse EncodeR) retrieval on the MT-RAG benchmark u
 
 ### Retrieval Results (12 files)
 ```
-scripts/retrieval_scripts/elser/results/
+scripts/baselines/retrieval_scripts/elser/results/
 ├── elser_clapnq_lastturn.jsonl
 ├── elser_clapnq_rewrite.jsonl
 ├── elser_clapnq_questions.jsonl

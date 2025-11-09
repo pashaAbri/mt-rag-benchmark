@@ -24,13 +24,13 @@ pip install sentence-transformers torch
 We download the model to a local `models/` directory (ignored by git):
 
 ```bash
-cd scripts/retrieval_scripts/bge
+cd scripts/baselines/retrieval_scripts/bge
 python download_model.py
 ```
 
 This will:
 - Download BAAI/bge-base-en-v1.5 (~420 MB)
-- Save to `scripts/retrieval_scripts/bge/models/bge-base-en-v1.5/`
+- Save to `scripts/baselines/retrieval_scripts/bge/models/bge-base-en-v1.5/`
 - Allow offline usage after first download
 
 **Note:** The `models/` directory is gitignored to avoid committing large model files.
@@ -40,12 +40,12 @@ This will:
 ### Run Single Experiment
 
 ```bash
-python scripts/retrieval_scripts/bge/bge_retrieval.py \
+python scripts/baselines/retrieval_scripts/bge/bge_retrieval.py \
     --domain clapnq \
     --query_type lastturn \
     --corpus_file corpora/passage_level/clapnq.jsonl \
     --query_file human/retrieval_tasks/clapnq/clapnq_lastturn.jsonl \
-    --output_file scripts/retrieval_scripts/bge/results/bge_clapnq_lastturn.jsonl \
+    --output_file scripts/baselines/retrieval_scripts/bge/results/bge_clapnq_lastturn.jsonl \
     --top_k 10
 ```
 
@@ -115,7 +115,7 @@ This will display:
 **Caching Strategy:**
 - First run: Encodes all documents (~5-15 minutes per domain) and saves to disk
 - Subsequent runs: Loads cached embeddings instantly
-- Cache location: `scripts/retrieval_scripts/bge/embeddings/`
+- Cache location: `scripts/baselines/retrieval_scripts/bge/embeddings/`
 - Cache size: ~562 MB per domain (183K docs × 768 dim × 4 bytes)
 - Cache is gitignored (not committed to repo)
 

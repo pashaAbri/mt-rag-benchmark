@@ -14,25 +14,25 @@ BM25 lexical retrieval implementation using PyTerrier for the MT-RAG benchmark.
 ### Run single experiment:
 
 ```bash
-python scripts/retrieval_scripts/bm25/bm25_retrieval.py \
+python scripts/baselines/retrieval_scripts/bm25/bm25_retrieval.py \
     --domain clapnq \
     --query_type lastturn \
     --corpus_file corpora/passage_level/clapnq.jsonl \
     --query_file human/retrieval_tasks/clapnq/clapnq_lastturn.jsonl \
-    --output_file scripts/retrieval_scripts/bm25/results/bm25_clapnq_lastturn.jsonl \
+    --output_file scripts/baselines/retrieval_scripts/bm25/results/bm25_clapnq_lastturn.jsonl \
     --top_k 10
 ```
 
 ### Run all experiments:
 
 ```bash
-bash scripts/retrieval_scripts/bm25/run_bm25_all.sh
+bash scripts/baselines/retrieval_scripts/bm25/run_bm25_all.sh
 ```
 
 ### Evaluate all results:
 
 ```bash
-bash scripts/retrieval_scripts/bm25/evaluate_bm25.sh
+bash scripts/baselines/retrieval_scripts/bm25/evaluate_bm25.sh
 ```
 
 ## Results

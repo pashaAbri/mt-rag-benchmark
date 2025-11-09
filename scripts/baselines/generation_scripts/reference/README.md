@@ -22,14 +22,14 @@ This represents the **ideal case** where retrieval is perfect.
 ### Run Generation
 
 ```bash
-cd scripts/generation_scripts/reference
+cd scripts/baselines/generation_scripts/reference
 ./run_reference.sh
 ```
 
 ### Evaluate Results
 
 ```bash
-cd scripts/generation_scripts/reference
+cd scripts/baselines/generation_scripts/reference
 ./evaluate_reference.sh
 ```
 

@@ -33,11 +33,11 @@ ES_API_KEY=your-api-key
 ### Run Single Experiment
 
 ```bash
-python scripts/retrieval_scripts/elser/elser_retrieval.py \
+python scripts/baselines/retrieval_scripts/elser/elser_retrieval.py \
     --domain fiqa \
     --query_type lastturn \
     --query_file human/retrieval_tasks/fiqa/fiqa_lastturn.jsonl \
-    --output_file scripts/retrieval_scripts/elser/results/elser_fiqa_lastturn.jsonl \
+    --output_file scripts/baselines/retrieval_scripts/elser/results/elser_fiqa_lastturn.jsonl \
     --top_k 10 \
     --delay 2.0
 ```
@@ -50,7 +50,7 @@ python scripts/retrieval_scripts/elser/elser_retrieval.py \
 ### Run All Experiments
 
 ```bash
-bash scripts/retrieval_scripts/elser/run_elser_all.sh
+bash scripts/baselines/retrieval_scripts/elser/run_elser_all.sh
 ```
 
 Runs ELSER on all 4 domains × 3 query types = 12 experiments
@@ -59,7 +59,7 @@ Runs ELSER on all 4 domains × 3 query types = 12 experiments
 ### Evaluate Results
 
 ```bash
-bash scripts/retrieval_scripts/elser/evaluate_elser.sh
+bash scripts/baselines/retrieval_scripts/elser/evaluate_elser.sh
 ```
 
 ## Implementation Notes
@@ -115,12 +115,12 @@ If you see `429 Rate limit exceeded` errors:
 - Increase `--delay` parameter (try 3.0 or 5.0 seconds)
 - Use the retry script for failed queries:
 ```bash
-python scripts/retrieval_scripts/elser/retry_failed_queries.py \
+python scripts/baselines/retrieval_scripts/elser/retry_failed_queries.py \
     --domain fiqa \
     --query_type questions \
     --query_file human/retrieval_tasks/fiqa/fiqa_questions.jsonl \
     --failed_ids_file fiqa_questions_failed_ids.txt \
-    --output_file scripts/retrieval_scripts/elser/results/elser_fiqa_questions.jsonl \
+    --output_file scripts/baselines/retrieval_scripts/elser/results/elser_fiqa_questions.jsonl \
     --delay 5.0
 ```
 

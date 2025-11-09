@@ -37,7 +37,7 @@ def run_baseline(retriever: str, domain: str, query_type: str,
     script = script_map[retriever]
     
     cmd = [
-        'python', f'scripts/retrieval_scripts/{script}',
+        'python', f'scripts/baselines/retrieval_scripts/{script}',
         '--domain', domain,
         '--query_type', query_type,
         '--corpus_file', corpus_file,
@@ -99,7 +99,7 @@ def main():
                         default='human/retrieval_tasks',
                         help='Directory containing query files')
     parser.add_argument('--output_dir', type=str,
-                        default='scripts/retrieval_scripts/bm25/results',
+                        default='scripts/baselines/retrieval_scripts/bm25/results',
                         help='Output directory for results (will be updated per retriever)')
     
     args = parser.parse_args()
