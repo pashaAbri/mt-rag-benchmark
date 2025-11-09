@@ -9,6 +9,7 @@ import spacy
 from sklearn.metrics.pairwise import cosine_similarity
 import sys
 import os
+from pathlib import Path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from pure_extractive.pure_extractive_rewrite import PureExtractiveRewriter, load_mtrag_queries
 
@@ -20,7 +21,7 @@ class HybridExtractiveRewriter:
     
     def __init__(
         self,
-        model_name: str = "all-MiniLM-L6-v2",
+        model_name: str = "BAAI/bge-base-en-v1.5",
         lambda_param: float = 0.7,
         max_terms: int = 10,
         entity_boost: float = 1.5
@@ -29,7 +30,7 @@ class HybridExtractiveRewriter:
         Initialize hybrid rewriter.
         
         Args:
-            model_name: Sentence embedding model
+            model_name: Sentence embedding model (default: bge-base-en-v1.5)
             lambda_param: MMR lambda parameter
             max_terms: Max terms to select
             entity_boost: Boost factor for named entities
@@ -371,9 +372,13 @@ class HybridExtractiveRewriter:
         return query
 
 
-def run_hybrid_extractive(domain: str):
+def run_hybrid_extractive(domain: str, output_format: str = 'both'):
     """
     Run hybrid extractive on MT-RAG dataset.
+    
+    Args:
+        domain: Domain to process
+        output_format: 'analysis' (detailed), 'mtrag' (retrieval format), or 'both'
     """
     import json
     import os
@@ -386,7 +391,9 @@ def run_hybrid_extractive(domain: str):
     
     queries = load_mtrag_queries(domain)
     
-    results = []
+    results_analysis = []
+    results_mtrag = []
+    
     for item in queries:
         try:
             rewritten = rewriter.rewrite(
@@ -394,11 +401,18 @@ def run_hybrid_extractive(domain: str):
                 conversation_history=item['history']
             )
             
-            results.append({
+            # Analysis format (detailed)
+            results_analysis.append({
                 "id": item['id'],
                 "original": item['query'],
                 "rewritten": rewritten,
                 "history_length": len(item['history'])
+            })
+            
+            # MT-RAG format (for retrieval)
+            results_mtrag.append({
+                "_id": item['id'],
+                "text": f"|user|: {rewritten}"
             })
             
             print(f"[{domain}] {item['id']}")
@@ -408,27 +422,44 @@ def run_hybrid_extractive(domain: str):
             
         except Exception as e:
             print(f"Error: {e}")
-            results.append({
+            results_analysis.append({
                 "id": item['id'],
                 "original": item['query'],
                 "rewritten": item['query'],
                 "error": str(e)
             })
+            results_mtrag.append({
+                "_id": item['id'],
+                "text": f"|user|: {item['query']}"
+            })
     
-    # Save to results directory within hybrid_extractive
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    results_dir = os.path.join(script_dir, 'results')
-    os.makedirs(results_dir, exist_ok=True)
     
-    output_path = os.path.join(results_dir, f"{domain}_rewrites.jsonl")
+    # Save analysis format
+    if output_format in ['analysis', 'both']:
+        results_dir = os.path.join(script_dir, 'results')
+        os.makedirs(results_dir, exist_ok=True)
+        output_path = os.path.join(results_dir, f"{domain}_rewrites.jsonl")
+        
+        with open(output_path, 'w') as f:
+            for result in results_analysis:
+                f.write(json.dumps(result) + '\n')
+        
+        print(f"Saved {len(results_analysis)} analysis results to {output_path}")
     
-    with open(output_path, 'w') as f:
-        for result in results:
-            f.write(json.dumps(result) + '\n')
+    # Save MT-RAG format
+    if output_format in ['mtrag', 'both']:
+        datasets_dir = os.path.join(script_dir, 'datasets')
+        os.makedirs(datasets_dir, exist_ok=True)
+        output_path = os.path.join(datasets_dir, f"{domain}_hybrid_extractive.jsonl")
+        
+        with open(output_path, 'w') as f:
+            for result in results_mtrag:
+                f.write(json.dumps(result) + '\n')
+        
+        print(f"Saved {len(results_mtrag)} MT-RAG queries to {output_path}")
     
-    print(f"Saved to {output_path}")
-    
-    return results
+    return results_analysis, results_mtrag
 
 
 if __name__ == "__main__":

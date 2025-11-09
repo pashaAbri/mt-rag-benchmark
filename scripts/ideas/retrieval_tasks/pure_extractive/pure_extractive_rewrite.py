@@ -10,7 +10,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 import re
 import nltk
 from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
+from pathlib import Path
+import os
 
 
 class TextPreprocessor:
@@ -21,7 +22,6 @@ class TextPreprocessor:
             self.stop_words = set(stopwords.words('english'))
         except:
             nltk.download('stopwords')
-            nltk.download('punkt')
             self.stop_words = set(stopwords.words('english'))
     
     def preprocess(self, text: str) -> List[str]:
@@ -35,8 +35,12 @@ class TextPreprocessor:
             List of cleaned tokens
         """
         text = text.lower()
-        text = re.sub(r'[^a-z0-9\s]', '', text)
-        tokens = word_tokenize(text)
+        # Remove punctuation but keep spaces
+        text = re.sub(r'[^a-z0-9\s]', ' ', text)
+        # Simple tokenization by splitting on whitespace
+        tokens = text.split()
+        # Remove extra empty strings
+        tokens = [t for t in tokens if t]
         
         # Keep question words even if they're stop words
         question_words = {'what', 'where', 'when', 'who', 'why', 'how', 'which'}
@@ -55,7 +59,7 @@ class PureExtractiveRewriter:
     
     def __init__(
         self,
-        model_name: str = "all-MiniLM-L6-v2",
+        model_name: str = "BAAI/bge-base-en-v1.5",
         lambda_param: float = 0.7,
         max_terms: int = 10
     ):
@@ -63,11 +67,24 @@ class PureExtractiveRewriter:
         Initialize rewriter.
         
         Args:
-            model_name: Sentence embedding model
+            model_name: Sentence embedding model (default: bge-base-en-v1.5)
             lambda_param: MMR lambda (relevance vs diversity)
             max_terms: Maximum terms to select
         """
-        self.encoder = SentenceTransformer(model_name)
+        # Set up paths
+        script_dir = Path(__file__).parent
+        self.root_dir = script_dir.parent.parent.parent.parent  # Workspace root
+        models_dir = script_dir.parent / ".models"
+        local_model_path = models_dir / "bge-base-en-v1.5"
+        
+        # Load embedding model
+        if local_model_path.exists():
+            print(f"Loading local model from {local_model_path}")
+            self.encoder = SentenceTransformer(str(local_model_path))
+        else:
+            print(f"Loading model from HuggingFace: {model_name}")
+            self.encoder = SentenceTransformer(model_name)
+        
         self.lambda_param = lambda_param
         self.max_terms = max_terms
         self.preprocessor = TextPreprocessor()
@@ -242,36 +259,44 @@ class PureExtractiveRewriter:
         return [candidates[i] for i in selected_indices]
 
 
-def load_mtrag_queries(domain: str) -> List[Dict]:
+def load_mtrag_queries(domain: str, root_dir: Path = None) -> List[Dict]:
     """
     Load MT-RAG queries for a domain.
     
     Args:
         domain: One of ['clapnq', 'cloud', 'fiqa', 'govt']
+        root_dir: Workspace root directory (optional, auto-detected if not provided)
         
     Returns:
         List of query dicts with history
     """
     import json
     
-    lastturn_path = f"human/retrieval_tasks/{domain}/{domain}_lastturn.jsonl"
-    with open(lastturn_path) as f:
-        queries = [json.loads(line) for line in f]
+    # Get workspace root if not provided (4 levels up from this script)
+    if root_dir is None:
+        script_dir = Path(__file__).parent
+        root_dir = script_dir.parent.parent.parent.parent
     
-    history_path = f"human/retrieval_tasks/{domain}/{domain}_questions.jsonl"
-    with open(history_path) as f:
-        histories = [json.loads(line) for line in f]
+    questions_path = root_dir / "human" / "retrieval_tasks" / domain / f"{domain}_questions.jsonl"
+    
+    if not questions_path.exists():
+        raise FileNotFoundError(f"Questions file not found: {questions_path}")
+    
+    with open(questions_path) as f:
+        questions = [json.loads(line) for line in f]
     
     results = []
-    for q, h in zip(queries, histories):
-        query_id = q['_id']
-        current_query = q['text'].replace('|user|:', '').strip()
+    for item in questions:
+        query_id = item['_id']
+        full_text = item['text']
+        turns = full_text.split('\n')
         
-        history_text = h['text']
-        turns = history_text.split('\n')
+        # Last turn is the current query
+        current_query = turns[-1].replace('|user|:', '').strip()
         
+        # Previous turns are the conversation history
         conversation_history = []
-        for turn in turns[:-1]:  # Exclude current query
+        for turn in turns[:-1]:
             content = turn.replace('|user|:', '').strip()
             if content:
                 conversation_history.append({
@@ -288,24 +313,25 @@ def load_mtrag_queries(domain: str) -> List[Dict]:
     return results
 
 
-def run_pure_extractive(domain: str):
+def run_pure_extractive(domain: str, output_format: str = 'mtrag'):
     """
     Run pure extractive rewriting on MT-RAG dataset.
     
     Args:
         domain: Domain to process
+        output_format: 'mtrag' (retrieval format, default)
     """
     import json
-    import os
     
     rewriter = PureExtractiveRewriter(
         lambda_param=0.7,
         max_terms=10
     )
     
-    queries = load_mtrag_queries(domain)
+    queries = load_mtrag_queries(domain, root_dir=rewriter.root_dir)
     
-    results = []
+    results_mtrag = []
+    
     for item in queries:
         try:
             rewritten = rewriter.rewrite(
@@ -313,11 +339,10 @@ def run_pure_extractive(domain: str):
                 conversation_history=item['history']
             )
             
-            results.append({
-                "id": item['id'],
-                "original": item['query'],
-                "rewritten": rewritten,
-                "history_length": len(item['history'])
+            # MT-RAG format (for retrieval)
+            results_mtrag.append({
+                "_id": item['id'],
+                "text": f"|user|: {rewritten}"
             })
             
             print(f"[{domain}] {item['id']}")
@@ -327,27 +352,25 @@ def run_pure_extractive(domain: str):
             
         except Exception as e:
             print(f"Error processing {item['id']}: {e}")
-            results.append({
-                "id": item['id'],
-                "original": item['query'],
-                "rewritten": item['query'],
-                "error": str(e)
+            results_mtrag.append({
+                "_id": item['id'],
+                "text": f"|user|: {item['query']}"
             })
     
-    # Save to results directory within pure_extractive
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    results_dir = os.path.join(script_dir, 'results')
-    os.makedirs(results_dir, exist_ok=True)
     
-    output_path = os.path.join(results_dir, f"{domain}_rewrites.jsonl")
+    # Save MT-RAG format
+    datasets_dir = os.path.join(script_dir, 'datasets')
+    os.makedirs(datasets_dir, exist_ok=True)
+    output_path = os.path.join(datasets_dir, f"{domain}_pure_extractive.jsonl")
     
     with open(output_path, 'w') as f:
-        for result in results:
+        for result in results_mtrag:
             f.write(json.dumps(result) + '\n')
     
-    print(f"Saved {len(results)} rewrites to {output_path}")
+    print(f"✓ Saved {len(results_mtrag)} queries to {output_path}")
     
-    return results
+    return results_mtrag
 
 
 if __name__ == "__main__":

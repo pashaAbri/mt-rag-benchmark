@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-This document presents a data-driven analysis of 777 query rewrites from the MT-RAG benchmark. The analysis identifies distinct rewriting patterns and their characteristics to inform extractive query rewriting implementation.
+This document presents an analysis of 777 query rewrites from the MT-RAG benchmark. The analysis identifies distinct rewriting patterns and their characteristics to inform extractive query rewriting implementation.
 
 **Key Findings:**
 - 27% of queries are already standalone and require no rewriting
