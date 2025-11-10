@@ -174,36 +174,54 @@ This format matches the existing MT-RAG retrieval tasks and can be used directly
 | govt | 0.344 | **0.420** | 0.306 ↓ | 0.303 ↓ | Human |
 | **Avg** | 0.342 | **0.400** | 0.308 | 0.307 | Human |
 
+#### ELSER (Learned Sparse) - NDCG@10
+
+| Domain | Lastturn | Human | Pure | Hybrid | Best |
+|--------|----------|-------|------|--------|------|
+| clapnq | 0.527 | **0.578** | 0.460 ↓ | 0.458 ↓ | Human |
+| cloud | 0.427 | **0.438** | 0.328 ↓ | 0.308 ↓ | Human |
+| fiqa | 0.391 | **0.436** | 0.333 ↓ | 0.302 ↓ | Human |
+| govt | 0.449 | **0.517** | 0.446 ≈ | 0.428 ↓ | Human |
+| **Avg** | 0.449 | **0.492** | 0.392 | 0.374 | Human |
+
 ### Key Findings:
 
-**1. Pure ≈ Hybrid** (both retrievers)
-- BM25: 0.4% difference
-- BGE: 0.3% difference
-- **Conclusion:** Templates/NER don't help
+**1. Pure ≈ Hybrid with BM25/BGE, but Pure > Hybrid with ELSER**
+- BM25: 0.4% difference (tie)
+- BGE: 0.3% difference (tie)
+- ELSER: 4.6% difference (**Pure wins!**)
+- **Conclusion:** Templates hurt ELSER, don't help BM25/BGE
 
-**2. Extractive better with BM25**
+**2. Extractive most competitive with BM25**
 - BM25 gap from human: -6.3%  ✅ Competitive
 - BGE gap from human: -23.0%  ❌ Not competitive
+- ELSER gap from human: -20.3%  ❌ Not competitive
 
-**3. BGE improves absolute scores**
-- Pure: +21% average improvement
-- Hybrid: +21% average improvement
-- But widens gap from baselines
+**3. ELSER achieves highest absolute scores**
+- Pure: 0.255 (BM25) → 0.308 (BGE) → **0.392 (ELSER)**
+- Hybrid: 0.254 (BM25) → 0.307 (BGE) → 0.374 (ELSER)
+- But gaps from human widen with better retrieval systems
 
 **4. Domain matters**
-- Best: govt (BM25), clapnq (BGE)
-- Worst: cloud (both), fiqa (BGE)
+- Best: govt (all systems), especially with BM25
+- Worst: cloud (all systems), fiqa (BGE/ELSER)
+
+**5. Government domain special case**
+- Pure + ELSER nearly ties lastturn (-0.7%)
+- Only domain where extractive is competitive with ELSER
 
 ### Final Recommendation:
 
 ✅ **Use Pure Extractive + BM25** for production (simple, competitive)  
-❌ **Avoid Hybrid** (no benefit over Pure)  
-❌ **Avoid Extractive + BGE** (too far behind baselines)
+❌ **Avoid Hybrid** (worse than Pure, especially with ELSER)  
+❌ **Avoid Extractive + BGE/ELSER** (too far behind baselines)  
+✅ **Exception**: Pure + ELSER for govt domain only (-0.7% from lastturn)
 
 ### Detailed Analysis:
 - [BM25 Results](FULL_RESULTS_COMPARISON.md)
 - [BGE Results](BGE_RESULTS_COMPARISON.md)
-- [Master Summary](MASTER_RESULTS_SUMMARY.md)
+- [ELSER Results](ELSER_RESULTS_COMPARISON.md)
+- [Master Summary](MASTER_RESULTS_SUMMARY.md) ← **Complete overview of all systems**
 
 ## Documentation
 

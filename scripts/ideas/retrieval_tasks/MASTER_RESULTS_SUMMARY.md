@@ -2,21 +2,22 @@
 
 **Date:** November 10, 2024  
 **Methods Tested:** Pure Extractive, Hybrid Extractive  
-**Retrieval Systems:** BM25 (lexical), BGE (semantic)  
+**Retrieval Systems:** BM25 (lexical), BGE (dense), ELSER (learned sparse)  
 **Baselines:** Lastturn, Human Rewrite
 
 ---
 
 ## 🎯 Executive Summary
 
-We tested two extractive query rewriting approaches (Pure and Hybrid) with two retrieval systems (BM25 and BGE) across 4 domains and 777 queries.
+We tested two extractive query rewriting approaches (Pure and Hybrid) with three retrieval systems (BM25, BGE, ELSER) across 4 domains and 777 queries.
 
 ### Key Findings:
 
-1. **Pure ≈ Hybrid** - Nearly identical performance with both retrieval systems
-2. **BGE > BM25** - Semantic retrieval outperforms lexical for all methods
-3. **Extractive works better with BM25** - Smaller gap from human performance
+1. **Pure ≈ Hybrid with BM25/BGE** - But Pure > Hybrid with ELSER
+2. **ELSER > BGE > BM25** - Learned sparse retrieval achieves highest absolute scores
+3. **Extractive most competitive with BM25** - Smallest gap from human (-6-7%)
 4. **Domain matters** - Technical domains don't benefit from rewriting
+5. **Templates hurt performance** - Especially with ELSER (-4.6%)
 
 ---
 
@@ -28,12 +29,16 @@ We tested two extractive query rewriting approaches (Pure and Hybrid) with two r
 |--------|-----------|----------|-------|------|--------|----------|------------|
 | **clapnq** | BM25 | 0.269 | **0.301** | 0.290 | 0.284 | -3.7% | -5.6% |
 | **clapnq** | BGE | 0.424 | **0.498** | 0.406 | 0.399 | -18.5% | -19.9% |
+| **clapnq** | ELSER | 0.527 | **0.578** | 0.460 | 0.458 | -20.4% | -20.8% |
 | **cloud** | BM25 | **0.252** | 0.248 | 0.239 | 0.241 | -5.2% | -4.4% |
 | **cloud** | BGE | 0.307 | **0.342** | 0.285 | 0.290 | -16.7% | -15.2% |
+| **cloud** | ELSER | 0.427 | **0.438** | 0.328 | 0.308 | -25.1% | -29.7% |
 | **fiqa** | BM25 | 0.136 | **0.186** | 0.152 | 0.155 | -18.3% | -16.7% |
 | **fiqa** | BGE | 0.291 | **0.341** | 0.234 | 0.236 | -31.4% | -30.8% |
+| **fiqa** | ELSER | 0.391 | **0.436** | 0.333 | 0.302 | -23.6% | -30.7% |
 | **govt** | BM25 | 0.319 | **0.354** | 0.339 | 0.336 | -4.2% | -5.1% |
 | **govt** | BGE | 0.344 | **0.420** | 0.306 | 0.303 | -27.1% | -27.9% |
+| **govt** | ELSER | 0.449 | **0.517** | 0.446 | 0.428 | -13.7% | -17.2% |
 
 ---
 
@@ -256,7 +261,53 @@ But they don't capture the **semantic relationships** humans add
 
 ---
 
+## 🆕 ELSER Results Summary
+
+### Average Performance (NDCG@10)
+
+| Method | BM25 | BGE | ELSER | Best System |
+|--------|------|-----|-------|-------------|
+| Human Rewrite | 0.272 | 0.400 | **0.492** | ELSER |
+| Lastturn | 0.244 | 0.342 | **0.449** | ELSER |
+| Pure Extractive | 0.255 | 0.308 | **0.392** | ELSER |
+| Hybrid Extractive | 0.254 | 0.307 | **0.374** | ELSER |
+
+**ELSER achieves highest absolute scores across all methods!**
+
+### Pure vs Hybrid with ELSER
+
+| Domain | Pure | Hybrid | Winner | Gap |
+|--------|------|--------|--------|-----|
+| clapnq | **0.460** | 0.458 | Pure | -0.4% |
+| cloud | **0.328** | 0.308 | Pure | -6.1% |
+| fiqa | **0.333** | 0.302 | Pure | -9.3% |
+| govt | **0.446** | 0.428 | Pure | -4.0% |
+| **Avg** | **0.392** | 0.374 | **Pure** | **-4.6%** |
+
+**First time Pure clearly beats Hybrid!** Templates hurt ELSER performance.
+
+### Extractive Gap from Human (All Systems)
+
+| Retriever | Pure Gap | Hybrid Gap | Best for Extractive |
+|-----------|----------|------------|---------------------|
+| **BM25** | **-6.3%** ✅ | -6.6% | BM25 |
+| BGE | -23.0% ❌ | -23.3% | - |
+| ELSER | -20.3% ❌ | -24.0% | - |
+
+**Critical Finding:** Extractive methods are **most competitive with BM25** despite having lowest absolute scores.
+
+### Key ELSER Insights:
+
+1. **ELSER has highest scores** but widest gaps for extractive methods
+2. **Pure outperforms Hybrid** (unlike BM25/BGE where they tied)
+3. **Templates are counterproductive** with learned sparse encoding
+4. **Govt domain**: Pure nearly ties lastturn (-0.7%)
+5. **Cloud/FiQA**: Extractive fails with ELSER too
+
+---
+
 **Complete Results:**
 - [BM25 Details](FULL_RESULTS_COMPARISON.md)
 - [BGE Details](BGE_RESULTS_COMPARISON.md)
+- [ELSER Details](ELSER_RESULTS_COMPARISON.md)
 
