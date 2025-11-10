@@ -10,8 +10,210 @@ from sklearn.metrics.pairwise import cosine_similarity
 import sys
 import os
 from pathlib import Path
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from pure_extractive.pure_extractive_rewrite import PureExtractiveRewriter, load_mtrag_queries
+from sentence_transformers import SentenceTransformer
+import re
+import nltk
+from nltk.corpus import stopwords
+
+
+class TextPreprocessor:
+    """Preprocess text for extractive rewriting."""
+    
+    def __init__(self):
+        try:
+            self.stop_words = set(stopwords.words('english'))
+        except:
+            nltk.download('stopwords')
+            self.stop_words = set(stopwords.words('english'))
+    
+    def preprocess(self, text: str) -> List[str]:
+        """Tokenize and clean text."""
+        text = text.lower()
+        # Remove punctuation but keep spaces
+        text = re.sub(r'[^a-z0-9\s]', ' ', text)
+        # Simple tokenization by splitting on whitespace
+        tokens = text.split()
+        # Remove extra empty strings
+        tokens = [t for t in tokens if t]
+        
+        # Keep question words even if they're stop words
+        question_words = {'what', 'where', 'when', 'who', 'why', 'how', 'which'}
+        tokens = [
+            t for t in tokens
+            if t not in self.stop_words or t in question_words
+        ]
+        
+        return tokens
+
+
+class PureExtractiveRewriter:
+    """Pure extractive query rewriting using MMR."""
+    
+    def __init__(
+        self,
+        model_name: str = "BAAI/bge-base-en-v1.5",
+        lambda_param: float = 0.7,
+        max_terms: int = 10
+    ):
+        """Initialize rewriter."""
+        # Set up paths
+        script_dir = Path(__file__).resolve().parent
+        # Go up 5 levels: hybrid_extractive/ -> retrieval_tasks/ -> ideas/ -> scripts/ -> workspace root
+        self.root_dir = script_dir.parent.parent.parent.parent
+        models_dir = script_dir.parent / ".models"
+        local_model_path = models_dir / "bge-base-en-v1.5"
+        
+        # Load embedding model
+        if local_model_path.exists():
+            print(f"Loading local model from {local_model_path}")
+            self.encoder = SentenceTransformer(str(local_model_path))
+        else:
+            print(f"Loading model from HuggingFace: {model_name}")
+            self.encoder = SentenceTransformer(model_name)
+        
+        self.lambda_param = lambda_param
+        self.max_terms = max_terms
+        self.preprocessor = TextPreprocessor()
+    
+    def format_history(self, conversation_history: List[Dict[str, str]]) -> str:
+        """Format conversation history into text."""
+        history_parts = []
+        
+        for turn in conversation_history:
+            role = turn.get("role", "user")
+            content = turn.get("content", "")
+            
+            if role == "user":
+                history_parts.append(content)
+        
+        return " ".join(history_parts)
+    
+    def extract_candidates(self, current_query: str, history_text: str) -> List[str]:
+        """Extract candidate terms/phrases from query and history."""
+        candidates = []
+        full_text = f"{current_query} {history_text}"
+        
+        tokens = self.preprocessor.preprocess(full_text)
+        
+        # Unigrams
+        candidates.extend(tokens)
+        
+        # Bigrams
+        candidates.extend([
+            f"{tokens[i]} {tokens[i+1]}"
+            for i in range(len(tokens)-1)
+        ])
+        
+        # Trigrams
+        candidates.extend([
+            f"{tokens[i]} {tokens[i+1]} {tokens[i+2]}"
+            for i in range(len(tokens)-2)
+        ])
+        
+        # Remove duplicates while preserving order
+        seen = set()
+        unique_candidates = []
+        for c in candidates:
+            if c not in seen:
+                seen.add(c)
+                unique_candidates.append(c)
+        
+        return unique_candidates
+    
+    def mmr_select(self, query: str, candidates: List[str], k: int = 10) -> List[str]:
+        """Select k terms using Maximal Marginal Relevance."""
+        if not candidates:
+            return []
+        
+        query_emb = self.encoder.encode([query])[0]
+        candidate_embs = self.encoder.encode(candidates)
+        
+        selected_indices = []
+        selected_embs = []
+        
+        for _ in range(min(k, len(candidates))):
+            mmr_scores = []
+            
+            for i, cand_emb in enumerate(candidate_embs):
+                if i in selected_indices:
+                    mmr_scores.append(-np.inf)
+                    continue
+                
+                # Relevance to query
+                relevance = np.dot(query_emb, cand_emb) / (
+                    np.linalg.norm(query_emb) * np.linalg.norm(cand_emb)
+                )
+                
+                # Similarity to already selected (redundancy)
+                if not selected_embs:
+                    redundancy = 0
+                else:
+                    similarities = [
+                        np.dot(cand_emb, sel_emb) / (
+                            np.linalg.norm(cand_emb) * np.linalg.norm(sel_emb)
+                        )
+                        for sel_emb in selected_embs
+                    ]
+                    redundancy = max(similarities)
+                
+                # MMR score
+                mmr_score = (
+                    self.lambda_param * relevance -
+                    (1 - self.lambda_param) * redundancy
+                )
+                mmr_scores.append(mmr_score)
+            
+            best_idx = np.argmax(mmr_scores)
+            selected_indices.append(best_idx)
+            selected_embs.append(candidate_embs[best_idx])
+        
+        return [candidates[i] for i in selected_indices]
+
+
+def load_mtrag_queries(domain: str, root_dir: Path = None) -> List[Dict]:
+    """Load MT-RAG queries for a domain."""
+    import json
+    
+    # Get workspace root if not provided
+    if root_dir is None:
+        script_dir = Path(__file__).resolve().parent
+        # Go up 4 levels: hybrid_extractive/ -> retrieval_tasks/ -> ideas/ -> scripts/ -> workspace root
+        root_dir = script_dir.parent.parent.parent.parent
+    
+    questions_path = root_dir / "human" / "retrieval_tasks" / domain / f"{domain}_questions.jsonl"
+    
+    if not questions_path.exists():
+        raise FileNotFoundError(f"Questions file not found: {questions_path}")
+    
+    with open(questions_path) as f:
+        questions = [json.loads(line) for line in f]
+    
+    results = []
+    for item in questions:
+        query_id = item['_id']
+        full_text = item['text']
+        turns = full_text.split('\n')
+        
+        # Last turn is the current query
+        current_query = turns[-1].replace('|user|:', '').strip()
+        
+        # Previous turns are the conversation history
+        conversation_history = []
+        for turn in turns[:-1]:
+            content = turn.replace('|user|:', '').strip()
+            if content:
+                conversation_history.append({
+                    "role": "user",
+                    "content": content
+                })
+        
+        results.append({
+            "id": query_id,
+            "query": current_query,
+            "history": conversation_history
+        })
+    
+    return results
 
 
 class HybridExtractiveRewriter:
@@ -372,13 +574,13 @@ class HybridExtractiveRewriter:
         return query
 
 
-def run_hybrid_extractive(domain: str, output_format: str = 'both'):
+def run_hybrid_extractive(domain: str, output_format: str = 'mtrag'):
     """
     Run hybrid extractive on MT-RAG dataset.
     
     Args:
         domain: Domain to process
-        output_format: 'analysis' (detailed), 'mtrag' (retrieval format), or 'both'
+        output_format: 'mtrag' (retrieval format, default)
     """
     import json
     import os
@@ -389,9 +591,8 @@ def run_hybrid_extractive(domain: str, output_format: str = 'both'):
         entity_boost=1.5
     )
     
-    queries = load_mtrag_queries(domain)
+    queries = load_mtrag_queries(domain, root_dir=rewriter.base_rewriter.root_dir)
     
-    results_analysis = []
     results_mtrag = []
     
     for item in queries:
@@ -400,14 +601,6 @@ def run_hybrid_extractive(domain: str, output_format: str = 'both'):
                 current_query=item['query'],
                 conversation_history=item['history']
             )
-            
-            # Analysis format (detailed)
-            results_analysis.append({
-                "id": item['id'],
-                "original": item['query'],
-                "rewritten": rewritten,
-                "history_length": len(item['history'])
-            })
             
             # MT-RAG format (for retrieval)
             results_mtrag.append({
@@ -422,12 +615,6 @@ def run_hybrid_extractive(domain: str, output_format: str = 'both'):
             
         except Exception as e:
             print(f"Error: {e}")
-            results_analysis.append({
-                "id": item['id'],
-                "original": item['query'],
-                "rewritten": item['query'],
-                "error": str(e)
-            })
             results_mtrag.append({
                 "_id": item['id'],
                 "text": f"|user|: {item['query']}"
@@ -435,31 +622,18 @@ def run_hybrid_extractive(domain: str, output_format: str = 'both'):
     
     script_dir = os.path.dirname(os.path.abspath(__file__))
     
-    # Save analysis format
-    if output_format in ['analysis', 'both']:
-        results_dir = os.path.join(script_dir, 'results')
-        os.makedirs(results_dir, exist_ok=True)
-        output_path = os.path.join(results_dir, f"{domain}_rewrites.jsonl")
-        
-        with open(output_path, 'w') as f:
-            for result in results_analysis:
-                f.write(json.dumps(result) + '\n')
-        
-        print(f"Saved {len(results_analysis)} analysis results to {output_path}")
-    
     # Save MT-RAG format
-    if output_format in ['mtrag', 'both']:
-        datasets_dir = os.path.join(script_dir, 'datasets')
-        os.makedirs(datasets_dir, exist_ok=True)
-        output_path = os.path.join(datasets_dir, f"{domain}_hybrid_extractive.jsonl")
-        
-        with open(output_path, 'w') as f:
-            for result in results_mtrag:
-                f.write(json.dumps(result) + '\n')
-        
-        print(f"Saved {len(results_mtrag)} MT-RAG queries to {output_path}")
+    datasets_dir = os.path.join(script_dir, 'datasets')
+    os.makedirs(datasets_dir, exist_ok=True)
+    output_path = os.path.join(datasets_dir, f"{domain}_hybrid_extractive.jsonl")
     
-    return results_analysis, results_mtrag
+    with open(output_path, 'w') as f:
+        for result in results_mtrag:
+            f.write(json.dumps(result) + '\n')
+    
+    print(f"✓ Saved {len(results_mtrag)} queries to {output_path}")
+    
+    return results_mtrag
 
 
 if __name__ == "__main__":

@@ -148,6 +148,27 @@ Standard format for retrieval evaluation:
 
 This format matches the existing MT-RAG retrieval tasks and can be used directly with retrieval systems.
 
+## Results
+
+**📊 See [FULL_RESULTS_COMPARISON.md](FULL_RESULTS_COMPARISON.md) for complete evaluation results**
+
+### Quick Summary (NDCG@10)
+
+| Domain | Lastturn | Human | Pure | Hybrid | Best |
+|--------|----------|-------|------|--------|------|
+| clapnq | 0.269 | **0.301** | 0.290 | 0.284 | Human |
+| cloud | **0.252** | 0.248 | 0.239 | 0.241 | Lastturn |
+| fiqa | 0.136 | **0.186** | 0.152 | 0.155 | Human |
+| govt | 0.319 | **0.354** | 0.339 | 0.336 | Human |
+
+**Key Findings:**
+- ✅ Pure and Hybrid perform nearly identically
+- ✅ Beat lastturn in 3/4 domains (+5-14%)
+- ⚠️ Still ~7.5% behind human rewrites
+- ❌ All rewriting hurts technical (cloud) domain
+
+**Recommendation:** Use **Pure Extractive** for simplicity with same performance as Hybrid.
+
 ## Documentation
 
 See `knowledgebase/ideas/retrieval_tasks/` for detailed documentation:
