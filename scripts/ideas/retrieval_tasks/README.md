@@ -150,24 +150,60 @@ This format matches the existing MT-RAG retrieval tasks and can be used directly
 
 ## Results
 
-**📊 See [FULL_RESULTS_COMPARISON.md](FULL_RESULTS_COMPARISON.md) for complete evaluation results**
+**📊 [MASTER_RESULTS_SUMMARY.md](MASTER_RESULTS_SUMMARY.md) - Complete analysis across BM25 and BGE**
 
-### Quick Summary (NDCG@10)
+### Quick Performance Summary
+
+#### BM25 (Lexical) - NDCG@10
 
 | Domain | Lastturn | Human | Pure | Hybrid | Best |
 |--------|----------|-------|------|--------|------|
-| clapnq | 0.269 | **0.301** | 0.290 | 0.284 | Human |
-| cloud | **0.252** | 0.248 | 0.239 | 0.241 | Lastturn |
-| fiqa | 0.136 | **0.186** | 0.152 | 0.155 | Human |
-| govt | 0.319 | **0.354** | 0.339 | 0.336 | Human |
+| clapnq | 0.269 | **0.301** | 0.290 ↑ | 0.284 ↑ | Human |
+| cloud | **0.252** | 0.248 | 0.239 ↓ | 0.241 ↓ | Lastturn |
+| fiqa | 0.136 | **0.186** | 0.152 ↑ | 0.155 ↑ | Human |
+| govt | 0.319 | **0.354** | 0.339 ↑ | 0.336 ↑ | Human |
+| **Avg** | 0.244 | **0.272** | 0.255 | 0.254 | Human |
 
-**Key Findings:**
-- ✅ Pure and Hybrid perform nearly identically
-- ✅ Beat lastturn in 3/4 domains (+5-14%)
-- ⚠️ Still ~7.5% behind human rewrites
-- ❌ All rewriting hurts technical (cloud) domain
+#### BGE (Semantic) - NDCG@10
 
-**Recommendation:** Use **Pure Extractive** for simplicity with same performance as Hybrid.
+| Domain | Lastturn | Human | Pure | Hybrid | Best |
+|--------|----------|-------|------|--------|------|
+| clapnq | 0.424 | **0.498** | 0.406 ↓ | 0.399 ↓ | Human |
+| cloud | 0.307 | **0.342** | 0.285 ↓ | 0.290 ↓ | Human |
+| fiqa | 0.291 | **0.341** | 0.234 ↓ | 0.236 ↓ | Human |
+| govt | 0.344 | **0.420** | 0.306 ↓ | 0.303 ↓ | Human |
+| **Avg** | 0.342 | **0.400** | 0.308 | 0.307 | Human |
+
+### Key Findings:
+
+**1. Pure ≈ Hybrid** (both retrievers)
+- BM25: 0.4% difference
+- BGE: 0.3% difference
+- **Conclusion:** Templates/NER don't help
+
+**2. Extractive better with BM25**
+- BM25 gap from human: -6.3%  ✅ Competitive
+- BGE gap from human: -23.0%  ❌ Not competitive
+
+**3. BGE improves absolute scores**
+- Pure: +21% average improvement
+- Hybrid: +21% average improvement
+- But widens gap from baselines
+
+**4. Domain matters**
+- Best: govt (BM25), clapnq (BGE)
+- Worst: cloud (both), fiqa (BGE)
+
+### Final Recommendation:
+
+✅ **Use Pure Extractive + BM25** for production (simple, competitive)  
+❌ **Avoid Hybrid** (no benefit over Pure)  
+❌ **Avoid Extractive + BGE** (too far behind baselines)
+
+### Detailed Analysis:
+- [BM25 Results](FULL_RESULTS_COMPARISON.md)
+- [BGE Results](BGE_RESULTS_COMPARISON.md)
+- [Master Summary](MASTER_RESULTS_SUMMARY.md)
 
 ## Documentation
 
