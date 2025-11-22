@@ -1,0 +1,160 @@
+{
+  "task_id": "42_5",
+  "conversation_id": "42",
+  "turn_id": 5,
+  "domain": "cloud",
+  "input": "Why could not I delete keys?",
+  "gold_answer": "One of the reason you could not delete a key it is when you are using the the Hyper Protect Crypto Services user interface. The service was not able to delete key \"<key_name>\". Because the key is enabled with the dual authorization policy and you set the key for deletion, a second approver needs to continue with the key deletion operation. Note that you will not be able to delete the key if it is protecting a registered IBM Cloud resource that's non-erasable due to a retention policy.\n\n",
+  "enrichments": {
+    "Question Type": [
+      "Explanation"
+    ],
+    "Multi-Turn": [
+      "Follow-up"
+    ],
+    "Answerability": [
+      "ANSWERABLE"
+    ]
+  },
+  "retrieved_contexts": [
+    {
+      "document_id": "ibmcld_09061-1334-3188",
+      "text": "\nWhen the first user authorizes a key for deletion, it remains in the [Active state](https://cloud.ibm.com/docs/key-protect?topic=key-protect-key-states) for seven days, during which all key operations are allowed on the key. To complete the deletion, another user with a Manager role can use the Key Protect GUI or API to delete the key at any point during those seven days, at which time the key will be moved to the Destroyed state. Note that because it is impossible to purge an active key, another user must delete the key before it can purged.\n* The key and its associated data will be inaccessible 90 days after being deleted. When you delete a key, it is \"soft deleted\", meaning that the key and its associated data will be restorable up to 30 days after deletion. You are able to still retrieve associated data such as key metadata, registrations, and policies for up to 90 days. After 90 days, the key becomes eligible to be automatically [purged](https://cloud.ibm.com/docs/key-protect?topic=key-protect-delete-dual-auth-keysdelete-dual-auth-keys-key-purge), or hard deleted, and its associated data will be permanently removed from the Key Protect service.\n\n\n\n\n\n\n\n Authorize deletion for a key in the console \n\n[After you enable dual authorization for an instance or key](https://cloud.ibm.com/docs/key-protect?topic=key-protect-manage-dual-auth), you can provide the first authorization to delete a key by using the Key Protect IBM Cloud console.\n\n\n\n1. [Log in to the IBM Cloud console](https://cloud.ibm.com/login/).\n2. Go to Menu > Resource List to view a list of your resources.\n3. From your IBM Cloud resource list, select your provisioned instance of Key Protect.\n4. On the application details page, use the Keys table to browse the keys in your service.\n5. Click the \u22ef icon to open a list of options for the key that you want to delete.",
+      "url": "https://cloud.ibm.com/docs/key-protect?topic=key-protect-delete-dual-auth-keys",
+      "score": 49.493065,
+      "feedback": {
+        "relevant": {
+          "868c6e58-57c1-48ee-8c67-832dbedcac18": {
+            "value": "no",
+            "timestamp": 1723461607
+          },
+          "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+            "value": "yes",
+            "timestamp": 1726677985
+          }
+        }
+      },
+      "query": {
+        "bool": {
+          "must": {
+            "text_expansion": {
+              "ml.tokens": {
+                "model_id": ".elser_model_1",
+                "model_text": "|user|: How can I delete a key?\n|assistant|: To delete a key using IBM Key Protect, you can follow these steps:\n1. Log in to the IBM Cloud console.\n2. Go to Menu > Resource List to view a list of your resources.\n3. From your IBM Cloud resource list, select your provisioned instance of Key Protect.\n4. On the application details page, use the Keys table to browse the keys in your service.\n5. Click the \u22ef icon to open a list of options for the key that you want to delete.\nPlease note that when you delete a key, it is \"soft deleted\", meaning that the key and its associated data will be restorable up to 30 days after deletion. After 90 days, the key becomes eligible to be automatically purged, or hard deleted, and its associated data will be permanently removed from the Key Protect service.\nAlso, keep in mind that deleting a key will make any data encrypted by the key inaccessible. If the key is restored within the 30-day time frame, this can be reversed. However, after 30 days, key metadata, registrations, and policies are available for up to 90 days, at which point the key becomes eligible to be purged. Once a key is no longer restorable and has been purged, its associated data can no longer be accessed.\n|user|: what happen when the first user authorizes a key for deletion?\n|assistant|: When the first user authorizes a key for deletion, it remains in the Active state for seven days. During this time, all key operations are allowed on the key. To complete the deletion, another user with a Manager role can use the Key Protect GUI or API to delete the key at any point during those seven days. Once the key is deleted, it will be moved to the Destroyed state. However, because it is impossible to purge an active key, another user must delete the key before it can be purged.\nThe key and its associated data will be inaccessible 90 days after being deleted. When you delete a key, it is \"soft deleted\", meaning that the key and its associated data will be restorable up to 30 days after deletion. You are able to still retrieve associated data such as key metadata, registrations, and policies for up to 90 days. After 90 days, the key becomes eligible to be automatically purged, or hard deleted, and its associated data will be permanently removed from the Key Protect service.\n|user|: What could happen if no action is taken by the second user and the 7-day period experies?\n|assistant|: If no action is taken by the second user and the 7-day period expires, the key will remain in the Active state and will not be deleted and you must restart the dual authorization process to delete the key . All key operations will still be allowed on the key. The key and its associated data will continue to be accessible and will not be moved to the Destroyed state. No further action can be taken to delete the key until the first user authorizes deletion again.\n|user|: In case, the server expired, Could I remove the entry from the resource list?\n|assistant|: In case  the server expire, you indeed can remove  the entry from the resource list and also  wait for the target time to trigger deletion for you, or even manually trigger the deletion from the resource reclamations.If an expired server is restored, only the entry within the resource list is restored, not the server itself.Restoring servers that belong to paid plans\nServers that belong to a paid plans do not expire, and that's why they can be restored during the reclamation period. If a server is restored, the timeframe for which the server was within the resource reclamations is billed to your account. After the server is deleted, only metadata, which isn't considered to be personal data is kept for 6 months. Make sure you back up important data for future use because you can't recover data after the virtual server has been deleted.\n\n\n|user|: Why could not I delete keys?"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_07578-1209748-1211682",
+      "text": "\nDeleting a key moves it into a Destroyed state, a \"soft\" deletion in which the key can still be seen and restored for 30 days. After 90 days, the key will be automatically purged, or \"hard deleted\", and its associated data will be permanently shredded and removed from the Key Protect service. If it is desirable that a key be purged sooner than 90 days, it is also possible to hard delete a key four hours after it has been moved into the Destroyed state.\n\nAfter a key has been deleted, any data that is encrypted by the key becomes inaccessible, though this can be reversed if the key is restored within the 30-day time frame. After 30 days, key metadata, registrations, and policies are available for up to 90 days, at which point the key becomes eligible to be purged. Note that once a key is no longer restorable and has been purged, its associated data can no longer be accessed. As a result, [destroying resources](https://cloud.ibm.com/docs/key-protect?topic=key-protect-security-and-compliancedata-deletion) is not recommended for production environments unless absolutely necessary.\n* What happens if I try to delete a key that's actively encrypting data?\n\nFor your protection, Key Protect prevents the deletion of a key that's actively encrypting data in the cloud. If you try to delete a key that's registered with a cloud resource, the action won't succeed.\n\nIf needed, you can [force deletion on a key](https://cloud.ibm.com/docs/key-protect?topic=key-protect-delete-keysdelete-keys-force-delete) by using the Key Protect APIs. [Review which resources are encrypted by the key](https://cloud.ibm.com/docs/key-protect?topic=key-protect-view-protected-resources) and verify with the owner of the resources to ensure you no longer require access to that data.\n\nIf you can't delete a key because a retention policy exists on the associated resource, contact the account owner to remove the retention policy on that resource.",
+      "url": "https://cloud.ibm.com/docs/faqs",
+      "score": 44.869015,
+      "feedback": {
+        "relevant": {
+          "868c6e58-57c1-48ee-8c67-832dbedcac18": {
+            "value": "no",
+            "timestamp": 1723461620
+          },
+          "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+            "value": "yes",
+            "timestamp": 1726677999
+          }
+        }
+      },
+      "query": {
+        "bool": {
+          "must": {
+            "text_expansion": {
+              "ml.tokens": {
+                "model_id": ".elser_model_1",
+                "model_text": "|user|: How can I delete a key?\n|assistant|: To delete a key using IBM Key Protect, you can follow these steps:\n1. Log in to the IBM Cloud console.\n2. Go to Menu > Resource List to view a list of your resources.\n3. From your IBM Cloud resource list, select your provisioned instance of Key Protect.\n4. On the application details page, use the Keys table to browse the keys in your service.\n5. Click the \u22ef icon to open a list of options for the key that you want to delete.\nPlease note that when you delete a key, it is \"soft deleted\", meaning that the key and its associated data will be restorable up to 30 days after deletion. After 90 days, the key becomes eligible to be automatically purged, or hard deleted, and its associated data will be permanently removed from the Key Protect service.\nAlso, keep in mind that deleting a key will make any data encrypted by the key inaccessible. If the key is restored within the 30-day time frame, this can be reversed. However, after 30 days, key metadata, registrations, and policies are available for up to 90 days, at which point the key becomes eligible to be purged. Once a key is no longer restorable and has been purged, its associated data can no longer be accessed.\n|user|: what happen when the first user authorizes a key for deletion?\n|assistant|: When the first user authorizes a key for deletion, it remains in the Active state for seven days. During this time, all key operations are allowed on the key. To complete the deletion, another user with a Manager role can use the Key Protect GUI or API to delete the key at any point during those seven days. Once the key is deleted, it will be moved to the Destroyed state. However, because it is impossible to purge an active key, another user must delete the key before it can be purged.\nThe key and its associated data will be inaccessible 90 days after being deleted. When you delete a key, it is \"soft deleted\", meaning that the key and its associated data will be restorable up to 30 days after deletion. You are able to still retrieve associated data such as key metadata, registrations, and policies for up to 90 days. After 90 days, the key becomes eligible to be automatically purged, or hard deleted, and its associated data will be permanently removed from the Key Protect service.\n|user|: What could happen if no action is taken by the second user and the 7-day period experies?\n|assistant|: If no action is taken by the second user and the 7-day period expires, the key will remain in the Active state and will not be deleted and you must restart the dual authorization process to delete the key . All key operations will still be allowed on the key. The key and its associated data will continue to be accessible and will not be moved to the Destroyed state. No further action can be taken to delete the key until the first user authorizes deletion again.\n|user|: In case, the server expired, Could I remove the entry from the resource list?\n|assistant|: In case  the server expire, you indeed can remove  the entry from the resource list and also  wait for the target time to trigger deletion for you, or even manually trigger the deletion from the resource reclamations.If an expired server is restored, only the entry within the resource list is restored, not the server itself.Restoring servers that belong to paid plans\nServers that belong to a paid plans do not expire, and that's why they can be restored during the reclamation period. If a server is restored, the timeframe for which the server was within the resource reclamations is billed to your account. After the server is deleted, only metadata, which isn't considered to be personal data is kept for 6 months. Make sure you back up important data for future use because you can't recover data after the virtual server has been deleted.\n\n\n|user|: Why could not I delete keys?"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_16727-1212381-1214315",
+      "text": "\nDeleting a key moves it into a Destroyed state, a \"soft\" deletion in which the key can still be seen and restored for 30 days. After 90 days, the key will be automatically purged, or \"hard deleted\", and its associated data will be permanently shredded and removed from the Key Protect service. If it is desirable that a key be purged sooner than 90 days, it is also possible to hard delete a key four hours after it has been moved into the Destroyed state.\n\nAfter a key has been deleted, any data that is encrypted by the key becomes inaccessible, though this can be reversed if the key is restored within the 30-day time frame. After 30 days, key metadata, registrations, and policies are available for up to 90 days, at which point the key becomes eligible to be purged. Note that once a key is no longer restorable and has been purged, its associated data can no longer be accessed. As a result, [destroying resources](https://cloud.ibm.com/docs/key-protect?topic=key-protect-security-and-compliancedata-deletion) is not recommended for production environments unless absolutely necessary.\n* What happens if I try to delete a key that's actively encrypting data?\n\nFor your protection, Key Protect prevents the deletion of a key that's actively encrypting data in the cloud. If you try to delete a key that's registered with a cloud resource, the action won't succeed.\n\nIf needed, you can [force deletion on a key](https://cloud.ibm.com/docs/key-protect?topic=key-protect-delete-keysdelete-keys-force-delete) by using the Key Protect APIs. [Review which resources are encrypted by the key](https://cloud.ibm.com/docs/key-protect?topic=key-protect-view-protected-resources) and verify with the owner of the resources to ensure you no longer require access to that data.\n\nIf you can't delete a key because a retention policy exists on the associated resource, contact the account owner to remove the retention policy on that resource.",
+      "url": "https://cloud.ibm.com/docs?tab=faqs",
+      "score": 44.869015,
+      "feedback": {
+        "relevant": {
+          "868c6e58-57c1-48ee-8c67-832dbedcac18": {
+            "value": "no",
+            "timestamp": 1723461934
+          }
+        }
+      },
+      "query": {
+        "bool": {
+          "must": {
+            "text_expansion": {
+              "ml.tokens": {
+                "model_id": ".elser_model_1",
+                "model_text": "|user|: How can I delete a key?\n|assistant|: To delete a key using IBM Key Protect, you can follow these steps:\n1. Log in to the IBM Cloud console.\n2. Go to Menu > Resource List to view a list of your resources.\n3. From your IBM Cloud resource list, select your provisioned instance of Key Protect.\n4. On the application details page, use the Keys table to browse the keys in your service.\n5. Click the \u22ef icon to open a list of options for the key that you want to delete.\nPlease note that when you delete a key, it is \"soft deleted\", meaning that the key and its associated data will be restorable up to 30 days after deletion. After 90 days, the key becomes eligible to be automatically purged, or hard deleted, and its associated data will be permanently removed from the Key Protect service.\nAlso, keep in mind that deleting a key will make any data encrypted by the key inaccessible. If the key is restored within the 30-day time frame, this can be reversed. However, after 30 days, key metadata, registrations, and policies are available for up to 90 days, at which point the key becomes eligible to be purged. Once a key is no longer restorable and has been purged, its associated data can no longer be accessed.\n|user|: what happen when the first user authorizes a key for deletion?\n|assistant|: When the first user authorizes a key for deletion, it remains in the Active state for seven days. During this time, all key operations are allowed on the key. To complete the deletion, another user with a Manager role can use the Key Protect GUI or API to delete the key at any point during those seven days. Once the key is deleted, it will be moved to the Destroyed state. However, because it is impossible to purge an active key, another user must delete the key before it can be purged.\nThe key and its associated data will be inaccessible 90 days after being deleted. When you delete a key, it is \"soft deleted\", meaning that the key and its associated data will be restorable up to 30 days after deletion. You are able to still retrieve associated data such as key metadata, registrations, and policies for up to 90 days. After 90 days, the key becomes eligible to be automatically purged, or hard deleted, and its associated data will be permanently removed from the Key Protect service.\n|user|: What could happen if no action is taken by the second user and the 7-day period experies?\n|assistant|: If no action is taken by the second user and the 7-day period expires, the key will remain in the Active state and will not be deleted and you must restart the dual authorization process to delete the key . All key operations will still be allowed on the key. The key and its associated data will continue to be accessible and will not be moved to the Destroyed state. No further action can be taken to delete the key until the first user authorizes deletion again.\n|user|: In case, the server expired, Could I remove the entry from the resource list?\n|assistant|: In case  the server expire, you indeed can remove  the entry from the resource list and also  wait for the target time to trigger deletion for you, or even manually trigger the deletion from the resource reclamations.If an expired server is restored, only the entry within the resource list is restored, not the server itself.Restoring servers that belong to paid plans\nServers that belong to a paid plans do not expire, and that's why they can be restored during the reclamation period. If a server is restored, the timeframe for which the server was within the resource reclamations is billed to your account. After the server is deleted, only metadata, which isn't considered to be personal data is kept for 6 months. Make sure you back up important data for future use because you can't recover data after the virtual server has been deleted.\n\n\n|user|: Why could not I delete keys?"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_08695-7-1852",
+      "text": "\nWhy can't I delete keys? \n\nWhen you use the Hyper Protect Crypto Services user interface, you're unable to delete a key.\n\n What\u2019s happening \n\nFrom the IBM Cloud dashboard, you select your instance of the Hyper Protect Crypto Services service.\n\nYou're assigned a Manager access policy for the service instance. You try to delete a key, but the action fails with either of the following error messages:\n\n\n\n* Error message 1:\n\n> The service was not able to delete key \"<key_name>\". The key cannot be deleted because it is protecting one or more cloud resources that have a retention policy.\n* Error message 2:\n\n> The service was not able to delete key \"<key_name>\". Because the key is enabled with the dual authorization policy and you set the key for deletion, a second approver needs to continue with the key deletion operation.\n\n\n\n Why it\u2019s happening \n\nThe following reasons might cause the errors:\n\n\n\n* If error message 1 is displayed, this key is actively protecting one or more cloud resources, such as a Cloud Object Storage bucket.\n* If error message 2 is displayed, this key is enabled with the dual authorization policy that requires a deletion authorization from two users. You set the key for deletion and you need to contact the second approver to complete the deletion.\n\n\n\n How to fix it \n\nThe following instructions can help you solve the problems:\n\n\n\n* To resolve the error that is reported in error message 1, [review the resources](https://cloud.ibm.com/docs/hs-crypto?topic=hs-crypto-view-protected-resources) that are associated with the key before you delete a key.\n\nYou can [force deletion on a key](https://cloud.ibm.com/docs/hs-crypto?topic=hs-crypto-delete-keysdelete-key-force) that's protecting a cloud resource. However, the action won't succeed if the key's associated resource is nonerasable due to a retention policy.",
+      "url": "https://cloud.ibm.com/docs/hs-crypto?topic=hs-crypto-troubleshoot-unable-to-delete-keys",
+      "score": 15.6468115,
+      "feedback": {
+        "relevant": {
+          "868c6e58-57c1-48ee-8c67-832dbedcac18": {
+            "value": "yes",
+            "timestamp": 1723462067
+          }
+        }
+      },
+      "query": {
+        "bool": {
+          "must": {
+            "text_expansion": {
+              "ml.tokens": {
+                "model_id": ".elser_model_1",
+                "model_text": "If i face problems when I try to delete a key, what should I do?"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_09064-1360-3081",
+      "text": "\nNote that you will not be able to delete the key if it is protecting a registered IBM Cloud resource that's non-erasable due to a [retention policy](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-immutableimmutable-terminology-policy).\n\n\n\nAfter you delete a key, the key transitions to the Destroyed state. Any data encrypted by keys in this state is no longer accessible. Metadata that is associated with the key, such as the key's deletion date, is kept in the Key Protect database. Destroyed keys can be recovered after up to 30 days or their expiration date, whichever is sooner. After 30 days, keys can no longer be recovered, and become eligible to be purged after 90 days, a process that shreds the key material and makes its metadata inaccessible.\n\nIf a user [has the KeyPurge attribute](https://cloud.ibm.com/docs/key-protect?topic=key-protect-grant-access-keysgrant-access-keys-specific-functions), they can purge a key after four hours. Check out [Purging keys in the console](https://cloud.ibm.com/docs/key-protect?topic=key-protect-delete-keysdelete-keys-gui-purge) for more information.\n\n\n\n\n\n Purging keys in the console \n\nIf it is important to your use case to purge a key sooner than 90 days (the soonest a key can be purged after a normal deletion), the key can be purged after four hours if a user [has the KeyPurge role](https://cloud.ibm.com/docs/key-protect?topic=key-protect-grant-access-keysgrant-access-keys-specific-functions).\n\nBecause a purged key has its key material permanently shredded and metadata inaccessible, a purged key cannot be restored. It is therefore even more important to ensure that the key has no vital associated resources.\n\nTo purge a key:\n\n\n\n1.",
+      "url": "https://cloud.ibm.com/docs/key-protect?topic=key-protect-delete-keys",
+      "score": 15.3759165,
+      "feedback": {
+        "relevant": {
+          "868c6e58-57c1-48ee-8c67-832dbedcac18": {
+            "value": "yes",
+            "timestamp": 1723461924
+          }
+        }
+      },
+      "query": {
+        "bool": {
+          "must": {
+            "text_expansion": {
+              "ml.tokens": {
+                "model_id": ".elser_model_1",
+                "model_text": "If i face problems when I try to delete a key, what should I do?"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "timestamp": 1723461574
+}

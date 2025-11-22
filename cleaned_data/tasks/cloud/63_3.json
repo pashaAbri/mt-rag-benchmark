@@ -1,0 +1,106 @@
+{
+  "task_id": "63_3",
+  "conversation_id": "63",
+  "turn_id": 3,
+  "domain": "cloud",
+  "input": "It is the same as data backup and disaster recovery, right?",
+  "gold_answer": "No, data encryption is not the same as data backup and disaster recovery. Encryption uses a two-way function to transform data into a form that hides its original value but can be converted back to the original state. On the other hand, the disaster recovery kit is an off-site and protected repository that includes hardware, software, and system secure configurations, as well as one-time keys and the disaster recovery plan. Meanwhile, data encryption keys are specifically designed to encrypt your data.",
+  "enrichments": {
+    "Question Type": [
+      "Comparative"
+    ],
+    "Multi-Turn": [
+      "Clarification"
+    ],
+    "Answerability": [
+      "ANSWERABLE"
+    ]
+  },
+  "retrieved_contexts": [
+    {
+      "document_id": "ibmcld_03869-10240-12288",
+      "text": "\nEncryption uses a two-way function to transform data into a form that hides its original value, but can be converted back to the original state. As an example, when data is sent over a network that is secured using TLS, the data is encrypted using a TLS certificate. It is then sent over the network as crypto text, and then decrypted by the recipient. The encrypted text contains all the original data, and can be decrypted using a private key. However, hashing is a one-way function that uses data to create a unique string of numbers and letters. The hashed data cannot be converted back to the original form using the hash. To verify the data that created the hash, a recipient needs to create a new hash of the original data using the same hash function, and verify that the hash values match. A third party cannot use the hash without a copy of the original data.\n\nIt is important to be aware with this option that while Orgs A and B cannot see the actual ledger data because it is hashed, they are still able to see that Orgs C and D are transacting and can see the volume of transactions that are occurring between them.\n\nAlso, consider that data inside a private data collection can be purged from the peers that store it. While data is stored on a channel forever, collections allow members to specify how many blocks are committed to a channel before the [private data is purged](https://hyperledger-fabric.readthedocs.io/en/release-2.2/private_data_tutorial.htmlpd-purge). Once data is removed from the private data collection, the hash on the channel can no longer be used to verify the transaction that created it. In the example network in Figure 3, Org C and Org D can use a block to live policy to ensure that any data that does not need to persist forever is removed from the network entirely within a specified time period.\n\n\n\n\n\n Option two: Private data collections on a separate channel \n\nOrg C and Org D can also use private data collections in the context of a separate channel to provide additional isolation for their data.",
+      "url": "https://cloud.ibm.com/docs/blockchain?topic=blockchain-console-icp-about-data-residency",
+      "score": 28.101377,
+      "feedback": {
+        "relevant": {
+          "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+            "value": "yes",
+            "timestamp": 1723541382
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "Encryption uses a two-way function to transform data into a form that hides its original value, "
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_07502-5502-7788",
+      "text": "\nThe disaster recovery kit is an off-site and protected repository that includes hardware, software, and system secure configurations, one-time keys, and the disaster recovery plan. Use this disaster recovery kit during an incident response to restore services.\n\n\n\n Infrastructure as code \n\nInfrastructure as code ensures that good backup practices are implemented in a uniform way across the organization. Include implementation of backups as part of deployable architectures. Keep backup configuration close to provisioning code so that it is easier to ensure that backups are adjusted as information system changes occur. Create and configure backup accounts as code.\n\n\n\n\n\n Backup accounts \n\nEach BU account group should include a separate backup account and an additional backup account should be used for the centralized accounts. These backup accounts provide an extra layer of protection for the confidentiality and integrity of the backed up data. If credentials to a source account are compromised, it should not be possible to use that access to tamper with backups.\n\nSupporting this effort, authorization to backup data in the backup account should use service-to-service or service to trusted profile authorization where possible. Otherwise, use secure storage of credentials with least privilege access.\n\nIf you are using Cloud Object Storage for backup, at minimum, use separate buckets for backing up different workload accounts. Also, use separate backup credentials for each bucket where service to service policies are not possible. Use Cloud Object Storage versioning or [immutable buckets](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-immutable) for maximum security.\n\nServices that provide built in backup facilities might have limitations regarding backup accounts.\n\n\n\n\n\n Service-specific considerations \n\n\n\n IBM Cloud Databases \n\n[IBM Cloud Databases](https://cloud.ibm.com/docs/cloud-databases?topic=cloud-databases-about) provide automatic daily backups that are stored in the same account and geography. Backups are typically stored in [cross-regional storage](https://cloud.ibm.com/docs/cloud-databases?topic=cloud-databases-dashboard-backups&interface=uibackup-locations) and should therefore be immune to a single region outage.",
+      "url": "https://cloud.ibm.com/docs/enterprise-account-architecture?topic=enterprise-account-architecture-bcdr",
+      "score": 21.700197,
+      "feedback": {
+        "relevant": {
+          "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+            "value": "yes",
+            "timestamp": 1723541378
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "he disaster recovery kit is an off-site and protected repository"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_09081-1687-4004",
+      "text": "\nData encryption keys (DEKs) are designed to encrypt your data and can be generated and managed by your service or an IBM Cloud service.\n\nEnvelope encryption offers several benefits for protecting your data:\n\n\n\n* Protection under a combination of multiple algorithms Envelope encryption uses the best benefits from symmetric and public key algorithms to keep your keys secure.\n\n\n\n1. Symmetric key algorithms work faster, are more scalable, and more secure than public key algorithms. Public key algorithms use complicated mathematics that increase computational overhead, especially when dealing with large volumes of data. Public key algorithms are also more susceptible to brute force attacks due to having a private key algorithm component that is easily recognizable by hackers. Symmetric key algorithms requires less computed power and are resistant to brute force attacks due to having a less recognizable structure.\n2. Public key algorithms allow for easier access control when granting access to keys at an individual level compared to symmetric key algorithms. Symmetric key algorithms have a key exchange problem, which is that access to a secret key can only be exchanged through a secure transfer. By using public key algorithms, encrypted DEKs (wDEKs) can be shared and unencrypted only by those with access to the encrypting root key, mitigating the key exchange problem of symmetric algorithms.\n\n\n\n* Easier key management You can encrypt multiple DEKs under a singular root key, which minimizes the amount of keys that you might need to manage in a key management service. You can also choose to save time on key maintenance by only rotating your root keys, instead of rotating and re-encrypting all of your DEKs. Note that in cases such as personnel turnover, process malfunctions, or the detection of a security issue, it is recommended to rotate all DEKs and root keys associated with the incident.\n* Data Key Protection Since your DEKs are wrapped by a root key, you do not have to worry about how to store the encrypted data key. Due to this, you can store the wDEK with alongside the associated encrypted data.\n\n\n\nKey Protect uses the Advanced Encryption Standard algorithm in Galois/Counter Mode (AES GCM) to wrap and unwrap DEKs. CRKs that are not imported are created with 256-bit key material.",
+      "url": "https://cloud.ibm.com/docs/key-protect?topic=key-protect-envelope-encryption",
+      "score": 16.273008,
+      "feedback": {
+        "relevant": {
+          "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+            "value": "yes",
+            "timestamp": 1723541375
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "Data encryption"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "timestamp": 1723540666
+}

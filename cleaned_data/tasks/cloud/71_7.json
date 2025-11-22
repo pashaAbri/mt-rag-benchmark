@@ -1,0 +1,218 @@
+{
+  "task_id": "71_7",
+  "conversation_id": "71",
+  "turn_id": 7,
+  "domain": "cloud",
+  "input": "Is storage included in the VPC price?",
+  "gold_answer": "No, storage is not included in the VPC price. Storage is a separate service and has its own pricing. Cost for Block Storage for VPC is calculated based on GB capacity that is stored per month. Some storage solutions, such as file and block storage offer hourly and monthly rates that you can choose from. A simple hourly pricing model makes cost estimation clear and easy by using the cost estimator tool that is available in the IBM Cloud dashboard. ",
+  "enrichments": {
+    "Question Type": [
+      "Explanation"
+    ],
+    "Multi-Turn": [
+      "Follow-up"
+    ],
+    "Answerability": [
+      "ANSWERABLE"
+    ]
+  },
+  "retrieved_contexts": [
+    {
+      "document_id": "ibmcld_12170-1498-3591",
+      "text": "\nVPC VPC provides you the security of a private cloud environment with the dynamic scalability of a public cloud. \n zones You must have one VPC subnet for each zone in your cluster. The available zones depend on the metro location that you created in the VPC. \n subnet VPC subnets is used to provide private IP addresses for your worker nodes and load balancer services in your cluster. You cannot change the number of IP addresses that a VPC subnet has. \n master node Controls and manages a set of worker nodes (workloads runtime) and resembles a cluster in Kubernetes. \n cluster A cluster contains a control plane and one or more compute machines, or nodes. Nodes run the applications and workloads. \n worker node Add the zone to your worker pool. When you add a zone to a worker pool, the worker nodes that are defined in your worker pool are provisioned in the zone and considered for future workload scheduling. \n\n\n\nYou can add worker nodes and pool to your VPC cluster by using a ibm_container_vpc_worker_pool provider resource.\n\nThe costs are incurred based on your resource usage. For more information about the VPC pricing, see [VPC pricing](https://www.ibm.com/cloud/virtual-servers/pricing).\n\n\n\n\n\n Objectives \n\nIn this tutorial, you will do the following:\n\n\n\n* Learn how to use an IBM-provided Terraform template to create a Virtual Private Cloud (VPC) and provision an IBM Cloud Kubernetes Service cluster that runs on Virtual Servers for VPC.\n* Create an IBM Cloud Object Storage service instance and bind the service to your IBM Cloud Kubernetes Service cluster.\n* Explore how to create an IBM Cloud Schematics Workspace.\n* Create a Terraform execution plan and apply your Terraform template in IBM Cloud.\n* Review the IBM Cloud\u00ae resources that you create.\n\n\n\n\n\n\n\n Time required \n\n1 hour\n\n\n\n\n\n Audience \n\nThis tutorial is intended for developers and system administrators who want to learn how to use Terraform templates to create and manage cloud infrastructure services by using IBM Cloud Schematics.\n\n\n\n\n\n Prerequisites \n\nBefore you begin, complete the following prerequisites.",
+      "url": "https://cloud.ibm.com/docs/schematics?topic=schematics-provisioning-terraform-template",
+      "score": 44.792973,
+      "feedback": {
+        "relevant": {
+          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+            "value": "no",
+            "timestamp": 1724866890
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "|user|: How do I build my client application using dialogue nodes?\n|assistant|: To build your client application using dialog nodes, you need to follow these steps: create a simple conversation with two intents; the dialog uses intents to identify the purpose of the user's input regardless of the precise wording used, and then responds in the way you specify. The client application sends a message containing user input and the user input triggers a dialog node.\n|user|: what are worker nodes?\n|assistant|: Worker nodes carry the deployments and services that make up your app. Virtual machines that your cluster manages are instances that are called worker nodes. Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. \n|user|: what are VPC clusters?\n|assistant|: With IBM Cloud Kubernetes Service, you can create a standard cluster in a Virtual Private Cloud (VPC). A VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.\n|user|: How to create a cluster.\n|assistant|: To create a cluster, this section steps through the build tasks needed to create the Windows Server Failover Cluster (WSFC) and the availability group. This guide assumes that you: Have at least two servers running Windows 2019 and SQL Server 2019 to cluster. Have a bastion host with external Internet access. Have deployed active directory.                                                                          Or you can:                                                                                      Try out Automating cluster creation with IBM Cloud Schematics templates.  \n|user|: How much do the IBM Cloud Schematics templates cost?\n|assistant|: This getting started tutorial incurs costs. You must have an IBM Cloud Pay-As-You-Go or Subscription account to proceed. IBM Cloud Schematics Workspaces are provided to you at no cost. However, when you decide to apply your Terraform template in IBM Cloud by clicking Apply plan from the workspace details page or running the IBM cloud schematics apply command, you are charged for the IBM Cloud resources that are described in your Terraform template.\n|user|: And what is the charge for VPC?\n|assistant|: Pay for only what you use, no minimum VPC hourly package is required, which makes it very inexpensive to get started.  IBM Blockchain Platform introduces a new hourly pricing model that is based on virtual processor core (VPC) allocation. This simplified model is based on the amount of CPU (or VPC) that your IBM Blockchain Platform nodes are allocated on an hourly basis, at a flat rate of $0.29 USD/VPC-hour.\n|user|: Is storage included in the VPC price?"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_10577-1371-3233",
+      "text": "\nFor more details, review the [workspace in IBM Cloud Schematics](https://cloud.ibm.com/schematics/workspaces) if you created the cluster from the UI. Or, if you created the cluster from the CLI, review the [IBM Cloud Provider Plug-in for Terraform template](https://github.com/terraform-ibm-modules/terraform-ibm-cluster/tree/master/examples/secure-roks-cluster).\n\nThe following resources are provisioned by default, but you can customize some resources, for example worker node flavor.\n\n\n\n* 1 Virtual Private Cloud (VPC) instance with the following details:\n\n\n\n* 3 subnets, 1 per zone.\n* 1 security group with pre-configured rules.\n\n\n\n* 1 Red Hat OpenShift on IBM Cloud cluster with the following features:\n\n\n\n* 9 worker nodes of flavor type bx2.16x64 with 16 vCPUs and 64 GB of memory that are evenly spread across the 3 zones in your VPC.\n* 1 default worker pool with 3 worker nodes per zone across 3 zones.\n\n\n\n* 1 IBM Cloud Log Analysis instance to enable logging from the cluster.\n* 1 IBM Cloud Activity Tracker instance to enable audit logs from the cluster, such as when a user creates a call against the Red Hat OpenShift on IBM Cloud API.\n* 1 IBM Cloud Monitoring instance to enable metrics such as node usage from the cluster.\n* 1 IBM Key Protect instance and customer root key (CRK) to encrypt the cluster master, including Kubernetes secrets in the cluster.\n* 1 IBM Cloud Object Storage instance and bucket to back up certain [cluster data](https://cloud.ibm.com/docs/containers?topic=containers-service-archibm-data). You can optionally select your own instance.\n\n\n\n\n\n\n\n Creating a secure cluster by using a template from the UI \n\nWith the secure cluster template, you can create a cluster from the UI with IBM Cloud Schematics that already includes certain security integrations such as encryption, logging, and monitoring enabled by default.\n\n\n\n1.",
+      "url": "https://cloud.ibm.com/docs/openshift?topic=openshift-templates",
+      "score": 43.40217,
+      "feedback": {
+        "relevant": {
+          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+            "value": "no",
+            "timestamp": 1724866759
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "|user|: How do I build my client application using dialogue nodes?\n|assistant|: To build your client application using dialog nodes, you need to follow these steps: create a simple conversation with two intents; the dialog uses intents to identify the purpose of the user's input regardless of the precise wording used, and then responds in the way you specify. The client application sends a message containing user input and the user input triggers a dialog node.\n|user|: what are worker nodes?\n|assistant|: Worker nodes carry the deployments and services that make up your app. Virtual machines that your cluster manages are instances that are called worker nodes. Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. \n|user|: what are VPC clusters?\n|assistant|: With IBM Cloud Kubernetes Service, you can create a standard cluster in a Virtual Private Cloud (VPC). A VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.\n|user|: How to create a cluster.\n|assistant|: To create a cluster, this section steps through the build tasks needed to create the Windows Server Failover Cluster (WSFC) and the availability group. This guide assumes that you: Have at least two servers running Windows 2019 and SQL Server 2019 to cluster. Have a bastion host with external Internet access. Have deployed active directory.                                                                          Or you can:                                                                                      Try out Automating cluster creation with IBM Cloud Schematics templates.  \n|user|: How much do the IBM Cloud Schematics templates cost?\n|assistant|: This getting started tutorial incurs costs. You must have an IBM Cloud Pay-As-You-Go or Subscription account to proceed. IBM Cloud Schematics Workspaces are provided to you at no cost. However, when you decide to apply your Terraform template in IBM Cloud by clicking Apply plan from the workspace details page or running the IBM cloud schematics apply command, you are charged for the IBM Cloud resources that are described in your Terraform template.\n|user|: And what is the charge for VPC?\n|assistant|: Pay for only what you use, no minimum VPC hourly package is required, which makes it very inexpensive to get started.  IBM Blockchain Platform introduces a new hourly pricing model that is based on virtual processor core (VPC) allocation. This simplified model is based on the amount of CPU (or VPC) that your IBM Blockchain Platform nodes are allocated on an hourly basis, at a flat rate of $0.29 USD/VPC-hour.\n|user|: Is storage included in the VPC price?"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_12170-7-1951",
+      "text": "\nCreating an IBM Cloud Kubernetes Service cluster on VPC infrastructure \n\nUse one of the IBM\u00ae provided templates to create an IBM Cloud\u00ae Kubernetes Service cluster in a Virtual Private Cloud (VPC). Then, you bind the cluster to an IBM Cloud\u00ae Object Storage service instance.\n\n\n\n Description \n\nIn this tutorial, you use the IBM\u00ae provided [vpc-gen2-cluster Terraform template](https://github.com/IBM-Cloud/terraform-provider-ibm/tree/master/examples/ibm-cluster/vpc-gen2-cluster) to create a Virtual Private Cloud (VPC) and to provision an IBM Cloud Kubernetes Service cluster on Virtual Servers for VPC. Then, you add the service credentials of an IBM Cloud Object Storage service instance as a Kubernetes secret in your cluster. You can change the default values in this template to spread your cluster across multiple subnets and zones. However, the steps in this tutorial use the default values that are provided in the template.\n\nThe following image shows the cloud architecture components that you provision as part of this tutorial.\n\nZoom\n\n![Provisioning Terraform templates by using IBM Cloud Schematics](https://cloud.ibm.com/docs-content/v1/content/ba89e173287b28d1453d2a327d8a1f74ae2f1662/schematics/images/vpcgen2cluster.png)\n\nProvisioning Terraform templates by using IBM Cloud Schematics\n\n\n\nCloud architecture components\n\n Component Description \n\n Region Region increases the availability of cluster's master node and its nodes by replicating across multiple zones of a region. \n VPC VPC provides you the security of a private cloud environment with the dynamic scalability of a public cloud. \n zones You must have one VPC subnet for each zone in your cluster. The available zones depend on the metro location that you created in the VPC. \n subnet VPC subnets is used to provide private IP addresses for your worker nodes and load balancer services in your cluster. You cannot change the number of IP addresses that a VPC subnet has.",
+      "url": "https://cloud.ibm.com/docs/schematics?topic=schematics-provisioning-terraform-template",
+      "score": 41.870335,
+      "feedback": {
+        "relevant": {
+          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+            "value": "no",
+            "timestamp": 1724866856
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "|user|: How do I build my client application using dialogue nodes?\n|assistant|: To build your client application using dialog nodes, you need to follow these steps: create a simple conversation with two intents; the dialog uses intents to identify the purpose of the user's input regardless of the precise wording used, and then responds in the way you specify. The client application sends a message containing user input and the user input triggers a dialog node.\n|user|: what are worker nodes?\n|assistant|: Worker nodes carry the deployments and services that make up your app. Virtual machines that your cluster manages are instances that are called worker nodes. Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. \n|user|: what are VPC clusters?\n|assistant|: With IBM Cloud Kubernetes Service, you can create a standard cluster in a Virtual Private Cloud (VPC). A VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.\n|user|: How to create a cluster.\n|assistant|: To create a cluster, this section steps through the build tasks needed to create the Windows Server Failover Cluster (WSFC) and the availability group. This guide assumes that you: Have at least two servers running Windows 2019 and SQL Server 2019 to cluster. Have a bastion host with external Internet access. Have deployed active directory.                                                                          Or you can:                                                                                      Try out Automating cluster creation with IBM Cloud Schematics templates.  \n|user|: How much do the IBM Cloud Schematics templates cost?\n|assistant|: This getting started tutorial incurs costs. You must have an IBM Cloud Pay-As-You-Go or Subscription account to proceed. IBM Cloud Schematics Workspaces are provided to you at no cost. However, when you decide to apply your Terraform template in IBM Cloud by clicking Apply plan from the workspace details page or running the IBM cloud schematics apply command, you are charged for the IBM Cloud resources that are described in your Terraform template.\n|user|: And what is the charge for VPC?\n|assistant|: Pay for only what you use, no minimum VPC hourly package is required, which makes it very inexpensive to get started.  IBM Blockchain Platform introduces a new hourly pricing model that is based on virtual processor core (VPC) allocation. This simplified model is based on the amount of CPU (or VPC) that your IBM Blockchain Platform nodes are allocated on an hourly basis, at a flat rate of $0.29 USD/VPC-hour.\n|user|: Is storage included in the VPC price?"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_04031-1609-3779",
+      "text": "\nFor IBM Blockchain Platform cost estimation purposes, 1 VPC = 1 CPU = 1 vCPU = 1 Core. The term \"VPC\" is also used to refer to a type of infrastructure on IBM Cloud and is unrelated to this topic.\n\nFor a total cost estimate, remember that your blockchain network consists of an Kubernetes cluster on IBM Cloud that contains IBM Blockchain Platform components and uses storage of your choice. Your Kubernetes cluster on IBM Cloud and the storage that you choose incur separate charges. You will not be charged for the cluster that the Operational Tooling instance, also known as the console, is running on. See the [Architecture reference](https://cloud.ibm.com/docs/blockchain?topic=blockchain-ibp-console-overviewibp-console-overview-architecture) topic for an illustration. More details on how to calculate charges are described below.\n\n\n\n Benefits of the new pricing model \n\n\n\n* No membership fees: Freedom from membership fees means that you can invest directly in your blockchain components.\n* Estimation clarity: A simple hourly pricing model makes cost estimation clear and easy by using the cost estimator tool that is available in the IBM Cloud dashboard.\n* No minimum fee required: Pay for only what you use, no minimum VPC hourly package is required, which makes it very inexpensive to get started.\n* Scalability of compute: You have the option to scale your compute up during peak usage periods or down to a minute fraction of capacity for when the compute is not needed to minimize expense.\n\n\n\nIn summary, these features remove the complexity of accounting for membership limitations or purchasing compute ahead of your needs.\n\n\n\n\n\n Find out how to preview the platform free for 30 days \n\nYou can preview the IBM Blockchain Platform at no charge for 30 days when you link your IBM Blockchain Platform service instance to an IBM Cloud Kubernetes free cluster.\n\nLimitations of the free preview\n\n\n\n* Performance will be limited by throughput, storage, and functionality. Read more about the [limitations of free clusters](https://cloud.ibm.com/docs/containers?topic=containers-cs_ovcluster_types).\n* IBM Cloud will delete your Kubernetes cluster after 30 days.",
+      "url": "https://cloud.ibm.com/docs/blockchain?topic=blockchain-ibp-saas-pricing",
+      "score": 20.504559,
+      "feedback": {
+        "relevant": {
+          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+            "value": "yes",
+            "timestamp": 1724867486
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "Is storage included in VPC cost?"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_05666-7536-9272",
+      "text": "\n* VPC clusters: A Load Balancer for VPC is automatically created in your VPC for your cluster. For cost information, see [Pricing for Load Balancer for VPC](https://cloud.ibm.com/vpc-ext/provision/vs).\n\n\n\n\n\n\n\n Storage \n\nWhen you provision storage, you can choose the storage type and storage class that is correct for your use case. Charges vary depending on the type of storage, the location, and the specs of the storage instance. Some storage solutions, such as file and block storage offer hourly and monthly rates that you can choose from.\n\nTo choose the correct storage solution, see [Planning highly available persistent storage](https://cloud.ibm.com/docs/containers?topic=containers-storage-plan). For more information, see:\n\n\n\n* [File Storage for Classic](https://www.ibm.com/products/file-storage)\n* [Block Storage for Classic](https://www.ibm.com/products/block-storage)\n* [File Storage for VPC](https://www.ibm.com/products/file-storage)\n* [Block Storage for VPC](https://www.ibm.com/products/block-storage)\n* [IBM Cloud Object Storage](https://www.ibm.com/cloud/object-storage)\n* [Portworx Enterprise pricing](https://cloud.ibm.com/catalog/services/portworx-enterprise)\n\n\n\n\n\n\n\n IBM Cloud services \n\nEach service that you integrate with your cluster has its own pricing model. Review each product documentation and use the IBM Cloud console to [estimate costs](https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-costcost).\n\n\n\n\n\n Operators and other third-party integrations \n\nOperators and other [third-party integrations](https://cloud.ibm.com/docs/containers?topic=containers-supported_integrations) are a convenient way to add services to your cluster from community, third-party, your own, or other providers.",
+      "url": "https://cloud.ibm.com/docs/containers?topic=containers-costs",
+      "score": 19.420315,
+      "feedback": {
+        "relevant": {
+          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+            "value": "yes",
+            "timestamp": 1724867492
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "Is storage included in VPC cost?"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_16727-881995-883891",
+      "text": "\nYou can also [create stand-alone volumes](https://cloud.ibm.com/docs/vpc?topic=vpc-creating-block-storagecreate-standalone-vol) and later attach them to your instances.\n* How many instances can share a provisioned Block Storage for VPC volume?\n\n How many instances can share a provisioned Block Storage for VPC volume? \n\nA Block Storage for VPC volume can be attached to only one instance at a time. Instances cannot share a volume.\n* How many Block Storage for VPC secondary data volumes can be attached to an instance?\n\n How many Block Storage for VPC secondary data volumes can be attached to an instance? \n\nYou can create 12 Block Storage for VPC data volumes per instance, plus the boot volume.\n* How am I charged for usage?\n\n How am I charged for usage? \n\nCost for Block Storage for VPC is calculated based on GB capacity that is stored per month, unless the duration is less than one month. The volume exists on the account until you delete the volume or you reach the end of a billing cycle, whichever comes first.\n\nPricing is also affected when you [expand volume capacity](https://cloud.ibm.com/docs/vpc?topic=vpc-expanding-block-storage-volumes) or [adjust IOPS](https://cloud.ibm.com/docs/vpc?topic=vpc-adjusting-volume-iops) by specifying a different IOPS profile. For example, expanding volume capacity increases costs, and changing an IOPS profile from a 5-IOPS/GB tier to a 3-IOPS/GB tier decreases the monthly and hourly rate. Billing for an updated volume is automatically updated to add the prorated difference of the new price to the current billing cycle. The new full amount is then billed in the next billing cycle.\n\nPricing for Block Storage for VPC volumes is also set by region. For more information, see [Pricing](https://www.ibm.com/cloud/vpc/pricing).\n* Are there limits on the number of volumes I can create?\n\n Are there limits on the number of volumes I can create?",
+      "url": "https://cloud.ibm.com/docs?tab=faqs",
+      "score": 19.35722,
+      "feedback": {
+        "relevant": {
+          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+            "value": "yes",
+            "timestamp": 1724867497
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "Is storage included in VPC cost?"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_07578-882118-884014",
+      "text": "\nYou can also [create stand-alone volumes](https://cloud.ibm.com/docs/vpc?topic=vpc-creating-block-storagecreate-standalone-vol) and later attach them to your instances.\n* How many instances can share a provisioned Block Storage for VPC volume?\n\n How many instances can share a provisioned Block Storage for VPC volume? \n\nA Block Storage for VPC volume can be attached to only one instance at a time. Instances cannot share a volume.\n* How many Block Storage for VPC secondary data volumes can be attached to an instance?\n\n How many Block Storage for VPC secondary data volumes can be attached to an instance? \n\nYou can create 12 Block Storage for VPC data volumes per instance, plus the boot volume.\n* How am I charged for usage?\n\n How am I charged for usage? \n\nCost for Block Storage for VPC is calculated based on GB capacity that is stored per month, unless the duration is less than one month. The volume exists on the account until you delete the volume or you reach the end of a billing cycle, whichever comes first.\n\nPricing is also affected when you [expand volume capacity](https://cloud.ibm.com/docs/vpc?topic=vpc-expanding-block-storage-volumes) or [adjust IOPS](https://cloud.ibm.com/docs/vpc?topic=vpc-adjusting-volume-iops) by specifying a different IOPS profile. For example, expanding volume capacity increases costs, and changing an IOPS profile from a 5-IOPS/GB tier to a 3-IOPS/GB tier decreases the monthly and hourly rate. Billing for an updated volume is automatically updated to add the prorated difference of the new price to the current billing cycle. The new full amount is then billed in the next billing cycle.\n\nPricing for Block Storage for VPC volumes is also set by region. For more information, see [Pricing](https://www.ibm.com/cloud/vpc/pricing).\n* Are there limits on the number of volumes I can create?\n\n Are there limits on the number of volumes I can create?",
+      "url": "https://cloud.ibm.com/docs/faqs",
+      "score": 19.35722,
+      "feedback": {
+        "relevant": {
+          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+            "value": "yes",
+            "timestamp": 1724867502
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "Is storage included in VPC cost?"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "timestamp": 1724866352
+}

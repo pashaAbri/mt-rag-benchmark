@@ -1,0 +1,191 @@
+{
+  "task_id": "100_5",
+  "conversation_id": "100",
+  "turn_id": 5,
+  "domain": "cloud",
+  "input": "Can I track my users?",
+  "gold_answer": "You can use the Activity Tracker service to track how users and applications interact. The IBM Cloud Activity Tracker service records user-initiated activities that change the state of a service in IBM Cloud. You can use this service to investigate abnormal activity and critical actions and to comply with regulatory audit requirements. ",
+  "enrichments": {
+    "Question Type": [
+      "Factoid",
+      "Summarization"
+    ],
+    "Multi-Turn": [
+      "Follow-up"
+    ],
+    "Answerability": [
+      "ANSWERABLE"
+    ]
+  },
+  "retrieved_contexts": [
+    {
+      "document_id": "ibmcld_12498-8087-10171",
+      "text": "\nAnd, ultimately, it makes it a little more efficient for the management of your secrets while you're going through your DevOps operations.\n\nThank you. If you have questions, please drop us a line. If you want to see more videos like this in the future, please like and subscribe, and don't forget you can grow your skills and earn a badge with IBM Cloud Labs which, are free browser-based interactive Kubernetes labs.\n\n\n\n\n\n Working with secrets of different types \n\nSecrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a\n\ndynamic secrethas its expiration date and time enforced when its secret data is read or accessed.\n\nSecrets Manager further classifies static and dynamic secrets by their general purpose or function. For example, each secret type is identified by programmatic name, such as username_password. If you're looking to manage your secret by using the Secrets Manager API or CLI, you can use these programmatic names to run operations on secrets according to their type.\n\nReview the following table to understand the types of static and dynamic secrets that you can create and manage with the service.\n\n\n\nTable 1. Secret types in Secrets Manager\n\n Type Programmatic name Kind Description \n\n [Arbitrary secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-arbitrary-secrets) arbitrary Static Arbitrary pieces of sensitive data, including any type of structured or unstructured data, that you can use to access an application or resource. \n [IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials) iam_credentials* Dynamic A dynamically generated service ID and API key that can be used to access an IBM Cloud service that requires IAM authentication. \n [Key-value secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-key-value) kv Static Pieces of sensitive data that is structured in JSON format that you can use to access an application or resource.",
+      "url": "https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-what-is-secret",
+      "score": 38.981373,
+      "feedback": {
+        "relevant": {
+          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+            "value": "no",
+            "timestamp": 1723561699
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?\n|assistant|: Both dynamic and static secrets have their own ways of protecting against vulnerabilities. Secrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a dynamic secret has its expiration date and time enforced when its secret data is read or accessed. The static code scan stage runs a static code analyzer tool on the specified app repo codebases. The static-scan task runs a scan on the specified repos. The Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n|user|: Do they both rotate secrets?\n|assistant|: Both dynamic and static secrets can have their expiration dates enforced, leading to the rotation of the secrets. The key difference lies in when this enforcement occurs. For static secrets, the expiration date and time are enforced at secret creation or rotation time. In contrast, for dynamic secrets, the expiration date and time are enforced when the secret data is read or accessed. When trying to rotate a secret, the request's success depends on whether the previous version is locked or not. Automatic rotation is available only for secrets that are generated by Secrets Manager. With IBM Cloud\u00ae Secrets Manager, you can design a strategy for rotating your secrets and sensitive data.\n|user|: What is an IAM credential?\n|assistant|: IBM Cloud Identity and Access Management (IAM) service securely authenticates users and controls access to all resources consistently in the IBM Cloud Platform. An IAM (Identity and Access Management) credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. These credentials allow you to authenticate your identity and control your access to various IBM Cloud resources.\n|user|: Can I track my users?"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_07578-1215486-1217535",
+      "text": "\nThere are several different strategies that you might use to approach secret groups. For more information and recommendations, see [Best practices for organizing secrets and assigning access](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-best-practices-organize-secrets).\n* What is an IAM credential?\n\nAn IAM credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. For more information about creating and storing IAM credentials, see [Creating IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials).\n* What happens when I rotate my secret?\n\nWhen a secret is rotated, a new version of its value becomes available for use. You can choose to manually add a value or automatically generate one at regular intervals by enabling automatic rotation.\n\nFor more information about secret rotation, see [Rotating secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-manual-rotation).\n* What happens when my secret expires?\n\nIn some secret types such as arbitrary or username_password, you can set the date and time when your secret expires. When the secret reaches its expiration date, it transitions to a Destroyed state. When the transition happens, the value that is associated with the secret is no longer recoverable. The transition to the Destroyed state can take up to a couple of minutes after the secret expires, or a lock that prevented expiration is removed.\n\nFor more information about how your information is protected, see [Securing your data](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-mng-data).\n* What are differences between the Reader and SecretsReader roles?\n\nBoth the Reader and SecretsReader roles help you to assign read-only access to Secrets Manager resources.\n\n\n\n* As a reader, you can browse a high-level view of secrets in your instance.",
+      "url": "https://cloud.ibm.com/docs/faqs",
+      "score": 37.692577,
+      "feedback": {
+        "relevant": {
+          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+            "value": "no",
+            "timestamp": 1723561722
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?\n|assistant|: Both dynamic and static secrets have their own ways of protecting against vulnerabilities. Secrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a dynamic secret has its expiration date and time enforced when its secret data is read or accessed. The static code scan stage runs a static code analyzer tool on the specified app repo codebases. The static-scan task runs a scan on the specified repos. The Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n|user|: Do they both rotate secrets?\n|assistant|: Both dynamic and static secrets can have their expiration dates enforced, leading to the rotation of the secrets. The key difference lies in when this enforcement occurs. For static secrets, the expiration date and time are enforced at secret creation or rotation time. In contrast, for dynamic secrets, the expiration date and time are enforced when the secret data is read or accessed. When trying to rotate a secret, the request's success depends on whether the previous version is locked or not. Automatic rotation is available only for secrets that are generated by Secrets Manager. With IBM Cloud\u00ae Secrets Manager, you can design a strategy for rotating your secrets and sensitive data.\n|user|: What is an IAM credential?\n|assistant|: IBM Cloud Identity and Access Management (IAM) service securely authenticates users and controls access to all resources consistently in the IBM Cloud Platform. An IAM (Identity and Access Management) credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. These credentials allow you to authenticate your identity and control your access to various IBM Cloud resources.\n|user|: Can I track my users?"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_16727-1218119-1220168",
+      "text": "\nThere are several different strategies that you might use to approach secret groups. For more information and recommendations, see [Best practices for organizing secrets and assigning access](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-best-practices-organize-secrets).\n* What is an IAM credential?\n\nAn IAM credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. For more information about creating and storing IAM credentials, see [Creating IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials).\n* What happens when I rotate my secret?\n\nWhen a secret is rotated, a new version of its value becomes available for use. You can choose to manually add a value or automatically generate one at regular intervals by enabling automatic rotation.\n\nFor more information about secret rotation, see [Rotating secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-manual-rotation).\n* What happens when my secret expires?\n\nIn some secret types such as arbitrary or username_password, you can set the date and time when your secret expires. When the secret reaches its expiration date, it transitions to a Destroyed state. When the transition happens, the value that is associated with the secret is no longer recoverable. The transition to the Destroyed state can take up to a couple of minutes after the secret expires, or a lock that prevented expiration is removed.\n\nFor more information about how your information is protected, see [Securing your data](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-mng-data).\n* What are differences between the Reader and SecretsReader roles?\n\nBoth the Reader and SecretsReader roles help you to assign read-only access to Secrets Manager resources.\n\n\n\n* As a reader, you can browse a high-level view of secrets in your instance.",
+      "url": "https://cloud.ibm.com/docs?tab=faqs",
+      "score": 37.692577,
+      "feedback": {
+        "relevant": {
+          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+            "value": "no",
+            "timestamp": 1723561741
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?\n|assistant|: Both dynamic and static secrets have their own ways of protecting against vulnerabilities. Secrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a dynamic secret has its expiration date and time enforced when its secret data is read or accessed. The static code scan stage runs a static code analyzer tool on the specified app repo codebases. The static-scan task runs a scan on the specified repos. The Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n|user|: Do they both rotate secrets?\n|assistant|: Both dynamic and static secrets can have their expiration dates enforced, leading to the rotation of the secrets. The key difference lies in when this enforcement occurs. For static secrets, the expiration date and time are enforced at secret creation or rotation time. In contrast, for dynamic secrets, the expiration date and time are enforced when the secret data is read or accessed. When trying to rotate a secret, the request's success depends on whether the previous version is locked or not. Automatic rotation is available only for secrets that are generated by Secrets Manager. With IBM Cloud\u00ae Secrets Manager, you can design a strategy for rotating your secrets and sensitive data.\n|user|: What is an IAM credential?\n|assistant|: IBM Cloud Identity and Access Management (IAM) service securely authenticates users and controls access to all resources consistently in the IBM Cloud Platform. An IAM (Identity and Access Management) credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. These credentials allow you to authenticate your identity and control your access to various IBM Cloud resources.\n|user|: Can I track my users?"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_02392-7-2321",
+      "text": "\nAuditing events for service instances \n\nAs a security officer, auditor, or manager, you can use the IBM Cloud Activity Tracker service to track how users and applications interact with the IBM Cloud services.\n\nThe IBM Cloud Activity Tracker service records user-initiated activities that change the state of a service in IBM Cloud. To get started monitoring your user's actions, see [IBM Cloud Activity Tracker](https://cloud.ibm.com/docs/services/activity-tracker?topic=activity-tracker-getting-startedgetting-started).\n\n\n\n Events for provisioning and managing service instances \n\nThe following table lists the actions that generate an event:\n\n\n\nTable 1. Actions that generate events\n\n Action Description \n\n service_name.instance.create An event is generated when you provision a service instance. \n service_name.instance.update An event is generated when you rename a service instance or when you change the service plan. \n service_name.instance.delete An event is generated when a service instance is deleted. \n service_name.instance.schedule_reclaim An event is generated when a service instance is pending_reclamation. \n service_name.instance.restore An event is generated when a service instance is restored. \n\n\n\n\n\n\n\n Events for managing aliases that are associated to a service instance \n\nAn alias is a connection between your IAM-managed service within a resource group and an application within an org or a space.\n\nThe following table lists the actions that generate an event:\n\n\n\nTable 2. Actions that generate events\n\n Action Description \n\n service_name.alias.create An event is generated when an alias for an instance is created. \n service_name.alias.update An event is generated when an alias for an instance is updated. \n service_name.alias.delete An event is generated when an alias for an instance is deleted. \n\n\n\n\n\n\n\n Events for managing service credentials that are associated to a service instance \n\nA service credential provides the necessary information to connect an application to a service instance.\n\nThe following table lists the actions that generate an event:\n\n\n\nTable 3. Actions that generate events\n\n Action Description \n\n service_name.key.create An event is generated when an API key is created for a service instance through the Service credentials section of the service instance UI.",
+      "url": "https://cloud.ibm.com/docs/activity-tracker?topic=activity-tracker-at_events_rc",
+      "score": 15.040893,
+      "feedback": {
+        "relevant": {
+          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+            "value": "yes",
+            "timestamp": 1723565321
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "tracking instances"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_03443-7-2321",
+      "text": "\nAuditing events for service instances \n\nAs a security officer, auditor, or manager, you can use the IBM Cloud Activity Tracker service to track how users and applications interact with the IBM Cloud services.\n\nThe IBM Cloud Activity Tracker service records user-initiated activities that change the state of a service in IBM Cloud. To get started monitoring your user's actions, see [IBM Cloud Activity Tracker](https://cloud.ibm.com/docs/services/activity-tracker?topic=activity-tracker-getting-startedgetting-started).\n\n\n\n Events for provisioning and managing service instances \n\nThe following table lists the actions that generate an event:\n\n\n\nTable 1. Actions that generate events\n\n Action Description \n\n service_name.instance.create An event is generated when you provision a service instance. \n service_name.instance.update An event is generated when you rename a service instance or when you change the service plan. \n service_name.instance.delete An event is generated when a service instance is deleted. \n service_name.instance.schedule_reclaim An event is generated when a service instance is pending_reclamation. \n service_name.instance.restore An event is generated when a service instance is restored. \n\n\n\n\n\n\n\n Events for managing aliases that are associated to a service instance \n\nAn alias is a connection between your IAM-managed service within a resource group and an application within an org or a space.\n\nThe following table lists the actions that generate an event:\n\n\n\nTable 2. Actions that generate events\n\n Action Description \n\n service_name.alias.create An event is generated when an alias for an instance is created. \n service_name.alias.update An event is generated when an alias for an instance is updated. \n service_name.alias.delete An event is generated when an alias for an instance is deleted. \n\n\n\n\n\n\n\n Events for managing service credentials that are associated to a service instance \n\nA service credential provides the necessary information to connect an application to a service instance.\n\nThe following table lists the actions that generate an event:\n\n\n\nTable 3. Actions that generate events\n\n Action Description \n\n service_name.key.create An event is generated when an API key is created for a service instance through the Service credentials section of the service instance UI.",
+      "url": "https://cloud.ibm.com/docs/atracker?topic=atracker-at_events_rc",
+      "score": 15.040893,
+      "feedback": {
+        "relevant": {
+          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+            "value": "yes",
+            "timestamp": 1723564995
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "tracking instances"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_00033-4979-5757",
+      "text": "\nFor details, see [Configuring and viewing logs](https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-viewing-logs).\n\n\n\n\n\n How can I track actions performed by users on a serverless Spark instance? \n\nYou can use the Activity Tracker service to track how users and applications interact with IBM Analytics Engine in IBM Cloud\u00ae. You can use this service to investigate abnormal activity and critical actions and to comply with regulatory audit requirements. In addition, you can be alerted about actions as they happen. The events that are collected comply with the Cloud Auditing Data Federation (CADF) standard. See [Auditing events for IBM Analytics Engine serverless instances](https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-at_events-serverless).",
+      "url": "https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-faqs-serverless",
+      "score": 14.278735,
+      "feedback": {
+        "relevant": {
+          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+            "value": "yes",
+            "timestamp": 1723562231
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "tracking instances"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "timestamp": 1723561453
+}

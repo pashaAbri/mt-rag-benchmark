@@ -1,0 +1,75 @@
+{
+  "task_id": "98_6",
+  "conversation_id": "98",
+  "turn_id": 6,
+  "domain": "cloud",
+  "input": "I want to secure the phone connection before the phone interaction and optimize your actions for phone interaction.",
+  "gold_answer": "To secure the phone connection before the interaction, follow the previous steps I've decribed. To optimize your actions for phone interaction, consider the following: 1. Do not include HTML elements in your action responses. Use Markdown for formatting instead. 2. Use a search extension to include search results in actions that the phone integration will read. Make sure the entire search response is less than 5,000 characters long. Test the search results and curate the data collection as necessary. ",
+  "enrichments": {
+    "Question Type": [
+      "How-To",
+      "Non-Question"
+    ],
+    "Multi-Turn": [
+      "Clarification"
+    ],
+    "Answerability": [
+      "ANSWERABLE"
+    ]
+  },
+  "retrieved_contexts": [
+    {
+      "document_id": "ibmcld_16288-1733-3996",
+      "text": "\nIt's important that the Assistant be configured with an Action or webhook that can handle this scenario.\n\n\n\nThe phone integration supports disaster recovery by providing the ability to do a fast failover to another region instead of routing the call to a live agent when a service outage occurs. This is accomplished by sending a SIP 503 response to the upstream SIP trunking provider, instead of auto referring the call to a live agent when failures happen during the setup of a call. This 503 response can then be used by the SIP trunking provider to reroute the call to another region. If you want to take advantage of this capability, open a service ticket against the Watson Assistant service instance that requires disaster recovery.\n\n\n\n\n\n Secure the phone connection \n\nYou can add security to the phone connection by going to the Advanced options tab in the phone integration settings, and selecting one or both of the following options:\n\n\n\n* Force secure trunking: Select this option to use Secure Real-Time Transfer Protocol (SRTP) to secure the audio that is transmitted over the phone. For more information about RTP, see [Call routing details](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-deploy-phone-configdeploy-phone-config-route).\n* Enable SIP authentication: Select this option if you want to require SIP digest authentication.\n\nWhen SIP authentication is required, all inbound traffic (meaning requests from the SIP provider to your assistant) is authenticated using SIP digest authentication, and must be sent using Transport Layer Security (TLS). If this option is selected, the SIP digest user name and password must be configured, and the SIP trunk being used to connect to Assistant must be configured to use only TLS.\n\nIf you use Twilio as your SIP trunk provider, you cannot enable SIP authentication for outbound SIP trunks to Watson Assistant.\n\n\n\n\n\n\n\n Applying advanced SIP trunk configuration settings \n\nTo configure how your assistant interacts with a SIP trunk from an external provider, go to the SIP trunk tab in the phone integration settings, and update the following options in the SIP trunking integration section:\n\n\n\n* SIP INVITE headers to extract: List the headers that you want your assistant to use.",
+      "url": "https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-deploy-phone-config",
+      "score": 18.002815,
+      "feedback": {
+        "relevant": {
+          "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+            "value": "yes",
+            "timestamp": 1723082354
+          }
+        }
+      },
+      "query": {
+        "bool": {
+          "must": {
+            "text_expansion": {
+              "ml.tokens": {
+                "model_id": ".elser_model_1",
+                "model_text": "You can add security to the phone connection by going to the Advanced options tab in the phone integration settings, and selecting one or both of the following options"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_16288-6287-8401",
+      "text": "\nWhen you use the phone integration as the first line of assistance for customers, it's a good idea to have a live agent backup available. You can design your assistant to transfer a call to a human in case the phone connection fails, or if a user asks to speak to someone.\n\nYour company might already have one or more phone numbers that connect to an automatic call dispatcher (ACD) that can queue callers until an appropriate agent is available. If not, choose a call center service to use as your backup.\n\nA conversation cannot be transferred from one integration type to another. For example, if you use the web chat integration with service desk support, you cannot transfer a phone call to the service desk that is set up for the web chat.\n\nYou must provide the call center SIP URI for the call center service you use. You must specify this information in your assistant when you enable a call transfer from a dialog node or action step. For more information, see [Transferring a call to a live agent](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-phone-actionsphone-actions-transfer).\n\n\n\n\n\n Optimize your actions for phone interaction \n\nFor the best customer experience, design your dialog with the capabilities of the phone integration in mind:\n\n\n\n* Do not include HTML elements in your action responses. To add formatting, use Markdown. For more information, see [Formatting responses](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-respondrespond-formatting).\n* You can use a search extension to include search results in actions that the phone integration will read. When search results are returned, the phone integration reads the introductory message (for example, I found this information that might be helpful), and then the body of only the first search result.\n\nThe entire search response (meaning the introductory message plus the body of the first search result) must be less than 5,000 characters long or the response will not be read at all. Be sure to test the search results that are returned and curate the data collection that you use as necessary.",
+      "url": "https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-deploy-phone-config",
+      "score": 22.168814,
+      "feedback": {
+        "relevant": {
+          "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+            "value": "yes",
+            "timestamp": 1723082356
+          }
+        }
+      },
+      "query": {
+        "bool": {
+          "must": {
+            "text_expansion": {
+              "ml.tokens": {
+                "model_id": ".elser_model_1",
+                "model_text": "For the best customer experience, design your dialog with the capabilities of the phone integration in mind"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "timestamp": 1723082233
+}

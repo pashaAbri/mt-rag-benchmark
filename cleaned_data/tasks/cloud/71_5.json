@@ -1,0 +1,190 @@
+{
+  "task_id": "71_5",
+  "conversation_id": "71",
+  "turn_id": 5,
+  "domain": "cloud",
+  "input": "How much do the IBM Cloud Schematics templates cost?",
+  "gold_answer": " Getting started tutorial incurs costs. You must have an IBM Cloud Pay-As-You-Go or Subscription account to proceed. IBM Cloud Schematics Workspaces are provided to you at no cost. However, when you decide to apply your Terraform template in IBM Cloud by clicking Apply plan from the workspace details page or running the IBM cloud schematics apply command, you are charged for the IBM Cloud resources that are described in your Terraform template.",
+  "enrichments": {
+    "Question Type": [
+      "Explanation"
+    ],
+    "Multi-Turn": [
+      "Clarification"
+    ],
+    "Answerability": [
+      "ANSWERABLE"
+    ]
+  },
+  "retrieved_contexts": [
+    {
+      "document_id": "ibmcld_12170-1498-3591",
+      "text": "\nVPC VPC provides you the security of a private cloud environment with the dynamic scalability of a public cloud. \n zones You must have one VPC subnet for each zone in your cluster. The available zones depend on the metro location that you created in the VPC. \n subnet VPC subnets is used to provide private IP addresses for your worker nodes and load balancer services in your cluster. You cannot change the number of IP addresses that a VPC subnet has. \n master node Controls and manages a set of worker nodes (workloads runtime) and resembles a cluster in Kubernetes. \n cluster A cluster contains a control plane and one or more compute machines, or nodes. Nodes run the applications and workloads. \n worker node Add the zone to your worker pool. When you add a zone to a worker pool, the worker nodes that are defined in your worker pool are provisioned in the zone and considered for future workload scheduling. \n\n\n\nYou can add worker nodes and pool to your VPC cluster by using a ibm_container_vpc_worker_pool provider resource.\n\nThe costs are incurred based on your resource usage. For more information about the VPC pricing, see [VPC pricing](https://www.ibm.com/cloud/virtual-servers/pricing).\n\n\n\n\n\n Objectives \n\nIn this tutorial, you will do the following:\n\n\n\n* Learn how to use an IBM-provided Terraform template to create a Virtual Private Cloud (VPC) and provision an IBM Cloud Kubernetes Service cluster that runs on Virtual Servers for VPC.\n* Create an IBM Cloud Object Storage service instance and bind the service to your IBM Cloud Kubernetes Service cluster.\n* Explore how to create an IBM Cloud Schematics Workspace.\n* Create a Terraform execution plan and apply your Terraform template in IBM Cloud.\n* Review the IBM Cloud\u00ae resources that you create.\n\n\n\n\n\n\n\n Time required \n\n1 hour\n\n\n\n\n\n Audience \n\nThis tutorial is intended for developers and system administrators who want to learn how to use Terraform templates to create and manage cloud infrastructure services by using IBM Cloud Schematics.\n\n\n\n\n\n Prerequisites \n\nBefore you begin, complete the following prerequisites.",
+      "url": "https://cloud.ibm.com/docs/schematics?topic=schematics-provisioning-terraform-template",
+      "score": 40.08086,
+      "feedback": {
+        "relevant": {
+          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+            "value": "no",
+            "timestamp": 1724859641
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "|user|: How do I build my client application using dialogue nodes?\n|assistant|: To build your client application using dialog nodes, you need to follow these steps: create a simple conversation with two intents; the dialog uses intents to identify the purpose of the user's input regardless of the precise wording used, and then responds in the way you specify. The client application sends a message containing user input and the user input triggers a dialog node.\n|user|: what are worker nodes?\n|assistant|: Worker nodes carry the deployments and services that make up your app. Virtual machines that your cluster manages are instances that are called worker nodes. Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. \n|user|: what are VPC clusters?\n|assistant|: With IBM Cloud Kubernetes Service, you can create a standard cluster in a Virtual Private Cloud (VPC). A VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.\n|user|: How to create a cluster.\n|assistant|: To create a cluster, this section steps through the build tasks needed to create the Windows Server Failover Cluster (WSFC) and the availability group. This guide assumes that you: Have at least two servers running Windows 2019 and SQL Server 2019 to cluster. Have a bastion host with external Internet access. Have deployed active directory.                                                                          Or you can:                                                                                      Try out Automating cluster creation with IBM Cloud Schematics templates.  \n|user|: How much do the IBM Cloud Schematics templates cost?"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_06007-21661-23758",
+      "text": "\nIf your app workload requires other IBM Cloud services, your worker nodes can automatically, securely communicate with IBM Cloud services that support private cloud service endpoints over the private VPC network.\n\n\n\n\n\n External communication to apps that run on worker nodes \n\nAfter you test your app, you can expose it to the internet by creating a public Kubernetes LoadBalancer service or using the default public Ingress application load balancers (ALBs). The VPC load balancer that is automatically created in your VPC outside of your cluster when you use one of these services routes traffic to your app. You can improve the security of your cluster and control public network traffic to your apps by replacing the kube-<vpc-id> security group, which is automatically applied to the VPC ALB, with a security group that you create and manage. When applied to ALBs, security groups control which inbound traffic is permitted to your cluster through the ALB.\n\nReady to get started with a cluster for this scenario? After you plan your [high availability](https://cloud.ibm.com/docs/containers?topic=containers-ha_clusters) and [worker node](https://cloud.ibm.com/docs/containers?topic=containers-planning_worker_nodes) setups, see [Creating VPC clusters](https://cloud.ibm.com/docs/containers?topic=containers-clusters).\n\n\n\n\n\n\n\n Scenario: Run internet-facing app workloads in a VPC cluster with limited public egress \n\nIn this scenario, you run workloads in a VPC cluster that are accessible to requests from the Internet. Public access is controlled so that end users can access your apps while unwanted public requests to your apps are denied. However, you might need to also provide limited public egress from your worker nodes to a public endpoint, and want to ensure that this public egress is controlled and isolated in your cluster. For example, you might need your app pods to access an IBM Cloud service that does not support private cloud service endpoints, and must be accessed over the public network.\n\nZoom\n\n![Network setup for a cluster that allows limited, secure public access.]",
+      "url": "https://cloud.ibm.com/docs/containers?topic=containers-plan_vpc_basics",
+      "score": 39.7617,
+      "feedback": {
+        "relevant": {
+          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+            "value": "no",
+            "timestamp": 1724859674
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "|user|: How do I build my client application using dialogue nodes?\n|assistant|: To build your client application using dialog nodes, you need to follow these steps: create a simple conversation with two intents; the dialog uses intents to identify the purpose of the user's input regardless of the precise wording used, and then responds in the way you specify. The client application sends a message containing user input and the user input triggers a dialog node.\n|user|: what are worker nodes?\n|assistant|: Worker nodes carry the deployments and services that make up your app. Virtual machines that your cluster manages are instances that are called worker nodes. Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. \n|user|: what are VPC clusters?\n|assistant|: With IBM Cloud Kubernetes Service, you can create a standard cluster in a Virtual Private Cloud (VPC). A VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.\n|user|: How to create a cluster.\n|assistant|: To create a cluster, this section steps through the build tasks needed to create the Windows Server Failover Cluster (WSFC) and the availability group. This guide assumes that you: Have at least two servers running Windows 2019 and SQL Server 2019 to cluster. Have a bastion host with external Internet access. Have deployed active directory.                                                                          Or you can:                                                                                      Try out Automating cluster creation with IBM Cloud Schematics templates.  \n|user|: How much do the IBM Cloud Schematics templates cost?"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_06063-18145-20200",
+      "text": "\n* VPC clusters: Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. You can't access your worker nodes by using the VPC dashboard. However, you can manage your worker nodes by using the IBM Cloud Kubernetes Service console, CLI, or API. The virtual machines that make up your worker nodes are dedicated to you and you are responsible to request timely updates so that your worker node OS and IBM Cloud Kubernetes Service components apply the latest security updates and patches.\n\n\n\nFor more information, see [Your responsibilities by using IBM Cloud Kubernetes Service](https://cloud.ibm.com/docs/containers?topic=containers-responsibilities_iks).\n\nUse the ibmcloud ks worker update[command](https://cloud.ibm.com/docs/containers?topic=containers-kubernetes-service-clics_worker_update) regularly (such as monthly) to deploy updates and security patches to the operating system and to update the Kubernetes version that your worker nodes run. When updates are available, you are notified when you view information about the master and worker nodes in the IBM Cloud console or CLI, such as with the ibmcloud ks clusters ls or ibmcloud ks workers ls --cluster <cluster_name> commands. Worker node updates are provided by IBM as a full worker node image that includes the latest security patches. To apply the updates, the worker node must be reimaged and reloaded with the new image. Keys for the root user are automatically rotated when the worker node is reloaded.\n\n\n\n\n\n How does my worker node setup look? \n\nThe following image shows the components that are set up for every worker node to protect your worker node from malicious attacks.\n\nThe image does not include components that ensure secure end-to-end communication to and from the worker node. For more information, see [network security](https://cloud.ibm.com/docs/containers?topic=containers-securitynetwork).\n\nZoom\n\n![Worker node setup in IBM Cloud Kubernetes Service excluding network security.]",
+      "url": "https://cloud.ibm.com/docs/containers?topic=containers-security",
+      "score": 39.604954,
+      "feedback": {
+        "relevant": {
+          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+            "value": "no",
+            "timestamp": 1724859825
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "|user|: How do I build my client application using dialogue nodes?\n|assistant|: To build your client application using dialog nodes, you need to follow these steps: create a simple conversation with two intents; the dialog uses intents to identify the purpose of the user's input regardless of the precise wording used, and then responds in the way you specify. The client application sends a message containing user input and the user input triggers a dialog node.\n|user|: what are worker nodes?\n|assistant|: Worker nodes carry the deployments and services that make up your app. Virtual machines that your cluster manages are instances that are called worker nodes. Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. \n|user|: what are VPC clusters?\n|assistant|: With IBM Cloud Kubernetes Service, you can create a standard cluster in a Virtual Private Cloud (VPC). A VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.\n|user|: How to create a cluster.\n|assistant|: To create a cluster, this section steps through the build tasks needed to create the Windows Server Failover Cluster (WSFC) and the availability group. This guide assumes that you: Have at least two servers running Windows 2019 and SQL Server 2019 to cluster. Have a bastion host with external Internet access. Have deployed active directory.                                                                          Or you can:                                                                                      Try out Automating cluster creation with IBM Cloud Schematics templates.  \n|user|: How much do the IBM Cloud Schematics templates cost?"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_12098-7-1814",
+      "text": "\nSoftware deployment in IBM Cloud Schematics \n\nTry out one of the IBM\u00ae provided software templates to quickly spin up a classic Virtual Server Instance (VSI), and automatically configure the instance to connect to an IBM Cloud\u00ae Databases for PostgreSQL instance.\n\nWith IBM Cloud Schematics, you can choose from a wide variety of [software and infrastructure templates](https://cloud.ibm.com/catalogsoftware) that you can use to set up IBM Cloud services, and to install IBM and Third party software. The templates are applied by using the built-in Terraform, Ansible, Helm, CloudPak, and Operator capabilities in Schematics.\n\nAs part of this getting started tutorial, you create a Schematics Workspaces that points to the [VSI database](https://cloud.ibm.com/catalogabout) template. Then, you run this template and watch Schematics provision your VSI and your IBM Cloud Databases for PostgreSQL instance. IBM Cloud Databases for PostgreSQL is a fully managed database offering in IBM Cloud that supports storing of non-relational and relational data types. For more information about this offering, see [What is PostgreSQL?](https://www.ibm.com/cloud/databases-for-postgresql).\n\nThis getting started tutorial incurs costs. You must have an [IBM Cloud Pay-As-You-Go or Subscription](https://cloud.ibm.com/registration) account to proceed. Make sure that you review pricing information for [classic VSIs](https://cloud.ibm.com/gen1/infrastructure/provision/vs) and [PostgreSQL](https://cloud.ibm.com/databases/databases-for-postgresql/create).\n\n\n\n Before you begin \n\nBefore you can use this template, you must complete the following tasks.\n\n\n\n* Make sure that you have the permissions to [create classic virtual servers](https://cloud.ibm.com/docs/virtual-servers?topic=virtual-servers-managing-device-access).",
+      "url": "https://cloud.ibm.com/docs/schematics?topic=schematics-get-started-software",
+      "score": 16.374655,
+      "feedback": {
+        "relevant": {
+          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+            "value": "yes",
+            "timestamp": 1724860209
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "How much do the IBM Cloud Schematics templates cost?"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_16727-623510-625767",
+      "text": "\nIBM Cloud Schematics provides powerful tools to automate your cloud infrastructure provisioning and management process, the configuration and operation of your cloud resources, and the deployment of your app workloads.\n\nTo do so, Schematics uses open source projects, such as Terraform, Ansible, Red Hat OpenShift, Operators, and Helm, and delivers these capabilities to you as a managed service. Rather than installing each open source project on your system, and learn the API or CLI. You can declare the tasks that you want to run in IBM Cloud and watch Schematics run these tasks for you.\n\nFor more information about how Schematics Works, see [About IBM Cloud Schematics](https://cloud.ibm.com/docs/schematics?topic=schematics-learn-about-schematics).\n* What is Infrastructure as Code?\n\nInfrastructure as Code (IaC) helps you codify your cloud environment so that you can automate the provisioning and management of your resources in the cloud. Rather than manually provisioning and configuring infrastructure resources or by using scripts to adjust your cloud environment, you use a high-level scripting language to specify your resource and its configuration. Then, you use tools like Terraform to provision the resource in the cloud by using its API. Your infrastructure code is treated the same way as your app code so that you can apply DevOps core practices such as version control, testing, and continuous monitoring.\n* What am I charged for when I use Schematics?\n\nIBM Cloud Schematics Workspaces are provided to you at no cost. However, when you decide to apply your Terraform template in IBM Cloud by clicking Apply plan from the workspace details page or running the ibmcloud schematics apply command, you are charged for the IBM Cloud resources that are described in your Terraform template. Review available service plans and pricing information for each resource that you are about to create. Some services come with a limit per IBM Cloud account. If you are about to reach the service limit for your account, the resource is not provisioned until you increase the service quota, or remove existing services first.\n\nThe Schematics ibmcloud terraform command usage displays warning and deprecation message as Alias Terraform are deprecated.",
+      "url": "https://cloud.ibm.com/docs?tab=faqs",
+      "score": 16.012836,
+      "feedback": {
+        "relevant": {
+          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+            "value": "yes",
+            "timestamp": 1724860622
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "How much do the IBM Cloud Schematics templates cost?"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_07578-623552-625809",
+      "text": "\nIBM Cloud Schematics provides powerful tools to automate your cloud infrastructure provisioning and management process, the configuration and operation of your cloud resources, and the deployment of your app workloads.\n\nTo do so, Schematics uses open source projects, such as Terraform, Ansible, Red Hat OpenShift, Operators, and Helm, and delivers these capabilities to you as a managed service. Rather than installing each open source project on your system, and learn the API or CLI. You can declare the tasks that you want to run in IBM Cloud and watch Schematics run these tasks for you.\n\nFor more information about how Schematics Works, see [About IBM Cloud Schematics](https://cloud.ibm.com/docs/schematics?topic=schematics-learn-about-schematics).\n* What is Infrastructure as Code?\n\nInfrastructure as Code (IaC) helps you codify your cloud environment so that you can automate the provisioning and management of your resources in the cloud. Rather than manually provisioning and configuring infrastructure resources or by using scripts to adjust your cloud environment, you use a high-level scripting language to specify your resource and its configuration. Then, you use tools like Terraform to provision the resource in the cloud by using its API. Your infrastructure code is treated the same way as your app code so that you can apply DevOps core practices such as version control, testing, and continuous monitoring.\n* What am I charged for when I use Schematics?\n\nIBM Cloud Schematics Workspaces are provided to you at no cost. However, when you decide to apply your Terraform template in IBM Cloud by clicking Apply plan from the workspace details page or running the ibmcloud schematics apply command, you are charged for the IBM Cloud resources that are described in your Terraform template. Review available service plans and pricing information for each resource that you are about to create. Some services come with a limit per IBM Cloud account. If you are about to reach the service limit for your account, the resource is not provisioned until you increase the service quota, or remove existing services first.\n\nThe Schematics ibmcloud terraform command usage displays warning and deprecation message as Alias Terraform are deprecated.",
+      "url": "https://cloud.ibm.com/docs/faqs",
+      "score": 16.012836,
+      "feedback": {
+        "relevant": {
+          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+            "value": "yes",
+            "timestamp": 1724860615
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "How much do the IBM Cloud Schematics templates cost?"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "timestamp": 1724857749
+}

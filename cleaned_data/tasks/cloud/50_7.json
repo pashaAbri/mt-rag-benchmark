@@ -1,0 +1,74 @@
+{
+  "task_id": "50_7",
+  "conversation_id": "50",
+  "turn_id": 7,
+  "domain": "cloud",
+  "input": "I'm allowed to use only my firewall rules.",
+  "gold_answer": "No. However, IBM Cloud Internet Services firewall rules provide flexibility and control by targeting HTTP traffic and applying custom criteria to block, challenge, log, or allow specific requests.\nYou can create various types of firewall rules, but your customer plan restricts the number of active rules on your site. Please refer to the Plan comparison page for more details on entitlements.\nThe number of active rules per plan is fixed, and it is impossible to purchase additional active ones now. By default, the IBM Cloud for VMware as a Service \u2013 single tenant instance is provisioned with a default firewall rule designed to block all traffic for basic network security. Additional rules must be configured to allow traffic from your existing network to access the Public Internet and to enable access to the virtual machine from the Public Internet. To create a firewall rule:\n\nIn the top menu navigation, click on Networking.\n\nClick on Edge Gateways and select your virtual data center's Edge Gateway.\n\nIn the left navigation under Services, click on Firewall.",
+  "enrichments": {
+    "Question Type": [
+      "Non-Question"
+    ],
+    "Multi-Turn": [
+      "Clarification"
+    ],
+    "Answerability": [
+      "ANSWERABLE"
+    ]
+  },
+  "retrieved_contexts": [
+    {
+      "document_id": "ibmcld_04106-7-2045",
+      "text": "\nCreating, editing, and deleting firewall rules \n\nIBM Cloud\u00ae Internet Services firewall rules offer power and flexibility by targeting HTTP traffic and applying custom criteria to block, challenge, log, or allow certain requests.\n\nYou can create many types of firewall rules. However, the number of active rules on your site is limited by your customer plan. See the [Plan comparison](https://cloud.ibm.com/docs/cis?topic=cis-cis-plan-comparison) page for more information on entitlements.\n\nThe number of active rules per plan is fixed. You cannot purchase additional active rules at this time.\n\nBefore getting started, it's a good idea to become familiar with [Using fields, functions, and expressions](https://cloud.ibm.com/docs/cis?topic=cis-fields-and-expressions).\n\n\n\n Creating a firewall rule \n\nTake the following steps to configure a basic firewall rule:\n\n\n\n1. Navigate to Security > Firewall Rules.\n2. Click Create Firewall Rule.\n3. Enter a rule name and optional description.\n4. Optionally, input a priority, if necessary. Note that a priority of zero is a null priority and is evaluated last.\n5. Use the UI builder in the Incoming requests section to add a condition. To build an expression with multiple conditions, click either:\n\n\n\n* And - to evaluate conditions using and logic\n* Or - to evaluate conditions or groups of previously and'ed conditions using or logic\n\n\n\nYou can see that as you build a condition, the Expression Preview shows the expression in plain text.\n\nIn the Expression Preview, you can click to edit your expression manually instead of using the Visual Expression Builder, or switch between the two. However, depending on the complexity of a manually constructed expression, the Visual Expression Builder might be unable to render it.\n6. Pick an action from the Response list menu.\n7. To save your rule, choose the most appropriate option by clicking either:\n\n\n\n* Save as draft to save your rule, but leave it disabled.\n* Save and deploy to save your rule and activate it.\n\n\n\n\n\n\n\n\n\n Editing a firewall rule",
+      "url": "https://cloud.ibm.com/docs/cis?topic=cis-about-firewall-rules",
+      "score": 20.036991,
+      "feedback": {
+        "relevant": {
+          "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+            "value": "yes",
+            "timestamp": 1723109308
+          }
+        }
+      },
+      "query": {
+        "bool": {
+          "must": {
+            "text_expansion": {
+              "ml.tokens": {
+                "model_id": ".elser_model_1",
+                "model_text": "Creating, editing, and deleting firewall rules"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_13189-15707-17534",
+      "text": "\nBy default, the IBM Cloud\u00ae for VMware as a Service \u2013 single tenant instance has been provisioned with a default firewall rule that will drop all traffic for ensuring basic network security. Additional rules must be put in place to allow the traffic from the previously created network to access the Public Internet and for you to access the virtual machine from the Public Internet.\n\n\n\nFirewall rules\n\n Name Applications Source Destination Action IP protocol \n\n dnat-to-jump RDP, ICMP ALL Any ipset-dnat-to-jump Allow IPv4 \n egress-to-inet N/A sg-private-networks Any Allow IPv4 \n default_rule N/A Any Any Drop IPv4 \n\n\n\nThe default_rule has been pre-provisioned by IBM Cloud. It is listed above just for illustration purposes.\n\nTo create a firewall rule:\n\n\n\n1. In the top menu navigation, click on Networking.\n2. Click on Edge Gateways and select your virtual data center's Edge Gateway.\n3. In the left navigation under Services, click on Firewall.\n4. Click on Edit Rules.\n5. Click on New on Top to create a new firewall rule above the default_rule (drop any).\n6. A new entry in the firewall rule list will be created. To complete the entry:\n\n\n\n1. Name \u2013 In this example, dnat-to-jump is used.\n2. Application - Click on the pencil icon next to Applications and select RDP and ICMP ALL from the applications list. You can filter with a name. Click on Save when complete.\n3. Source \u2013 Click on the pencil icon next to source and toggle the slider next to Any source to green (enabled). Click on Keep when complete.\n4. Destination \u2013 Click on the pencil icon next to destination and select IP Set ipset-dnat-to-jump (or Static Group if that would have been used). Click on Keep when complete.\n\n\n\n7. Review the inputs and click on Save when complete.\n\n\n\nThe new firewall rule will be created. This may take a few seconds to complete.",
+      "url": "https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vmware-as-a-service-vdc",
+      "score": 18.868555,
+      "feedback": {
+        "relevant": {
+          "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+            "value": "yes",
+            "timestamp": 1723109302
+          }
+        }
+      },
+      "query": {
+        "bool": {
+          "must": {
+            "text_expansion": {
+              "ml.tokens": {
+                "model_id": ".elser_model_1",
+                "model_text": "Creating a firewall rule"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "timestamp": 1723109001
+}

@@ -1,0 +1,106 @@
+{
+  "task_id": "95_1",
+  "conversation_id": "95",
+  "turn_id": 1,
+  "domain": "cloud",
+  "input": "How can I update the cluster master?",
+  "gold_answer": "To update the cluster master, you should follow these steps:\n1. Check if your cluster is unsupported by reviewing the State field in the output of the `ibmcloud ks cluster ls` command or in the IBM Cloud Kubernetes Service console.\n2. If your cluster is unsupported, you need to create a new cluster and deploy your apps to the new cluster. Then, you can delete the unsupported cluster.\n3. Before updating to the latest version, make sure to update deprecated clusters to a supported version that is one or two behind the current version. For example, you can update to version 1.21 or 1.22 before updating to the latest version, 1.23.\n4. If the worker nodes run a version two or more behind the master, update them to the same version as the master to avoid issues with your pods.\n5. Finally, update the cluster using the instructions provided in the IBM Cloud documentation: <https://cloud.ibm.com/docs/containers?topic=containers-updateupdate>.\nKeep in mind that updating a cluster to a new version may impact deployed apps, so it's essential to prepare accordingly.",
+  "enrichments": {
+    "Question Type": [
+      "How-To"
+    ],
+    "Multi-Turn": [
+      "N/A"
+    ],
+    "Answerability": [
+      "ANSWERABLE"
+    ]
+  },
+  "retrieved_contexts": [
+    {
+      "document_id": "ibmcld_05728-10229-11925",
+      "text": "\nIf the cluster master runs two or more versions behind the oldest supported version, you can no longer apply updates and must delete the cluster and create a new one.\n5. Archived: The version is unsupported with no upgrade path. IBM provides no support. IBM reserves the right to shut down the control planes for such clusters.\n\n\n\nIf you wait until your cluster is two or more minor versions behind the oldest supported version, you can't update the cluster. Instead, [create a new cluster](https://cloud.ibm.com/docs/containers?topic=containers-clustersclusters), [deploy your apps](https://cloud.ibm.com/docs/containers?topic=containers-appapp) to the new cluster, and [delete](https://cloud.ibm.com/docs/containers?topic=containers-remove) the unsupported cluster. To avoid this issue, update deprecated clusters to a supported version that is one or two behind the current version, such as 1.21 or 1.22 and then update to the latest version, 1.23. If the worker nodes run a version two or more behind the master, you might see your pods fail by entering a state such as MatchNodeSelector, CrashLoopBackOff, or ContainerCreating until you update the worker nodes to the same version as the master. After you update from a deprecated to a supported version, your cluster can resume normal operations and continue receiving support. You can find out whether your cluster is unsupported by reviewing the State field in the output of the ibmcloud ks cluster ls command or in the [IBM Cloud Kubernetes Service console](https://cloud.ibm.com/kubernetes/clusters).\n\n\n\n\n\n Preparing to update \n\nUpdating a cluster to a new version from the previous version is likely to have an impact on deployed apps.",
+      "url": "https://cloud.ibm.com/docs/containers?topic=containers-cs_versions",
+      "score": 20.472004,
+      "feedback": {
+        "relevant": {
+          "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+            "value": "yes",
+            "timestamp": 1724985904
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "|user|: How can I update the cluster master?"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_05597-10227-11923",
+      "text": "\nIf the cluster master runs two or more versions behind the oldest supported version, you can no longer apply updates and must delete the cluster and create a new one.\n5. Archived: The version is unsupported with no upgrade path. IBM provides no support. IBM reserves the right to shut down the control planes for such clusters.\n\n\n\nIf you wait until your cluster is two or more minor versions behind the oldest supported version, you can't update the cluster. Instead, [create a new cluster](https://cloud.ibm.com/docs/containers?topic=containers-clustersclusters), [deploy your apps](https://cloud.ibm.com/docs/containers?topic=containers-appapp) to the new cluster, and [delete](https://cloud.ibm.com/docs/containers?topic=containers-remove) the unsupported cluster. To avoid this issue, update deprecated clusters to a supported version that is one or two behind the current version, such as 1.21 or 1.22 and then update to the latest version, 1.23. If the worker nodes run a version two or more behind the master, you might see your pods fail by entering a state such as MatchNodeSelector, CrashLoopBackOff, or ContainerCreating until you update the worker nodes to the same version as the master. After you update from a deprecated to a supported version, your cluster can resume normal operations and continue receiving support. You can find out whether your cluster is unsupported by reviewing the State field in the output of the ibmcloud ks cluster ls command or in the [IBM Cloud Kubernetes Service console](https://cloud.ibm.com/kubernetes/clusters).\n\n\n\n\n\n Preparing to update \n\nUpdating a cluster to a new version from the previous version is likely to have an impact on deployed apps.",
+      "url": "https://cloud.ibm.com/docs/containers?topic=containers-changelog",
+      "score": 20.472004,
+      "feedback": {
+        "relevant": {
+          "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+            "value": "yes",
+            "timestamp": 1724985902
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "|user|: How can I update the cluster master?"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_05728-12623-13559",
+      "text": "\nAlthough your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes, or update the cluster to the next version. Review the potential impacts and immediately [update the cluster](https://cloud.ibm.com/docs/containers?topic=containers-updateupdate) to continue receiving important security updates and support. If your cluster master is two or more versions behind the oldest supported version, you must [make a new cluster](https://cloud.ibm.com/docs/containers?topic=containers-clustersclusters) and [deploy your apps](https://cloud.ibm.com/docs/containers?topic=containers-appapp) to the new cluster.\n\nUnsupported Kubernetes versions\n: [Archived version history](https://cloud.ibm.com/docs/containers?topic=containers-cs_sitemapsitemap_archived_version_history)",
+      "url": "https://cloud.ibm.com/docs/containers?topic=containers-cs_versions",
+      "score": 19.71453,
+      "feedback": {
+        "relevant": {
+          "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+            "value": "yes",
+            "timestamp": 1724985899
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "|user|: How can I update the cluster master?"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "timestamp": 1724985700
+}
