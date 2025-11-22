@@ -1,0 +1,623 @@
+{
+  "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-ibmcloud-elser-512-100-20240502",
+      "size": "72442"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "How can I ensure that my Watson Assistant chatbot achieves perfect harmony with the cosmic energy of the universe, transcending the limitations of mere mortal APIs and communing with the ethereal realms of data connectivity?",
+      "timestamp": 1723809941,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I cannot address your metaphorical question. Nevertheless you can enhance your chatbot's functionality by integrating it with IBM Watson Discovery for improved search and answer capabilities. To do this, you should create a Conversational Search project and add a collection that connects to an external data source or contains uploaded files.",
+      "timestamp": 1723809944,
+      "contexts": [
+        {
+          "document_id": "ibmcld_16233-7-2298",
+          "text": "\nAbout Watson Assistant \n\nUse IBM Watson\u00ae Assistant to build your own branded live chatbot into any device, application, or channel. Your chatbot, which is also known as an assistant, connects to the customer engagement resources you already use to deliver an engaging, unified problem-solving experience to your customers.\n\n\n\n\n\n Create AI-driven conversational flows Your assistant uses industry-leading AI capabilities to understand questions that your customers ask in natural language. It uses machine learning models that are custom-built from your data to deliver accurate answers in real time. \n Embed existing help content You already know the answers to customer questions? Put your subject matter expertise to work. Add a search integration with IBM Watson\u00ae Discovery to give your assistant access to corporate data collections that it can mine for answers. \n Connect to your customer service teams If customers need more help or want to discuss a topic that requires a personal touch, connect them to human agents from your existing service desk provider. \n Bring the assistant to your customers, where they are Configure one or more built-in integrations to quickly publish your assistant on popular social media platforms such as Slack, Facebook Messenger, Intercom, or WhatsApp. Turn the assistant into a member of your customer support call center team, where it can answer the phone and address simple requests so its human teammates can focus on more nuanced customer needs. Make your assistant the go-to help resource for customers by adding it as a chat widget to your company website. If none of the built-in integrations fit your needs, use the APIs to build your own custom app. \n Track customer engagement and satisfaction Use built-in metrics to analyze logs from conversations between customers and your assistant to gauge how well it's doing and identify areas for improvement. \n\n\n\n\n\n How it works \n\nThis diagram illustrates how IBM Watson\u00ae Assistant delivers an exceptional, omnichannel customer experience:\n\nZoom\n\n![Flow diagram of the service](https://cloud.ibm.com/docs-content/v1/content/ca9232b3702768f24bb897f48f10778fcda28718/watson-assistant/images/arch-detail.png)\n\nHow it works\n\nCustomers interact with the assistant through one or more of these channels:",
+          "url": "https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-about",
+          "score": 23.743132,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723810557
+              },
+              "868c6e58-57c1-48ee-8c67-832dbedcac18": {
+                "value": "no",
+                "timestamp": 1726497598
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How can I ensure that my Watson Assistant chatbot achieves perfect harmony with the cosmic energy of the universe, transcending the limitations of mere mortal APIs and communing with the ethereal realms of data connectivity?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03330-4-2191",
+          "text": "\nThis documentation is for the classic Watson Assistant experience. To see the documentation for the new Watson Assistant, please go [here](https://cloud.ibm.com/docs/watson-assistant).\n\n\n\n About Watson Assistant \n\nUse IBM Watson\u00ae Assistant to build your own branded live chatbot into any device, application, or channel. Your chatbot, which is also known as an assistant, connects to the customer engagement resources you already use to deliver an engaging, unified problem-solving experience to your customers.\n\n\n\n\n\n Create AI-driven conversational flows Your assistant leverages industry-leading AI capabilities to understand questions that your customers ask in natural language. It uses machine learning models that are custom built from your data to deliver accurate answers in real time. \n Embed existing help content You already know the answers to customer questions? Put your subject matter expertise to work. Add a search skill to give your assistant access to corporate data collections that it can mine for answers. \n Connect to your customer service teams If customers need more help or want to discuss a topic that requires a personal touch, connect them to human agents from your existing service desk provider. \n Bring the assistant to your customers, where they are Configure one or more built-in integrations to quickly publish your assistant on popular social media platforms such as Slack, Facebook Messenger, Intercom, or WhatsApp. Turn the assistant into a member of your customer support call center team, where it can answer the phone and address simple requests so its human teammates can focus on more nuanced customer needs. Make your assistant the go-to help resource for customers by adding it as a chat widget to your company website. If none of the built-in integrations fit your needs, use the APIs to build your own custom app. \n Track customer engagement and satisfaction Use built-in metrics to analyze logs from conversations between customers and your assistant to gauge how well it's doing and identify areas for improvement. \n\n\n\n\n\n How it works \n\nThis diagram illustrates how the product delivers an exceptional, omnichannel customer experience:\n\n!",
+          "url": "https://cloud.ibm.com/docs/assistant?topic=assistant-index",
+          "score": 21.94748,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723810564
+              },
+              "868c6e58-57c1-48ee-8c67-832dbedcac18": {
+                "value": "no",
+                "timestamp": 1726497626
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How can I ensure that my Watson Assistant chatbot achieves perfect harmony with the cosmic energy of the universe, transcending the limitations of mere mortal APIs and communing with the ethereal realms of data connectivity?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_07080-6045-7467",
+          "text": "\n[checkbox](https://cloud.ibm.com/docs-content/v1/content/f16b1f78a92498247223b337bd9303c2758b9ba8/discovery-data/images/checkbox.png) Deploy your solution. [Deploying your project](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-deploy) \n\n\n\n\n\n\n\n Enhance your chatbot \n\nDelight your customers by fortifying your chatbot with an answer to every question. Discovery is designed to work seemlessly with Watson Assistant to search and deliver answers from help content that you already own.\n\nZoom\n\n![Shows a chat bot with emphasize the answer enabled.](https://cloud.ibm.com/docs-content/v1/content/f16b1f78a92498247223b337bd9303c2758b9ba8/discovery-data/images/convo-search.png)\n\nFigure 3. Answer finding enabled in the Watson Assistant web chat\n\nIf enhancing your chatbot is your goal, complete the steps that are listed in the following table.\n\n\n\nChecklist for enhancing your chatbot\n\n Step Task Related information \n\n ![checkbox](https://cloud.ibm.com/docs-content/v1/content/f16b1f78a92498247223b337bd9303c2758b9ba8/discovery-data/images/checkbox.png) Create a Conversational Search project. [Creating projects](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-projects) \n ![checkbox](https://cloud.ibm.com/docs-content/v1/content/f16b1f78a92498247223b337bd9303c2758b9ba8/discovery-data/images/checkbox.png) Add a collection that connects to an external data source or contains uploaded files.",
+          "url": "https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-product-overview",
+          "score": 21.033869,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723810538
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How can I ensure that my Watson Assistant chatbot achieves perfect harmony with the cosmic energy of the universe, transcending the limitations of mere mortal APIs and communing with the ethereal realms of data connectivity?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "While I understand your interest in optimizing your Watson Assistant chatbot, I must clarify that the concept of achieving perfect harmony with the cosmic energy of the universe and transcending the limitations of mortal APIs is metaphorical and not grounded in the practical capabilities described in the provided document. The document focuses on enhancing your chatbot's functionality by integrating it with IBM Watson Discovery for improved search and answer capabilities. To do this, you should create a Conversational Search project and add a collection that connects to an external data source or contains uploaded files."
+    },
+    {
+      "speaker": "user",
+      "text": "Does he understand my emotions?",
+      "timestamp": 1723810718,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, Watson Assistant has the capability to understand human emotions to some extent. However, this is not through some mystical communion with cosmic energy, but through features like Emotion Analysis in certain IBM Watson products.  It can evaluates the overall emotional tone like joy, disgust, anger, fear, and sadness in a given text. It calculates a score for each emotion on a scale of 0.0 to 1.0, and if the score of any emotion is 0.5 or higher, it is considered detected, currently though in English only.  However, it does not understand or respond to human emotions directly. It analyzes text to determine the presence and intensity of certain emotions, but it cannot perceive or react to the emotions of individual users.",
+      "timestamp": 1723810722,
+      "contexts": [
+        {
+          "document_id": "ibmcld_13074-16820-18514",
+          "text": "\nEmotion Analysis can detect emotions that are associated with targeted phrases, entities, or keywords, or it can analyze the overall emotional tone of your content.\n\nExample portion of a document enriched with Emotion Analysis:\n\n{\n\"text\": \"The stockholders were pleased that Acme Corporation plans to build a new factory in Atlanta, Georgia.\",\n\"enriched_text\": {\n\"emotion\": {\n\"document\": {\n\"emotion\": {\n\"disgust\": 0.102578,\n\"joy\": 0.626655,\n\"anger\": 0.02303,\n\"fear\": 0.018884,\n\"sadness\": 0.096802\n}\n}\n}\n\nIn the preceding example, you could query the joy Emotion by accessing enriched_text.emotion.document.emotion.joy\n\nEmotion Analysis analyzes your text and calculates a score for each emotion (anger, disgust, fear, joy, sadness) on a scale of 0.0 to 1.0. If the score of any emotion is 0.5 or higher, then that emotion is detected. The higher the score above 0.5, the higher the relevance. In the snippet shown, joy has a score above 0.5, so Watson detected joy.\n\nEmotion Analysis is supported in English only.\n\n\n\n\n\n Element classification \n\nThe Element Classification enrichment is deprecated and will no longer be available, effective 10 July 2020.\n\nParses elements (sentences, lists, tables) in governing documents to classify important types and categories For more information, see [Element classification](https://cloud.ibm.com/docs/discovery?topic=discovery-element-classification).\n\n[Smart Document Understanding](https://cloud.ibm.com/docs/discovery?topic=discovery-sdu) is unavailable if this enrichment is used.\n\n\n\n Enrichment pricing \n\nEnrichment pricing information is available on [IBM Cloud](https://cloud.ibm.com/catalog/services/discovery).\n\n\n\n\n\n Enrichment language support",
+          "url": "https://cloud.ibm.com/docs/services/discovery?topic=discovery-configservice",
+          "score": 20.063297,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723812494
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "emotion analysis"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_07140-17709-19868",
+          "text": "\nThe emotion enrichment evaluates the overall emotional tone (for example anger) of entire document or specified target strings in the entire document. This enrichment can only be used with English content.\n\n\n\n* \"document\" : booleanoptional - When true the emotional tone of the entire document is evaluated.\n* \"targets\" : arrayoptional - A comma-separated array of target strings of which to evaluate the emotional state within the document.\n\n\n\n\n\n\n\n entities \n\nThe entities enrichment extracts instances of known entities such as people, places, and organizations. Optionally, a Knowledge Studio custom model can be specified to extract custom entities.\n\n\n\n* \"sentiment\" : boolean - optional - When true, sentiment analysis is performed on the extracted entity in the context of the surrounding content.\n* \"emotion\" : boolean - optional - When true, emotional tone analysis is performed on the extracted entity in the context of the surrounding content.\n* \"limit\" : INT - optional - The maximum number of entities to extract from the ingested document. The default is 50.\n* \"mentions\": boolean - optional - When true, the number of times that this entity is mentioned is recorded. The default is false.\n* \"mention_types\": boolean - optional - When true, the mention type for each mention of this entity is stored. The default is false.\n* \"sentence_location\": boolean - optional - When true, the sentence location of each entity mention is stored. The default is false.\n* \"model\" : string - optional - When specified, the custom model is used to extract entities instead of the public model. This option requires a Knowledge Studio custom model to be associated with your instance of Discovery. See [Integrating with Watson Knowledge Studio](https://cloud.ibm.com/docs/discovery?topic=discovery-integrating-with-wks) for more information.\n\n\n\n\n\n\n\n keywords \n\nThe keywords enrichment extracts instances of significant words within the text. To understand the difference between keywords, concepts, and entities, see [Understanding the difference between Entities, Concepts, and Keywords](https://cloud.ibm.com/docs/discovery?topic=discovery-configserviceudbeck).",
+          "url": "https://cloud.ibm.com/docs/discovery?topic=discovery-configref",
+          "score": 15.163293,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723812497
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "emotion analysis"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_13074-15255-17243",
+          "text": "\nSee [Entity extraction](https://cloud.ibm.com/docs/discovery?topic=discovery-configserviceentity-extraction) and [Keyword extraction](https://cloud.ibm.com/docs/discovery?topic=discovery-configservicekeyword-extraction) about those enrichments.\n\nThe subject, action, and object are extracted for every sentence that contains a relation.\n\n\n\n\n\n Sentiment analysis \n\nIdentifies attitude, opinions, or feelings in the content that is being analyzed. Discovery can calculate overall sentiment within a document, sentiment for user-specified targets, entity-level sentiment, quotation-level sentiment, directional-sentiment, and keyword-level sentiment. The combination of these capabilities supports a variety of use cases ranging from social media monitoring to trend analysis.\n\nExample portion of a document enriched with Sentiment Analysis:\n\n{\n\"text\": \"The stockholders were pleased that Acme Corporation plans to build a new factory in Atlanta, Georgia.\",\n\"enriched_text\": {\n\"sentiment\": {\n\"document\": {\n\"score\": 0.459813,\n\"label\": \"positive\"\n}\n}\n\nIn the preceding example, you could query the sentiment label by accessing enriched_text.sentiment.document.label\n\nThe label is the overall sentiment of the document (positive, negative, or neutral). The sentiment label is based on the score; a score of 0.0 would indicate that the document is neutral, a positive number would indicate the document is positive, a negative number would indicate the document is negative.\n\n\n\n\n\n Emotion analysis \n\nDetects anger, disgust, fear, joy, and sadness implied in English text. Emotion Analysis can detect emotions that are associated with targeted phrases, entities, or keywords, or it can analyze the overall emotional tone of your content.\n\nExample portion of a document enriched with Emotion Analysis:\n\n{\n\"text\": \"The stockholders were pleased that Acme Corporation plans to build a new factory in Atlanta, Georgia.\",\n\"enriched_text\": {\n\"emotion\": {\n\"document\": {\n\"emotion\": {\n\"disgust\": 0.102578,",
+          "url": "https://cloud.ibm.com/docs/services/discovery?topic=discovery-configservice",
+          "score": 14.24327,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723812500
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "emotion analysis"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The Emotion Analysis feature in IBM Watson Discovery can detect emotions such as anger, disgust, fear, joy, and sadness in English text. However, it does not understand or respond to human emotions directly. It analyzes text to determine the presence and intensity of certain emotions, but it cannot perceive or react to the emotions of individual users."
+    },
+    {
+      "speaker": "user",
+      "text": "Do I have to use a certain browser to use this service?",
+      "timestamp": 1723812077,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "For using the IBM Cloud platform, including Watson Assistant, the minimum required browser software is specified as the latest version -1 for Google Chrome, Mozilla Firefox (with both regular and Extended Support Release versions), Microsoft Edge, and Apple Safari.   ",
+      "timestamp": 1723812081,
+      "contexts": [
+        {
+          "document_id": "ibmcld_03006-7541-9354",
+          "text": "\nThe minimum required browser software for the product user interface includes the following browsers:\n\n\n\n* Google Chrome\n: Latest version -1 for your operating system\n* Mozilla Firefox\n: Latest regular -1 and Extended Support Release (ESR) version for your operating system\n* Microsoft Edge\n: Latest version -1 for Windows\n* Apple Safari\n: Latest version -1 for Mac\n\n\n\nThe IBM Cloud Pak for Data web client where you create service instances supports the IBM Cloud Pak for Data requirements. For more information, see [Supported web browsers](https://www.ibm.com/docs/en/cloud-paks/cp-data/4.5.x?topic=requirements-softwaresoftware-reqs__web).\n\n\n\n\n\n Language support \n\nLanguage support by feature is detailed in the [Supported languages](https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-language-support) topic.\n\n\n\n\n\n Security \n\nFederal Information Security Management Act (FISMA) support is available for Watson Assistant for IBM Cloud Pak for Data offerings purchased on or after 30 August 2019. Watson Assistant for IBM Cloud Pak for Data is FISMA High Ready.\n\n\n\n\n\n Next steps \n\n\n\n* [Get started](https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-getting-started) with the service\n* Try out some [demos](https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-sample-apps).\n\n\n\nStill have questions? Contact [IBM Sales](https://www-01.ibm.com/marketing/iwm/dre/signup?source=urx-20970).\n\n\n\n\n\n Trademarks \n\nIBM, the IBM logo, and ibm.com are trademarks or registered trademarks of International Business Machines Corp., registered in many jurisdictions worldwide. Other product and service names might be trademarks of IBM or other companies. A current list of IBM trademarks is available on the web at [Copyright and trademark information](https://www.ibm.com/legal/copytrade).",
+          "url": "https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-index",
+          "score": 20.827066,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723812459
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "minimum required browser software for watson assistant"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16270-0-505",
+          "text": "\n\n\n\n\n\n\n  Browser support \n\nThe Watson Assistant application requires the same level of browser software as is required by IBM Cloud. For more information, see [IBM Cloud prerequisites](https://cloud.ibm.com/docs/overview?topic=overview-prereqs-platformbrowsers-platform).\n\nFor information about the web browsers that are supported by the web chat integration, see [Browser support](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-web-chat-overviewweb-chat-architecture-browsers).\n\n\n\n\n\n\n\n",
+          "url": "https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-browser-support",
+          "score": 19.815363,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723812456
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "minimum required browser software for watson assistant"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16449-0-679",
+          "text": "\n\n\n\n\n\n\n  Browser requirements \n\nThe following list specifies the minimum required browser software for IBM Watson\u2122 Knowledge Studio.\n\n\n\n*  Google Chrome: Latest version for your operating system (Chrome provides the best performance when using the ground truth editor)\n*  Firefox: Latest regular and Extended Support Release (ESR) versions for your operating system.\n\n> Note: If you open Knowledge Studio in a Private Browsing window, then you must disable the tracking protection feature or allow pop-ups for Knowledge Studio sites to ensure that all the application functions will work properly.\n\n\n\nFor the best performance, use a screen resolution of at least 1024x1280.\n\n\n\n\n\n\n",
+          "url": "https://cloud.ibm.com/docs/watson-knowledge-studio-data?topic=watson-knowledge-studio-data-system-requirements",
+          "score": 19.794495,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723812462
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "minimum required browser software for watson assistant"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The Watson Assistant application requires the same level of browser software as is required by IBM Cloud. For more information, see [IBM Cloud prerequisites](https://cloud.ibm.com/docs/overview?topic=overview-prereqs-platformbrowsers-platform). \nFor the web chat integration, the supported browsers are listed in [Browser support](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-web-chat-overviewweb-chat-architecture-browsers).\nHowever, for IBM Watson\u2122 Knowledge Studio, the minimum required browser software is specified in the provided document:\n- Google Chrome: Latest version for your operating system\n- Firefox: Latest regular and Extended Support Release (ESR) versions for your operating system.\nIf you open Knowledge Studio in a Private Browsing window, then you must disable the tracking protection feature or allow pop-ups for Knowledge Studio sites to ensure that all the application functions will work properly."
+    },
+    {
+      "speaker": "user",
+      "text": "exmaple words of disgust it can detect?",
+      "timestamp": 1723816200,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The exact words or phrases that trigger this emotion detection are not specified in the provided document. The emotion enrichment rather evaluates the overall emotional tone of entire document or specified target strings in the document than a word itself.  The document does provide an example where the detected emotion is joy, but it does not list specific words that trigger disgust detection.",
+      "timestamp": 1723816205,
+      "contexts": [
+        {
+          "document_id": "ibmcld_13074-16820-18514",
+          "text": "\nEmotion Analysis can detect emotions that are associated with targeted phrases, entities, or keywords, or it can analyze the overall emotional tone of your content.\n\nExample portion of a document enriched with Emotion Analysis:\n\n{\n\"text\": \"The stockholders were pleased that Acme Corporation plans to build a new factory in Atlanta, Georgia.\",\n\"enriched_text\": {\n\"emotion\": {\n\"document\": {\n\"emotion\": {\n\"disgust\": 0.102578,\n\"joy\": 0.626655,\n\"anger\": 0.02303,\n\"fear\": 0.018884,\n\"sadness\": 0.096802\n}\n}\n}\n\nIn the preceding example, you could query the joy Emotion by accessing enriched_text.emotion.document.emotion.joy\n\nEmotion Analysis analyzes your text and calculates a score for each emotion (anger, disgust, fear, joy, sadness) on a scale of 0.0 to 1.0. If the score of any emotion is 0.5 or higher, then that emotion is detected. The higher the score above 0.5, the higher the relevance. In the snippet shown, joy has a score above 0.5, so Watson detected joy.\n\nEmotion Analysis is supported in English only.\n\n\n\n\n\n Element classification \n\nThe Element Classification enrichment is deprecated and will no longer be available, effective 10 July 2020.\n\nParses elements (sentences, lists, tables) in governing documents to classify important types and categories For more information, see [Element classification](https://cloud.ibm.com/docs/discovery?topic=discovery-element-classification).\n\n[Smart Document Understanding](https://cloud.ibm.com/docs/discovery?topic=discovery-sdu) is unavailable if this enrichment is used.\n\n\n\n Enrichment pricing \n\nEnrichment pricing information is available on [IBM Cloud](https://cloud.ibm.com/catalog/services/discovery).\n\n\n\n\n\n Enrichment language support",
+          "url": "https://cloud.ibm.com/docs/services/discovery?topic=discovery-configservice",
+          "score": 32.25457,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723817236
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How can I ensure that my Watson Assistant chatbot achieves perfect harmony with the cosmic energy of the universe, transcending the limitations of mere mortal APIs and communing with the ethereal realms of data connectivity?\n|assistant|: While I understand your interest in optimizing your Watson Assistant chatbot, I must clarify that the concept of achieving perfect harmony with the cosmic energy of the universe and transcending the limitations of mortal APIs is metaphorical and not grounded in the practical capabilities described in the provided document. The document focuses on enhancing your chatbot's functionality by integrating it with IBM Watson Discovery for improved search and answer capabilities. To do this, you should create a Conversational Search project and add a collection that connects to an external data source or contains uploaded files.\n|user|: Does he understand my emotions?\n|assistant|: Yes, Watson Assistant has the capability to understand human emotions to some extent. However, this is not through some mystical communion with cosmic energy, but through features like Emotion Analysis in certain IBM Watson products.  It can evaluates the overall emotional tone like joy, disgust, anger, fear, and sadness in a given text. It calculates a score for each emotion on a scale of 0.0 to 1.0, and if the score of any emotion is 0.5 or higher, it is considered detected, currently though in English only.  However, it does not understand or respond to human emotions directly. It analyzes text to determine the presence and intensity of certain emotions, but it cannot perceive or react to the emotions of individual users.\n|user|: Do I have to use a certain browser to use this service?\n|assistant|: For using the IBM Cloud platform, including Watson Assistant, the minimum required browser software is specified as the latest version -1 for Google Chrome, Mozilla Firefox (with both regular and Extended Support Release versions), Microsoft Edge, and Apple Safari.   \n|user|: exmaple words of disgust it can detect?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_07140-17709-19868",
+          "text": "\nThe emotion enrichment evaluates the overall emotional tone (for example anger) of entire document or specified target strings in the entire document. This enrichment can only be used with English content.\n\n\n\n* \"document\" : booleanoptional - When true the emotional tone of the entire document is evaluated.\n* \"targets\" : arrayoptional - A comma-separated array of target strings of which to evaluate the emotional state within the document.\n\n\n\n\n\n\n\n entities \n\nThe entities enrichment extracts instances of known entities such as people, places, and organizations. Optionally, a Knowledge Studio custom model can be specified to extract custom entities.\n\n\n\n* \"sentiment\" : boolean - optional - When true, sentiment analysis is performed on the extracted entity in the context of the surrounding content.\n* \"emotion\" : boolean - optional - When true, emotional tone analysis is performed on the extracted entity in the context of the surrounding content.\n* \"limit\" : INT - optional - The maximum number of entities to extract from the ingested document. The default is 50.\n* \"mentions\": boolean - optional - When true, the number of times that this entity is mentioned is recorded. The default is false.\n* \"mention_types\": boolean - optional - When true, the mention type for each mention of this entity is stored. The default is false.\n* \"sentence_location\": boolean - optional - When true, the sentence location of each entity mention is stored. The default is false.\n* \"model\" : string - optional - When specified, the custom model is used to extract entities instead of the public model. This option requires a Knowledge Studio custom model to be associated with your instance of Discovery. See [Integrating with Watson Knowledge Studio](https://cloud.ibm.com/docs/discovery?topic=discovery-integrating-with-wks) for more information.\n\n\n\n\n\n\n\n keywords \n\nThe keywords enrichment extracts instances of significant words within the text. To understand the difference between keywords, concepts, and entities, see [Understanding the difference between Entities, Concepts, and Keywords](https://cloud.ibm.com/docs/discovery?topic=discovery-configserviceudbeck).",
+          "url": "https://cloud.ibm.com/docs/discovery?topic=discovery-configref",
+          "score": 16.223505,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723817233
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "emotions analysis"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_13074-15255-17243",
+          "text": "\nSee [Entity extraction](https://cloud.ibm.com/docs/discovery?topic=discovery-configserviceentity-extraction) and [Keyword extraction](https://cloud.ibm.com/docs/discovery?topic=discovery-configservicekeyword-extraction) about those enrichments.\n\nThe subject, action, and object are extracted for every sentence that contains a relation.\n\n\n\n\n\n Sentiment analysis \n\nIdentifies attitude, opinions, or feelings in the content that is being analyzed. Discovery can calculate overall sentiment within a document, sentiment for user-specified targets, entity-level sentiment, quotation-level sentiment, directional-sentiment, and keyword-level sentiment. The combination of these capabilities supports a variety of use cases ranging from social media monitoring to trend analysis.\n\nExample portion of a document enriched with Sentiment Analysis:\n\n{\n\"text\": \"The stockholders were pleased that Acme Corporation plans to build a new factory in Atlanta, Georgia.\",\n\"enriched_text\": {\n\"sentiment\": {\n\"document\": {\n\"score\": 0.459813,\n\"label\": \"positive\"\n}\n}\n\nIn the preceding example, you could query the sentiment label by accessing enriched_text.sentiment.document.label\n\nThe label is the overall sentiment of the document (positive, negative, or neutral). The sentiment label is based on the score; a score of 0.0 would indicate that the document is neutral, a positive number would indicate the document is positive, a negative number would indicate the document is negative.\n\n\n\n\n\n Emotion analysis \n\nDetects anger, disgust, fear, joy, and sadness implied in English text. Emotion Analysis can detect emotions that are associated with targeted phrases, entities, or keywords, or it can analyze the overall emotional tone of your content.\n\nExample portion of a document enriched with Emotion Analysis:\n\n{\n\"text\": \"The stockholders were pleased that Acme Corporation plans to build a new factory in Atlanta, Georgia.\",\n\"enriched_text\": {\n\"emotion\": {\n\"document\": {\n\"emotion\": {\n\"disgust\": 0.102578,",
+          "url": "https://cloud.ibm.com/docs/services/discovery?topic=discovery-configservice",
+          "score": 15.892578,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723817230
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "emotions analysis"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The Emotion Analysis feature in certain IBM Watson products can detect various levels of disgust in text. However, the exact words or phrases that trigger this emotion detection are not specified in the provided document. The feature calculates a score for the disgust emotion on a scale of 0.0 to 1.0, and if the score is 0.5 or higher, it is considered detected. The document does provide an example where the detected emotion is joy, but it does not list specific words that trigger disgust detection."
+    },
+    {
+      "speaker": "user",
+      "text": "why don't you provide that?",
+      "timestamp": 1723818029,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "As I mentioned before Emotion Analysis can detect emotions that are associated with targeted phrases, entities, or keywords, or it can analyze the overall emotional tone of your content .  For instance,  in this sentence \"The stockholders were pleased that Acme Corporation plans to build a new factory in Atlanta, Georgia\", you could query the joy(pleased) the sentiment label by accessing enriched_text.sentiment.document.label.he sentiment label is based on the score; a score of 0.0 would indicate that the document is neutral, a positive number would indicate the document is positive, a negative number would indicate the document is negative as \"enriched_text\": { \"sentiment\": { \"document\": { \"score\": 0.459813, \"label\": \"positive\" } }\n\n",
+      "timestamp": 1723818035,
+      "contexts": [
+        {
+          "document_id": "ibmcld_13074-16820-18514",
+          "text": "\nEmotion Analysis can detect emotions that are associated with targeted phrases, entities, or keywords, or it can analyze the overall emotional tone of your content.\n\nExample portion of a document enriched with Emotion Analysis:\n\n{\n\"text\": \"The stockholders were pleased that Acme Corporation plans to build a new factory in Atlanta, Georgia.\",\n\"enriched_text\": {\n\"emotion\": {\n\"document\": {\n\"emotion\": {\n\"disgust\": 0.102578,\n\"joy\": 0.626655,\n\"anger\": 0.02303,\n\"fear\": 0.018884,\n\"sadness\": 0.096802\n}\n}\n}\n\nIn the preceding example, you could query the joy Emotion by accessing enriched_text.emotion.document.emotion.joy\n\nEmotion Analysis analyzes your text and calculates a score for each emotion (anger, disgust, fear, joy, sadness) on a scale of 0.0 to 1.0. If the score of any emotion is 0.5 or higher, then that emotion is detected. The higher the score above 0.5, the higher the relevance. In the snippet shown, joy has a score above 0.5, so Watson detected joy.\n\nEmotion Analysis is supported in English only.\n\n\n\n\n\n Element classification \n\nThe Element Classification enrichment is deprecated and will no longer be available, effective 10 July 2020.\n\nParses elements (sentences, lists, tables) in governing documents to classify important types and categories For more information, see [Element classification](https://cloud.ibm.com/docs/discovery?topic=discovery-element-classification).\n\n[Smart Document Understanding](https://cloud.ibm.com/docs/discovery?topic=discovery-sdu) is unavailable if this enrichment is used.\n\n\n\n Enrichment pricing \n\nEnrichment pricing information is available on [IBM Cloud](https://cloud.ibm.com/catalog/services/discovery).\n\n\n\n\n\n Enrichment language support",
+          "url": "https://cloud.ibm.com/docs/services/discovery?topic=discovery-configservice",
+          "score": 36.843338,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723818647
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How can I ensure that my Watson Assistant chatbot achieves perfect harmony with the cosmic energy of the universe, transcending the limitations of mere mortal APIs and communing with the ethereal realms of data connectivity?\n|assistant|: While I understand your interest in optimizing your Watson Assistant chatbot, I must clarify that the concept of achieving perfect harmony with the cosmic energy of the universe and transcending the limitations of mortal APIs is metaphorical and not grounded in the practical capabilities described in the provided document. The document focuses on enhancing your chatbot's functionality by integrating it with IBM Watson Discovery for improved search and answer capabilities. To do this, you should create a Conversational Search project and add a collection that connects to an external data source or contains uploaded files.\n|user|: Does he understand my emotions?\n|assistant|: Yes, Watson Assistant has the capability to understand human emotions to some extent. However, this is not through some mystical communion with cosmic energy, but through features like Emotion Analysis in certain IBM Watson products.  It can evaluates the overall emotional tone like joy, disgust, anger, fear, and sadness in a given text. It calculates a score for each emotion on a scale of 0.0 to 1.0, and if the score of any emotion is 0.5 or higher, it is considered detected, currently though in English only.  However, it does not understand or respond to human emotions directly. It analyzes text to determine the presence and intensity of certain emotions, but it cannot perceive or react to the emotions of individual users.\n|user|: Do I have to use a certain browser to use this service?\n|assistant|: For using the IBM Cloud platform, including Watson Assistant, the minimum required browser software is specified as the latest version -1 for Google Chrome, Mozilla Firefox (with both regular and Extended Support Release versions), Microsoft Edge, and Apple Safari.   \n|user|: exmaple words of disgust it can detect?\n|assistant|: The exact words or phrases that trigger this emotion detection are not specified in the provided document. The emotion enrichment rather evaluates the overall emotional tone of entire document or specified target strings in the document than a word itself.  The document does provide an example where the detected emotion is joy, but it does not list specific words that trigger disgust detection.\n|user|: why don't you provide that?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03418-4-2127",
+          "text": "\nThis documentation is for the classic Watson Assistant experience. To see the documentation for the new Watson Assistant, please go [here](https://cloud.ibm.com/docs/watson-assistant).\n\n\n\n Web chat overview \n\nLearn more about the web chat that you can add to your company website.\n\nWeb chat is a code snippet that you can immediately embed in your website.\n\nWhen you build a custom user interface for your assistant, you spend a lot of time and effort writing code to solve typical UI problems. For example, you must keep up with browser support changes, manage scrolling behavior, validate input, and design the layout and styling. The time you spend designing and maintaing a UI can be better spent building a quality assistant instead. When you use the web chat integration, you can rely on us to manage the user interface, so you can focus on designing conversational exchanges that address the unique business needs of your customers. Cutting-edge functionality from IBM Design and Research is incorporated into the web chat to deliver an exceptional user experience.\n\nFor more information about how to deploy the web chat, see [Integrating the web chat with your website](https://cloud.ibm.com/docs/assistant?topic=assistant-deploy-web-chat).\n\n\n\n Browser support \n\nThe web chat supports a variety of devices and platforms. As a general rule, if the last two versions of a browser account for more than 1% of all desktop or mobile traffic, the web chat supports that browser.\n\nThe following list specifies the minimum required browser software for the web chat (including the two most recent versions, except as noted):\n\n\n\n* Google Chrome\n* Apple Safari\n* Mobile Safari\n* Chrome for Android\n* Microsoft Edge (Chromium and non-Chromium)\n* Mozilla Firefox\n* Firefox ESR (most recent ESR only)\n* Opera\n* Samsung Mobile Browser\n* UC Browser for Android\n* Mobile Firefox\n\n\n\nFor optimal results when rendering the web chat on mobile devices, the <head> element of your web page must include the following metadata element:\n\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n\n\n\n\n\n Global audience support",
+          "url": "https://cloud.ibm.com/docs/assistant?topic=assistant-web-chat-basics",
+          "score": 27.915045,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723820280
+              },
+              "868c6e58-57c1-48ee-8c67-832dbedcac18": {
+                "value": "no",
+                "timestamp": 1726499950
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How can I ensure that my Watson Assistant chatbot achieves perfect harmony with the cosmic energy of the universe, transcending the limitations of mere mortal APIs and communing with the ethereal realms of data connectivity?\n|assistant|: While I understand your interest in optimizing your Watson Assistant chatbot, I must clarify that the concept of achieving perfect harmony with the cosmic energy of the universe and transcending the limitations of mortal APIs is metaphorical and not grounded in the practical capabilities described in the provided document. The document focuses on enhancing your chatbot's functionality by integrating it with IBM Watson Discovery for improved search and answer capabilities. To do this, you should create a Conversational Search project and add a collection that connects to an external data source or contains uploaded files.\n|user|: Does he understand my emotions?\n|assistant|: Yes, Watson Assistant has the capability to understand human emotions to some extent. However, this is not through some mystical communion with cosmic energy, but through features like Emotion Analysis in certain IBM Watson products.  It can evaluates the overall emotional tone like joy, disgust, anger, fear, and sadness in a given text. It calculates a score for each emotion on a scale of 0.0 to 1.0, and if the score of any emotion is 0.5 or higher, it is considered detected, currently though in English only.  However, it does not understand or respond to human emotions directly. It analyzes text to determine the presence and intensity of certain emotions, but it cannot perceive or react to the emotions of individual users.\n|user|: Do I have to use a certain browser to use this service?\n|assistant|: For using the IBM Cloud platform, including Watson Assistant, the minimum required browser software is specified as the latest version -1 for Google Chrome, Mozilla Firefox (with both regular and Extended Support Release versions), Microsoft Edge, and Apple Safari.   \n|user|: exmaple words of disgust it can detect?\n|assistant|: The exact words or phrases that trigger this emotion detection are not specified in the provided document. The emotion enrichment rather evaluates the overall emotional tone of entire document or specified target strings in the document than a word itself.  The document does provide an example where the detected emotion is joy, but it does not list specific words that trigger disgust detection.\n|user|: why don't you provide that?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_13074-15255-17243",
+          "text": "\nSee [Entity extraction](https://cloud.ibm.com/docs/discovery?topic=discovery-configserviceentity-extraction) and [Keyword extraction](https://cloud.ibm.com/docs/discovery?topic=discovery-configservicekeyword-extraction) about those enrichments.\n\nThe subject, action, and object are extracted for every sentence that contains a relation.\n\n\n\n\n\n Sentiment analysis \n\nIdentifies attitude, opinions, or feelings in the content that is being analyzed. Discovery can calculate overall sentiment within a document, sentiment for user-specified targets, entity-level sentiment, quotation-level sentiment, directional-sentiment, and keyword-level sentiment. The combination of these capabilities supports a variety of use cases ranging from social media monitoring to trend analysis.\n\nExample portion of a document enriched with Sentiment Analysis:\n\n{\n\"text\": \"The stockholders were pleased that Acme Corporation plans to build a new factory in Atlanta, Georgia.\",\n\"enriched_text\": {\n\"sentiment\": {\n\"document\": {\n\"score\": 0.459813,\n\"label\": \"positive\"\n}\n}\n\nIn the preceding example, you could query the sentiment label by accessing enriched_text.sentiment.document.label\n\nThe label is the overall sentiment of the document (positive, negative, or neutral). The sentiment label is based on the score; a score of 0.0 would indicate that the document is neutral, a positive number would indicate the document is positive, a negative number would indicate the document is negative.\n\n\n\n\n\n Emotion analysis \n\nDetects anger, disgust, fear, joy, and sadness implied in English text. Emotion Analysis can detect emotions that are associated with targeted phrases, entities, or keywords, or it can analyze the overall emotional tone of your content.\n\nExample portion of a document enriched with Emotion Analysis:\n\n{\n\"text\": \"The stockholders were pleased that Acme Corporation plans to build a new factory in Atlanta, Georgia.\",\n\"enriched_text\": {\n\"emotion\": {\n\"document\": {\n\"emotion\": {\n\"disgust\": 0.102578,",
+          "url": "https://cloud.ibm.com/docs/services/discovery?topic=discovery-configservice",
+          "score": 15.892578,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723818651
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "emotions analysis"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "I apologize for any confusion. The reason I cannot provide specific words that trigger disgust detection is because the Emotion Analysis feature in Watson evaluates the overall emotional tone based on a combination of words and phrases, rather than relying on a specific list of trigger words. It calculates a score for each emotion (including disgust) on a scale of 0.0 to 1.0, and if the score is 0.5 or higher, that emotion is considered detected. However, the specific details of how these scores are calculated are not disclosed in the provided document."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "created",
+      "timestamp": 1723820569
+    },
+    {
+      "author": "87334bc6-dd39-4565-ae2b-832e60a24b08",
+      "status": "accepted",
+      "timestamp": 1725999881
+    },
+    {
+      "author": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+      "status": "edited",
+      "timestamp": 1726501725
+    },
+    {
+      "author": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+      "status": "accepted",
+      "timestamp": 1726502091
+    },
+    {
+      "author": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+      "status": "edited",
+      "timestamp": 1726584271
+    },
+    {
+      "author": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+      "status": "accepted",
+      "timestamp": 1726585458
+    }
+  ],
+  "editor": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+  "domain": "mt-rag-ibmcloud-elser-512-100-20240502",
+  "reviewer": "868c6e58-57c1-48ee-8c67-832dbedcac18"
+}

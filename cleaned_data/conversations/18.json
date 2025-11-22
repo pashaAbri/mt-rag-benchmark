@@ -1,0 +1,848 @@
+{
+  "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-govt-elser-512-100-20240611",
+      "size": "49607"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"bool\": {\n    \"must\": {\n      \"text_expansion\": {\n        \"ml.tokens\": {\n          \"model_id\": \".elser_model_1\",\n          \"model_text\": \"${QUERY}\"\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "What are the MOXIE instrument's primary attributes and functionalities?",
+      "timestamp": 1722948626,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) is a Scale Model for a Future Big MOXIE, an instrument designed to help NASA prepare for human exploration of Mars. Its main job is to produce oxygen from the Martian carbon-dioxide atmosphere where less than 1% as much air on the surface as on Earth is present.  It will test a way for future explorers to produce oxygen for burning fuel and breathing. MOXIE is currently making 6-10 grams of oxygen per hour, but the Big MOXIE, would need to make 2,000 to 3,000 grams of oxygen per hour to support a crewed mission to Mars.",
+      "timestamp": 1722948636,
+      "contexts": [
+        {
+          "document_id": "eb89f1b8e630dca6-9947-11907",
+          "text": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars\nThe \"solid oxide\" in a solid oxide electrolyzer cell is a ceramic made mostly of zirconia that is heated to 1,472 degrees Fahrenheit (800 degrees Celsius) inside a special miniature oven. When MOXIE runs, it first has to heat up that ceramic to its operating temperature. That takes about two hours. The rover batteries have enough available charge left to make oxygen for about an hour after that. During that hour, we sometimes change the voltage or the compressor speed to learn more about the instrument.\nWhen MOXIE runs, very little else gets done on Perseverance. There isn't enough power left to drive, or to abrade rocks, or even to run the other instruments for very long. So MOXIE doesn't run very often, maybe once every one or two months.\n\nWhat do we hope to learn from MOXIE?\n\nMOXIE's main job is to show that we can rely on this technology to keep future crews of astronauts alive and return them home safely. That's a tall order. But more than that, we hope to learn a lot of technical details about how to build that much larger future MOXIE system. For that purpose, we include in MOXIE lots of sensors and controls that help us learn about how well MOXIE is doing and how to make it better.\n\nWhat would a full-size MOXIE look like?\n\nEarth and Mars line up for a trip every 26 months. When we send an astronaut crew to Mars, one idea is to send all the things they'll need \u2013 a place to live, rovers, a power plant, and maybe a \"Big MOXIE\" \u2013 on one launch opportunity, then send the astronauts on the next opportunity, 26 months later. If we do that, then the base would be in place for about 20 months before the astronauts start their trip. The goal of a Big MOXIE would be to make and store all the oxygen that the astronaut and their rocket would need for their mission before they even launch. That means the Big MOXIE would need to make 2,000 to 3,000 grams of oxygen per hour, compared to the 6-10 grams that the current MOXIE is making.",
+          "title": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars",
+          "url": "https://mars.nasa.gov/mars2020/spacecraft/instruments/moxie/",
+          "score": 11.014186,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1722948955
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What are the MOXIE instrument's primary attributes and functionalities?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "eb89f1b8e630dca6-2-1656",
+          "text": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars\nMars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars\n\nSkip to main content\n\nMars\n\n2020 Mission\nPerseverance Rover\n\nmission\n\nOverview\nScience\nMars Rock Samples\nMars Weather\nWhere is Perseverance?\nExplore with Perseverance\nLanding Site\nMission Team\nFAQs\n\ntimeline\n\nOverview\nPre-Launch\nLaunch\nCruise\nLanding\nSurface Operations\n\nspacecraft\n\nOverview\nRover\nInstruments\nRocket\n\nnews\n\nNews\nNewsroom\nRover Updates\nWatch Online\n\nmultimedia\n\nImages\nRaw Images\nVideos\nAudio\nMore Resources\n\nparticipate\n\nOverview\nYou've Got Perseverance!\nRoving With Perseverance\nSend Your Name to Mars\nSounds of Mars\nMars Photo Booth\n#CountdownToMars\nName the Rover\n\nAll Mars\n\nMars Exploration Home\n\nMars Sample Return\nMars Helicopter\nMars Science Laboratory\nMAVEN\nMars Reconnaissance Orbiter\nMars Odyssey\n\nInSight Mission\nMars Exploration Rovers\n\nSearch\n\nSearch\n\nSpacecraft\n\u203a Instruments\n\nSummary\nMastcam-Z \nMEDA \nMOXIE \nPIXL \nRIMFAX \nSHERLOC \nSuperCam \n\nSummary\nFor Scientists\n\nMOXIE Lowered into Rover: Technicians in the clean room are carefully lowering the Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) instrument into the belly of the Perseverance rover. Credit: NASA/JPL-Caltech. Full image and caption \u203a\n\nMOXIE\nThe Mars Oxygen In-Situ Resource Utilization Experiment, or MOXIE, is helping NASA prepare for human exploration of Mars. MOXIE will test a way for future explorers to produce oxygen from the Martian atmosphere for burning fuel and breathing.\nTech Specs\n\nMain Job\nTo produce oxygen from the Martian carbon-dioxide atmosphere\n\nLocation\nInside the rover (front, right side)\n\nMass\nAbout 37.7 pounds (17.1 kilograms) on Earth\n\nWeight",
+          "title": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars",
+          "url": "https://mars.nasa.gov/mars2020/spacecraft/instruments/moxie/",
+          "score": 10.96041,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1722948953
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What are the MOXIE instrument's primary attributes and functionalities?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "eb89f1b8e630dca6-11249-13070",
+          "text": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars\nWhen we send an astronaut crew to Mars, one idea is to send all the things they'll need \u2013 a place to live, rovers, a power plant, and maybe a \"Big MOXIE\" \u2013 on one launch opportunity, then send the astronauts on the next opportunity, 26 months later. If we do that, then the base would be in place for about 20 months before the astronauts start their trip. The goal of a Big MOXIE would be to make and store all the oxygen that the astronaut and their rocket would need for their mission before they even launch. That means the Big MOXIE would need to make 2,000 to 3,000 grams of oxygen per hour, compared to the 6-10 grams that the current MOXIE is making. And it would need to do that all day and night, without stopping, for most of the 20 months.\nWe expect that the astronauts would need at least 25 kilowatts of power for their mission, and that the Big MOXIE relies on being able to use that power plant for making oxygen until the astronauts arrive. We also expect Big MOXIE to be the size of a small chest freezer and to weigh about 1 ton.\n\nGet the Mars Newsletter\n\nSubscribe to newsletter\n\nFollow the Mission\n\nAbout The Mission\n\nOverview\nScience\nMars Rock Samples\nMars Weather\nWhere is Perseverance?\nExplore with Perseverance\nLanding Site\nMission Team\nFAQs\n\nSpacecraft\n\nOverview\nRover\nInstruments\nRocket\n\nTimeline\n\nOverview\nPre-Launch\nLaunch\nCruise\nLanding\nSurface Operations\n\nNews\n\nNews\nNewsroom\nRover Updates\nWatch Online\n\nMultimedia\n\nImages\nRaw Images\nVideos\nAudio\nMore Resources\n\nParticipate\n\nOverview\nYou've Got Perseverance!\nRoving With Perseverance\nSend Your Name to Mars\nSounds of Mars\nMars Photo Booth\n#CountdownToMars\nName the Rover\n\nAll Mars\n\nMars Exploration Home\nMars Sample Return\nMars Science Laboratory\nMAVEN\nMars Reconnaissance Orbiter\nMars Odyssey\nInSight Mission\nMars Exploration Rovers\n\nNASA",
+          "title": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars",
+          "url": "https://mars.nasa.gov/mars2020/spacecraft/instruments/moxie/",
+          "score": 10.402605,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1722948950
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What are the MOXIE instrument's primary attributes and functionalities?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "eb89f1b8e630dca6-5670-7525",
+          "text": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars\nThat destructive process is called \"coking.\" The carbon deposit itself is called \u2013 coke.\n\nAll About MOXIE\n\nWhat does MOXIE do?\n\nCompared to what we're used to on Earth, the air on Mars is very thin. In fact, there is less than 1% as much air on the surface of Mars as on Earth, and visiting Mars would be like flying in a balloon 100,00 feet up in the air. And not only is the air thin, but it's made almost entirely out of carbon dioxide (CO2).\nOn Earth, we can thank the myriad forms of life for the oxygen in our atmosphere that our body greedily absorbs with every breath we take. All around us, trees and plants are busy scrubbing CO2 out of our atmosphere and turning it into useful oxygen, at the same time taking up water and turning it into the chemicals that the plants need to live. Mars isn't so fortunate, so if we want oxygen on Mars we'll have to make it ourselves. That's what MOXIE does.\n\nWhat is ISRU?\n\nThe \"I\" in MOXIE stands for ISRU, or In Situ Resource Utilization. \"In Situ\" refers to the stuff that's there \u2013 on Mars in this case. Resource Utilization means using that stuff for some productive purpose, usually to make something that we would otherwise have to bring with us. In other words, living off the land (LOL). Maybe LOL would have been a better acronym than ISRU, but that's already been taken! One example of ISRU might be making bricks out of Martian soil, and using the bricks for buildings. Another example is making oxygen out of the thin Martian air.\n\nHow does MOXIE work?\n\nMOXIE is an example of a \"solid oxide electrolyzer cell,\" which is a fuel cell that runs in reverse. In a fuel cell, fuel and oxygen react to make energy (electricity) and a stable chemical product. The most common example is the hydrogen fuel cell, used in some automobiles, which combines hydrogen and oxygen to make water and electricity.",
+          "title": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars",
+          "url": "https://mars.nasa.gov/mars2020/spacecraft/instruments/moxie/",
+          "score": 12.817719,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1722951542
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "MOXIE  attributes and functionality"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "eb89f1b8e630dca6-2585-4611",
+          "text": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars\nOn Earth, we are always getting energy from the reaction between oxygen and whatever fuel we are using \u2014 whether it's a log in a campfire or gasoline in a car tank. The oxygen weighs several times more than the fuel it burns, which is not an issue on our planet. However, when we have to bring it with us to other locations in space, we need to think a lot about that weight and other factors.\n\nMOXIE Makes Oxygen 'Out of Thin Air'\nFuel needs oxygen to burn\u2014for example, on Earth, oxygen is constantly being converted to carbon dioxide by animals, or fires, or other chemical reactions. Plants and trees use water and sunlight to convert the carbon dioxide back to oxygen, replenishing the air. On Mars, MOXIE also makes oxygen from carbon dioxide, about as much as a modest-sized tree, though using a very different process.\n\nMOXIE is a Scale Model for a Future Big MOXIE\nTo launch from Mars, a small crew of human explorers will need 25 to 30 tons of oxygen, or about the weight of a tractor-trailer! To make that much oxygen would require a 25,000 to 30,000 watt power plant. The Perseverance power system only provides about 100 watts, so MOXIE can only make a small fraction of the oxygen that a future \"Big MOXIE\" would need to make.\n\nMOXIE is a 'Tech Demo'\nNASA uses technical demonstrations, or tech demos, when it's not enough to just test a critical technology in the laboratory and it needs to be proven on an actual mission.\n\nWhere Is MOXIE Located?\n\nMichael Hecht\nPrincipal Investigator\n\nMassachusetts Institute of Technology,\nCambridge, Massachusetts\n\nDid You Know?\nMOXIE uses a device called an \"electrolyzer\" to make oxygen from the carbon dioxide in the air. An electrolyzer is a close cousin to a fuel cell, which is a device we use to directly make electricity from fuel and oxygen. You can think of MOXIE as a fuel cell running in reverse. \n\nFor Scientists\nNASA is preparing for human exploration of Mars, and the MOXIE investigation on the Mars 2020 mission aims to address key knowledge gaps.\nRead More \u203a",
+          "title": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars",
+          "url": "https://mars.nasa.gov/mars2020/spacecraft/instruments/moxie/",
+          "score": 13.134439,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1722951536
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "MOXIE  attributes and functionality"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) is an instrument designed to help NASA prepare for human exploration of Mars. Its main job is to produce oxygen from the Martian carbon-dioxide atmosphere. MOXIE has a mass of about 37.7 pounds (17.1 kilograms) and is located inside the Perseverance rover. It will test a way for future explorers to produce oxygen for burning fuel and breathing. MOXIE is currently making 6-10 grams of oxygen per hour, but a larger version, called Big MOXIE, would need to make 2,000 to 3,000 grams of oxygen per hour to support a crewed mission to Mars."
+    },
+    {
+      "speaker": "user",
+      "text": "Is there H on Mars to make water with O?",
+      "timestamp": 1722951794,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Mars' atmosphere is mostly carbon dioxide, that makes up about 96%, argon, and nitrogen, with only 0.13% oxygen.The only information about water (H2O) on Mars is that it could be found if travel to the far north or south to find ice, or to mine for ice buried deep in the ground.",
+      "timestamp": 1722951799,
+      "contexts": [
+        {
+          "document_id": "eb89f1b8e630dca6-1227-3016",
+          "text": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars\nThe Mars Oxygen In-Situ Resource Utilization Experiment, or MOXIE, is helping NASA prepare for human exploration of Mars. MOXIE will test a way for future explorers to produce oxygen from the Martian atmosphere for burning fuel and breathing.\nTech Specs\n\nMain Job\nTo produce oxygen from the Martian carbon-dioxide atmosphere\n\nLocation\nInside the rover (front, right side)\n\nMass\nAbout 37.7 pounds (17.1 kilograms) on Earth\n\nWeight\n37.7 pounds on Earth, 14.14 pounds on Mars\n\nPower\n300 watts\n\nVolume\n9.4 x 9.4 x 12.2 inches\n(23.9 x 23.9 x 30.9 centimeters)\n\nOxygen Production Rate\nUp to 0.022 pounds per hour \n(up to 10 grams per hour)\n\nOperation Time\nApproximately one hour of oxygen (O2) production per experiment, scheduled intermittently over the duration of the mission.\n\n\"To support a human mission to Mars, we have to bring a lot of stuff from Earth, like computers, spacesuits, and habitats. But oxygen? If you can make it there, go for it \u2014 you're way ahead of the game.\" \n - Jeff Hoffman, MOXIE Deputy Principal Investigator\n\n5 Things to Know\n\nOxygen is Rare on Mars\nThere is less than 1% of air on Mars as there is on Earth, and carbon dioxide makes up about 96% of it on Mars. Oxygen is only 0.13%, compared to 21% in Earth's atmosphere. If we want oxygen on Mars, we either have to bring it along, or make it ourselves.\n\nFuel Needs Oxygen to Burn\nOn Earth, we are always getting energy from the reaction between oxygen and whatever fuel we are using \u2014 whether it's a log in a campfire or gasoline in a car tank. The oxygen weighs several times more than the fuel it burns, which is not an issue on our planet. However, when we have to bring it with us to other locations in space, we need to think a lot about that weight and other factors.\n\nMOXIE Makes Oxygen 'Out of Thin Air'",
+          "title": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars",
+          "url": "https://mars.nasa.gov/mars2020/spacecraft/instruments/moxie/",
+          "score": 49.183228,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1722953403
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What are the MOXIE instrument's primary attributes and functionalities?\n|assistant|: The Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) is a Scale Model for a Future Big MOXIE, an instrument designed to help NASA prepare for human exploration of Mars. Its main job is to produce oxygen from the Martian carbon-dioxide atmosphere where less than 1% as much air on the surface as on Earth is present.  It will test a way for future explorers to produce oxygen for burning fuel and breathing. MOXIE is currently making 6-10 grams of oxygen per hour, but the Big MOXIE, would need to make 2,000 to 3,000 grams of oxygen per hour to support a crewed mission to Mars.\n|user|: Is there H on Mars to make water with O?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "eb89f1b8e630dca6-7099-9072",
+          "text": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars\nAnother example is making oxygen out of the thin Martian air.\n\nHow does MOXIE work?\n\nMOXIE is an example of a \"solid oxide electrolyzer cell,\" which is a fuel cell that runs in reverse. In a fuel cell, fuel and oxygen react to make energy (electricity) and a stable chemical product. The most common example is the hydrogen fuel cell, used in some automobiles, which combines hydrogen and oxygen to make water and electricity. A hydrogen cell of this type, in contrast, would start with the water and use electricity to turn it back into hydrogen and oxygen. The two devices, the fuel cell and the electrolyzer, are nearly identical devices, operated in a very different way.\nUsing water to make oxygen on Mars would be a great idea if we had easy access to the water. But to get water, we would have to travel to the far north or south to find ice, or to mine for ice buried deep in the ground. Fortunately, though, another source of oxygen is all around us, in the form of the carbon dioxide that makes up most of the Martian air. So instead of using hydrogen, MOXIE is an example of a solid oxide electrolyzer cell that uses carbon dioxide to make the gasses carbon monoxide and oxygen. \n\nWhy will we need oxygen on Mars?\n\nThe first human crew to go to Mars will need a lot of oxygen to breathe, as much as 2 to 3 tons. Our bodies use that oxygen to burn our fuel, which we call \"food,\" in order to make the energy that keeps us going all day. But it's not just humans who need oxygen. Nearly everything that uses fuel to make energy uses oxygen to burn that fuel, whether it's a car, a campfire, or a rocket. And it turns out that the oxygen, which on Earth we get for free from the air, actually weighs a lot more than the fuel itself.\nWhen we send the first crew to Mars, we would need to think about how to bring them home at the end of their visit. And the single biggest user of oxygen in their entire stay on Mars will be the rocket that takes them back to orbit.",
+          "title": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars",
+          "url": "https://mars.nasa.gov/mars2020/spacecraft/instruments/moxie/",
+          "score": 43.980278,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1722953395
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What are the MOXIE instrument's primary attributes and functionalities?\n|assistant|: The Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) is a Scale Model for a Future Big MOXIE, an instrument designed to help NASA prepare for human exploration of Mars. Its main job is to produce oxygen from the Martian carbon-dioxide atmosphere where less than 1% as much air on the surface as on Earth is present.  It will test a way for future explorers to produce oxygen for burning fuel and breathing. MOXIE is currently making 6-10 grams of oxygen per hour, but the Big MOXIE, would need to make 2,000 to 3,000 grams of oxygen per hour to support a crewed mission to Mars.\n|user|: Is there H on Mars to make water with O?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "306e7cacc68db8e2-2198-4184",
+          "text": "Mars - NASA Science\nIt\u2019s the only planet we know of inhabited entirely by robots.All About MarsRead MoreSmall WorldMars is 53% smaller than Earth.Fourth RockMars is 1.52 AU from the Sun. Earth = 1.More TimeA Martian day is a little longer than Earth's; a Mars year is almost two Earth years.Rocky PlanetMars' surface has been altered by volcanoes, impacts, winds, and crustal movement.Bring a SpacesuitMars' atmosphere is mostly carbon dioxide, argon, and nitrogen.Two MoonsPhobos and Deimos are small compared to the planet.RinglessMars has no rings.Many MissionsThe first success was NASA's Mariner 4 flyby in 1965,The Search for LifeMissions are determining Mars' past and future potential for life.The Red PlanetIron minerals in the Martian soil oxidize, or rust, causing the soil and atmosphere to look red.Mars OverviewMars is no place for the faint-hearted. It\u2019s dry, rocky, and bitter cold. The fourth planet from the Sun, Mars, is one of Earth's two closest planetary neighbors (Venus is the other). Mars is one of the easiest planets to spot in the night sky \u2013 it looks like a bright red point of light.Despite being inhospitable to humans, robotic explorers \u2013 like NASA's Perseverance rover \u2013 are serving as pathfinders to eventually get humans to the surface of the Red Planet.Why Do We Go?Mars is one of the most explored bodies in our solar system, and it's the only planet where we've sent rovers to explore the alien landscape. NASA missions have found lots of evidence that Mars was much wetter and warmer, with a thicker atmosphere, billions of years ago.Explore with UsEarth-Mars Comparison: This composite image, from NASA Galileo and Mars Global Survey orbiters, of Earth and Mars was created to allow viewers to gain a better understanding of the relative sizes of the two planets.JPLMars Relay NetworkUnable to render the provided sourceSee the current, past, and future communication between Mars orbiters, Mars landers and rovers, using real data from the Mars missions themselves.",
+          "title": "Mars - NASA Science",
+          "url": "https://mars.nasa.gov/#red_planet",
+          "score": 17.083055,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1722953398
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Mars' atmosphere"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "According to the information provided, there is no mention of Hydrogen (H) on Mars to make water with the oxygen produced by MOXIE. MOXIE produces oxygen by extracting it from the carbon dioxide in the Martian atmosphere, not by combining it with hydrogen. Water is not used in the process."
+    },
+    {
+      "speaker": "user",
+      "text": "MOXIE a tree?",
+      "timestamp": 1722954301,
+      "enrichments": {
+        "Question Type": [
+          "Comparative"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "No, MOXIE does not work like a tree. It produces oxygen from the Martian carbon-dioxide atmosphere using a device called an \"electrolyzer,\" a close cousin to a fuel cell that is running in reverse. On Earth, trees and plants absorb carbon dioxide and release oxygen through photosynthesis, but MOXIE uses a different process to achieve the same result.",
+      "timestamp": 1722954304,
+      "contexts": [
+        {
+          "document_id": "eb89f1b8e630dca6-1227-3016",
+          "text": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars\nThe Mars Oxygen In-Situ Resource Utilization Experiment, or MOXIE, is helping NASA prepare for human exploration of Mars. MOXIE will test a way for future explorers to produce oxygen from the Martian atmosphere for burning fuel and breathing.\nTech Specs\n\nMain Job\nTo produce oxygen from the Martian carbon-dioxide atmosphere\n\nLocation\nInside the rover (front, right side)\n\nMass\nAbout 37.7 pounds (17.1 kilograms) on Earth\n\nWeight\n37.7 pounds on Earth, 14.14 pounds on Mars\n\nPower\n300 watts\n\nVolume\n9.4 x 9.4 x 12.2 inches\n(23.9 x 23.9 x 30.9 centimeters)\n\nOxygen Production Rate\nUp to 0.022 pounds per hour \n(up to 10 grams per hour)\n\nOperation Time\nApproximately one hour of oxygen (O2) production per experiment, scheduled intermittently over the duration of the mission.\n\n\"To support a human mission to Mars, we have to bring a lot of stuff from Earth, like computers, spacesuits, and habitats. But oxygen? If you can make it there, go for it \u2014 you're way ahead of the game.\" \n - Jeff Hoffman, MOXIE Deputy Principal Investigator\n\n5 Things to Know\n\nOxygen is Rare on Mars\nThere is less than 1% of air on Mars as there is on Earth, and carbon dioxide makes up about 96% of it on Mars. Oxygen is only 0.13%, compared to 21% in Earth's atmosphere. If we want oxygen on Mars, we either have to bring it along, or make it ourselves.\n\nFuel Needs Oxygen to Burn\nOn Earth, we are always getting energy from the reaction between oxygen and whatever fuel we are using \u2014 whether it's a log in a campfire or gasoline in a car tank. The oxygen weighs several times more than the fuel it burns, which is not an issue on our planet. However, when we have to bring it with us to other locations in space, we need to think a lot about that weight and other factors.\n\nMOXIE Makes Oxygen 'Out of Thin Air'",
+          "title": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars",
+          "url": "https://mars.nasa.gov/mars2020/spacecraft/instruments/moxie/",
+          "score": 49.160957,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1722955009
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What are the MOXIE instrument's primary attributes and functionalities?\n|assistant|: The Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) is a Scale Model for a Future Big MOXIE, an instrument designed to help NASA prepare for human exploration of Mars. Its main job is to produce oxygen from the Martian carbon-dioxide atmosphere where less than 1% as much air on the surface as on Earth is present.  It will test a way for future explorers to produce oxygen for burning fuel and breathing. MOXIE is currently making 6-10 grams of oxygen per hour, but the Big MOXIE, would need to make 2,000 to 3,000 grams of oxygen per hour to support a crewed mission to Mars.\n|user|: Is there H on Mars to make water with O?\n|assistant|: Mars' atmosphere is mostly carbon dioxide, that makes up about 96%, argon, and nitrogen, with only 0.13% oxygen. There is no explicit mention of hydrogen (H) or water (H2O) on Mars on the given document.\n|user|: MOXIE a tree?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "eb89f1b8e630dca6-5670-7525",
+          "text": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars\nThat destructive process is called \"coking.\" The carbon deposit itself is called \u2013 coke.\n\nAll About MOXIE\n\nWhat does MOXIE do?\n\nCompared to what we're used to on Earth, the air on Mars is very thin. In fact, there is less than 1% as much air on the surface of Mars as on Earth, and visiting Mars would be like flying in a balloon 100,00 feet up in the air. And not only is the air thin, but it's made almost entirely out of carbon dioxide (CO2).\nOn Earth, we can thank the myriad forms of life for the oxygen in our atmosphere that our body greedily absorbs with every breath we take. All around us, trees and plants are busy scrubbing CO2 out of our atmosphere and turning it into useful oxygen, at the same time taking up water and turning it into the chemicals that the plants need to live. Mars isn't so fortunate, so if we want oxygen on Mars we'll have to make it ourselves. That's what MOXIE does.\n\nWhat is ISRU?\n\nThe \"I\" in MOXIE stands for ISRU, or In Situ Resource Utilization. \"In Situ\" refers to the stuff that's there \u2013 on Mars in this case. Resource Utilization means using that stuff for some productive purpose, usually to make something that we would otherwise have to bring with us. In other words, living off the land (LOL). Maybe LOL would have been a better acronym than ISRU, but that's already been taken! One example of ISRU might be making bricks out of Martian soil, and using the bricks for buildings. Another example is making oxygen out of the thin Martian air.\n\nHow does MOXIE work?\n\nMOXIE is an example of a \"solid oxide electrolyzer cell,\" which is a fuel cell that runs in reverse. In a fuel cell, fuel and oxygen react to make energy (electricity) and a stable chemical product. The most common example is the hydrogen fuel cell, used in some automobiles, which combines hydrogen and oxygen to make water and electricity.",
+          "title": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars",
+          "url": "https://mars.nasa.gov/mars2020/spacecraft/instruments/moxie/",
+          "score": 44.22265,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1722955003
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What are the MOXIE instrument's primary attributes and functionalities?\n|assistant|: The Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) is a Scale Model for a Future Big MOXIE, an instrument designed to help NASA prepare for human exploration of Mars. Its main job is to produce oxygen from the Martian carbon-dioxide atmosphere where less than 1% as much air on the surface as on Earth is present.  It will test a way for future explorers to produce oxygen for burning fuel and breathing. MOXIE is currently making 6-10 grams of oxygen per hour, but the Big MOXIE, would need to make 2,000 to 3,000 grams of oxygen per hour to support a crewed mission to Mars.\n|user|: Is there H on Mars to make water with O?\n|assistant|: Mars' atmosphere is mostly carbon dioxide, that makes up about 96%, argon, and nitrogen, with only 0.13% oxygen. There is no explicit mention of hydrogen (H) or water (H2O) on Mars on the given document.\n|user|: MOXIE a tree?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "eb89f1b8e630dca6-7099-9072",
+          "text": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars\nAnother example is making oxygen out of the thin Martian air.\n\nHow does MOXIE work?\n\nMOXIE is an example of a \"solid oxide electrolyzer cell,\" which is a fuel cell that runs in reverse. In a fuel cell, fuel and oxygen react to make energy (electricity) and a stable chemical product. The most common example is the hydrogen fuel cell, used in some automobiles, which combines hydrogen and oxygen to make water and electricity. A hydrogen cell of this type, in contrast, would start with the water and use electricity to turn it back into hydrogen and oxygen. The two devices, the fuel cell and the electrolyzer, are nearly identical devices, operated in a very different way.\nUsing water to make oxygen on Mars would be a great idea if we had easy access to the water. But to get water, we would have to travel to the far north or south to find ice, or to mine for ice buried deep in the ground. Fortunately, though, another source of oxygen is all around us, in the form of the carbon dioxide that makes up most of the Martian air. So instead of using hydrogen, MOXIE is an example of a solid oxide electrolyzer cell that uses carbon dioxide to make the gasses carbon monoxide and oxygen. \n\nWhy will we need oxygen on Mars?\n\nThe first human crew to go to Mars will need a lot of oxygen to breathe, as much as 2 to 3 tons. Our bodies use that oxygen to burn our fuel, which we call \"food,\" in order to make the energy that keeps us going all day. But it's not just humans who need oxygen. Nearly everything that uses fuel to make energy uses oxygen to burn that fuel, whether it's a car, a campfire, or a rocket. And it turns out that the oxygen, which on Earth we get for free from the air, actually weighs a lot more than the fuel itself.\nWhen we send the first crew to Mars, we would need to think about how to bring them home at the end of their visit. And the single biggest user of oxygen in their entire stay on Mars will be the rocket that takes them back to orbit.",
+          "title": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars",
+          "url": "https://mars.nasa.gov/mars2020/spacecraft/instruments/moxie/",
+          "score": 43.70174,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1722954996
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What are the MOXIE instrument's primary attributes and functionalities?\n|assistant|: The Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) is a Scale Model for a Future Big MOXIE, an instrument designed to help NASA prepare for human exploration of Mars. Its main job is to produce oxygen from the Martian carbon-dioxide atmosphere where less than 1% as much air on the surface as on Earth is present.  It will test a way for future explorers to produce oxygen for burning fuel and breathing. MOXIE is currently making 6-10 grams of oxygen per hour, but the Big MOXIE, would need to make 2,000 to 3,000 grams of oxygen per hour to support a crewed mission to Mars.\n|user|: Is there H on Mars to make water with O?\n|assistant|: Mars' atmosphere is mostly carbon dioxide, that makes up about 96%, argon, and nitrogen, with only 0.13% oxygen. There is no explicit mention of hydrogen (H) or water (H2O) on Mars on the given document.\n|user|: MOXIE a tree?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "eb89f1b8e630dca6-4165-6026",
+          "text": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars\nMOXIE uses a device called an \"electrolyzer\" to make oxygen from the carbon dioxide in the air. An electrolyzer is a close cousin to a fuel cell, which is a device we use to directly make electricity from fuel and oxygen. You can think of MOXIE as a fuel cell running in reverse. \n\nFor Scientists\nNASA is preparing for human exploration of Mars, and the MOXIE investigation on the Mars 2020 mission aims to address key knowledge gaps.\nRead More \u203a\n\nThe Story Behind the Name\nMOXIE stands for the Mars OXygen ISRU Experiment. ISRU is another acronym, In Situ Resource Utilization, which is a technical way of describing what most of us call \"living off the land.\"\nThe word \"moxie,\" used to describe someone with spunk and audacity, came from the soft drink of the same name. The soft drink, Moxie, was invented in the late 1800s in Lowell, Massachusetts, not far from the M.I.T. Haystack Observatory where the MOXIE principal investigator works. You can still buy Moxie in New England, and it's considered the official drink of the state of Maine.\nThe connection with soft drinks doesn't end there. According to some accounts, the Moxie company was the first in the U.S. to use carbon dioxide (CO2) to make a beverage fizzy. On Mars, MOXIE is the first to use carbon dioxide to make \u2013 well, anything at all. Another connection is more technical. Whenever we run MOXIE, we need to be very careful with the settings to make sure we only produce carbon monoxide (CO), and not pure carbon, which would ruin it. That destructive process is called \"coking.\" The carbon deposit itself is called \u2013 coke.\n\nAll About MOXIE\n\nWhat does MOXIE do?\n\nCompared to what we're used to on Earth, the air on Mars is very thin. In fact, there is less than 1% as much air on the surface of Mars as on Earth, and visiting Mars would be like flying in a balloon 100,00 feet up in the air.",
+          "title": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars",
+          "url": "https://mars.nasa.gov/mars2020/spacecraft/instruments/moxie/",
+          "score": 13.921484,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1722954991
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "MOXIE"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "No, MOXIE is not a tree. It is a scientific instrument developed by NASA to produce oxygen from the Martian carbon-dioxide atmosphere. On Earth, trees and plants absorb carbon dioxide and release oxygen through photosynthesis, but MOXIE is a technological device that uses a different process to achieve the same result."
+    },
+    {
+      "speaker": "user",
+      "text": "right, there is no water on Mars. silly thoughts...well, Moxie sounds familiar like a beverage?",
+      "timestamp": 1722955178,
+      "enrichments": {
+        "Question Type": [
+          "Factoid",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, you're correct. The word \"moxie,\" used to describe someone with spunk and audacity, came from the soft drink of the same name. The soft drink, Moxie, was invented in the late 1800s in Lowell, Massachusetts, not far from the M.I.T. Haystack Observatory where the MOXIE principal investigator works.  You can still buy Moxie in New England, and it's considered the official drink of the state of Maine. The connection with soft drinks doesn't end there. According to some accounts, the Moxie company was the first in the U.S. to use carbon dioxide (CO2) to make a beverage fizzy.  MOXIE is the first to use carbon dioxide on Mars.",
+      "timestamp": 1722955183,
+      "contexts": [
+        {
+          "document_id": "eb89f1b8e630dca6-1227-3016",
+          "text": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars\nThe Mars Oxygen In-Situ Resource Utilization Experiment, or MOXIE, is helping NASA prepare for human exploration of Mars. MOXIE will test a way for future explorers to produce oxygen from the Martian atmosphere for burning fuel and breathing.\nTech Specs\n\nMain Job\nTo produce oxygen from the Martian carbon-dioxide atmosphere\n\nLocation\nInside the rover (front, right side)\n\nMass\nAbout 37.7 pounds (17.1 kilograms) on Earth\n\nWeight\n37.7 pounds on Earth, 14.14 pounds on Mars\n\nPower\n300 watts\n\nVolume\n9.4 x 9.4 x 12.2 inches\n(23.9 x 23.9 x 30.9 centimeters)\n\nOxygen Production Rate\nUp to 0.022 pounds per hour \n(up to 10 grams per hour)\n\nOperation Time\nApproximately one hour of oxygen (O2) production per experiment, scheduled intermittently over the duration of the mission.\n\n\"To support a human mission to Mars, we have to bring a lot of stuff from Earth, like computers, spacesuits, and habitats. But oxygen? If you can make it there, go for it \u2014 you're way ahead of the game.\" \n - Jeff Hoffman, MOXIE Deputy Principal Investigator\n\n5 Things to Know\n\nOxygen is Rare on Mars\nThere is less than 1% of air on Mars as there is on Earth, and carbon dioxide makes up about 96% of it on Mars. Oxygen is only 0.13%, compared to 21% in Earth's atmosphere. If we want oxygen on Mars, we either have to bring it along, or make it ourselves.\n\nFuel Needs Oxygen to Burn\nOn Earth, we are always getting energy from the reaction between oxygen and whatever fuel we are using \u2014 whether it's a log in a campfire or gasoline in a car tank. The oxygen weighs several times more than the fuel it burns, which is not an issue on our planet. However, when we have to bring it with us to other locations in space, we need to think a lot about that weight and other factors.\n\nMOXIE Makes Oxygen 'Out of Thin Air'",
+          "title": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars",
+          "url": "https://mars.nasa.gov/mars2020/spacecraft/instruments/moxie/",
+          "score": 48.10083,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1722955754
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What are the MOXIE instrument's primary attributes and functionalities?\n|assistant|: The Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) is a Scale Model for a Future Big MOXIE, an instrument designed to help NASA prepare for human exploration of Mars. Its main job is to produce oxygen from the Martian carbon-dioxide atmosphere where less than 1% as much air on the surface as on Earth is present.  It will test a way for future explorers to produce oxygen for burning fuel and breathing. MOXIE is currently making 6-10 grams of oxygen per hour, but the Big MOXIE, would need to make 2,000 to 3,000 grams of oxygen per hour to support a crewed mission to Mars.\n|user|: Is there H on Mars to make water with O?\n|assistant|: Mars' atmosphere is mostly carbon dioxide, that makes up about 96%, argon, and nitrogen, with only 0.13% oxygen. There is no explicit mention of hydrogen (H) or water (H2O) on Mars on the given document.\n|user|: MOXIE a tree?\n|assistant|: No, MOXIE does not work like a tree. It produces oxygen from the Martian carbon-dioxide atmosphere using a device called an \"electrolyzer,\" a close cousin to a fuel cell that is running in reverse. On Earth, trees and plants absorb carbon dioxide and release oxygen through photosynthesis, but MOXIE uses a different process to achieve the same result.\n|user|: right, there is no water on Mars. silly thoughts...well, Moxie sounds familiar like a beverage?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "eb89f1b8e630dca6-5670-7525",
+          "text": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars\nThat destructive process is called \"coking.\" The carbon deposit itself is called \u2013 coke.\n\nAll About MOXIE\n\nWhat does MOXIE do?\n\nCompared to what we're used to on Earth, the air on Mars is very thin. In fact, there is less than 1% as much air on the surface of Mars as on Earth, and visiting Mars would be like flying in a balloon 100,00 feet up in the air. And not only is the air thin, but it's made almost entirely out of carbon dioxide (CO2).\nOn Earth, we can thank the myriad forms of life for the oxygen in our atmosphere that our body greedily absorbs with every breath we take. All around us, trees and plants are busy scrubbing CO2 out of our atmosphere and turning it into useful oxygen, at the same time taking up water and turning it into the chemicals that the plants need to live. Mars isn't so fortunate, so if we want oxygen on Mars we'll have to make it ourselves. That's what MOXIE does.\n\nWhat is ISRU?\n\nThe \"I\" in MOXIE stands for ISRU, or In Situ Resource Utilization. \"In Situ\" refers to the stuff that's there \u2013 on Mars in this case. Resource Utilization means using that stuff for some productive purpose, usually to make something that we would otherwise have to bring with us. In other words, living off the land (LOL). Maybe LOL would have been a better acronym than ISRU, but that's already been taken! One example of ISRU might be making bricks out of Martian soil, and using the bricks for buildings. Another example is making oxygen out of the thin Martian air.\n\nHow does MOXIE work?\n\nMOXIE is an example of a \"solid oxide electrolyzer cell,\" which is a fuel cell that runs in reverse. In a fuel cell, fuel and oxygen react to make energy (electricity) and a stable chemical product. The most common example is the hydrogen fuel cell, used in some automobiles, which combines hydrogen and oxygen to make water and electricity.",
+          "title": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars",
+          "url": "https://mars.nasa.gov/mars2020/spacecraft/instruments/moxie/",
+          "score": 46.785114,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1722955740
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What are the MOXIE instrument's primary attributes and functionalities?\n|assistant|: The Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) is a Scale Model for a Future Big MOXIE, an instrument designed to help NASA prepare for human exploration of Mars. Its main job is to produce oxygen from the Martian carbon-dioxide atmosphere where less than 1% as much air on the surface as on Earth is present.  It will test a way for future explorers to produce oxygen for burning fuel and breathing. MOXIE is currently making 6-10 grams of oxygen per hour, but the Big MOXIE, would need to make 2,000 to 3,000 grams of oxygen per hour to support a crewed mission to Mars.\n|user|: Is there H on Mars to make water with O?\n|assistant|: Mars' atmosphere is mostly carbon dioxide, that makes up about 96%, argon, and nitrogen, with only 0.13% oxygen. There is no explicit mention of hydrogen (H) or water (H2O) on Mars on the given document.\n|user|: MOXIE a tree?\n|assistant|: No, MOXIE does not work like a tree. It produces oxygen from the Martian carbon-dioxide atmosphere using a device called an \"electrolyzer,\" a close cousin to a fuel cell that is running in reverse. On Earth, trees and plants absorb carbon dioxide and release oxygen through photosynthesis, but MOXIE uses a different process to achieve the same result.\n|user|: right, there is no water on Mars. silly thoughts...well, Moxie sounds familiar like a beverage?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "eb89f1b8e630dca6-4165-6026",
+          "text": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars\nMOXIE uses a device called an \"electrolyzer\" to make oxygen from the carbon dioxide in the air. An electrolyzer is a close cousin to a fuel cell, which is a device we use to directly make electricity from fuel and oxygen. You can think of MOXIE as a fuel cell running in reverse. \n\nFor Scientists\nNASA is preparing for human exploration of Mars, and the MOXIE investigation on the Mars 2020 mission aims to address key knowledge gaps.\nRead More \u203a\n\nThe Story Behind the Name\nMOXIE stands for the Mars OXygen ISRU Experiment. ISRU is another acronym, In Situ Resource Utilization, which is a technical way of describing what most of us call \"living off the land.\"\nThe word \"moxie,\" used to describe someone with spunk and audacity, came from the soft drink of the same name. The soft drink, Moxie, was invented in the late 1800s in Lowell, Massachusetts, not far from the M.I.T. Haystack Observatory where the MOXIE principal investigator works. You can still buy Moxie in New England, and it's considered the official drink of the state of Maine.\nThe connection with soft drinks doesn't end there. According to some accounts, the Moxie company was the first in the U.S. to use carbon dioxide (CO2) to make a beverage fizzy. On Mars, MOXIE is the first to use carbon dioxide to make \u2013 well, anything at all. Another connection is more technical. Whenever we run MOXIE, we need to be very careful with the settings to make sure we only produce carbon monoxide (CO), and not pure carbon, which would ruin it. That destructive process is called \"coking.\" The carbon deposit itself is called \u2013 coke.\n\nAll About MOXIE\n\nWhat does MOXIE do?\n\nCompared to what we're used to on Earth, the air on Mars is very thin. In fact, there is less than 1% as much air on the surface of Mars as on Earth, and visiting Mars would be like flying in a balloon 100,00 feet up in the air.",
+          "title": "Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) - NASA Mars",
+          "url": "https://mars.nasa.gov/mars2020/spacecraft/instruments/moxie/",
+          "score": 16.155525,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1722955387
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "MOXIE a beverage"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, you're correct. There is indeed a beverage named \"Moxie\" which has been popular in the United States since the early 20th century. However, the Mars Oxygen In-Situ Resource Utilization Experiment (MOXIE) I've been discussing is unrelated to this beverage and is a technological instrument developed by NASA."
+    },
+    {
+      "speaker": "user",
+      "text": "Others in the past?",
+      "timestamp": 1722963354,
+      "enrichments": {
+        "Question Type": [
+          "Factoid",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "There have been previous experiments and studies related to Mars exploration and resource utilization.  Some notable ones include the Mars Exploration Rovers, Sprit and Opportunity, which landed on Mars in 2004; the Mars Reconnaissance Orbiter, which has been studying Mars from orbit since 2006; the Mars Science Laboratory mission, which include the Curiosity rover that has been exploring Mars since 2012; and the InSight lander, which touched down on Mars in 2018 to study the planet's deep interior.  Additionally, there was the Mars Global Surveyor, which orbited Mars from 1997 to 2006, and Mars Pathfinder mission, which included the Sojourner rover and landed on Mars in 1997.  These are just few examples of the many missions and programs that have contributed to our understanding of Mars.",
+      "timestamp": 1722963358,
+      "contexts": [
+        {
+          "document_id": "faa97cef1ed38238-23183-25488",
+          "text": "History\nMars Exploration Rover Opportunity looks back at its lander shell in 2004. Credit: NASA/JPL/Cornell NASA also approved a large orbiter to help discover suitable landing sites for a future Mars sample return project. That orbiter mission became the Mars Reconnaissance Orbiter, launched in 2005.The next rover, eventually named \"Curiosity,\" was equipped for even more detailed investigation of Mars' ancient minerals and geology. It arrived on Mars on Aug. 6, 2012, and was still operating in 2020. Mars Science Laboratory Curiosity rover drive testing at JPL in 2010. Credit: NASA/JPL-Caltech JPL's next rover to Mars is a modification of Curiosity and is named Perseverance. It was launched July 30, 2020. Instead of mineralogy, it will specialize in astrobiology and look specifically for signs of past life on Mars. Perseverance is also designed to collect and store rock samples on the Martian surface for retrieval by a future Mars sample return mission, formally approved by NASA in 2019. Perseverance also hosts a robotic helicopter named Ingenuity, a technology demonstration mission that will attempt powered flight on another planet.Competing for the planetsJPL was awarded a number of other Discovery program missions after Mars Pathfinder. The Stardust mission collected particles from comet Wild-2 in 2004, while the Genesis mission returned some particles from the solar wind in 2004. The Deep Impact mission launched a kinetic impactor at Comet Tempel 1 to assess its structure and composition in 2005. The GRAIL mission, based on the GRACE gravity satellites, produced very high resolution gravity maps of the Moon, while the Dawn mission used solar-electric propulsion to visit the dwarf planet Ceres and the largest main belt asteroid, Vesta. JPL also managed the development of Ames Research Center's Kepler exoplanet astronomy mission, launched in 2009. The Laboratory's most recent Discovery program mission, InSight, landed on Mars Nov. 26, 2018. Its mission was to measure martian seismic activity and the heat flow coming from Mars' interior. JPL's next Discovery mission, Psyche, is being designed to explore the unusual main belt asteroid 16 Psyche during the late 2020s. The InSight lander after placing its seismometer and heat probe instruments on the Martian surface in 2019.",
+          "title": "History",
+          "url": "https://www.jpl.nasa.gov/who-we-are/history",
+          "score": 21.589048,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1722964314
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Mars   InSight lander"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "c3983d1515263e63-2-2003",
+          "text": "The Mars Rovers: Spirit and Opportunity | NASA Space Place \u2013 NASA Science for Kids\nThe Mars Rovers: Spirit and Opportunity | NASA Space Place \u2013 NASA Science for Kids\n\nmars-spirit-opportunity\n\nVea en Espa\u00f1ol\n\nEarth\nSun\nSolar System\nUniverse\nScience and Tech\nEducators\n\nThe Mars Rovers: Spirit and Opportunity\n\nThe Short Answer:\nWhat are the Spirit and Opportunity rovers?\n\r\n\tSpirit and Opportunity are twin rovers that were made to learn more about the planet Mars.\r\n\t\n\nAfter the success of the Sojourner rover, NASA wanted to send more rovers to learn about Mars. So, in 2003, they sent two rovers to the Red Planet. The rovers were named Spirit and Opportunity. Together, they were part of the Mars Exploration Rover mission.\r\nSpirit and Opportunity were made as twins. They both carried all of the same scientific instruments. And each was about the size of a golf cart.\r\n\nOn Earth, where there is water, there is life. Spirit and Opportunity were sent to Mars to find more clues about the history of water there, and to see if the Red Planet could ever have supported life. To do this, scientists sent the two rovers to two different landing sites. The rovers landed on opposite sides of the planet. \r\n\nThe landing sites of all four Mars rovers on a map of Mars. Credit: National Geographic Society, MOLA Science Team, MSS, JPL, NASA\nSpirit landed in a region called Gusev Crater. Scientists wanted to explore the crater because they thought it could have held water long ago. From pictures taken by satellites, scientists thought it looked like several large rivers flowed into Gusev Crater.\r\nOpportunity landed on the other side of Mars in an area called Meridiani Planum. This region was nice because it was a flat, safe spot for the rover to land. Also, studies with a satellite around Mars showed that it might contain a mineral called grey hematite. On Earth, grey hematite is often found in the presence of water. \r\n\nOpportunity found grey hematite in sphere-like grains in Meridiani Planum. Scientists called these grains \u201cblueberries.\u201d On Earth, hematite forms near water.",
+          "title": "The Mars Rovers: Spirit and Opportunity | NASA Space Place \u2013 NASA Science for Kids",
+          "url": "https://spaceplace.nasa.gov/mars-spirit-opportunity/en/",
+          "score": 20.593298,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1722964317
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Mars   spirit and opportunity"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "c9ffb07333c57d35-4113-6319",
+          "text": "Mars Exploration - NASA Science\nRead MoreEXOMars ProgramESA\u2019s (European Space Agency) Exobiology on Mars program consists of two missions: Trace Gas Orbiter and the Rosalind Franklin rover.Read MoreInSightInSight was the first space robotic explorer to study in-depth the \"inner space\" of Mars: its crust, mantle, and core. (2018-2022)Read MoreMAVENMAVEN is obtaining critical measurements of Mars' atmosphere to help understand dramatic climate change over the planet's history. (2013-present)Read MoreMars Reconnaissance OrbiterMRO studies the planet's atmosphere and terrain from orbit and serves as a key data relay station for other Mars missions. (2005-present)Read MoreMars Science Laboratory: Curiosity RoverCuriosity is investigating Mars to determine whether the Red Planet ever was habitable to microbial life.\u00a0(2011-present)Read MoreMars PhoenixPhoenix carried a complex suite of instruments to look for signs of water-ice in a region farther north than any previous mission. (2007-2008)Read MoreMars Exploration Rovers: Spirit and OpportunityA pair of Mars rovers that used field geology and atmospheric observations as they looked for signs of ancient water activity. (2003-2010)Read MoreMars Express (ESA)NASA is contributing advanced radar and radio relay systems to this ESA-ASI mission searching for sub-surface water from Mars orbit. (2003-present)Read More2001 Mars OdysseyNASA's longest-lasting spacecraft at Mars is making the first global map of the amount and distribution of chemical elements and minerals that make up the Martian surface. (2001-present)Read MoreMars Polar Lander/Deep Space 2Mars Polar Lander's mission was to dig for water ice near the edge of the south polar cap and deploy two small surface probes, but all spacecraft were lost on arrival. (1999)Read MoreMars Climate OrbiterDesigned to function as an interplanetary weather satellite and a communications relay for Mars Polar Lander, Mars Climate Orbiter was lost on arrival after entering the atmosphere too low. (1999-1999)Read MoreMars Global SurveyorMars Global Surveyor studied the entire Martian surface, atmosphere, and interior, discovering repeatable weather patterns, gully formation, new boulder tracks, and recent impact craters.",
+          "title": "Mars Exploration - NASA Science",
+          "url": "https://mars.nasa.gov/mars-exploration/missions/?category=167",
+          "score": 13.630359,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1722964320
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Mars reconnaissance"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "faa97cef1ed38238-21338-23680",
+          "text": "History\nThe Mars Surveyor program came to an end in 2000, after the failure of two missions launched in 1998, the Mars Climate Orbiter and the Mars Polar Lander.Mars Observer's loss also helped enable NASA to gain approval for another planetary mission program, known as Discovery. The Discovery Program required NASA centers and university-based scientists to submit proposals to competitions that were to be held every few years. To get the program going, the first two Discovery missions were assigned. JPL was awarded Mars Pathfinder. The Mars Pathfinder mission introduced what has become a powerful technology for planetary exploration: the planetary rover. The USSR had landed robotic rovers on the Moon, and it had tried to land a miniature rover on Mars in the 1970s but had failed. Mars Pathfinder's micro-rover, named Sojourner, for abolitionist Sojourner Truth, in 1997 became the first robotic rover to explore the Red Planet. The Sojourner rover sampling a convenient rock next to the Mars Pathfinder lander. Credit: NASA/JPL-Caltech Mars Pathfinder also pioneered a new policy of releasing imagery to the public in almost real time, via the newly public World Wide Web. Finally, Mars Pathfinder was also inexpensive, and justified an agency drive to reduce the cost of planetary missions even further.After the failures of the Mars Climate Orbiter and Mars Polar Lander, NASA approved the Mars Exploration Rover mission, whose two rovers were named \"Spirit\" and \"Opportunity\" after their launch in July 2003. The two were equipped for robotic geology, looking for signs that liquid water having ever existed on the surface. They operated until 2010 and 2018, respectively, roving nearly nearly 33 miles (53 kilometers) between them. Among their many spectacular findings: at some time in Mars' deep past, water had flowed on the surface. Mars Exploration Rover Opportunity looks back at its lander shell in 2004. Credit: NASA/JPL/Cornell NASA also approved a large orbiter to help discover suitable landing sites for a future Mars sample return project. That orbiter mission became the Mars Reconnaissance Orbiter, launched in 2005.The next rover, eventually named \"Curiosity,\" was equipped for even more detailed investigation of Mars' ancient minerals and geology. It arrived on Mars on Aug. 6, 2012, and was still operating in 2020.",
+          "title": "History",
+          "url": "https://www.jpl.nasa.gov/who-we-are/history",
+          "score": 16.142496,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1722964323
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Mars global surveyor"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "b9a86475e2088940-26913-28632",
+          "text": "A to Z Topics Listing - NASA\nMars Campaign Development Division \nMars Climate Orbiter \nMars Exploration Program \nMars Exploration Rovers (MER) \nMars Express \nMars Global Surveyor (MGS) \nMars Moons \nMars Observer\nMars Odyssey \nMars Orbiter Mission (MOM) \nMars Oxygen In-Situ Resource Utilization Experiment (MOXIE) \nMars Pathfinder \nMars Phoenix \nMars Polar Lander / Deep Space 2 \nMars Reconnaissance Orbiter (MRO)\nMars Sample Return (MSR) \nMars Science Laboratory (MSL)\nMarsha Ivins \nMarshall Space Flight Center\nMarshall Test Facility and Support Infrastructure \nMartian Moon Exploration (MMX)\nMartin J. Fettman \nMary E. Weber \nMary L. Cleave \nMaterials Science \nMaterials Science Research Rack (MSRR)\nMatthew Dominick \nMAVEN (Mars Atmosphere and Volatile EvolutioN)\nMedia Resources \nMegan McArthur\nMerchandise Approvals\nMercury \nMesosphere \nMESSENGER (MErcury Surface, Space ENvironment, GEochemistry, and Ranging) \nMessier Catalog \nMeteor Showers \nMeteors & Meteorites \nMetOp (Meteorological Operational satellite)\nMichael A. Baker \nMichael Collins \nMichael Fincke\nMichael E. Fossum \nMichael E. Lopez-Alegria \nMichael J. Bloomfield \nMichael J. Foreman \nMichael J. Massimino \nMichael J. McCulley \nMichael J. Smith \nMichael L. Coats\nMichael L. Gernhardt\nMichael P. Anderson \nMichael R. Barratt \nMichael R. Clifford \nMichael S. Hopkins \nMichael T. Good \nMichel F. Curtis \nMichoud Assembly Facility \nMicro-10 \nMicrobial Tracking (MT) \nMicrobiology\nMillie Hughes-Fulford \nMini-RF Instrument \nMinXSS (Miniature X-ray Solar Spectrometer) \nMiranda \nMission Equity \nMission Support Directorate\nMissions \nMMS (Magnetospheric Multiscale) \nModeling, Analysis and Prediction (MAP) Program\nModerate Resolution Imaging Spectroradiometer (MODIS) \nModern Figures",
+          "title": "A to Z Topics Listing - NASA",
+          "url": "https://www.nasa.gov/a-to-z-topics-listing/",
+          "score": 14.528602,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1722964326
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Mars global surveyor"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "According to the document, there have been previous experiments and studies related to Mars exploration and resource utilization, but there is no specific mention of other instruments or experiments similar to MOXIE that were implemented before. MOXIE is described as a unique and innovative approach to producing oxygen on Mars using the planet's carbon dioxide-rich atmosphere."
+    },
+    {
+      "speaker": "user",
+      "text": "wow there are so many I didn't recognize. Are they all by us?",
+      "timestamp": 1722965391,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "They are NASA-led initiatives, however, there have been international collaborations with commercial and international partners in the explorations.  For example the Mars Exploration Rovers, Sprit and Opportunity, are jointly developed by NASA and the European Space Agency(ESA).  Mars Reconnaissance Orbiter, Mars Science Laboratory mission and InSight lander also involved contributions from various countries and organizations. ",
+      "timestamp": 1722965393,
+      "contexts": [
+        {
+          "document_id": "0705ff17bdcfa47d-7550-10036",
+          "text": "Destinations - NASA\nAn international partnership of five space agencies from 15 countries operates the International Space Station.\n\n \n\n \n\nExplore\n\nLearn more about NASA's destinations for human exploration from the orbiting laboratory in low-Earth orbit, to Artemis missions at the Moon, and leading to the boldest mission yet: sending humans to Mars.\n\n\tAll Humans in Space Topics \t\n\nInternational Space StationAstronauts on the orbiting laboratory are helping us prove many of the technologies and communications systems needed for human missions in deep space, including to the Moon and Mars. The space station also advances our understanding of how the body reacts and changes in space and how to protect astronaut health.Read MoreEarth's MoonArtemis missions will collaborate with commercial and international partners to demonstrate innovative technologies on the lunar surface and around the Moon for scientific discovery and to prepare for human missions to Mars. NASA will land the first woman and first person of color on the Moon and inspire a new generation of explorers.Read MoreMarsEngineers and scientists around the country are developing the technologies astronauts will use to one day live and work on Mars and safely return home from humanity's next giant leap. NASA is working to address the challenges of living farther from Earth, such as using existing resources, options for disposing of trash, and more.Read MoreCommercial Destinations in Low Earth OrbitNASA\u2019s Commercial Low Earth Orbit Development Program is supporting the development of commercially owned and operated low Earth orbit destinations from which NASA, along with other customers, can purchase services and stimulate the growth of commercial activities close to Earth.\u00a0Read More \n\nArchitecture\n\nMoon to Mars Architecture\n\nNASA's Moon to Mars architecture\u00a0represents the hardware and operations needed for human missions to the Moon and Mars, and how they function together as a system.\n\nThe architecture is not a mission, a manifest, or a set of requirements, but it does define the elements \u2014 rockets, spacecraft, rovers, spacesuits, communications relays, and more \u2014 that will be incrementally developed and delivered to the Moon and Mars for long-term, human-led scientific discovery in deep space.\u00a0\n\n Learn More about Moon to Mars Architecture \n\nIllustration of three astronaut silhouettesNASA \n\n \n\nThat's one small step for (a) man; one giant leap for mankind.\u00a0\n\nNeil Armstrong\nApollo astronaut\n\n \n\nLatest News",
+          "title": "Destinations - NASA",
+          "url": "https://www.nasa.gov/humans-in-space/destinations/",
+          "score": 15.804725,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1722967125
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "international collaborations in the explorations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "22e79b2ed4b35d4e-2419-4461",
+          "text": "Mars News & Features - NASA Science\nHer current work involves helping to develop the vision for the initial\u2026Article1 day agoNASA, European Space Agency Unite to Land Europe\u2019s Rover on Mars2 min readNASA and ESA (European Space Agency) announced Thursday they signed an agreement to expand NASA\u2019s work on the ExoMars Rosalind Franklin rover, an ESA-led mission launching in 2028 that will search for signs of ancient life on the Red Planet.\u2026News ReleaseNASA Technology Grants to Advance Moon to Mars Space Exploration2 min readNASA has awarded nearly $1.5 million to academic, non-profit, and business organizations to advance state-of-the-art technology that will play a key role in the agency\u2019s return to the Moon under Artemis, as well as future missions to Mars. Twenty-four projects\u2026News ReleaseNASA Selects Commercial Service Studies to Enable Mars Robotic Science4 min readNine companies have been selected to conduct early-stage studies of concepts for commercial services to support lower-cost, higher-frequency missions to the Red Planet. NASA has identified nine U.S. companies to perform a total of 12 concept studies of how commercial\u2026Article3 weeks agoNASA Scientists Gear Up for Solar Storms at Mars6 min readThe Sun will be at peak activity this year, providing a rare opportunity to study how solar storms and radiation could affect future astronauts on the Red Planet. In the months ahead, two of NASA\u2019s Mars spacecraft will have an\u2026Article4 weeks agoMajor Martian Milestones1 min readThere\u2019s good news from NASA\u2019s\u00a0Cloudspotting on Mars project! That\u2019s the project that invites you to help identify exotic clouds high in the Martian atmosphere. Congratulations to\u00a0the\u00a0Cloudspotting on Mars\u00a0team and\u00a0all the volunteers who have\u00a0helped\u00a0spot Martian clouds!Article4 weeks agoWhy is Methane Seeping on Mars? NASA Scientists Have New Ideas5 min readThe most surprising revelation from NASA\u2019s Curiosity Mars Rover \u2014 that methane is seeping from the surface of Gale Crater \u2014 has scientists scratching their heads. Living creatures produce most of the methane on Earth.",
+          "title": "Mars News & Features - NASA Science",
+          "url": "https://mars.nasa.gov/blogs/bunsen-peak-piques-interest/",
+          "score": 9.749127,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1722966569
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "NASA and the European Space Agency"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "faa97cef1ed38238-23183-25488",
+          "text": "History\nMars Exploration Rover Opportunity looks back at its lander shell in 2004. Credit: NASA/JPL/Cornell NASA also approved a large orbiter to help discover suitable landing sites for a future Mars sample return project. That orbiter mission became the Mars Reconnaissance Orbiter, launched in 2005.The next rover, eventually named \"Curiosity,\" was equipped for even more detailed investigation of Mars' ancient minerals and geology. It arrived on Mars on Aug. 6, 2012, and was still operating in 2020. Mars Science Laboratory Curiosity rover drive testing at JPL in 2010. Credit: NASA/JPL-Caltech JPL's next rover to Mars is a modification of Curiosity and is named Perseverance. It was launched July 30, 2020. Instead of mineralogy, it will specialize in astrobiology and look specifically for signs of past life on Mars. Perseverance is also designed to collect and store rock samples on the Martian surface for retrieval by a future Mars sample return mission, formally approved by NASA in 2019. Perseverance also hosts a robotic helicopter named Ingenuity, a technology demonstration mission that will attempt powered flight on another planet.Competing for the planetsJPL was awarded a number of other Discovery program missions after Mars Pathfinder. The Stardust mission collected particles from comet Wild-2 in 2004, while the Genesis mission returned some particles from the solar wind in 2004. The Deep Impact mission launched a kinetic impactor at Comet Tempel 1 to assess its structure and composition in 2005. The GRAIL mission, based on the GRACE gravity satellites, produced very high resolution gravity maps of the Moon, while the Dawn mission used solar-electric propulsion to visit the dwarf planet Ceres and the largest main belt asteroid, Vesta. JPL also managed the development of Ames Research Center's Kepler exoplanet astronomy mission, launched in 2009. The Laboratory's most recent Discovery program mission, InSight, landed on Mars Nov. 26, 2018. Its mission was to measure martian seismic activity and the heat flow coming from Mars' interior. JPL's next Discovery mission, Psyche, is being designed to explore the unusual main belt asteroid 16 Psyche during the late 2020s. The InSight lander after placing its seismometer and heat probe instruments on the Martian surface in 2019.",
+          "title": "History",
+          "url": "https://www.jpl.nasa.gov/who-we-are/history",
+          "score": 19.790882,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1722966557
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Mars Reconnaissance Orbiter, Mars Science Laboratory mission and InSight lander"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, all the missions and programs mentioned, such as the Mars Exploration Rovers, Mars Reconnaissance Orbiter, Mars Science Laboratory mission, InSight lander, Mars Global Surveyor, and Mars Pathfinder mission, are NASA-led initiatives. They have significantly contributed to our understanding of Mars."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "created",
+      "timestamp": 1722967151
+    },
+    {
+      "author": "2077e44f-68bd-4df7-89a1-27ac26e1eb9a",
+      "status": "edited",
+      "timestamp": 1723229826
+    },
+    {
+      "author": "2077e44f-68bd-4df7-89a1-27ac26e1eb9a",
+      "status": "edited",
+      "timestamp": 1723229826
+    },
+    {
+      "author": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+      "status": "accepted",
+      "timestamp": 1725551706
+    },
+    {
+      "author": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+      "status": "edited",
+      "timestamp": 1725622269
+    },
+    {
+      "author": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+      "status": "edited",
+      "timestamp": 1725622346
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "edited",
+      "timestamp": 1726756152
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "accepted",
+      "timestamp": 1726756257
+    }
+  ],
+  "editor": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+  "domain": "mt-rag-govt-elser-512-100-20240611",
+  "reviewer": "f6ce971c-68d2-4c26-b1c0-477dd28a5181"
+}

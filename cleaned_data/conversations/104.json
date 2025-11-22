@@ -1,0 +1,1103 @@
+{
+  "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-ibmcloud-elser-512-100-20240502",
+      "size": "72442"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "What are the billing plans available and differences between each of them?",
+      "timestamp": 1724722975,
+      "enrichments": {
+        "Question Type": [
+          "Comparative",
+          "Composite"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "There are two billing plans available: Pay-As-You-Go and Subscription. 1. Pay-As-You-Go: With this account, you're billed monthly for your resource usage. Your resource usage consists of recurring and fluctuating costs. This plan is suitable for developers or companies that want to explore the entire IBM Cloud catalog but have smaller or variable workloads. You pay only for what you use or commit to on a monthly basis, with no long-term contracts. Usage consists of products, services, and resources. 2. Subscription: With this account, you buy a subscription for an amount of credit to spend on resource usage within a certain time period. In exchange for this spending commitment, you get a discount on your usage costs.",
+      "timestamp": 1724722982,
+      "contexts": [
+        {
+          "document_id": "ibmcld_03704-1531-3564",
+          "text": "\nWhat's the difference between a Pay-As-You-Go and Subscription account? \n\nWith Pay-As-You-Go accounts, you're billed monthly for your resource usage. Your resource usage consists of recurring and fluctuating costs. This account type is a good fit for developers or companies that want to explore the entire IBM Cloud catalog but have smaller or variable workloads. You pay only for what you use or commit to on a monthly basis, with no long-term contracts. Usage consists of products, services, and resources.\n\nWith Subscription accounts, you buy a subscription for an amount of credit to spend on resource usage within a certain time period. In exchange for this spending commitment, you get a discount on your usage costs. For more information about the differences between account types, see [Account types](https://cloud.ibm.com/docs/account?topic=account-accounts).\n\n\n\n\n\n What happens if my Lite plan instance reaches the monthly quota? \n\nWhen you reach any quota for Lite plan instances, the service for that month is suspended. Quotas are based per org and not per instance. New instances that are created in the same org show any usage from previous instances. The quota resets on the first of every month.\n\n\n\n\n\n Can I use PayPal as a payment method? \n\nAs of March 31, 2023, PayPal is no longer accepted.\n\n\n\n\n\n Can I update my credit card? \n\nUpdating your credit card is just like adding a new one. Go to the [Payments](https://cloud.ibm.com/billing/payments) page in the IBM Cloud console. In the Add Payment Method section, enter the billing information for your new card, and click Add credit card.\n\nTo switch to a different payment method, select Pay with Other, and click Submit change request. A support case to change your payment method is then created for you.\n\nIf your payments are managed outside of the console, go to IBM.com and log in to the Manage Payment Method application to update your credit card. For more information, see [How do I add a credit card when the option isn't available through the console?]",
+          "url": "https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-billusagefaqs",
+          "score": 9.782476,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724723130
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What are the billing plans available and differences between each of them?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Based on the document, there are two billing plans available: Pay-As-You-Go and Subscription.\n1. Pay-As-You-Go: With this account, you're billed monthly for your resource usage. Your resource usage consists of recurring and fluctuating costs. This plan is suitable for developers or companies that want to explore the entire IBM Cloud catalog but have smaller or variable workloads. You pay only for what you use or commit to on a monthly basis, with no long-term contracts. Usage consists of products, services, and resources.\n2. Subscription: With this account, you buy a subscription for an amount of credit to spend on resource usage within a certain time period. In exchange for this spending commitment, you get a discount on your usage costs.\nFor more detailed information about the differences between account types, you can refer to the Account types section in the document.\nThe document also mentions a Lite plan, which is not exactly a separate billing plan but a free tier with monthly quotas. When you reach any quota for Lite plan instances, the service for that month is suspended. Quotas are based per org and not per instance."
+    },
+    {
+      "speaker": "user",
+      "text": "how can I estimate my costs?",
+      "timestamp": 1724723214,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "To estimate your costs, you can use the IBM Cloud cost estimator tool. Here are the steps to follow: 1. Go to the IBM Cloud console and click on the Cost estimator icon. 2. Click on 'Create new estimate' and enter a name and description for the estimate. 3. Click on 'Create' and you will be directed to the estimate details page. 4. Click on 'Go to catalog' to add products to the estimate. 5. Select the product you are interested in and choose your pricing plan and enter any necessary configuration details. 6. Click on 'Add to estimate'. 7. Enter your estimated usage and click on 'Calculate Cost'. You can adjust the estimated usage and recalculate the cost to see how different usage levels affect the overall cost. By default, the estimator shows the pricing and billing currency set for your account. If you're estimating costs for a different location or currency, you might have to select the appropriate currency on the order summary page for the product or change the currency on your account. Once you have added all the products to your estimate, review the product details and click on 'View estimate' to see the total estimated cost.",
+      "timestamp": 1724723217,
+      "contexts": [
+        {
+          "document_id": "ibmcld_03735-7-1918",
+          "text": "\nEstimating your costs \n\nYou can use the cost estimator to estimate the cost of IBM Cloud\u00ae products by customizing plans that fit your business needs. Your account type doesn't affect your estimates. Explore the catalog to find available products to add to an estimate.\n\nEstimates can now be saved to an account. Make sure you're in the account that you want to save the estimate to. If you have existing estimates, they must be converted to a saved estimate that is attached to an account.\n\n\n\n Creating a new estimate \n\n\n\n1. In the IBM Cloud console, go to Cost estimator icon![Cost estimator icon](https://cloud.ibm.com/docs-content/v1/content/9713d864488177dc6b273b53b7f2383a81f10bc1/icons/calculator.svg). From here, you are directed to Estimating your costs page.\n2. Click Create new estimate.\n3. Enter a name and description for the estimate.\n4. Click Create\n5. From here, you are directed to the estimate details page. Click Go to catalog to add products to the estimate.\n6. Select the product that you are interested in.\n\nDepending on the product, an interim informational page might be displayed. For example, if you select Bare Metal Servers, an informational page that describes various features is displayed. Click Continue.\n7. Select your pricing plan and enter other configuration details if needed. Then, click Add to estimate.\n\nSome products might require that you log in to add them to an estimate.\n8. Enter your estimated usage, and click Calculate Cost. You can adjust the estimated usage and recalculate the cost to see how different usage levels affect the overall cost.\n\n\n\nBy default, the estimator shows the pricing and billing currency set for your account. Pricing can vary by region. If you're estimating costs for a different location or currency, you might have to select the appropriate currency on the order summary page for the product or change the currency on your account.\n\n\n\n1.",
+          "url": "https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-cost",
+          "score": 15.082735,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724723329
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "You can use the cost estimator to estimate the cost "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03735-1425-3233",
+          "text": "\nEnter your estimated usage, and click Calculate Cost. You can adjust the estimated usage and recalculate the cost to see how different usage levels affect the overall cost.\n\n\n\nBy default, the estimator shows the pricing and billing currency set for your account. Pricing can vary by region. If you're estimating costs for a different location or currency, you might have to select the appropriate currency on the order summary page for the product or change the currency on your account.\n\n\n\n1. Click Save and select the estimate that you'd like to add the product to, and then add the calculated cost to your estimate by clicking Save.\n2. When you're done adding products to your estimate, review the product details, and click View estimate.\n\n\n\n\n\n\n\n Updating an existing estimate \n\nYou can always update the name and description of an estimate as your needs change. To edit an estimate, complete the following steps:\n\n\n\n1. From the View Estimate page, identify the estimate that you want to edit.\n2. Click the Actions icon ![Actions icon](https://cloud.ibm.com/docs-content/v1/content/9713d864488177dc6b273b53b7f2383a81f10bc1/icons/action-menu-icon.svg) > Edit.\n3. Enter the updated name and description.\n4. Click Save\n\n\n\n\n\n\n\n Saving and sharing your estimate \n\nWhen you create an estimate, you can save each estimate's unique link to share or revisit directly through your browser. To share an estimate, complete the following steps:\n\n\n\n1. From the View Estimate page, identify the estimate that you want to share.\n2. Click the Actions icon ![Actions icon](https://cloud.ibm.com/docs-content/v1/content/9713d864488177dc6b273b53b7f2383a81f10bc1/icons/action-menu-icon.svg) > Share.\n3. Click Copy link and share the link with users in your account.\n\n\n\n\n\n\n\n Creating quotes for classic infrastructure services",
+          "url": "https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-cost",
+          "score": 15.212923,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724723331
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "You can use the cost estimator to estimate the cost "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "To estimate your costs, you can use the IBM Cloud cost estimator tool. Here are the steps to follow:\n1. Go to the IBM Cloud console and click on the Cost estimator icon.\n2. Click on 'Create new estimate' and enter a name and description for the estimate.\n3. Click on 'Create' and you will be directed to the estimate details page.\n4. Click on 'Go to catalog' to add products to the estimate.\n5. Select the product you are interested in and choose your pricing plan and enter any necessary configuration details.\n6. Click on 'Add to estimate'.\n7. Enter your estimated usage and click on 'Calculate Cost'. You can adjust the estimated usage and recalculate the cost to see how different usage levels affect the overall cost.\nBy default, the estimator shows the pricing and billing currency set for your account. However, if you're estimating costs for a different location or currency, you might have to select the appropriate currency on the order summary page for the product or change the currency on your account.\nOnce you have added all the products to your estimate, review the product details and click on 'View estimate' to see the total estimated cost."
+    },
+    {
+      "speaker": "user",
+      "text": "are there different types of charges I am charged? ",
+      "timestamp": 1724723463,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, Different types of charges apply depending on the features of IBM Cloud that you're using. The types of charges are Fixed, Metered, Tiered, and Reserved.",
+      "timestamp": 1724723471,
+      "contexts": [
+        {
+          "document_id": "ibmcld_03729-7-2197",
+          "text": "\nHow you're charged \n\nIBM Cloud\u00ae charges vary depending on the resources that are used by a particular service, runtime, container, or support option. The resources can be the number of API calls, the number of instances, memory, or storage. In addition, tiered pricing is offered in simple, graduated, or block.\n\nIBM Cloud provides detailed [cost estimators](https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-cost) to help you plan for charges.\n\nAfter you build your resources, you can check the actual cost. In the IBM Cloud\u00ae console, go to Manage > Billing and usage, and select Usage. With an IBM Cloud billable account, you're charged for the compute, containers, and services that your organization used. You might be invited by other IBM Cloud users to participate in organizations under a different account. The usage of the apps or services that you use in the organizations that you're invited to are charged to the account that contains those organizations. You can see more information about a specific charge from each resource details page.\n\nDifferent types of charges apply depending on the features of IBM Cloud that you're using. The following table provides a high-level overview:\n\n\n\nTable 1. Charges based on features\n\n Type of Charge Description Resource Type Example \n\n Fixed Fixed-rate pricing is based on an agreed upon monthly charge. If you buy an additional bare metal server, virtual server, or storage resource after the start of the monthly billing period, the cost of the resource for the first month is prorated based on the number of days remaining in the billing period. The prorated cost is billed in a separate invoice. Services For Bare Metal Servers, there are fixed plans to choose from, and those plans are charged at a fixed monthly rate. \n Metered Usage is a unit-based pricing model in which you pay for what you consume. In this case, the number of GB hours that are consumed for runtimes and the number of IP addresses and storage that is consumed for containers. Services, Compute, and Containers For Push Notifications, any usage that is consumed over the free monthly allowance of 100,000 digital messages per month, will be charged.",
+          "url": "https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-charges",
+          "score": 13.712833,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724723712
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "charges vary depending on the resources that are used by a particular service"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03729-1672-3956",
+          "text": "\nServices For Bare Metal Servers, there are fixed plans to choose from, and those plans are charged at a fixed monthly rate. \n Metered Usage is a unit-based pricing model in which you pay for what you consume. In this case, the number of GB hours that are consumed for runtimes and the number of IP addresses and storage that is consumed for containers. Services, Compute, and Containers For Push Notifications, any usage that is consumed over the free monthly allowance of 100,000 digital messages per month, will be charged. \n Tiered In this pricing model, you get a volumed-based discount according to your actual usage. Tiered pricing is typically used for charge metrics that are expected to have high quantities per month, such as API calls. Services might offer simple, graduated, or block tier pricing plans. Services For API Connect, one of the tiered plans charges $10,000 for the first 25 million monthly API calls and $40.00 USD per 100,000 API calls per month thereafter. \n Reserved Reserved pricing is based on a long-term commitment for a service, so you can get a discounted price. With a reserved plan, you get a dedicated service instance that is easy to set up, deploy, and deliver in the public IBM Cloud environment. Services Db2 on Cloud has reserved plans. \n\n\n\n\n\n Understanding monthly and hourly tags \n\nOn the usage dashboard, your products and resources can be labeled with Monthly, Hourly, or a combination of both tags to signify how often charges are updated.\n\nThe Monthly tag signifies that resources within your account have a fixed cost. These charge show up immediately after purchase and are prorated in proportion to how many days are left in the month. Any recurring monthly fixed costs are then shown at the first of every month.\n\nThe Hourly tag signifies that resources within your account have variable costs. These resources are updated daily.\n\n\n\n\n\n Lite plans \n\nLite plans are structured as a free quota. You can work on your projects worry free, without the risk of generating an accidental bill. The quota might operate for a specific time period, for example a month, or on a one-off usage basis. The following list provides some examples of Lite plan quotas:\n\n\n\n* Maximum number of registered devices\n* Maximum number of application bindings",
+          "url": "https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-charges",
+          "score": 13.6616535,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724723532
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "charges vary depending on the resources that are used by a particular service"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03729-4932-7001",
+          "text": "\nFor example, consider a runtime that costs $0.07 per GB-hour in two 512-MB instances, running for 30 days (720 hours). These resources would cost $50.4 USD, with the following calculations:\n\n2 instances x 0.5 GB x 720 hours = 720 GB-hours.\n720 GB-hours x $0.07 per GB-hour = $50.4\n\n\n\n\n\n Charges for services \n\nMany services include monthly free allowances. Usage of services that aren't included as part of the free allowance is charged in one of the following ways:\n\nFixed charges\n: You select a plan and pay on a flat rate basis. For example, the Bare Metal Servers are charged at a flat-rate.\n\nMetered charges\n: You pay based on your runtime and service consumption. For example, with the Push service, any usage over the free monthly allowance is charged.\n\nReserved charges\n: As the account owner of a Pay As You Go account or a Subscription account, you can reserve a service instance, with a long-term commitment, for a discounted price. For example, you can reserve the standard large Db2 on Cloud offering for 12 months.\n: Some IBM Cloud services offer reserved plans. You can request a reserved plan from the IBM Cloud catalog by clicking the tile of the service. Then, select the service plan that best meets your needs. If a reserved plan is available, click Request, and follow the prompts to send your request. You receive an email that contains the price information of the reserved plan. An IBM Cloud sales representative also contacts you soon to complete the purchase.\n\nTiered charges\n: Similar to metered charges, you pay based on your runtime and service consumption. However, tiered charges add more pricing tiers, often offering discounted charges in tiers with larger consumption. Tiered pricing is offered in simple, graduated, or block.\n\n\n\n Simple tier \n\nIn the simple tier model, the unit price is determined by the tier that the quantity of your usage falls into. The total price is your quantity that is multiplied by the unit price in that tier, for example:\n\n\n\nTable 2. Simple tier pricing table\n\n Quantity of Items Unit Price for All Items",
+          "url": "https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-charges",
+          "score": 14.43134,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724723679
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "charges vary depending on the resources that are used by a particular service"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, there are different types of charges you might encounter while using IBM Cloud services. Here are some of them:\n1. **Fixed**: This type of charge is based on a fixed-rate pricing model, where you agree to a monthly charge for a specific resource, like a bare metal server, virtual server, or storage. If you buy a resource after the start of the monthly billing period, the cost for the first month is prorated based on the number of days remaining in the billing period.\n2. **Metered Usage**: This is a unit-based pricing model where you pay for what you consume. For example, you might be charged for the number of GB hours consumed for runtimes or the number of IP addresses and storage consumed for containers. Services like Push Notifications will charge for any usage that exceeds the free monthly allowance.\n3. **Tiered**: This type of charge offers volume-based discounts according to your actual usage. Tiered pricing is typically used for charge metrics that are expected to have high quantities per month, such as API calls. For instance, IBM Cloud's API Connect charges $10,000 for the first 25 million monthly API calls and $40.00 USD per 100,000 API calls per month thereafter.\n4. **Reserved**: This type of charge is based on a long-term commitment for a service, which allows you to get a discounted price. With a reserved plan, you get a dedicated service instance that is easy to set up, deploy, and deliver in the public IBM Cloud environment.\nFor more detailed information, you can refer to the IBM Cloud documentation on billing and usage."
+    },
+    {
+      "speaker": "user",
+      "text": "can you tell me the difference among Fixed, Metered, Tiered, and Reserved?",
+      "timestamp": 1724723728,
+      "enrichments": {
+        "Question Type": [
+          "Comparative"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Sure, here are the differences among Fixed, Metered, Tiered, and Reserved charges:\n1. Fixed: Fixed-rate pricing is based on an agreed upon monthly charge. If you buy an additional bare metal server, virtual server, or storage resource after the start of the monthly billing period, the cost of the resource for the first month is prorated based on the number of days remaining in the billing period. The prorated cost is billed in a separate invoice. An example of this type of charge is the fixed plans for Bare Metal Servers.\n2. Metered: Metered usage is a unit-based pricing model in which you pay for what you consume. In this case, the number of GB hours that are consumed for runtimes and the number of IP addresses and storage that is consumed for containers. An example of this type of charge is the Push service, where any usage over the free monthly allowance is charged.\n3. Tiered: Tiered charges add more pricing tiers, often offering discounted charges in tiers with larger consumption. Tiered pricing is offered in simple, graduated, or block. In the simple tier model, the unit price is determined by the tier that the quantity of your usage falls into. The total price is your quantity that is multiplied by the unit price in that tier. An example of this type of charge is the API Connect service, where one of the tiered plans charges $10,000 for the first 25 million monthly API calls and $40.00 USD per 100,000 API calls per month thereafter.\n4. Reserved: Reserved pricing is based on a long-term commitment for a service, so you can get a discounted price. With a reserved plan, you get a dedicated service instance that is easy to set up, deploy, and deliver in the public IBM Cloud environment. An example of this type of charge is the Db2 on Cloud service, which has reserved plans.",
+      "timestamp": 1724723736,
+      "contexts": [
+        {
+          "document_id": "ibmcld_03729-7-2197",
+          "text": "\nHow you're charged \n\nIBM Cloud\u00ae charges vary depending on the resources that are used by a particular service, runtime, container, or support option. The resources can be the number of API calls, the number of instances, memory, or storage. In addition, tiered pricing is offered in simple, graduated, or block.\n\nIBM Cloud provides detailed [cost estimators](https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-cost) to help you plan for charges.\n\nAfter you build your resources, you can check the actual cost. In the IBM Cloud\u00ae console, go to Manage > Billing and usage, and select Usage. With an IBM Cloud billable account, you're charged for the compute, containers, and services that your organization used. You might be invited by other IBM Cloud users to participate in organizations under a different account. The usage of the apps or services that you use in the organizations that you're invited to are charged to the account that contains those organizations. You can see more information about a specific charge from each resource details page.\n\nDifferent types of charges apply depending on the features of IBM Cloud that you're using. The following table provides a high-level overview:\n\n\n\nTable 1. Charges based on features\n\n Type of Charge Description Resource Type Example \n\n Fixed Fixed-rate pricing is based on an agreed upon monthly charge. If you buy an additional bare metal server, virtual server, or storage resource after the start of the monthly billing period, the cost of the resource for the first month is prorated based on the number of days remaining in the billing period. The prorated cost is billed in a separate invoice. Services For Bare Metal Servers, there are fixed plans to choose from, and those plans are charged at a fixed monthly rate. \n Metered Usage is a unit-based pricing model in which you pay for what you consume. In this case, the number of GB hours that are consumed for runtimes and the number of IP addresses and storage that is consumed for containers. Services, Compute, and Containers For Push Notifications, any usage that is consumed over the free monthly allowance of 100,000 digital messages per month, will be charged.",
+          "url": "https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-charges",
+          "score": 13.712833,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724723878
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "charges vary depending on the resources that are used by a particular service"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03729-4932-7001",
+          "text": "\nFor example, consider a runtime that costs $0.07 per GB-hour in two 512-MB instances, running for 30 days (720 hours). These resources would cost $50.4 USD, with the following calculations:\n\n2 instances x 0.5 GB x 720 hours = 720 GB-hours.\n720 GB-hours x $0.07 per GB-hour = $50.4\n\n\n\n\n\n Charges for services \n\nMany services include monthly free allowances. Usage of services that aren't included as part of the free allowance is charged in one of the following ways:\n\nFixed charges\n: You select a plan and pay on a flat rate basis. For example, the Bare Metal Servers are charged at a flat-rate.\n\nMetered charges\n: You pay based on your runtime and service consumption. For example, with the Push service, any usage over the free monthly allowance is charged.\n\nReserved charges\n: As the account owner of a Pay As You Go account or a Subscription account, you can reserve a service instance, with a long-term commitment, for a discounted price. For example, you can reserve the standard large Db2 on Cloud offering for 12 months.\n: Some IBM Cloud services offer reserved plans. You can request a reserved plan from the IBM Cloud catalog by clicking the tile of the service. Then, select the service plan that best meets your needs. If a reserved plan is available, click Request, and follow the prompts to send your request. You receive an email that contains the price information of the reserved plan. An IBM Cloud sales representative also contacts you soon to complete the purchase.\n\nTiered charges\n: Similar to metered charges, you pay based on your runtime and service consumption. However, tiered charges add more pricing tiers, often offering discounted charges in tiers with larger consumption. Tiered pricing is offered in simple, graduated, or block.\n\n\n\n Simple tier \n\nIn the simple tier model, the unit price is determined by the tier that the quantity of your usage falls into. The total price is your quantity that is multiplied by the unit price in that tier, for example:\n\n\n\nTable 2. Simple tier pricing table\n\n Quantity of Items Unit Price for All Items",
+          "url": "https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-charges",
+          "score": 14.43134,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724723880
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "charges vary depending on the resources that are used by a particular service"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03729-1672-3956",
+          "text": "\nServices For Bare Metal Servers, there are fixed plans to choose from, and those plans are charged at a fixed monthly rate. \n Metered Usage is a unit-based pricing model in which you pay for what you consume. In this case, the number of GB hours that are consumed for runtimes and the number of IP addresses and storage that is consumed for containers. Services, Compute, and Containers For Push Notifications, any usage that is consumed over the free monthly allowance of 100,000 digital messages per month, will be charged. \n Tiered In this pricing model, you get a volumed-based discount according to your actual usage. Tiered pricing is typically used for charge metrics that are expected to have high quantities per month, such as API calls. Services might offer simple, graduated, or block tier pricing plans. Services For API Connect, one of the tiered plans charges $10,000 for the first 25 million monthly API calls and $40.00 USD per 100,000 API calls per month thereafter. \n Reserved Reserved pricing is based on a long-term commitment for a service, so you can get a discounted price. With a reserved plan, you get a dedicated service instance that is easy to set up, deploy, and deliver in the public IBM Cloud environment. Services Db2 on Cloud has reserved plans. \n\n\n\n\n\n Understanding monthly and hourly tags \n\nOn the usage dashboard, your products and resources can be labeled with Monthly, Hourly, or a combination of both tags to signify how often charges are updated.\n\nThe Monthly tag signifies that resources within your account have a fixed cost. These charge show up immediately after purchase and are prorated in proportion to how many days are left in the month. Any recurring monthly fixed costs are then shown at the first of every month.\n\nThe Hourly tag signifies that resources within your account have variable costs. These resources are updated daily.\n\n\n\n\n\n Lite plans \n\nLite plans are structured as a free quota. You can work on your projects worry free, without the risk of generating an accidental bill. The quota might operate for a specific time period, for example a month, or on a one-off usage basis. The following list provides some examples of Lite plan quotas:\n\n\n\n* Maximum number of registered devices\n* Maximum number of application bindings",
+          "url": "https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-charges",
+          "score": 13.6616535,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724723881
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "charges vary depending on the resources that are used by a particular service"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "speaker": "user",
+      "text": "I want to update my pricing plan and view my usage ",
+      "timestamp": 1724724209,
+      "enrichments": {
+        "Question Type": [
+          "Composite",
+          "Non-Question"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "To update your pricing plan: First, navigate to the IBM Cloud console, go to the Resource List, and select the service. Then, click on Plan in the service instance dashboard and select the pricing plan you want. Finally, click Save. However, some services might require assistance from the IBM Cloud Sales team or a migration before you can update plans. You can view your usage details from the billing and usage dashboard or from the Usage page in the console. This includes a summary of estimated charges for all services and resources used per month in your organizations. To view usage for all resources in the account, you need an access policy with the Administrator role on the Billing account management service. To view usage only for specific IBM Cloud Identity and Access Management (IAM) resources, you need the Viewer role on the resource group. To view usage only for specific Cloud Foundry services, the Billing manager role must be applied at the org level.",
+      "timestamp": 1724724222,
+      "contexts": [
+        {
+          "document_id": "ibmcld_12809-7-1712",
+          "text": "\nChanging a pricing plan \n\nIf you already submitted a pricing plan and you need to make changes, you must open a support case. Changing a submitted pricing plan can take at least a full billing cycle.\n\nTo open a support case to change your pricing plan, complete the following steps:\n\n\n\n1. Click the Help icon ![Help icon](https://cloud.ibm.com/docs-content/v1/content/ff5860bfede49db3197c4bbba7f7123769bdc068/icons/help.svg) > Support center from the console menu bar.\n2. Click Create a case.\n3. Select Account > Partner Center - Sell. Then, select Partner Center - Sell Price Change as the subtopic.\n4. Click Next.\n5. Enter a case subject line following this format: Your product name Price Change Request.\n6. Provide the following details in the case description:\n\n\n\n* Service ID\n* Plan IDs\n* Intended Delivery Date\n* Link to Partner Center Entry\n* Metric ID\n* Price Change To\n\n\n\n7. Click Next.\n\nTo maintain security, do not include any personal information, sensitive data, or device or service credentials. For example, don't include passwords, API keys, secrets, or credit card information.\n8. Review your case summary, and click Submit case.\n\n\n\nYou will receive an email notification that your case was successfully submitted.\n\nAccording to [the IBM Cloud Services Agreement](https://www.ibm.com/support/customer/csol/terms/?id=Z126-6304&cc=us&lc=endetail-document), we are required to provide our customers with a 30-day notice of any price changes. After you submit your support case, you must email the onboarding specailists at [cloud.onboarding@ibm.com](mailto:cloud.onboarding@ibm.com) to help draft this notification. Client notifications will be sent out on the first of the following month.",
+          "url": "https://cloud.ibm.com/docs/sell?topic=sell-change-plan",
+          "score": 13.882489,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724724292
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Updating your pricing plan"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03727-4-1792",
+          "text": "\n* UI\n* CLI\n* API\n\n\n\n\n\n\n\n Updating your pricing plan \n\nYou can update the pricing plan of an IBM Cloud\u00ae service if plan updates are enabled for that specific service. For example, you might want to upgrade or reduce your pricing plan. You can update the service's pricing plan from the service instance dashboard.\n\nAre you looking for details about upgrading your account type? See [Upgrading your account](https://cloud.ibm.com/docs/account?topic=account-upgrading-account) for more information.\n\nYou can update the pricing plan only for certain services. If plan updates are enabled for the service, a Plan option is displayed on the service instance dashboard. Each service has a different set of steps to follow if you update your plan.\n\n\n\n Updating a plan in the console \n\n\n\n1. From the IBM Cloud console, click the Navigation Menu icon ![Navigation Menu icon](https://cloud.ibm.com/docs-content/v1/content/9713d864488177dc6b273b53b7f2383a81f10bc1/icons/icon_hamburger.svg) > Resource List, and select the service.\n2. Click Plan in the service instance dashboard. Select the pricing plan that you want, and click Save.\n\nSome services have pricing plans that are not selectable from the Plan page. Typically, these plans aren't selectable because they require assistance from the IBM Cloud Sales team or they require a migration before you can update plans. See the documentation for the specific service for information about the required next steps.\n\n\n\nDepending on the type of plan updates you make, your next steps can vary. For example, if you reduced the pricing plan, restart your app. Or, if you upgraded the pricing plan, you might need to restart your app, and then take other actions.\n\nComplete the following steps to restart your app:\n\n\n\n1. Click the Navigation Menu icon !",
+          "url": "https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-changing",
+          "score": 13.469847,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724724291
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Updating your pricing plan"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03800-4-2250",
+          "text": "\n* UI\n* CLI\n* API\n\n\n\n\n\n\n\n Viewing your usage \n\nYou can view your IBM Cloud\u00ae usage details from the billing and usage dashboard or from the Usage page in the console. Your usage details include a summary of estimated charges for all services and resources that are used per month in your organizations.\n\n\n\n Before you begin \n\nEnsure that you have the required access to view usage data for the resources. Access can be assigned at the account-level or to individual resource groups and Cloud Foundry orgs.\n\n\n\n* To view usage for all resources in the account, you need an access policy with the Administrator role on the Billing account management service.\n* To view usage only for specific IBM Cloud\u00ae Identity and Access Management (IAM) resources, you need the Viewer role on the resource group.\n* To view usage only for specific Cloud Foundry services, the Billing manager role must be applied at the org level. Billing managers can see the details for only the organizations in which they are assigned the Billing manager role.\n\n\n\nYou can limit the access to view the usage for a specific resource group by assigning the viewer role or higher on all Identity and Access enabled services within that resource group.\n\nFor more information about access roles, see [IAM access](https://cloud.ibm.com/docs/account?topic=account-userroles) and [Cloud foundry access](https://cloud.ibm.com/docs/account?topic=account-cfaccess).\n\n\n\n\n\n Viewing service usage details in the console \n\nThe usage summary widget provides a view of your month-to date-spending, last month spending, average monthly spending, and next month's predicted usage at a glance. For a more granular view of your usage and specific costs that are associated with services, view your usage from the usage page.\n\n\n\n Viewing usage details from the usage summary widget \n\nIn the usage summary widget on the billing and usage dashboard, you get view of your actual and predicted spending trends.\n\nThe predicted usage for the next month is calculated by finding the trend from the usage of the last three months, including the current month. For example, if it's August, predicted usage is calculated based on usage trends in June, July, and August to find the predicted usage for September.",
+          "url": "https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-viewingusage",
+          "score": 19.475752,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724724290
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "usage details from the billing and usage dashboard"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "To update your pricing plan, you can follow the steps mentioned in the document. First, navigate to the IBM Cloud console, go to the Resource List, and select the service. Then, click on Plan in the service instance dashboard and select the pricing plan you want. Finally, click Save. However, some services might require assistance from the IBM Cloud Sales team or a migration before you can update plans. After updating your plan, you can view your usage details from the billing and usage dashboard or from the Usage page in the console. This includes a summary of estimated charges for all services and resources used per month in your organizations. To view usage for all resources in the account, you need an access policy with the Administrator role on the Billing account management service. To view usage only for specific IBM Cloud Identity and Access Management (IAM) resources, you need the Viewer role on the resource group. To view usage only for specific Cloud Foundry services, the Billing manager role must be applied at the org level."
+    },
+    {
+      "speaker": "user",
+      "text": "am I charged for those support costs as well?",
+      "timestamp": 1724725540,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Based on your resource usage, there can be additional costs for support beyond the starting price. The higher your resource usage, the higher your total support cost. If you have Advanced or Premium support, you can view your monthly support costs from the Support costs page in the IBM Cloud console.",
+      "timestamp": 1724725544,
+      "contexts": [
+        {
+          "document_id": "ibmcld_08067-0-1736",
+          "text": "\n\n\n\n\n\n\n  Viewing your support costs \n\nIf you have Advanced or Premium support, you can keep track of your monthly support costs from the Support costs page in the IBM Cloud\u00ae console.\n\n\n\n  How you're charged for support \n\nEach [IBM Cloud support plan](https://cloud.ibm.com/docs/get-support?topic=get-support-support-plans) has a minimum monthly price for providing support for your cloud workload at the stated service level. Beyond this starting price, any additional costs for support are based on your resource usage. The higher your resource usage, the higher your total support cost. For details about your purchased support plan, contact [IBM Cloud Sales](https://www.ibm.com/cloud?contactmodule).\n\n\n\n\n\n  Viewing support costs \n\nTo view your support costs, you need an access policy with the Administrator role on the Billing account management service. For more information about access roles, see [IAM access](https://cloud.ibm.com/docs/account?topic=account-userroles).\n\nIn the IBM Cloud console, go to Manage > Billing and usage, and select Support costs. You can view your support plan and relevant cost details:\n\n\n\n*  If your support costs are billed monthly, you can view your costs for the current month. These costs include the starting price for the plan and any additional costs from your resource usage. After each billing cycle, these charges are added to your monthly invoice.\n*  If you have a support subscription, you can view the remaining credit in your active subscriptions and any overages for the current month. Overage is charged if you run out of credit in your active subscriptions. You can also view upcoming support subscriptions, which are subscriptions that you bought but are not yet valid.\n\n\n\n\n\n\n\n\n\n\n\n",
+          "url": "https://cloud.ibm.com/docs/get-support?topic=get-support-support",
+          "score": 16.46965,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724725596
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Viewing your support costs"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, support costs are also part of the billing and are based on your resource usage. The higher your resource usage, the higher your total support cost. If you have Advanced or Premium support, you can view your monthly support costs from the Support costs page in the IBM Cloud console."
+    },
+    {
+      "speaker": "user",
+      "text": "what is the process of managing my payments?",
+      "timestamp": 1724725683,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "To manage your payments, you can use the [Payments](https://cloud.ibm.com/billing/payments) page in the IBM Cloud\u00ae console or go to [IBM\u00ae Billing](https://myibm.ibm.com/billing/). Depending on your account type, you may need to be assigned the operator role or higher on the billing account management service. For new US-based Pay-As-You-Go accounts with credit card billing, you can add multiple cards, replace the default card, or edit card details from the [Payments](https://cloud.ibm.com/billing/payments) page.  If you're using a payment method other than a credit card, you can switch to your payment method by going to the same page, clicking 'Payment method', selecting 'Pay with Other', and submitting a change request. Some payment methods may not be accepted as recurring payment methods and must be manually submitted each month.\n",
+      "timestamp": 1724725687,
+      "contexts": [
+        {
+          "document_id": "ibmcld_03765-7-1896",
+          "text": "\nManaging payments \n\nDepending on your account type, you can easily manage your payment methods by using the [Payments](https://cloud.ibm.com/billing/payments) page in the IBM Cloud\u00ae console or by going to [IBM\u00ae Billing](https://myibm.ibm.com/billing/).\n\nA valid credit card is required for all Pay-As-You-Go and Subscription accounts. Every month, the credit card is charged with the usage amount that is accumulated during that month. When updates to your payment details are approved, they are applied to your account within 24 hours. The contact that is specified in the billing address section receives an email confirming that the updates are applied.\n\nYou can contact IBM Cloud Support to get help with payment-related issues. From the console menu bar, click the Help icon ![Help icon](https://cloud.ibm.com/docs-content/v1/content/9713d864488177dc6b273b53b7f2383a81f10bc1/icons/help.svg) > Support center, and then click Create a case to get in touch.\n\n\n\n Before you begin \n\nTo manage payments, you need to be assigned the operator role or higher on the billing account management service. See [Assigning access to account management services](https://cloud.ibm.com/docs/account?topic=account-account-services) for more information.\n\n\n\n\n\n Managing payment methods for new US-based Pay-As-You-Go accounts with credit card billing \n\nIf you're a new Pay-As-You-Go account owner that is located in the US and you are paying with a credit card, can you add multiple cards to the account, replace your default card with a saved one, or edit the details of a card. You manage your credit card from the [Payments](https://cloud.ibm.com/billing/payments) page in the IBM Cloud console.\n\nComplete the following steps to add a new payment method to the account:\n\n\n\n1. Click Add payment method.\n2. Enter the card details, and click Save. Updates to your card details are reflected immediately.",
+          "url": "https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-linkedusage",
+          "score": 17.665741,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724726869
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Depending on your account type, you can easily manage your payment methods by"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03765-1346-3055",
+          "text": "\nIf you're a new Pay-As-You-Go account owner that is located in the US and you are paying with a credit card, can you add multiple cards to the account, replace your default card with a saved one, or edit the details of a card. You manage your credit card from the [Payments](https://cloud.ibm.com/billing/payments) page in the IBM Cloud console.\n\nComplete the following steps to add a new payment method to the account:\n\n\n\n1. Click Add payment method.\n2. Enter the card details, and click Save. Updates to your card details are reflected immediately.\n\n\n\nYou can\u2019t enter a PO Box as the billing address.\n\nWhen you add a new credit card, it becomes the default credit card. Recurring payments are charged to the default payment method.\n\nComplete the following steps to edit your active payment method:\n\n\n\n1. Click the Actions icon ![Actions icon](https://cloud.ibm.com/docs-content/v1/content/9713d864488177dc6b273b53b7f2383a81f10bc1/icons/action-menu-icon.svg) > Edit menu.\n2. To edit the billing address, click Edit and update the billing address.\n3. To edit the card details, click Edit and update the card number or expiration date.\n\n\n\nYou can only have one address that's associated with your payment methods. All credit cards in the account will be updated to the same address.\n\nComplete the following steps to set a new default payment method:\n\n\n\n1. Click the Actions icon ![Actions icon](https://cloud.ibm.com/docs-content/v1/content/9713d864488177dc6b273b53b7f2383a81f10bc1/icons/action-menu-icon.svg) > Set as default.\n2. Confirm that you want to make this payment method the default. The default payment method is charged for recurring payments\n\n\n\n\n\n\n\n Managing payment methods for all other accounts",
+          "url": "https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-linkedusage",
+          "score": 23.059921,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724726871
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "If you're a new Pay-As-You-Go account owner that is located in the US and you are paying with a credit card"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03765-2725-4571",
+          "text": "\n[Actions icon](https://cloud.ibm.com/docs-content/v1/content/9713d864488177dc6b273b53b7f2383a81f10bc1/icons/action-menu-icon.svg) > Set as default.\n2. Confirm that you want to make this payment method the default. The default payment method is charged for recurring payments\n\n\n\n\n\n\n\n Managing payment methods for all other accounts \n\nThe steps to update your credit card apply to the following types of accounts:\n\n\n\n* New and existing Pay-As-You-Go accounts based in the US with any payment method other than a credit card\n* New and existing Pay-As-You-Go accounts not based in the US\n* New and existing Subscription accounts worldwide\n\n\n\n\n\n1. Go to the [Payments](https://cloud.ibm.com/billing/payments) page in the IBM Cloud console.\n2. In the Add Payment Method section, enter the billing information for your new card, and click Add credit card.\n\n\n\nThe process for updating a credit card requires a manual review that might take a few days to process. To view your open change request cases, go to [IBM Cloud Support](https://cloud.ibm.com/unifiedsupport/supportcenter).\n\nAmerican Express can't be used as a payment method for India, Singapore, and South Africa based accounts that are billed in US dollars.\n\n\n\n Updating your payment methods \n\nIf you're using a payment method that's not a credit card, complete the following steps to switch to your payment method:\n\n\n\n1. Go to the [Payments](https://cloud.ibm.com/billing/payments) page in the IBM Cloud console.\n2. Click Payment method.\n3. In the Add Payment Method section, select Pay with Other, and click Submit change request. A support case to change your payment method is then created for you.\n\n\n\nSome payment methods aren't accepted as recurring payment methods. You must manually submit the payment each month.\n\n\n\n\n\n India-based customers with accounts that are billed in US Dollars",
+          "url": "https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-linkedusage",
+          "score": 15.118496,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724726904
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "The steps to update your credit card apply to the following types of account"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "To manage your payments, you can use the [Payments](https://cloud.ibm.com/billing/payments) page in the IBM Cloud\u00ae console or go to [IBM\u00ae Billing](https://myibm.ibm.com/billing/). Depending on your account type, you may need to be assigned the operator role or higher on the billing account management service. For new US-based Pay-As-You-Go accounts with credit card billing, you can add multiple cards, replace the default card, or edit card details from the [Payments](https://cloud.ibm.com/billing/payments) page.\nFor all other accounts, you can update your credit card by going to the [Payments](https://cloud.ibm.com/billing/payments) page, entering the new billing information, and clicking 'Add credit card'. Note that updating a credit card requires manual review and may take a few days to process. American Express cannot be used as a payment method for India, Singapore, and South Africa based accounts billed in US dollars.\nIf you're using a payment method other than a credit card, you can switch to your payment method by going to the [Payments](https://cloud.ibm.com/billing/payments) page, clicking 'Payment method', selecting 'Pay with Other', and submitting a change request. Some payment methods may not be accepted as recurring payment methods and must be manually submitted each month.\nIndia-based customers with accounts billed in US Dollars should note that there may be specific requirements or restrictions for their accounts."
+    },
+    {
+      "speaker": "user",
+      "text": "view my invoices and status",
+      "timestamp": 1724727067,
+      "enrichments": {
+        "Question Type": [
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "To manage and view your invoices, visit the Invoices page from the billing and usage dashboard in the IBM Cloud\u00ae console. To view your invoices, you need to be assigned the operator role or higher on the billing account management service.  These are the status of invoices: Invoiced: You received the latest invoice from IBM Cloud. Paid: Your payment for the charges on your latest invoice was received. Unpaid: The charges on your latest invoice have not been paid. Pending: Your payment for your latest charges has not been applied due to a payment processing error. You can view and download your invoice from the IBM console by clicking the Download icon. The invoice is available as a simplified PDF, a detailed PDF, or as an excel spreadsheet.",
+      "timestamp": 1724727074,
+      "contexts": [
+        {
+          "document_id": "ibmcld_03771-7-2029",
+          "text": "\nViewing your invoices \n\nTo manage and view your invoices, visit the [Invoices](https://cloud.ibm.com/billing/invoices) page from the billing and usage dashboard in the IBM Cloud\u00ae console. If your account is billed through a separate billing platform, you can see the following message on the Invoices page:\n\nThe account is invoiced on a separate billing platform. This page reflects only classic infrastructure charges. To view your official invoice and for any pricing inquiries, visit IBM Invoices.\n\nIn these situations, visit the [Invoices@IBM](http://ibm.com/invoices) website to see your invoices.\n\n\n\n Before you begin \n\nTo view your invoices, you need to be assigned the operator role or higher on the billing account management service. For more information, see [Assigning access to account management services](https://cloud.ibm.com/docs/account?topic=account-account-services).\n\n\n\n\n\n Viewing invoices for new US-based Pay-As-You-Go accounts with credit card billing \n\nNew IBM Cloud Pay-As-You-Go accounts for US customers with credit card billing can now view all classic infrastructure and platform services on one invoice. In the IBM Cloud console, go to Manage > Billing and usage, and select Invoices.\n\nThe new invoice hierarchy highlights the most important details. By showcasing when the usage is measured, you can view each invoice\u2019s billing period in a clarified and comprehensive manner. The adjustments section on your invoice provides details about credits and adjustments from previous billing periods that might be included on an invoice from a different month.\n\nThe charges on your invoice are consistent with the usage dashboard. On the Invoices page in the console, click View usage to be directed to your usage dashboard. From there, you can select a timeframe and view billing and usage information that aligns directly with the details in your invoice.\n\n\n\n Checking your invoice status \n\nYou can check the status of your invoice on the [Invoices page](https://cloud.ibm.com/billing/invoices):",
+          "url": "https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-managing-invoices",
+          "score": 18.596815,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724727133
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "To manage and view your invoices, visit the Invoices page from"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03771-1594-3365",
+          "text": "\nThe charges on your invoice are consistent with the usage dashboard. On the Invoices page in the console, click View usage to be directed to your usage dashboard. From there, you can select a timeframe and view billing and usage information that aligns directly with the details in your invoice.\n\n\n\n Checking your invoice status \n\nYou can check the status of your invoice on the [Invoices page](https://cloud.ibm.com/billing/invoices):\n\n\n\n* Invoiced: You received the latest invoice from IBM Cloud.\n* Paid: Your payment for the charges on your latest invoice was received.\n* Unpaid: The charges on your latest invoice have not been paid.\n* Pending: Your payment for your latest charges has not been applied due to a payment processing error. In this case, you can contact IBM Cloud Support for more details about the error.\n\n\n\nTurning a resource \"off\" doesn't cancel the resource in your account. You will receive invoices for resources in your account until you cancel them. For more information, see [Cancelling your billing items](https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-cancel-billing-items).\n\n\n\n\n\n Viewing and downloading your invoice \n\nView and download your invoice from the IBM console by clicking the Download icon ![Download icon](https://cloud.ibm.com/docs-content/v1/content/9713d864488177dc6b273b53b7f2383a81f10bc1/icons/download.svg)> PDF invoice next to each invoice. For some accounts, invoices are available through the [Invoices@IBM](http://ibm.com/invoices) website. See the [Viewing and downloading invoices for all other accounts](https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-managing-invoicesviewing-external-invoices) section for more information.\n\n\n\n\n\n\n\n Viewing and downloading invoices for all other accounts",
+          "url": "https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-managing-invoices",
+          "score": 19.023876,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724727134
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "invoiced: You received the latest invoice from IBM Cloud."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16727-1066874-1068548",
+          "text": "\n[Download icon](https://cloud.ibm.com/icons/download.svg) and choose an invoice format. You can download an invoice as a simplified PDF, a detailed PDF, or as an excel spreadsheet. In some cases, you are redirected to the [IBM Invoices website](https://www.ibm.com/invoices) where you can download your invoices. From the Invoices page, click the Actions icon ![Actions icon](https://cloud.ibm.com/icons/action-menu-icon.svg) and select the invoice format. You can download an invoice as a simplified PDF, a detailed PDF, or as an excel spreadsheet.\n* Is paperless invoicing available?\n\nYes, you can switch to paperless invoices by submitting a request on the [IBM Customer Support site](https://www.ibm.com/support/customer/zz/en/selectcountrylang.html). For more information, see [Requesting paperless invoices](https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-managing-invoicesrequest-paperless-invoices).\n* What are the adjustments that are shown on my invoice?\n\nThe adjustments section of your current invoice includes charges or credits from previous billing periods that weren't included on your previous invoice.\n* How do I know if my invoice is paid?\n\nIf you manage your invoices through the IBM Console, you can see the invoice status by clicking Manage > Billing and usage, and selecting Invoices. When the invoice is paid, the status is Closed. If your invoices are managed through the [IBM Invoices website](https://www.ibm.com/invoices), it's paid when the status is Settled.\n* How do I add subscription credit to my account?\n\nAfter you purchase a subscription, you'll receive an email with a subscription code that adds the credit to your account.",
+          "url": "https://cloud.ibm.com/docs?tab=faqs",
+          "score": 20.387905,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724727156
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "iew and download your invoice from the IBM console by clicking the Download"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03771-2998-4769",
+          "text": "\nFor some accounts, invoices are available through the [Invoices@IBM](http://ibm.com/invoices) website. See the [Viewing and downloading invoices for all other accounts](https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-managing-invoicesviewing-external-invoices) section for more information.\n\n\n\n\n\n\n\n Viewing and downloading invoices for all other accounts \n\nIf you own one of the following accounts, you can view your invoice on the [Invoices@IBM](http://ibm.com/invoices) website, which is linked from the [Invoices page](https://cloud.ibm.com/billing/invoices) in the IBM console.\n\n\n\n* New and existing Pay-As-You-Go accounts that are based in the US with any payment method other than a credit card\n* New and existing Pay-As-You-Go accounts not based in the US\n* New and existing Subscription accounts worldwide\n\n\n\nTo save a copy of your invoice, click the PDF icon in the Invoice Number column. Then, click the Download icon ![Download icon](https://cloud.ibm.com/docs-content/v1/content/9713d864488177dc6b273b53b7f2383a81f10bc1/icons/download.svg).\n\n\n\n Getting access to Invoices@IBM \n\nIf you are attempting to access the [Invoices@IBM](http://ibm.com/invoices) website for the first time, you can sign up with your IBMid, complete your profile, and provide your IBM customer number to access your account. Your IBM customer number is used for identification purposes during your registration process with the IBM Invoices page and during other interactions with [IBM Support](https://www.ibm.com/support/home/).\n\nTo ensure that access is granted to the correct individuals, you must register using an email address that includes your company's domain, such as ibm.com. Requests using personal, non-company-specific email addresses might not be approved.",
+          "url": "https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-managing-invoices",
+          "score": 16.974052,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724727192
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "If you own one of the following accounts, you can view your invoice on the Invoices"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "To view your invoices and their status, you can follow these steps:\n1. Log in to the IBM Cloud console.\n2. Click on \"Manage\" in the top navigation bar, then select \"Billing and usage\" from the dropdown menu.\n3. Click on \"Invoices\" in the left-hand navigation menu.\nOn this page, you will see a list of your invoices with their respective statuses. The possible statuses include \"Invoiced\", \"Paid\", \"Unpaid\", and \"Pending\". If you want to view the details of a specific invoice, you can click on its invoice number.\nAlternatively, if you are using the Invoices@IBM website, you can view your invoices and their statuses by signing in with your IBMid, completing your profile, and providing your IBM customer number. From there, you can access your account and view your invoices and their statuses."
+    },
+    {
+      "speaker": "user",
+      "text": "Why do you think I can not apply a subscription code?",
+      "timestamp": 1724727493,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "You might not be able to apply a subscription code because you don't have the required access in the account or the code expired. To successfully apply a subscription code, you must have an Editor role or higher on all account management services. If the expired code needs to be reissued, you would need to contact the person who provided the code for help with reissuing a new one.",
+      "timestamp": 1724727496,
+      "contexts": [
+        {
+          "document_id": "ibmcld_03710-0-838",
+          "text": "\n\n\n\n\n\n\n  Why can't I apply a subscription code? \n\nTo successfully apply a subscription code, make sure the code is valid and you have the required access.\n\n  What\u2019s happening \n\nWhen you try to apply a subscription code, you see an error that states that the code cannot be applied.\n\n  Why it\u2019s happening \n\nYou might see this error if you don't have the required access in the account or the code expired.\n\n  How to fix it \n\nUse the following options:\n\n\n\n*  Verify that you have access to apply the code. To apply any code, you must have an Editor role or higher on all account management services. To view or change roles, see [Assigning access to account management services](https://cloud.ibm.com/docs/account?topic=account-account-services).\n*  Contact the person who provided the code for help with reissuing an expired code.\n\n\n\n\n\n\n\n\n\n",
+          "url": "https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-cannot-apply-subscription-code",
+          "score": 26.67136,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724727867
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "To successfully apply a subscription code, make sure the code is valid and you have the required access"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Based on the document provided, you might not be able to apply a subscription code because you don't have the required access in the account or the code expired. To successfully apply a subscription code, you must have an Editor role or higher on all account management services. If the code has expired, you would need to contact the person who provided the code for help with reissuing a new one."
+    },
+    {
+      "speaker": "user",
+      "text": "what about why can't I apply a feature code?",
+      "timestamp": 1724727619,
+      "enrichments": {
+        "Question Type": [
+          "Troubleshooting"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "You might not be able to apply a feature code because your account doesn't meet the requirements for the feature code, you don't have the required access in the account, or the code expired. To successfully apply a feature code, you must have an Editor role or higher on all account management services. If the expired code needs to be reissued, you would need to contact the person who provided the code for help.",
+      "timestamp": 1724727631,
+      "contexts": [
+        {
+          "document_id": "ibmcld_03709-0-1479",
+          "text": "\n\n\n\n\n\n\n  Why can't I apply a feature code? \n\nTo successfully apply a feature code, make sure the code is valid and that you have the correct account type.\n\n  What\u2019s happening \n\nWhen you try to apply a feature code, you see an error that states that the code cannot be applied.\n\n  Why it\u2019s happening \n\nYou might see this error for any of the following reasons:\n\n\n\n*  Your account doesn't meet the requirements for the feature code.\n*  You don't have the required access in the account.\n*  The code expired.\n\n\n\n  How to fix it \n\nUse the following steps to successfully apply a feature code:\n\n\n\n*  Verify that you have the correct account type. For example, some feature codes for educational promotions are only for Lite accounts. To view your account type, in the IBM Cloud\u00ae console, go to Manage > Account, and select Account settings. For more information, see [Applying feature codes](https://cloud.ibm.com/docs/account?topic=account-codes).\n*  Verify that you have access to apply the code. To apply any code, you must have an Editor role or higher on all account management services. To view or change roles, see [Assigning access to account management services](https://cloud.ibm.com/docs/account?topic=account-account-services).\n*  Contact the person who provided the code for help with reissuing an expired code.\n*  If you are unable to apply a feature code that you received from an educational provider, contact that educational provider for further assistance.\n\n\n\n\n\n\n\n\n\n",
+          "url": "https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-cannot-apply-feature-code",
+          "score": 22.143003,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724727862
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Why can't I apply a feature code"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "You might not be able to apply a feature code because your account doesn't meet the requirements for the feature code, you don't have the required access in the account, or the code expired. To successfully apply a feature code, you must have an Editor role or higher on all account management services. If the expired code needs to be reissued, you would need to contact the person who provided the code for help with reissuing a new one. This information is based on the document provided."
+    },
+    {
+      "speaker": "user",
+      "text": "I also tried to update my credit card, but it keeps showing errors",
+      "timestamp": 1724727794,
+      "enrichments": {
+        "Question Type": [
+          "Non-Question",
+          "Troubleshooting"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I'm sorry to hear that you're having trouble updating your credit card. Can you please let me know the error you are seeing? It can be like \"Could not place order. Problem authorizing the credit card. We are unable to process your request: Transaction Rejected; Could not place order. Problem authorizing the credit card. We're afraid this transaction has been rejected; or Failed to complete the Change Request process due to the following error: We are unable to process your request: Transaction Rejected.\" ",
+      "timestamp": 1724727803,
+      "contexts": [
+        {
+          "document_id": "ibmcld_03713-7-2194",
+          "text": "\nCredit Card error messages \n\nAn issue might occur when you try to update, add, or remove a credit card. Review the following credit card error messages for detailed self-help information.\n\n\n\n Why was my credit card transaction rejected? \n\nProtecting your identity is a priority and IBM Cloud takes credit card verification seriously.\n\n What\u2019s happening \n\nAn issue occurred that caused the transaction to fail. For example, the name and address on file with IBM Cloud doesn't match the information on file with the company that issued your credit card. This error might prompt the following message:\n\n> Error: Could not place order. Problem authorizing the credit card. We are unable to process your request: Transaction Rejected\n\n Why it\u2019s happening \n\nSomething went wrong when verifying your credit card, and the transaction wasn't successful.\n\n How to fix it \n\nTo ensure that your credit card verification is successful, complete the following steps:\n\n\n\n1. Verify that the name and address for your IBM Cloud account matches the name and address on file with your credit card issuer.\n2. Verify that the country associated with a VAT or tax identification number matches the country in your IBM Cloud account. For example, a VAT ID registered in France can't be associated with an IBM Cloud account that is registered in Finland.\n3. Verify that you are creating a business account and not a personal account if you are specifying a VAT ID or tax identification number.\n4. Review the error message that was displayed. If your transaction was rejected and an email address was not provided, contact your credit card issuer.\n5. Contact us by calling 1-866-325-0045 and selecting the third option.\n\n\n\n\n\n\n\n Why do I get an error when I try to update my credit card? \n\nYou tried to change your payment method by adding a new credit card in the IBM Cloud console [Payments page](https://cloud.ibm.com/billing/payments).\n\n What\u2019s happening \n\nAfter you entered your credit card information and saved it, the following message displayed:\n\n> Failed to complete the Change Request process due to the following error: We are unable to process your request: Transaction Rejected.\n\n Why it\u2019s happening",
+          "url": "https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-cc-error-messages",
+          "score": 23.025703,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724727852
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Credit card error messages"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03713-1710-3705",
+          "text": "\nWhy do I get an error when I try to update my credit card? \n\nYou tried to change your payment method by adding a new credit card in the IBM Cloud console [Payments page](https://cloud.ibm.com/billing/payments).\n\n What\u2019s happening \n\nAfter you entered your credit card information and saved it, the following message displayed:\n\n> Failed to complete the Change Request process due to the following error: We are unable to process your request: Transaction Rejected.\n\n Why it\u2019s happening \n\nSomething went wrong when verifying your credit card, and the update wasn't successful.\n\n How to fix it \n\nGo to the [Support Center](https://cloud.ibm.com/unifiedsupport/supportcenter) and click Create a case.\n\n\n\n\n\n Why was there a general decline of my credit card? \n\n What\u2019s happening \n\nYou tried to make a payment or place an order in the IBM Cloud console [Payments page](https://cloud.ibm.com/billing/payments), but you get the following error message:\n\n> Could not place order. Problem authorizing the credit card. We're afraid this transaction has been rejected. General decline of the card. No other information provided by the issuing bank.\n\n Why it\u2019s happening \n\nYour credit card issuer has declined the transaction.\n\n How to fix it \n\nContact your credit card issuer for more information.\n\n\n\n\n\n Why is my credit card inactive or not authorized? \n\n What\u2019s happening \n\nYou tried to make a payment or place an order in the IBM Cloud console [Payments page](https://cloud.ibm.com/billing/payments), but you get the following error message:\n\n> Could not place order. Problem authorizing the credit card. We're afraid this transaction has been rejected. Inactive card or card not authorized for card-not-present transactions.\n\n Why it\u2019s happening \n\nSome credit card issuers don't allow transactions when it is being initiated by using a credit card on file. You might see this error message if your credit card has been deactivated.\n\n How to fix it \n\nContact your credit card issuer for more information.",
+          "url": "https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-cc-error-messages",
+          "score": 15.309903,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724727916
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Why was there a general decline of my credit card?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03713-4689-6647",
+          "text": "\nContact the Cloud Trust and Enablement team by email at [verify@us.ibm.com](mailto:verify@us.ibm.com).\n\n\n\n\n\n Why was my change request rejected? \n\n What\u2019s happening \n\nYou tried to place an order in the IBM Cloud console [Payments page](https://cloud.ibm.com/billing/payments), but you get one of the following error messages:\n\n> Failed to complete the Change Request process due to the following error: We're afraid this transaction has been rejected. Invalid account number.\n\nor\n\n> Failed to complete the Change Request process due to the following error: We are unable to process your request: Transaction Rejected.\n\n Why it\u2019s happening \n\nYour credit card number was not recognized by your credit card issuer.\n\n How to fix it \n\nContact your credit card issuer for more information.\n\n\n\n\n\n Why was my change request rejected because of a VAT ID? \n\n What\u2019s happening \n\nYou tried to complete a change request IBM Cloud console [Payments page](https://cloud.ibm.com/billing/payments), but you get the following error message:\n\n> Failed to complete the Change Request process due to the following error: VAT ID is a required field for ...\n\n Why it\u2019s happening \n\nYour VAT ID, CST or other tax identification number cannot be validated.\n\n How to fix it \n\n\n\n1. Verify that tax identification number is valid.\n2. Verify that the tax identification number is associated with the same country as the physical country of residence in your IBM Cloud profile.\n3. Verify whether a VAT ID is required to create an IBM Cloud account in your country of residence. For more information, see [Personal use availability](https://cloud.ibm.com/docs/account?topic=account-account-getting-startedsignup-personalaccts).\n4. Verify that you are creating the correct account type: personal or business.\n\n\n\n\n\n\n\n Why was there an error in the payment process? \n\n What\u2019s happening \n\nAn issue occurred that caused the payment process to fail. This error might prompt the following message:",
+          "url": "https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-cc-error-messages",
+          "score": 18.884499,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724727939
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Why was my change request rejected?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03713-7896-8949",
+          "text": "\nSubmit your account upgrade information again. If the error continues to occur, you can contact [IBM Cloud Support](https://cloud.ibm.com/unifiedsupport/supportcenter).\n\n\n\n\n\n Why can't I save my credit card to the account? \n\n What\u2019s happening \n\nAn issue occurred that caused the payment process to fail. This error might prompt the following message:\n\n> Your card could not be saved. Please try another card.\n\n Why it\u2019s happening \n\nYour card information was incorrect.\n\n How to fix it \n\nUse a different credit card to process your transaction.\n\n\n\n\n\n Why was my credit card declined? \n\n What\u2019s happening \n\nAn issue occurred that caused your credit card to decline. This error might prompt the following message:\n\n> Your payment was declined for invoice number\u2026\n\n Why it\u2019s happening \n\nYou have a credit card on file and it was declined.\n\n How to fix it \n\nUpdate your credit card information on the [Payments page](https://cloud.ibm.com/billing/payments). Credit card transactions are automatically retried within 24 hours after you update the information.",
+          "url": "https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-cc-error-messages",
+          "score": 17.708853,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724728167
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Why was my credit card declined?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "I'm sorry to hear that you're having trouble updating your credit card. The error could be caused by various reasons such as incorrect information, mismatched billing addresses, or issues with your credit card. Here are some steps you can take to troubleshoot the problem:\n1. Verify that the name and address for your IBM Cloud account matches the name and address on file with your credit card issuer.\n2. Ensure that the credit card information, including the card number, expiration date, and CVV code, is correct.\n3. Check if your credit card issuer is experiencing any issues or if there are any restrictions on using the card for online transactions.\n4. Try using a different web browser or device to update your credit card information.\n5. If the issue persists, you can contact IBM Cloud Support for further assistance by clicking the Help icon in the console menu bar, selecting \"Support center,\" and then clicking \"Create a case.\"\nRegarding your question about the subscription code, it's possible that you don't have the required access in the account or the code expired. You must have an Editor role or higher on all account management services to successfully apply a subscription code. If the expired code needs to be reissued, you would need to contact the person who provided the code for help.\nSimilarly, if you cannot apply a feature code, your account might not meet the requirements for the feature code, or you don't have the required access in the account. The code might also be expired. To successfully apply a feature code, you must have an Editor role or higher on all account management services. If the expired code needs to be reissued, you would need to contact the person who provided the code for help."
+    },
+    {
+      "speaker": "user",
+      "text": "it is showing \"Could not place order. Problem authorizing the credit card. We are unable to process your request: Transaction Rejected\"",
+      "timestamp": 1724728120,
+      "enrichments": {
+        "Question Type": [
+          "Non-Question",
+          "Troubleshooting"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The error message \"Could not place order. Problem authorizing the credit card. We are unable to process your request: Transaction Rejected\" might be due to IBM Cloud\u00ae was unable to process your transaction. You can contact the Cloud Trust and Enablement team by email at verify@us.ibm.com. to resolve this issue.",
+      "timestamp": 1724728128,
+      "contexts": [
+        {
+          "document_id": "ibmcld_03713-3269-5168",
+          "text": "\nProblem authorizing the credit card. We're afraid this transaction has been rejected. Inactive card or card not authorized for card-not-present transactions.\n\n Why it\u2019s happening \n\nSome credit card issuers don't allow transactions when it is being initiated by using a credit card on file. You might see this error message if your credit card has been deactivated.\n\n How to fix it \n\nContact your credit card issuer for more information.\n\n\n\n\n\n Why is my credit card not authorized to place an order? \n\n What\u2019s happening \n\nYou tried to place an order in the IBM Cloud console [Payments page](https://cloud.ibm.com/billing/payments), but you get the following error message:\n\n> Could not place order. Problem authorizing the credit card.\n\n Why it\u2019s happening \n\nYour credit card issuer has declined the transaction.\n\n How to fix it \n\nContact your credit card issuer for more information.\n\n\n\n\n\n Why is IBM Cloud unable to process my order request? \n\n What\u2019s happening \n\nYou tried to place an order in the IBM Cloud console [Payments page](https://cloud.ibm.com/billing/payments), but you get the following error message:\n\n> Could not place order. Problem authorizing the credit card. We are unable to process your request: Transaction Rejected. Please contact Cloud Trust Enablement at [verify@us.ibm.com](mailto:verify@us.ibm.com).\n\n Why it\u2019s happening \n\nIBM Cloud\u00ae was unable to process your transaction.\n\n How to fix it \n\nContact the Cloud Trust and Enablement team by email at [verify@us.ibm.com](mailto:verify@us.ibm.com).\n\n\n\n\n\n Why was my change request rejected? \n\n What\u2019s happening \n\nYou tried to place an order in the IBM Cloud console [Payments page](https://cloud.ibm.com/billing/payments), but you get one of the following error messages:\n\n> Failed to complete the Change Request process due to the following error: We're afraid this transaction has been rejected. Invalid account number.\n\nor",
+          "url": "https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-cc-error-messages",
+          "score": 32.601196,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724728159
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Could not place order. Problem authorizing the credit card. We are unable to process your request: Transaction Rejected"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The error message \"Could not place order. Problem authorizing the credit card. We are unable to process your request: Transaction Rejected\" typically means that your credit card issuer has declined the transaction. This could be due to various reasons such as insufficient funds, reaching the credit limit, or potential fraud activity. To resolve this issue, you should contact your credit card issuer for more information. If the problem persists, you may also consider using a different credit card or payment method."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+      "status": "created",
+      "timestamp": 1724728244
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "edited",
+      "timestamp": 1726671919
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "accepted",
+      "timestamp": 1726672210
+    }
+  ],
+  "editor": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+  "domain": "mt-rag-ibmcloud-elser-512-100-20240502",
+  "reviewer": "f6ce971c-68d2-4c26-b1c0-477dd28a5181"
+}

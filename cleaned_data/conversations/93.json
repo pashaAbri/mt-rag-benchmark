@@ -1,0 +1,914 @@
+{
+  "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-govt-elser-512-100-20240611",
+      "size": "49607"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "How do I file a complaint with the state?",
+      "timestamp": 1723787410,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "To file a complaint with the New York State Attorney General, you can visit their official website and select the category that best fits your purpose. For consumer issues, you can choose from categories like goods or services purchase, credit cards, credit reports, and personal finance, social media, personal data and information privacy, vehicle lease or purchase, and lemon law. If you cannot complete the form online or need additional assistance, you can call their OAG Help Line at 1-800-771-7755. Please note that patterns of complaints often help in allocating law enforcement resources, and filing a false complaint is punishable as a Class A Misdemeanor.",
+      "timestamp": 1723787414,
+      "contexts": [
+        {
+          "document_id": "24de6442808976ec-1561-3787",
+          "text": "File a complaint | New York State Attorney General\nFile a Complaint\n\nHow can we help you?\n\nI Want To...\n\nAppeal a background check\n\nApply for a Job/Internship\n\nDo Business with the OAG\n\nFile a Complaint\n\nFind Legal Services\n\nKnow My Rights\n\nMake a FOIL Request\n\nRegister/Submit a Filing\n\nReport a Data Breach\n\nRequest a Publication\n\nServe Papers on OAG\n\nUse the Whistleblower Portal\n\nHome\n\n File a complaint\n \n\nFile a complaint\n\nChoose the category that best fits your purpose:\n\n Consumer issues\nVehicles, personal data, credit cards, goods or services purchases, and more\n\n Housing and real estate\nRent, housing discrimination, unlawful evictions, deed theft, and more\n\n Technology and information privacy\nTechnology issues, and data & information privacy\n\n Health care issues\nMedicaid provider fraud, nursing homes, hospitals, and more\n\n Civil rights and discrimination\nEmployer discrimination, voting issues, law enforcement, and more\n\n Employment issues\nWages, conditions, harassment in the workplace, opportunity fraud, and more\n\n Finance, investment, and lending\nInvestor fraud, brokers, lenders, credit, financial services, and more\n\n Public corruption or corporate wrongdoing\nPublic officials, elected representatives, charitable organizations, and more \n\n Charities and fundraising\nCharitable organizations or 501(c)(3) corporations\n\n Fair market and competition\nAntitrust violations and patent protections\n\n \n\nKnow what you're looking for?Popular complaint forms for:Consumer fraudDiscriminationEmployment and wagesHealth insurance and providersTechnology and privacy\n\n \n\nWe welcome complaints and\u00a0whistleblower tips. For consumer issues, we offer a voluntary mediation service if we believe our intervention might assist in resolving the dispute. Patterns of complaints involving the same party or a new issue often help us in allocating our law enforcement resources, regardless of whether we can intervene on any individual complaint.\nIf you have questions regarding your individual legal rights or responsibilities, contact a private attorney.\nIf you cannot complete the form online or need additional assistance with where to direct your complaint, please call our OAG Help Line at 1-800-771-7755.\nFiling a false complaint is punishable as a Class A Misdemeanor.",
+          "title": "File a complaint | New York State Attorney General",
+          "url": "https://ag.ny.gov/file-complaint",
+          "score": 17.203497,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723787498
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do I file a complaint with the state?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "2c7a648f80709bee-1542-3518",
+          "text": "File a complaint: Consumer issues | New York State Attorney General\nEvent Archive\n\nContact\n\nContact Us\n\nFile a Complaint\n\nHow can we help you?\n\nI Want To...\n\nAppeal a background check\n\nApply for a Job/Internship\n\nDo Business with the OAG\n\nFile a Complaint\n\nFind Legal Services\n\nKnow My Rights\n\nMake a FOIL Request\n\nRegister/Submit a Filing\n\nReport a Data Breach\n\nRequest a Publication\n\nServe Papers on OAG\n\nUse the Whistleblower Portal\n\nHome\n\nFile a complaint\n\n Consumer issues\n \n\nFile a complaint: Consumer issues\n\nChoose the category that best fits your purpose:\n\n Goods or services purchase\n\n Credit cards, credit reports, and personal finance\n\n Social media\n\n Personal data and information privacy\n\n Vehicle lease or purchase\n\n Lemon law\n\n \n\nKnow what you're looking for?Popular complaint forms for:Consumer fraudDiscriminationEmployment and wagesHealth insurance and providersTechnology and privacy\n\n \n\nWe welcome complaints and\u00a0whistleblower tips. For consumer issues, we offer a voluntary mediation service if we believe our intervention might assist in resolving the dispute. Patterns of complaints involving the same party or a new issue often help us in allocating our law enforcement resources, regardless of whether we can intervene on any individual complaint.\nIf you have questions regarding your individual legal rights or responsibilities, contact a private attorney.\nIf you cannot complete the form online or need additional assistance with where to direct your complaint, please call our OAG Help Line at 1-800-771-7755.\nFiling a false complaint is punishable as a Class A Misdemeanor.\n\nLetitia James\nNew York State Attorney General\n\nSocial Media\n\nContact\n\n Office of the New York State Attorney General\n The Capitol\n Albany NY 12224-0341\n Phone: 1-800-771-7755\n\nFooter\n\nStatewide Offices\n\nPress Releases\n\nFile a Complaint\n\nEmployment Opportunities\n\nCopyright \u00a9\n 2024\n \u2014 Office of the New York State Attorney General. All Rights Reserved.\n \n\nPolicy Menu\n\nPrivacy Policy\n\nDisclaimer\n\nAccessibility Policy\n\nWe Value Your Privacy",
+          "title": "File a complaint: Consumer issues | New York State Attorney General",
+          "url": "https://ag.ny.gov/file-complaint/consumer",
+          "score": 15.320476,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723787496
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do I file a complaint with the state?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "24de6442808976ec-3268-4396",
+          "text": "File a complaint | New York State Attorney General\nPatterns of complaints involving the same party or a new issue often help us in allocating our law enforcement resources, regardless of whether we can intervene on any individual complaint.\nIf you have questions regarding your individual legal rights or responsibilities, contact a private attorney.\nIf you cannot complete the form online or need additional assistance with where to direct your complaint, please call our OAG Help Line at 1-800-771-7755.\nFiling a false complaint is punishable as a Class A Misdemeanor.\n\nLetitia James\nNew York State Attorney General\n\nSocial Media\n\nContact\n\n Office of the New York State Attorney General\n The Capitol\n Albany NY 12224-0341\n Phone: 1-800-771-7755\n\nFooter\n\nStatewide Offices\n\nPress Releases\n\nFile a Complaint\n\nEmployment Opportunities\n\nCopyright \u00a9\n 2024\n \u2014 Office of the New York State Attorney General. All Rights Reserved.\n \n\nPolicy Menu\n\nPrivacy Policy\n\nDisclaimer\n\nAccessibility Policy\n\nWe Value Your Privacy\nWe use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By using this website you consent to our use of cookies.\n\nOkay",
+          "title": "File a complaint | New York State Attorney General",
+          "url": "https://ag.ny.gov/file-complaint",
+          "score": 14.679548,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723787493
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do I file a complaint with the state?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "speaker": "user",
+      "text": "what if I want to file a complaint with other states",
+      "timestamp": 1723787867,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The information I have does not provide an answer for other states except California, where you can file a complaint online. The whistleblower hotline is 1-800-649-7570, and the Department of Managed Health Care Help Center is 1-888-466-2219.",
+      "timestamp": 1723787870,
+      "contexts": [
+        {
+          "document_id": "d75202bd82041589-0-906",
+          "text": "Complaints - California Department of Consumer Affairs\n\n\n  \n\nComplaints - California Department of Consumer Affairs\n\nSkip to Main Content\n\n\u00d7\n\nSaving your location allows us to provide you with more relevant information.\n\nSet Location\n\n\u00d7\n\nDefault\nHigh Contrast\n\nReset\nIncrease Font SizeFont \nDecrease Font SizeFont \n\nHome\nFacebook\nTwitter\nWordPress\nLinkedIn\nYouTube\nEmail\n\n Search\n\nDisclaimer\nAbout Us\nContact Us\nTranslate this site:\n\n Settings\n \n\nMenu\n\nSearch\n\nSearch Services, Agencies, and More...\n\nSubmit\nClose Search\n\n Home \n Consumer \n Licensees \n\n Data \n Publications \n Newsroom \n Enforcement \n Regulations \n Careers \n Public Meetings \n\n Complaints\n\nFile a Complaint Against a Licensee\nConsumer Self-Help\nHow to File a Citizen\u00e2\u0080\u0099s comment/complaint about DCA\nConsumer Complaints Disclosure\n\nBack to Top\nConditions of Use\nPrivacy Policy\nAccessibility\nContact Us\nWeb Accessibility Certification\n\n\r\n            Copyright \u00a9  State of California\r\n        \n\n\u00a0\n\n",
+          "title": "Complaints - California Department of Consumer Affairs",
+          "url": "https://www.dca.ca.gov/consumers/complaints/index.shtml",
+          "score": 18.019344,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723788007
+              },
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "no",
+                "timestamp": 1725609191
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "file complaint with CA"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "1df68abf2a1712f7-2-1908",
+          "text": "Whistleblower Complaint\nWhistleblower Complaint\n\nSkip to Main Content\n\nCA.gov\n\nShare via Facebook\nShare via Twitter\nShare via LinkedIn\nShare via Email\n\nContact Us\n\nTranslate\n\nSettings\n\nDefault\n\nHigh Contrast\n\nReset\n\nIncrease Font Size\n\nIncrease \r\n Font\r\n Size \n\nDecrease Font Size\n\nDecrease \r\n Font\r\n Size \n\nTranslate this website:\n\nCalifornia\nPublic Utilities Commission\n\nSite Search\n\n \n\nHome\nConsumer Support\nFile a Complaint\nWhistleblower Complaint\n\n \nWhistleblower Complaint\n\n\r\n As an employee, contractor, or subcontractor of a company regulated by the Commission, you may report suspected unsafe, unlawful, or dishonest activity. \r\n \n\nReport Unsafe Conditions\nIf the situation is an immediate safety threat, please call 911.\nIf you are a whistleblower, you can report unsafe conditions \u2014\u00a0confidentially, if you prefer \u2014 to us in the following ways:\n\nCall the whistleblower hotline at 1-800-649-7570\n\nFile a Whistleblower Complaint Online\n\nAll others can report unsafe conditions to us in the following ways:\n\nCall the whistleblower hotline at 1-800-649-7570\n\nE-mail\u00a0safetyhotline@cpuc.ca.gov\n\nWho is a \u201cWhistleblower\u201d?\nA whistleblower who can be assisted by us is an employee, contractor, or subcontractor of a company regulated by us who reports their employer\u2019s suspected unsafe, unlawful, or dishonest activity. Whistleblowers may report their claims internally to their company\u2019s upper management or to the company\u2019s ethics officer or externally to regulators responsible for regulating the company. A whistleblower\u2019s inside knowledge of the suspected unlawful or dishonest activity may help us discover something we would otherwise not know. Whistleblowers can play a valuable role in helping us get needed evidence to support the claim.\nWhat is the role of the Public Utilities Commission?\nWe regulate privately owned electric, natural gas, phone, water, railroad, rail transit, and passenger transportation companies.",
+          "title": "Whistleblower Complaint",
+          "url": "https://www.cpuc.ca.gov/consumer-support/file-a-complaint/whistleblower-complaint",
+          "score": 17.735323,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723788008
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "file complaint with CA"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "b0c6aedbea918266-5130-6565",
+          "text": "\r\n\tCalifornia Department of Managed Health Care > File a Complaint\r\n\nWe cannot talk to another person about your case unless you sign this form:\nAuthorized Assistant Form (English),\u00a0Formulario de Asistente Autorizado (Espa\u00f1ol)\n\n\u00a0\n\nWhat Happens Next\n\nWithin 7 Days\n\nThe Help Center will review your application and send you an acknowledgement of receipt letter.\n\n Expedited IMR decisions are typically determined, if the case has qualified for an IMR and the required documentation has been received by the DMHC's Independent Medical Review organization.\n\nWithin 30 Days\n\n Consumer Complaints are usually decided.\n\nWithin 45 Days\n\n Non-expedited IMRs are usually decided.\n\n\u00a0\nHave additional questions? Take a look at our Frequently Asked Questions.\n\u00a0\nOther helpful links:\n\u00a0\nIndependent Medical Review and Complaint Reports\n\u00a0\nProvider Complaint Against a Plan\n\u00a0\nLegal Representative for Deceased Patient Form (English)\n\u00a0\n\nDocuments & Links\n\nIndependent Medical Review/Complaint Form\nView All Health Plans\nSubmit a Provider Complaint\nLanguage Access Complaint\u00a0Form (PDF)\nFormulario de Queja Acceso Idioma (PDF)\n\nStatewide Campaigns\n\nCOVID-19 Updates\nMental Health Resources for Youth\nRegister to VOTE\nSave Our Water\nFlex Alert\n\n\r\n \u00a0\r\n \n\nNeed Help with Your Health Plan?\nCall the DMHC Help Center\n\n1-888-466-2219 \u00a0\u00a0\u00a0or \u00a0\r\n \nFile a Complaint\n\nBack to Top\nPrivacy Policy & Condition of Use\nAccessibility Certification\nSite Map\nAccessibility\nContact Us\n\nFacebook\n\nYouTube\n\nTwitter\n\nLinkedIn\n\nCopyright 2024 DMHC",
+          "title": "\r\n\tCalifornia Department of Managed Health Care > File a Complaint\r\n",
+          "url": "http://www.dmhc.ca.gov/FileaComplaint.aspx",
+          "score": 17.351665,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723788010
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "file complaint with CA"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The process for filing a complaint with other states may vary. For example, if you want to file a complaint with the California Department of Consumer Affairs, you can visit their website and select the appropriate category for your complaint. They provide options such as filing a complaint against a licensee, submitting a citizen's comment/complaint about the DCA, or reporting unsafe conditions through the whistleblower hotline. Similarly, if you have a complaint related to healthcare in California, you can file a complaint with the California Department of Managed Health Care. Their website provides forms and instructions on how to submit a complaint. It's recommended to check the specific state's department or agency website for detailed information on how to file a complaint."
+    },
+    {
+      "speaker": "user",
+      "text": "what is NY and CA office hours?",
+      "timestamp": 1723788345,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The New York State Attorney General's Offices are open from 8:30 a.m. to 5:00 p.m., Monday through Friday. In contrast, the California Department of Consumer Affairs' Consumer Service Representatives are available to answer consumer, licensee, and applicant questions in over 200 different languages by phone from 8:00 a.m. to 5:00 p.m., Monday through Friday, except on the first and third Wednesday of each month, when they open at 8:30 a.m., and on state-observed holidays.",
+      "timestamp": 1723788349,
+      "contexts": [
+        {
+          "document_id": "a5a566afcb2ba053-4635-6069",
+          "text": "Regional Offices | New York State Attorney General\nOffice hours: 8:30 a.m. to 5:00 p.m., Monday through Friday\nThe Buffalo Regional Office serves the counties of Allegany, Cattaraugus, Chautauqua, Erie, Genesee, Niagara, Orleans, and Wyoming.\n\n\u00a0\n\nHarlem Regional Office\nAddress:\n163 West 125th Street, Suite 1324\nNew York NY 10027\nMain line: 212-364-6010\nFax: 646-356-3000\nOffice hours: 8:30 a.m. to 5:00 p.m., Monday through Friday\nThe Harlem Regional Office serves Bronx County and New York County (96th Street and above).\n\n\u00a0\n\nNassau Regional OfficeAddress:200 Old Country Road, Suite 240Mineola NY 11501Main line: 516-248-3302Consumer Frauds: 516-248-3301, 516-248-3300Fax: 516-747-6432Office hours: 8:30 a.m. to 5:00 p.m., Monday through FridayThe Nassau Regional Office serves Nassau County.\u00a0\n\nPlattsburgh Regional Office\nAddress:\n43 Durkee Street, Suite 700\nPlattsburgh NY 12901\nMain line: 518-562-3288\nConsumer Frauds: 518-562-3282\nFax: 518-562-3293\nOffice hours: 8:30 a.m. to 5:00 p.m., Monday through Friday\nThe Plattsburgh Regional Office serves the counties of Clinton, Essex, and Franklin.\n\n\u00a0\n\nPoughkeepsie Regional Office\nAddress:\nOne Civic Center Plaza, Suite 401\nPoughkeepsie NY 12601-3157\nMain line: 845-485-3900\nFax: 845-452-3303, 845-485-3927\nOffice hours: 8:30 a.m. to 5:00 p.m., Monday through Friday\nThe Poughkeepsie Regional Office serves the counties of Dutchess, Orange, Sullivan, and Ulster.\n\n\u00a0\n\nRochester Regional Office\nAddress:\n144 Exchange Blvd., Suite 200",
+          "title": "Regional Offices | New York State Attorney General",
+          "url": "https://ag.ny.gov/about/about-office/regional-offices",
+          "score": 22.331314,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723788575
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Office of the New York State Attorney General office hours"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "cceaa17ad1654860-1339-3229",
+          "text": "Contact Us - California Department of Consumer Affairs\nWarranties (excluding appliances and vehicles)\nwww.insurance.ca.gov\n\nTelephone/cell phone provider complaints & prepaid telephone cards\nwww.cpuc.ca.gov\n\nTravel - Claims against registered participants of the Travel Consumer Restitution Corporation (for California consumers who suffer losses as a result of the bankruptcy, cessation of operations, insolvency, or material failure of a seller of travel to provide the contracted transportation or travel services.)\nwww.tcrcinfo.org\n\nInsurance companies\nwww.insurance.ca.gov\n\nApp-based money transmitters\nwww.dfpi.ca.gov\n\nOnline merchants\nwww.oag.ca.gov\n\nInternet service providers\nwww.cpuc.ca.gov\n\nAuto purchases and driver's license laws and issues\nwww.dmv.ca.gov\n\nConsumer Assistance\nConsumer service representatives can answer consumer, licensee, and applicant questions in over 200 different languages. They can also assist in the filing of complaints, and mail helpful publications. Automated services are available 24 hours a day, seven days a week.\nOur toll-free telephone line is staffed Monday through Friday from 8:00 a.m. to 5:00 p.m., except on the first and third Wednesday of each month, when we open at 8:30 a.m. We are closed on state-observed holidays.\nTo submit a public comment, complaint, or suggestion via email, please click here.\nOr mail a complaint form to:\r\n Department of Consumer Affairs\r\n Consumer Information Center\r\n 1625 North Market Blvd., Suite N 112\r\n Sacramento, CA 95834\nMap and Driving Directions to 1625 North Market Blvd.\nTo submit a Public Records Act (PRA) request pertaining to a specific DCA entity (board/bureau/committee/program), please contact them directly at: https://www.dca.ca.gov/about_us/entities.shtml.\nTo submit a PRA request pertaining to DCA but not to a specific DCA entity, please click here.\n\nFor additional assistance, call the Consumer Information Center at:\nMain: (800) 952-5210",
+          "title": "Contact Us - California Department of Consumer Affairs",
+          "url": "https://www.dca.ca.gov/about_us/contactus.shtml",
+          "score": 16.072577,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723788577
+              },
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "no",
+                "timestamp": 1725609235
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Consumer Affairs Branch office hours"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The New York State Attorney General's Regional Offices are open from 8:30 a.m. to 5:00 p.m., Monday through Friday. In contrast, the California Department of Consumer Affairs' Consumer Service Representatives are available to answer consumer, licensee, and applicant questions in over 200 different languages by phone from 8:00 a.m. to 5:00 p.m., Monday through Friday, except on the first and third Wednesday of each month, when they open at 8:30 a.m., and on state-observed holidays."
+    },
+    {
+      "speaker": "user",
+      "text": "if I work with New York State Attorney General office, who am I going to work with?",
+      "timestamp": 1723790456,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "UNANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The question is not clear enough. You need to say the position you will have so that I can tell you who you will work with. ",
+      "timestamp": 1723790461,
+      "contexts": [
+        {
+          "document_id": "a72d0a6a32e5426a-1561-4013",
+          "text": "About the Office | New York State Attorney General\nFile a Complaint\n\nHow can we help you?\n\nI Want To...\n\nAppeal a background check\n\nApply for a Job/Internship\n\nDo Business with the OAG\n\nFile a Complaint\n\nFind Legal Services\n\nKnow My Rights\n\nMake a FOIL Request\n\nRegister/Submit a Filing\n\nReport a Data Breach\n\nRequest a Publication\n\nServe Papers on OAG\n\nUse the Whistleblower Portal\n\nHome\n\n About the Office\n \n\nAbout the Office\n\n \n\nAs head of the Department of Law, the Attorney General is both the People's Lawyer and the state's chief legal officer. The Attorney General serves as the guardian of the legal rights of the people of New York, its organizations, and its natural resources. As the state's chief legal counsel, the Attorney General advises the executive branch of state government, and defends actions and proceedings on behalf of the state.\n\n \nMeet Letitia James \n\nThe Attorney General serves the public interest of all New Yorkers in matters affecting their daily lives, enforcing laws to protect consumers, tenants, patients, workers, investors, and charitable donors. The office coordinates statewide civil and criminal investigations, promoting economic and social justice, encouraging harm-reducing public health strategies, and preserving the state\u2019s environment. \nWhile the Attorney General acts independently of the Governor, the Governor or a state agency may request the Attorney General to undertake specific criminal investigations and prosecutions. The Attorney General's authority also includes the activities and investigations of the Organized Crime Task Force and Medicaid Fraud Control Unit.\nThe office employs over 1,700 staff, including investigators, analysts, scientists, forensic accountants, legal assistants and support staff, and over 700 assistant attorneys general, serving in over two dozen locations across New York state.\u00a0 \n\nDepartment of Law Divisions\n\nAdministration \nCriminal Justice \nEconomic Justice \nExecutive \nRegional Offices \nSocial Justice \nSolicitor General \nState Counsel \n\nAdministration\u00a0Division\n\nThe Administration Division consists of:Administrative Services BureauBudget and Fiscal Management BureauHuman Resources Management BureauInformation Technology BureauLegal Recruitment BureauLegal Education and Professional Development BureauOffice of Diversity and InclusionPractice Technologies Group\n\nLearn more about the Administration Division \n\nCriminal Justice Division\n\nThe Criminal Justice Division consists of:\n\nConviction Review Bureau",
+          "title": "About the Office | New York State Attorney General",
+          "url": "https://ag.ny.gov/about/about-office",
+          "score": 19.430529,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723790536
+              },
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "no",
+                "timestamp": 1725609255
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "New York State Attorney General office"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "a72d0a6a32e5426a-4903-7270",
+          "text": "About the Office | New York State Attorney General\nThe Office of the New York State Attorney General's regional offices help carry out the Attorney General\u2019s essential defensive, regulatory, and affirmative justice functions in every part of the state.Each regional office handles many functions, which may include:representing and defending the state, its officers, and other government agencies in federal and state courtshandling claims and defensive litigation\u00a0conducting social and economic justice investigations, litigation, and enforcement\u00a0\u00a0prohibiting discrimination and protecting the rights of consumers, senior citizens, tenants, immigrants, and others\u00a0sponsoring community outreach and educationmediating consumer-frauds cases\u00a0managing regulatory matters involving charities\u00a0handling Mental Hygiene Law casesfacilitating Extreme Risk Protection Orders (ERPOs)enforcing the Cannabis Law\n\nLearn more about the Attorney General\u2019s 13 regional offices \n\nSocial Justice Division\n\nThe Social Justice Division consists of:\n\nCharities Bureau\nCivil Rights Bureau\nEnvironmental Protection Bureau\u00a0\nHate Crimes Unit\u00a0\nHealth Care Bureau\nHousing Protection Unit\u00a0\nLabor Bureau\nLaw Enforcement Misconduct Investigative Office\u00a0\nReal Estate Finance Bureau\u00a0\n\nLearn more about the Social Justice Division \n\nSolicitor General Division\n\nThe Solicitor General Division consists of:\n\nAppeals and Opinions Bureau\nCriminal Appeals and Federal Habeas Corpus Bureau\nLaw Library\n\nLearn more about the Solicitor General Division \n\nState Counsel Division\n\nThe State Counsel Division consists of:\n\nCivil Recoveries Bureau\nClaims Bureau\nLitigation Bureau\nReal Property Bureau\nSex Offender Management Bureau\n\nLearn more about the State Counsel Division \n\nYou may also be interested in\n\nEmployment opportunities \nMeet Letitia James \n\nLetitia James\nNew York State Attorney General\n\nSocial Media\n\nContact\n\n Office of the New York State Attorney General\n The Capitol\n Albany NY 12224-0341\n Phone: 1-800-771-7755\n\nFooter\n\nStatewide Offices\n\nPress Releases\n\nFile a Complaint\n\nEmployment Opportunities\n\nCopyright \u00a9\n 2024\n \u2014 Office of the New York State Attorney General. All Rights Reserved.\n \n\nPolicy Menu\n\nPrivacy Policy\n\nDisclaimer\n\nAccessibility Policy\n\nWe Value Your Privacy\nWe use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By using this website you consent to our use of cookies.\n\nOkay",
+          "title": "About the Office | New York State Attorney General",
+          "url": "https://ag.ny.gov/about/about-office",
+          "score": 19.372787,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723790538
+              },
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "no",
+                "timestamp": 1725609262
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "New York State Attorney General office"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "If you work with the New York State Attorney General's office, you will be working with a team of over 1,700 staff members, including investigators, analysts, scientists, forensic accountants, legal assistants, support staff, and over 700 assistant attorneys general. These professionals serve in various divisions such as Administration, Criminal Justice, Economic Justice, Executive, Regional Offices, Social Justice, Solicitor General, and State Counsel. The specific division and individuals you work with would depend on your role and responsibilities within the office."
+    },
+    {
+      "speaker": "user",
+      "text": "can you please tell me more about Letitia James?",
+      "timestamp": 1723790737,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Letitia James is the 67th Attorney General for the state of New York, and she is the first woman of color to hold statewide office in New York and the first woman to be elected Attorney General. \n\nSome recent highlights: Attorney General James Secures $740,000 from Online Mental Health Provider for its Burdensome Cancellation Process; she reaches $310,000 Settlement-in-Principle with Syracuse Landlord for Failing to Address Lead-Based Paint Hazards; she secures $15.2 Million Judgment Against Unlicensed Cannabis Store Owner in Upstate New York; and she also wins Landmark Victory in Case Against Donald Trump.",
+      "timestamp": 1723790742,
+      "contexts": [
+        {
+          "document_id": "39c95be13937c2db-3174-5508",
+          "text": "Meet Letitia James | New York State Attorney General\nShe protected New Yorkers\u2019 health and the state\u2019s natural resources by going after polluters and companies that flouted environmental protection laws. Attorney General James stood up for vulnerable populations by going all the way to the U.S. Supreme Court to stop a question about citizenship from being added to the census and successfully protecting DACA.\u00a0\nShe has been a national leader in the fight to defend access to reproductive health care, leading dozens of legal actions across the country to protect and expand access to this lifesaving care. Attorney General James also stood up against corruption and took strong action against officials who broke New York laws or workplace protection measure, regardless of their status or political affiliation.\u00a0\u00a0\n\nBefore serving as Attorney General, Letitia James was the public advocate for the City of New York. When she was elected in 2013, she became the first woman of color to hold citywide office. During her tenure as public advocate, her office passed more legislation than all previous public advocates combined, including a groundbreaking law that banned questions about salary history from the employment process to address the pervasive gender wage gap. Prior to serving as public advocate, Letitia James represented the 35th Council District in Brooklyn in the New York City Council for 10 years. As a council member, she passed the Safe Housing Act, legislation that forced landlords to improve living conditions for tenants in New York City\u2019s worst buildings. Before her election to the City Council, Letitia James was head of the Brooklyn Regional Office of the New York State Attorney General\u2019s Office.\u00a0\nLetitia James began her career as a public defender at the Legal Aid Society. A proud Brooklynite, she is a graduate of Lehman College and Howard University School of Law.\n\n \n\nLooking for more?\n\nLearn more about the Office of the New York State Attorney General, or view our previous Year in Review. \n\nAbout the Office of the New York State Attorney General \n2022 Year in Review \n\nLetitia James\nNew York State Attorney General\n\nSocial Media\n\nContact\n\n Office of the New York State Attorney General\n The Capitol\n Albany NY 12224-0341\n Phone: 1-800-771-7755\n\nFooter\n\nStatewide Offices\n\nPress Releases\n\nFile a Complaint\n\nEmployment Opportunities\n\nCopyright \u00a9\n 2024",
+          "title": "Meet Letitia James | New York State Attorney General",
+          "url": "https://ag.ny.gov/about/meet-letitia-james",
+          "score": 14.910195,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723790840
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Letitia James"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "39c95be13937c2db-1563-3728",
+          "text": "Meet Letitia James | New York State Attorney General\nFile a Complaint\n\nHow can we help you?\n\nI Want To...\n\nAppeal a background check\n\nApply for a Job/Internship\n\nDo Business with the OAG\n\nFile a Complaint\n\nFind Legal Services\n\nKnow My Rights\n\nMake a FOIL Request\n\nRegister/Submit a Filing\n\nReport a Data Breach\n\nRequest a Publication\n\nServe Papers on OAG\n\nUse the Whistleblower Portal\n\nHome\n\n Meet Letitia James\n \n\nMeet Letitia James\n\n \n\nLetitia \u201cTish\u201d James is the 67th Attorney General for the state of New York. With decades of experience and a long record of achievements, she is a powerful, effective attorney and lifelong public servant. When she was elected in 2018, she became the first woman of color to hold statewide office in New York and the first woman to be elected Attorney General. \n\n \nView the 2022 Year in Review \n\nIn her first term, Attorney General James focused on protecting vulnerable New York residents and ensuring that individuals or companies that broke state laws were held accountable. She secured more than $7.5 billion for New York from those who broke state laws and took advantage of New Yorkers, including more than $2.5 billion from opioid manufacturers and distributors for their roles in the opioid epidemic. Under her leadership, the Office of the New York State Attorney General helped remove more than 4,000 guns from New York communities, took down dozens of dangerous drug and gun trafficking rings throughout the state, and took legal action to stop the proliferation of ghost guns.\nAttorney General James took on predatory landlords who harassed tenants and endangered children by violating New York\u2019s lead paint laws. She protected New Yorkers\u2019 health and the state\u2019s natural resources by going after polluters and companies that flouted environmental protection laws. Attorney General James stood up for vulnerable populations by going all the way to the U.S. Supreme Court to stop a question about citizenship from being added to the census and successfully protecting DACA.\u00a0\nShe has been a national leader in the fight to defend access to reproductive health care, leading dozens of legal actions across the country to protect and expand access to this lifesaving care.",
+          "title": "Meet Letitia James | New York State Attorney General",
+          "url": "https://ag.ny.gov/about/meet-letitia-james",
+          "score": 14.69207,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723790841
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Letitia James"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "352b36dc29266a01-2-1882",
+          "text": "Attorney General James Secures $740,000 from Online Mental Health Provider for its Burdensome Cancellation Process\nAttorney General James Secures $740,000 from Online Mental Health Provider for its Burdensome Cancellation Process\n\nSkip to main content \n\nOffice of the New York State Attorney General\n\nLetitia James\nNew York State Attorney General\n\nSearch\n\nSort by\nRelevanceDate\n\nOrder\nAscDesc\n\nHow can we help you?\n\nI Want To...\n\nAppeal a background check\n\nApply for a Job/Internship\n\nDo Business with the OAG\n\nFile a Complaint\n\nFind Legal Services\n\nKnow My Rights\n\nMake a FOIL Request\n\nRegister/Submit a Filing\n\nReport a Data Breach\n\nRequest a Publication\n\nServe Papers on OAG\n\nUse the Whistleblower Portal\n\nSearch\n\nSort by\nRelevanceDate\n\nOrder\nAscDesc\n\nMain navigation\n\nAbout\n\nAbout the Office\n\nEmployment Opportunities\n\nMeet Letitia James\n\nYear in Review\n\nResources\n\nFor Individuals\n\nCar & Auto\n\nCharities & Nonprofits\n\nCivil Rights\n\nConsumer Issues\n\nCredit & Lending\n\nEducation & Students\n\nEnvironmental Issues\n\nHealth Care & Insurance\n\nInvesting & Finance\n\nPolicing Issues\n\nTenants & Homeowners\n\nWorkers' Rights\n\nFor Organizations\n\nBusiness Guidance\n\nCharities, Nonprofits & Fundraisers\n\nContract & Procurement Opportunities\n\nData Breach Reporting\n\nFranchise Regulation\n\nInvestments, Registration & Regulation\n\nNew York Voting Rights Act\n\nOutreach Presentations\n\nPolice Departments & Law Enforcement\n\nReal Estate Regulation\n\nLibraries & Documents\n\nAdvocacy and Enforcement Actions\n\nCharities Registry Search\n\nCharities Transaction Search\n\nOffering Plan Database\n\nOpinions\n\nPublications\n\nReal Estate Policy Memoranda Search\n\nRegulatory Documents\n\nReports\n\nNews & Media\n\nPress Releases\n\nLivestream\n\nEvent Archive\n\nContact\n\nContact Us\n\nFile a Complaint\n\nHow can we help you?\n\nI Want To...\n\nAppeal a background check\n\nApply for a Job/Internship\n\nDo Business with the OAG\n\nFile a Complaint\n\nFind Legal Services\n\nKnow My Rights\n\nMake a FOIL Request\n\nRegister/Submit a Filing\n\nReport a Data Breach",
+          "title": "Attorney General James Secures $740,000 from Online Mental Health Provider for its Burdensome Cancellation Process",
+          "url": "https://ag.ny.gov/press-release/2023/attorney-general-james-secures-740000-online-mental-health-provider-its",
+          "score": 14.065555,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723790842
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Letitia James"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "b157d4efc4fcd23b-1567-3672",
+          "text": "Home | New York State Attorney General\nHow can we help you?\n\nI Want To...\n\nAppeal a background check\n\nApply for a Job/Internship\n\nDo Business with the OAG\n\nFile a Complaint\n\nFind Legal Services\n\nKnow My Rights\n\nMake a FOIL Request\n\nRegister/Submit a Filing\n\nReport a Data Breach\n\nRequest a Publication\n\nServe Papers on OAG\n\nUse the Whistleblower Portal\n\n \n\nPopular Actions\n\nFile a complaint \nKnow my rights \nRegister/submit a filing \nMake a FOIL request \n\nToggle Popular Actions\n\nLetitia James is the 67th Attorney General of the state of New York. Letitia is the chief lawyer and law enforcement officer of the state of New York.\u00a0\n\n \n\nAttorney General James Wins Landmark Victory in Case Against Donald Trump \n\nDonald Trump and other defendants must pay $463.9 million for their staggering financial fraud.\n\nWatch Video \n\nVoting resources\n\nVoting key dates, resources, and hotline information\n\nMeet AG Letitia James\n\nLetitia James is the 67th Attorney General for the state of New York.\n\n Protecting access to reproductive health care in New York\n\nOur office offers a hotline and free legal guidance on your reproductive health care rights.\n\nAreas of interest\n\nCivil rights \n\nConsumer issues \n\nLemon Law program \n\nLyft and Uber settlement \n\nOpioid settlement \n\nTenants \n\nAbout the Office\n\nThe Office of the New York State Attorney General works to protect New Yorkers, combats crime, ensures public safety, defends civil rights, fights for workers, safeguards our environment, and more.\n\nLearn more about the Office of the New York State Attorney General \n\nRecent press releases\n\nMay 24, 2024\n\nAttorney General James and DEC Interim Commissioner Mahar Sue Contractor for Illegal Construction Near Protected Wetlands on Long Island\n\nMay 23, 2024\n\nAttorney General James Secures $15.2 Million Judgment Against Unlicensed Cannabis Store Owner in Upstate New York\n\nMay 23, 2024\n\nAttorney General James Takes Action to Defend Protections for Pregnant Workers\n\nMay 23, 2024\n\nAttorney General James Sues Live Nation and Ticketmaster for Monopolizing Live Events and Overcharging Consumers\n\nView all press releases\n\n Featured Media\n \n\nRemote video URL",
+          "title": "Home | New York State Attorney General",
+          "url": "https://ag.ny.gov/",
+          "score": 13.851883,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723790844
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Letitia James"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "f402b041ec0c80e9-2-1854",
+          "text": "Attorney General James Reaches $310,000 Settlement-in-Principle with Syracuse Landlord for Failing to Address Lead-Based Paint Hazards\nAttorney General James Reaches $310,000 Settlement-in-Principle with Syracuse Landlord for Failing to Address Lead-Based Paint Hazards\n\nSkip to main content \n\nOffice of the New York State Attorney General\n\nLetitia James\nNew York State Attorney General\n\nSearch\n\nSort by\nRelevanceDate\n\nOrder\nAscDesc\n\nHow can we help you?\n\nI Want To...\n\nAppeal a background check\n\nApply for a Job/Internship\n\nDo Business with the OAG\n\nFile a Complaint\n\nFind Legal Services\n\nKnow My Rights\n\nMake a FOIL Request\n\nRegister/Submit a Filing\n\nReport a Data Breach\n\nRequest a Publication\n\nServe Papers on OAG\n\nUse the Whistleblower Portal\n\nSearch\n\nSort by\nRelevanceDate\n\nOrder\nAscDesc\n\nMain navigation\n\nAbout\n\nAbout the Office\n\nEmployment Opportunities\n\nMeet Letitia James\n\nYear in Review\n\nResources\n\nFor Individuals\n\nCar & Auto\n\nCharities & Nonprofits\n\nCivil Rights\n\nConsumer Issues\n\nCredit & Lending\n\nEducation & Students\n\nEnvironmental Issues\n\nHealth Care & Insurance\n\nInvesting & Finance\n\nPolicing Issues\n\nTenants & Homeowners\n\nWorkers' Rights\n\nFor Organizations\n\nBusiness Guidance\n\nCharities, Nonprofits & Fundraisers\n\nContract & Procurement Opportunities\n\nData Breach Reporting\n\nFranchise Regulation\n\nInvestments, Registration & Regulation\n\nNew York Voting Rights Act\n\nOutreach Presentations\n\nPolice Departments & Law Enforcement\n\nReal Estate Regulation\n\nLibraries & Documents\n\nAdvocacy and Enforcement Actions\n\nCharities Registry Search\n\nCharities Transaction Search\n\nOffering Plan Database\n\nOpinions\n\nPublications\n\nReal Estate Policy Memoranda Search\n\nRegulatory Documents\n\nReports\n\nNews & Media\n\nPress Releases\n\nLivestream\n\nEvent Archive\n\nContact\n\nContact Us\n\nFile a Complaint\n\nHow can we help you?\n\nI Want To...\n\nAppeal a background check\n\nApply for a Job/Internship\n\nDo Business with the OAG\n\nFile a Complaint\n\nFind Legal Services\n\nKnow My Rights\n\nMake a FOIL Request",
+          "title": "Attorney General James Reaches $310,000 Settlement-in-Principle with Syracuse Landlord for Failing to Address Lead-Based Paint Hazards",
+          "url": "https://ag.ny.gov/press-release/2024/attorney-general-james-reaches-310000-settlement-principle-syracuse-landlord",
+          "score": 13.819024,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723790845
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Letitia James"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "b25e4cbcb83a5f6b-2-1859",
+          "text": "Attorney General James Secures $15.2 Million Judgment Against Unlicensed Cannabis Store Owner in Upstate New York\nAttorney General James Secures $15.2 Million Judgment Against Unlicensed Cannabis Store Owner in Upstate New York\n\nSkip to main content \n\nOffice of the New York State Attorney General\n\nLetitia James\nNew York State Attorney General\n\nSearch\n\nSort by\nRelevanceDate\n\nOrder\nAscDesc\n\nHow can we help you?\n\nI Want To...\n\nAppeal a background check\n\nApply for a Job/Internship\n\nDo Business with the OAG\n\nFile a Complaint\n\nFind Legal Services\n\nKnow My Rights\n\nMake a FOIL Request\n\nRegister/Submit a Filing\n\nReport a Data Breach\n\nRequest a Publication\n\nServe Papers on OAG\n\nUse the Whistleblower Portal\n\nSearch\n\nSort by\nRelevanceDate\n\nOrder\nAscDesc\n\nMain navigation\n\nAbout\n\nAbout the Office\n\nEmployment Opportunities\n\nMeet Letitia James\n\nYear in Review\n\nResources\n\nFor Individuals\n\nCar & Auto\n\nCharities & Nonprofits\n\nCivil Rights\n\nConsumer Issues\n\nCredit & Lending\n\nEducation & Students\n\nEnvironmental Issues\n\nHealth Care & Insurance\n\nInvesting & Finance\n\nPolicing Issues\n\nTenants & Homeowners\n\nWorkers' Rights\n\nFor Organizations\n\nBusiness Guidance\n\nCharities, Nonprofits & Fundraisers\n\nContract & Procurement Opportunities\n\nData Breach Reporting\n\nFranchise Regulation\n\nInvestments, Registration & Regulation\n\nNew York Voting Rights Act\n\nOutreach Presentations\n\nPolice Departments & Law Enforcement\n\nReal Estate Regulation\n\nLibraries & Documents\n\nAdvocacy and Enforcement Actions\n\nCharities Registry Search\n\nCharities Transaction Search\n\nOffering Plan Database\n\nOpinions\n\nPublications\n\nReal Estate Policy Memoranda Search\n\nRegulatory Documents\n\nReports\n\nNews & Media\n\nPress Releases\n\nLivestream\n\nEvent Archive\n\nContact\n\nContact Us\n\nFile a Complaint\n\nHow can we help you?\n\nI Want To...\n\nAppeal a background check\n\nApply for a Job/Internship\n\nDo Business with the OAG\n\nFile a Complaint\n\nFind Legal Services\n\nKnow My Rights\n\nMake a FOIL Request\n\nRegister/Submit a Filing",
+          "title": "Attorney General James Secures $15.2 Million Judgment Against Unlicensed Cannabis Store Owner in Upstate New York",
+          "url": "https://ag.ny.gov/press-release/2024/attorney-general-james-secures-152-million-judgment-against-unlicensed-cannabis",
+          "score": 13.575821,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723790847
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Letitia James"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Letitia James is the 67th Attorney General for the state of New York, elected in 2"
+    },
+    {
+      "speaker": "user",
+      "text": "wow, that sounds great. maybe tell me more about Office of the New York State Attorney General itself",
+      "timestamp": 1723791133,
+      "enrichments": {
+        "Question Type": [
+          "Non-Question"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The office employs over 1,700 staff, including investigators, analysts, scientists, forensic accountants, legal assistants and support staff, and over 700 assistant attorneys general, serving in over two dozen locations across New York state. The New York State Attorney General's Office is responsible for carrying out essential defensive, regulatory, and affirmative justice functions throughout the state. This includes representing and defending the state, its officers, and other government agencies in federal and state courts, handling claims and defensive litigation, conducting social and economic justice investigations, litigation, and enforcement, prohibiting discrimination and protecting the rights of various groups such as consumers, senior citizens, tenants, immigrants, and others. They also sponsor community outreach and education, mediate consumer-frauds cases, manage regulatory matters involving charities, handle Mental Hygiene Law cases, facilitate Extreme Risk Protection Orders (ERPOs), and enforce the Cannabis Law. The office has divisions such as Administration, Criminal Justice, Economic Justice, Executive, Regional Offices, Social Justice, Solicitor General, and State Counsel. Each division has various bureaus and units that focus on specific areas of responsibility.",
+      "timestamp": 1723791139,
+      "contexts": [
+        {
+          "document_id": "a72d0a6a32e5426a-1561-4013",
+          "text": "About the Office | New York State Attorney General\nFile a Complaint\n\nHow can we help you?\n\nI Want To...\n\nAppeal a background check\n\nApply for a Job/Internship\n\nDo Business with the OAG\n\nFile a Complaint\n\nFind Legal Services\n\nKnow My Rights\n\nMake a FOIL Request\n\nRegister/Submit a Filing\n\nReport a Data Breach\n\nRequest a Publication\n\nServe Papers on OAG\n\nUse the Whistleblower Portal\n\nHome\n\n About the Office\n \n\nAbout the Office\n\n \n\nAs head of the Department of Law, the Attorney General is both the People's Lawyer and the state's chief legal officer. The Attorney General serves as the guardian of the legal rights of the people of New York, its organizations, and its natural resources. As the state's chief legal counsel, the Attorney General advises the executive branch of state government, and defends actions and proceedings on behalf of the state.\n\n \nMeet Letitia James \n\nThe Attorney General serves the public interest of all New Yorkers in matters affecting their daily lives, enforcing laws to protect consumers, tenants, patients, workers, investors, and charitable donors. The office coordinates statewide civil and criminal investigations, promoting economic and social justice, encouraging harm-reducing public health strategies, and preserving the state\u2019s environment. \nWhile the Attorney General acts independently of the Governor, the Governor or a state agency may request the Attorney General to undertake specific criminal investigations and prosecutions. The Attorney General's authority also includes the activities and investigations of the Organized Crime Task Force and Medicaid Fraud Control Unit.\nThe office employs over 1,700 staff, including investigators, analysts, scientists, forensic accountants, legal assistants and support staff, and over 700 assistant attorneys general, serving in over two dozen locations across New York state.\u00a0 \n\nDepartment of Law Divisions\n\nAdministration \nCriminal Justice \nEconomic Justice \nExecutive \nRegional Offices \nSocial Justice \nSolicitor General \nState Counsel \n\nAdministration\u00a0Division\n\nThe Administration Division consists of:Administrative Services BureauBudget and Fiscal Management BureauHuman Resources Management BureauInformation Technology BureauLegal Recruitment BureauLegal Education and Professional Development BureauOffice of Diversity and InclusionPractice Technologies Group\n\nLearn more about the Administration Division \n\nCriminal Justice Division\n\nThe Criminal Justice Division consists of:\n\nConviction Review Bureau",
+          "title": "About the Office | New York State Attorney General",
+          "url": "https://ag.ny.gov/about/about-office",
+          "score": 20.352081,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723791310
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "The Attorney General serves the public interest of all New Yorkers in matters affecting"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "a72d0a6a32e5426a-3444-6148",
+          "text": "About the Office | New York State Attorney General\nEconomic Justice \nExecutive \nRegional Offices \nSocial Justice \nSolicitor General \nState Counsel \n\nAdministration\u00a0Division\n\nThe Administration Division consists of:Administrative Services BureauBudget and Fiscal Management BureauHuman Resources Management BureauInformation Technology BureauLegal Recruitment BureauLegal Education and Professional Development BureauOffice of Diversity and InclusionPractice Technologies Group\n\nLearn more about the Administration Division \n\nCriminal Justice Division\n\nThe Criminal Justice Division consists of:\n\nConviction Review Bureau\nCriminal Enforcement and Financial Crimes Bureau\nInvestigations\nMedicaid Fraud Control Unit\u00a0\nOffice of Special Investigation\nOrganized Crime Task Force\nPublic Integrity Bureau\nReal Estate Enforcement Unit\n\nLearn more about the Criminal Justice Division \n\nEconomic Justice Division\n\nThe Economic Justice Division consists of:\n\nAntitrust Bureau\nBureau of Internet and Technology\nConsumer Frauds and Protection\u00a0Bureau\u00a0\nInvestor Protection Bureau\u00a0\nTaxpayer Protection Bureau\n\nLearn more about the Economic Justice Division \n\nExecutive Division\n\nThe Executive Division consists of:Constituent Services\u00a0BureauIntergovernmental Affairs\u00a0Legislative AffairsManaging Attorney's OfficePress OfficePublic Information and Correspondence UnitRecords Access Office (Freedom of Information Law (FOIL))Research and Analytics Department\n\nLearn more about the Executive Division \n\nRegional Offices Division\n\nThe Office of the New York State Attorney General's regional offices help carry out the Attorney General\u2019s essential defensive, regulatory, and affirmative justice functions in every part of the state.Each regional office handles many functions, which may include:representing and defending the state, its officers, and other government agencies in federal and state courtshandling claims and defensive litigation\u00a0conducting social and economic justice investigations, litigation, and enforcement\u00a0\u00a0prohibiting discrimination and protecting the rights of consumers, senior citizens, tenants, immigrants, and others\u00a0sponsoring community outreach and educationmediating consumer-frauds cases\u00a0managing regulatory matters involving charities\u00a0handling Mental Hygiene Law casesfacilitating Extreme Risk Protection Orders (ERPOs)enforcing the Cannabis Law\n\nLearn more about the Attorney General\u2019s 13 regional offices \n\nSocial Justice Division\n\nThe Social Justice Division consists of:\n\nCharities Bureau\nCivil Rights Bureau\nEnvironmental Protection Bureau\u00a0\nHate Crimes Unit\u00a0\nHealth Care Bureau\nHousing Protection Unit\u00a0\nLabor Bureau\nLaw Enforcement Misconduct Investigative Office\u00a0\nReal Estate Finance Bureau\u00a0\n\nLearn more about the Social Justice Division",
+          "title": "About the Office | New York State Attorney General",
+          "url": "https://ag.ny.gov/about/about-office",
+          "score": 15.33816,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723791315
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "The Administration Division consists of:"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "a72d0a6a32e5426a-4903-7270",
+          "text": "About the Office | New York State Attorney General\nThe Office of the New York State Attorney General's regional offices help carry out the Attorney General\u2019s essential defensive, regulatory, and affirmative justice functions in every part of the state.Each regional office handles many functions, which may include:representing and defending the state, its officers, and other government agencies in federal and state courtshandling claims and defensive litigation\u00a0conducting social and economic justice investigations, litigation, and enforcement\u00a0\u00a0prohibiting discrimination and protecting the rights of consumers, senior citizens, tenants, immigrants, and others\u00a0sponsoring community outreach and educationmediating consumer-frauds cases\u00a0managing regulatory matters involving charities\u00a0handling Mental Hygiene Law casesfacilitating Extreme Risk Protection Orders (ERPOs)enforcing the Cannabis Law\n\nLearn more about the Attorney General\u2019s 13 regional offices \n\nSocial Justice Division\n\nThe Social Justice Division consists of:\n\nCharities Bureau\nCivil Rights Bureau\nEnvironmental Protection Bureau\u00a0\nHate Crimes Unit\u00a0\nHealth Care Bureau\nHousing Protection Unit\u00a0\nLabor Bureau\nLaw Enforcement Misconduct Investigative Office\u00a0\nReal Estate Finance Bureau\u00a0\n\nLearn more about the Social Justice Division \n\nSolicitor General Division\n\nThe Solicitor General Division consists of:\n\nAppeals and Opinions Bureau\nCriminal Appeals and Federal Habeas Corpus Bureau\nLaw Library\n\nLearn more about the Solicitor General Division \n\nState Counsel Division\n\nThe State Counsel Division consists of:\n\nCivil Recoveries Bureau\nClaims Bureau\nLitigation Bureau\nReal Property Bureau\nSex Offender Management Bureau\n\nLearn more about the State Counsel Division \n\nYou may also be interested in\n\nEmployment opportunities \nMeet Letitia James \n\nLetitia James\nNew York State Attorney General\n\nSocial Media\n\nContact\n\n Office of the New York State Attorney General\n The Capitol\n Albany NY 12224-0341\n Phone: 1-800-771-7755\n\nFooter\n\nStatewide Offices\n\nPress Releases\n\nFile a Complaint\n\nEmployment Opportunities\n\nCopyright \u00a9\n 2024\n \u2014 Office of the New York State Attorney General. All Rights Reserved.\n \n\nPolicy Menu\n\nPrivacy Policy\n\nDisclaimer\n\nAccessibility Policy\n\nWe Value Your Privacy\nWe use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By using this website you consent to our use of cookies.\n\nOkay",
+          "title": "About the Office | New York State Attorney General",
+          "url": "https://ag.ny.gov/about/about-office",
+          "score": 19.553244,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723791316
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "About the Office | New York State Attorney General"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The New York State Attorney General's Office is responsible for carrying out essential defensive, regulatory, and affirmative justice functions throughout the state. This includes representing and defending the state, its officers, and other government agencies in federal and state courts, handling claims and defensive litigation, conducting social and economic justice investigations, litigation, and enforcement, prohibiting discrimination and protecting the rights of various groups such as consumers, senior citizens, tenants, immigrants, and others. They also sponsor community outreach and education, mediate consumer-frauds cases, manage regulatory matters involving charities, handle Mental Hygiene Law cases, facilitate Extreme Risk Protection Orders (ERPOs), and enforce the Cannabis Law. The office has divisions such as Administration, Criminal Justice, Economic Justice, Executive, Regional Offices, Social Justice, Solicitor General, and State Counsel. Each division has various bureaus and units that focus on specific areas of responsibility."
+    },
+    {
+      "speaker": "user",
+      "text": "Office of the New York State Attorney General press conference",
+      "timestamp": 1723791456,
+      "enrichments": {
+        "Question Type": [
+          "Non-Question"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "UNANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I cannot answer the question because it refers to a specific conference without specifying which one. ",
+      "timestamp": 1723791460,
+      "contexts": [
+        {
+          "document_id": "477d598b3655d75b-1558-3534",
+          "text": "Event Archive | New York State Attorney General\nFile a Complaint\n\nHow can we help you?\n\nI Want To...\n\nAppeal a background check\n\nApply for a Job/Internship\n\nDo Business with the OAG\n\nFile a Complaint\n\nFind Legal Services\n\nKnow My Rights\n\nMake a FOIL Request\n\nRegister/Submit a Filing\n\nReport a Data Breach\n\nRequest a Publication\n\nServe Papers on OAG\n\nUse the Whistleblower Portal\n\nHome\n\n Event Archive\n \n\nEvent Archive\n\n \n\nApril 2, 2024\n | Live EventAttorney General James to Make Announcement on Baby Formula Donation in New York City \n \n\nMarch 15, 2024\n | Press ConferenceAttorney General James Delivers Over 9,500 Cans of Baby Formula to New Yorkers\n \n\nFebruary 16, 2024\n | Live EventAttorney General James Wins Landmark Victory in Case Against Donald Trump\n \n\nFebruary 14, 2024\n | Press ConferenceAttorney General James Announces Takedowns of Firearms and Fentanyl Trafficking Networks Operating in Dutchess County\n \n\nNovember 15, 2023\n | Press ConferenceAttorney General James Takes Historic Action Against PepsiCo for Endangering the Environment and Public Health With Plastic Pollution \n \n\nOctober 11, 2023\n | Press ConferenceAttorney General James, Governor Hochul, Senator Gounardes, and Assemblymember Rozic Take Action to Protect Children Online \n \n\nSeptember 18, 2023\n | Live EventAttorney General James' Public Hearing on Status of Burdett Birth Center in the Capital Region\n \n\nJuly 27, 2023\n | Press ConferenceAttorney General James Sues Syracuse Landlord for Failing to Properly Address Lead-Based Paint Hazards\n \n\nJune 28, 2023\n | Press ConferenceAttorney General James Sues Owners and Operators of Four Nursing Homes for Financial Fraud and Resident Neglect\n \n\nJune 13, 2023\n | Live EventAttorney General James Announces Takedown of Major Narcotics Trafficking Ring in Finger Lakes Region \n\nPagination\n\n Current page\n 1 \n\n Page\n 2 \n\n Page\n 3 \n\u2026\n\nNext page\u203a\u203a \n\nLast pageLast \u00bb \n\nLetitia James\nNew York State Attorney General\n\nSocial Media\n\nContact\n\n Office of the New York State Attorney General\n The Capitol",
+          "title": "Event Archive | New York State Attorney General",
+          "url": "https://ag.ny.gov/news-media/event-archive",
+          "score": 21.753052,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723791679
+              },
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "no",
+                "timestamp": 1725609282
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Attorney General James Delivers Over 9,500 Cans of Baby Formula to New Yorkers"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The Office of the New York State Attorney General regularly holds press conferences to announce significant actions, investigations, or updates related to their work. These events are typically open to the public and the media. You can find information about upcoming press conferences on the Attorney General's website or through local news outlets. Previous press conference topics include consumer protection, environmental protection, healthcare fraud, data breaches, and major criminal cases."
+    },
+    {
+      "speaker": "user",
+      "text": "how can I protect myself if I am the whistleblower....",
+      "timestamp": 1723791815,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "If you are a whistleblower, you can protect yourself by using the Whistleblower Portal provided by the New York State Attorney General's Office. The portal allows anonymous submissions and two-way communications with the office through a unique key code that submitters can use to send and retrieve messages. To begin the anonymous submission process, you need to download and install Tor Browser on your computer, which provides an extra layer of security and privacy to protect your anonymity. After installation, launch Tor Browser and type the following URL into the Tor Browser's address bar: `http://wux56igrepfok5cz5eqszt3xr7ng6tqai2ayplbmvp5qxruax5eicjad.onion`. Once you have accessed the whistleblower portal, you can submit your communication via the simple form that asks for the subject of the communication, a description of the communication, and any supporting files available to upload. After submitting the form, you will receive a secret code to track your submission and communicate with the office anonymously.",
+      "timestamp": 1723791819,
+      "contexts": [
+        {
+          "document_id": "fe33a79129d8ed0d-1565-3653",
+          "text": "Whistleblower Portal | New York State Attorney General\nFile a Complaint\n\nHow can we help you?\n\nI Want To...\n\nAppeal a background check\n\nApply for a Job/Internship\n\nDo Business with the OAG\n\nFile a Complaint\n\nFind Legal Services\n\nKnow My Rights\n\nMake a FOIL Request\n\nRegister/Submit a Filing\n\nReport a Data Breach\n\nRequest a Publication\n\nServe Papers on OAG\n\nUse the Whistleblower Portal\n\nHome\n\n Whistleblower Portal\n \n\nOffice of the New York State Attorney General Whistleblower Portal\n\nThe Office of the New York State Attorney General (OAG) welcomes and encourages whistleblowers, tips, and complaints. Whistleblowers are essential to fulfilling our mission: protecting the citizens of New York. Whistleblowing insiders are particularly critical in opaque industries, where transparency is limited.\nWe take special care to protect whistleblowers. While we encourage whistleblowers to identify themselves, we recognize that many whistleblowers have legitimate concerns about their anonymity because they report conduct by their employers, associates, or community members. The whistleblower portal allows anonymous submissions and two-way communications with our office through a unique key code that submitters can use to send and retrieve messages. As most people understand, the transmission of this information will be anonymous, but the content therein is not guaranteed to remain anonymous and confidential.\nTo begin the anonymous submission process, follow the instructions below:\n\n1. Download and install Tor Browser on your computer.\nOffice of the New York State Attorney General uses Tor Browser to provide an extra layer of security and privacy to protect the anonymity of whistleblowers.\u00a0 Individuals must download and install the Tor Browser on their computer first to connect and access the whistleblower portal.\u00a0\nTo learn more about Tor Browser and how it works, visit the official Tor Browser online documentation.\u00a0\n2. Launch Tor Browser on your computer.\nAfter installation, open Tor Browser and type the following URL into the Tor Browser's address bar:\n\nhttp://wux56igrepfok5cz5eqszt3xr7ng6tqai2ayplbmvp5qxruax5eicjad.onion",
+          "title": "Whistleblower Portal | New York State Attorney General",
+          "url": "https://ag.ny.gov/i-want/use-whistleblower-portal",
+          "score": 13.627722,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723791897
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "A whistleblower is an insider with sensitive information about misdeeds by their employer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "fe33a79129d8ed0d-3339-5019",
+          "text": "Whistleblower Portal | New York State Attorney General\nTo learn more about Tor Browser and how it works, visit the official Tor Browser online documentation.\u00a0\n2. Launch Tor Browser on your computer.\nAfter installation, open Tor Browser and type the following URL into the Tor Browser's address bar:\n\nhttp://wux56igrepfok5cz5eqszt3xr7ng6tqai2ayplbmvp5qxruax5eicjad.onion\n\nIf you are unable to reach the whistleblower portal in Tor Browser, refer to Tor Browser's guide to first-time use for additional troubleshooting steps.\nPlease note that the URL address above will only work inside Tor Browser.\u00a0 Attempts to visit the URL in your default browser (such as Chrome, Firefox, Safari, or Edge) will not connect.\n3. Submit your communication via the whistleblower portal.\nThe whistleblower portal consists of a simple form that asks individuals to provide the following information:\n\nthe subject of the communication\na description of the communication\nany supporting files available to upload\n\nOnce the form has been submitted, the submitter will receive a secret code to track their submission and communication with our office.\n\nLetitia James\nNew York State Attorney General\n\nSocial Media\n\nContact\n\n Office of the New York State Attorney General\n The Capitol\n Albany NY 12224-0341\n Phone: 1-800-771-7755\n\nFooter\n\nStatewide Offices\n\nPress Releases\n\nFile a Complaint\n\nEmployment Opportunities\n\nCopyright \u00a9\n 2024\n \u2014 Office of the New York State Attorney General. All Rights Reserved.\n \n\nPolicy Menu\n\nPrivacy Policy\n\nDisclaimer\n\nAccessibility Policy\n\nWe Value Your Privacy\nWe use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By using this website you consent to our use of cookies.\n\nOkay",
+          "title": "Whistleblower Portal | New York State Attorney General",
+          "url": "https://ag.ny.gov/i-want/use-whistleblower-portal",
+          "score": 22.34509,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723791951
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Whistleblower Portal | New York State Attorney General"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+      "status": "created",
+      "timestamp": 1723792027
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "edited",
+      "timestamp": 1725609282
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "edited",
+      "timestamp": 1725609282
+    },
+    {
+      "author": "2077e44f-68bd-4df7-89a1-27ac26e1eb9a",
+      "status": "edited",
+      "timestamp": 1726870650
+    },
+    {
+      "author": "2077e44f-68bd-4df7-89a1-27ac26e1eb9a",
+      "status": "accepted",
+      "timestamp": 1726870715
+    }
+  ],
+  "editor": "2077e44f-68bd-4df7-89a1-27ac26e1eb9a",
+  "domain": "mt-rag-govt-elser-512-100-20240611",
+  "reviewer": "2077e44f-68bd-4df7-89a1-27ac26e1eb9a"
+}

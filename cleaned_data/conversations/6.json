@@ -1,0 +1,1078 @@
+{
+  "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-fiqa-beir-elser-512-100-20240501",
+      "size": "61022"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"bool\": {\n    \"must\": {\n      \"text_expansion\": {\n        \"ml.tokens\": {\n          \"model_id\": \".elser_model_1\",\n          \"model_text\": \"${QUERY}\"\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "How to pay with cash when car shopping?",
+      "timestamp": 1723118898,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "When paying with cash for a car, you need to get a cashier's check made out for the amount. Note that dealers may not accept personal checks as they may bounce. You would typically pay a deposit of $500, which can be a check or bank deposit after negotiation. Then, you can return to the dealership later the same day or within a few days with a cashier's check for the remaining amount. Keep in mind that if you give the dealership $10,000 or more in actual cash, they will be required to fill out a form 8300 with the IRS.",
+      "timestamp": 1723118903,
+      "contexts": [
+        {
+          "document_id": "346042-0-906",
+          "text": "\nWhen you pay cash for a car, you don't always necessarily need to pay cash. You just aren't using credit or a loan is all. A few options you have are: Obviously no dealer expects anyone to just have the cash laying around for a car worth a few thousand dollars, nor would you bother going to your bank or credit union for the cash. You can simply get a cashier's check made out for the amount. Note that dealers may not accept personal checks as they may bounce.  After negotiations at the dealer, you would explain you're paying cash, likely pay a deposit (depending on the price of the car, but $500 would probably be enough. Again, the deposit can be a check or bank deposit), and then come back later on with a cashier's check, or deposit into a bank account. You would be able to do this later that day or within a few days, but since you've purchased a new car you would probably want to return ASAP!",
+          "score": 15.949655,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723119384
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: How to pay with cash when car shopping?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "108739-0-242",
+          "text": "\nYou can pay with a cashiers check or personal check. You can even pay cash, or combine payment methods. However, in the USA if you give the dealership $10,000 or more in actual cash, they will be required to fill out a form 8300 with the IRS.",
+          "score": 15.514337,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723119381
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: How to pay with cash when car shopping?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "9146-0-251",
+          "text": "\nOne additional reason to pay with cash rather than financing is that you will be able to completely shut down the dealership from haggling over finance terms and get right to the point of haggling over the cost of the car (which you should always do).",
+          "score": 14.80311,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723119378
+              },
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "no",
+                "timestamp": 1726564808
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: How to pay with cash when car shopping?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "When paying with cash for a car, you can visit the dealership and negotiate the cost of the vehicle. After negotiations, you would typically pay a deposit, which can be a check or bank deposit. Then, you can return to the dealership later the same day or within a few days with a cashier's check or a deposit into a bank account for the remaining amount. Keep in mind that if you give the dealership $10,000 or more in actual cash, they will be required to fill out a form 8300 with the IRS. Paying with cash also allows you to avoid haggling over finance terms and focus on negotiating the cost of the car."
+    },
+    {
+      "speaker": "user",
+      "text": "Or installment easier?",
+      "timestamp": 1723121384,
+      "enrichments": {
+        "Question Type": [
+          "Comparative",
+          "Opinion"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "UNANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I'm sorry, but I don't have an answer to your question.",
+      "timestamp": 1723121388,
+      "contexts": [
+        {
+          "document_id": "346042-0-906",
+          "text": "\nWhen you pay cash for a car, you don't always necessarily need to pay cash. You just aren't using credit or a loan is all. A few options you have are: Obviously no dealer expects anyone to just have the cash laying around for a car worth a few thousand dollars, nor would you bother going to your bank or credit union for the cash. You can simply get a cashier's check made out for the amount. Note that dealers may not accept personal checks as they may bounce.  After negotiations at the dealer, you would explain you're paying cash, likely pay a deposit (depending on the price of the car, but $500 would probably be enough. Again, the deposit can be a check or bank deposit), and then come back later on with a cashier's check, or deposit into a bank account. You would be able to do this later that day or within a few days, but since you've purchased a new car you would probably want to return ASAP!",
+          "score": 33.865074,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723122838
+              },
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "no",
+                "timestamp": 1726565060
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: How to pay with cash when car shopping?\n|assistant|: When paying with cash for a car, you need to get a cashier's check made out for the amount. Note that dealers may not accept personal checks as they may bounce. You would typically pay a deposit of $500, which can be a check or bank deposit after negotiation. Then, you can return to the dealership later the same day or within a few days with a cashier's check for the remaining amount. Keep in mind that if you give the dealership $10,000 or more in actual cash, they will be required to fill out a form 8300 with the IRS.\n|user|: Or installment easier?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "139047-0-453",
+          "text": "\nI have in the last few years purchased several used cars from dealers. They have handled it two different ways. They accepted a small check ~$1,000 now, and then gave me three business days to bring the rest as a cashiers check. They also insisted that I submit a application for credit, in case I needed a loan.  They accepted a personal check on the spot. Ask them before you drive to the dealer. Of course they would love you to get a loan from them.",
+          "score": 28.80388,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723122847
+              },
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "no",
+                "timestamp": 1726565153
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: How to pay with cash when car shopping?\n|assistant|: When paying with cash for a car, you need to get a cashier's check made out for the amount. Note that dealers may not accept personal checks as they may bounce. You would typically pay a deposit of $500, which can be a check or bank deposit after negotiation. Then, you can return to the dealership later the same day or within a few days with a cashier's check for the remaining amount. Keep in mind that if you give the dealership $10,000 or more in actual cash, they will be required to fill out a form 8300 with the IRS.\n|user|: Or installment easier?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "105694-0-598",
+          "text": "\nTo add to what others have said, INSTALLMENT CREDIT is a stronger factor when building credit. An installment credit is essentially a loan with a fixed repay amount such as a student loan and a car loan. Banks (when it comes to buying your first home) want to see that you are financially able to repay a big debt (car loan). But be careful, if you cannot pay cash, you cannot afford it. My rule of thumb is that when I'm charging something to my CC, I MUST pay it off when it posts to my account. I just became debt free (paid off about 15k in CC and student loan debt in 18 months) and I love it.",
+          "score": 14.013038,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723122809
+              },
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "no",
+                "timestamp": 1726565281
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "installment at car dealer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "If you prefer to pay in installments, you can discuss this with the car dealer. They may offer financing options, and in some cases, they may require you to submit a credit application. However, if you wish to pay with cash, the process involves paying a deposit and returning with a cashier's check for the remaining amount. The exact terms and conditions may vary depending on the dealership's policies."
+    },
+    {
+      "speaker": "user",
+      "text": "Then, 0% interest same as having benefits of the both?",
+      "timestamp": 1723123285,
+      "enrichments": {
+        "Question Type": [
+          "Opinion",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "A 0% interest rate offer can provide some benefits of both paying in cash and financing. With a 0% interest rate, you can effectively borrow money from the dealership without paying any interest, which can make your payments lower and more manageable.  This can be beneficial if you want to preserve your savings by not paying the full price of the car upfront.  However, zero percent interest may sound great,  those deals often have extra margin built into the price to make up for it. There might also be late payment fees, prepayment penalties, and other clauses.  Also, these tend to be shorter 12 months vs  72 months. ",
+      "timestamp": 1723123301,
+      "contexts": [
+        {
+          "document_id": "420018-0-507",
+          "text": "\nIf and only if by coincidence the car you were already considering from your research includes a 0% finance offer, go ahead a take the financing and save your cash. If however you are being tempted to a different car, or would spend more than you initially thought were wanted to, 0% financing is just another trick to get more of you money. Just be honest why you want the car: is it a good price, or does the financing seem like a good deal?  Even if you are not paying interest, you are paying principal.",
+          "score": 26.61642,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723124706
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "0% interest car deal"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "380368-0-200",
+          "text": "\nZero percent interest may sound great, but those deals often have extra margin built into the price to make up for it. If you see 0%, find it cheaper somewhere else and avoid the cloud over your head.",
+          "score": 25.431168,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723124689
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "0% interest car deal"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "130850-0-703",
+          "text": "\nVery good answers as to how 0% loans are typically done.  In addition, many are either tied to a specific large item purchase, or credit cards with a no interest period.  On credit card transactions the bank is getting a fee from the retailer, who in turn is giving you a hidden charge to cover that fee.  In the case of a large purchase item like a car, the retailer is again quite likely paying a fee to cover what would be that interest, something they are willing to do to make the sale.  They will typically be less prone to deal as low a price in negotiation if you were not making that deal, or at times they may offer either a rebate or special low to zero finance rates, but you don't get both.",
+          "score": 25.264868,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723124685
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "0% interest car deal"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "167129-0-1904",
+          "text": "\nThe car deal makes money 3 ways. If you pay in one lump payment. If the payment is greater than what they paid for the car, plus their expenses, they make a profit. They loan you the money. You make payments over months or years, if the total amount you pay is greater than what they paid for the car, plus their expenses, plus their finance expenses they make money. Of course the money takes years to come in, or they sell your loan to another business to get the money faster but in a smaller amount. You trade in a car and they sell it at a profit. Of course that new transaction could be a lump sum or a loan on the used car... They or course make money if you bring the car back for maintenance, or you buy lots of expensive dealer options. Some dealers wave two deals in front of you: get a 0% interest loan. These tend to be shorter 12 months vs 36,48,60 or even 72 months. The shorter length makes it harder for many to afford. If you can't swing the 12 large payments they offer you at x% loan for y years that keeps the payments in your budget. pay cash and get a rebate. If you take the rebate you can't get the 0% loan. If you take the 0% loan you can't get the rebate. The price you negotiate minus the rebate is enough to make a profit. The key is not letting them know which offer you are interested in. Don't even mention a trade in until the price of the new car has been finalized. Otherwise they will adjust the price, rebate, interest rate, length of loan,  and trade-in value to maximize their profit. The suggestion of running the numbers through a spreadsheet is a good one. If you get a loan for 2% from your bank/credit union for 3 years and the rebate from the dealer, it will cost less in total than the 0% loan from the dealer. The key is to get the loan approved by the bank/credit union before meeting with the dealer. The money from the bank looks like cash to the dealer.",
+          "score": 24.275583,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723123730
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "0% interest car deal"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "396853-0-988",
+          "text": "\n\"A \"\"true\"\" 0% loan is a losing proposition for the bank, that's true.  However when you look at actual \"\"0%\"\" loans they usually have some catches: There might also be late payment fees, prepayment penalties, and other clauses that make it a good deal on average to the bank.  Individual borrowers might be able to get away with \"\"free money\"\", but the bank does not look to make money on each loan, they look to make money on thousands of loans overall. For a retailer (including new car sellers). the actual financing costs will be baked into the sales price.  They will add, say, 10% to the sales price in exchange for an interest-free loan. They can also sell these loans to an investment bank or other entity, but they would be sold at a deep discount, so the difference will be made up in the sales price or other \"\"fees\"\". It's possible that they would just chalk it up to promotional discounts or customer acquisition costs, but it would not be a good practice on a large scale.\"",
+          "score": 24.70763,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723124622
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "0% interest car deal"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "A 0% interest rate offer can provide some benefits of both paying in cash and financing. With a 0% interest rate, you can effectively borrow money from the dealership without paying any interest, which can make your payments lower and more manageable. This can be similar to financing with a low interest rate. At the same time, because you are not paying any interest, you will end up paying the same total price for the car as you would if you paid in cash, assuming you pay off the loan within the promotional period. This can be beneficial if you want to preserve your savings by not paying the full price of the car upfront. However, it's important to note that 0% interest rate offers are often only available to customers with excellent credit, so not everyone will qualify for these deals. Additionally, if you are unable to pay off the loan within the promotional period, you may be charged a higher interest rate or other penalties, so it's important to read the terms and conditions carefully before agreeing to a 0% interest rate offer."
+    },
+    {
+      "speaker": "user",
+      "text": "If my friend paid for me with her bank's check, what is a consequence?",
+      "timestamp": 1723125087,
+      "enrichments": {
+        "Question Type": [
+          "Explanation",
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "If your friend pays for the car using her bank's check (also known as a cashier's check), there should not be any legal consequences for you.  In the US, gift tax always falls on the donor, never the recipient, and gifts are not taxable income to the recipient up to $14K for the whole year.",
+      "timestamp": 1723125091,
+      "contexts": [
+        {
+          "document_id": "194136-0-703",
+          "text": "\nIn the US, gift tax always falls on the donor, never the recipient, and gifts are not taxable income to the recipient. The IRS could raise questions if there is an employer-employee relationship between donor and recipient; your employer cannot give you money or property (e.g. a Rolex watch) or benefits (e.g. a house to live in rent-free) and claim that it is a gift, so that you do not have to pay income tax on that money.  But, your parents need to be careful; that $14K per person is the exemption for the whole year and once they give you that, anything extra (birthday present, Christmas present etc) is subject to gift tax (for them) though you can still enjoy your gifts without any tax issue.",
+          "score": 20.844833,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723125860
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "gift tax"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "328403-0-669",
+          "text": "\nIt is correct, in general. Gift tax is indeed at 35%, but you have the first 14K of your gift exempt from it for each person you give to, yearly (verify the number, it changes every year). You can also use your lifetime exemption ($5.45M in 2016, subject to change each year), but at the amounts you're talking about it still will not be enough. Charitable (501(c)) organizations, paying for someone's tuition or medical expenses (directly to the providers), political donations, transfer between you and your spouse - these are all exempt from gift tax. If you have 10 millions to give, I'm sure you can afford a $200 consultation with a EA/CPA licensed in your state.",
+          "score": 24.191881,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723125868
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "amount for gift tax"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "464204-0-176",
+          "text": "\nIt is taxable to your brother (assuming he's a US tax resident). Transfer of any amount over $14k per year to any single person (other than spouse) triggers gift tax liability.",
+          "score": 22.824692,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723125876
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "amount for gift tax"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "If your friend pays for the car using her bank's check (also known as a cashier's check), there should not be any legal consequences for you, as long as you are able to provide the necessary documentation and proof of identity as required by the dealership. However, it is important to ensure that your friend is aware that she is the one purchasing the car, and you are reimbursing her. The financial responsibility and credit implications will still belong to your friend, as she is the one making the purchase. Make sure to clarify these details with the dealership and your friend before proceeding with the transaction."
+    },
+    {
+      "speaker": "user",
+      "text": "Do I really need an extra warranty on my new car?",
+      "timestamp": 1723127256,
+      "enrichments": {
+        "Question Type": [
+          "Explanation",
+          "Opinion"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": " An insurance via \"extended warranty\" is rarely a good deal.  Don't waste money on a third party warranty.  A new vehicle does not have unknown risk associated with the purchase, and also comes with peace of mind through a manufacturer warranty.  It is also depending on various factors, such as your driving habits and your risk tolerance.  If you drive less, have a good track record with cars, and are comfortable with the manufacturer's warranty, you might not need an additional warranty. However, if you drive more, have had issues with cars in the past, or want additional peace of mind, purchasing an extended warranty could be beneficial. ",
+      "timestamp": 1723127266,
+      "contexts": [
+        {
+          "document_id": "250672-1605-2622",
+          "text": "\nCertified cars don't justify their cost according to consumer reports, they are more for marketing than reliability. Don't waste money on a third party warranty. Either the car is good and doesn't need it, or it needs a warranty and you shouldn't buy it. If you new car comes with a factory warranty, that is fine. Radio host Clark Howard is indifferent if you want to purchase a factory warranty separately, but never a third party. Just out of college, you probably will be better off spending the least amount of money you can for a good used car. If for no other reason, this likely isn't going to be your car in the near future. (Only you can answer that) If you have a feeling you won't keep your tiny car well into your 30s, then definitely don't buy a new car. Also, my experience only applies to my make and model. Certain models of cars keep their value and the difference between new and used isn't much for the most recent model years. But there are many more makes and models that don't pan out that way.",
+          "score": 14.6828985,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723128395
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "extra warranty on my new car"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "129350-3347-5243",
+          "text": "\nA new vehicle does not have unknown risk associated with the purchase, and also comes with peace of mind through a manufacturer warranty. You can purchase a used car warranty, but they are expensive, and often come with (different) problems. Finance Terms - A buyer can purchase a new vehicle with lower financing rate than a used vehicle. And you get nothing of value from the additional finance charges, so the difference between a new and used car also includes higher finance costs. Own versus Rent - You are assuming that people actually want to 'own' their cars. And I would suggest that people want to 'own' their car until it begins to present problems (repair and maintenance issues), and then they want a new vehicle to replace it. But renting or leasing a vehicle is an even more expensive, and less flexible means to obtain transportation. Expense Allocation - A vehicle is an expense. As the owner of a vehicle, you are willing to pay for that expense, to fill your need for transportation. Paying for the product as you use the product makes sense, and financing is one way to align the payment with the consumption of the product, and to pay for the expense of the vehicle as you enjoy the benefit of the vehicle. Capital Allocation - A buyer may need a vehicle (either to commute to work, school, doctor, or for work or business), but either lack the capital or be unwilling to commit the capital to the vehicle purchase. Vehicle financing is one area banks have been willing to lend, so buying a new vehicle may free capital to use to pay down other debts (credit cards, loans). The buyer may not have savings, but be able to obtain financing to solve that need. Remember, people need transportation. And they are willing to pay to fill their need. But they also have varying needs for all of the above factors, and each of those factors may offer value to different individuals.",
+          "score": 13.180057,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723128327
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "extra warranty on my new car"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "506194-0-1907",
+          "text": "\n\"In general, if you can afford to replace something, you are able to \"\"self-insure\"\". You really want to understand a little of the statistics before you can make a generic call, but my rule of thumb is that insurance via \"\"extended warranty\"\" is rarely a good deal. Here is a simple expected value math formula you can apply (when the > is true, then you should buy it): replacement cost x likelihood of using warranty % > cost of insurance You can then back-compute, what is the likelihood that I'd need to lose this item to break even? Given your numbers: $2000 x Y > $350 or Y > (350/2000) or Y > 17.5% So if you think there is a 17.5% or greater chance that you'll need to have you system replaced (i.e. not just a simple fix) AND (as Scott pointed out) you'll be able to actually use the replacement warranty then the applecare is a good purchase. Note, this only applies to items you can replace out-of-pocket without significant burden, because if you didn't have the $10k to replace your car, it wouldn't matter if the insurance wasn't such a good deal (especially if you need the car to get to work, etc.) So the obvious question is: \"\"Why would a for-profit company ever offer insurance on something they are statistically likely to lose money on?\"\" The obvious answer is \"\"they wouldn't,\"\" but that doesn't mean you should never buy this type of insurance, because you may have statistically significant circumstances. For instance, I purchased a $40 remote helicopter as a gift for my children. I also paid the $5 for a \"\"no questions asked\"\" warranty on it because, knowing my kids, I knew there was a nearly 100% chance they would break it at least once. In this case, this warranty was well worth the $5, because they did break it! Presumably they make money on these warranties because most of the purchasers of the plan are more attentive (or too lazy to make the claim) than in this case.",
+          "score": 13.340529,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723128321
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "extra warranty on my new car"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Whether you need an extra warranty on your new car depends on various factors, such as the manufacturer's warranty coverage, your driving habits, and your risk tolerance. New cars usually come with a factory warranty covering defects and repairs for a certain period. If you drive less, have a good track record with cars, and are comfortable with the manufacturer's warranty, you might not need an additional warranty. However, if you drive more, have had issues with cars in the past, or want additional peace of mind, purchasing an extended warranty could be beneficial. It's essential to read the terms and conditions of the warranty and consider your personal needs before making a decision."
+    },
+    {
+      "speaker": "user",
+      "text": "EV used car market",
+      "timestamp": 1723128683,
+      "enrichments": {
+        "Question Type": [
+          "Keyword",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "UNANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I do not have specific information about the EV (electric vehicle) used car market. ",
+      "timestamp": 1723128689,
+      "contexts": [
+        {
+          "document_id": "487864-0-659",
+          "text": "\nYeah, it's going to happen a lot faster than that.  Today we're starting to see the 2nd generation of modern electric cars becoming available at $35K price and 200+ mile range.  It was only 7 years ago that the first generation started becoming available.  If progress continues at the pace it has up to now, then by 2025 we might see the 3rd gen EVs appearing and I expect they'll have 300+ range starting around $25K.  EV infrastructure is easy peasy to install.  All you have to do is pick an electrician out of the phone book.  Apartments, parking garages, and hotels will all have to start installing level 1 and level 2 chargers, if they want customers.",
+          "score": 14.5392475,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1723129482
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "EV used car"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "511950-0-792",
+          "text": "\nI dunno what the replacement rate is for cars, but there were 230M cars registered in the US in 2015. There were 17.5M cars sold in 2015. If you assume that full production capacity for cars is about 20M then (assuming 100% of production is switched to EV) it will take 11.5 years at full tilt to just replace the ones on the road.   But of course there will be a ramp and a tail meaning cars will be sold in 2024 that are not electric only and they will be on the road for 15 years.   Also the market will grow to say 25M but instead of adding 5M capacity, we would really have to add 25M capacity b.c EV is currently 0.   Thats all assuming there isnt a recession/depression and ignores trucks and ships and all the other uses for oil.   I thought this article was posted to /r/badeconomics",
+          "score": 15.30269,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1723129486
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "EV used car market"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "253565-0-505",
+          "text": "\nThis is great news.  EVs are growing so fast.  Their reduced fuel and maintenance costs will be a great boon to the economy.  I wouldn't be surprising to see EVs take a significant share of the auto market in the coming years (they were ~1% in 2016).  Innovation drives economic growth.  It's also good for the environment (the electricity used is much cleaner than gasoline/diesel) and electrical grid (increased demand that's potentially responsive to system load helps finance smart grid improvements).",
+          "score": 17.541027,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1723129490
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "EV used car market"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "I do not have specific information about the EV (electric vehicle) used car market. However, I can tell you that buying a used electric vehicle can be a good option for those looking to save money while still enjoying the benefits of electric powertrains. Factors to consider when buying a used EV include battery health, charging infrastructure availability, and government incentives. Additionally, it's important to research the specific make and model to understand any common issues or recalls."
+    },
+    {
+      "speaker": "user",
+      "text": "I mean current EV's battery does not stand for a used car market...how do you think?",
+      "timestamp": 1723129647,
+      "enrichments": {
+        "Question Type": [
+          "Opinion",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The longevity of EV batteries can indeed impact the used car market. The companies like Toyota and GM have done extensive testing and research to ensure the longevity of their battery packs. For instance, Toyota's battery packs have proven to last longer than initially claimed, debunking the notion that they would need replacement every five years. Similarly, GM has made similar claims about the longevity of their packs. However, Nissan's decision to omit a liquid cooling system in their cars' battery packs has led to heat-related issues, affecting their longevity.  Enhanced battery tech investment needed badly, but not anytime soon while batteries are not the only bottleneck in vehicle production.",
+      "timestamp": 1723129674,
+      "contexts": [
+        {
+          "document_id": "162428-0-349",
+          "text": "\nAs an electric vehicle engineer... I can say that shitty 18650 batteries are not the only bottleneck in vehicle production. If your supply chain is completely dependant on out of date battery technolgy, one small part of an EV,  the vehicle will be postponed a great deal. There are many many facets to vehicle production than 1/5 of the powertrain.",
+          "score": 19.039022,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723130852
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "EV battery tech"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "181880-0-671",
+          "text": "\nThere's quite a lot of investment in battery tech right now. Batteries with 2 to 4 times the energy density of Li-ion are now in production, though not for sale yet. People are working on fast charging and long life battery tech too.  And there are a number of flow battery technologies, where the electrolytes are like fuel, and the power extraction unit is like an engine. These may never be suitable for vehicles, but they can store huge amounts of energy for months.   Also there are some very high energy density batteries that are non-rechargeable but where the solid electrolytes are replaceable and recyclable. These have energy density close to that of gasoline.",
+          "score": 18.861416,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723130742
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "EV battery tech"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "295295-0-526",
+          "text": "\nThe momentum is there and seems unstoppable with the Europeans, US and Asian car makers going all electric and a stop to gasoline &amp; diesel fuel on the horizon.  Might be some fuel cell use (hydrogen) but generally electric is the way to go.  Enhanced battery tech investment needed badly.  Range is critical and removable and replaceable batteries the way to go too.  Pull into a garage and have your spent battery pack removed and replaced by a fully-charged pack.  Pay $3 and go on your way.  It's the way of the future.",
+          "score": 18.837496,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723130693
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "EV battery tech"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "541778-0-629",
+          "text": "\nOr valued like a company that is likely to lead the transition to EVs.  What most people miss: to make 1M EVs/year you need at least 50GWh in batteries/year. This is an amount you cannot buy anywhere. Not even if you're Mercedes or BMW or GM. The only solution is to build dedicated factories for this, and that takes 3-5 years.  Tesla has the forethought to realize this is the bottleneck and they moved early. So in 2020 each of the other car makers can maybe source enough batteries for 100K cars/year, while Tesla will make their own to the tune of 1M cars/year.  This will change eventually, of course. But not anytime soon.",
+          "score": 17.79036,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723130690
+              },
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "no",
+                "timestamp": 1726567015
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "EV battery tech"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "485187-0-819",
+          "text": "\n\"But you also can't use a comparison to a cell phone battery; they are not the same chemistry either despite both having \"\"lithium\"\" in the name, and EVs limit themselves to a far narrower range of charge than a cell phone does.  My point was that Toyota, didn't base their longevity claims on nothing; they did a shitload of testing of their battery before putting it out, and the \"\"you'll need a new pack after five years\"\" crowd was ultimately proved wrong.  GM has made similar claims about the longevity of their packs, based on similar shitloads of research and testing, and I see no reason why they won't ultimately enjoy the same vindication.  As for Nissan, they are reaping the effects of cheaping out and omitting a liquid cooling system from their cars battery packs. Heat kills batteries of any chemistry!\"",
+          "score": 17.853804,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723130686
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "EV battery tech"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The longevity of EV batteries can indeed impact the used car market. However, as mentioned in the documents, companies like Toyota and GM have done extensive testing and research to ensure the longevity of their battery packs. For instance, Toyota's battery packs have proven to last longer than initially claimed, debunking the notion that they would need replacement every five years. Similarly, GM has made similar claims about the longevity of their packs. However, as noted, Nissan's decision to omit a liquid cooling system in their cars' battery packs has led to heat-related issues, affecting their longevity. Therefore, the condition and technology of the battery pack can influence the value of a used EV."
+    },
+    {
+      "speaker": "user",
+      "text": "Isn't this where NASA technology comes in?",
+      "timestamp": 1723131060,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "UNANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I don't have specific information on whether NASA technology has been directly applied to improve EV batteries or address their impact on the used car market.",
+      "timestamp": 1723131074,
+      "contexts": [
+        {
+          "document_id": "541778-0-629",
+          "text": "\nOr valued like a company that is likely to lead the transition to EVs.  What most people miss: to make 1M EVs/year you need at least 50GWh in batteries/year. This is an amount you cannot buy anywhere. Not even if you're Mercedes or BMW or GM. The only solution is to build dedicated factories for this, and that takes 3-5 years.  Tesla has the forethought to realize this is the bottleneck and they moved early. So in 2020 each of the other car makers can maybe source enough batteries for 100K cars/year, while Tesla will make their own to the tune of 1M cars/year.  This will change eventually, of course. But not anytime soon.",
+          "score": 14.296664,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1723131867
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Nasa tech in EV battery  "
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "162428-0-349",
+          "text": "\nAs an electric vehicle engineer... I can say that shitty 18650 batteries are not the only bottleneck in vehicle production. If your supply chain is completely dependant on out of date battery technolgy, one small part of an EV,  the vehicle will be postponed a great deal. There are many many facets to vehicle production than 1/5 of the powertrain.",
+          "score": 14.030062,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1723131874
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Nasa tech in EV battery  "
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "269912-0-306",
+          "text": "\nThe issue is production volume.   No other manufacturer had the foresight to build a gigafactory.   Therefore no other manufacturer can source enough batteries for hundreds of thousands of cars per year.   Tesla will ruler the EV market for years - until legacy makers catch up in terms of battery sources.",
+          "score": 13.570982,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1723131877
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Nasa tech in EV battery  "
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "NASA technology has been used in various industries, including the automotive sector, for different applications such as materials science, aerodynamics, and propulsion systems. However, I don't have specific information on whether NASA technology has been directly applied to improve EV batteries or address their impact on the used car market."
+    },
+    {
+      "speaker": "user",
+      "text": "because if I cannot sell my EV later, it is not good...",
+      "timestamp": 1723132241,
+      "enrichments": {
+        "Question Type": [
+          "Opinion"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "That's correct. The longevity of EV batteries is an important factor in the used car market.   Compare to a gasoline car, the gas savings alone will be cheaper let alone repairs, oil change, filters, and it is already at 35k while EV is down to 25K.   Only the negative factor is an EV's battery impacting its resale value. ",
+      "timestamp": 1723132245,
+      "contexts": [
+        {
+          "document_id": "453135-0-268",
+          "text": "\nIIRC correctly there was a report posted to reddit recently that Teslas are  the most popular seller in Norway, which has incentives for the first 50,000 buyers of EVs. They sold 1,493 in one month, which equates to almost 18,000 in the next 12 months in Norway alone.",
+          "score": 16.668898,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1723132822
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "sell used EV "
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "253565-0-505",
+          "text": "\nThis is great news.  EVs are growing so fast.  Their reduced fuel and maintenance costs will be a great boon to the economy.  I wouldn't be surprising to see EVs take a significant share of the auto market in the coming years (they were ~1% in 2016).  Innovation drives economic growth.  It's also good for the environment (the electricity used is much cleaner than gasoline/diesel) and electrical grid (increased demand that's potentially responsive to system load helps finance smart grid improvements).",
+          "score": 14.300246,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1723132857
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "sell used EV "
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "421621-0-251",
+          "text": "\nI'm no expert but I don't think it'll take to 2040 will have 54% of sales.. Once full EV's cost 25k there isn't any reason to buy a gasoline car, the gas savings alone will be cheaper let alone repairs, oil change, filters, and they're already at 35k.",
+          "score": 14.908174,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723132888
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "sell used EV "
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "That's correct. The longevity of EV batteries is an important factor in the used car market. If an EV's battery is not expected to last long, it may negatively impact its resale value. However, major car manufacturers like Toyota, GM, and Nissan have conducted extensive research and testing to ensure the durability of their battery packs. While some companies have had success, others like Nissan have faced heat-related issues due to the lack of a liquid cooling system. Overall, enhanced battery technology is needed to improve the lifespan of EV batteries and their impact on the used car market."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "created",
+      "timestamp": 1723133739
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "accepted",
+      "timestamp": 1725533536
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "edited",
+      "timestamp": 1726568126
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "accepted",
+      "timestamp": 1726568438
+    }
+  ],
+  "editor": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+  "domain": "mt-rag-fiqa-beir-elser-512-100-20240501",
+  "reviewer": "9dcd142c-415e-4161-a82f-c8b14bfb36ac"
+}

@@ -1,0 +1,905 @@
+{
+  "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-fiqa-beir-elser-512-100-20240501",
+      "size": "61022"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"bool\": {\n    \"must\": {\n      \"text_expansion\": {\n        \"ml.tokens\": {\n          \"model_id\": \".elser_model_1\",\n          \"model_text\": \"${QUERY}\"\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "When applying for a mortgage, can it also cover outstanding debts?",
+      "timestamp": 1722939556,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "UNANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The documents do not provide an answer to the question.",
+      "timestamp": 1722939559,
+      "contexts": [
+        {
+          "document_id": "245005-0-558",
+          "text": "\nI generally agree with the other answers.  Regarding the bit about your loan from your parents... Your arrangement with your parents is certainly material to you getting another  loan.  The mortgage application will probably require you to disclose all outstanding debt.  Obviously, if you choose to omit it and your parents don't tell, it probably won't come up.  But that would be unethical (definitely) and illegal (probably).   Whether this will interfere with you getting a loan is another question, but since it's your only debt it will probably be OK.",
+          "score": 14.948033,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "no",
+                "timestamp": 1722939898
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: When applying for a mortgage, can it also cover outstanding debts?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Based on the information provided, a mortgage is a type of loan used to purchase a house. It seems that the documents do not directly address whether a mortgage can cover other outstanding debts. Therefore, I cannot provide a definitive answer to this question. However, it is important to note that when applying for a mortgage, you are typically required to disclose all outstanding debts. This includes debts to parents, banks, money lenders, phone companies, and any other creditors. Failure to disclose such debts could be considered unethical and potentially illegal."
+    },
+    {
+      "speaker": "user",
+      "text": "Is refinancing the same as getting a mortgage?",
+      "timestamp": 1722940886,
+      "enrichments": {
+        "Question Type": [
+          "Comparative",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "No, they are not the same. A mortgage is a secured debt consisting of a promissory note and a security interest that provides the mortgage holder with a secured interest in the property. A mortgage is a loan backed by a property, as specific laws cover it due to its wide usage. Therefore, the bank is not an \"investor\" in your house; it is simply lending you money with the property as collateral. Thus, it does not receive any share of the profit. On the other hand, refinancing, or re-fi, occurs when a debtor takes out a new loan, usually with new bank, to pay off an old one. This can be done for various reasons, primarily because the new loan terms will result in a lower monthly payment.",
+      "timestamp": 1722940891,
+      "contexts": [
+        {
+          "document_id": "104857-0-1939",
+          "text": "\n\"A re-financing, or re-fi, is when a debtor takes out a new loan for the express purpose of paying off an old one. This can be done for several reasons; usually the primary reason is that the terms of the new loan will result in a lower monthly payment. Debt consolidation (taking out one big loan at a relatively low interest rate to pay off the smaller, higher-interest loans that rack up, like credit card debt, medical bills, etc) is a form of refinancing, but you most commonly hear the term when referring to refinancing a home mortgage, as in your example. To answer your questions, most of the money comes from a new bank. That bank understands up front that this is a re-fi and not \"\"new debt\"\"; the homeowner isn't asking for any additional money, but instead the money they get will pay off outstanding debt. Therefore, the net amount of outstanding debt remains roughly equal. Even then, a re-fi can be difficult for a homeowner to get (at least on terms he'd be willing to take). First off, if the homeowner owes more than the home's worth, a re-fi may not cover the full principal of the existing loan. The bank may reject the homeowner outright as not creditworthy (a new house is a HUGE ding on your credit score, trust me), or the market and the homeowner's credit may prevent the bank offering loan terms that are worth it to the homeowner. The homeowner must often pony up cash up front for the closing costs of this new mortgage, which is money the homeowner hopes to recoup in reduced interest; however, the homeowner may not recover all the closing costs for many years, or ever. To answer the question of why a bank would do this, there are several reasons: The bank offering the re-fi is usually not the bank getting payments for the current mortgage. This new bank wants to take your business away from your current bank, and receive the substantial amount of interest involved over the remaining life of the loan.",
+          "score": 16.542427,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1722941417
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: When applying for a mortgage, can it also cover outstanding debts?\n|assistant|: The documents do not provide an answer to the question.\n|user|: Is refinancing the same as getting a mortgage?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "274870-0-1888",
+          "text": "\n\"Mortgage is a (secured) debt, a combination of a promissory note, and a security interest providing the mortage holder a secured interest in the property. Yes, you are \"\"in debt\"\". But that depends upon whether you define the term \"\"in debt\"\" as a debt appearing on the balance sheet, or the net of assets - liabilities is less than zero, whether you have a \"\"debt\"\" expense on the income statement (budget), or whether the net of income - expenses is less than zero. One person might look at their budget, find the (monthly) mortgage payment listed, and judge that they have a debt payment, and thus are \"\"in debt\"\". Or they might look at their expenses, find they exceed their income, and judge that they are \"\"in debt\"\". Another person might look at their balance sheet, compare assets to liabilities, and only say they were \"\"in debt\"\" when their liabilities exceeded their assets. Some people view mortgage debt as \"\"good debt\"\", as they view certain debts as \"\"good\"\" and others as \"\"bad\"\". Trust me, having a high mortgage payment (higher 30% of your net income) is hard, and over 40% is bad. Consider you balance sheet and your income statement. On your balance sheet, the house appears on the \"\"asset\"\" side with an (estimated) value, while the \"\"mortgage\"\" (really, the promissory note part of the mortgage) appears on the \"\"liability\"\" side. On your income statement, your house does not appear on the income side, but the mortgage (promissory note) payment appears on the expense side. So, you clearly have both a \"\"liability\"\" with a clearly-defined value and an \"\"expense\"\" with a clearly-defined payment. But do you have an \"\"asset\"\"? According to an accountant, you have an \"\"asset\"\" and a \"\"liability\"\". But you do not have a business asset that is producing revenue (income), nor do you have a business asset that can be amortized and expensed to reduce taxable income.",
+          "score": 19.858046,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1722941414
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "What is a mortgage?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "181081-0-1825",
+          "text": "\n\"A mortgage is simply a loan backed by a property (and, because it's both very large and very common, covered by some specific laws). As such, the bank isn't an \"\"investor\"\" in your house; it simply is lending you money with the property as collateral. So, it doesn't get any share of the profit. As long as you sell the house on your own, for more than you owe, most of the time in the US you will get about 92-94% of the sale price back, minus whatever you owe on the house. The 6-8% you don't get will go to the realtors as commission (unless you sell by owner and don't sell to someone with a buyer's agent), and to pay some of the costs of the sale (how much of those you pay depends on the deal you make with the buyer, but it's common to pay some of them in some areas). You also will owe taxes (potentially). You then pay the bank back from that amount. As such, in your example, let's say Bob owes $50k on his house, and sells it with a realtor for $150k. He gets $150k-0.06*150k = 141k after commission. He then hands the bank a check for the current payoff of the loan: that amount is usually slightly higher than the remaining principal, because you owe the interest that's accrued between [last payment you made] and [day of sale]. Let's say this is a 6% loan, which works out to around 0.5% per month, and it's been half a month since his last payment, so he owes another 0.25%, or another $125. Some mortgages also may have prepayment penalties (check your note). In this case there isn't a penalty, so the bank gets $50,125 from the sale. Usually, the bank would get that immediately at closing - ie, he doesn't get the full $141k or $150k and then write a check, instead the title/closing company gets that amount, and gives the $9k to the realtors, the $50,125 to the bank, and the remaining $90,875 to him.",
+          "score": 18.931376,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1722941412
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "What is a mortgage?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Based on the documents, refinancing is not the same as getting a mortgage, but it does involve applying for a new loan. Refinancing refers to the process of replacing an existing loan with a new one, typically to secure better terms or conditions. On the other hand, a mortgage is a specific type of loan used to purchase real estate. While refinancing can involve a mortgage, it is not the same thing."
+    },
+    {
+      "speaker": "user",
+      "text": "What is the typical down payment amount for a mortgage?",
+      "timestamp": 1722941500,
+      "enrichments": {
+        "Question Type": [
+          "Explanation",
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Ideally, a 20% down payment is suggested when buying a house. The idea behind this is that if someone can't save 1/5 of the cost of a house, they might not be responsible enough to ensure loan repayment. Additionally, by putting down 20%, you can avoid paying costly private mortgage insurance (PMI).",
+      "timestamp": 1722941505,
+      "contexts": [
+        {
+          "document_id": "447580-0-742",
+          "text": "\n\"The typical down-payment was expected to be 20%.  The idea being that if one could not save 1/5 of the cost of a house, they were not responsible enough to ensure repayment of the loan. It is hard to say whether this is truly a relevant measure.  However, in the absence of other data points, it is pretty decent.  It typically requires a fair amount of time to amass that much money and it does demonstrate some restraint.  (e.g. it is easily the cost of a decent new car or some other shiny \"\"toy.\"\") Income is not necessarily a good measure, on its own.  I am certainly more responsible with my spending when I have less money to spend.  (Lately, I have been feeling like my father, scrutinizing every single purchase down to the penny.)\"",
+          "score": 20.94467,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1722941968
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "What is the typical down payment amount for a mortgage?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "453051-0-943",
+          "text": "\nHow much should my down payment be? Ideally 20% of the purchase price because with 20% of the purchase price, you don't have to pay a costly private mortgage insurance (PMI).  If you don't have 20% down and come across a good property to purchase, it is still a good idea to go forward with purchasing with what you are comfortable with, because renting long term is generally never a good idea if you want to build wealth and become financially independent. How much should I keep in my emergency fund? People say 3-12 months of living expenses.  Keep in mind though, in most cases, if you lose your job, you are entitled to unemployment benefits from the government. How long should my mortgage be? 30 year amortization is the best. You can always opt to pay more each month.  But having that leverage with a 30 year loan can allow you to invest your savings in other opportunities, which can yield more than mortgage interest. Best of luck!",
+          "score": 20.080244,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1722941965
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "What is the typical down payment amount for a mortgage?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The documents do not provide specific information on the typical down payment amount for a mortgage. It can vary based on factors such as the borrower's credit score, the type of mortgage, and the lender's policies. Common down payment amounts can range from 3% to 20% of the property's purchase price. For more accurate information, it is recommended to check with a lender or mortgage broker."
+    },
+    {
+      "speaker": "user",
+      "text": "Do I need to buy house insurance?",
+      "timestamp": 1722942776,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "You can obtain various types of insurance, each with commendable rules. If you require a specific kind of insurance, the insurance company can offer it to you. Homeowners insurance helps to protect against the potential devastation of a catastrophic event, which could otherwise wipe out a large portion of our net worth. For many individuals, a fully paid-off house represents their most significant asset, often more valuable than all other savings combined. It's a risk that most people would prefer to avoid.",
+      "timestamp": 1722942780,
+      "contexts": [
+        {
+          "document_id": "545800-5034-6397",
+          "text": "\nSo for us, we have home owners insurance to prevent a catastrophic event from wiping out the lion's share of our net worth. If you're an ultra-wealthy individual who can afford an 8 figure home, that's not really the case (at least with the ones I've dealt with, who made their fortunes in business and are good managing their wealth and diversifying their assets - could be different for sports stars or the entertainment industry), and these people generally own multiple homes anyway, so it's not as big a deal if they lose one. However, no one actually buys a multi-million dollar home by writing a multi-million dollar check. They get a mortgage, just like the rest of us. And to get a mortgage, insurance on the property is a requirement. So yes, even the ultra wealthy generally have insurance on their home(s). There is an element of not wanting to shell out another 20 million if the place burns down, or someone breaks in and steals your valuables, but the bigger part of the reason is that it's required to get a mortgage in the first place, which is generally done for financial reasons - interest on your mortgage is a tax deduction, and you don't want to sink millions of dollars all at once into buying a property that's not going to appreciate in value, when you can get a mortgage and invest those millions of dollars to make more money instead.\"",
+          "score": 20.71744,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1722943349
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Do I need to buy house insurance?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "430612-0-1543",
+          "text": "\n(Disclosure - I am a real estate agent, involved with houses to buy/sell, but much activity in rentals) I got a call from a man and his wife looking for an apartment. He introduced itself, described what they were looking for, and then suggested I google his name. He said I'd find that a few weeks back, his house burned to the ground and he had no insurance. He didn't have enough savings to rebuild, and besides needing an apartment, had a building lot to sell.  Insurance against theft may not be at the top of your list. Don't keep any cash, and keep your possessions to a minimum. But a house needs insurance for a bank to give you a mortgage. Once paid off, you have no legal obligation, but are playing a dangerous game. You are right, it's an odds game. If the cost of insurance is .5% the house value and the chance of it burning down is 1 in 300 (I made this up) you are simply betting it won't be yours that burns down.  Given that for most people, a paid off house is their largest asset, more value that all other savings combined, it's a risk most would prefer not to take.  Life insurance is a different matter. A person with no dependents has no need for insurance. For those who are married (or have a loved one), or for parents, insurance is intended to help survivors bridge the gap for that lost income. The 10-20 times income value for insurance is just a recommendation, whose need fades away as one approaches independence. I don't believe in insurance as an investment vehicle, so this answer is talking strictly term.",
+          "score": 22.360565,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1722943344
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Do I need to buy house insurance?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "263145-0-705",
+          "text": "\nThey all have rules about what type of insurance you must have;  and if you don't have the required insurance,  they will offer to contract one for you.  That's fair enough,  I had to prove to my CU that the insurance I have was up to their standards,  no biggy.  Where it becomes a scam,  is when i) the lender refuses to accept your existing insurance as valid no matter what;  ii) buys an insurance on your behalf without asking/giving you the option of getting your own;  and iii) buys an overpriced insurance (e.g., insurance for the fair market value of your house rather than the cost of rebuilding it...),  likely from themselves  (and possibly iv) uses this as a pretext to foreclose your house).",
+          "score": 22.034727,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1722943785
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Do I need to buy house insurance?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The documents do not provide specific information on whether house insurance is mandatory when buying a house. However, it is generally recommended to have homeowner's insurance to protect the property and your belongings from damages or theft. Some lenders may require proof of insurance before approving a mortgage."
+    },
+    {
+      "speaker": "user",
+      "text": "Which is more convenient: renting or buying",
+      "timestamp": 1722944408,
+      "enrichments": {
+        "Question Type": [
+          "Comparative",
+          "Opinion"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Renting vs. buying: There are advantages to buying, such as that instead of money going towards rent, with a mortgage, some of the payment goes towards interest, but you are also building equity. Eventually, you'll pay off the mortgage and can live rent-free. Buying with a 20% down payment can give you a strong position in the market. If you have the financial ability to assume the risk of owning, you may be better off. On the other hand, renting provides flexibility to move with minimum hassle, and the landlord assumes the risk of owning the property. Buying is sometimes better than renting, even if you're not mobile; that depends on local market conditions. If you're investing the money reasonably, you may do as well as or better than a homebuyer, and your funds will be significantly more liquid.",
+      "timestamp": 1722944414,
+      "contexts": [
+        {
+          "document_id": "387715-0-254",
+          "text": "\nBuying is not always better than renting, even if you aren't mobile! That depends on local market conditions.  If you're investing the money reasonably you may do as well as or better than the house-buyer, and your funds will be tremendously more liquid.",
+          "score": 15.085248,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1722944992
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Which is more convenient: renting or buying"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "58433-0-1375",
+          "text": "\nAnother factor not mentioned are the rent prices in the area you are looking to live. I'd recommend buying a house of which the total monthly costs (mortgage, insurance, repairs, etc) are equal to or less than renting a house in the same area. If you can't find a property for sale that meets this requirement, you might actually be better off keep on renting, at least for a while, because you risk paying too much for your living expenses. A second point is, if possible, to buy when the mortgage interest rates are low, and then go for a mortgage with fixed interest and fixed repayments. While such a mortgage will be more more expensive than one with variable interest, and house prices are higher when mortgage rates are lower, future inflation is almost a certainty. And if your interest rate was fixed, and you are confident that you'll be able to negotiate salary raises in pace with the inflation, then inflation will gradually whittle down the rate between the mortgage payment and your income. Conversely, if interest rates are historically high, with no lowering in sight, then a variable loan might be more interesting.  And do shop around for mortgages, there are many banks out there, the competition between them is heavy, and many banks, especially the smaller banks, will often be willing to give you a mortgage at better conditions than their competitors.",
+          "score": 12.740541,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1722944864
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Which is more convenient: renting or buying"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "315972-0-1692",
+          "text": "\nYou may be in a situation where buying is preferred, especially because you can enter the market in a strong position - with a 20% down payment.  If you have the financial ability to assume the risk of owning, you may be better off.  I would consider two things.  Renting is purchasing a service. You are buying the flexibility to move with minimum hassle and the landlord is assuming the risk of owning the asset (property). They will make money on you, like any service provider. Buying is purchasing an asset. You are buying the underlying asset and assume all the risks associated with it. This is large, unforeseen maintenance, fees, taxes, depreciation, etc... Some of these risks were passed to you as a renter, but some were not.  Just like purchasing $400k in stock, if you have to sell when the market is down, you lose big. You win if you can hold. Unlike a stock, real estate will eat your cash in taxes and repairs unless it is rented. If you are willing to be a long-distance landlord, this may work out. Understand that property management fees will eat into your rent income and being long-distance will give more potential for a bad tenant to ruin your property value. These and other factors (e.g. vacancy rate) will increase your risk of loss and should be considered. Some of this will be your preference, since you will spend much more time dealing with buying/selling/property management as opposed to a more clean rental situation. Is this hassle worth the savings? For many, yes; others, no. Finally, I hope this calculator can help clarify some of the financial aspects for you.  http://www.nytimes.com/interactive/2014/upshot/buy-rent-calculator.html?_r=0 Good Luck!",
+          "score": 12.459666,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1722944858
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Which is more convenient: renting or buying"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "4739-0-2044",
+          "text": "\n\"Some pros and cons to renting vs buying: Some advantages of buying: When you rent, the money you pay is gone. When you buy, assuming you don't have the cash to buy outright but get a mortgage, some of the payment goes to interest, but you are building equity. Ultimately you pay off the mortgage and you can then live rent-free. When you buy, you can alter your home to your liking. You can paint in the colors you like, put in the carpet or flooring you like, heck, tear down walls and alter the floor plan (subject to building codes and safety consideration, of course). If you rent, you are usually sharply limited in what alterations you can make. In the U.S., mortgage interest is tax deductible. Rent is not. Property taxes are deductible from your federal income tax. So if you have, say, $1000 mortgage vs $1000 rent, the mortgage is actually cheaper. Advantages of renting: There are a lot of transaction costs involved in buying a house. You have to pay a realtor's commission, various legal fees, usually \"\"loan origination fees\"\" to the bank, etc. Plus the way mortgages are designed, your total payment is the same throughout the life of the loan. But for the first payment you owe interest on the total balance of the loan, while the last payment you only owe interest on a small amount. So early payments are mostly interest. This leads to the conventional advice that you should not buy unless you plan to live in the house for some reasonably long period of time, exact amount varying with whose giving the advice, but I think 3 to 5 years is common. One mitigating factor: Bear in mind that if you buy a house, and then after 2 years sell it, and you discover that the sale price minus purchase price minus closing costs ends up a net minus, say, $20,000, it's not entirely fair to say \"\"zounds! I lost $20,000 by buying\"\". If you had not bought this house, presumably you would have been renting. So the fair comparison is, mortgage payments plus losses on the resale compared to likely rental payments for the same period.\"",
+          "score": 11.911694,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1722944854
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Which is more convenient: renting or buying"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The decision between renting and buying a home depends on individual circumstances and preferences. Renting typically offers more flexibility and less responsibility for maintenance and repairs, while buying provides the opportunity to build equity and potentially benefit from property appreciation over time. It's essential to weigh the pros and cons and consider factors such as financial stability, long-term plans, and lifestyle when making this decision."
+    },
+    {
+      "speaker": "user",
+      "text": "Value",
+      "timestamp": 1722945401,
+      "enrichments": {
+        "Question Type": [
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "A home is an investment, but the value it provides isn't primarily financial. Instead, it offers consumption value as a place to live. This sets it apart from other types of investments. While you may experience some capital gains, typically in line with inflation, they are not guaranteed, and it's not easy to realize them without selling the house and moving. Essentially, there are two ways to benefit from an appreciating asset like a home: (a) Sell it and take the profit. However, if you still need a place to live, this doesn't really benefit you unless you buy a cheaper home to replace it.",
+      "timestamp": 1722945403,
+      "contexts": [
+        {
+          "document_id": "206794-0-2218",
+          "text": "\n\"A home is an investment, but the value it returns isn't primarily financial ($$) - they are consumption (a place to live). This gives it different characteristics than other investments (e.g. increasing the amount invested by buying a more expensive home doesn't do much to assist your financial well-being and future income, and isn't necessarily the \"\"responsible\"\" thing to do). You may get some capital gains, typically in line with inflation, sometimes less, sometimes more, but those aren't the most reliable, and it's difficult to realize them (it involves selling your house and moving). Its main value as a hedge is a hedge against rising rent. But if you're still working full-time and can expect cost-of-living increases, that hedge may not be as valuable to you as it would to, say, someone living on a fixed income. But as for treating it as a \"\"low-risk investment\"\"? That's very problematic. Real low-risk investments are things like government bonds, where you can't lose principal. Unless you're going to live into your house until the day you die, the real estate crash should have disabused you of any notion that housing values never go down. Rather, your house is a single, indivisible, undiversified, illiquid investment. Imagine, if you will, going to your brokerage and borrowing a hundred thousand dollars or more on margin to invest in a single real estate investment trust... then take away whatever diversification the trust offered by holding multiple properties. Also, you can't sell any of it until you move away, and the transaction fee will take something like 3%. Still sound \"\"safe\"\"? Moreover, it's exactly the wrong kind of risk. Your house's value is tied to what people are willing to pay for housing where your house is, which is usually subject to the whims of the local economy. This means that in a recession and housing bust in the local economy, you can lose your job and have your mortgage go underwater at the same time. It totally makes sense to treat your house as an investment to some extent, and it makes double sense for a financial adviser to consider it as part of your investment recommendations. \"\"Safety\"\" is not the way you should be thinking of it, though.\"",
+          "score": 16.905882,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1722945894
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "House getting value"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "248578-0-1240",
+          "text": "\n\"There are basically two ways to get value out of an appreciating asset such as a home: (a) Sell it and take the profit. In the case of a home, you presumably still have to live somewhere, so unless you buy a cheaper home to replace it, this doesn't get you anywhere. If you can get another house that is just as nice and in just as nice a location -- whatever you consider \"\"nice\"\" to be -- than this sounds like a winning option. If it means moving to a less desirable home, then you are getting the cash but losing the nice home. You'll have to decide if it's worth it. (b) Use it as collateral for a loan. In this case, that means a second mortgage, home equity loan, or a home equity line of credit. But this can be dangerous. House prices are very volatile these days. If the value of the house falls, you could be stuck with debts greater than your assets. In my humble opinion, you should be very careful about doing this. Borrowing against your house to send the kids to college or pay for your spouse's life-saving operation may be reasonable. Borrowing against your house to go on a fancy vacation is almost surely a bad idea. The vacation will be over within a couple of weeks, but you could be paying off the debt for decades.\"",
+          "score": 16.839798,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1722946087
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "House getting value"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The term \"value\" can be subjective and depend on the context. In the document, value could refer to the worth or monetary amount of a property, asset, or service. For example, the value of a house could be its selling price or the equity accumulated by the homeowner. If you have a specific definition or context in mind, please provide it so I can give a more accurate response."
+    },
+    {
+      "speaker": "user",
+      "text": "Gifting",
+      "timestamp": 1722946735,
+      "enrichments": {
+        "Question Type": [
+          "Explanation",
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Gift taxes kick in at around $14K per giver per recipient per year. That means a straight-up gift of $200K (as cash or a house) will incur a tax. If the father has a spouse, he and the spouse could each give the mother and each child the total gift limit. Put the house in your name right from the get-go. He gives you the money, but you sign over a promissory note to him so that you net less than $14000 (gift tax annual exclusion for the calendar year). He can give everyone in your household 14k per year tax-free, which he could give you and your partner in less than seven years.",
+      "timestamp": 1722946738,
+      "contexts": [
+        {
+          "document_id": "475412-0-1412",
+          "text": "\nGift taxes kick in at around $13K per giver per recipient per year. That means that a straight up gift of $200K (as cash or a house) will incur a tax. It is possible, however, that if the father has a spouse, he and the spouse could each give the mother and each child the full gift limit, for a total of about $78K per year, and that money could be used by all 3 of them to buy the house jointly, over a couple of years. I think the children would have to be on the title, since part of the gift money would be theirs (and one is an adult). As far as lending the money, my in-laws are our mortgage lenders, and when we structured the loan, it had to be at a market rate (which could be the lowest advertised rate we found for a fixed-rate mortgage, independent of what we might actually qualify for) or we could not deduct interest payments. Forgiving the loan could also be considered a gift, so they would need to keep an audit trail showing that payments were made, and her father would need to declare the interest income on his taxes. If he bought the house as a second home and let her and her children live there rent-free, it might work, but I'm not sure. It would, in that case, be an asset of his estate when he dies. I don't know anything about structuring it as a trust. Free rent could conceivably also be construed as a gift, subject to the limits stated above. Disclaimer: Not a tax professional.",
+          "score": 13.183009,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1722948144
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Gifting a home"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "341947-0-644",
+          "text": "\nYou are going to need a lawyer anyway so check with him.   But here is a path you might be able to go down.   Put the house in your name right from the get go.  He gives you the money but you sign over a promissory note to him so that you net less than $14000 (gift tax annual exclusion for the calendar year). He can gift everyone in your household 14k per year tax free and he could gift it to you and your partner in less than 7 years.  You can pay him back in anyway you like or not at all as the promissory note could be reduced by 28k per year. I think a CPA and lawyer in your state would be able to confirm that this would work for you.",
+          "score": 12.606824,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1722947857
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Gifting a home"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The documents do not provide information on gifting."
+    },
+    {
+      "speaker": "user",
+      "text": "Not payment",
+      "timestamp": 1722948194,
+      "enrichments": {
+        "Question Type": [
+          "Keyword",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "\u00a0Mortgage holders sign a promissory note, a promise to pay. But the contract explicitly details the penalty for nonpayment \u2014 surrender of the property. The borrower isn't escaping the consequences; he is suffering them from a purely financial standpoint. If you look at the downsides of walking away, The issues with the credit rating are well known, but you need to consider any open lines of credit you currently have and any need you might have to open a line of credit in the future.\u00a0401(k) and IRA accounts are not at risk when you default on a mortgage, even in states that aren't non-recourse. The bank cannot go after you in states where mortgages are non-recourse loans. They get the keys, and whatever they recover from the house sale is it.",
+      "timestamp": 1722948196,
+      "contexts": [
+        {
+          "document_id": "141320-0-1858",
+          "text": "\nI wouldn't like to say either way what you should do, not being an financial advisor or lawyer, but I did find an interesting article on nytimes.com: Walk Away From Your Mortgage!  that you might also find helpful to frame your decision. It has some interesting information on defaults, it says this: Mortgage holders do sign a promissory note, which is a promise to pay. But the contract explicitly details the penalty for nonpayment \u2014 surrender of the property. The borrower isn\u2019t escaping the consequences; he is suffering them. In some states, lenders also have recourse to the borrowers\u2019 unmortgaged assets, like their car and savings accounts. A study by the Federal Reserve Bank of Richmond found that defaults are lower in such states, apparently because lenders threaten the borrowers with judgments against their assets. But actual lawsuits are rare. And given that nearly a quarter of mortgages are underwater, and that 10 percent of mortgages are delinquent, White, of the University of Arizona, is surprised that more people haven\u2019t walked. He thinks the desire to avoid shame is a factor, as are overblown fears of harm to credit ratings. Probably, homeowners also labor under a delusion that their homes will quickly return to value. White has argued that the government should stop perpetuating default \u201cscare stories\u201d and, indeed, should encourage borrowers to default when it\u2019s in their economic interest. This would correct a prevailing imbalance: homeowners operate under a \u201cpowerful moral constraint\u201d while lenders are busily trying to maximize profits. More important, it might get the system unstuck. If lenders feared an avalanche of strategic defaults, they would have an incentive to renegotiate loan terms. In theory, this could produce a wave of loan modifications \u2014 the very goal the Treasury has been pursuing to end the crisis.",
+          "score": 16.236355,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1722950355
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "default mortgage"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "487255-0-284",
+          "text": "\nNo, 401(k) and IRA accounts are not at risk when you default on a mortgage, even in states that aren't non-recourse. In states where mortgages are non-recourse loans, the bank isn't allowed to go after you at all. They get the keys and whatever they recover from the house sale is it.",
+          "score": 15.021055,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1722950386
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "default mortgage"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The user seems to have accidentally provided an incomplete statement. If they have a specific question or query, I would be happy to help with a response based on the provided documents."
+    },
+    {
+      "speaker": "user",
+      "text": "What is the minimum age requirement for applying for a mortgage?",
+      "timestamp": 1722951875,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Generally, you need to be of legal age (usually 18) to apply for a loan. Also, your credit score should be good enough for the bank or loan company to feel comfortable lending you money. The reason for the age requirement is that if you're not 18, any contract you sign can be canceled (made invalid) by either you or your parents. This means that it would be legal for you to ask the bank for a $1000 loan and for the bank to provide it, if you're under 18.",
+      "timestamp": 1722951877,
+      "contexts": [
+        {
+          "document_id": "458312-0-206",
+          "text": "\nIn general, you would have to be the age of majority (generally, 18) to take out a loan. Additionally, your credit rating must be sufficient for the bank or loan company to be comfortable loaning you money.",
+          "score": 21.050432,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1722952093
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "What is the minimum age requirement for applying for a mortgage?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "460271-0-560",
+          "text": "\n\"To explain why you have to be 18: If you are not 18, then any contract that you sign can be voided (made invalid) by either you or your parents. So it would be completely legal for you to go to the bank, ask for a $1000 loan, and for the bank to give you the loan. But then you could spend the money, and tell the bank \"\"sorry, I changed my mind, I don't want that loan, and sorry again, but the money is gone\"\". At that point, there would be nothing the bank could do to get their money back.  Obviously, banks don't like this, so they won't lend you money.\"",
+          "score": 15.743227,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1722952096
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "What is the minimum age requirement for applying for a mortgage?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The documents do not provide specific information regarding the minimum age requirement for applying for a mortgage."
+    },
+    {
+      "speaker": "user",
+      "text": "15- or 30-year mortgage?",
+      "timestamp": 1722952630,
+      "enrichments": {
+        "Question Type": [
+          "Comparative"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The choice between a 15-year and 30-year mortgage depends on your financial situation and goals. A 15-year mortgage will typically have a lower interest rate and you'll pay off your house faster, but your monthly payments will be higher. A 30-year mortgage will have higher interest rates and you'll pay more in interest over the life of the loan, but your monthly payments will be lower. If you can afford the higher monthly payments, a 15-year mortgage may be a good choice to save money in the long run. However, if you need the lower monthly payments to afford a house, a 30-year mortgage may be a better option.",
+      "timestamp": 1722952636,
+      "contexts": [
+        {
+          "document_id": "496752-0-1995",
+          "text": "\nAs mentioned, the main advantage of a 15-year loan compared to a 30-year loan is that the 15-year loan should come at a discounted rate. All things equal, the main advantage of the 30-year loan is that the payment is lower. A completely different argument from what you are hearing is that if you can get a low interest rate, you should get the longest loan possible. It seem unlikely that interest rates are going to get much lower than they are and it's far more likely that they will get higher. In 15 years, if interest rates are back up around 6% or more (where they were when I bought my first home) and you are 15 years into a 30 year mortgage, you'll being enjoying an interest rate that no one can get. You need to keep in mind that as the loan is paid off, you will earn exactly 0% on the principal you've paid. If for some reason the value of the home drops, you lose that portion of the principal. The only way you can get access to that capital is to sell the house. You (generally) can't sell part of the house to send a kid to college. You can take out another mortgage but it is going to be at the current going rate which is likely higher than current rates. Another thing to consider that over the course of 30 years, inflation is going to make a fixed payment cheaper over time. Let's say you make $60K and you have a monthly payment of $1000 or 20% of your annual income. In 15 years at a 1% annualized wage growth rate, it will be 17% of your income. If you get a few raises or inflation jumps up, it will be a lot more than that. For example, at a 2% annualized growth rate, it's only 15% of your income after 15 years. In places where long-term fixed rates are not available, shorter mortgages are common because of the risk of higher rates later. It's also more common to pay them off early for the same reason. Taking on a higher payment to pay off the loan early only really only helps you if you can get through the entire payment and 15 years is still a long way off.",
+          "score": 23.618624,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1722953588
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "15- or 30-year mortgage?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "404605-0-335",
+          "text": "\nYour calculations are correct if you use the same mortgage rate for both the 15 and 30 year mortgages.  However, generally when you apply for a 15 year mortgage the interest rate is significantly less than the 30 year rate.  The rate is lower for a number of reasons but mainly there is less risk for the bank on a 15 year payoff plan.",
+          "score": 23.005005,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1722953577
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "15- or 30-year mortgage?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "390642-0-493",
+          "text": "\nIf the interest rate in both mortgages is the same, then yes, you will end up paying the same amount in interest if both are paid off in 15 years. However, in practice, almost always a 15-year mortgage will have a much lower interest rate that a 30-year mortgage. Also, if you are thinking of taking out a 30-year mortgage with the intention of paying it off early, make sure it does not have an early payment penalty; this is a penalty the bank will charge you if you pay back the loan early.",
+          "score": 22.257732,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1722953583
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "15- or 30-year mortgage?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "created",
+      "timestamp": 1722953748
+    },
+    {
+      "author": "87334bc6-dd39-4565-ae2b-832e60a24b08",
+      "status": "accepted",
+      "timestamp": 1725992792
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "edited",
+      "timestamp": 1726582073
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "accepted",
+      "timestamp": 1726582215
+    }
+  ],
+  "editor": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+  "domain": "mt-rag-fiqa-beir-elser-512-100-20240501",
+  "reviewer": "f6ce971c-68d2-4c26-b1c0-477dd28a5181"
+}

@@ -1,0 +1,1189 @@
+{
+  "author": "d2b56e91-6d89-4df4-b89a-eef8d969850b",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-clapnq-elser-512-100-20240503",
+      "size": "183408"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "when did the wall in berlin come down",
+      "timestamp": 1724683312,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The Berlin Wall began to come down on the evening of 9 November 1989.",
+      "timestamp": 1724683314,
+      "contexts": [
+        {
+          "document_id": "843537822_66876-67169-0-293",
+          "text": "Berlin Wall\nThe fall of the Wall marked the first critical step towards German reunification , which formally concluded a mere 339 days later on 3 October 1990 with the dissolution of East Germany and the official reunification of the German state along the democratic lines of the West German Basic Law .",
+          "title": "Berlin Wall",
+          "score": 18.291983,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724683518
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: when did the wall in berlin come down"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "843537822_63713-64044-0-331",
+          "text": "Berlin Wall\nThe fall of the Berlin Wall ( German : Mauerfall ) began the evening of 9 November 1989 and continued over the following days and weeks , with people nicknamed Mauerspechte ( wall woodpeckers ) using various tools to chip off souvenirs , demolishing lengthy parts in the process , and creating several unofficial border crossings .",
+          "title": "Berlin Wall",
+          "score": 18.059263,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724683511
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: when did the wall in berlin come down"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "843537822_6316-7100-0-784",
+          "text": "Berlin Wall\nIn 1989 a series of revolutions in nearby Eastern Bloc countries -- Poland and Hungary in particular -- caused a chain reaction in East Germany that ultimately resulted in the demise of the Wall . After several weeks of civil unrest , the East German government announced on 9 November 1989 that all GDR citizens could visit West Germany and West Berlin . Crowds of East Germans crossed and climbed onto the Wall , joined by West Germans on the other side in a celebratory atmosphere . Over the next few weeks , euphoric people and souvenir hunters chipped away parts of the Wall ; the governments later used industrial equipment to remove most of what was left . The `` fall of the Berlin Wall '' paved the way for German reunification , which formally took place on 3 October 1990 .",
+          "title": "Berlin Wall",
+          "score": 17.662516,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724683568
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: when did the wall in berlin come down"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The Berlin Wall began to come down on the evening of 9 November 1989 and this process continued over the following days and weeks."
+    },
+    {
+      "speaker": "user",
+      "text": "When did the official reunification of Germany take place?",
+      "timestamp": 1724685124,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The official reunification of Germany took place on 3 October 1990.",
+      "timestamp": 1724685130,
+      "contexts": [
+        {
+          "document_id": "843537822_66876-67169-0-293",
+          "text": "Berlin Wall\nThe fall of the Wall marked the first critical step towards German reunification , which formally concluded a mere 339 days later on 3 October 1990 with the dissolution of East Germany and the official reunification of the German state along the democratic lines of the West German Basic Law .",
+          "title": "Berlin Wall",
+          "score": 27.642336,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724685156
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: when did the wall in berlin come down\n|assistant|: The Berlin Wall began to come down on the evening of 9 November 1989.\n|user|: When did the official reunification of Germany take place?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "843537822_6316-7100-0-784",
+          "text": "Berlin Wall\nIn 1989 a series of revolutions in nearby Eastern Bloc countries -- Poland and Hungary in particular -- caused a chain reaction in East Germany that ultimately resulted in the demise of the Wall . After several weeks of civil unrest , the East German government announced on 9 November 1989 that all GDR citizens could visit West Germany and West Berlin . Crowds of East Germans crossed and climbed onto the Wall , joined by West Germans on the other side in a celebratory atmosphere . Over the next few weeks , euphoric people and souvenir hunters chipped away parts of the Wall ; the governments later used industrial equipment to remove most of what was left . The `` fall of the Berlin Wall '' paved the way for German reunification , which formally took place on 3 October 1990 .",
+          "title": "Berlin Wall",
+          "score": 26.436386,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724685183
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: when did the wall in berlin come down\n|assistant|: The Berlin Wall began to come down on the evening of 9 November 1989.\n|user|: When did the official reunification of Germany take place?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "843537822_63713-64044-0-331",
+          "text": "Berlin Wall\nThe fall of the Berlin Wall ( German : Mauerfall ) began the evening of 9 November 1989 and continued over the following days and weeks , with people nicknamed Mauerspechte ( wall woodpeckers ) using various tools to chip off souvenirs , demolishing lengthy parts in the process , and creating several unofficial border crossings .",
+          "title": "Berlin Wall",
+          "score": 23.328655,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724685212
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: when did the wall in berlin come down\n|assistant|: The Berlin Wall began to come down on the evening of 9 November 1989.\n|user|: When did the official reunification of Germany take place?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "843316151_92287-93964-0-1677",
+          "text": "History of Germany (1945\u201390)\nThe conclusion of the final settlement cleared the way for the unification of East and West Germany . Formal political union occurred on 3 October 1990 , preceded by the GDR declaring its accession to the Federal Republic through Article 23 of West Germany 's Basic Law ( meaning that constitutionally , East Germany was subsumed into West Germany ) ; but affected in strict legality through the subsequent Unification Treaty of 30 August 1990 , which was voted into their constitutions by both the West German Bundestag and the East German Volkskammer on 20 September 1990 . These votes simultaneously extinguished the GDR and affected fundamental amendments to the West German Basic Law ( including the repeal of the very Article 23 under which the GDR had recently declared its post-dated accession ) . On 2 December 1990 , all - German elections were held for the first time since 1933 . The `` new '' country stayed the same as the West German legal system and institutions were extended to the east . The unified nation kept the name Bundesrepublik Deutschland ( though the simple ' Deutschland ' would become increasingly common ) and retained the West German `` Deutsche Mark '' for currency as well . Berlin would formally become the capital of the united Germany , but the political institutions remained at Bonn for the time being . Only after a heated 1991 debate did the Bundestag conclude on moving itself and most of the government to Berlin as well , a process that took until 1999 to complete , when the Bundestag held its first session at the reconstructed Reichstag building . Many government departments still maintain sizable presences in Bonn as of 2008 .",
+          "title": "History of Germany (1945\u201390)",
+          "score": 18.222338,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724685782
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "When did the official reunification of Germany take place?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "speaker": "user",
+      "text": "How many people died trying to cross the Berlin Wall?",
+      "timestamp": 1724686097,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The number of people who died trying to cross the Wall, or as a result of the Wall's existence, has been disputed. Historical Research ( ZZF ) in Potsdam has confirmed at least 140 deaths. An estimated death toll ranges from 136 to more than 200 in and around Berlin.",
+      "timestamp": 1724686099,
+      "contexts": [
+        {
+          "document_id": "843537822_66876-67169-0-293",
+          "text": "Berlin Wall\nThe fall of the Wall marked the first critical step towards German reunification , which formally concluded a mere 339 days later on 3 October 1990 with the dissolution of East Germany and the official reunification of the German state along the democratic lines of the West German Basic Law .",
+          "title": "Berlin Wall",
+          "score": 28.949192,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724686722
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: when did the wall in berlin come down\n|assistant|: The Berlin Wall began to come down on the evening of 9 November 1989.\n|user|: When did the official reunification of Germany take place?\n|assistant|: The official reunification of Germany took place on 3 October 1990.\n|user|: How many people died trying to cross the Berlin Wall?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "843537822_6316-7100-0-784",
+          "text": "Berlin Wall\nIn 1989 a series of revolutions in nearby Eastern Bloc countries -- Poland and Hungary in particular -- caused a chain reaction in East Germany that ultimately resulted in the demise of the Wall . After several weeks of civil unrest , the East German government announced on 9 November 1989 that all GDR citizens could visit West Germany and West Berlin . Crowds of East Germans crossed and climbed onto the Wall , joined by West Germans on the other side in a celebratory atmosphere . Over the next few weeks , euphoric people and souvenir hunters chipped away parts of the Wall ; the governments later used industrial equipment to remove most of what was left . The `` fall of the Berlin Wall '' paved the way for German reunification , which formally took place on 3 October 1990 .",
+          "title": "Berlin Wall",
+          "score": 27.671259,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724686744
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: when did the wall in berlin come down\n|assistant|: The Berlin Wall began to come down on the evening of 9 November 1989.\n|user|: When did the official reunification of Germany take place?\n|assistant|: The official reunification of Germany took place on 3 October 1990.\n|user|: How many people died trying to cross the Berlin Wall?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "843537822_67644-67970-0-326",
+          "text": "Berlin Wall\nIn some European capitals at the time , there was a deep anxiety over prospects for a reunified Germany . In September 1989 , British Prime Minister Margaret Thatcher pleaded with Soviet President Mikhail Gorbachev not to let the Berlin Wall fall and confided that she wanted the Soviet leader to do what he could to stop it .",
+          "title": "Berlin Wall",
+          "score": 23.578411,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724686710
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: when did the wall in berlin come down\n|assistant|: The Berlin Wall began to come down on the evening of 9 November 1989.\n|user|: When did the official reunification of Germany take place?\n|assistant|: The official reunification of Germany took place on 3 October 1990.\n|user|: How many people died trying to cross the Berlin Wall?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "843537822_46715-47282-0-567",
+          "text": "Berlin Wall\nDuring the years of the Wall , around 5,000 people successfully defected to West Berlin . The number of people who died trying to cross the Wall , or as a result of the Wall 's existence , has been disputed . The most vocal claims by Alexandra Hildebrandt , Director of the Checkpoint Charlie Museum and widow of the Museum 's founder , estimated the death toll to be well above 200 . A historic research group at the Center for Contemporary Historical Research ( ZZF ) in Potsdam has confirmed at least 140 deaths . Prior official figures listed 98 as being killed .",
+          "title": "Berlin Wall",
+          "score": 23.28159,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724686769
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "How many people died trying to cross the Berlin Wall?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "843537822_5747-6315-0-568",
+          "text": "Berlin Wall\nBefore the Wall 's erection , 3.5 million East Germans circumvented Eastern Bloc emigration restrictions and defected from the GDR , many by crossing over the border from East Berlin into West Berlin ; from there they could then travel to West Germany and to other Western European countries . Between 1961 and 1989 the Wall prevented almost all such emigration . During this period over 100,000 people attempted to escape and over 5,000 people succeeded in escaping over the Wall , with an estimated death toll ranging from 136 to more than 200 in and around Berlin .",
+          "title": "Berlin Wall",
+          "score": 20.366627,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724686792
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "How many people died trying to cross the Berlin Wall?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "I do not have specific information about the number of people who died trying to cross the Berlin Wall in the provided document."
+    },
+    {
+      "speaker": "user",
+      "text": "How did people try to escape?",
+      "timestamp": 1724687475,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Berlin Wall Early successful escapes involved people jumping the initial barbed wire or leaping out of apartment windows along the line, but these ended as the Wall was fortified. \u00a0East German authorities no longer permitted apartments near the Wall to be occupied, and any building near the Wall had its windows boarded and later bricked up.",
+      "timestamp": 1724687480,
+      "contexts": [
+        {
+          "document_id": "843537822_66876-67169-0-293",
+          "text": "Berlin Wall\nThe fall of the Wall marked the first critical step towards German reunification , which formally concluded a mere 339 days later on 3 October 1990 with the dissolution of East Germany and the official reunification of the German state along the democratic lines of the West German Basic Law .",
+          "title": "Berlin Wall",
+          "score": 29.633972,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724687673
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: when did the wall in berlin come down\n|assistant|: The Berlin Wall began to come down on the evening of 9 November 1989.\n|user|: When did the official reunification of Germany take place?\n|assistant|: The official reunification of Germany took place on 3 October 1990.\n|user|: How many people died trying to cross the Berlin Wall?\n|assistant|: The number of people who died trying to cross the Wall, or as a result of the Wall's existence, has been disputed. Historical Research ( ZZF ) in Potsdam has confirmed at least 140 deaths. An estimated death toll ranges from 136 to more than 200 in and around Berlin.\n|user|: How did people try to escape?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "843537822_6316-7100-0-784",
+          "text": "Berlin Wall\nIn 1989 a series of revolutions in nearby Eastern Bloc countries -- Poland and Hungary in particular -- caused a chain reaction in East Germany that ultimately resulted in the demise of the Wall . After several weeks of civil unrest , the East German government announced on 9 November 1989 that all GDR citizens could visit West Germany and West Berlin . Crowds of East Germans crossed and climbed onto the Wall , joined by West Germans on the other side in a celebratory atmosphere . Over the next few weeks , euphoric people and souvenir hunters chipped away parts of the Wall ; the governments later used industrial equipment to remove most of what was left . The `` fall of the Berlin Wall '' paved the way for German reunification , which formally took place on 3 October 1990 .",
+          "title": "Berlin Wall",
+          "score": 28.421112,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724687705
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: when did the wall in berlin come down\n|assistant|: The Berlin Wall began to come down on the evening of 9 November 1989.\n|user|: When did the official reunification of Germany take place?\n|assistant|: The official reunification of Germany took place on 3 October 1990.\n|user|: How many people died trying to cross the Berlin Wall?\n|assistant|: The number of people who died trying to cross the Wall, or as a result of the Wall's existence, has been disputed. Historical Research ( ZZF ) in Potsdam has confirmed at least 140 deaths. An estimated death toll ranges from 136 to more than 200 in and around Berlin.\n|user|: How did people try to escape?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "843537822_5747-6315-0-568",
+          "text": "Berlin Wall\nBefore the Wall 's erection , 3.5 million East Germans circumvented Eastern Bloc emigration restrictions and defected from the GDR , many by crossing over the border from East Berlin into West Berlin ; from there they could then travel to West Germany and to other Western European countries . Between 1961 and 1989 the Wall prevented almost all such emigration . During this period over 100,000 people attempted to escape and over 5,000 people succeeded in escaping over the Wall , with an estimated death toll ranging from 136 to more than 200 in and around Berlin .",
+          "title": "Berlin Wall",
+          "score": 25.373352,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724687807
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: when did the wall in berlin come down\n|assistant|: The Berlin Wall began to come down on the evening of 9 November 1989.\n|user|: When did the official reunification of Germany take place?\n|assistant|: The official reunification of Germany took place on 3 October 1990.\n|user|: How many people died trying to cross the Berlin Wall?\n|assistant|: The number of people who died trying to cross the Wall, or as a result of the Wall's existence, has been disputed. Historical Research ( ZZF ) in Potsdam has confirmed at least 140 deaths. An estimated death toll ranges from 136 to more than 200 in and around Berlin.\n|user|: How did people try to escape?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "843537822_47834-48296-0-462",
+          "text": "Berlin Wall\nEarly successful escapes involved people jumping the initial barbed wire or leaping out of apartment windows along the line , but these ended as the Wall was fortified . East German authorities no longer permitted apartments near the Wall to be occupied , and any building near the Wall had its windows boarded and later bricked up . On 15 August 1961 , Conrad Schumann was the first East German border guard to escape by jumping the barbed wire to West Berlin .",
+          "title": "Berlin Wall",
+          "score": 11.213292,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724688860
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "How did people try to escape?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "843537822_48782-49295-0-513",
+          "text": "Berlin Wall\nAnother dramatic escape was carried out on April 1963 by Wolfgang Engels , a 19 - year - old civilian employee of the Nationale Volksarmee . Engels stole a Soviet armored personnel carrier from a base where he was deployed and drove it right into the Wall . He was fired at and seriously wounded by border guards . But a West German policeman intervened , firing his weapon at the East German border guards . The policeman removed Engels from the vehicle , which had become entangled in the barbed wire . Memorial",
+          "title": "Berlin Wall",
+          "score": 10.079575,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724688864
+              },
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "no",
+                "timestamp": 1726752872
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "How did people try to escape?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "843537822_50713-51695-0-982",
+          "text": "Berlin Wall\nIf an escapee was wounded in a crossing attempt and lay on the death strip , no matter how close they were to the Western wall , Westerners could not intervene for fear of triggering engaging fire from the ' Grepos ' , the East Berlin border guards . The guards often let fugitives bleed to death in the middle of this ground , as in the most notorious failed attempt , that of Peter Fechter ( aged 18 ) . He was shot and bled to death , in full view of the Western media , on 17 August 1962 . Fechter 's death created negative publicity worldwide that led the leaders of East Berlin to place more restrictions on shooting in public places , and provide medical care for possible `` would - be escapers '' . The last person to be shot and killed while trying to cross the border was Chris Gueffroy on 6 February 1989 , while the final person to die in an escape attempt was Winfried Freudenberg who was killed when his homemade natural gas - filled balloon crashed on 8 March 1989 .",
+          "title": "Berlin Wall",
+          "score": 9.811944,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724688869
+              },
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "no",
+                "timestamp": 1726752879
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "How did people try to escape?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "People tried to escape from East Berlin to West Berlin by various means. Before the Wall was built, 3.5 million East Germans had already defected from the GDR, many by crossing the border between East and West Berlin. However, after the Wall was erected in 1961, it became much more difficult to escape. Despite this, over 100,000 people attempted to escape and over 5,000 people succeeded in escaping over the Wall between 1961 and 1989. The methods used to escape included tunneling under the Wall, climbing over it, or using false papers to cross through checkpoints. However, these attempts often came with significant risks, and an estimated 136 to over 200 people died in and around Berlin while trying to cross the Wall."
+    },
+    {
+      "speaker": "user",
+      "text": "Did all government agencies move to Berlin",
+      "timestamp": 1724690092,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Government offices have been moving progressively to Berlin. Under the terms of the treaty between West and East Germany, Berlin became the capital of a unified Germany.  The Bundestag voted in June 1991 to make Berlin the seat of government, but the political institutions remained at Bonn for the time being. Only after a heated 1991 debate did the Bundestag conclude on moving itself and most of the government to Berlin as well, a process that took until 1999 to complete. Many government departments still maintain sizable presences in Bonn.",
+      "timestamp": 1724690095,
+      "contexts": [
+        {
+          "document_id": "843537822_66876-67169-0-293",
+          "text": "Berlin Wall\nThe fall of the Wall marked the first critical step towards German reunification , which formally concluded a mere 339 days later on 3 October 1990 with the dissolution of East Germany and the official reunification of the German state along the democratic lines of the West German Basic Law .",
+          "title": "Berlin Wall",
+          "score": 28.58032,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724690125
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: when did the wall in berlin come down\n|assistant|: The Berlin Wall began to come down on the evening of 9 November 1989.\n|user|: When did the official reunification of Germany take place?\n|assistant|: The official reunification of Germany took place on 3 October 1990.\n|user|: How many people died trying to cross the Berlin Wall?\n|assistant|: The number of people who died trying to cross the Wall, or as a result of the Wall's existence, has been disputed. Historical Research ( ZZF ) in Potsdam has confirmed at least 140 deaths. An estimated death toll ranges from 136 to more than 200 in and around Berlin.\n|user|: How did people try to escape?\n|assistant|: Berlin Wall Early successful escapes involved people jumping the initial barbed wire or leaping out of apartment windows along the line, but these ended as the Wall was fortified. Wolfgang Engels, a 19 year old, stole a Soviet armored personnel carrier from a base where he was deployed and drove it right into the Wall. The final person to die in an escape attempt was Winfried Freudenberg who was killed when his homemade natural gas - filled balloon crashed on 8 March 1989 .\n|user|: Did all government agencies move to Berlin"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "843537822_6316-7100-0-784",
+          "text": "Berlin Wall\nIn 1989 a series of revolutions in nearby Eastern Bloc countries -- Poland and Hungary in particular -- caused a chain reaction in East Germany that ultimately resulted in the demise of the Wall . After several weeks of civil unrest , the East German government announced on 9 November 1989 that all GDR citizens could visit West Germany and West Berlin . Crowds of East Germans crossed and climbed onto the Wall , joined by West Germans on the other side in a celebratory atmosphere . Over the next few weeks , euphoric people and souvenir hunters chipped away parts of the Wall ; the governments later used industrial equipment to remove most of what was left . The `` fall of the Berlin Wall '' paved the way for German reunification , which formally took place on 3 October 1990 .",
+          "title": "Berlin Wall",
+          "score": 27.8168,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724690154
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: when did the wall in berlin come down\n|assistant|: The Berlin Wall began to come down on the evening of 9 November 1989.\n|user|: When did the official reunification of Germany take place?\n|assistant|: The official reunification of Germany took place on 3 October 1990.\n|user|: How many people died trying to cross the Berlin Wall?\n|assistant|: The number of people who died trying to cross the Wall, or as a result of the Wall's existence, has been disputed. Historical Research ( ZZF ) in Potsdam has confirmed at least 140 deaths. An estimated death toll ranges from 136 to more than 200 in and around Berlin.\n|user|: How did people try to escape?\n|assistant|: Berlin Wall Early successful escapes involved people jumping the initial barbed wire or leaping out of apartment windows along the line, but these ended as the Wall was fortified. Wolfgang Engels, a 19 year old, stole a Soviet armored personnel carrier from a base where he was deployed and drove it right into the Wall. The final person to die in an escape attempt was Winfried Freudenberg who was killed when his homemade natural gas - filled balloon crashed on 8 March 1989 .\n|user|: Did all government agencies move to Berlin"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "843537822_50713-51695-0-982",
+          "text": "Berlin Wall\nIf an escapee was wounded in a crossing attempt and lay on the death strip , no matter how close they were to the Western wall , Westerners could not intervene for fear of triggering engaging fire from the ' Grepos ' , the East Berlin border guards . The guards often let fugitives bleed to death in the middle of this ground , as in the most notorious failed attempt , that of Peter Fechter ( aged 18 ) . He was shot and bled to death , in full view of the Western media , on 17 August 1962 . Fechter 's death created negative publicity worldwide that led the leaders of East Berlin to place more restrictions on shooting in public places , and provide medical care for possible `` would - be escapers '' . The last person to be shot and killed while trying to cross the border was Chris Gueffroy on 6 February 1989 , while the final person to die in an escape attempt was Winfried Freudenberg who was killed when his homemade natural gas - filled balloon crashed on 8 March 1989 .",
+          "title": "Berlin Wall",
+          "score": 27.368053,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724690178
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: when did the wall in berlin come down\n|assistant|: The Berlin Wall began to come down on the evening of 9 November 1989.\n|user|: When did the official reunification of Germany take place?\n|assistant|: The official reunification of Germany took place on 3 October 1990.\n|user|: How many people died trying to cross the Berlin Wall?\n|assistant|: The number of people who died trying to cross the Wall, or as a result of the Wall's existence, has been disputed. Historical Research ( ZZF ) in Potsdam has confirmed at least 140 deaths. An estimated death toll ranges from 136 to more than 200 in and around Berlin.\n|user|: How did people try to escape?\n|assistant|: Berlin Wall Early successful escapes involved people jumping the initial barbed wire or leaping out of apartment windows along the line, but these ended as the Wall was fortified. Wolfgang Engels, a 19 year old, stole a Soviet armored personnel carrier from a base where he was deployed and drove it right into the Wall. The final person to die in an escape attempt was Winfried Freudenberg who was killed when his homemade natural gas - filled balloon crashed on 8 March 1989 .\n|user|: Did all government agencies move to Berlin"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "843316151_82503-82689-0-185",
+          "text": "History of Germany (1945\u201390)\nGovernment offices have been moving progressively to Berlin , and it became the formal seat of the federal government in 1999 . Berlin also is one of the Federal Republic 's 16 L\u00e4nder .",
+          "title": "History of Germany (1945\u201390)",
+          "score": 20.434605,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724691162
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Did all government agencies move to Berlin"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "843316151_81842-82502-0-660",
+          "text": "History of Germany (1945\u201390)\nThe Final Settlement Treaty ended Berlin 's special status as a separate area under Four Power control . Under the terms of the treaty between West and East Germany , Berlin became the capital of a unified Germany . The Bundestag voted in June 1991 to make Berlin the seat of government . The Government of Germany asked the Allies to maintain a military presence in Berlin until the complete withdrawal of the Western Group of Forces ( ex-Soviet ) from the territory of the former East Germany . The Russian withdrawal was completed 31 August 1994 . Ceremonies were held on 8 September 1994 , to mark the final departure of Western Allied troops from Berlin .",
+          "title": "History of Germany (1945\u201390)",
+          "score": 17.46714,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724691404
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Did all government agencies move to Berlin"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "843316151_92287-93964-0-1677",
+          "text": "History of Germany (1945\u201390)\nThe conclusion of the final settlement cleared the way for the unification of East and West Germany . Formal political union occurred on 3 October 1990 , preceded by the GDR declaring its accession to the Federal Republic through Article 23 of West Germany 's Basic Law ( meaning that constitutionally , East Germany was subsumed into West Germany ) ; but affected in strict legality through the subsequent Unification Treaty of 30 August 1990 , which was voted into their constitutions by both the West German Bundestag and the East German Volkskammer on 20 September 1990 . These votes simultaneously extinguished the GDR and affected fundamental amendments to the West German Basic Law ( including the repeal of the very Article 23 under which the GDR had recently declared its post-dated accession ) . On 2 December 1990 , all - German elections were held for the first time since 1933 . The `` new '' country stayed the same as the West German legal system and institutions were extended to the east . The unified nation kept the name Bundesrepublik Deutschland ( though the simple ' Deutschland ' would become increasingly common ) and retained the West German `` Deutsche Mark '' for currency as well . Berlin would formally become the capital of the united Germany , but the political institutions remained at Bonn for the time being . Only after a heated 1991 debate did the Bundestag conclude on moving itself and most of the government to Berlin as well , a process that took until 1999 to complete , when the Bundestag held its first session at the reconstructed Reichstag building . Many government departments still maintain sizable presences in Bonn as of 2008 .",
+          "title": "History of Germany (1945\u201390)",
+          "score": 12.604601,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724692058
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Did the bundestag move to Berlin"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "I don't have specific information about whether all government agencies moved to Berlin after the reunification. However, it is mentioned that the German state was officially reunified along the democratic lines of the West German Basic Law."
+    },
+    {
+      "speaker": "user",
+      "text": "Who was running East Germany when the wall came down",
+      "timestamp": 1724693212,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "When the Berlin Wall came down, Erich Honecker, the General Secretary of the Socialist Unity Party of Germany, was the head of state of East Germany. The longtime leader of East Germany was forced to resign on 18 October 1989 and replaced by Egon Krenz.",
+      "timestamp": 1724693217,
+      "contexts": [
+        {
+          "document_id": "843537822_66876-67169-0-293",
+          "text": "Berlin Wall\nThe fall of the Wall marked the first critical step towards German reunification , which formally concluded a mere 339 days later on 3 October 1990 with the dissolution of East Germany and the official reunification of the German state along the democratic lines of the West German Basic Law .",
+          "title": "Berlin Wall",
+          "score": 29.629269,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724693234
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: when did the wall in berlin come down\n|assistant|: The Berlin Wall began to come down on the evening of 9 November 1989.\n|user|: When did the official reunification of Germany take place?\n|assistant|: The official reunification of Germany took place on 3 October 1990.\n|user|: How many people died trying to cross the Berlin Wall?\n|assistant|: The number of people who died trying to cross the Wall, or as a result of the Wall's existence, has been disputed. Historical Research ( ZZF ) in Potsdam has confirmed at least 140 deaths. An estimated death toll ranges from 136 to more than 200 in and around Berlin.\n|user|: How did people try to escape?\n|assistant|: Berlin Wall Early successful escapes involved people jumping the initial barbed wire or leaping out of apartment windows along the line, but these ended as the Wall was fortified. Wolfgang Engels, a 19 year old, stole a Soviet armored personnel carrier from a base where he was deployed and drove it right into the Wall. The final person to die in an escape attempt was Winfried Freudenberg who was killed when his homemade natural gas - filled balloon crashed on 8 March 1989 .\n|user|: Did all government agencies move to Berlin\n|assistant|: Government offices have been moving progressively to Berlin. Under the terms of the treaty between West and East Germany, Berlin became the capital of a unified Germany.  The Bundestag voted in June 1991 to make Berlin the seat of government, but the political institutions remained at Bonn for the time being. Only after a heated 1991 debate did the Bundestag conclude on moving itself and most of the government to Berlin as well, a process that took until 1999 to complete. Many government departments still maintain sizable presences in Bonn.\n|user|: Who was running East Germany when the wall came down"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "843537822_6316-7100-0-784",
+          "text": "Berlin Wall\nIn 1989 a series of revolutions in nearby Eastern Bloc countries -- Poland and Hungary in particular -- caused a chain reaction in East Germany that ultimately resulted in the demise of the Wall . After several weeks of civil unrest , the East German government announced on 9 November 1989 that all GDR citizens could visit West Germany and West Berlin . Crowds of East Germans crossed and climbed onto the Wall , joined by West Germans on the other side in a celebratory atmosphere . Over the next few weeks , euphoric people and souvenir hunters chipped away parts of the Wall ; the governments later used industrial equipment to remove most of what was left . The `` fall of the Berlin Wall '' paved the way for German reunification , which formally took place on 3 October 1990 .",
+          "title": "Berlin Wall",
+          "score": 28.361834,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724693276
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: when did the wall in berlin come down\n|assistant|: The Berlin Wall began to come down on the evening of 9 November 1989.\n|user|: When did the official reunification of Germany take place?\n|assistant|: The official reunification of Germany took place on 3 October 1990.\n|user|: How many people died trying to cross the Berlin Wall?\n|assistant|: The number of people who died trying to cross the Wall, or as a result of the Wall's existence, has been disputed. Historical Research ( ZZF ) in Potsdam has confirmed at least 140 deaths. An estimated death toll ranges from 136 to more than 200 in and around Berlin.\n|user|: How did people try to escape?\n|assistant|: Berlin Wall Early successful escapes involved people jumping the initial barbed wire or leaping out of apartment windows along the line, but these ended as the Wall was fortified. Wolfgang Engels, a 19 year old, stole a Soviet armored personnel carrier from a base where he was deployed and drove it right into the Wall. The final person to die in an escape attempt was Winfried Freudenberg who was killed when his homemade natural gas - filled balloon crashed on 8 March 1989 .\n|user|: Did all government agencies move to Berlin\n|assistant|: Government offices have been moving progressively to Berlin. Under the terms of the treaty between West and East Germany, Berlin became the capital of a unified Germany.  The Bundestag voted in June 1991 to make Berlin the seat of government, but the political institutions remained at Bonn for the time being. Only after a heated 1991 debate did the Bundestag conclude on moving itself and most of the government to Berlin as well, a process that took until 1999 to complete. Many government departments still maintain sizable presences in Bonn.\n|user|: Who was running East Germany when the wall came down"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "843537822_50713-51695-0-982",
+          "text": "Berlin Wall\nIf an escapee was wounded in a crossing attempt and lay on the death strip , no matter how close they were to the Western wall , Westerners could not intervene for fear of triggering engaging fire from the ' Grepos ' , the East Berlin border guards . The guards often let fugitives bleed to death in the middle of this ground , as in the most notorious failed attempt , that of Peter Fechter ( aged 18 ) . He was shot and bled to death , in full view of the Western media , on 17 August 1962 . Fechter 's death created negative publicity worldwide that led the leaders of East Berlin to place more restrictions on shooting in public places , and provide medical care for possible `` would - be escapers '' . The last person to be shot and killed while trying to cross the border was Chris Gueffroy on 6 February 1989 , while the final person to die in an escape attempt was Winfried Freudenberg who was killed when his homemade natural gas - filled balloon crashed on 8 March 1989 .",
+          "title": "Berlin Wall",
+          "score": 26.029621,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724693291
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: when did the wall in berlin come down\n|assistant|: The Berlin Wall began to come down on the evening of 9 November 1989.\n|user|: When did the official reunification of Germany take place?\n|assistant|: The official reunification of Germany took place on 3 October 1990.\n|user|: How many people died trying to cross the Berlin Wall?\n|assistant|: The number of people who died trying to cross the Wall, or as a result of the Wall's existence, has been disputed. Historical Research ( ZZF ) in Potsdam has confirmed at least 140 deaths. An estimated death toll ranges from 136 to more than 200 in and around Berlin.\n|user|: How did people try to escape?\n|assistant|: Berlin Wall Early successful escapes involved people jumping the initial barbed wire or leaping out of apartment windows along the line, but these ended as the Wall was fortified. Wolfgang Engels, a 19 year old, stole a Soviet armored personnel carrier from a base where he was deployed and drove it right into the Wall. The final person to die in an escape attempt was Winfried Freudenberg who was killed when his homemade natural gas - filled balloon crashed on 8 March 1989 .\n|user|: Did all government agencies move to Berlin\n|assistant|: Government offices have been moving progressively to Berlin. Under the terms of the treaty between West and East Germany, Berlin became the capital of a unified Germany.  The Bundestag voted in June 1991 to make Berlin the seat of government, but the political institutions remained at Bonn for the time being. Only after a heated 1991 debate did the Bundestag conclude on moving itself and most of the government to Berlin as well, a process that took until 1999 to complete. Many government departments still maintain sizable presences in Bonn.\n|user|: Who was running East Germany when the wall came down"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "843537822_58701-58991-0-290",
+          "text": "Berlin Wall\nThe longtime leader of East Germany , Erich Honecker , resigned on 18 October 1989 and was replaced by Egon Krenz that day . Honecker had predicted in January of that year that the Wall would stand for 50 or 100 more years if the conditions that had caused its construction did not change .",
+          "title": "Berlin Wall",
+          "score": 17.140387,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724693430
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Who was running East Germany when the wall came down."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "843316151_87626-88155-0-529",
+          "text": "History of Germany (1945\u201390)\nOn 18 October , Erich Honecker was forced to resign as head of the SED and as head of state and was replaced by Egon Krenz . But the exodus continued unabated , and pressure for political reform mounted . On 4 November , a demonstration in East Berlin drew as many as 1 million East Germans . Finally , on 9 November 1989 , the Berlin Wall was opened , and East Germans were allowed to travel freely . Thousands poured through the wall into the western sectors of Berlin , and on 12 November , East Germany began dismantling it .",
+          "title": "History of Germany (1945\u201390)",
+          "score": 16.74312,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724693437
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Who was running East Germany when the wall came down."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The head of state of East Germany when the Berlin Wall came down was Erich Honecker, who was the General Secretary of the Socialist Unity Party of Germany. However, due to health issues, he was replaced by Egon Krenz just a few days before the Wall fell."
+    },
+    {
+      "speaker": "user",
+      "text": "Who was Willy Brandt and what did he do.",
+      "timestamp": 1724695376,
+      "enrichments": {
+        "Question Type": [
+          "Composite",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Willy Brandt was one of the most popular politicians who served as Mayor ( Oberb\u00fcrgermeister ) of West-Berlin and as the Chancellor of West Germany. Brandt received the Nobel Peace Prize in 1971 for his efforts in strengthening cooperation between East and West.",
+      "timestamp": 1724695398,
+      "contexts": [
+        {
+          "document_id": "843537822_66876-67169-0-293",
+          "text": "Berlin Wall\nThe fall of the Wall marked the first critical step towards German reunification , which formally concluded a mere 339 days later on 3 October 1990 with the dissolution of East Germany and the official reunification of the German state along the democratic lines of the West German Basic Law .",
+          "title": "Berlin Wall",
+          "score": 29.705332,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724695410
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: when did the wall in berlin come down\n|assistant|: The Berlin Wall began to come down on the evening of 9 November 1989.\n|user|: When did the official reunification of Germany take place?\n|assistant|: The official reunification of Germany took place on 3 October 1990.\n|user|: How many people died trying to cross the Berlin Wall?\n|assistant|: The number of people who died trying to cross the Wall, or as a result of the Wall's existence, has been disputed. Historical Research ( ZZF ) in Potsdam has confirmed at least 140 deaths. An estimated death toll ranges from 136 to more than 200 in and around Berlin.\n|user|: How did people try to escape?\n|assistant|: Berlin Wall Early successful escapes involved people jumping the initial barbed wire or leaping out of apartment windows along the line, but these ended as the Wall was fortified. Wolfgang Engels, a 19 year old, stole a Soviet armored personnel carrier from a base where he was deployed and drove it right into the Wall. The final person to die in an escape attempt was Winfried Freudenberg who was killed when his homemade natural gas - filled balloon crashed on 8 March 1989 .\n|user|: Did all government agencies move to Berlin\n|assistant|: Government offices have been moving progressively to Berlin. Under the terms of the treaty between West and East Germany, Berlin became the capital of a unified Germany.  The Bundestag voted in June 1991 to make Berlin the seat of government, but the political institutions remained at Bonn for the time being. Only after a heated 1991 debate did the Bundestag conclude on moving itself and most of the government to Berlin as well, a process that took until 1999 to complete. Many government departments still maintain sizable presences in Bonn.\n|user|: Who was running East Germany when the wall came down\n|assistant|: The head of state of East Germany when the Berlin Wall came down was Erich Honecker, who was the General Secretary of the Socialist Unity Party of Germany. The longtime leader of East Germany, Erich Honecker, was forced to resign on 18 October 1989 and was replaced by Egon Krenz. \n|user|: Who was Willy Brandt and what did he do."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "843537822_6316-7100-0-784",
+          "text": "Berlin Wall\nIn 1989 a series of revolutions in nearby Eastern Bloc countries -- Poland and Hungary in particular -- caused a chain reaction in East Germany that ultimately resulted in the demise of the Wall . After several weeks of civil unrest , the East German government announced on 9 November 1989 that all GDR citizens could visit West Germany and West Berlin . Crowds of East Germans crossed and climbed onto the Wall , joined by West Germans on the other side in a celebratory atmosphere . Over the next few weeks , euphoric people and souvenir hunters chipped away parts of the Wall ; the governments later used industrial equipment to remove most of what was left . The `` fall of the Berlin Wall '' paved the way for German reunification , which formally took place on 3 October 1990 .",
+          "title": "Berlin Wall",
+          "score": 28.469656,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724695428
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: when did the wall in berlin come down\n|assistant|: The Berlin Wall began to come down on the evening of 9 November 1989.\n|user|: When did the official reunification of Germany take place?\n|assistant|: The official reunification of Germany took place on 3 October 1990.\n|user|: How many people died trying to cross the Berlin Wall?\n|assistant|: The number of people who died trying to cross the Wall, or as a result of the Wall's existence, has been disputed. Historical Research ( ZZF ) in Potsdam has confirmed at least 140 deaths. An estimated death toll ranges from 136 to more than 200 in and around Berlin.\n|user|: How did people try to escape?\n|assistant|: Berlin Wall Early successful escapes involved people jumping the initial barbed wire or leaping out of apartment windows along the line, but these ended as the Wall was fortified. Wolfgang Engels, a 19 year old, stole a Soviet armored personnel carrier from a base where he was deployed and drove it right into the Wall. The final person to die in an escape attempt was Winfried Freudenberg who was killed when his homemade natural gas - filled balloon crashed on 8 March 1989 .\n|user|: Did all government agencies move to Berlin\n|assistant|: Government offices have been moving progressively to Berlin. Under the terms of the treaty between West and East Germany, Berlin became the capital of a unified Germany.  The Bundestag voted in June 1991 to make Berlin the seat of government, but the political institutions remained at Bonn for the time being. Only after a heated 1991 debate did the Bundestag conclude on moving itself and most of the government to Berlin as well, a process that took until 1999 to complete. Many government departments still maintain sizable presences in Bonn.\n|user|: Who was running East Germany when the wall came down\n|assistant|: The head of state of East Germany when the Berlin Wall came down was Erich Honecker, who was the General Secretary of the Socialist Unity Party of Germany. The longtime leader of East Germany, Erich Honecker, was forced to resign on 18 October 1989 and was replaced by Egon Krenz. \n|user|: Who was Willy Brandt and what did he do."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "843537822_67644-67970-0-326",
+          "text": "Berlin Wall\nIn some European capitals at the time , there was a deep anxiety over prospects for a reunified Germany . In September 1989 , British Prime Minister Margaret Thatcher pleaded with Soviet President Mikhail Gorbachev not to let the Berlin Wall fall and confided that she wanted the Soviet leader to do what he could to stop it .",
+          "title": "Berlin Wall",
+          "score": 26.607035,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724695438
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: when did the wall in berlin come down\n|assistant|: The Berlin Wall began to come down on the evening of 9 November 1989.\n|user|: When did the official reunification of Germany take place?\n|assistant|: The official reunification of Germany took place on 3 October 1990.\n|user|: How many people died trying to cross the Berlin Wall?\n|assistant|: The number of people who died trying to cross the Wall, or as a result of the Wall's existence, has been disputed. Historical Research ( ZZF ) in Potsdam has confirmed at least 140 deaths. An estimated death toll ranges from 136 to more than 200 in and around Berlin.\n|user|: How did people try to escape?\n|assistant|: Berlin Wall Early successful escapes involved people jumping the initial barbed wire or leaping out of apartment windows along the line, but these ended as the Wall was fortified. Wolfgang Engels, a 19 year old, stole a Soviet armored personnel carrier from a base where he was deployed and drove it right into the Wall. The final person to die in an escape attempt was Winfried Freudenberg who was killed when his homemade natural gas - filled balloon crashed on 8 March 1989 .\n|user|: Did all government agencies move to Berlin\n|assistant|: Government offices have been moving progressively to Berlin. Under the terms of the treaty between West and East Germany, Berlin became the capital of a unified Germany.  The Bundestag voted in June 1991 to make Berlin the seat of government, but the political institutions remained at Bonn for the time being. Only after a heated 1991 debate did the Bundestag conclude on moving itself and most of the government to Berlin as well, a process that took until 1999 to complete. Many government departments still maintain sizable presences in Bonn.\n|user|: Who was running East Germany when the wall came down\n|assistant|: The head of state of East Germany when the Berlin Wall came down was Erich Honecker, who was the General Secretary of the Socialist Unity Party of Germany. The longtime leader of East Germany, Erich Honecker, was forced to resign on 18 October 1989 and was replaced by Egon Krenz. \n|user|: Who was Willy Brandt and what did he do."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "843316151_64018-65787-0-1768",
+          "text": "History of Germany (1945\u201390)\nIn the 1969 election , the SPD -- headed by Willy Brandt -- gained enough votes to form a coalition government with the FDP . Although Chancellor for only just over four years , Brandt was one of the most popular politicians in the whole period . Brandt was a gifted speaker and the growth of the Social Democrats from there on was in no small part due to his personality . Brandt began a policy of rapprochement with West Germany 's eastern neighbors known as Ostpolitik , a policy opposed by the CDU . The issue of improving relations with Poland , Czechoslovakia , and East Germany made for an increasingly aggressive tone in public debates but it was a huge step forward when Willy Brandt and the Foreign Minister , Walther Scheel ( FDP ) negotiated agreements with all three countries ( Moscow Agreement , August 1970 , Warsaw Agreement , December 1970 , Four - Power Agreement over the status of West Berlin in 1971 and an agreement on relations between West and East Germany , signed in December 1972 ) . These agreements were the basis for a rapid improvement in the relations between east and west and led , in the long term , to the dismantlement of the Warsaw Treaty and the Soviet Union 's control over East - Central Europe . During a visit to Warsaw on 7 December 1970 , Brandt made the Warschauer Kniefall by kneeling before a monument to those killed in the Warsaw Ghetto Uprising , a gesture of humility and penance that no German Chancellor had made until that time . Chancellor Brandt was forced to resign in May 1974 , after G\u00fcnter Guillaume , a senior member of his staff , was uncovered as a spy for the East German intelligence service , the Stasi . Brandt 's contributions to world peace led to his winning the Nobel Peace Prize for 1971 . U.S.",
+          "title": "History of Germany (1945\u201390)",
+          "score": 13.748088,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724696250
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Who was Willy Brandt and what did he do."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "843537822_25189-26266-0-1076",
+          "text": "Berlin Wall\nWith the closing of the East - West sector boundary in Berlin , the vast majority of East Germans could no longer travel or emigrate to West Germany . Berlin soon went from being the easiest place to make an unauthorized crossing between East and West Germany to being the most difficult . Many families were split , while East Berliners employed in the West were cut off from their jobs . West Berlin became an isolated exclave in a hostile land . West Berliners demonstrated against the Wall , led by their Mayor ( Oberb\u00fcrgermeister ) Willy Brandt , who strongly criticized the United States for failing to respond . Allied intelligence agencies had hypothesized about a wall to stop the flood of refugees , but the main candidate for its location was around the perimeter of the city . In 1961 , Secretary of State Dean Rusk proclaimed , `` The Wall certainly ought not to be a permanent feature of the European landscape . I see no reason why the Soviet Union should think it is -- it is to their advantage in any way to leave there that monument to communist failure . ''",
+          "title": "Berlin Wall",
+          "score": 7.2843113,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724696232
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Who was Willy Brandt and what did he do."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Willy Brandt was a German politician who served as the Chancellor of West Germany from 1969 to 1974. He was a prominent figure in the Social Democratic Party of Germany (SPD) and is known for his policy of Ostpolitik, which aimed to improve relations with East Germany and other Eastern European countries during the Cold War. Brandt received the Nobel Peace Prize in 1971 for his efforts in strengthening cooperation between East and West."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "d2b56e91-6d89-4df4-b89a-eef8d969850b",
+      "status": "created",
+      "timestamp": 1724696608
+    },
+    {
+      "author": "87334bc6-dd39-4565-ae2b-832e60a24b08",
+      "status": "accepted",
+      "timestamp": 1726063923
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "edited",
+      "timestamp": 1726754560
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "accepted",
+      "timestamp": 1726754805
+    }
+  ],
+  "editor": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+  "domain": "mt-rag-clapnq-elser-512-100-20240503",
+  "reviewer": "9dcd142c-415e-4161-a82f-c8b14bfb36ac"
+}

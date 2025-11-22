@@ -1,0 +1,1008 @@
+{
+  "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-fiqa-beir-elser-512-100-20240501",
+      "size": "61022"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "collections": {
+        "regex": "mt-rag*"
+      },
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "\u201a\u00c4\u00faInternational credit report\u201a\u00c4\u00f9 for French nationals?",
+      "timestamp": 1724855896,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I don't have information on obtaining an international credit report specifically for French nationals.   A company's ability to report on your credit report is dependent on their membership in Equifax, USA etc., and while most of your credit is country by country, international companies or companies with any relationship in other countries can follow you cross-border.",
+      "timestamp": 1724855901,
+      "contexts": [
+        {
+          "document_id": "588153-3434-5698",
+          "text": "\n(So, for a 25 years running credit of theis type, the price Y of the credit at its inception depends on 100 Xs, which are the uncertain prices for the Swiss frank each quarter of the 25 next years.) Some of these communes can be quite small, with 5.000 inhabitants, and needless to say, do not have the required expertise to analyse the risks bound to such instruments, which in that special case led the court call the credit a swindling and to cancel the credit. But what chain of events leads a 5.000 inhabitants city in France to own a credit whose reimbursements depends on the Swiss frank? After the credit crunch in 2007 and the fall of Lehman Brothers in 2008, it has begun to be very hard to organise funding, which basically means to conclude credits running long in time on large amounts of money. So, the municipality needs a 25 years credit of 10.000.000 EUROS and goes to its communal bank. The communal bank has hundreds or thousands of municipalities looking for credits and needs itself a financing. So the communal bank goes to one of the five largest financial institutions in the world, which insists on selling a huge credit whose reimbursements have a variable part depending on hundred of values the Swiss frank will have in the 25 next years. Since the the big bank has better computation techniques than the small bank it makes a big profit. Since the small bank has no idea, how to compute the correct price of the credit it bought, it cuts this in pieces and sell it in the same form to the various communes it works with. If we were to attribute this kind of intentions to the largest five banks, we could ask about the possibility that they designed the credit to take advantage of the primitive evaluation methods of the small bank. We could also ask if they organised a cartel to force communal banks to buy their bermudean snowballs. And we could also ask, if they are so influent that they eventually can manipulate the Swiss frank to secure an even higher profit. But I will not go into this. To the best of my understanding, the subprime crisis is a play along the same plot, with different actors, but I know this latter subject only by what I could read in French newspapers. So much for the \u201cHow is it causing problems?\u201d part.",
+          "score": 9.3819275,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1724856923
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: \u201a\u00c4\u00faInternational credit report\u201a\u00c4\u00f9 for French nationals?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "558388-0-548",
+          "text": "\nAs someone who spends a lot of time in France, I learned that many French banks will issue debit cards to US citizens, as an add-on feature to a bank account.  The fees are not low.  Societe Generale charges 8 Euros per month, Credit Agricole charges 30 Euros a year, BNP Paribas charges 12 Euros a month.  I'm sure other banks will issue cards as well.  You need to show 2 items proving US residence, such as a utility bill, plus a passport.  They can open an account immediately, on that basis and it takes about 7-10 days to get your debit card.",
+          "score": 8.48186,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1724856926
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: \u201a\u00c4\u00faInternational credit report\u201a\u00c4\u00f9 for French nationals?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "486729-0-1123",
+          "text": "\nSomeone else might be able to provide more details - but generally yes, of course.  International corporations can pursue debt collection across borders - whether or not they do is a matter of convenience rather than law.  My understanding is that a company's ability to report on your credit report is dependent on their membership in Equifax, USA etc. - so while most of your credit is country by country, international companies or companies with any relationship in other countries can follow you cross-border if they find out your new address and report the debt w/ that address.  Since virtually every major company has some American affiliate, I wouldn't hold my breath that you can escape it indefinitely ESPECIALLY since you don't already have the debt, and have the power to actually pay for the service that you're using.  Also - this is an incredibly scummy thing to do, and no matter how you dress it up as a financial decision it's just theft. Would you leave the country without paying your landlord? Without paying for groceries or other physical goods? Why is stealing from a telecom company any different?",
+          "score": 11.941288,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724856891
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "International credit report\u201a for French nationals?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The document does not provide information on obtaining an international credit report specifically for French nationals. However, it is mentioned that many French banks issue debit cards to US citizens with an add-on feature to a bank account, given two items proving US residence and a passport. The fees for these debit cards vary between 8 Euros per month at Societe Generale, 30 Euros a year at Credit Agricole, and 12 Euros a month at BNP Paribas. It takes about 7-10 days to receive the debit card after opening an account."
+    },
+    {
+      "speaker": "user",
+      "text": "Do you mean I can get my credit report in US?",
+      "timestamp": 1724858141,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, as a French national, you can obtain your credit report in the United States. Generally, in the U.S., you can request a free copy of your credit report from each of the three major credit bureaus - Equifax, Experian, and TransUnion - once a year through the AnnualCreditReport website. Your credit report contains information that goes into your credit score, such as the lines of credit on file and any delinquencies reported. To get your actual credit score, you would need to pay a nominal fee.",
+      "timestamp": 1724858146,
+      "contexts": [
+        {
+          "document_id": "486729-0-1123",
+          "text": "\nSomeone else might be able to provide more details - but generally yes, of course.  International corporations can pursue debt collection across borders - whether or not they do is a matter of convenience rather than law.  My understanding is that a company's ability to report on your credit report is dependent on their membership in Equifax, USA etc. - so while most of your credit is country by country, international companies or companies with any relationship in other countries can follow you cross-border if they find out your new address and report the debt w/ that address.  Since virtually every major company has some American affiliate, I wouldn't hold my breath that you can escape it indefinitely ESPECIALLY since you don't already have the debt, and have the power to actually pay for the service that you're using.  Also - this is an incredibly scummy thing to do, and no matter how you dress it up as a financial decision it's just theft. Would you leave the country without paying your landlord? Without paying for groceries or other physical goods? Why is stealing from a telecom company any different?",
+          "score": 22.088495,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724858611
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: \u201a\u00c4\u00faInternational credit report\u201a\u00c4\u00f9 for French nationals?\n|assistant|: The document does not provide information on obtaining an international credit report specifically for French nationals.   A company's ability to report on your credit report is dependent on their membership in Equifax, USA etc., and while most of your credit is country by country, international companies or companies with any relationship in other countries can follow you cross-border.\n|user|: Do you mean I can get my credit report in US?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "66963-0-1507",
+          "text": "\nAssuming you are asking about a credit score in the United States, the following applies. To find out your FICO score, navigate to AnnualCreditReport, the official site to help consumers receive their credit report from each of the three organizations providing these scores - Equifax, Experian, and TransUnion.  You are - in many states - entitled to a free copy of your credit report from each of these organizations annually.   This copy of your credit report will not contain your credit score from that organization.  It will, however, contain information that goes into your credit score - the lines of credits on file, any delinquencies reported, etc. If you decide you would like to pay for your credit score from each bureau, you will have the option to receive this information while getting your credit report, but you will have to pay a nominal fee for it.  Remember that each of the 3 bureaus gives you a different score.  Averaging your 3 scores should give you a good idea of your FICO score.  Note that your report is far more important than your score - once you know that, you know if you're in a good place or not. These other questions are so close that they might even be considered duplicates, and provide other suggestions for how to check your score. As a warning, don't trust the many ads out there saying you can get your score for free.  Only AnnualCreditReport is considered a safe place for entering the very personal information required to get a score.  The FTC backs this up.",
+          "score": 16.421495,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724858614
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: \u201a\u00c4\u00faInternational credit report\u201a\u00c4\u00f9 for French nationals?\n|assistant|: The document does not provide information on obtaining an international credit report specifically for French nationals.   A company's ability to report on your credit report is dependent on their membership in Equifax, USA etc., and while most of your credit is country by country, international companies or companies with any relationship in other countries can follow you cross-border.\n|user|: Do you mean I can get my credit report in US?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "184365-0-908",
+          "text": "\n\"It's not just that credit history is local; it's that it's a private business run for profit. The \"\"big three\"\" credit bureaus in the US are Experian, Equifax and Transunion.  They collect information on debt usage and abuse from various companies in the US, and charge a fee to provide that information (and their judgement of you) to companies interested in offering you further credit.  But there's nothing stopping a company from collecting international credit histories, or specialized credit histories either (for instance, there's a company called ChexSystems which focuses on retail purchase financing (mostly auto) and checking account abuse, while ignoring other types of lending). That being said, I don't know of any companies which currently collect international credit histories.  Perhaps in Europe, with more nations in close geographic proximity, there would be, but not in North America.\"",
+          "score": 15.79234,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724858653
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: \u201a\u00c4\u00faInternational credit report\u201a\u00c4\u00f9 for French nationals?\n|assistant|: The document does not provide information on obtaining an international credit report specifically for French nationals.   A company's ability to report on your credit report is dependent on their membership in Equifax, USA etc., and while most of your credit is country by country, international companies or companies with any relationship in other countries can follow you cross-border.\n|user|: Do you mean I can get my credit report in US?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, as a French national, you can obtain your credit report in the United States. However, the document does not provide specific details on how to do so for foreign nationals. Generally, in the U.S., you can request a free copy of your credit report from each of the three major credit bureaus - Equifax, Experian, and TransUnion - once a year through the AnnualCreditReport website. Your credit report contains information that goes into your credit score, such as the lines of credit on file and any delinquencies reported. To get your actual credit score, you would need to pay a nominal fee. Keep in mind that each bureau provides a slightly different score, so averaging the three scores should give you a good idea of your credit standing."
+    },
+    {
+      "speaker": "user",
+      "text": "what would hurt my credit?",
+      "timestamp": 1724858791,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Several factors could negatively impact your credit score. These include having a high credit utilization rate, which means using more than 50% or 33% of your credit card limit at any given time. This applies even if you charge a large amount and pay it off quickly. Having a large available credit balance could also potentially harm your credit score, as this could indicate to lenders that you might quickly accumulate high credit card debt. Late payments, a large total credit balance outstanding, and making many credit applications in a short period of time can also negatively affect your credit score.   However, opening and closing bank accounts, buying or selling cars without debt, or even buying or selling houses without debt won't affect your credit score.",
+      "timestamp": 1724858796,
+      "contexts": [
+        {
+          "document_id": "44223-0-689",
+          "text": "\nThe biggest risk is Credit Utilization rate.  If you have a total of $10,000 in revolving credit (ie: credit card line) and you ever have more than 50% (or 33% to be conservative) on the card at any time then your credit score will be negatively impacted. This will be a negative impact even if you charge it on day one and pay it off in full on day 2.  Doesn't make much sense but credit companies are playing the averages:  on average they find that people who get close to maxing their credit limit are in some sort of financial trouble. You're better off to make small purchases each month, under $100, and pay them off right away.  That will build a better credit history - and score.",
+          "score": 19.678267,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724858989
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "negatively impact your credit score"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "188406-0-584",
+          "text": "\nCredit scoring has changed since the time of this question (July 2017) and it is now possible that having a high available credit balance can negatively affect your credit score. ... VantageScore will now mark a borrower negatively for having   excessively large credit card limits, on the theory that the person   could run up a high credit card debt quickly. Those who have prime   credit scores may be hurt the most, since they are most likely to have   multiple cards open. But those who like to play the credit card   rewards program points game could be affected as well. source",
+          "score": 19.232172,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724858991
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "negatively impact your credit score"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "2460-0-671",
+          "text": "\nCredit scoring has changed recently and the answer to this question will have slightly changed. While most points made here are true: But now (as of July 2017) it is possible having a large available credit balance can negatively effect your credit score directly:  ... VantageScore will now mark a borrower negatively for having   excessively large credit card limits, on the theory that the person   could run up a high credit card debt quickly. Those who have prime   credit scores may be hurt the most, since they are most likely to have   multiple cards open. But those who like to play the credit card   rewards program points game could be affected as well. source",
+          "score": 18.929874,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724858994
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "negatively impact your credit score"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "578184-0-213",
+          "text": "\nYour credit score is based on your use of Debt. From wikipedia: Opening and closing bank accounts, buying or selling cars without debt, or even buying or selling houses without debt won't affect your credit score.",
+          "score": 17.474167,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724858997
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "negatively impact your credit score"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "113167-0-2188",
+          "text": "\n\"The following is based on my Experian credit scoring feedback and experience here in the UK over many years. (And for further information I currently hold a credit score of 999, the highest possible, with 6 credit cards.) Now I'm assuming that while there may be some differences in particulars in your case due to the difference in locality nevertheless the below should hopefully provide some broad guidelines and reasonable conclusion in your situation: Having a large number of active credit accounts may be seen as a negative. However having a large number of settled accounts should on the contrary have a positive effect on your score. As you keep your accounts mostly settled, I think having another card will not be to your detriment and should in time be beneficial. A large total credit balance outstanding may count against you. (But see the next point.) Having your total outstanding debt on all credit accounts be a smaller proportion of your total available credit, counts in your favour. This means having more cards for the same amount of credit in use, is net-net in your favour. It also has the effect of making even larger outstanding credit balances (as in point 2) to be a lower percentage of your total available credit, and consequently will indicate lower risk to lenders. It appears from my experience the higher the highest credit limit on a single card you are issued (and are managing responsibly e.g. either paid off or used responsibly) the better. Needless to say, any late payments count against you. The best thing to do then is to set up a direct debit for the minimum amount to be paid like clockwork every month. Lenders really like consistent payers. :) New credit accounts initially will count against you for a while. But as the accounts age and are managed responsibly or settled they will eventually count in your favour and increase your score. Making many credit applications in a short space of time may count against you as you may be seen to be credit reliant. Conclusion: On balance I would say get the other card. Your credit score might be slightly lower for a couple of months but eventually it will be to your benefit as per the above.",
+          "score": 18.10332,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724859000
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "negatively impact your credit score"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Based on the information provided, several factors could negatively impact your credit score. These include having a high credit utilization rate, which means using more than 50% or 33% of your credit card limit at any given time. This applies even if you charge a large amount and pay it off quickly. To avoid this, it's recommended to make small purchases and pay them off regularly. Having a large available credit balance could also potentially harm your credit score, as this could indicate to lenders that you might quickly accumulate high credit card debt. Late payments, a large total credit balance outstanding, and making many credit applications in a short period of time can also negatively affect your credit score."
+    },
+    {
+      "speaker": "user",
+      "text": "should I live in the US?",
+      "timestamp": 1724861436,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "UNANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I have no information that you should live in the US to obtain your credit report. ",
+      "timestamp": 1724861449,
+      "contexts": [
+        {
+          "document_id": "66963-0-1507",
+          "text": "\nAssuming you are asking about a credit score in the United States, the following applies. To find out your FICO score, navigate to AnnualCreditReport, the official site to help consumers receive their credit report from each of the three organizations providing these scores - Equifax, Experian, and TransUnion.  You are - in many states - entitled to a free copy of your credit report from each of these organizations annually.   This copy of your credit report will not contain your credit score from that organization.  It will, however, contain information that goes into your credit score - the lines of credits on file, any delinquencies reported, etc. If you decide you would like to pay for your credit score from each bureau, you will have the option to receive this information while getting your credit report, but you will have to pay a nominal fee for it.  Remember that each of the 3 bureaus gives you a different score.  Averaging your 3 scores should give you a good idea of your FICO score.  Note that your report is far more important than your score - once you know that, you know if you're in a good place or not. These other questions are so close that they might even be considered duplicates, and provide other suggestions for how to check your score. As a warning, don't trust the many ads out there saying you can get your score for free.  Only AnnualCreditReport is considered a safe place for entering the very personal information required to get a score.  The FTC backs this up.",
+          "score": 32.528427,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1724863152
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: \u201a\u00c4\u00faInternational credit report\u201a\u00c4\u00f9 for French nationals?\n|assistant|: The document does not provide information on obtaining an international credit report specifically for French nationals.   A company's ability to report on your credit report is dependent on their membership in Equifax, USA etc., and while most of your credit is country by country, international companies or companies with any relationship in other countries can follow you cross-border.\n|user|: Do you mean I can get my credit report in US?\n|assistant|: Yes, as a French national, you can obtain your credit report in the United States. Generally, in the U.S., you can request a free copy of your credit report from each of the three major credit bureaus - Equifax, Experian, and TransUnion - once a year through the AnnualCreditReport website. Your credit report contains information that goes into your credit score, such as the lines of credit on file and any delinquencies reported. To get your actual credit score, you would need to pay a nominal fee.\n|user|: what would hurt my credit?\n|assistant|: Several factors could negatively impact your credit score. These include having a high credit utilization rate, which means using more than 50% or 33% of your credit card limit at any given time. This applies even if you charge a large amount and pay it off quickly. Having a large available credit balance could also potentially harm your credit score, as this could indicate to lenders that you might quickly accumulate high credit card debt. Late payments, a large total credit balance outstanding, and making many credit applications in a short period of time can also negatively affect your credit score.   However, opening and closing bank accounts, buying or selling cars without debt, or even buying or selling houses without debt won't affect your credit score.\n|user|: should I live in the US?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "520205-0-2117",
+          "text": "\nPatience is the key here, I hate to say! There are five factors to FICO credit scores:  Payment history is adversely affected by late payments - so always pay on time, otherwise your report will be haunted for seven years! \ud83d\udc7b Credit utilization has to do with how much of your available credit is currently in use - lower is better, but 0% isn't good either because they want to see that you're using credit. 10% or less is a good goal, and try to keep any single card balance to 30% or less when its statement close date rolls around. Credit history is based on the average age of all of your accounts, cards or otherwise, the older the better. Don't close either of your other cards (because that would cause your average account age to fall), and make sure to use the store card at least occasionally, because lenders sometimes decide to close unused lines of credit. Credit mix has to do with the different types of credit you hold and is why your bank's website suggested taking out a loan. It also has to do with the number of accounts overall; I've never found a satisfactory answer for what the sweet spot is, but I suspect it's in the 6-12 range? You wouldn't want to get several new ones at the same time because... New credit is affected by the credit inquiries (hard pulls) that occur when you apply for new cards or loans. Inquiries stay on your report for two years before falling off. This is almost certainly where your score dropped. You also mentioned not knowing if some hospital bills are still affecting your score. You'll want to review your credit reports and find out, plus checking your credit reports regularly is a really great habit to get into because errors (and fraud) can and do happen. There are three credit reporting agencies: Experian, Equifax, and TransUnion, and you'll want to review all three. You can get one free report from each of them every year: https://www.usa.gov/credit-reports It can take a couple of months for a new credit account to show up on your credit report, so your score should recover and go even higher once that happens. Sit tight, as annoying as that is!",
+          "score": 27.099144,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1724863166
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: \u201a\u00c4\u00faInternational credit report\u201a\u00c4\u00f9 for French nationals?\n|assistant|: The document does not provide information on obtaining an international credit report specifically for French nationals.   A company's ability to report on your credit report is dependent on their membership in Equifax, USA etc., and while most of your credit is country by country, international companies or companies with any relationship in other countries can follow you cross-border.\n|user|: Do you mean I can get my credit report in US?\n|assistant|: Yes, as a French national, you can obtain your credit report in the United States. Generally, in the U.S., you can request a free copy of your credit report from each of the three major credit bureaus - Equifax, Experian, and TransUnion - once a year through the AnnualCreditReport website. Your credit report contains information that goes into your credit score, such as the lines of credit on file and any delinquencies reported. To get your actual credit score, you would need to pay a nominal fee.\n|user|: what would hurt my credit?\n|assistant|: Several factors could negatively impact your credit score. These include having a high credit utilization rate, which means using more than 50% or 33% of your credit card limit at any given time. This applies even if you charge a large amount and pay it off quickly. Having a large available credit balance could also potentially harm your credit score, as this could indicate to lenders that you might quickly accumulate high credit card debt. Late payments, a large total credit balance outstanding, and making many credit applications in a short period of time can also negatively affect your credit score.   However, opening and closing bank accounts, buying or selling cars without debt, or even buying or selling houses without debt won't affect your credit score.\n|user|: should I live in the US?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "501826-0-757",
+          "text": "\nAs of 2014, this answer is deprecated. Read answer here for recent developments up to January 2015.  You can get a free credit report yearly, but you don't get your credit score, just the content of your report. This is useful to make sure your credit history is correct, etc. To get that, visit annualcreditreport.com. Another site which will give you your score for free, really free with no strings attached, is creditkarma.com, which gives you your TransUnion credit score and full TransUnion credit report. The site is run by TransUnion and supported via advertising. At this point Equifax and Experian offer similar services via subscription, but not for free. Update 8/14/2015: CreditKarma now offers the Equifax information as part of their service.",
+          "score": 27.016712,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1724863168
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: \u201a\u00c4\u00faInternational credit report\u201a\u00c4\u00f9 for French nationals?\n|assistant|: The document does not provide information on obtaining an international credit report specifically for French nationals.   A company's ability to report on your credit report is dependent on their membership in Equifax, USA etc., and while most of your credit is country by country, international companies or companies with any relationship in other countries can follow you cross-border.\n|user|: Do you mean I can get my credit report in US?\n|assistant|: Yes, as a French national, you can obtain your credit report in the United States. Generally, in the U.S., you can request a free copy of your credit report from each of the three major credit bureaus - Equifax, Experian, and TransUnion - once a year through the AnnualCreditReport website. Your credit report contains information that goes into your credit score, such as the lines of credit on file and any delinquencies reported. To get your actual credit score, you would need to pay a nominal fee.\n|user|: what would hurt my credit?\n|assistant|: Several factors could negatively impact your credit score. These include having a high credit utilization rate, which means using more than 50% or 33% of your credit card limit at any given time. This applies even if you charge a large amount and pay it off quickly. Having a large available credit balance could also potentially harm your credit score, as this could indicate to lenders that you might quickly accumulate high credit card debt. Late payments, a large total credit balance outstanding, and making many credit applications in a short period of time can also negatively affect your credit score.   However, opening and closing bank accounts, buying or selling cars without debt, or even buying or selling houses without debt won't affect your credit score.\n|user|: should I live in the US?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "591454-0-704",
+          "text": "\nIs it possible her husband obtained a card from a bank overseas? Unlikely. A Bank overseas generally will not issue such cards. Is that why she can't find it on the credit report? The data sent to Credit Bureau is periodic and not immediate. At times it may take a month or more for a Bank to start reporting the new card to Credit Agencies. If he got the card recently, she has a freeze in effect and no bank can issue a card in her name without her approval. Possibly timing issue. i.e. the freeze was put after card company pulled the report and approved. It may take sometime to dispatch a new card. So it could be that her husband applied for this card previously before the freeze was put in place.",
+          "score": 16.24367,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1724863171
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "credit report issue for foreign residents"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "486729-0-1123",
+          "text": "\nSomeone else might be able to provide more details - but generally yes, of course.  International corporations can pursue debt collection across borders - whether or not they do is a matter of convenience rather than law.  My understanding is that a company's ability to report on your credit report is dependent on their membership in Equifax, USA etc. - so while most of your credit is country by country, international companies or companies with any relationship in other countries can follow you cross-border if they find out your new address and report the debt w/ that address.  Since virtually every major company has some American affiliate, I wouldn't hold my breath that you can escape it indefinitely ESPECIALLY since you don't already have the debt, and have the power to actually pay for the service that you're using.  Also - this is an incredibly scummy thing to do, and no matter how you dress it up as a financial decision it's just theft. Would you leave the country without paying your landlord? Without paying for groceries or other physical goods? Why is stealing from a telecom company any different?",
+          "score": 15.776125,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1724863174
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "credit report issue for foreign residents"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The document does not provide information that could help determine whether you should live in the US or not. This decision would depend on various personal and professional factors, and it is recommended to thoroughly evaluate these factors before making a decision."
+    },
+    {
+      "speaker": "user",
+      "text": "But I have to have some credit activities in the US, right?",
+      "timestamp": 1724862086,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, credit history is local. To have a credit report in the U.S., you generally need to have credit activities here that are reported to the credit bureaus.  This could include having credit cards, loans, or other types of credit accounts with financial institutions in the U.S. ",
+      "timestamp": 1724862091,
+      "contexts": [
+        {
+          "document_id": "539473-0-302",
+          "text": "\n\"Agree with wrschneider99. Also, since it's a \"\"credit report\"\" it helps to have a history of credit. My wife has been in the U.S. for 14 years and now has a higher credit score than me, a U.S. citizen. When we leased a car we put it in her name. When we took out a mortgage it's under both our names.\"",
+          "score": 12.081955,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724862458
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "credit report for temporal residents"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "217804-0-1794",
+          "text": "\nThe whole point of a credit report and, by extension, a credit score, is to demonstrate (and judge) your ability to repay borrowed funds.  Everything stems from that goal; available credit, payment history, collections, etc all serve to demonstrate whether or not you personally are a good investment for lenders to pursue. Revolving credit balances are tricky because they are more complicated than fixed loans (for the rest of this answer, I'll just talk about credit cards, though it also applies to lines of credit such as overdraft protection for checking accounts, HELOCs, and other such products). Having a large available balance relative to your income means that at any time you could suddenly drown yourself in debt.  Having no credit cards means you don't have experience managing them (and personal finances are governed largely by behavior, meaning experience is invaluable).  Having credit cards but carrying a high balance means you know how to borrow money, but not pay it back.  Having credit cards but carrying no balance means you don't know how to borrow money (or you don't trust yourself to pay it back). Ideally, lenders will see a pattern of you borrowing a portion of the available credit, and then paying it down.  Generally that means utilizing up to 30% of your available credit.  Even if you maintain the balance in that range without paying it off completely, it at least shows that you have restraint, and are able to stop spending at a limit you personally set, rather than the limit the bank sets for you. So, to answer your question, 0% balance on your credit cards is bad because you might as well not have them.  Use it, pay it off, rinse and repeat, and it will demonstrate your ability to exercise self control as well as your ability to repay your debts.",
+          "score": 10.066752,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724863007
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "credit report for temporal residents"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "184365-0-908",
+          "text": "\n\"It's not just that credit history is local; it's that it's a private business run for profit. The \"\"big three\"\" credit bureaus in the US are Experian, Equifax and Transunion.  They collect information on debt usage and abuse from various companies in the US, and charge a fee to provide that information (and their judgement of you) to companies interested in offering you further credit.  But there's nothing stopping a company from collecting international credit histories, or specialized credit histories either (for instance, there's a company called ChexSystems which focuses on retail purchase financing (mostly auto) and checking account abuse, while ignoring other types of lending). That being said, I don't know of any companies which currently collect international credit histories.  Perhaps in Europe, with more nations in close geographic proximity, there would be, but not in North America.\"",
+          "score": 12.601869,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724862979
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "credit report local"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, to have a credit report in the U.S., you generally need to have credit activities that are reported to the credit bureaus. This could include having credit cards, loans, or other types of credit accounts with financial institutions in the U.S. However, the specific requirements for establishing credit in the U.S. may vary depending on the policies of individual credit reporting agencies and lenders."
+    },
+    {
+      "speaker": "user",
+      "text": "if I am wrongfully reported...",
+      "timestamp": 1724863604,
+      "enrichments": {
+        "Question Type": [
+          "How-To",
+          "Non-Question"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "If you believe you have been wrongfully reported on in your credit report, you can file a dispute with the credit bureaus. All three credit bureaus allow you to file a dispute online, and some may allow you to upload documentation at the same time. If you have a letter from your bank regarding the dispute, you can send it to the credit bureaus, who will then return to the collection company.  It is important to note that disputes must be initiated by the consumer.",
+      "timestamp": 1724863610,
+      "contexts": [
+        {
+          "document_id": "268777-0-459",
+          "text": "\nI think you're off base here.  The bureaus only remove information if the creditor cannot verify any dispute within 30 days, or if the information's super old.  If the creditor can provide corrected information, then the credit bureau is required to apply it to its own database.  A dispute can be about the entire account, or it can be about payment status within a given span (or spans) of time. Of course, it's the consumer who has to initiate the dispute.",
+          "score": 20.45228,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724863745
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "credit report dispute"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "384608-0-679",
+          "text": "\nAll three credit bureaus allow you to file a dispute online. Some allow you to upload documentation at the same time, others will ask you to mail it to them. Send them the letter you got from your bank, they will then return to the collection company.  For $300.00 most likely they will not pursue it any further and the credit bureaus will delete the entry from your file. If the collection company want to make a case out of it they will have to view to cost of trying to get a Court Judgment against the value of the amount they are claiming. Almost certainly they will view at not cost effective and your credit rating will return to where it was prior to the negative impact",
+          "score": 18.968702,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724863922
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "credit report dispute"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "372039-0-732",
+          "text": "\n\"The debt collection agency needs to see a copy of the notice from the bank that the $300 charge is a disputed and fraudulent charge. Also require them to provide proof. To reduce your stress, you should contact a lawyer to handle the debt collection agency.  Disputing the information on your credit report is exactly the way to \"\"fix\"\" that issue. All they need to see is the bank letter stating that the charges were fraudulent. The credit reports should show that item as disputed for at least a month if not remove it entirely. The bank should be able to provide with copies although you may have to pay a research charge if the information is old enough. I recommend talking to your local branch manager to get what you need.\"",
+          "score": 18.090466,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724863933
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "credit report dispute"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "161422-0-1119",
+          "text": "\nRun your credit reports for the 3 major agencies to find out which of them have the debt was reported on and initiate the dispute process with each agency that reports the invalid debt. This will cause the person who put it on the report to either prove that it is valid or remove it from your report. Ignoring debt collector calls is not a good option, regardless of whether the debt is valid. They obviously think the debt is yours so their response is naturally to put it on your credit report. In most cases it is a good idea to respond in writing that it is not your debt. I doubt you have much recourse against the creditor. For one thing they DID try to contact you and you dodged them. That is not their fault. Secondly, it is unlikely you would prevail unless you could prove that they maliciously put false information on your credit or through gross incompetence did so. More likely is that they are mismatching you to a debt from someone with a similar name, or there is an accounting error somewhere. Or possibly you owe the debt and no one ever sent you a bill. It happens with medical bills all the time.",
+          "score": 18.192616,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724863915
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "credit report dispute"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "If you believe you have been wrongfully reported on in your credit report, you can file a dispute with the credit bureaus. According to the document, all three credit bureaus allow you to file a dispute online, and some may allow you to upload documentation at the same time. If you have a letter from your bank regarding the dispute, you can send it to the credit bureaus, who will then return to the collection company. For a fee, the collection company may choose not to pursue the dispute further, and the credit bureaus will delete the entry from your file. However, if the collection company decides to take the matter to court, they will need to weigh the cost of trying to obtain a judgment against the value of the amount they are claiming. In many cases, it may not be cost-effective for them to do so, and your credit rating will return to where it was prior to the negative impact. It is important to note that disputes must be initiated by the consumer."
+    },
+    {
+      "speaker": "user",
+      "text": "clearing period",
+      "timestamp": 1725021009,
+      "enrichments": {
+        "Question Type": [
+          "Factoid",
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The Fair Credit Reporting Act specifies that when a consumer initiates a dispute, the reporting agency must remove the information in dispute from reports within 30 days if the reporting party does not certify the information is complete and accurate.  Additionally, the furnisher of information is responsible for reporting information after notice and confirmation of errors, and has a duty to correct and update information.",
+      "timestamp": 1725021012,
+      "contexts": [
+        {
+          "document_id": "268777-0-459",
+          "text": "\nI think you're off base here.  The bureaus only remove information if the creditor cannot verify any dispute within 30 days, or if the information's super old.  If the creditor can provide corrected information, then the credit bureau is required to apply it to its own database.  A dispute can be about the entire account, or it can be about payment status within a given span (or spans) of time. Of course, it's the consumer who has to initiate the dispute.",
+          "score": 18.786055,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725022908
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "dispute credit bureau"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "320246-0-1110",
+          "text": "\nI believe the answer is that to protect yourself it is good to get credit protection so you will be notified when new credit is taken in your name.   Also, you can use http://www.annualcreditreport.com/ to look at your credit report. HINT:  While you do that, and while you are in the TransUnion report, you will have the option to DISPUTE adverse items.   I always suggest that people dispute everything adverse.  That puts the onus on the other parties to produce evidence to TransUnion within 30 days attesting to the validity of the adverse item.   You would be surprised how many will simply drop off your report after doing that.  Everybody should do this Here is a direct address for TransUnion: https://dispute.transunion.com/dp/dispute/landingPage.jsp ==>  Once the disputes are finalized, the results get communicated to the other two bureaus. It is amazing how well it works.  It can raise your credit score significantly. It really helps to watch your credit report yourself, and also to get whatever protection is offered that may help protect you against others opening new accounts in your name.",
+          "score": 15.130712,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725022905
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "dispute credit bureau"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "450031-0-2092",
+          "text": "\n\"The Fair Credit Reporting Act specifies in some detail on pages 50-54 (as labeled in the footer, 55-59 as pages in pdf) the process that occurs when a consumer initiates a dispute. The safe outcome for the reporting agency is to remove the information in dispute from reports within 30 days if the reporting party does not certify the information is complete and accurate (with other statutory timelines for communication to the customer and the reporter). If you initiate a dispute, then the agency is following the law by deleting the reported information, outside new input from the furnisher. If this is unsatisfactory, you have the following statutory right within \u00a7\u00a0611. Procedure in case of disputed accuracy [15 U.S.C. \u00a7\u00a01681i (d) Notification of deletion of disputed information. Following any deletion of information which is found to be inaccurate or whose accuracy can no longer be verified or any notation as to disputed information, the consumer reporting agency shall, at the request of the consumer, furnish notification that the item has been deleted or the statement, codification or summary pursuant to subsection (b) or (c) of this section to any person specifically designated by the consumer who has within two years prior thereto received a consumer report for employment purposes, or within six months prior thereto received a consumer report for any other purpose, which contained the deleted or disputed information. The section that binds furnishers of information (\u00a7\u00a0623. Responsibilities of furnishers of information to consumer reporting agencies [15 U.S.C. \u00a7\u00a01681s-2], starting on page 78 in the footer) places on them the following specific duties: (B) Reporting information after notice and confirmation of errors. A person shall not furnish information relating to a consumer to any consumer reporting agency if (i) the person has been notified by the consumer, at the address specified by the person for such notices, that specific information is inaccurate; and (ii) the information is, in fact, inaccurate. ... (2) Duty to correct and update information.",
+          "score": 18.503052,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725022902
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "credit dispute process"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The Fair Credit Reporting Act specifies that when a consumer initiates a dispute, the reporting agency must remove the information in dispute from reports within 30 days if the reporting party does not certify the information is complete and accurate. If the dispute is found to be accurate, the consumer reporting agency shall, at the request of the consumer, furnish notification that the item has been deleted to any person specifically designated by the consumer who has received a consumer report within two years prior thereto. Additionally, the furnisher of information is responsible for reporting information after notice and confirmation of errors, and has a duty to correct and update information."
+    },
+    {
+      "speaker": "user",
+      "text": "confusing, layman's term pls",
+      "timestamp": 1725023961,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Sure, I'd be happy to simplify it! If you find something in your credit report that you believe is incorrect, you can file a dispute to have it investigated. The credit bureaus must remove the disputed information from your report within 30 days if the company that provided the information can't prove that it's accurate. After that, the company that gave the wrong information is responsible for fixing it and updating your report.",
+      "timestamp": 1725023967,
+      "contexts": [
+        {
+          "document_id": "268777-0-459",
+          "text": "\nI think you're off base here.  The bureaus only remove information if the creditor cannot verify any dispute within 30 days, or if the information's super old.  If the creditor can provide corrected information, then the credit bureau is required to apply it to its own database.  A dispute can be about the entire account, or it can be about payment status within a given span (or spans) of time. Of course, it's the consumer who has to initiate the dispute.",
+          "score": 21.069489,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725024251
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "credit dispute process"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "450031-0-2092",
+          "text": "\n\"The Fair Credit Reporting Act specifies in some detail on pages 50-54 (as labeled in the footer, 55-59 as pages in pdf) the process that occurs when a consumer initiates a dispute. The safe outcome for the reporting agency is to remove the information in dispute from reports within 30 days if the reporting party does not certify the information is complete and accurate (with other statutory timelines for communication to the customer and the reporter). If you initiate a dispute, then the agency is following the law by deleting the reported information, outside new input from the furnisher. If this is unsatisfactory, you have the following statutory right within \u00a7\u00a0611. Procedure in case of disputed accuracy [15 U.S.C. \u00a7\u00a01681i (d) Notification of deletion of disputed information. Following any deletion of information which is found to be inaccurate or whose accuracy can no longer be verified or any notation as to disputed information, the consumer reporting agency shall, at the request of the consumer, furnish notification that the item has been deleted or the statement, codification or summary pursuant to subsection (b) or (c) of this section to any person specifically designated by the consumer who has within two years prior thereto received a consumer report for employment purposes, or within six months prior thereto received a consumer report for any other purpose, which contained the deleted or disputed information. The section that binds furnishers of information (\u00a7\u00a0623. Responsibilities of furnishers of information to consumer reporting agencies [15 U.S.C. \u00a7\u00a01681s-2], starting on page 78 in the footer) places on them the following specific duties: (B) Reporting information after notice and confirmation of errors. A person shall not furnish information relating to a consumer to any consumer reporting agency if (i) the person has been notified by the consumer, at the address specified by the person for such notices, that specific information is inaccurate; and (ii) the information is, in fact, inaccurate. ... (2) Duty to correct and update information.",
+          "score": 18.503052,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725024248
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "credit dispute process"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "created",
+      "timestamp": 1725024251
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "edited",
+      "timestamp": 1726593301
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "accepted",
+      "timestamp": 1726593841
+    }
+  ],
+  "editor": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+  "domain": "mt-rag-fiqa-beir-elser-512-100-20240501",
+  "reviewer": "f6ce971c-68d2-4c26-b1c0-477dd28a5181"
+}

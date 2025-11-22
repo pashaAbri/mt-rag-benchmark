@@ -1,0 +1,1374 @@
+{
+  "author": "7ee1aecf-492d-4847-a436-3db915c57d2e",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-clapnq-elser-512-100-20240503",
+      "size": "183408"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "Were Shakespeare's plays popular when he was alive?",
+      "timestamp": 1724075170,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, based on the provided document, Shakespeare's plays were popular during his lifetime.  Hamlet appears to have been his fourth most popular play at that time, surpassed only by Henry IV Part 1 , Richard III and Pericles. Romeo and Juliet is also known to have been extremely popular then, so much so that it was performed outside of England as well, in N\u00f6rdlingen in 1604.",
+      "timestamp": 1724075171,
+      "contexts": [
+        {
+          "document_id": "837275285_51973-52565-0-592",
+          "text": "Hamlet\nShakespeare almost certainly wrote the role of Hamlet for Richard Burbage . He was the chief tragedian of the Lord Chamberlain 's Men , with a capacious memory for lines and a wide emotional range . Judging by the number of reprints , Hamlet appears to have been Shakespeare 's fourth most popular play during his lifetime -- only Henry IV Part 1 , Richard III and Pericles eclipsed it . Shakespeare provides no clear indication of when his play is set ; however , as Elizabethan actors performed at the Globe in contemporary dress on minimal sets , this would not have affected the staging .",
+          "title": "Hamlet",
+          "score": 15.277426,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "yes",
+                "timestamp": 1724075238
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Were Shakespeare's plays popular when he was alive?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "840297813_25275-26277-0-1002",
+          "text": "Shakespeare's reputation\nIn the Romantic age , Shakespeare became extremely popular in Russia . Vissarion Belinsky wrote he had been `` enslaved by the drama of Shakespeare '' . Russia 's national poet , Alexander Pushkin , was heavily influenced by Hamlet and the history plays , and his novel Boris Godunov showed strong Shakespearean influences . Later on , in the 19th century , the novelist Ivan Turgenev often wrote essays on Shakespeare with the best known being `` Hamlet and Don Quixote '' . Fyodor Dostoevsky was greatly influenced by Macbeth with the his novel Crime and Punishment showing Shakespearean influence in his treatment of the theme of guilt . From the 1840s onward , Shakespeare was regularly staged in Russia , and the black American actor Ira Aldridge who had been barred from the stage in the United States on the account of his skin color became the leading Shakespearean actor in Russia in the 1850s , being decorated by the Emperor Alexander II for his work in portraying Shakespearean characters .",
+          "title": "Shakespeare's reputation",
+          "score": 14.664956,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "no",
+                "timestamp": 1724075259
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Were Shakespeare's plays popular when he was alive?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "806376271_40405-41737-0-1331",
+          "text": "Romeo and Juliet\nRomeo and Juliet ranks with Hamlet as one of Shakespeare 's most performed plays . Its many adaptations have made it one of his most enduring and famous stories . Even in Shakespeare 's lifetime , it was extremely popular . Scholar Gary Taylor measures it as the sixth most popular of Shakespeare 's plays , in the period after the death of Christopher Marlowe and Thomas Kyd but before the ascendancy of Ben Jonson during which Shakespeare was London 's dominant playwright . The date of the first performance is unknown . The First Quarto , printed in 1597 , says that `` it hath been often ( and with great applause ) plaid publiquely '' , setting the first performance before that date . The Lord Chamberlain 's Men were certainly the first to perform it . Besides their strong connections with Shakespeare , the Second Quarto actually names one of its actors , Will Kemp , instead of Peter , in a line in Act Five . Richard Burbage was probably the first Romeo , being the company 's actor , and Master Robert Goffe ( a boy ) the first Juliet . The premiere is likely to have been at `` The Theatre '' , with other early productions at `` The Curtain '' . Romeo and Juliet is one of the first Shakespearean plays to have been performed outside England : a shortened and simplified version was performed in N\u00f6rdlingen in 1604 .",
+          "title": "Romeo and Juliet",
+          "score": 14.268035,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "yes",
+                "timestamp": 1724075279
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Were Shakespeare's plays popular when he was alive?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "837275285_651-1313-0-662",
+          "text": "Hamlet\nHamlet is Shakespeare 's longest play , and is considered among the most powerful and influential works of world literature , with a story capable of `` seemingly endless retelling and adaptation by others '' . It was probably one of Shakespeare 's most popular works during his lifetime , and still ranks among his most performed , topping the performance list of the Royal Shakespeare Company and its predecessors in Stratford - upon - Avon since 1879 . It has inspired many other writers -- from Johann Wolfgang von Goethe and Charles Dickens to James Joyce and Iris Murdoch -- and has been described as `` the world 's most filmed story after Cinderella '' .",
+          "title": "Hamlet",
+          "score": 16.262423,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "yes",
+                "timestamp": 1724075591
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Were Shakespeare's plays popular when he was alive"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, based on the provided document, Shakespeare's plays were popular during his lifetime. For instance, Hamlet appears to have been his fourth most popular play, and Romeo and Juliet was one of his most performed works. It was so popular that it was performed outside of England as well."
+    },
+    {
+      "speaker": "user",
+      "text": "How many film adaptations of Hamlet are there?",
+      "timestamp": 1724077044,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I do not have specific information about the exact number of film adaptations of Hamlet. However, the earliest screen success recorded for Hamlet was Sara Bernhardt's 5-minute film of the fencing scene, which was produced in 1900. The film was an early attempt at combining sound and film , music and words were recorded on phonograph records , to be played along with the film . Seven silent versions were released from 1907-1921. Laurence Olivier adapted, produced, directed and starred in his screen version in 1948. Tony Richardson directed  the first Hamlet film in color in 1969. Franco A version by Franco Zeffirelli, with Mel Gibson and Glenn Close came out in 1990, and Kenneth Branagh's version was released in 1996. A version set in contemporary Manhattan and starring Ethan Hawke dates back to 2000. There have also been several films that transposed the general storyline of Hamlet or elements thereof to other settings . For example , the 2014 Bollywood film Haider is an adaptation set in Kashmir . There have also been many films which included performances of scenes from Hamlet as a play - within - a-film .",
+      "timestamp": 1724077048,
+      "contexts": [
+        {
+          "document_id": "806376271_40405-41737-0-1331",
+          "text": "Romeo and Juliet\nRomeo and Juliet ranks with Hamlet as one of Shakespeare 's most performed plays . Its many adaptations have made it one of his most enduring and famous stories . Even in Shakespeare 's lifetime , it was extremely popular . Scholar Gary Taylor measures it as the sixth most popular of Shakespeare 's plays , in the period after the death of Christopher Marlowe and Thomas Kyd but before the ascendancy of Ben Jonson during which Shakespeare was London 's dominant playwright . The date of the first performance is unknown . The First Quarto , printed in 1597 , says that `` it hath been often ( and with great applause ) plaid publiquely '' , setting the first performance before that date . The Lord Chamberlain 's Men were certainly the first to perform it . Besides their strong connections with Shakespeare , the Second Quarto actually names one of its actors , Will Kemp , instead of Peter , in a line in Act Five . Richard Burbage was probably the first Romeo , being the company 's actor , and Master Robert Goffe ( a boy ) the first Juliet . The premiere is likely to have been at `` The Theatre '' , with other early productions at `` The Curtain '' . Romeo and Juliet is one of the first Shakespearean plays to have been performed outside England : a shortened and simplified version was performed in N\u00f6rdlingen in 1604 .",
+          "title": "Romeo and Juliet",
+          "score": 25.56783,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "no",
+                "timestamp": 1724078016
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Were Shakespeare's plays popular when he was alive?\n|assistant|: Yes, based on the provided document, Shakespeare's plays were popular during his lifetime.  Hamlet appears to have been his fourth most popular play at that time, surpassed only by Henry IV Part 1 , Richard III and Pericles. Romeo and Juliet is also known to have been extremely popular then, so much so that it was performed outside of England as well, in N\u00f6rdlingen in 1604.\n|user|: How many film adaptations of Hamlet are there?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "837275285_51973-52565-0-592",
+          "text": "Hamlet\nShakespeare almost certainly wrote the role of Hamlet for Richard Burbage . He was the chief tragedian of the Lord Chamberlain 's Men , with a capacious memory for lines and a wide emotional range . Judging by the number of reprints , Hamlet appears to have been Shakespeare 's fourth most popular play during his lifetime -- only Henry IV Part 1 , Richard III and Pericles eclipsed it . Shakespeare provides no clear indication of when his play is set ; however , as Elizabethan actors performed at the Globe in contemporary dress on minimal sets , this would not have affected the staging .",
+          "title": "Hamlet",
+          "score": 22.986103,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "no",
+                "timestamp": 1724078029
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Were Shakespeare's plays popular when he was alive?\n|assistant|: Yes, based on the provided document, Shakespeare's plays were popular during his lifetime.  Hamlet appears to have been his fourth most popular play at that time, surpassed only by Henry IV Part 1 , Richard III and Pericles. Romeo and Juliet is also known to have been extremely popular then, so much so that it was performed outside of England as well, in N\u00f6rdlingen in 1604.\n|user|: How many film adaptations of Hamlet are there?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "806376271_46650-47025-0-375",
+          "text": "Romeo and Juliet\nThe first professional performance of the play in Japan may have been George Crichton Miln 's company 's production , which toured to Yokohama in 1890 . Throughout the 19th century , Romeo and Juliet had been Shakespeare 's most popular play , measured by the number of professional performances . In the 20th century it would become the second most popular , behind Hamlet .",
+          "title": "Romeo and Juliet",
+          "score": 21.332598,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "no",
+                "timestamp": 1724078040
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Were Shakespeare's plays popular when he was alive?\n|assistant|: Yes, based on the provided document, Shakespeare's plays were popular during his lifetime.  Hamlet appears to have been his fourth most popular play at that time, surpassed only by Henry IV Part 1 , Richard III and Pericles. Romeo and Juliet is also known to have been extremely popular then, so much so that it was performed outside of England as well, in N\u00f6rdlingen in 1604.\n|user|: How many film adaptations of Hamlet are there?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "837275285_72545-72816-0-271",
+          "text": "Hamlet\nIn 2000 , Michael Almereyda 's Hamlet set the story in contemporary Manhattan , with Ethan Hawke playing Hamlet as a film student . Claudius ( played by Kyle MacLachlan ) became the CEO of `` Denmark Corporation '' , having taken over the company by killing his brother .",
+          "title": "Hamlet",
+          "score": 16.65773,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "yes",
+                "timestamp": 1724078057
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "How many film adaptations of Hamlet are there?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "837275285_71386-71759-0-373",
+          "text": "Hamlet\nIn 1990 Franco Zeffirelli , whose Shakespeare films have been described as `` sensual rather than cerebral '' , cast Mel Gibson -- then famous for the Mad Max and Lethal Weapon movies -- in the title role of his 1990 version ; Glenn Close -- then famous as the psychotic `` other woman '' in Fatal Attraction -- played Gertrude , and Paul Scofield played Hamlet 's father .",
+          "title": "Hamlet",
+          "score": 16.609215,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "yes",
+                "timestamp": 1724078079
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "How many film adaptations of Hamlet are there?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "837275285_72917-73230-0-313",
+          "text": "Hamlet\nThere have also been several films that transposed the general storyline of Hamlet or elements thereof to other settings . For example , the 2014 Bollywood film Haider is an adaptation set in Kashmir . There have also been many films which included performances of scenes from Hamlet as a play - within - a-film .",
+          "title": "Hamlet",
+          "score": 16.31321,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "yes",
+                "timestamp": 1724078096
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "How many film adaptations of Hamlet are there?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "837275285_31621-31984-0-363",
+          "text": "Hamlet\nHamlet is Shakespeare 's longest play . The Riverside edition constitutes 4,042 lines totaling 29,551 words , typically requiring over four hours to stage . It is rare that the play is performed without some abridgments , and only one film adaptation has used a full - text conflation : Kenneth Branagh 's 1996 version , which runs slightly more than four hours .",
+          "title": "Hamlet",
+          "score": 16.162693,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "yes",
+                "timestamp": 1724078122
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "How many film adaptations of Hamlet are there?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "837275285_71248-71385-0-137",
+          "text": "Hamlet\nThe first Hamlet in color was a 1969 film directed by Tony Richardson with Nicol Williamson as Hamlet and Marianne Faithfull as Ophelia .",
+          "title": "Hamlet",
+          "score": 16.171453,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "yes",
+                "timestamp": 1724079210
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "How many film adaptations of Hamlet are there?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "837275285_71760-72544-0-784",
+          "text": "Hamlet\nIn contrast to Zeffirelli , whose Hamlet was heavily cut , Kenneth Branagh adapted , directed , and starred in a 1996 version containing every word of Shakespeare 's play , combining the material from the F1 and Q2 texts . Branagh 's Hamlet runs for just over four hours . Branagh set the film with late 19th - century costuming and furnishings , a production in many ways reminiscent of a Russian novel of the time ; and Blenheim Palace , built in the early 18th century , became Elsinore Castle in the external scenes . The film is structured as an epic and makes frequent use of flashbacks to highlight elements not made explicit in the play : Hamlet 's sexual relationship with Kate Winslet 's Ophelia , for example , or his childhood affection for Yorick ( played by Ken Dodd ) .",
+          "title": "Hamlet",
+          "score": 15.710036,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "yes",
+                "timestamp": 1724078142
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "How many film adaptations of Hamlet are there?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "837275285_68848-69340-0-492",
+          "text": "Hamlet\nThe earliest screen success for Hamlet was Sarah Bernhardt 's five - minute film of the fencing scene , which was produced in 1900 . The film was an early attempt at combining sound and film , music and words were recorded on phonograph records , to be played along with the film . Silent versions were released in 1907 , 1908 , 1910 , 1913 , 1917 , and 1920 . In the 1921 film Hamlet , Danish actress Asta Nielsen played the role of Hamlet as a woman who spends her life disguised as a man .",
+          "title": "Hamlet",
+          "score": 15.501708,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "yes",
+                "timestamp": 1724078161
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "How many film adaptations of Hamlet are there?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "I do not have specific information about the exact number of film adaptations of Hamlet. The provided document does mention that Hamlet was Shakespeare's fourth most popular play during his lifetime, but it does not provide details about the number of film adaptations."
+    },
+    {
+      "speaker": "user",
+      "text": "What about Romeo and Juliet?",
+      "timestamp": 1724079237,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Just like Hamlet, Romeo and Juliet has been adapted multiple times for the small and large screens. It may be the most filmed play of all time, with notable theatrical releases such as George Cukor's 1936 production, Franco Zeffirelli's 1968 version, and Baz Luhrmann's 1996 MTV-inspired Romeo + Juliet. The play was first filmed in the silent era by Georges M\u00e9li\u00e8s, although his film is now lost. The first sound recording of the play on film was in The Hollywood Revue of 1929, where John Gilbert recited the balcony scene opposite Norma Shearer. In 1960 , Peter Ustinov 's cold - war stage parody , Romanoff and Juliet was filmed. film A popular film of a musical theatre adaptation, West Side Story was made in 1961 . This version updated the setting to mid-20th - century New York City and the warring families to ethnic gangs. Other musical adaptations include Terrence Mann 's 1999 rock musical William Shakespeare 's Romeo and Juliet , co-written with Jerome Korman , G\u00e9rard Presgurvic 's 2001 Rom\u00e9o et Juliette , de la Haine \u00e0 l'Amour and Riccardo Cocciante 's 2007 Giulietta & Romeo . In 2013 , Sanjay Leela Bhansali directed the Bollywood film Goliyon Ki Raasleela Ram - Leela , a contemporary version of the play. which was a commercial and critical success. ",
+      "timestamp": 1724079243,
+      "contexts": [
+        {
+          "document_id": "806376271_40405-41737-0-1331",
+          "text": "Romeo and Juliet\nRomeo and Juliet ranks with Hamlet as one of Shakespeare 's most performed plays . Its many adaptations have made it one of his most enduring and famous stories . Even in Shakespeare 's lifetime , it was extremely popular . Scholar Gary Taylor measures it as the sixth most popular of Shakespeare 's plays , in the period after the death of Christopher Marlowe and Thomas Kyd but before the ascendancy of Ben Jonson during which Shakespeare was London 's dominant playwright . The date of the first performance is unknown . The First Quarto , printed in 1597 , says that `` it hath been often ( and with great applause ) plaid publiquely '' , setting the first performance before that date . The Lord Chamberlain 's Men were certainly the first to perform it . Besides their strong connections with Shakespeare , the Second Quarto actually names one of its actors , Will Kemp , instead of Peter , in a line in Act Five . Richard Burbage was probably the first Romeo , being the company 's actor , and Master Robert Goffe ( a boy ) the first Juliet . The premiere is likely to have been at `` The Theatre '' , with other early productions at `` The Curtain '' . Romeo and Juliet is one of the first Shakespearean plays to have been performed outside England : a shortened and simplified version was performed in N\u00f6rdlingen in 1604 .",
+          "title": "Romeo and Juliet",
+          "score": 27.666843,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "no",
+                "timestamp": 1724080669
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Were Shakespeare's plays popular when he was alive?\n|assistant|: Yes, based on the provided document, Shakespeare's plays were popular during his lifetime.  Hamlet appears to have been his fourth most popular play at that time, surpassed only by Henry IV Part 1 , Richard III and Pericles. Romeo and Juliet is also known to have been extremely popular then, so much so that it was performed outside of England as well, in N\u00f6rdlingen in 1604.\n|user|: How many film adaptations of Hamlet are there?\n|assistant|: I do not have specific information about the exact number of film adaptations of Hamlet. However, the earliest screen success recorded for Hamlet was Sara Bernhardt's 5-minute film of the fencing scene, which was produced in 1900. The film was an early attempt at combining sound and film , music and words were recorded on phonograph records , to be played along with the film . Seven silent versions were released from 1907-1921. Laurence Olivier adapted, produced, directed and starred in his screen version in 1948. Tony Richardson directed  the first Hamlet film in color in 1969. Franco A version by Franco Zeffirelli, with Mel Gibson and Glenn Close came out in 1990, and Kenneth Branagh's version was released in 1996. A version set in contemporary Manhattan and starring Ethan Hawke dates back to 2000. There have also been several films that transposed the general storyline of Hamlet or elements thereof to other settings . For example , the 2014 Bollywood film Haider is an adaptation set in Kashmir . There have also been many films which included performances of scenes from Hamlet as a play - within - a-film .\n|user|: What about Romeo and Juliet?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "837275285_68848-69340-0-492",
+          "text": "Hamlet\nThe earliest screen success for Hamlet was Sarah Bernhardt 's five - minute film of the fencing scene , which was produced in 1900 . The film was an early attempt at combining sound and film , music and words were recorded on phonograph records , to be played along with the film . Silent versions were released in 1907 , 1908 , 1910 , 1913 , 1917 , and 1920 . In the 1921 film Hamlet , Danish actress Asta Nielsen played the role of Hamlet as a woman who spends her life disguised as a man .",
+          "title": "Hamlet",
+          "score": 26.95537,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "no",
+                "timestamp": 1724080674
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Were Shakespeare's plays popular when he was alive?\n|assistant|: Yes, based on the provided document, Shakespeare's plays were popular during his lifetime.  Hamlet appears to have been his fourth most popular play at that time, surpassed only by Henry IV Part 1 , Richard III and Pericles. Romeo and Juliet is also known to have been extremely popular then, so much so that it was performed outside of England as well, in N\u00f6rdlingen in 1604.\n|user|: How many film adaptations of Hamlet are there?\n|assistant|: I do not have specific information about the exact number of film adaptations of Hamlet. However, the earliest screen success recorded for Hamlet was Sara Bernhardt's 5-minute film of the fencing scene, which was produced in 1900. The film was an early attempt at combining sound and film , music and words were recorded on phonograph records , to be played along with the film . Seven silent versions were released from 1907-1921. Laurence Olivier adapted, produced, directed and starred in his screen version in 1948. Tony Richardson directed  the first Hamlet film in color in 1969. Franco A version by Franco Zeffirelli, with Mel Gibson and Glenn Close came out in 1990, and Kenneth Branagh's version was released in 1996. A version set in contemporary Manhattan and starring Ethan Hawke dates back to 2000. There have also been several films that transposed the general storyline of Hamlet or elements thereof to other settings . For example , the 2014 Bollywood film Haider is an adaptation set in Kashmir . There have also been many films which included performances of scenes from Hamlet as a play - within - a-film .\n|user|: What about Romeo and Juliet?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "806376271_58662-59259-0-595",
+          "text": "Romeo and Juliet\nRomeo and Juliet may be the most - filmed play of all time . The most notable theatrical releases were George Cukor 's multi-Oscar - nominated 1936 production , Franco Zeffirelli 's 1968 version , and Baz Luhrmann 's 1996 MTV - inspired Romeo + Juliet . The latter two were both , in their time , the highest - grossing Shakespeare film ever . Romeo and Juliet was first filmed in the silent era , by Georges M\u00e9li\u00e8s , although his film is now lost . The play was first heard on film in The Hollywood Revue of 1929 , in which John Gilbert recited the balcony scene opposite Norma Shearer . Leslie",
+          "title": "Romeo and Juliet",
+          "score": 26.672686,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "yes",
+                "timestamp": 1724080903
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Were Shakespeare's plays popular when he was alive?\n|assistant|: Yes, based on the provided document, Shakespeare's plays were popular during his lifetime.  Hamlet appears to have been his fourth most popular play at that time, surpassed only by Henry IV Part 1 , Richard III and Pericles. Romeo and Juliet is also known to have been extremely popular then, so much so that it was performed outside of England as well, in N\u00f6rdlingen in 1604.\n|user|: How many film adaptations of Hamlet are there?\n|assistant|: I do not have specific information about the exact number of film adaptations of Hamlet. However, the earliest screen success recorded for Hamlet was Sara Bernhardt's 5-minute film of the fencing scene, which was produced in 1900. The film was an early attempt at combining sound and film , music and words were recorded on phonograph records , to be played along with the film . Seven silent versions were released from 1907-1921. Laurence Olivier adapted, produced, directed and starred in his screen version in 1948. Tony Richardson directed  the first Hamlet film in color in 1969. Franco A version by Franco Zeffirelli, with Mel Gibson and Glenn Close came out in 1990, and Kenneth Branagh's version was released in 1996. A version set in contemporary Manhattan and starring Ethan Hawke dates back to 2000. There have also been several films that transposed the general storyline of Hamlet or elements thereof to other settings . For example , the 2014 Bollywood film Haider is an adaptation set in Kashmir . There have also been many films which included performances of scenes from Hamlet as a play - within - a-film .\n|user|: What about Romeo and Juliet?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "806376271_1956-2855-0-899",
+          "text": "Romeo and Juliet\nRomeo and Juliet has been adapted numerous times for stage , film , musical , and opera venues . During the English Restoration , it was revived and heavily revised by William Davenant . David Garrick 's 18th - century version also modified several scenes , removing material then considered indecent , and Georg Benda 's Romeo und Julie omitted much of the action and added a happy ending . Performances in the 19th century , including Charlotte Cushman 's , restored the original text and focused on greater realism . John Gielgud 's 1935 version kept very close to Shakespeare 's text and used Elizabethan costumes and staging to enhance the drama . In the 20th and into the 21st century , the play has been adapted in versions as diverse as George Cukor 's 1935 film Romeo and Juliet , Franco Zeffirelli 's 1968 version Romeo and Juliet , and Baz Luhrmann 's 1996 MTV - inspired Romeo + Juliet .",
+          "title": "Romeo and Juliet",
+          "score": 16.587584,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "yes",
+                "timestamp": 1724081076
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "romeo and juliet film versions"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "806376271_61081-62730-0-1649",
+          "text": "Romeo and Juliet\nThe play has been widely adapted for TV and film . In 1960 , Peter Ustinov 's cold - war stage parody , Romanoff and Juliet was filmed . The 1961 film of West Side Story -- set among New York gangs -- featured the Jets as white youths , equivalent to Shakespeare 's Montagues while the Sharks , equivalent to the Capulets , are Puerto Rican . The 1994 film The Punk uses both the rough plot outline of Romeo and Juliet and names many of the characters in ways that reflect the characters in the play . In 2006 , Disney 's High School Musical made use of Romeo and Juliet 's plot , placing the two young lovers in different high school cliques instead of feuding families . Film - makers have frequently featured characters performing scenes from Romeo and Juliet . The conceit of dramatising Shakespeare writing Romeo and Juliet has been used several times , including John Madden 's 1998 Shakespeare in Love , in which Shakespeare writes the play against the backdrop of his own doomed love affair . An anime series produced by Gonzo and SKY Perfect Well Think , called Romeo x Juliet , was made in 2007 and the 2013 version is the latest English - language film based on the play . In 2013 , Sanjay Leela Bhansali directed the Bollywood film Goliyon Ki Raasleela Ram - Leela , a contemporary version of the play which starred Ranveer Singh and Deepika Padukone in leading roles . The film was a commercial and critical success . In February 2014 , BroadwayHD released a filmed version of the 2013 Broadway Revival of Romeo and Juliet . The production starred Orlando Bloom and Condola Rashad . The film was released internationally in April 2014 .",
+          "title": "Romeo and Juliet",
+          "score": 16.458958,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "yes",
+                "timestamp": 1724081166
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "romeo and juliet film versions"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "806376271_55533-56132-0-595",
+          "text": "Romeo and Juliet\nThe most famous musical theatre adaptation is West Side Story with music by Leonard Bernstein and lyrics by Stephen Sondheim . It d\u00e9buted on Broadway in 1957 and in the West End in 1958 and became a popular film in 1961 . This version updated the setting to mid-20th - century New York City and the warring families to ethnic gangs . Other musical adaptations include Terrence Mann 's 1999 rock musical William Shakespeare 's Romeo and Juliet , co-written with Jerome Korman , G\u00e9rard Presgurvic 's 2001 Rom\u00e9o et Juliette , de la Haine \u00e0 l'Amour and Riccardo Cocciante 's 2007 Giulietta & Romeo .",
+          "title": "Romeo and Juliet",
+          "score": 15.87824,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "yes",
+                "timestamp": 1724081184
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "romeo and juliet film versions"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Just like Hamlet, Romeo and Juliet was also popular during Shakespeare's lifetime and has been adapted multiple times for the screen. The document mentions that it may be the most filmed play of all time, with notable theatrical releases such as George Cukor's 1936 production, Franco Zeffirelli's 1968 version, and Baz Luhrmann's 1996 MTV-inspired Romeo + Juliet. The play was first filmed in the silent era by Georges M\u00e9li\u00e8s, although his film is now lost. The first sound recording of the play on film was in The Hollywood Revue of 1929, where John Gilbert recited the balcony scene opposite Norma Shearer."
+    },
+    {
+      "speaker": "user",
+      "text": "Hamnet",
+      "timestamp": 1724083811,
+      "enrichments": {
+        "Question Type": [
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Hamnet is the name of William Shakespeare's only son. He was born in 1585 and died in 1596 at the age of 11. The death of Hamnet had a profound impact on Shakespeare, and some literary scholars believe that it may have influenced his work, particularly his play \"Hamlet,\" which was written around the same time. However, this connection is still a subject of debate, most scholars rejecting the idea that the play is in any way connected to Shakespeare's son.",
+      "timestamp": 1724083814,
+      "contexts": [
+        {
+          "document_id": "806376271_58662-59259-0-595",
+          "text": "Romeo and Juliet\nRomeo and Juliet may be the most - filmed play of all time . The most notable theatrical releases were George Cukor 's multi-Oscar - nominated 1936 production , Franco Zeffirelli 's 1968 version , and Baz Luhrmann 's 1996 MTV - inspired Romeo + Juliet . The latter two were both , in their time , the highest - grossing Shakespeare film ever . Romeo and Juliet was first filmed in the silent era , by Georges M\u00e9li\u00e8s , although his film is now lost . The play was first heard on film in The Hollywood Revue of 1929 , in which John Gilbert recited the balcony scene opposite Norma Shearer . Leslie",
+          "title": "Romeo and Juliet",
+          "score": 31.974457,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "no",
+                "timestamp": 1724083975
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Were Shakespeare's plays popular when he was alive?\n|assistant|: Yes, based on the provided document, Shakespeare's plays were popular during his lifetime.  Hamlet appears to have been his fourth most popular play at that time, surpassed only by Henry IV Part 1 , Richard III and Pericles. Romeo and Juliet is also known to have been extremely popular then, so much so that it was performed outside of England as well, in N\u00f6rdlingen in 1604.\n|user|: How many film adaptations of Hamlet are there?\n|assistant|: I do not have specific information about the exact number of film adaptations of Hamlet. However, the earliest screen success recorded for Hamlet was Sara Bernhardt's 5-minute film of the fencing scene, which was produced in 1900. The film was an early attempt at combining sound and film , music and words were recorded on phonograph records , to be played along with the film . Seven silent versions were released from 1907-1921. Laurence Olivier adapted, produced, directed and starred in his screen version in 1948. Tony Richardson directed  the first Hamlet film in color in 1969. Franco A version by Franco Zeffirelli, with Mel Gibson and Glenn Close came out in 1990, and Kenneth Branagh's version was released in 1996. A version set in contemporary Manhattan and starring Ethan Hawke dates back to 2000. There have also been several films that transposed the general storyline of Hamlet or elements thereof to other settings . For example , the 2014 Bollywood film Haider is an adaptation set in Kashmir . There have also been many films which included performances of scenes from Hamlet as a play - within - a-film .\n|user|: What about Romeo and Juliet?\n|assistant|: Just like Hamlet, Romeo and Juliet has been adapted multiple times for the small and large screens. It may be the most filmed play of all time, with notable theatrical releases such as George Cukor's 1936 production, Franco Zeffirelli's 1968 version, and Baz Luhrmann's 1996 MTV-inspired Romeo + Juliet. The play was first filmed in the silent era by Georges M\u00e9li\u00e8s, although his film is now lost. The first sound recording of the play on film was in The Hollywood Revue of 1929, where John Gilbert recited the balcony scene opposite Norma Shearer. In 1960 , Peter Ustinov 's cold - war stage parody , Romanoff and Juliet was filmed. film A popular film of a musical theatre adaptation, West Side Story was made in 1961 . This version updated the setting to mid-20th - century New York City and the warring families to ethnic gangs. Other musical adaptations include Terrence Mann 's 1999 rock musical William Shakespeare 's Romeo and Juliet , co-written with Jerome Korman , G\u00e9rard Presgurvic 's 2001 Rom\u00e9o et Juliette , de la Haine \u00e0 l'Amour and Riccardo Cocciante 's 2007 Giulietta & Romeo . In 2013 , Sanjay Leela Bhansali directed the Bollywood film Goliyon Ki Raasleela Ram - Leela , a contemporary version of the play. which was a commercial and critical success. \n|user|: Hamnet"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "806376271_40405-41737-0-1331",
+          "text": "Romeo and Juliet\nRomeo and Juliet ranks with Hamlet as one of Shakespeare 's most performed plays . Its many adaptations have made it one of his most enduring and famous stories . Even in Shakespeare 's lifetime , it was extremely popular . Scholar Gary Taylor measures it as the sixth most popular of Shakespeare 's plays , in the period after the death of Christopher Marlowe and Thomas Kyd but before the ascendancy of Ben Jonson during which Shakespeare was London 's dominant playwright . The date of the first performance is unknown . The First Quarto , printed in 1597 , says that `` it hath been often ( and with great applause ) plaid publiquely '' , setting the first performance before that date . The Lord Chamberlain 's Men were certainly the first to perform it . Besides their strong connections with Shakespeare , the Second Quarto actually names one of its actors , Will Kemp , instead of Peter , in a line in Act Five . Richard Burbage was probably the first Romeo , being the company 's actor , and Master Robert Goffe ( a boy ) the first Juliet . The premiere is likely to have been at `` The Theatre '' , with other early productions at `` The Curtain '' . Romeo and Juliet is one of the first Shakespearean plays to have been performed outside England : a shortened and simplified version was performed in N\u00f6rdlingen in 1604 .",
+          "title": "Romeo and Juliet",
+          "score": 27.571814,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "no",
+                "timestamp": 1724083972
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Were Shakespeare's plays popular when he was alive?\n|assistant|: Yes, based on the provided document, Shakespeare's plays were popular during his lifetime.  Hamlet appears to have been his fourth most popular play at that time, surpassed only by Henry IV Part 1 , Richard III and Pericles. Romeo and Juliet is also known to have been extremely popular then, so much so that it was performed outside of England as well, in N\u00f6rdlingen in 1604.\n|user|: How many film adaptations of Hamlet are there?\n|assistant|: I do not have specific information about the exact number of film adaptations of Hamlet. However, the earliest screen success recorded for Hamlet was Sara Bernhardt's 5-minute film of the fencing scene, which was produced in 1900. The film was an early attempt at combining sound and film , music and words were recorded on phonograph records , to be played along with the film . Seven silent versions were released from 1907-1921. Laurence Olivier adapted, produced, directed and starred in his screen version in 1948. Tony Richardson directed  the first Hamlet film in color in 1969. Franco A version by Franco Zeffirelli, with Mel Gibson and Glenn Close came out in 1990, and Kenneth Branagh's version was released in 1996. A version set in contemporary Manhattan and starring Ethan Hawke dates back to 2000. There have also been several films that transposed the general storyline of Hamlet or elements thereof to other settings . For example , the 2014 Bollywood film Haider is an adaptation set in Kashmir . There have also been many films which included performances of scenes from Hamlet as a play - within - a-film .\n|user|: What about Romeo and Juliet?\n|assistant|: Just like Hamlet, Romeo and Juliet has been adapted multiple times for the small and large screens. It may be the most filmed play of all time, with notable theatrical releases such as George Cukor's 1936 production, Franco Zeffirelli's 1968 version, and Baz Luhrmann's 1996 MTV-inspired Romeo + Juliet. The play was first filmed in the silent era by Georges M\u00e9li\u00e8s, although his film is now lost. The first sound recording of the play on film was in The Hollywood Revue of 1929, where John Gilbert recited the balcony scene opposite Norma Shearer. In 1960 , Peter Ustinov 's cold - war stage parody , Romanoff and Juliet was filmed. film A popular film of a musical theatre adaptation, West Side Story was made in 1961 . This version updated the setting to mid-20th - century New York City and the warring families to ethnic gangs. Other musical adaptations include Terrence Mann 's 1999 rock musical William Shakespeare 's Romeo and Juliet , co-written with Jerome Korman , G\u00e9rard Presgurvic 's 2001 Rom\u00e9o et Juliette , de la Haine \u00e0 l'Amour and Riccardo Cocciante 's 2007 Giulietta & Romeo . In 2013 , Sanjay Leela Bhansali directed the Bollywood film Goliyon Ki Raasleela Ram - Leela , a contemporary version of the play. which was a commercial and critical success. \n|user|: Hamnet"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "806376271_61081-62730-0-1649",
+          "text": "Romeo and Juliet\nThe play has been widely adapted for TV and film . In 1960 , Peter Ustinov 's cold - war stage parody , Romanoff and Juliet was filmed . The 1961 film of West Side Story -- set among New York gangs -- featured the Jets as white youths , equivalent to Shakespeare 's Montagues while the Sharks , equivalent to the Capulets , are Puerto Rican . The 1994 film The Punk uses both the rough plot outline of Romeo and Juliet and names many of the characters in ways that reflect the characters in the play . In 2006 , Disney 's High School Musical made use of Romeo and Juliet 's plot , placing the two young lovers in different high school cliques instead of feuding families . Film - makers have frequently featured characters performing scenes from Romeo and Juliet . The conceit of dramatising Shakespeare writing Romeo and Juliet has been used several times , including John Madden 's 1998 Shakespeare in Love , in which Shakespeare writes the play against the backdrop of his own doomed love affair . An anime series produced by Gonzo and SKY Perfect Well Think , called Romeo x Juliet , was made in 2007 and the 2013 version is the latest English - language film based on the play . In 2013 , Sanjay Leela Bhansali directed the Bollywood film Goliyon Ki Raasleela Ram - Leela , a contemporary version of the play which starred Ranveer Singh and Deepika Padukone in leading roles . The film was a commercial and critical success . In February 2014 , BroadwayHD released a filmed version of the 2013 Broadway Revival of Romeo and Juliet . The production starred Orlando Bloom and Condola Rashad . The film was released internationally in April 2014 .",
+          "title": "Romeo and Juliet",
+          "score": 25.503117,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "no",
+                "timestamp": 1724083981
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Were Shakespeare's plays popular when he was alive?\n|assistant|: Yes, based on the provided document, Shakespeare's plays were popular during his lifetime.  Hamlet appears to have been his fourth most popular play at that time, surpassed only by Henry IV Part 1 , Richard III and Pericles. Romeo and Juliet is also known to have been extremely popular then, so much so that it was performed outside of England as well, in N\u00f6rdlingen in 1604.\n|user|: How many film adaptations of Hamlet are there?\n|assistant|: I do not have specific information about the exact number of film adaptations of Hamlet. However, the earliest screen success recorded for Hamlet was Sara Bernhardt's 5-minute film of the fencing scene, which was produced in 1900. The film was an early attempt at combining sound and film , music and words were recorded on phonograph records , to be played along with the film . Seven silent versions were released from 1907-1921. Laurence Olivier adapted, produced, directed and starred in his screen version in 1948. Tony Richardson directed  the first Hamlet film in color in 1969. Franco A version by Franco Zeffirelli, with Mel Gibson and Glenn Close came out in 1990, and Kenneth Branagh's version was released in 1996. A version set in contemporary Manhattan and starring Ethan Hawke dates back to 2000. There have also been several films that transposed the general storyline of Hamlet or elements thereof to other settings . For example , the 2014 Bollywood film Haider is an adaptation set in Kashmir . There have also been many films which included performances of scenes from Hamlet as a play - within - a-film .\n|user|: What about Romeo and Juliet?\n|assistant|: Just like Hamlet, Romeo and Juliet has been adapted multiple times for the small and large screens. It may be the most filmed play of all time, with notable theatrical releases such as George Cukor's 1936 production, Franco Zeffirelli's 1968 version, and Baz Luhrmann's 1996 MTV-inspired Romeo + Juliet. The play was first filmed in the silent era by Georges M\u00e9li\u00e8s, although his film is now lost. The first sound recording of the play on film was in The Hollywood Revue of 1929, where John Gilbert recited the balcony scene opposite Norma Shearer. In 1960 , Peter Ustinov 's cold - war stage parody , Romanoff and Juliet was filmed. film A popular film of a musical theatre adaptation, West Side Story was made in 1961 . This version updated the setting to mid-20th - century New York City and the warring families to ethnic gangs. Other musical adaptations include Terrence Mann 's 1999 rock musical William Shakespeare 's Romeo and Juliet , co-written with Jerome Korman , G\u00e9rard Presgurvic 's 2001 Rom\u00e9o et Juliette , de la Haine \u00e0 l'Amour and Riccardo Cocciante 's 2007 Giulietta & Romeo . In 2013 , Sanjay Leela Bhansali directed the Bollywood film Goliyon Ki Raasleela Ram - Leela , a contemporary version of the play. which was a commercial and critical success. \n|user|: Hamnet"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "837275285_18310-18974-0-664",
+          "text": "Hamlet\nMost scholars reject the idea that Hamlet is in any way connected with Shakespeare 's only son , Hamnet Shakespeare , who died in 1596 at age eleven . Conventional wisdom holds that Hamlet is too obviously connected to legend , and the name Hamnet was quite popular at the time . However , Stephen Greenblatt has argued that the coincidence of the names and Shakespeare 's grief for the loss of his son may lie at the heart of the tragedy . He notes that the name of Hamnet Sadler , the Stratford neighbour after whom Hamnet was named , was often written as Hamlet Sadler and that , in the loose orthography of the time , the names were virtually interchangeable .",
+          "title": "Hamlet",
+          "score": 13.194552,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "yes",
+                "timestamp": 1724083986
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Hamnet"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Hamnet is the name of William Shakespeare's only son. He was born in 1585 and died in 1596 at the age of 11. The cause of his death is not specifically mentioned in historical records. The death of Hamnet had a profound impact on Shakespeare, and some literary scholars believe that it may have influenced his work, particularly his play \"Hamlet,\" which was written around the same time. However, this connection is still a subject of debate."
+    },
+    {
+      "speaker": "user",
+      "text": "What was Shakespeare's most popular historical play?",
+      "timestamp": 1724084927,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "UNANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I do not have specific information to answer this. ",
+      "timestamp": 1724084928,
+      "contexts": [
+        {
+          "document_id": "806376271_58662-59259-0-595",
+          "text": "Romeo and Juliet\nRomeo and Juliet may be the most - filmed play of all time . The most notable theatrical releases were George Cukor 's multi-Oscar - nominated 1936 production , Franco Zeffirelli 's 1968 version , and Baz Luhrmann 's 1996 MTV - inspired Romeo + Juliet . The latter two were both , in their time , the highest - grossing Shakespeare film ever . Romeo and Juliet was first filmed in the silent era , by Georges M\u00e9li\u00e8s , although his film is now lost . The play was first heard on film in The Hollywood Revue of 1929 , in which John Gilbert recited the balcony scene opposite Norma Shearer . Leslie",
+          "title": "Romeo and Juliet",
+          "score": 31.974457,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "no",
+                "timestamp": 1724084942
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Were Shakespeare's plays popular when he was alive?\n|assistant|: Yes, based on the provided document, Shakespeare's plays were popular during his lifetime.  Hamlet appears to have been his fourth most popular play at that time, surpassed only by Henry IV Part 1 , Richard III and Pericles. Romeo and Juliet is also known to have been extremely popular then, so much so that it was performed outside of England as well, in N\u00f6rdlingen in 1604.\n|user|: How many film adaptations of Hamlet are there?\n|assistant|: I do not have specific information about the exact number of film adaptations of Hamlet. However, the earliest screen success recorded for Hamlet was Sara Bernhardt's 5-minute film of the fencing scene, which was produced in 1900. The film was an early attempt at combining sound and film , music and words were recorded on phonograph records , to be played along with the film . Seven silent versions were released from 1907-1921. Laurence Olivier adapted, produced, directed and starred in his screen version in 1948. Tony Richardson directed  the first Hamlet film in color in 1969. Franco A version by Franco Zeffirelli, with Mel Gibson and Glenn Close came out in 1990, and Kenneth Branagh's version was released in 1996. A version set in contemporary Manhattan and starring Ethan Hawke dates back to 2000. There have also been several films that transposed the general storyline of Hamlet or elements thereof to other settings . For example , the 2014 Bollywood film Haider is an adaptation set in Kashmir . There have also been many films which included performances of scenes from Hamlet as a play - within - a-film .\n|user|: What about Romeo and Juliet?\n|assistant|: Just like Hamlet, Romeo and Juliet has been adapted multiple times for the small and large screens. It may be the most filmed play of all time, with notable theatrical releases such as George Cukor's 1936 production, Franco Zeffirelli's 1968 version, and Baz Luhrmann's 1996 MTV-inspired Romeo + Juliet. The play was first filmed in the silent era by Georges M\u00e9li\u00e8s, although his film is now lost. The first sound recording of the play on film was in The Hollywood Revue of 1929, where John Gilbert recited the balcony scene opposite Norma Shearer. In 1960 , Peter Ustinov 's cold - war stage parody , Romanoff and Juliet was filmed. film A popular film of a musical theatre adaptation, West Side Story was made in 1961 . This version updated the setting to mid-20th - century New York City and the warring families to ethnic gangs. Other musical adaptations include Terrence Mann 's 1999 rock musical William Shakespeare 's Romeo and Juliet , co-written with Jerome Korman , G\u00e9rard Presgurvic 's 2001 Rom\u00e9o et Juliette , de la Haine \u00e0 l'Amour and Riccardo Cocciante 's 2007 Giulietta & Romeo . In 2013 , Sanjay Leela Bhansali directed the Bollywood film Goliyon Ki Raasleela Ram - Leela , a contemporary version of the play. which was a commercial and critical success. \n|user|: Hamnet\n|assistant|: Hamnet is the name of William Shakespeare's only son. He was born in 1585 and died in 1596 at the age of 11. The death of Hamnet had a profound impact on Shakespeare, and some literary scholars believe that it may have influenced his work, particularly his play \"Hamlet,\" which was written around the same time. However, this connection is still a subject of debate, most scholars rejecting the idea that the play is in any way connected to Shakespeare's son.\n|user|: What was Shakespeare's most popular historical play?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "806376271_40405-41737-0-1331",
+          "text": "Romeo and Juliet\nRomeo and Juliet ranks with Hamlet as one of Shakespeare 's most performed plays . Its many adaptations have made it one of his most enduring and famous stories . Even in Shakespeare 's lifetime , it was extremely popular . Scholar Gary Taylor measures it as the sixth most popular of Shakespeare 's plays , in the period after the death of Christopher Marlowe and Thomas Kyd but before the ascendancy of Ben Jonson during which Shakespeare was London 's dominant playwright . The date of the first performance is unknown . The First Quarto , printed in 1597 , says that `` it hath been often ( and with great applause ) plaid publiquely '' , setting the first performance before that date . The Lord Chamberlain 's Men were certainly the first to perform it . Besides their strong connections with Shakespeare , the Second Quarto actually names one of its actors , Will Kemp , instead of Peter , in a line in Act Five . Richard Burbage was probably the first Romeo , being the company 's actor , and Master Robert Goffe ( a boy ) the first Juliet . The premiere is likely to have been at `` The Theatre '' , with other early productions at `` The Curtain '' . Romeo and Juliet is one of the first Shakespearean plays to have been performed outside England : a shortened and simplified version was performed in N\u00f6rdlingen in 1604 .",
+          "title": "Romeo and Juliet",
+          "score": 27.571814,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "no",
+                "timestamp": 1724084959
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Were Shakespeare's plays popular when he was alive?\n|assistant|: Yes, based on the provided document, Shakespeare's plays were popular during his lifetime.  Hamlet appears to have been his fourth most popular play at that time, surpassed only by Henry IV Part 1 , Richard III and Pericles. Romeo and Juliet is also known to have been extremely popular then, so much so that it was performed outside of England as well, in N\u00f6rdlingen in 1604.\n|user|: How many film adaptations of Hamlet are there?\n|assistant|: I do not have specific information about the exact number of film adaptations of Hamlet. However, the earliest screen success recorded for Hamlet was Sara Bernhardt's 5-minute film of the fencing scene, which was produced in 1900. The film was an early attempt at combining sound and film , music and words were recorded on phonograph records , to be played along with the film . Seven silent versions were released from 1907-1921. Laurence Olivier adapted, produced, directed and starred in his screen version in 1948. Tony Richardson directed  the first Hamlet film in color in 1969. Franco A version by Franco Zeffirelli, with Mel Gibson and Glenn Close came out in 1990, and Kenneth Branagh's version was released in 1996. A version set in contemporary Manhattan and starring Ethan Hawke dates back to 2000. There have also been several films that transposed the general storyline of Hamlet or elements thereof to other settings . For example , the 2014 Bollywood film Haider is an adaptation set in Kashmir . There have also been many films which included performances of scenes from Hamlet as a play - within - a-film .\n|user|: What about Romeo and Juliet?\n|assistant|: Just like Hamlet, Romeo and Juliet has been adapted multiple times for the small and large screens. It may be the most filmed play of all time, with notable theatrical releases such as George Cukor's 1936 production, Franco Zeffirelli's 1968 version, and Baz Luhrmann's 1996 MTV-inspired Romeo + Juliet. The play was first filmed in the silent era by Georges M\u00e9li\u00e8s, although his film is now lost. The first sound recording of the play on film was in The Hollywood Revue of 1929, where John Gilbert recited the balcony scene opposite Norma Shearer. In 1960 , Peter Ustinov 's cold - war stage parody , Romanoff and Juliet was filmed. film A popular film of a musical theatre adaptation, West Side Story was made in 1961 . This version updated the setting to mid-20th - century New York City and the warring families to ethnic gangs. Other musical adaptations include Terrence Mann 's 1999 rock musical William Shakespeare 's Romeo and Juliet , co-written with Jerome Korman , G\u00e9rard Presgurvic 's 2001 Rom\u00e9o et Juliette , de la Haine \u00e0 l'Amour and Riccardo Cocciante 's 2007 Giulietta & Romeo . In 2013 , Sanjay Leela Bhansali directed the Bollywood film Goliyon Ki Raasleela Ram - Leela , a contemporary version of the play. which was a commercial and critical success. \n|user|: Hamnet\n|assistant|: Hamnet is the name of William Shakespeare's only son. He was born in 1585 and died in 1596 at the age of 11. The death of Hamnet had a profound impact on Shakespeare, and some literary scholars believe that it may have influenced his work, particularly his play \"Hamlet,\" which was written around the same time. However, this connection is still a subject of debate, most scholars rejecting the idea that the play is in any way connected to Shakespeare's son.\n|user|: What was Shakespeare's most popular historical play?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "806376271_61081-62730-0-1649",
+          "text": "Romeo and Juliet\nThe play has been widely adapted for TV and film . In 1960 , Peter Ustinov 's cold - war stage parody , Romanoff and Juliet was filmed . The 1961 film of West Side Story -- set among New York gangs -- featured the Jets as white youths , equivalent to Shakespeare 's Montagues while the Sharks , equivalent to the Capulets , are Puerto Rican . The 1994 film The Punk uses both the rough plot outline of Romeo and Juliet and names many of the characters in ways that reflect the characters in the play . In 2006 , Disney 's High School Musical made use of Romeo and Juliet 's plot , placing the two young lovers in different high school cliques instead of feuding families . Film - makers have frequently featured characters performing scenes from Romeo and Juliet . The conceit of dramatising Shakespeare writing Romeo and Juliet has been used several times , including John Madden 's 1998 Shakespeare in Love , in which Shakespeare writes the play against the backdrop of his own doomed love affair . An anime series produced by Gonzo and SKY Perfect Well Think , called Romeo x Juliet , was made in 2007 and the 2013 version is the latest English - language film based on the play . In 2013 , Sanjay Leela Bhansali directed the Bollywood film Goliyon Ki Raasleela Ram - Leela , a contemporary version of the play which starred Ranveer Singh and Deepika Padukone in leading roles . The film was a commercial and critical success . In February 2014 , BroadwayHD released a filmed version of the 2013 Broadway Revival of Romeo and Juliet . The production starred Orlando Bloom and Condola Rashad . The film was released internationally in April 2014 .",
+          "title": "Romeo and Juliet",
+          "score": 25.503117,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "no",
+                "timestamp": 1724084966
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Were Shakespeare's plays popular when he was alive?\n|assistant|: Yes, based on the provided document, Shakespeare's plays were popular during his lifetime.  Hamlet appears to have been his fourth most popular play at that time, surpassed only by Henry IV Part 1 , Richard III and Pericles. Romeo and Juliet is also known to have been extremely popular then, so much so that it was performed outside of England as well, in N\u00f6rdlingen in 1604.\n|user|: How many film adaptations of Hamlet are there?\n|assistant|: I do not have specific information about the exact number of film adaptations of Hamlet. However, the earliest screen success recorded for Hamlet was Sara Bernhardt's 5-minute film of the fencing scene, which was produced in 1900. The film was an early attempt at combining sound and film , music and words were recorded on phonograph records , to be played along with the film . Seven silent versions were released from 1907-1921. Laurence Olivier adapted, produced, directed and starred in his screen version in 1948. Tony Richardson directed  the first Hamlet film in color in 1969. Franco A version by Franco Zeffirelli, with Mel Gibson and Glenn Close came out in 1990, and Kenneth Branagh's version was released in 1996. A version set in contemporary Manhattan and starring Ethan Hawke dates back to 2000. There have also been several films that transposed the general storyline of Hamlet or elements thereof to other settings . For example , the 2014 Bollywood film Haider is an adaptation set in Kashmir . There have also been many films which included performances of scenes from Hamlet as a play - within - a-film .\n|user|: What about Romeo and Juliet?\n|assistant|: Just like Hamlet, Romeo and Juliet has been adapted multiple times for the small and large screens. It may be the most filmed play of all time, with notable theatrical releases such as George Cukor's 1936 production, Franco Zeffirelli's 1968 version, and Baz Luhrmann's 1996 MTV-inspired Romeo + Juliet. The play was first filmed in the silent era by Georges M\u00e9li\u00e8s, although his film is now lost. The first sound recording of the play on film was in The Hollywood Revue of 1929, where John Gilbert recited the balcony scene opposite Norma Shearer. In 1960 , Peter Ustinov 's cold - war stage parody , Romanoff and Juliet was filmed. film A popular film of a musical theatre adaptation, West Side Story was made in 1961 . This version updated the setting to mid-20th - century New York City and the warring families to ethnic gangs. Other musical adaptations include Terrence Mann 's 1999 rock musical William Shakespeare 's Romeo and Juliet , co-written with Jerome Korman , G\u00e9rard Presgurvic 's 2001 Rom\u00e9o et Juliette , de la Haine \u00e0 l'Amour and Riccardo Cocciante 's 2007 Giulietta & Romeo . In 2013 , Sanjay Leela Bhansali directed the Bollywood film Goliyon Ki Raasleela Ram - Leela , a contemporary version of the play. which was a commercial and critical success. \n|user|: Hamnet\n|assistant|: Hamnet is the name of William Shakespeare's only son. He was born in 1585 and died in 1596 at the age of 11. The death of Hamnet had a profound impact on Shakespeare, and some literary scholars believe that it may have influenced his work, particularly his play \"Hamlet,\" which was written around the same time. However, this connection is still a subject of debate, most scholars rejecting the idea that the play is in any way connected to Shakespeare's son.\n|user|: What was Shakespeare's most popular historical play?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Based on the provided document, Shakespeare's most popular historical play was Henry IV Part 1."
+    },
+    {
+      "speaker": "user",
+      "text": "A horse , a horse , my kingdom for a horse !",
+      "timestamp": 1724085132,
+      "enrichments": {
+        "Question Type": [
+          "Explanation",
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The famous line \"A horse, a horse, my kingdom for a horse!\" is from Shakespeare's play Richard III. It is spoken by the character Richard, Duke of Gloucester, when he is unhorsed in the Battle of Bosworth Field, and realizes that he would give up his kingdom for a horse to continue fighting.",
+      "timestamp": 1724085135,
+      "contexts": [
+        {
+          "document_id": "806376271_58662-59259-0-595",
+          "text": "Romeo and Juliet\nRomeo and Juliet may be the most - filmed play of all time . The most notable theatrical releases were George Cukor 's multi-Oscar - nominated 1936 production , Franco Zeffirelli 's 1968 version , and Baz Luhrmann 's 1996 MTV - inspired Romeo + Juliet . The latter two were both , in their time , the highest - grossing Shakespeare film ever . Romeo and Juliet was first filmed in the silent era , by Georges M\u00e9li\u00e8s , although his film is now lost . The play was first heard on film in The Hollywood Revue of 1929 , in which John Gilbert recited the balcony scene opposite Norma Shearer . Leslie",
+          "title": "Romeo and Juliet",
+          "score": 31.974457,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "no",
+                "timestamp": 1724085970
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Were Shakespeare's plays popular when he was alive?\n|assistant|: Yes, based on the provided document, Shakespeare's plays were popular during his lifetime.  Hamlet appears to have been his fourth most popular play at that time, surpassed only by Henry IV Part 1 , Richard III and Pericles. Romeo and Juliet is also known to have been extremely popular then, so much so that it was performed outside of England as well, in N\u00f6rdlingen in 1604.\n|user|: How many film adaptations of Hamlet are there?\n|assistant|: I do not have specific information about the exact number of film adaptations of Hamlet. However, the earliest screen success recorded for Hamlet was Sara Bernhardt's 5-minute film of the fencing scene, which was produced in 1900. The film was an early attempt at combining sound and film , music and words were recorded on phonograph records , to be played along with the film . Seven silent versions were released from 1907-1921. Laurence Olivier adapted, produced, directed and starred in his screen version in 1948. Tony Richardson directed  the first Hamlet film in color in 1969. Franco A version by Franco Zeffirelli, with Mel Gibson and Glenn Close came out in 1990, and Kenneth Branagh's version was released in 1996. A version set in contemporary Manhattan and starring Ethan Hawke dates back to 2000. There have also been several films that transposed the general storyline of Hamlet or elements thereof to other settings . For example , the 2014 Bollywood film Haider is an adaptation set in Kashmir . There have also been many films which included performances of scenes from Hamlet as a play - within - a-film .\n|user|: What about Romeo and Juliet?\n|assistant|: Just like Hamlet, Romeo and Juliet has been adapted multiple times for the small and large screens. It may be the most filmed play of all time, with notable theatrical releases such as George Cukor's 1936 production, Franco Zeffirelli's 1968 version, and Baz Luhrmann's 1996 MTV-inspired Romeo + Juliet. The play was first filmed in the silent era by Georges M\u00e9li\u00e8s, although his film is now lost. The first sound recording of the play on film was in The Hollywood Revue of 1929, where John Gilbert recited the balcony scene opposite Norma Shearer. In 1960 , Peter Ustinov 's cold - war stage parody , Romanoff and Juliet was filmed. film A popular film of a musical theatre adaptation, West Side Story was made in 1961 . This version updated the setting to mid-20th - century New York City and the warring families to ethnic gangs. Other musical adaptations include Terrence Mann 's 1999 rock musical William Shakespeare 's Romeo and Juliet , co-written with Jerome Korman , G\u00e9rard Presgurvic 's 2001 Rom\u00e9o et Juliette , de la Haine \u00e0 l'Amour and Riccardo Cocciante 's 2007 Giulietta & Romeo . In 2013 , Sanjay Leela Bhansali directed the Bollywood film Goliyon Ki Raasleela Ram - Leela , a contemporary version of the play. which was a commercial and critical success. \n|user|: Hamnet\n|assistant|: Hamnet is the name of William Shakespeare's only son. He was born in 1585 and died in 1596 at the age of 11. The death of Hamnet had a profound impact on Shakespeare, and some literary scholars believe that it may have influenced his work, particularly his play \"Hamlet,\" which was written around the same time. However, this connection is still a subject of debate, most scholars rejecting the idea that the play is in any way connected to Shakespeare's son.\n|user|: What was Shakespeare's most popular historical play?\n|assistant|: Based on the provided document, Shakespeare's most popular historical play was Henry IV Part 1.\n|user|: A horse , a horse , my kingdom for a horse !"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "806376271_40405-41737-0-1331",
+          "text": "Romeo and Juliet\nRomeo and Juliet ranks with Hamlet as one of Shakespeare 's most performed plays . Its many adaptations have made it one of his most enduring and famous stories . Even in Shakespeare 's lifetime , it was extremely popular . Scholar Gary Taylor measures it as the sixth most popular of Shakespeare 's plays , in the period after the death of Christopher Marlowe and Thomas Kyd but before the ascendancy of Ben Jonson during which Shakespeare was London 's dominant playwright . The date of the first performance is unknown . The First Quarto , printed in 1597 , says that `` it hath been often ( and with great applause ) plaid publiquely '' , setting the first performance before that date . The Lord Chamberlain 's Men were certainly the first to perform it . Besides their strong connections with Shakespeare , the Second Quarto actually names one of its actors , Will Kemp , instead of Peter , in a line in Act Five . Richard Burbage was probably the first Romeo , being the company 's actor , and Master Robert Goffe ( a boy ) the first Juliet . The premiere is likely to have been at `` The Theatre '' , with other early productions at `` The Curtain '' . Romeo and Juliet is one of the first Shakespearean plays to have been performed outside England : a shortened and simplified version was performed in N\u00f6rdlingen in 1604 .",
+          "title": "Romeo and Juliet",
+          "score": 27.571814,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "no",
+                "timestamp": 1724085976
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Were Shakespeare's plays popular when he was alive?\n|assistant|: Yes, based on the provided document, Shakespeare's plays were popular during his lifetime.  Hamlet appears to have been his fourth most popular play at that time, surpassed only by Henry IV Part 1 , Richard III and Pericles. Romeo and Juliet is also known to have been extremely popular then, so much so that it was performed outside of England as well, in N\u00f6rdlingen in 1604.\n|user|: How many film adaptations of Hamlet are there?\n|assistant|: I do not have specific information about the exact number of film adaptations of Hamlet. However, the earliest screen success recorded for Hamlet was Sara Bernhardt's 5-minute film of the fencing scene, which was produced in 1900. The film was an early attempt at combining sound and film , music and words were recorded on phonograph records , to be played along with the film . Seven silent versions were released from 1907-1921. Laurence Olivier adapted, produced, directed and starred in his screen version in 1948. Tony Richardson directed  the first Hamlet film in color in 1969. Franco A version by Franco Zeffirelli, with Mel Gibson and Glenn Close came out in 1990, and Kenneth Branagh's version was released in 1996. A version set in contemporary Manhattan and starring Ethan Hawke dates back to 2000. There have also been several films that transposed the general storyline of Hamlet or elements thereof to other settings . For example , the 2014 Bollywood film Haider is an adaptation set in Kashmir . There have also been many films which included performances of scenes from Hamlet as a play - within - a-film .\n|user|: What about Romeo and Juliet?\n|assistant|: Just like Hamlet, Romeo and Juliet has been adapted multiple times for the small and large screens. It may be the most filmed play of all time, with notable theatrical releases such as George Cukor's 1936 production, Franco Zeffirelli's 1968 version, and Baz Luhrmann's 1996 MTV-inspired Romeo + Juliet. The play was first filmed in the silent era by Georges M\u00e9li\u00e8s, although his film is now lost. The first sound recording of the play on film was in The Hollywood Revue of 1929, where John Gilbert recited the balcony scene opposite Norma Shearer. In 1960 , Peter Ustinov 's cold - war stage parody , Romanoff and Juliet was filmed. film A popular film of a musical theatre adaptation, West Side Story was made in 1961 . This version updated the setting to mid-20th - century New York City and the warring families to ethnic gangs. Other musical adaptations include Terrence Mann 's 1999 rock musical William Shakespeare 's Romeo and Juliet , co-written with Jerome Korman , G\u00e9rard Presgurvic 's 2001 Rom\u00e9o et Juliette , de la Haine \u00e0 l'Amour and Riccardo Cocciante 's 2007 Giulietta & Romeo . In 2013 , Sanjay Leela Bhansali directed the Bollywood film Goliyon Ki Raasleela Ram - Leela , a contemporary version of the play. which was a commercial and critical success. \n|user|: Hamnet\n|assistant|: Hamnet is the name of William Shakespeare's only son. He was born in 1585 and died in 1596 at the age of 11. The death of Hamnet had a profound impact on Shakespeare, and some literary scholars believe that it may have influenced his work, particularly his play \"Hamlet,\" which was written around the same time. However, this connection is still a subject of debate, most scholars rejecting the idea that the play is in any way connected to Shakespeare's son.\n|user|: What was Shakespeare's most popular historical play?\n|assistant|: Based on the provided document, Shakespeare's most popular historical play was Henry IV Part 1.\n|user|: A horse , a horse , my kingdom for a horse !"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "806376271_61081-62730-0-1649",
+          "text": "Romeo and Juliet\nThe play has been widely adapted for TV and film . In 1960 , Peter Ustinov 's cold - war stage parody , Romanoff and Juliet was filmed . The 1961 film of West Side Story -- set among New York gangs -- featured the Jets as white youths , equivalent to Shakespeare 's Montagues while the Sharks , equivalent to the Capulets , are Puerto Rican . The 1994 film The Punk uses both the rough plot outline of Romeo and Juliet and names many of the characters in ways that reflect the characters in the play . In 2006 , Disney 's High School Musical made use of Romeo and Juliet 's plot , placing the two young lovers in different high school cliques instead of feuding families . Film - makers have frequently featured characters performing scenes from Romeo and Juliet . The conceit of dramatising Shakespeare writing Romeo and Juliet has been used several times , including John Madden 's 1998 Shakespeare in Love , in which Shakespeare writes the play against the backdrop of his own doomed love affair . An anime series produced by Gonzo and SKY Perfect Well Think , called Romeo x Juliet , was made in 2007 and the 2013 version is the latest English - language film based on the play . In 2013 , Sanjay Leela Bhansali directed the Bollywood film Goliyon Ki Raasleela Ram - Leela , a contemporary version of the play which starred Ranveer Singh and Deepika Padukone in leading roles . The film was a commercial and critical success . In February 2014 , BroadwayHD released a filmed version of the 2013 Broadway Revival of Romeo and Juliet . The production starred Orlando Bloom and Condola Rashad . The film was released internationally in April 2014 .",
+          "title": "Romeo and Juliet",
+          "score": 25.503117,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "no",
+                "timestamp": 1724085980
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Were Shakespeare's plays popular when he was alive?\n|assistant|: Yes, based on the provided document, Shakespeare's plays were popular during his lifetime.  Hamlet appears to have been his fourth most popular play at that time, surpassed only by Henry IV Part 1 , Richard III and Pericles. Romeo and Juliet is also known to have been extremely popular then, so much so that it was performed outside of England as well, in N\u00f6rdlingen in 1604.\n|user|: How many film adaptations of Hamlet are there?\n|assistant|: I do not have specific information about the exact number of film adaptations of Hamlet. However, the earliest screen success recorded for Hamlet was Sara Bernhardt's 5-minute film of the fencing scene, which was produced in 1900. The film was an early attempt at combining sound and film , music and words were recorded on phonograph records , to be played along with the film . Seven silent versions were released from 1907-1921. Laurence Olivier adapted, produced, directed and starred in his screen version in 1948. Tony Richardson directed  the first Hamlet film in color in 1969. Franco A version by Franco Zeffirelli, with Mel Gibson and Glenn Close came out in 1990, and Kenneth Branagh's version was released in 1996. A version set in contemporary Manhattan and starring Ethan Hawke dates back to 2000. There have also been several films that transposed the general storyline of Hamlet or elements thereof to other settings . For example , the 2014 Bollywood film Haider is an adaptation set in Kashmir . There have also been many films which included performances of scenes from Hamlet as a play - within - a-film .\n|user|: What about Romeo and Juliet?\n|assistant|: Just like Hamlet, Romeo and Juliet has been adapted multiple times for the small and large screens. It may be the most filmed play of all time, with notable theatrical releases such as George Cukor's 1936 production, Franco Zeffirelli's 1968 version, and Baz Luhrmann's 1996 MTV-inspired Romeo + Juliet. The play was first filmed in the silent era by Georges M\u00e9li\u00e8s, although his film is now lost. The first sound recording of the play on film was in The Hollywood Revue of 1929, where John Gilbert recited the balcony scene opposite Norma Shearer. In 1960 , Peter Ustinov 's cold - war stage parody , Romanoff and Juliet was filmed. film A popular film of a musical theatre adaptation, West Side Story was made in 1961 . This version updated the setting to mid-20th - century New York City and the warring families to ethnic gangs. Other musical adaptations include Terrence Mann 's 1999 rock musical William Shakespeare 's Romeo and Juliet , co-written with Jerome Korman , G\u00e9rard Presgurvic 's 2001 Rom\u00e9o et Juliette , de la Haine \u00e0 l'Amour and Riccardo Cocciante 's 2007 Giulietta & Romeo . In 2013 , Sanjay Leela Bhansali directed the Bollywood film Goliyon Ki Raasleela Ram - Leela , a contemporary version of the play. which was a commercial and critical success. \n|user|: Hamnet\n|assistant|: Hamnet is the name of William Shakespeare's only son. He was born in 1585 and died in 1596 at the age of 11. The death of Hamnet had a profound impact on Shakespeare, and some literary scholars believe that it may have influenced his work, particularly his play \"Hamlet,\" which was written around the same time. However, this connection is still a subject of debate, most scholars rejecting the idea that the play is in any way connected to Shakespeare's son.\n|user|: What was Shakespeare's most popular historical play?\n|assistant|: Based on the provided document, Shakespeare's most popular historical play was Henry IV Part 1.\n|user|: A horse , a horse , my kingdom for a horse !"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "826096157_13500-14104-0-604",
+          "text": "Richard III (play)\nAt the Battle of Bosworth Field , Lord Stanley ( who is also Richmond 's stepfather ) and his followers desert Richard 's side , whereupon Richard calls for the execution of George Stanley , Lord Stanley 's son . This does not happen , as the battle is in full swing , and Richard is left at a disadvantage . Richard is soon unhorsed on the field at the climax of the battle , and cries out , `` A horse , a horse , my kingdom for a horse ! '' Richmond kills Richard in the final duel . Subsequently , Richmond succeeds to the throne as Henry VII , and marries Princess Elizabeth from the House of York .",
+          "title": "Richard III (play)",
+          "score": 13.647764,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "yes",
+                "timestamp": 1724085986
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "A horse , a horse , my kingdom for a horse !"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The famous line \"A horse, a horse, my kingdom for a horse!\" is from Shakespeare's play Richard III. It is spoken by the character Richard, Duke of Gloucester (who later becomes King Richard III), when he is unhorsed in battle and realizes that he would give up his kingdom for a horse to continue fighting."
+    },
+    {
+      "speaker": "user",
+      "text": "Is Richard III historically accurate?",
+      "timestamp": 1724086377,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Shakespeare's Richard III is a dramatic interpretation of history rather than a strict historical account. While the play is based on the true story of King Richard III of England, it contains numerous historical inaccuracies which can be attributed partly to Shakespeare 's sources, such as Holinshed 's Chronicles, and there is no doubt that Shakespeare drew heavily on Sir Thomas More 's account of Richard III as a criminal and tyrant as inspiration for his own rendering. Shakespeare and the Tudor chroniclers who influenced him, were obliged to portray the downfall of the Plantagenet House of York and the victory of the House of Tudor as good conquering evil. This is usually attributed to bias as a result of a new regime being in place. ",
+      "timestamp": 1724086380,
+      "contexts": [
+        {
+          "document_id": "806376271_58662-59259-0-595",
+          "text": "Romeo and Juliet\nRomeo and Juliet may be the most - filmed play of all time . The most notable theatrical releases were George Cukor 's multi-Oscar - nominated 1936 production , Franco Zeffirelli 's 1968 version , and Baz Luhrmann 's 1996 MTV - inspired Romeo + Juliet . The latter two were both , in their time , the highest - grossing Shakespeare film ever . Romeo and Juliet was first filmed in the silent era , by Georges M\u00e9li\u00e8s , although his film is now lost . The play was first heard on film in The Hollywood Revue of 1929 , in which John Gilbert recited the balcony scene opposite Norma Shearer . Leslie",
+          "title": "Romeo and Juliet",
+          "score": 31.974457,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "no",
+                "timestamp": 1724086563
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Were Shakespeare's plays popular when he was alive?\n|assistant|: Yes, based on the provided document, Shakespeare's plays were popular during his lifetime.  Hamlet appears to have been his fourth most popular play at that time, surpassed only by Henry IV Part 1 , Richard III and Pericles. Romeo and Juliet is also known to have been extremely popular then, so much so that it was performed outside of England as well, in N\u00f6rdlingen in 1604.\n|user|: How many film adaptations of Hamlet are there?\n|assistant|: I do not have specific information about the exact number of film adaptations of Hamlet. However, the earliest screen success recorded for Hamlet was Sara Bernhardt's 5-minute film of the fencing scene, which was produced in 1900. The film was an early attempt at combining sound and film , music and words were recorded on phonograph records , to be played along with the film . Seven silent versions were released from 1907-1921. Laurence Olivier adapted, produced, directed and starred in his screen version in 1948. Tony Richardson directed  the first Hamlet film in color in 1969. Franco A version by Franco Zeffirelli, with Mel Gibson and Glenn Close came out in 1990, and Kenneth Branagh's version was released in 1996. A version set in contemporary Manhattan and starring Ethan Hawke dates back to 2000. There have also been several films that transposed the general storyline of Hamlet or elements thereof to other settings . For example , the 2014 Bollywood film Haider is an adaptation set in Kashmir . There have also been many films which included performances of scenes from Hamlet as a play - within - a-film .\n|user|: What about Romeo and Juliet?\n|assistant|: Just like Hamlet, Romeo and Juliet has been adapted multiple times for the small and large screens. It may be the most filmed play of all time, with notable theatrical releases such as George Cukor's 1936 production, Franco Zeffirelli's 1968 version, and Baz Luhrmann's 1996 MTV-inspired Romeo + Juliet. The play was first filmed in the silent era by Georges M\u00e9li\u00e8s, although his film is now lost. The first sound recording of the play on film was in The Hollywood Revue of 1929, where John Gilbert recited the balcony scene opposite Norma Shearer. In 1960 , Peter Ustinov 's cold - war stage parody , Romanoff and Juliet was filmed. film A popular film of a musical theatre adaptation, West Side Story was made in 1961 . This version updated the setting to mid-20th - century New York City and the warring families to ethnic gangs. Other musical adaptations include Terrence Mann 's 1999 rock musical William Shakespeare 's Romeo and Juliet , co-written with Jerome Korman , G\u00e9rard Presgurvic 's 2001 Rom\u00e9o et Juliette , de la Haine \u00e0 l'Amour and Riccardo Cocciante 's 2007 Giulietta & Romeo . In 2013 , Sanjay Leela Bhansali directed the Bollywood film Goliyon Ki Raasleela Ram - Leela , a contemporary version of the play. which was a commercial and critical success. \n|user|: Hamnet\n|assistant|: Hamnet is the name of William Shakespeare's only son. He was born in 1585 and died in 1596 at the age of 11. The death of Hamnet had a profound impact on Shakespeare, and some literary scholars believe that it may have influenced his work, particularly his play \"Hamlet,\" which was written around the same time. However, this connection is still a subject of debate, most scholars rejecting the idea that the play is in any way connected to Shakespeare's son.\n|user|: What was Shakespeare's most popular historical play?\n|assistant|: Based on the provided document, Shakespeare's most popular historical play was Henry IV Part 1.\n|user|: A horse , a horse , my kingdom for a horse !\n|assistant|: The famous line \"A horse, a horse, my kingdom for a horse!\" is from Shakespeare's play Richard III. It is spoken by the character Richard, Duke of Gloucester, when he is unhorsed in the Battle of Bosworth Field, and realizes that he would give up his kingdom for a horse to continue fighting.\n|user|: Is Richard III historically accurate?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "806376271_40405-41737-0-1331",
+          "text": "Romeo and Juliet\nRomeo and Juliet ranks with Hamlet as one of Shakespeare 's most performed plays . Its many adaptations have made it one of his most enduring and famous stories . Even in Shakespeare 's lifetime , it was extremely popular . Scholar Gary Taylor measures it as the sixth most popular of Shakespeare 's plays , in the period after the death of Christopher Marlowe and Thomas Kyd but before the ascendancy of Ben Jonson during which Shakespeare was London 's dominant playwright . The date of the first performance is unknown . The First Quarto , printed in 1597 , says that `` it hath been often ( and with great applause ) plaid publiquely '' , setting the first performance before that date . The Lord Chamberlain 's Men were certainly the first to perform it . Besides their strong connections with Shakespeare , the Second Quarto actually names one of its actors , Will Kemp , instead of Peter , in a line in Act Five . Richard Burbage was probably the first Romeo , being the company 's actor , and Master Robert Goffe ( a boy ) the first Juliet . The premiere is likely to have been at `` The Theatre '' , with other early productions at `` The Curtain '' . Romeo and Juliet is one of the first Shakespearean plays to have been performed outside England : a shortened and simplified version was performed in N\u00f6rdlingen in 1604 .",
+          "title": "Romeo and Juliet",
+          "score": 27.571814,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "no",
+                "timestamp": 1724086566
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Were Shakespeare's plays popular when he was alive?\n|assistant|: Yes, based on the provided document, Shakespeare's plays were popular during his lifetime.  Hamlet appears to have been his fourth most popular play at that time, surpassed only by Henry IV Part 1 , Richard III and Pericles. Romeo and Juliet is also known to have been extremely popular then, so much so that it was performed outside of England as well, in N\u00f6rdlingen in 1604.\n|user|: How many film adaptations of Hamlet are there?\n|assistant|: I do not have specific information about the exact number of film adaptations of Hamlet. However, the earliest screen success recorded for Hamlet was Sara Bernhardt's 5-minute film of the fencing scene, which was produced in 1900. The film was an early attempt at combining sound and film , music and words were recorded on phonograph records , to be played along with the film . Seven silent versions were released from 1907-1921. Laurence Olivier adapted, produced, directed and starred in his screen version in 1948. Tony Richardson directed  the first Hamlet film in color in 1969. Franco A version by Franco Zeffirelli, with Mel Gibson and Glenn Close came out in 1990, and Kenneth Branagh's version was released in 1996. A version set in contemporary Manhattan and starring Ethan Hawke dates back to 2000. There have also been several films that transposed the general storyline of Hamlet or elements thereof to other settings . For example , the 2014 Bollywood film Haider is an adaptation set in Kashmir . There have also been many films which included performances of scenes from Hamlet as a play - within - a-film .\n|user|: What about Romeo and Juliet?\n|assistant|: Just like Hamlet, Romeo and Juliet has been adapted multiple times for the small and large screens. It may be the most filmed play of all time, with notable theatrical releases such as George Cukor's 1936 production, Franco Zeffirelli's 1968 version, and Baz Luhrmann's 1996 MTV-inspired Romeo + Juliet. The play was first filmed in the silent era by Georges M\u00e9li\u00e8s, although his film is now lost. The first sound recording of the play on film was in The Hollywood Revue of 1929, where John Gilbert recited the balcony scene opposite Norma Shearer. In 1960 , Peter Ustinov 's cold - war stage parody , Romanoff and Juliet was filmed. film A popular film of a musical theatre adaptation, West Side Story was made in 1961 . This version updated the setting to mid-20th - century New York City and the warring families to ethnic gangs. Other musical adaptations include Terrence Mann 's 1999 rock musical William Shakespeare 's Romeo and Juliet , co-written with Jerome Korman , G\u00e9rard Presgurvic 's 2001 Rom\u00e9o et Juliette , de la Haine \u00e0 l'Amour and Riccardo Cocciante 's 2007 Giulietta & Romeo . In 2013 , Sanjay Leela Bhansali directed the Bollywood film Goliyon Ki Raasleela Ram - Leela , a contemporary version of the play. which was a commercial and critical success. \n|user|: Hamnet\n|assistant|: Hamnet is the name of William Shakespeare's only son. He was born in 1585 and died in 1596 at the age of 11. The death of Hamnet had a profound impact on Shakespeare, and some literary scholars believe that it may have influenced his work, particularly his play \"Hamlet,\" which was written around the same time. However, this connection is still a subject of debate, most scholars rejecting the idea that the play is in any way connected to Shakespeare's son.\n|user|: What was Shakespeare's most popular historical play?\n|assistant|: Based on the provided document, Shakespeare's most popular historical play was Henry IV Part 1.\n|user|: A horse , a horse , my kingdom for a horse !\n|assistant|: The famous line \"A horse, a horse, my kingdom for a horse!\" is from Shakespeare's play Richard III. It is spoken by the character Richard, Duke of Gloucester, when he is unhorsed in the Battle of Bosworth Field, and realizes that he would give up his kingdom for a horse to continue fighting.\n|user|: Is Richard III historically accurate?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "806376271_61081-62730-0-1649",
+          "text": "Romeo and Juliet\nThe play has been widely adapted for TV and film . In 1960 , Peter Ustinov 's cold - war stage parody , Romanoff and Juliet was filmed . The 1961 film of West Side Story -- set among New York gangs -- featured the Jets as white youths , equivalent to Shakespeare 's Montagues while the Sharks , equivalent to the Capulets , are Puerto Rican . The 1994 film The Punk uses both the rough plot outline of Romeo and Juliet and names many of the characters in ways that reflect the characters in the play . In 2006 , Disney 's High School Musical made use of Romeo and Juliet 's plot , placing the two young lovers in different high school cliques instead of feuding families . Film - makers have frequently featured characters performing scenes from Romeo and Juliet . The conceit of dramatising Shakespeare writing Romeo and Juliet has been used several times , including John Madden 's 1998 Shakespeare in Love , in which Shakespeare writes the play against the backdrop of his own doomed love affair . An anime series produced by Gonzo and SKY Perfect Well Think , called Romeo x Juliet , was made in 2007 and the 2013 version is the latest English - language film based on the play . In 2013 , Sanjay Leela Bhansali directed the Bollywood film Goliyon Ki Raasleela Ram - Leela , a contemporary version of the play which starred Ranveer Singh and Deepika Padukone in leading roles . The film was a commercial and critical success . In February 2014 , BroadwayHD released a filmed version of the 2013 Broadway Revival of Romeo and Juliet . The production starred Orlando Bloom and Condola Rashad . The film was released internationally in April 2014 .",
+          "title": "Romeo and Juliet",
+          "score": 25.503117,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "no",
+                "timestamp": 1724086572
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Were Shakespeare's plays popular when he was alive?\n|assistant|: Yes, based on the provided document, Shakespeare's plays were popular during his lifetime.  Hamlet appears to have been his fourth most popular play at that time, surpassed only by Henry IV Part 1 , Richard III and Pericles. Romeo and Juliet is also known to have been extremely popular then, so much so that it was performed outside of England as well, in N\u00f6rdlingen in 1604.\n|user|: How many film adaptations of Hamlet are there?\n|assistant|: I do not have specific information about the exact number of film adaptations of Hamlet. However, the earliest screen success recorded for Hamlet was Sara Bernhardt's 5-minute film of the fencing scene, which was produced in 1900. The film was an early attempt at combining sound and film , music and words were recorded on phonograph records , to be played along with the film . Seven silent versions were released from 1907-1921. Laurence Olivier adapted, produced, directed and starred in his screen version in 1948. Tony Richardson directed  the first Hamlet film in color in 1969. Franco A version by Franco Zeffirelli, with Mel Gibson and Glenn Close came out in 1990, and Kenneth Branagh's version was released in 1996. A version set in contemporary Manhattan and starring Ethan Hawke dates back to 2000. There have also been several films that transposed the general storyline of Hamlet or elements thereof to other settings . For example , the 2014 Bollywood film Haider is an adaptation set in Kashmir . There have also been many films which included performances of scenes from Hamlet as a play - within - a-film .\n|user|: What about Romeo and Juliet?\n|assistant|: Just like Hamlet, Romeo and Juliet has been adapted multiple times for the small and large screens. It may be the most filmed play of all time, with notable theatrical releases such as George Cukor's 1936 production, Franco Zeffirelli's 1968 version, and Baz Luhrmann's 1996 MTV-inspired Romeo + Juliet. The play was first filmed in the silent era by Georges M\u00e9li\u00e8s, although his film is now lost. The first sound recording of the play on film was in The Hollywood Revue of 1929, where John Gilbert recited the balcony scene opposite Norma Shearer. In 1960 , Peter Ustinov 's cold - war stage parody , Romanoff and Juliet was filmed. film A popular film of a musical theatre adaptation, West Side Story was made in 1961 . This version updated the setting to mid-20th - century New York City and the warring families to ethnic gangs. Other musical adaptations include Terrence Mann 's 1999 rock musical William Shakespeare 's Romeo and Juliet , co-written with Jerome Korman , G\u00e9rard Presgurvic 's 2001 Rom\u00e9o et Juliette , de la Haine \u00e0 l'Amour and Riccardo Cocciante 's 2007 Giulietta & Romeo . In 2013 , Sanjay Leela Bhansali directed the Bollywood film Goliyon Ki Raasleela Ram - Leela , a contemporary version of the play. which was a commercial and critical success. \n|user|: Hamnet\n|assistant|: Hamnet is the name of William Shakespeare's only son. He was born in 1585 and died in 1596 at the age of 11. The death of Hamnet had a profound impact on Shakespeare, and some literary scholars believe that it may have influenced his work, particularly his play \"Hamlet,\" which was written around the same time. However, this connection is still a subject of debate, most scholars rejecting the idea that the play is in any way connected to Shakespeare's son.\n|user|: What was Shakespeare's most popular historical play?\n|assistant|: Based on the provided document, Shakespeare's most popular historical play was Henry IV Part 1.\n|user|: A horse , a horse , my kingdom for a horse !\n|assistant|: The famous line \"A horse, a horse, my kingdom for a horse!\" is from Shakespeare's play Richard III. It is spoken by the character Richard, Duke of Gloucester, when he is unhorsed in the Battle of Bosworth Field, and realizes that he would give up his kingdom for a horse to continue fighting.\n|user|: Is Richard III historically accurate?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "826096157_40641-41263-0-622",
+          "text": "Richard III (play)\nShakespeare , and the Tudor chroniclers who influenced him , were obliged to portray the downfall of the Plantagenet House of York and the victory of the House of Tudor as good conquering evil . This is usually attributed to bias as a result of a new regime being in place , requiring that the last Plantagenet king , Richard III , be depicted as a villain . There are many historical inaccuracies in the play , which can be attributed partly to Shakespeare 's sources , such as Holinshed 's Chronicles . Some of these inaccuracies are listed below in the order in which they either appear or are referred to in the play .",
+          "title": "Richard III (play)",
+          "score": 19.743223,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "yes",
+                "timestamp": 1724087006
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Is Richard III historically accurate?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "826096157_18486-19259-0-773",
+          "text": "Richard III (play)\nOne of the central themes of Richard III is the idea of fate , especially as it is seen through the tension between free will and fatalism in Richard 's actions and speech , as well as the reactions to him by other characters . There is no doubt that Shakespeare drew heavily on Sir Thomas More 's account of Richard III as a criminal and tyrant as inspiration for his own rendering . This influence , especially as it relates to the role of divine punishment in Richard 's rule of England , reaches its height in the voice of Margaret . Janis Lull suggests that `` Margaret gives voice to the belief , encouraged by the growing Calvinism of the Elizabethan era , that individual historical events are determined by God , who often punishes evil with ( apparent ) evil '' .",
+          "title": "Richard III (play)",
+          "score": 18.025417,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "yes",
+                "timestamp": 1724087087
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Is Richard III historically accurate?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Shakespeare's Richard III is a dramatic interpretation of history rather than a strict historical account. While the play is based on the true story of King Richard III of England, it contains numerous historical inaccuracies and dramatic embellishments. For instance, Shakespeare portrays Richard as a physically deformed villain, which is not supported by historical evidence. Additionally, the play condenses and simplifies a complex chain of events, and it attributes motivations and actions to historical figures that may not be accurate. Therefore, while Richard III provides valuable insights into Shakespeare's perspective on history and power, it should not be regarded as a reliable source of historical information."
+    },
+    {
+      "speaker": "user",
+      "text": "what is the most popular Shakespearean play in China?",
+      "timestamp": 1724089266,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "In the years of tentative political and economic liberalization after the death of Mao in 1976 , Shakespeare became popular in China. Of all his plays , the most popular in China in the late 1970s and 1980s was Macbeth, as Chinese audiences saw in a play first performed in England in 1606 and set in 11th century Scotland a parallel with the Great Proletarian Cultural Revolution of the late 1960s. The story of a national hero becoming a tyrant complete with a power-hungry wife was seen as a parallel with Mao Zedong and his wife , Jiang Qing . The critic Zhao Xun wrote \"Macbeth is the fifth Shakespearean play produced on the Chinese stage after the smashing of the Gang of Four. This play of conspiracy has always been performed at critical moments in the history of our nation.'' ",
+      "timestamp": 1724089268,
+      "contexts": [
+        {
+          "document_id": "806376271_58662-59259-0-595",
+          "text": "Romeo and Juliet\nRomeo and Juliet may be the most - filmed play of all time . The most notable theatrical releases were George Cukor 's multi-Oscar - nominated 1936 production , Franco Zeffirelli 's 1968 version , and Baz Luhrmann 's 1996 MTV - inspired Romeo + Juliet . The latter two were both , in their time , the highest - grossing Shakespeare film ever . Romeo and Juliet was first filmed in the silent era , by Georges M\u00e9li\u00e8s , although his film is now lost . The play was first heard on film in The Hollywood Revue of 1929 , in which John Gilbert recited the balcony scene opposite Norma Shearer . Leslie",
+          "title": "Romeo and Juliet",
+          "score": 31.974457,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "no",
+                "timestamp": 1724089412
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Were Shakespeare's plays popular when he was alive?\n|assistant|: Yes, based on the provided document, Shakespeare's plays were popular during his lifetime.  Hamlet appears to have been his fourth most popular play at that time, surpassed only by Henry IV Part 1 , Richard III and Pericles. Romeo and Juliet is also known to have been extremely popular then, so much so that it was performed outside of England as well, in N\u00f6rdlingen in 1604.\n|user|: How many film adaptations of Hamlet are there?\n|assistant|: I do not have specific information about the exact number of film adaptations of Hamlet. However, the earliest screen success recorded for Hamlet was Sara Bernhardt's 5-minute film of the fencing scene, which was produced in 1900. The film was an early attempt at combining sound and film , music and words were recorded on phonograph records , to be played along with the film . Seven silent versions were released from 1907-1921. Laurence Olivier adapted, produced, directed and starred in his screen version in 1948. Tony Richardson directed  the first Hamlet film in color in 1969. Franco A version by Franco Zeffirelli, with Mel Gibson and Glenn Close came out in 1990, and Kenneth Branagh's version was released in 1996. A version set in contemporary Manhattan and starring Ethan Hawke dates back to 2000. There have also been several films that transposed the general storyline of Hamlet or elements thereof to other settings . For example , the 2014 Bollywood film Haider is an adaptation set in Kashmir . There have also been many films which included performances of scenes from Hamlet as a play - within - a-film .\n|user|: What about Romeo and Juliet?\n|assistant|: Just like Hamlet, Romeo and Juliet has been adapted multiple times for the small and large screens. It may be the most filmed play of all time, with notable theatrical releases such as George Cukor's 1936 production, Franco Zeffirelli's 1968 version, and Baz Luhrmann's 1996 MTV-inspired Romeo + Juliet. The play was first filmed in the silent era by Georges M\u00e9li\u00e8s, although his film is now lost. The first sound recording of the play on film was in The Hollywood Revue of 1929, where John Gilbert recited the balcony scene opposite Norma Shearer. In 1960 , Peter Ustinov 's cold - war stage parody , Romanoff and Juliet was filmed. film A popular film of a musical theatre adaptation, West Side Story was made in 1961 . This version updated the setting to mid-20th - century New York City and the warring families to ethnic gangs. Other musical adaptations include Terrence Mann 's 1999 rock musical William Shakespeare 's Romeo and Juliet , co-written with Jerome Korman , G\u00e9rard Presgurvic 's 2001 Rom\u00e9o et Juliette , de la Haine \u00e0 l'Amour and Riccardo Cocciante 's 2007 Giulietta & Romeo . In 2013 , Sanjay Leela Bhansali directed the Bollywood film Goliyon Ki Raasleela Ram - Leela , a contemporary version of the play. which was a commercial and critical success. \n|user|: Hamnet\n|assistant|: Hamnet is the name of William Shakespeare's only son. He was born in 1585 and died in 1596 at the age of 11. The death of Hamnet had a profound impact on Shakespeare, and some literary scholars believe that it may have influenced his work, particularly his play \"Hamlet,\" which was written around the same time. However, this connection is still a subject of debate, most scholars rejecting the idea that the play is in any way connected to Shakespeare's son.\n|user|: What was Shakespeare's most popular historical play?\n|assistant|: Based on the provided document, Shakespeare's most popular historical play was Henry IV Part 1.\n|user|: A horse , a horse , my kingdom for a horse !\n|assistant|: The famous line \"A horse, a horse, my kingdom for a horse!\" is from Shakespeare's play Richard III. It is spoken by the character Richard, Duke of Gloucester, when he is unhorsed in the Battle of Bosworth Field, and realizes that he would give up his kingdom for a horse to continue fighting.\n|user|: Is Richard III historically accurate?\n|assistant|: Shakespeare's Richard III is a dramatic interpretation of history rather than a strict historical account. While the play is based on the true story of King Richard III of England, it contains numerous historical inaccuracies which can be attributed partly to Shakespeare 's sources, such as Holinshed 's Chronicles, and there is no doubt that Shakespeare drew heavily on Sir Thomas More 's account of Richard III as a criminal and tyrant as inspiration for his own rendering. Shakespeare and the Tudor chroniclers who influenced him, were obliged to portray the downfall of the Plantagenet House of York and the victory of the House of Tudor as good conquering evil. This is usually attributed to bias as a result of a new regime being in place. \n|user|: what is the most popular Shakespearean play in China?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "806376271_40405-41737-0-1331",
+          "text": "Romeo and Juliet\nRomeo and Juliet ranks with Hamlet as one of Shakespeare 's most performed plays . Its many adaptations have made it one of his most enduring and famous stories . Even in Shakespeare 's lifetime , it was extremely popular . Scholar Gary Taylor measures it as the sixth most popular of Shakespeare 's plays , in the period after the death of Christopher Marlowe and Thomas Kyd but before the ascendancy of Ben Jonson during which Shakespeare was London 's dominant playwright . The date of the first performance is unknown . The First Quarto , printed in 1597 , says that `` it hath been often ( and with great applause ) plaid publiquely '' , setting the first performance before that date . The Lord Chamberlain 's Men were certainly the first to perform it . Besides their strong connections with Shakespeare , the Second Quarto actually names one of its actors , Will Kemp , instead of Peter , in a line in Act Five . Richard Burbage was probably the first Romeo , being the company 's actor , and Master Robert Goffe ( a boy ) the first Juliet . The premiere is likely to have been at `` The Theatre '' , with other early productions at `` The Curtain '' . Romeo and Juliet is one of the first Shakespearean plays to have been performed outside England : a shortened and simplified version was performed in N\u00f6rdlingen in 1604 .",
+          "title": "Romeo and Juliet",
+          "score": 27.571814,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "no",
+                "timestamp": 1724089416
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Were Shakespeare's plays popular when he was alive?\n|assistant|: Yes, based on the provided document, Shakespeare's plays were popular during his lifetime.  Hamlet appears to have been his fourth most popular play at that time, surpassed only by Henry IV Part 1 , Richard III and Pericles. Romeo and Juliet is also known to have been extremely popular then, so much so that it was performed outside of England as well, in N\u00f6rdlingen in 1604.\n|user|: How many film adaptations of Hamlet are there?\n|assistant|: I do not have specific information about the exact number of film adaptations of Hamlet. However, the earliest screen success recorded for Hamlet was Sara Bernhardt's 5-minute film of the fencing scene, which was produced in 1900. The film was an early attempt at combining sound and film , music and words were recorded on phonograph records , to be played along with the film . Seven silent versions were released from 1907-1921. Laurence Olivier adapted, produced, directed and starred in his screen version in 1948. Tony Richardson directed  the first Hamlet film in color in 1969. Franco A version by Franco Zeffirelli, with Mel Gibson and Glenn Close came out in 1990, and Kenneth Branagh's version was released in 1996. A version set in contemporary Manhattan and starring Ethan Hawke dates back to 2000. There have also been several films that transposed the general storyline of Hamlet or elements thereof to other settings . For example , the 2014 Bollywood film Haider is an adaptation set in Kashmir . There have also been many films which included performances of scenes from Hamlet as a play - within - a-film .\n|user|: What about Romeo and Juliet?\n|assistant|: Just like Hamlet, Romeo and Juliet has been adapted multiple times for the small and large screens. It may be the most filmed play of all time, with notable theatrical releases such as George Cukor's 1936 production, Franco Zeffirelli's 1968 version, and Baz Luhrmann's 1996 MTV-inspired Romeo + Juliet. The play was first filmed in the silent era by Georges M\u00e9li\u00e8s, although his film is now lost. The first sound recording of the play on film was in The Hollywood Revue of 1929, where John Gilbert recited the balcony scene opposite Norma Shearer. In 1960 , Peter Ustinov 's cold - war stage parody , Romanoff and Juliet was filmed. film A popular film of a musical theatre adaptation, West Side Story was made in 1961 . This version updated the setting to mid-20th - century New York City and the warring families to ethnic gangs. Other musical adaptations include Terrence Mann 's 1999 rock musical William Shakespeare 's Romeo and Juliet , co-written with Jerome Korman , G\u00e9rard Presgurvic 's 2001 Rom\u00e9o et Juliette , de la Haine \u00e0 l'Amour and Riccardo Cocciante 's 2007 Giulietta & Romeo . In 2013 , Sanjay Leela Bhansali directed the Bollywood film Goliyon Ki Raasleela Ram - Leela , a contemporary version of the play. which was a commercial and critical success. \n|user|: Hamnet\n|assistant|: Hamnet is the name of William Shakespeare's only son. He was born in 1585 and died in 1596 at the age of 11. The death of Hamnet had a profound impact on Shakespeare, and some literary scholars believe that it may have influenced his work, particularly his play \"Hamlet,\" which was written around the same time. However, this connection is still a subject of debate, most scholars rejecting the idea that the play is in any way connected to Shakespeare's son.\n|user|: What was Shakespeare's most popular historical play?\n|assistant|: Based on the provided document, Shakespeare's most popular historical play was Henry IV Part 1.\n|user|: A horse , a horse , my kingdom for a horse !\n|assistant|: The famous line \"A horse, a horse, my kingdom for a horse!\" is from Shakespeare's play Richard III. It is spoken by the character Richard, Duke of Gloucester, when he is unhorsed in the Battle of Bosworth Field, and realizes that he would give up his kingdom for a horse to continue fighting.\n|user|: Is Richard III historically accurate?\n|assistant|: Shakespeare's Richard III is a dramatic interpretation of history rather than a strict historical account. While the play is based on the true story of King Richard III of England, it contains numerous historical inaccuracies which can be attributed partly to Shakespeare 's sources, such as Holinshed 's Chronicles, and there is no doubt that Shakespeare drew heavily on Sir Thomas More 's account of Richard III as a criminal and tyrant as inspiration for his own rendering. Shakespeare and the Tudor chroniclers who influenced him, were obliged to portray the downfall of the Plantagenet House of York and the victory of the House of Tudor as good conquering evil. This is usually attributed to bias as a result of a new regime being in place. \n|user|: what is the most popular Shakespearean play in China?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "806376271_61081-62730-0-1649",
+          "text": "Romeo and Juliet\nThe play has been widely adapted for TV and film . In 1960 , Peter Ustinov 's cold - war stage parody , Romanoff and Juliet was filmed . The 1961 film of West Side Story -- set among New York gangs -- featured the Jets as white youths , equivalent to Shakespeare 's Montagues while the Sharks , equivalent to the Capulets , are Puerto Rican . The 1994 film The Punk uses both the rough plot outline of Romeo and Juliet and names many of the characters in ways that reflect the characters in the play . In 2006 , Disney 's High School Musical made use of Romeo and Juliet 's plot , placing the two young lovers in different high school cliques instead of feuding families . Film - makers have frequently featured characters performing scenes from Romeo and Juliet . The conceit of dramatising Shakespeare writing Romeo and Juliet has been used several times , including John Madden 's 1998 Shakespeare in Love , in which Shakespeare writes the play against the backdrop of his own doomed love affair . An anime series produced by Gonzo and SKY Perfect Well Think , called Romeo x Juliet , was made in 2007 and the 2013 version is the latest English - language film based on the play . In 2013 , Sanjay Leela Bhansali directed the Bollywood film Goliyon Ki Raasleela Ram - Leela , a contemporary version of the play which starred Ranveer Singh and Deepika Padukone in leading roles . The film was a commercial and critical success . In February 2014 , BroadwayHD released a filmed version of the 2013 Broadway Revival of Romeo and Juliet . The production starred Orlando Bloom and Condola Rashad . The film was released internationally in April 2014 .",
+          "title": "Romeo and Juliet",
+          "score": 25.503117,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "no",
+                "timestamp": 1724089419
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Were Shakespeare's plays popular when he was alive?\n|assistant|: Yes, based on the provided document, Shakespeare's plays were popular during his lifetime.  Hamlet appears to have been his fourth most popular play at that time, surpassed only by Henry IV Part 1 , Richard III and Pericles. Romeo and Juliet is also known to have been extremely popular then, so much so that it was performed outside of England as well, in N\u00f6rdlingen in 1604.\n|user|: How many film adaptations of Hamlet are there?\n|assistant|: I do not have specific information about the exact number of film adaptations of Hamlet. However, the earliest screen success recorded for Hamlet was Sara Bernhardt's 5-minute film of the fencing scene, which was produced in 1900. The film was an early attempt at combining sound and film , music and words were recorded on phonograph records , to be played along with the film . Seven silent versions were released from 1907-1921. Laurence Olivier adapted, produced, directed and starred in his screen version in 1948. Tony Richardson directed  the first Hamlet film in color in 1969. Franco A version by Franco Zeffirelli, with Mel Gibson and Glenn Close came out in 1990, and Kenneth Branagh's version was released in 1996. A version set in contemporary Manhattan and starring Ethan Hawke dates back to 2000. There have also been several films that transposed the general storyline of Hamlet or elements thereof to other settings . For example , the 2014 Bollywood film Haider is an adaptation set in Kashmir . There have also been many films which included performances of scenes from Hamlet as a play - within - a-film .\n|user|: What about Romeo and Juliet?\n|assistant|: Just like Hamlet, Romeo and Juliet has been adapted multiple times for the small and large screens. It may be the most filmed play of all time, with notable theatrical releases such as George Cukor's 1936 production, Franco Zeffirelli's 1968 version, and Baz Luhrmann's 1996 MTV-inspired Romeo + Juliet. The play was first filmed in the silent era by Georges M\u00e9li\u00e8s, although his film is now lost. The first sound recording of the play on film was in The Hollywood Revue of 1929, where John Gilbert recited the balcony scene opposite Norma Shearer. In 1960 , Peter Ustinov 's cold - war stage parody , Romanoff and Juliet was filmed. film A popular film of a musical theatre adaptation, West Side Story was made in 1961 . This version updated the setting to mid-20th - century New York City and the warring families to ethnic gangs. Other musical adaptations include Terrence Mann 's 1999 rock musical William Shakespeare 's Romeo and Juliet , co-written with Jerome Korman , G\u00e9rard Presgurvic 's 2001 Rom\u00e9o et Juliette , de la Haine \u00e0 l'Amour and Riccardo Cocciante 's 2007 Giulietta & Romeo . In 2013 , Sanjay Leela Bhansali directed the Bollywood film Goliyon Ki Raasleela Ram - Leela , a contemporary version of the play. which was a commercial and critical success. \n|user|: Hamnet\n|assistant|: Hamnet is the name of William Shakespeare's only son. He was born in 1585 and died in 1596 at the age of 11. The death of Hamnet had a profound impact on Shakespeare, and some literary scholars believe that it may have influenced his work, particularly his play \"Hamlet,\" which was written around the same time. However, this connection is still a subject of debate, most scholars rejecting the idea that the play is in any way connected to Shakespeare's son.\n|user|: What was Shakespeare's most popular historical play?\n|assistant|: Based on the provided document, Shakespeare's most popular historical play was Henry IV Part 1.\n|user|: A horse , a horse , my kingdom for a horse !\n|assistant|: The famous line \"A horse, a horse, my kingdom for a horse!\" is from Shakespeare's play Richard III. It is spoken by the character Richard, Duke of Gloucester, when he is unhorsed in the Battle of Bosworth Field, and realizes that he would give up his kingdom for a horse to continue fighting.\n|user|: Is Richard III historically accurate?\n|assistant|: Shakespeare's Richard III is a dramatic interpretation of history rather than a strict historical account. While the play is based on the true story of King Richard III of England, it contains numerous historical inaccuracies which can be attributed partly to Shakespeare 's sources, such as Holinshed 's Chronicles, and there is no doubt that Shakespeare drew heavily on Sir Thomas More 's account of Richard III as a criminal and tyrant as inspiration for his own rendering. Shakespeare and the Tudor chroniclers who influenced him, were obliged to portray the downfall of the Plantagenet House of York and the victory of the House of Tudor as good conquering evil. This is usually attributed to bias as a result of a new regime being in place. \n|user|: what is the most popular Shakespearean play in China?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "840297813_32143-33481-0-1338",
+          "text": "Shakespeare's reputation\nIn the years of tentative political and economic liberalization after the death of Mao in 1976 , Shakespeare became popular in China . The very act of putting on a play by Shakespeare , formerly condemned as a `` bourgeois Western imperialist author '' whom no Chinese could respect , was in and of itself an act of quiet dissent . Of all Shakespeare 's plays , the most popular in China in the late 1970s and 1980s was Macbeth , as Chinese audiences saw in a play first performed in England in 1606 and set in 11th century Scotland a parallel with the Great Proletarian Cultural Revolution of the late 1960s . The violence and bloody chaos of Macbeth reminded Chinese audiences of the violence and bloody chaos of the Cultural Revolution , and furthermore , the story of a national hero becoming a tyrant complete with a power - hungry wife was seen as a parallel with Mao Zedong and his wife , Jiang Qing . Reviewing a production of Macbeth in Beijing in 1980 , one Chinese critic , Xu Xiaozhong praised Macbeth as the story of `` how the greed for power finally ruined a great man '' . Another critic , Zhao Xun wrote `` Macbeth is the fifth Shakespearean play produced on the Chinese stage after the smashing of the Gang of Four . This play of conspiracy has always been performed at critical moments in the history of our nation '' .",
+          "title": "Shakespeare's reputation",
+          "score": 20.952818,
+          "feedback": {
+            "relevant": {
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "yes",
+                "timestamp": 1724089917
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "macbeth china"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "I don't have specific information regarding the most popular Shakespearean play in China. However, Shakespeare's works have been studied and performed in China since the late Qing Dynasty, and his plays have been translated into Chinese multiple times. Among his works, Romeo and Juliet, Hamlet, and Macbeth are often performed and well-received in China."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "7ee1aecf-492d-4847-a436-3db915c57d2e",
+      "status": "created",
+      "timestamp": 1724090168
+    },
+    {
+      "author": "87334bc6-dd39-4565-ae2b-832e60a24b08",
+      "status": "accepted",
+      "timestamp": 1725999361
+    },
+    {
+      "author": "2077e44f-68bd-4df7-89a1-27ac26e1eb9a",
+      "status": "edited",
+      "timestamp": 1726857540
+    },
+    {
+      "author": "2077e44f-68bd-4df7-89a1-27ac26e1eb9a",
+      "status": "accepted",
+      "timestamp": 1726857659
+    }
+  ],
+  "editor": "2077e44f-68bd-4df7-89a1-27ac26e1eb9a",
+  "domain": "mt-rag-clapnq-elser-512-100-20240503",
+  "reviewer": "2077e44f-68bd-4df7-89a1-27ac26e1eb9a"
+}

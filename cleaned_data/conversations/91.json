@@ -1,0 +1,1240 @@
+{
+  "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-fiqa-beir-elser-512-100-20240501",
+      "size": "61022"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "Following an investment guru a good idea?",
+      "timestamp": 1723549347,
+      "enrichments": {
+        "Question Type": [
+          "Explanation",
+          "Opinion"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Following an investment guru can be a good idea if you can afford the time and are looking for more in-depth, fun investment tips. However, it's crucial to understand what you're investing in, including the company's products, and to buy stock in good companies at good prices, considering factors like price to earnings, price to revenue, and price to book. Therefore, while following an investment guru can provide valuable insights, it's essential to conduct your own research and make informed decisions based on your understanding and investment goals. Blindly following other investors, including big investors or gurus, is not recommended, as their strategies may differ from yours. Instead, consider finding someone with similar goals to help guide your investment decisions.",
+      "timestamp": 1723549351,
+      "contexts": [
+        {
+          "document_id": "311117-0-651",
+          "text": "\nIf it's money you can lose, and you're young, why not?  Another would be motifinvesting where you can invest in ideas as opposed to picking companies. However, blindly following other investors is not a good idea.  Big investors strategies might not be similar to yours, they might be looking for something different than you.  If you're going to do that, find someone with similar goals. Having investments, and a strategy, that you believe in and understand is paramount to investing.  It's that belief, strategy, and understanding that will give you direction.  Otherwise you're just going to follow the herd and as they say, sheep get slaughtered.",
+          "score": 15.846478,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723549771
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Following an investment guru a good idea?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "565827-0-421",
+          "text": "\n\"If you can afford the time and are looking for more deep, and fun, investment tips, check out http://gurufocus.com. Great for more fundamental analysis of \"\"Intelligent Investor\"\" type Benjamin Graham-style businesses.  No use scatter-shooting the stock exchange hoping to find good value businesses. Even blue-chips have an increasingly uncertain future (except IMHO certain world dominators like KO, WMT, XO and MCD).\"",
+          "score": 14.549739,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723549774
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Following an investment guru a good idea?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "444261-0-404",
+          "text": "\nThe key to good investing is you need to understand what you are investing in. That is, if you are buying a company that makes product X, you need to understand that. It is a good idea to buy stock in good companies but that is not sufficient. You need to buy stock in good companies at good prices. That means you need to understand things like price to earnings, price to revenue and price to book. Bob",
+          "score": 13.225456,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723549777
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Following an investment guru a good idea?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "According to the documents, following an investment guru can be a good idea if you can afford the time and are looking for more in-depth, fun investment tips. However, it's important to remember that even blue-chip companies have an increasingly uncertain future. Additionally, it's crucial to understand what you're investing in, including the company's products, and to buy stock in good companies at good prices, considering factors like price to earnings, price to revenue, and price to book. Therefore, while following an investment guru can provide valuable insights, it's essential to conduct your own research and make informed decisions based on your understanding and investment goals. Blindly following other investors, including big investors or gurus, is not recommended, as their strategies may differ from yours. Instead, consider finding someone with similar goals to help guide your investment decisions."
+    },
+    {
+      "speaker": "user",
+      "text": "name a few gurus",
+      "timestamp": 1723549803,
+      "enrichments": {
+        "Question Type": [
+          "Factoid",
+          "Opinion"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I don't have a lot of information about individual investment gurus to recommend, but a classic investing guru is Benjamin Graham.  Also Warren Buffett, the CEO of Berkshire Hathaway, is certainly one, who looks for value and ignores hype, greed, and fear.  The websites like Gurufocus (<http://gurufocus.com>) may provide resources for fundamental analysis of \"Intelligent Investor\" style businesses which can help you identify potential investment gurus.",
+      "timestamp": 1723549806,
+      "contexts": [
+        {
+          "document_id": "565827-0-421",
+          "text": "\n\"If you can afford the time and are looking for more deep, and fun, investment tips, check out http://gurufocus.com. Great for more fundamental analysis of \"\"Intelligent Investor\"\" type Benjamin Graham-style businesses.  No use scatter-shooting the stock exchange hoping to find good value businesses. Even blue-chips have an increasingly uncertain future (except IMHO certain world dominators like KO, WMT, XO and MCD).\"",
+          "score": 18.57312,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723551119
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Following an investment guru a good idea?\n|assistant|: Following an investment guru can be a good idea if you can afford the time and are looking for more in-depth, fun investment tips. However, it's crucial to understand what you're investing in, including the company's products, and to buy stock in good companies at good prices, considering factors like price to earnings, price to revenue, and price to book. Therefore, while following an investment guru can provide valuable insights, it's essential to conduct your own research and make informed decisions based on your understanding and investment goals. Blindly following other investors, including big investors or gurus, is not recommended, as their strategies may differ from yours. Instead, consider finding someone with similar goals to help guide your investment decisions.\n|user|: name a few gurus"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "230733-0-459",
+          "text": "\n\"Classic investing guru Benjamin Graham defines \"\"An investment operation is one which, upon thorough analysis, promises safety of principal and an adequate return.\"\" He contrasts this with speculation which is anything else (no thorough analysis, no safety of principal, or no adequate return). The word \"\"adequate\"\" is important, since it contrasts adequate returns with those that are either lower than needed or higher than necessary to reach your goals.\"",
+          "score": 13.423473,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723551122
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "investment gurus"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "520677-0-989",
+          "text": "\nBuffett is a value investor. His goal is to buy good companies when the market is overly worried and prices them below intrinsic value. When the market is highly priced it is much more difficult for him to find things that he thinks are at an attractive price. When people are very worried and the market has crashed, stocks are then priced below their intrinsic value and he can use the cash he keeps in the company to make attractive purchases. Remember that Buffett is not concerned with the ups and downs of the price of Berkshire Hathaway stock, he is concerned with the economic value of the assets that the company owns. So if all stock prices crash and he can buy things that are at bargain prices, he is happy no matter what Berkshire stock price does in the short run. One consequence of value investing is that because you are buying assets at bargain prices, the total value of your assets drops less in a bear market than the highly priced stuff that drives the major indexes.",
+          "score": 17.328133,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723551124
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "warren buffett"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "3533-0-983",
+          "text": "\n\"Warren Buffet isn't using any special sauce. He looks for value and ignores hype, greed, and fear. He buys what he knows and looks for companies that generate cash and/or are available for a discount of their true value. He explains what he looks for in a company and his reasons for buying it. He has said on numerous occasions, \"\"I look for intrinsic value.\"\" (So there's your formula.) Human nature is often  irrational and investing seems to bring out the fear and greed. I've always been a bit surprised when people ascribe some sort of sixth sense to Warren Buffet's success. He just works hard and doesn't deviate from a sound strategy. \"\"Be fearful when others are greedy and greedy when others are fearful.\"\" And of course, rule one: \"\"Don't lose money.\"\" It's not a joke. How many people buy high and sell low because of fear and greed? When the market tanks, buy more. Finally, anyone can invest with Buffet without all the work. Just buy a few shares of BRK.A or BRK.B.\"",
+          "score": 19.41368,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723551127
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "warren buffett hype"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "I don't have specific information about individual investment gurus to recommend. However, websites like Gurufocus (<http://gurufocus.com>) provide analysis and insights from various investment gurus, focusing on fundamental analysis of \"Intelligent Investor\" style businesses. Remember that following any guru should be done with caution and thorough understanding, as their investment strategies might not align with your personal goals and risk tolerance. Always do your own research and consider seeking advice from financial advisors before making investment decisions."
+    },
+    {
+      "speaker": "user",
+      "text": "Those gurus average return?",
+      "timestamp": 1723551166,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Standalone Type": [
+          "Non-standalone"
+        ],
+        "Ambiguity Type": [
+          "Needs Context from Chatbot Response",
+          "Coreference"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I don't have specific information on the average returns of investment gurus. However, Warren Buffet, arguably the most successful investor ever lived, has averaged returns of around 21% throughout his 40 years in business.",
+      "timestamp": 1723551170,
+      "contexts": [
+        {
+          "document_id": "411084-0-851",
+          "text": "\n\"Consultant, I commend you for thinking about your financial future at such an early age. Warren Buffet, arguably the most successful investor ever lived, and the best known student of Ben Graham has a very simple advice for non-professional investors:  \"\"Put 10% of the cash in short-term government bonds and 90% in a very low-cost S&P 500 index fund. (I suggest Vanguard\u2019s.)\"\" This quote is from his 2013 letter to shareholders. Source: http://www.berkshirehathaway.com/letters/2013ltr.pdf Buffet's annual letters to shareholders are the wealth of useful and practical wisdom for building one's financial future. The logic behind his advice is that most investors cannot consistently pick stock \"\"winners\"\", additionally, they are not able to predict timing of the market; hence, one has to simply stay in the market, and win over in the long run.\"",
+          "score": 25.919733,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723552368
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Following an investment guru a good idea?\n|assistant|: Following an investment guru can be a good idea if you can afford the time and are looking for more in-depth, fun investment tips. However, it's crucial to understand what you're investing in, including the company's products, and to buy stock in good companies at good prices, considering factors like price to earnings, price to revenue, and price to book. Therefore, while following an investment guru can provide valuable insights, it's essential to conduct your own research and make informed decisions based on your understanding and investment goals. Blindly following other investors, including big investors or gurus, is not recommended, as their strategies may differ from yours. Instead, consider finding someone with similar goals to help guide your investment decisions.\n|user|: name a few gurus\n|assistant|: I don't have specific information about individual investment gurus to recommend but a classic investing guru Benjamin Graham is one of them.  Also Warren Buffett, the CEO of Berkshire Hathaway, is certainly the one, who looks for value and ignores hype, greed, and fear.  The websites like Gurufocus (<http://gurufocus.com>) may provide resources for fundamental analysis of \"Intelligent Investor\" style businesses which can help you identify potential investment gurus.\n|user|: Those gurus average return?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "520677-0-989",
+          "text": "\nBuffett is a value investor. His goal is to buy good companies when the market is overly worried and prices them below intrinsic value. When the market is highly priced it is much more difficult for him to find things that he thinks are at an attractive price. When people are very worried and the market has crashed, stocks are then priced below their intrinsic value and he can use the cash he keeps in the company to make attractive purchases. Remember that Buffett is not concerned with the ups and downs of the price of Berkshire Hathaway stock, he is concerned with the economic value of the assets that the company owns. So if all stock prices crash and he can buy things that are at bargain prices, he is happy no matter what Berkshire stock price does in the short run. One consequence of value investing is that because you are buying assets at bargain prices, the total value of your assets drops less in a bear market than the highly priced stuff that drives the major indexes.",
+          "score": 25.69974,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1723552391
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Following an investment guru a good idea?\n|assistant|: Following an investment guru can be a good idea if you can afford the time and are looking for more in-depth, fun investment tips. However, it's crucial to understand what you're investing in, including the company's products, and to buy stock in good companies at good prices, considering factors like price to earnings, price to revenue, and price to book. Therefore, while following an investment guru can provide valuable insights, it's essential to conduct your own research and make informed decisions based on your understanding and investment goals. Blindly following other investors, including big investors or gurus, is not recommended, as their strategies may differ from yours. Instead, consider finding someone with similar goals to help guide your investment decisions.\n|user|: name a few gurus\n|assistant|: I don't have specific information about individual investment gurus to recommend but a classic investing guru Benjamin Graham is one of them.  Also Warren Buffett, the CEO of Berkshire Hathaway, is certainly the one, who looks for value and ignores hype, greed, and fear.  The websites like Gurufocus (<http://gurufocus.com>) may provide resources for fundamental analysis of \"Intelligent Investor\" style businesses which can help you identify potential investment gurus.\n|user|: Those gurus average return?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "557350-0-306",
+          "text": "\nYes definitely  Warren Buffet averaged returns of only around 21% throughout his 40 years in business.  ROE of 23% is probably more than double the ROE of most companies , whats more as the saying goes its easier to grow sales from 1 million to 100 million than to grow sales from 100 million to 10 billion",
+          "score": 15.3448305,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723552355
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "warren buffett"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "I don't have specific information on the average returns of investment gurus like Benjamin Graham or Warren Buffett. However, it's important to note that past performance is not indicative of future results. While these gurus have achieved significant success in the past, there is no guarantee that their strategies will continue to perform well in the future. It's crucial to conduct thorough research and make informed decisions based on your own investment goals and risk tolerance."
+    },
+    {
+      "speaker": "user",
+      "text": "any online self-help?",
+      "timestamp": 1723553231,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Standalone Type": [
+          "Non-standalone"
+        ],
+        "Ambiguity Type": [
+          "Ellipsis"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, for self-service type online customers, some recommended include OptionsXpress, Marketclub.com, where you can watch and learn from experienced traders like Adam Hewison, and Corey Rosenblum's blog at blog.afraidtotrade.com that offers valuable content focusing on market internals and short-term trades. Trending123.com, run by successful trader John Lansing, provides a live daily chat room for learning from large account day traders. Additionally, seekingalpha.com gives a quick overview and offers free articles on portfolio allocation, and WorldCap which is a mobile solution to analyze global stocks at FactSet and S&P CapitalIQ. Further, YouTube channels and Google searches can help you learn about various aspects of technical analysis and trading strategies.   Remember that no matter how much you learn from others, conducting your own research and making informed decisions based on your understanding and investment goals is crucial.",
+      "timestamp": 1723553238,
+      "contexts": [
+        {
+          "document_id": "405217-0-326",
+          "text": "\nFor self-service type online customers, OptionsXpress gives me far better trading features(like technicals advanced conditions) and tools, ACH money management & scheduling, fullfillment too. $9 stock trades.  I don't know if they yet share Schwab's (their new parent company?) commission-free ETFs getting so trendy nowadays.",
+          "score": 16.854189,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723555865
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "online free self-help stock analysis "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "162884-0-1770",
+          "text": "\nA great way to learn is by watching then doing. I run a very successful technical analysis blog, and the first thing I like to tell my readers is to find a trader online who you can connect with, then watch them trade. I particularly like Adam Hewison, Marketclub.com - This is a great website, and they offer a great deal of eduction for free, in video format. They also offer further video based education through their ino.tv partner which is paid. Here is a link that has their free daily technical analysis based stock market update in video format. Marketclub Daily Stock Market Update Corey Rosenblum, blog.afraidtotrade.com - Corey is a Chartered Market Technician, and runs a fantastic technical analysis blog the focuses on market internals and short term trades. John Lansing, Trending123.com - John is highly successful trader who uses a reliable set of indicators and patterns, and has the most amazing knack for knowing which direction the markets are headed. Many of his members are large account day traders, and you can learn tons from them as well. They have a live daily chat room that is VERY busy. The other option is to get a mentor. Just about any successful trader will be willing to teach someone who is really interested, motivated, and has the time to learn. The next thing to do once you have chosen a route of education is to start virtual trading. There are many platforms available for this, just do some research on Google. You need to develop a trading plan and methodology for dealing with the emotions of trading. While there is no replacement for making real trades, getting some up front practice can help reduce your mistakes, teach you a better traders mindset, and help you with the discipline necessary to be a successful trader.",
+          "score": 15.658257,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723554094
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "online free self-help stock analysis "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "422453-0-296",
+          "text": "\nIf you are looking to analyze stocks and don't need the other features provided by Bloomberg and Reuters (e.g. derivatives and FX), you could also look at WorldCap, which is a mobile solution to analyze global stocks, at FactSet and S&P CapitalIQ.  Please note that I am affiliated with WorldCap.",
+          "score": 15.226231,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723555813
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "online free self-help stock analysis "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "240894-1731-2436",
+          "text": "\nThis article on seeking alpha: http://seekingalpha.com/article/112794-the-intrinsic-value-of-gold gives a quick overview, but it is also vague because gold can't be accurately priced. I wouldn't say that gold has zero intrinsic value because gold is not a business so traditional models are inappropriate, but I would say that gold *certainly * doesn't have a value of $1,500 and it's propped so high only because of investor expectation. In conclusion, I do not believe you can accurately state whether gold is undervalued or overvalued - you must make judgments based on what you think about the future of the market and of monetary policy, but there are too many variables to be accurate consistently.\"",
+          "score": 13.040183,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723555508
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "seeking alpha"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, there are several online resources available for self-help in trading and investing. Some recommended websites include Marketclub.com, where you can watch and learn from experienced traders like Adam Hewison. Corey Rosenblum's blog at blog.afraidtotrade.com offers valuable content focusing on market internals and short-term trades. Trending123.com, run by successful trader John Lansing, provides a live daily chat room for learning from large account day traders. Additionally, seekingalpha.com offers free articles on portfolio allocation, and YouTube channels and Google searches can help you learn about various aspects of technical analysis and trading strategies.\nFor beginners, it's essential to start with a solid foundation of knowledge. Books such as Security Analysis and The Intelligent Investor by Benjamin Graham, Reminiscences of a Stock Operator (Life of Jesse Livermore), and Memoirs, Popular Delusions and Madness of the Crowds by Charles Mackay are great starting points.\nOnce you have a basic understanding, consider using virtual trading platforms to practice and develop a trading plan and methodology. This can help you manage emotions and build the discipline necessary for successful trading.\nLastly, remember that no matter how much you learn from others, conducting your own research and making informed decisions based on your understanding and investment goals is crucial."
+    },
+    {
+      "speaker": "user",
+      "text": "I meant not online trading.. but training, right?",
+      "timestamp": 1723557011,
+      "enrichments": {
+        "Question Type": [
+          "Non-Question",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "For self-help in terms of investment training, there are several online resources available. Try online workshops that are relatively cheap but give you a glimpse of a particular subject: Shaw Academy, Udemy, Khan Academy, Investopedia, etc..  For a more hands-on approach, you might consider opening a paper trading account with a brokerage like ThinkOrSwim by TDAmeritrade, which allows you to practice trading without risking real money. Additionally, joining investment clubs or groups in your community can provide opportunities for learning from experienced investors and discussing investment ideas with like-minded individuals.",
+      "timestamp": 1723557015,
+      "contexts": [
+        {
+          "document_id": "578023-0-280",
+          "text": "\nIt's a good start that you want to self educate and get ahead of the curve. Try online workshops that are relatively cheap but give you a glimpse of a particular subject. Shaw Academy, Udemy, Khan Academy, etc..   This should help you in the spare time learn about other subjects.",
+          "score": 10.236571,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723557797
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "online free course Coursera, Udemy, and edX"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "90255-0-396",
+          "text": "\nI would like to specifically address your second question. There are a number of great resources available online, but I found that when I was first starting out the website Investopedia was a very helpful resource. There you will find a wide range of information regarding investing, investment vehicles, and glossaries of key terms with robust definitions to help you with the financial jargon.",
+          "score": 13.390616,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723557794
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Investopedia"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "301813-0-600",
+          "text": "\nInvestopedia does have tutorials about investments in different asset classes. Have you read them ? If you had heard of CFA, you can read their material if you can get hold of it or register for CFA. Their material is quite extensive and primarily designed for newbies.  This  is one helluva book and advice coming from persons who have showed and proved their tricks. And the good part is loads of advice in one single volume. And what they would suggest is probably opposite of what you would be doing in a hedge fund. And you can always trust google to fish out resources at the click of a button.",
+          "score": 11.79238,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723557806
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Investopedia"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "573708-0-2135",
+          "text": "\n\"A couple options that I know of: Interactive Brokers offers a \"\"paper trading\"\" mode to its account holders that allows you to start with a pretend stack of money and place simulated trades to test trading ideas. They also provide an API that allows you to interface with their platform programmatically for retrieving quotes, placing orders, and the such. As you noted, however, it's not free; you must hold a funded brokerage account in order to qualify for access to their platform. In order to maintain an account, there are minimums for required equity and monthly activity (measured in dollars that you spend on commissions), so you won't get access to their platform without having a decent amount of skin in the game. IB's native API is Java-based; IbPy is an unofficial wrapper that makes the interface available in Python. I've not used IB at all myself, but I've heard good things about their API and its accessibility via IbPy. Edit: IB now supports Python natively via their published API, so using IbPy is no longer needed, unless you wish to use Python 2.x. The officially supported API is based on Python 3. TD Ameritrade also offers an API that is usable by its brokerage clients. They do not offer any such \"\"paper trading\"\" mode, so you would need to \"\"execute\"\" transactions based on quotes at the corresponding trade times and then keep track of your simulated account history yourself. The API supports quote retrieval, price history, and trade execution, among other functions. TDA might be more attractive than IB if you're looking for a low-cost link into market data, as I believe their minimum-equity levels are lower. To get access, you'll need to sign up for an API developer account, which I believe requires an NDA. I don't believe there is an official Python implementation of the API, but if you're a capable Python writer, you shouldn't have trouble hooking up to the published interfaces. Some caveats: as when doing any strategy backtesting, you'll want to be sure to be pessimistic when doing so, so your optimism doesn't make your trades look more successful than they would be in the real world.",
+          "score": 16.835632,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723557925
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "paper trading account"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "44521-0-160",
+          "text": "\nTry ThinkOrSwim by TDAmeritrade. It allows you to paper trade with a powerful trading platform. There's also a mobile app so you can trade on the go. Good luck!",
+          "score": 13.809042,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723557938
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "TD Ameritrade paper trade"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "For self-help in terms of investment training, there are several online resources available. Coursera, Udemy, and edX offer courses on investing and finance that can help you better understand the markets and various investment strategies. Investopedia is also a valuable resource for learning about investing concepts and strategies. For a more hands-on approach, you might consider opening a paper trading account with a brokerage like TD Ameritrade or E*TRADE, which allows you to practice trading without risking real money. Additionally, joining investment clubs or groups in your community can provide opportunities for learning from experienced investors and discussing investment ideas with like-minded individuals."
+    },
+    {
+      "speaker": "user",
+      "text": "Is there a minimum amount required?",
+      "timestamp": 1723558933,
+      "enrichments": {
+        "Question Type": [
+          "Factoid",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The minimum amount required for investing in mutual funds, including index funds, typically ranges from a few hundred to a few thousand dollars. For example, a common minimum investment is $3000 for a taxable investment account and often lower for IRA and 401k accounts. However, some companies may allow for smaller minimum investments if you set up an automatic investment plan or if you invest in a particular type of fund, such as an S&P 500 Index fund or a Total Market Index fund. It's important to check the specific requirements for the fund you're interested in before making an investment. Regarding the initial investment for most funds, $5000 should be enough for 99.9% of all funds. ",
+      "timestamp": 1723558938,
+      "contexts": [
+        {
+          "document_id": "376485-0-1982",
+          "text": "\n\"Congratulations on deciding to save money and choosing to invest it. One thing to know about mutual funds including index funds is that they typically require a minimum investment of a few thousand dollars, $3000 being a typical amount, unless the investment is in an IRA in which case $1000 might be a minimum. In some cases, automated monthly investments of $50 or $100 might need to be set up if you are beginning with a small balance. There is nothing wrong with your approach. You now should go and look at the various requirements for specific index funds. The Fidelity and Vanguard families are good choices and both offer very low-cost index funds to choose from, but different funds can have different requirements regarding minimum investments etc. You also have a choice of which index you want to follow, the S&P 500 Index, MidCap Indexes, Small-Cap Indexes, Total Stock Market Indexes etc., but your choice might be limited  until you have more money to invest because of minimum investment rules etc.   Most important, after you have made your choice, I urge you to not look every day, or even every month, to see how your investment is doing. You will save yourself a lot of anxiety and will save yourself from making wrong decisions.  Far too many investors ignore the maxim \"\"Buy Low, Sell High\"\" and pull money out of what should be long-term investments at the first flicker of a downturn and end up buying high and selling low. Finally, the time is approaching when most stock funds will be declaring dividends and capital gains distributions. If you invest now, you may end up with a paper profit on which you will have to pay taxes (in  non-tax-advantaged accounts) on your 2012 tax return (this is called \"\"buying a dividend\"\"), and so you might want to spend some time investigating now, but actually make the investment in late December after your chosen fund has made its distributions (the date for this will be on the fund's web site) or in early 2013.\"",
+          "score": 17.861338,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723559274
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "minimum amount for investment"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "424131-0-730",
+          "text": "\nYou do not need to have 'high net value', and yes, you can invest in it. Typically, fund companies require a minimum investment, that could be 100, it could be a 1000. 5000 should be enough for 99.9 % of all funds for an initial investment. What you need is an investment company that manages the account for you. I cannot name those for your country, but they should be easy to find (companies like IMG, and Fidelity might serve your country). You then open an account with the company of your choice, transfer the money, and tell them which fund it shall go in; all this is possible online. You can also go to see an agent in person, and he will fill the forms for you, and handle all the action, but he might take a fee for it.",
+          "score": 17.81664,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723559271
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "minimum amount for investment"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "219208-0-1350",
+          "text": "\nMany mutual fund companies (including Vanguard when I checked many years ago) require smaller minimum investments (often $1000) for IRA and 401k accounts.  Some also allow for smaller investments into their funds for  IRA accounts if you set up an automatic investment plan that contributes  a fixed amount of money each month or each quarter.  On the other hand,  many mutual fund companies charge an annual account maintenance fee ($10? $20? $25? more?) per fund for IRA investments unless the balance in the fund is above a certain amount (often $5K or $10K$).  This fee can be paid in cash or deducted from the IRA investment, and the former option is vastly better. So, diversification into multiple funds while starting out with an IRA is not that great an idea. It is far better to get diversification through investment in an S&P 500 Index fund (VFINX since you won't have access to @JoeTaxpayer's VIIIX) or a Total Market Index fund or, if you prefer, a Target Retirement Fund, and then branch out into other types of mutual funds as your investment grows through future contributions and dividends etc. To answer your question about fund minimums, the IRA account is separate from a taxable investment account, and the minimum rule applies to each separately. But, as noted above, there often are smaller minimums for tax-deferred accounts.",
+          "score": 17.442326,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723559268
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "minimum amount for investment"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The minimum amount required for investing in mutual funds, including index funds, typically ranges from a few hundred to a few thousand dollars. For example, a common minimum investment is $3000 for a taxable investment account and often lower for IRA and 401k accounts. However, some companies may allow for smaller minimum investments if you set up an automatic investment plan or if you invest in a particular type of fund, such as an S&P 500 Index fund or a Total Market Index fund. It's important to check the specific requirements for the fund you're interested in before making an investment.\nRegarding the initial investment for most funds, $5000 should be enough for 99.9% of all funds. To start investing, you would need to open an account with an investment company that manages the account for you, and then transfer the money and specify which fund it should go in. This process can be done online or in person with the help of an agent.\nIt's worth noting that diversification into multiple funds while starting out with an IRA may not be the best idea due to the annual account maintenance fee that many mutual fund companies charge per fund for IRA investments. Therefore, it's recommended to get diversification through investment in a single fund, such as an S&P 500 Index fund or a Total Market Index fund, and then branch out into other types of mutual funds as your investment grows through future contributions and dividends."
+    },
+    {
+      "speaker": "user",
+      "text": "don't know if I go with IRA or 401K...",
+      "timestamp": 1723560470,
+      "enrichments": {
+        "Question Type": [
+          "Comparative",
+          "Non-Question",
+          "Opinion"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "A 401K (pre-tax or Roth) account or an IRA (Deductible or Roth) account is a retirement account. Traditional IRA and 401(k) accounts allow you to make pre-tax contributions, giving you an immediate tax deduction when you contribute. Roth IRA, Roth 401(k) are funded with after tax money.  Choosing between an IRA and a 401K depends on your personal circumstances and preferences. Here are some key points to consider: * A 401K is typically offered by your employer, while an IRA is an individual retirement account that you set up for yourself. * A 401K may have more limited investment options compared to an IRA, but it may also offer matching contributions from your employer, a free money to you.  * If you expect to be in a lower tax bracket in retirement than you are now, a traditional IRA or 401K may be a better choice, as it allows you to defer taxes until retirement. It's a good idea to start with the 401K offered by your company, especially if they have matching funds. Ultimately, the best choice for you will depend on your individual circumstances, so it's a good idea to consult with a financial advisor or do further research to determine the best option for you.",
+      "timestamp": 1723560472,
+      "contexts": [
+        {
+          "document_id": "534795-0-1034",
+          "text": "\n401Ks and IRAs are types of retirement accounts. They have rules regarding maximum amount of investments per year; who can invest; destructibility; and the tax treatment of the growth.  Stock, bonds, mutual funds, ETFs are all types of investments that can exist either inside or outside of the retirement account. Some 401Ks restrict the type of investments you can have, others allow you to own almost anything. Any investment is a risk, and there is no guarantee that it will grow.  Look around the site for beginning investment advice. You should start with the 401K offered by your company especially if they have matching funds. That is free money. Many suggest you invest enough to get the match, then invest with an IRA. Look into IRAs because under US tax law you can still make a 2013 investment up until tax day 2014. Take the time before tax day to decide on Roth or Regular IRA.   The more exotic investments take more time to understand and should not be a concern until you have laid out your basic retirement accounts.",
+          "score": 14.574999,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723562008
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "IRA and 401K"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "448260-0-1360",
+          "text": "\nA 401K (pre-tax or Roth) account or an IRA (Deductible or Roth) account is a retirement account. Which means you delay paying taxes now on your deposits, or you avoid paying taxes on your earnings later.  But a retirement account doesn't  perform any different than any other account year-to-year. Being a retirement account doesn't  dictate a type of investment. You can invest in a certificate of deposit that is guaranteed to make x% this year; or you can invest in stocks, bonds, mutual funds that infest in stocks or bonds. Those stocks and bonds can be growth focused, or income focused; they can be from large companies or small companies; US companies or international companies. Or whatever mix you want. The graph in your question shows that if you invest early in your adulthood, and keep investing, and you make the average return you should make more money than starting later. But a couple of notes:  So to your exact questions: An S&P 500 investment should perform exactly the same this year if it is in a 401K, IRA, or taxable account With a few exceptions:  Yes any investment can lose money. The last 6 months have been volatile and the last month and a half especially so. A retirement account isn't any different. An investment in mutual fund X in a retirement account is just as depressed a one in the same fund but from a taxable account.",
+          "score": 13.698123,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723561562
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "IRA and 401K"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "94496-0-2276",
+          "text": "\nFirst of all, there are some differences between the retirement accounts that you mentioned regarding taxes. Traditional IRA and 401(k) accounts allow you to make pre-tax contributions, giving you an immediate tax deduction when you contribute. Roth IRA, Roth 401(k) are funded with after tax money, and a non-retirement account is, of course, also funded with after tax money. So if you are looking for the immediate tax deduction, this is a point in favor of the retirement accounts. Roth IRA & Roth 401(k) accounts allow the investment to grow tax-free, which means that the growth is not taxed, even when taking the investment out at retirement. With Traditional IRA and 401(k) accounts, you need to pay tax on the gains realized in the account when you withdraw the money, just as you do with a non-retirement account. This is a point in favor of the Roth retirement accounts. To answer your question about capital gains, yes, it is true that you do not have a capital gain until an investment is sold. So, discounting the contribution tax deductions of the retirement accounts, if you only bought individual stocks that never paid a dividend, and never sold them until retirement, you are correct that it really wouldn't matter if you had it in a regular brokerage account or in a traditional IRA. However, even people dedicated to buy-and-hold rarely actually buy only individual stocks and hold them for 30 years. There are several different circumstances that will generally happen in the time between now and when you want to withdraw the money in retirement that would be taxable events if you are not in a retirement account: If you sell an investment and buy a different one, the gains would be taxable. If you want to rebalance your holdings, this also involves selling a portion of your investments. For example, if you want to maintain an 80% stock/20% bond ratio, and your stock values have gone up to 90%, you might want to sell some stock and buy bonds. Or if you are getting closer to retirement, you might decide to go with a higher percentage of bonds. This would trigger capital gains. Inside a mutual fund, anytime the management sells investments inside the fund and realizes capital gains, these gains are passed on to the investors, and are taxable.",
+          "score": 13.168798,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723561674
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "IRA and 401K"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Choosing between an IRA and a 401K depends on your personal circumstances and preferences. Here are some key points to consider:\n* A 401K is typically offered by your employer, while an IRA is an individual retirement account that you set up for yourself.\n* A 401K may have more limited investment options compared to an IRA, but it may also offer matching contributions from your employer.\n* An IRA generally has more investment options and lower fees than a 401K, but it does not offer matching contributions.\n* If you expect to be in a higher tax bracket in retirement than you are now, a Roth IRA may be a good choice, as it allows you to pay taxes now instead of later.\n* If you expect to be in a lower tax bracket in retirement than you are now, a traditional IRA or 401K may be a better choice, as it allows you to defer taxes until retirement.\nIt's a good idea to start with the 401K offered by your company, especially if they have matching funds, as this is essentially free money. Then, consider investing with an IRA once you have maxed out your 401K contributions. Under US tax law, you can still make a 2013 investment in an IRA up until tax day 2014.\nUltimately, the best choice for you will depend on your individual circumstances, so it's a good idea to consult with a financial advisor or do further research to determine the best option for you."
+    },
+    {
+      "speaker": "user",
+      "text": "what is a myx amount you can accumulate for 401K",
+      "timestamp": 1723562383,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The maximum amount you can contribute to a 401(k) in 2016 was $18,000. However, if you are aged 50 or more, you are allowed a catch-up of $6000 in addition to the $18,000 max deferral amount. ",
+      "timestamp": 1723562385,
+      "contexts": [
+        {
+          "document_id": "159921-0-222",
+          "text": "\nPoster forgot to mention his age (range). If you're aged 50 or more, you are allowed a catch-up of $6000 in addition to the $18000 max deferral amount to your 401k (2015-2017) IRS Retirement Topics - Catch-Up Contributions",
+          "score": 20.381372,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723563011
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "max amount 401K"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "441632-0-459",
+          "text": "\nYou're correct about the 401(k). Your employer's contributions don't count toward the $18k limit. You're incorrect about the IRAs though. You can contribute a maximum of $5500 total across IRA and Roth IRA, not $5500 to each. There are also limits once you reach higher levels of income. from IRS.gov: Retirement Topics - IRA Contribution Limits: For 2015, 2016, and 2017, your total contributions to all of your traditional and Roth IRAs cannot be more than:",
+          "score": 20.570831,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723563005
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "max amount 401K"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "17166-0-1508",
+          "text": "\nAccording to the 401K information from the IRS' website, it seems that you could seemingly get away with a salary as low as $53,000. It's tough, and I'd suggest speaking with an Accounting professional to get the clear answers, because as Brick's answer suggests, the IRS isn't super clear about it.  An excerpt from a separate page regarding 401K contributions: The annual additions paid to a participant\u2019s account cannot exceed the   lesser of: There are separate, smaller limits for SIMPLE 401(k) plans. Example 1: Greg, 46, is employed by an employer with a 401(k) plan and   he also works as an independent contractor for an unrelated business.   Greg sets up a solo 401(k) plan for his independent contracting   business. Greg contributes the maximum amount to his employer\u2019s 401(k)   plan for 2015, $18,000. Greg would also like to contribute the maximum   amount to his solo 401(k) plan. He is not able to make further   elective deferrals to his solo 401(k) plan because he has already   contributed his personal maximum, $18,000. He has enough earned income   from his business to contribute the overall maximum for the year,   $53,000. Greg can make a nonelective contribution of $53,000 to his   solo 401(k) plan. This limit is not reduced by the elective deferrals   under his employer\u2019s plan because the limit on annual additions   applies to each plan separately. https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-401k-and-profit-sharing-plan-contribution-limits",
+          "score": 20.44812,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723562961
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "max amount 401K"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The maximum amount you can contribute to a 401(k) in 2016 was $18,000. However, if you are aged 50 or more, you are allowed a catch-up of $6000 in addition to the $18,000 max deferral amount. Employer contributions do not count towards this limit.\nIn the case of Greg, mentioned in the document, if he has already contributed $18,000 to his employer's 401(k) plan, and he has enough earned income from his business, he can make a nonelective contribution of up to $53,000 to his solo 401(k) plan. This limit is not reduced by the elective deferrals under his employer's plan because the limit on annual additions applies to each plan separately.\nIt's important to note that these limits are subject to change and it's always a good idea to consult with a financial advisor or check the IRS website for the most recent information."
+    },
+    {
+      "speaker": "user",
+      "text": "I mean is there maximum amount I can accumulate in the account?  Or it is unlimited as far as contributions limits are kept.",
+      "timestamp": 1723563236,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I do not have specific information to confirm whether there is a maximum amount you can accumulate in a 401(k) account, or whether it is unlimited as long as you adhere to the annual contribution limits. But the available information suggests that it is possible to reach $8.2 million, after 40 years, if you max out the $18,000 (2017) contribution limit and get an additional $3,000 from an employer match (for a total monthly contribution of $1750), at 9% rate of return. ",
+      "timestamp": 1723563239,
+      "contexts": [
+        {
+          "document_id": "15841-0-1083",
+          "text": "\nI have worked for companies that have done this. One did have a match and the other did not. When they figured their profit at the end of the year a portion was given to the employees as a 401K deposit.  retirement-topics-401k-and-profit-sharing-plan-contribution-limits Total annual contributions (annual additions) to all of your accounts   in plans maintained by one employer (and any related employer) are   limited. The limit applies to the total of: elective deferrals employer matching contributions employer nonelective contributions allocations of forfeitures The annual additions paid to a participant\u2019s account cannot exceed the   lesser of: 100% of the participant's compensation, or $54,000 ($60,000 including catch-up contributions) for 2017;  $53,000   ($59,000 including catch-up contributions) for 2016. So as long as everything stays below that $54,000 limit you are good. In one case the decision was made by the company for the employee, the other company gave us the option of bonus check or 401K. I heard that most of the employees wanted the money in the 401K.",
+          "score": 18.074858,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723564436
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "401K annual contribution for 2022"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "323355-0-1643",
+          "text": "\nThe deadline for contributing to a 401K is the last paycheck paid in December. That may not be the last pay period that ends in December. For example if the last pay period ends on Friday the 30th and you get paid on Thursday January 5th, that check is the first in the new year.  The US government has rules regarding how quickly the money needs to be sent to the 401K trustee. It is possible that the money may get there after the first of the year, but the important date for you is the date of the last paycheck in December. The company form to set the contribution rate (it could also be on a website) will have a deadline to determine if the rate makes the next check or the one after that. The form will also have a maximum amount as a percentage of the check. Some could allow up to 100% but yours might not. So how much you can put in with the last paycheck or two is up to company policy and your pay rate. The company forms or website will describe how the company match works. If you were try and put as much as possible into a few checks, it is possible to hit the $18,000 yearly limit in just a small part of the year. In some companies that would mean that you could miss out on company match money, because that would never be more than x% of each check. For example if you were to put $3,000 per check with a base pay of $5,000 every two weeks and if the maximum company match was 5%. After 6 checks you would be done: you would have put in $18,000 and the company would have put in $250 x 6 or $1,500. If you were to spread the money over all 26 checks you would still put in $18,000 but the company would have put in $6,500.",
+          "score": 18.082888,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1723564438
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "401K annual contribution for 2022"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "467044-0-1711",
+          "text": "\nYes, quite easily, in fact.  You left a lot of numbers out, so lets start with some assumptions. If you are at the median of middle income families in the US that might mean $70,000/year. 15% of that is an investment of $875 per month. If you invest that amount monthly and assume a 6% return, then you will have a million dollars at approximately 57 years old. 6% is a very conservative number, and as Ben Miller points out, the S&P 500 has historically returned closer to 11%. If you assumed an aggressive 9% return, and continued with that $875/month for 40 years until you turn 65, that becomes $4 million. Start with a much more conservative $9/hr for $18,720 per year (40 hours * 52 weeks, no overtime). If that person saved 14% of his/her income or about $219 per month from 25 to 65 years old with the same 9%, they would still achieve $1 million for retirement. Is it much harder for a poor person? Certainly, but hopefully these numbers illustrate that it is better to save and invest even a small amount if that's all that can be done. High income earners have the most to gain if they save and the most to lose if they don't. Let's just assume an even $100,000/year salary and modest 401(k) match of 3%. Even married filing jointly a good portion of that salary is going to be taxed at the 25% rate. If single you'll be hitting the 28% income tax rate.  If you can max out the $18,000 (2017) contribution limit and get an additional $3,000 from an employer match (for a total monthly contribution of $1750) 40 years of contributions would become $8.2 million with the 9% rate of return.  If you withdrew that money at 4% per year you would have a residual income of $300k throughout your retirement.",
+          "score": 16.786177,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723564376
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "401K annual contribution for 2022"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "There is no maximum amount you can accumulate in a 401(k) account, as long as you adhere to the annual contribution limits and any applicable catch-up contributions. The annual contribution limit for 2022 is $20,500, and if you are aged 50 or older, you can contribute an additional $6,500 as a catch-up contribution. These limits apply to both traditional 401(k) and Roth 401(k) accounts. Keep in mind that these limits are subject to change over time, so it's essential to stay updated on the current guidelines."
+    },
+    {
+      "speaker": "user",
+      "text": "If I divorce, do I have to share my 401K?  an early withdrawal makes economic sense?",
+      "timestamp": 1723564974,
+      "enrichments": {
+        "Question Type": [
+          "Composite",
+          "Explanation",
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "In the event of a divorce, your 401(k) may be considered a marital asset and could be subject to division. There is a QDRO, a qualified domestic relations order whereby a judge orders this to occur.  It is a very rare circumstance where an early 401(k) withdrawal actually makes any real economic sense as you may end up in the higher income tax bracket.",
+      "timestamp": 1723564977,
+      "contexts": [
+        {
+          "document_id": "357492-0-585",
+          "text": "\nNo. But you are not splitting the 401(k), the judge is. There is no provision for an employee to simply request funds to give to the ex-spouse. But there is a QDRO, a qualified domestic relations order whereby a judge orders this to occur. The lawyers will be aware of the loans, as will the judge, and will take that into account when splitting the 401(k). Depending on what other money the Ex has, he make be required to pay the loans back, partially, or in full.  No one can guess what will happen. The judge will take all aspects of your finances and current earnings into account.",
+          "score": 14.506749,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723565670
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "401K and divorce"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "129730-0-965",
+          "text": "\n\"As JoeTaxpayer says, \"\"It's a very rare circumstance where an early 401(k) withdrawal actually makes any real economic sense.\"\" Your statements that one year's salary for you is $60K and the combination of your spouse's income and yours puts you into the highest income tax bracket together lead to the conclusion that your spouse's income is considerably higher than yours. If this income will continue past your death (e.g. you two are not in a joint venture that will collapse when you pass away because she cannot do the work by herself), then it is very definitely to your joint advantage to leave your money in a tax-deferred account for as long as possible. Her income should be enough to cover the mortgage payments.  Also, rather than take the money out and paying taxes at a high rate right now, your  spouse can roll over the 401k money into an IRA and withdraw only small amounts per year, paying taxes spread over the years rather than in a lump sum.\"",
+          "score": 13.250824,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723565668
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "401K and divorce"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "79153-0-2093",
+          "text": "\nA 401k plan will ask you to name a beneficiary who will receive the funds if you don't withdraw them all before death. Usually, a primary beneficiary and a secondary beneficiary is requested. If you don't specify a beneficiary, your estate is the beneficiary by default. Note that the name supplied to the 401k plan is who will get the money, and you cannot change this by bequeathing the money in your will. For example, if you neglected to change the beneficiary upon divorce, it is useless to say in your will that the money in the 401k plan goes to your new wife; the 401k plan will give it to your ex-wife who still remains the beneficiary of your 401k Money in a 401k plan is what is called income with respect to a decedent (IRD) on which income tax is levied, and it is also is part of your estate and thus liable to be subject to estate tax. The latter is true even if the 401k plan assets are not mentioned anywhere in your will, and even if the assets got sent to your ex-wife which is not what you wanted to have happen. There are various estate tax exceptions for spouse beneficiaries (no estate tax due now, but will be charged when the spouse passes away). With regard to income tax, the beneficiaries of a 401k plan (similarly IRAs, 403b plans etc) generally get to take the whole amount and pay the income tax themselves. Edit in response to littleadv's comments: Each 401k plan is different, and some plans, especially the smaller ones, may prefer to distribute the 401k assets as a lump sum rather than allow the beneficiaries to withdraw the money over several years (and pay income tax on the amount withdrawn each year). This is because there are far too many rules and regulations to trip over when making withdrawals over several years. The lump sum distribution can be transferred into a newly established Inherited IRA (see the Nolo article linked to in @littleadv's answer for some details and some pitfalls to avoid) and the income tax is thus deferred until withdrawals occur. Spouse beneficiaries are entitled to more generous rules than non-spouse beneficiaries.",
+          "score": 12.115319,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1723565665
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "401K and divorce"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "In the event of a divorce, your 401(k) may be considered a marital asset and could be subject to division. The specific rules governing the division of 4"
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "created",
+      "timestamp": 1723566831
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "accepted",
+      "timestamp": 1725582330
+    },
+    {
+      "author": "2077e44f-68bd-4df7-89a1-27ac26e1eb9a",
+      "status": "edited",
+      "timestamp": 1726859741
+    },
+    {
+      "author": "2077e44f-68bd-4df7-89a1-27ac26e1eb9a",
+      "status": "accepted",
+      "timestamp": 1726859765
+    }
+  ],
+  "editor": "2077e44f-68bd-4df7-89a1-27ac26e1eb9a",
+  "domain": "mt-rag-fiqa-beir-elser-512-100-20240501",
+  "reviewer": "2077e44f-68bd-4df7-89a1-27ac26e1eb9a"
+}

@@ -1,0 +1,1217 @@
+{
+  "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-govt-elser-512-100-20240611",
+      "size": "49607"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "Why do some states report more West Nile cases than others, and where are these states located?",
+      "timestamp": 1723731831,
+      "enrichments": {
+        "Question Type": [
+          "Composite",
+          "Explanation",
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The number of West Nile cases reported in each state can vary depending on the year; in 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. However, the document neither provides specific information on why some states report more West Nile cases than others nor where these states are located. ",
+      "timestamp": 1723731833,
+      "contexts": [
+        {
+          "document_id": "838fffa336b64b99-1289-2846",
+          "text": "West Nile Virus | Sierra County, CA - Official Website\nWhat are the risks?In 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. Depending on the year, some states report more West Nile cases than others. Some areas of the United States also report cases of other viruses spread by mosquitoes, such as Eastern Equine Encephalitis Virus or La Crosse Encephalitis Virus.Though anyone can get infected with West Nile virus, some people are at higher risk for infection of the brain or spinal cord. For example, people over the age of 50 are at higher risk for encephalitis (swelling of the brain).What are the symptoms of a West Nile virus infection?No Symptoms in Most PeopleMost people (70-80%) who become infected with West Nile virus do not have any symptoms.Fever in Some PeopleAbout 1 in 5 people who are infected will develop a fever with other symptoms such as headache, body aches, joint pains, vomiting, diarrhea, or rash. Most people with this type of West Nile virus recover completely, but feeling tired and weak can last for weeks to months.Severe Symptoms in a Few PeopleLess than 1% of people who are infected will develop a serious neurologic illness such as encephalitis or meningitis (inflammation of the lining of the brain and spinal cord). The symptoms of neurologic illness can include headache, high fever, neck stiffness, disorientation, coma, tremors, seizures, or paralysis. See your healthcare provider if you think you have symptoms of West Nile virus.\n\n \n \n\n \n \n \n\nWhy risk a severe illness this summer?",
+          "title": "West Nile Virus | Sierra County, CA - Official Website",
+          "url": "https://www.sierracounty.ca.gov/518/West-Nile-Virus",
+          "score": 15.173624,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723733026
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Why do some states report more West Nile cases than others, and where are these states located?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "838fffa336b64b99-2-1810",
+          "text": "West Nile Virus | Sierra County, CA - Official Website\nWest Nile Virus | Sierra County, CA - Official Website\n\n \n\nSkip to Main Content\n\n \n\nSearch\n\n \n \n \n\nYour GovernmentCommunityCounty DepartmentsHow Do I\n\n \n\n \n\n \n\n \n\n \nHomeCounty DepartmentsPublic HealthCommunicable DiseaseWest Nile Virus\n\n\r\n\r\nWest Nile Virus\t\n\n \n \n \n\nDon\u2019t let mosquitoes wreck your summer fun. Protect yourself and your family from mosquito bites.Summertime means mosquitoes and West Nile virus season. An infected mosquito bite can make you or a family member sick with West Nile virus. Stay healthy this summer. Take steps to avoid mosquito bites, especially in from evening to morning when the mosquitoes that spread West Nile virus are most active.How many people get sick with West Nile virus?Nearly 44,000 cases of West Nile virus disease (West Nile virus) have been reported in the United States since 1999. Of those, over 20,000 people have had infections of the brain or spinal cord and more than 1,900 people have died. Many more cases of illness are not reported to CDC.\n\n \n \n\n \n \n\nFigure 1: West Nile virus activity by state in the United States, 2016. View map.See detailed case counts by state for 2015 (PDF).\n\n \n \n \n\n \n \n \n\nFigure 2. West Nile virus neurological disease incidence reported to ArboNET by state in the United States, 2016. View Map.\n\n \n \n \n\nWhat are the risks?In 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. Depending on the year, some states report more West Nile cases than others. Some areas of the United States also report cases of other viruses spread by mosquitoes, such as Eastern Equine Encephalitis Virus or La Crosse Encephalitis Virus.Though anyone can get infected with West Nile virus, some people are at higher risk for infection of the brain or spinal cord.",
+          "title": "West Nile Virus | Sierra County, CA - Official Website",
+          "url": "https://www.sierracounty.ca.gov/518/West-Nile-Virus",
+          "score": 14.704994,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723733029
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Why do some states report more West Nile cases than others, and where are these states located?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "838fffa336b64b99-5027-6031",
+          "text": "West Nile Virus | Sierra County, CA - Official Website\nPlease see our system usage guidelines and disclaimer.\n\n \n \n \n\n \n\n \n\nCoronavirus (COVID-19)\n\nAbout Vaccine for COVID-19\n\nClinical & Professional Resources\n\nQuarantine & Isolation Instructions\n\nTesting Options \n\nTravel \n\nTreatment for COVID-19\n\nHantavirus\n\nInfluenza (Flu)\n\nMeasles Information\n\nMPOX\n\nPlague\n\nWest Nile Virus\n\nZika Virus\u00a0\n\n \n\n \n\nEmergencyInformation\n\nOnlinePayments\n\n \n \n\nAgendas& Minutes\n\nCountyOrdinance Code\n\n \n \n\nJobs\n\nView PropertyTax bills\n\n \n \n \n\n \n\n \n\n \n \n\n \n \n\nContact Us\n\nSierra County Courthouse100 Courthouse Square #200Downieville, CA 95936Phone: 530-289-3698\n \n\n \n \n\n \n \n\nQuick Links\n\nCurrent Projects\n\nProjects & Public Hearings\n\nCA Chief Probation Officers\n\nProposition 13 FAQ\n\n/QuickLinks.aspx\n\n \n \n\n \n \n\nSite Links\n\nBids & RFP's\n\nSite Map\n\nContact Us\n\nAccessibility\n\n/QuickLinks.aspx\n\n \n \n \n\n \n\n \n\n \n \n\nGovernment Websites by CivicPlus\u00ae\n\n \n \n\n \n \n \n\nLoading\n\n\r\n\tLoading\r\n\t\n\nDo Not Show Again\nClose\n\nArrow Left\n\nArrow Right\n\n[]\n\nSlideshow Left Arrow\n\nSlideshow Right Arrow",
+          "title": "West Nile Virus | Sierra County, CA - Official Website",
+          "url": "https://www.sierracounty.ca.gov/518/West-Nile-Virus",
+          "score": 10.488576,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1723733178
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Why do some states report more West Nile cases than others, and where are these states located?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The number of West Nile cases reported in each state can vary depending on the year. According to the document, in 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. However, the document does not provide specific information on which states reported more cases than others. It is recommended to check the CDC website or contact your local health department for the most recent and detailed data."
+    },
+    {
+      "speaker": "user",
+      "text": "when was the first time it discovered?",
+      "timestamp": 1723735479,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The West Nile virus was first discovered in the United States in 1999. ",
+      "timestamp": 1723735485,
+      "contexts": [
+        {
+          "document_id": "838fffa336b64b99-2-1810",
+          "text": "West Nile Virus | Sierra County, CA - Official Website\nWest Nile Virus | Sierra County, CA - Official Website\n\n \n\nSkip to Main Content\n\n \n\nSearch\n\n \n \n \n\nYour GovernmentCommunityCounty DepartmentsHow Do I\n\n \n\n \n\n \n\n \n\n \nHomeCounty DepartmentsPublic HealthCommunicable DiseaseWest Nile Virus\n\n\r\n\r\nWest Nile Virus\t\n\n \n \n \n\nDon\u2019t let mosquitoes wreck your summer fun. Protect yourself and your family from mosquito bites.Summertime means mosquitoes and West Nile virus season. An infected mosquito bite can make you or a family member sick with West Nile virus. Stay healthy this summer. Take steps to avoid mosquito bites, especially in from evening to morning when the mosquitoes that spread West Nile virus are most active.How many people get sick with West Nile virus?Nearly 44,000 cases of West Nile virus disease (West Nile virus) have been reported in the United States since 1999. Of those, over 20,000 people have had infections of the brain or spinal cord and more than 1,900 people have died. Many more cases of illness are not reported to CDC.\n\n \n \n\n \n \n\nFigure 1: West Nile virus activity by state in the United States, 2016. View map.See detailed case counts by state for 2015 (PDF).\n\n \n \n \n\n \n \n \n\nFigure 2. West Nile virus neurological disease incidence reported to ArboNET by state in the United States, 2016. View Map.\n\n \n \n \n\nWhat are the risks?In 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. Depending on the year, some states report more West Nile cases than others. Some areas of the United States also report cases of other viruses spread by mosquitoes, such as Eastern Equine Encephalitis Virus or La Crosse Encephalitis Virus.Though anyone can get infected with West Nile virus, some people are at higher risk for infection of the brain or spinal cord.",
+          "title": "West Nile Virus | Sierra County, CA - Official Website",
+          "url": "https://www.sierracounty.ca.gov/518/West-Nile-Virus",
+          "score": 27.163898,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723735883
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Why do some states report more West Nile cases than others, and where are these states located?\n|assistant|: The number of West Nile cases reported in each state can vary depending on the year; in 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. However, the document neither provides specific information on why some states report more West Nile cases than others nor where these states are located.  It is recommended to check the CDC website or contact your local health department for the most recent and detailed data.\n|user|: when was the first time it discovered?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "838fffa336b64b99-1289-2846",
+          "text": "West Nile Virus | Sierra County, CA - Official Website\nWhat are the risks?In 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. Depending on the year, some states report more West Nile cases than others. Some areas of the United States also report cases of other viruses spread by mosquitoes, such as Eastern Equine Encephalitis Virus or La Crosse Encephalitis Virus.Though anyone can get infected with West Nile virus, some people are at higher risk for infection of the brain or spinal cord. For example, people over the age of 50 are at higher risk for encephalitis (swelling of the brain).What are the symptoms of a West Nile virus infection?No Symptoms in Most PeopleMost people (70-80%) who become infected with West Nile virus do not have any symptoms.Fever in Some PeopleAbout 1 in 5 people who are infected will develop a fever with other symptoms such as headache, body aches, joint pains, vomiting, diarrhea, or rash. Most people with this type of West Nile virus recover completely, but feeling tired and weak can last for weeks to months.Severe Symptoms in a Few PeopleLess than 1% of people who are infected will develop a serious neurologic illness such as encephalitis or meningitis (inflammation of the lining of the brain and spinal cord). The symptoms of neurologic illness can include headache, high fever, neck stiffness, disorientation, coma, tremors, seizures, or paralysis. See your healthcare provider if you think you have symptoms of West Nile virus.\n\n \n \n\n \n \n \n\nWhy risk a severe illness this summer?",
+          "title": "West Nile Virus | Sierra County, CA - Official Website",
+          "url": "https://www.sierracounty.ca.gov/518/West-Nile-Virus",
+          "score": 27.136631,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1723736216
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Why do some states report more West Nile cases than others, and where are these states located?\n|assistant|: The number of West Nile cases reported in each state can vary depending on the year; in 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. However, the document neither provides specific information on why some states report more West Nile cases than others nor where these states are located.  It is recommended to check the CDC website or contact your local health department for the most recent and detailed data.\n|user|: when was the first time it discovered?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ea3398dfb43611f6-7199-9084",
+          "text": "Measles Cases and Outbreaks | Measles (Rubeola) | CDC\nDuring January 1\u2013December 31, 2023, a total of 58 measles cases were reported by 20 jurisdictions: California, Colorado, District of Columbia, Florida, Hawaii, Idaho, Illinois, Kentucky, Maryland, Missouri, New Jersey, New York City, Ohio, Oregon, Pennsylvania, Texas, Utah, Virginia, Washington, and Wisconsin.\n*Jurisdictions refer to any of the 50 states, New York City, and the District of Columbia. \n\n2022\n\nFrom January 1 to December 31, 2022, a total of 121 measles cases were reported by 6 jurisdictions. *\nFor more information please see the following reports:\n\nNotes from the Field: Measles Outbreak \u2014 Central Ohio, 2022\u20132023MMWR. August 4, 2023\n\n*Jurisdictions refer to any of the 50 states, New York City, and the District of Columbia. \n\n2021\n\nFrom January 1 to December 31, 2021, a total of 49 measles cases were reported by 5 jurisdictions. *\nFor more information please see the following reports:\n\nPublic Health Actions to Control Measles Among Afghan Evacuees During Operation Allies Welcome \u2014 United States, September\u2013November 2021MMWR. April 29, 2022\n\n*Jurisdictions refer to any of the 50 states, New York City, and the District of Columbia. \n\n2020\n\nFrom January 1 to December 31, 2020, 13 individual cases of measles were confirmed in 8 jurisdictions.*\n*Jurisdictions refer to any of the 50 states, New York City, and the District of Columbia. \n\n2019\n\nFrom January 1 to December 31, 2019, 1,274 individual cases of measles were confirmed in 31 states.\nThis is the greatest number of cases reported in the United States since 1992. The majority of cases were among people who were not vaccinated against measles. Measles is more likely to spread and cause outbreaks in U.S. communities where groups of people are unvaccinated.\nFor more information please see the following reports:\n\nIncrease in Measles Cases \u2013 United States, January 1-April 26, 2019 MMWR. May 3, 2019",
+          "title": "Measles Cases and Outbreaks | Measles (Rubeola) | CDC",
+          "url": "http://www.cdc.gov/measles/data-research/",
+          "score": 19.506409,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1723736222
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Why do some states report more West Nile cases than others, and where are these states located?\n|assistant|: The number of West Nile cases reported in each state can vary depending on the year; in 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. However, the document neither provides specific information on why some states report more West Nile cases than others nor where these states are located.  It is recommended to check the CDC website or contact your local health department for the most recent and detailed data.\n|user|: when was the first time it discovered?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The West Nile virus was first discovered in the United States in 1999 in New York City. This information can be found in the document titled \"West Nile Virus | Sierra County, CA - Official Website\"."
+    },
+    {
+      "speaker": "user",
+      "text": "I mean historically.",
+      "timestamp": 1723736899,
+      "enrichments": {
+        "Question Type": [
+          "Factoid",
+          "Non-Question"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "UNANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Sorry but the document does not provide an answer to your question.",
+      "timestamp": 1723736904,
+      "contexts": [
+        {
+          "document_id": "838fffa336b64b99-2-1810",
+          "text": "West Nile Virus | Sierra County, CA - Official Website\nWest Nile Virus | Sierra County, CA - Official Website\n\n \n\nSkip to Main Content\n\n \n\nSearch\n\n \n \n \n\nYour GovernmentCommunityCounty DepartmentsHow Do I\n\n \n\n \n\n \n\n \n\n \nHomeCounty DepartmentsPublic HealthCommunicable DiseaseWest Nile Virus\n\n\r\n\r\nWest Nile Virus\t\n\n \n \n \n\nDon\u2019t let mosquitoes wreck your summer fun. Protect yourself and your family from mosquito bites.Summertime means mosquitoes and West Nile virus season. An infected mosquito bite can make you or a family member sick with West Nile virus. Stay healthy this summer. Take steps to avoid mosquito bites, especially in from evening to morning when the mosquitoes that spread West Nile virus are most active.How many people get sick with West Nile virus?Nearly 44,000 cases of West Nile virus disease (West Nile virus) have been reported in the United States since 1999. Of those, over 20,000 people have had infections of the brain or spinal cord and more than 1,900 people have died. Many more cases of illness are not reported to CDC.\n\n \n \n\n \n \n\nFigure 1: West Nile virus activity by state in the United States, 2016. View map.See detailed case counts by state for 2015 (PDF).\n\n \n \n \n\n \n \n \n\nFigure 2. West Nile virus neurological disease incidence reported to ArboNET by state in the United States, 2016. View Map.\n\n \n \n \n\nWhat are the risks?In 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. Depending on the year, some states report more West Nile cases than others. Some areas of the United States also report cases of other viruses spread by mosquitoes, such as Eastern Equine Encephalitis Virus or La Crosse Encephalitis Virus.Though anyone can get infected with West Nile virus, some people are at higher risk for infection of the brain or spinal cord.",
+          "title": "West Nile Virus | Sierra County, CA - Official Website",
+          "url": "https://www.sierracounty.ca.gov/518/West-Nile-Virus",
+          "score": 27.061579,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1723740967
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Why do some states report more West Nile cases than others, and where are these states located?\n|assistant|: The number of West Nile cases reported in each state can vary depending on the year; in 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. However, the document neither provides specific information on why some states report more West Nile cases than others nor where these states are located.  It is recommended to check the CDC website or contact your local health department for the most recent and detailed data.\n|user|: when was the first time it discovered?\n|assistant|: The West Nile virus was first discovered in the United States in 1999. \n|user|: I mean historically."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "838fffa336b64b99-1289-2846",
+          "text": "West Nile Virus | Sierra County, CA - Official Website\nWhat are the risks?In 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. Depending on the year, some states report more West Nile cases than others. Some areas of the United States also report cases of other viruses spread by mosquitoes, such as Eastern Equine Encephalitis Virus or La Crosse Encephalitis Virus.Though anyone can get infected with West Nile virus, some people are at higher risk for infection of the brain or spinal cord. For example, people over the age of 50 are at higher risk for encephalitis (swelling of the brain).What are the symptoms of a West Nile virus infection?No Symptoms in Most PeopleMost people (70-80%) who become infected with West Nile virus do not have any symptoms.Fever in Some PeopleAbout 1 in 5 people who are infected will develop a fever with other symptoms such as headache, body aches, joint pains, vomiting, diarrhea, or rash. Most people with this type of West Nile virus recover completely, but feeling tired and weak can last for weeks to months.Severe Symptoms in a Few PeopleLess than 1% of people who are infected will develop a serious neurologic illness such as encephalitis or meningitis (inflammation of the lining of the brain and spinal cord). The symptoms of neurologic illness can include headache, high fever, neck stiffness, disorientation, coma, tremors, seizures, or paralysis. See your healthcare provider if you think you have symptoms of West Nile virus.\n\n \n \n\n \n \n \n\nWhy risk a severe illness this summer?",
+          "title": "West Nile Virus | Sierra County, CA - Official Website",
+          "url": "https://www.sierracounty.ca.gov/518/West-Nile-Virus",
+          "score": 26.77769,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1723740970
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Why do some states report more West Nile cases than others, and where are these states located?\n|assistant|: The number of West Nile cases reported in each state can vary depending on the year; in 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. However, the document neither provides specific information on why some states report more West Nile cases than others nor where these states are located.  It is recommended to check the CDC website or contact your local health department for the most recent and detailed data.\n|user|: when was the first time it discovered?\n|assistant|: The West Nile virus was first discovered in the United States in 1999. \n|user|: I mean historically."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ea3398dfb43611f6-7199-9084",
+          "text": "Measles Cases and Outbreaks | Measles (Rubeola) | CDC\nDuring January 1\u2013December 31, 2023, a total of 58 measles cases were reported by 20 jurisdictions: California, Colorado, District of Columbia, Florida, Hawaii, Idaho, Illinois, Kentucky, Maryland, Missouri, New Jersey, New York City, Ohio, Oregon, Pennsylvania, Texas, Utah, Virginia, Washington, and Wisconsin.\n*Jurisdictions refer to any of the 50 states, New York City, and the District of Columbia. \n\n2022\n\nFrom January 1 to December 31, 2022, a total of 121 measles cases were reported by 6 jurisdictions. *\nFor more information please see the following reports:\n\nNotes from the Field: Measles Outbreak \u2014 Central Ohio, 2022\u20132023MMWR. August 4, 2023\n\n*Jurisdictions refer to any of the 50 states, New York City, and the District of Columbia. \n\n2021\n\nFrom January 1 to December 31, 2021, a total of 49 measles cases were reported by 5 jurisdictions. *\nFor more information please see the following reports:\n\nPublic Health Actions to Control Measles Among Afghan Evacuees During Operation Allies Welcome \u2014 United States, September\u2013November 2021MMWR. April 29, 2022\n\n*Jurisdictions refer to any of the 50 states, New York City, and the District of Columbia. \n\n2020\n\nFrom January 1 to December 31, 2020, 13 individual cases of measles were confirmed in 8 jurisdictions.*\n*Jurisdictions refer to any of the 50 states, New York City, and the District of Columbia. \n\n2019\n\nFrom January 1 to December 31, 2019, 1,274 individual cases of measles were confirmed in 31 states.\nThis is the greatest number of cases reported in the United States since 1992. The majority of cases were among people who were not vaccinated against measles. Measles is more likely to spread and cause outbreaks in U.S. communities where groups of people are unvaccinated.\nFor more information please see the following reports:\n\nIncrease in Measles Cases \u2013 United States, January 1-April 26, 2019 MMWR. May 3, 2019",
+          "title": "Measles Cases and Outbreaks | Measles (Rubeola) | CDC",
+          "url": "http://www.cdc.gov/measles/data-research/",
+          "score": 20.248594,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1723740972
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Why do some states report more West Nile cases than others, and where are these states located?\n|assistant|: The number of West Nile cases reported in each state can vary depending on the year; in 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. However, the document neither provides specific information on why some states report more West Nile cases than others nor where these states are located.  It is recommended to check the CDC website or contact your local health department for the most recent and detailed data.\n|user|: when was the first time it discovered?\n|assistant|: The West Nile virus was first discovered in the United States in 1999. \n|user|: I mean historically."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The West Nile virus was first identified in 1937 in the West Nile district of Uganda. However, the first recorded outbreak in the United States was in 1999."
+    },
+    {
+      "speaker": "user",
+      "text": "well, that is ok...but why you cannot answer to such seemingly an elementary question?",
+      "timestamp": 1723737463,
+      "enrichments": {
+        "Question Type": [
+          "Non-Question"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I apologize for the confusion.  The document only mentions that it was first discovered in the United States in 1999, and it does not provide information about the discovery of the virus before that.",
+      "timestamp": 1723737467,
+      "contexts": [
+        {
+          "document_id": "838fffa336b64b99-2-1810",
+          "text": "West Nile Virus | Sierra County, CA - Official Website\nWest Nile Virus | Sierra County, CA - Official Website\n\n \n\nSkip to Main Content\n\n \n\nSearch\n\n \n \n \n\nYour GovernmentCommunityCounty DepartmentsHow Do I\n\n \n\n \n\n \n\n \n\n \nHomeCounty DepartmentsPublic HealthCommunicable DiseaseWest Nile Virus\n\n\r\n\r\nWest Nile Virus\t\n\n \n \n \n\nDon\u2019t let mosquitoes wreck your summer fun. Protect yourself and your family from mosquito bites.Summertime means mosquitoes and West Nile virus season. An infected mosquito bite can make you or a family member sick with West Nile virus. Stay healthy this summer. Take steps to avoid mosquito bites, especially in from evening to morning when the mosquitoes that spread West Nile virus are most active.How many people get sick with West Nile virus?Nearly 44,000 cases of West Nile virus disease (West Nile virus) have been reported in the United States since 1999. Of those, over 20,000 people have had infections of the brain or spinal cord and more than 1,900 people have died. Many more cases of illness are not reported to CDC.\n\n \n \n\n \n \n\nFigure 1: West Nile virus activity by state in the United States, 2016. View map.See detailed case counts by state for 2015 (PDF).\n\n \n \n \n\n \n \n \n\nFigure 2. West Nile virus neurological disease incidence reported to ArboNET by state in the United States, 2016. View Map.\n\n \n \n \n\nWhat are the risks?In 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. Depending on the year, some states report more West Nile cases than others. Some areas of the United States also report cases of other viruses spread by mosquitoes, such as Eastern Equine Encephalitis Virus or La Crosse Encephalitis Virus.Though anyone can get infected with West Nile virus, some people are at higher risk for infection of the brain or spinal cord.",
+          "title": "West Nile Virus | Sierra County, CA - Official Website",
+          "url": "https://www.sierracounty.ca.gov/518/West-Nile-Virus",
+          "score": 27.8506,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723738466
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Why do some states report more West Nile cases than others, and where are these states located?\n|assistant|: The number of West Nile cases reported in each state can vary depending on the year; in 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. However, the document neither provides specific information on why some states report more West Nile cases than others nor where these states are located.  It is recommended to check the CDC website or contact your local health department for the most recent and detailed data.\n|user|: when was the first time it discovered?\n|assistant|: The West Nile virus was first discovered in the United States in 1999. \n|user|: I mean historically.\n|assistant|: Sorry but the document does not provide an answer to your question.\n|user|: well, that is ok...but why you cannot answer to such seemingly an elementary question?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "838fffa336b64b99-1289-2846",
+          "text": "West Nile Virus | Sierra County, CA - Official Website\nWhat are the risks?In 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. Depending on the year, some states report more West Nile cases than others. Some areas of the United States also report cases of other viruses spread by mosquitoes, such as Eastern Equine Encephalitis Virus or La Crosse Encephalitis Virus.Though anyone can get infected with West Nile virus, some people are at higher risk for infection of the brain or spinal cord. For example, people over the age of 50 are at higher risk for encephalitis (swelling of the brain).What are the symptoms of a West Nile virus infection?No Symptoms in Most PeopleMost people (70-80%) who become infected with West Nile virus do not have any symptoms.Fever in Some PeopleAbout 1 in 5 people who are infected will develop a fever with other symptoms such as headache, body aches, joint pains, vomiting, diarrhea, or rash. Most people with this type of West Nile virus recover completely, but feeling tired and weak can last for weeks to months.Severe Symptoms in a Few PeopleLess than 1% of people who are infected will develop a serious neurologic illness such as encephalitis or meningitis (inflammation of the lining of the brain and spinal cord). The symptoms of neurologic illness can include headache, high fever, neck stiffness, disorientation, coma, tremors, seizures, or paralysis. See your healthcare provider if you think you have symptoms of West Nile virus.\n\n \n \n\n \n \n \n\nWhy risk a severe illness this summer?",
+          "title": "West Nile Virus | Sierra County, CA - Official Website",
+          "url": "https://www.sierracounty.ca.gov/518/West-Nile-Virus",
+          "score": 27.66842,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723738457
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Why do some states report more West Nile cases than others, and where are these states located?\n|assistant|: The number of West Nile cases reported in each state can vary depending on the year; in 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. However, the document neither provides specific information on why some states report more West Nile cases than others nor where these states are located.  It is recommended to check the CDC website or contact your local health department for the most recent and detailed data.\n|user|: when was the first time it discovered?\n|assistant|: The West Nile virus was first discovered in the United States in 1999. \n|user|: I mean historically.\n|assistant|: Sorry but the document does not provide an answer to your question.\n|user|: well, that is ok...but why you cannot answer to such seemingly an elementary question?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "I apologize for the confusion. The West Nile virus was first identified in the West Nile district of Uganda in 1937. However, the document only mentions that it was first discovered in the United States in 1999, and it does not provide information about the discovery of the virus before that."
+    },
+    {
+      "speaker": "user",
+      "text": "animal infected diseases",
+      "timestamp": 1723739030,
+      "enrichments": {
+        "Question Type": [
+          "Factoid",
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The document discusses several infectious diseases that can affect animals, including chronic wasting disease (CWD), plague, and West Nile virus. CWD is a slow-progressing neurological disease that affects deer, elk, and moose, and is caused by a misfolded prion protein. Plague is a severe bacterial infection that can affect humans and other mammals, and is typically transmitted through the bite of an infected flea or by handling infected animals. West Nile virus is a mosquito-borne virus that can cause fever, headache, and muscle weakness in humans, and can also infect birds, horses, and other animals.",
+      "timestamp": 1723739050,
+      "contexts": [
+        {
+          "document_id": "dd2c94212064f84d-2896-5084",
+          "text": "\r\n\tChronic Wasting Disease\r\n\nCreutzfeldt-Jakob disease (CJD), a sporadic prion disease arising in 1:1,000,000 people, and variant Creutzfeldt-Jakob disease (vCJD), which has been linked to the consumption of infected cattle during the \u201cmad cow disease\u201d outbreak in Great Britain and Europe in the 1990s, are examples of TSEs in humans.\n\nHow is chronic wasting disease spread?\n\nThe misfolded prion that causes CWD is infectious to other cervids and can be spread through direct contact with infected individuals or through contact with a contaminated environment. Infectious prions can be excreted in urine, feces, and saliva of infected animals, even before they show any signs of the disease. Carcasses and tissues, especially brain, spinal cord, and lymph nodes, of infected animals contain infectious prions and may spread the disease if left out on the landscape. Prions are very stable and difficult to disinfect, persisting for years in a contaminated environment able to infect a susceptible deer or elk.\n\nWhere is chronic wasting disease?\n\nChronic wasting disease (CWD) was first described in mule deer at a captive facility in Colorado in 1967. Since then, CWD has been diagnosed in free-ranging deer, elk, and moose populations in 34\u00a0states (now including California) and four Canadian provinces. It has also been found in captive elk and Sika deer in South Korea, free-ranging moose and reindeer in Norway, and free-ranging moose in Finland.\u00a0For a map of current known CWD infected populations in North America, please visit the United States Geological Survey (USGS) CWD page. A timeline of the spread of CWD can be found by visiting the Chronic Wasting Disease Alliance website.\n\nWhat are the symptoms of chronic wasting disease?\n\nThe progression of chronic wasting disease (CWD) in an infected animal is very slow. It takes months or even years following infection for clinical signs of CWD to appear. Infected animals gradually become skinnier, emaciated or \u201cwasted\u201d despite continuing to eat. They may show abnormal behaviors such as a wide stance, staggering gait, or inability to keep their head up.\n\nWhat should I do if I see a sick deer or elk and am concerned it might be chronic wasting disease?",
+          "title": "\r\n\tChronic Wasting Disease\r\n",
+          "url": "https://wildlife.ca.gov/Conservation/Laboratories/Wildlife-Investigations/Monitoring/CWD",
+          "score": 11.841277,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723739328
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "animal infect disease"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "00e9adb15f35b625-3085-4945",
+          "text": "COVID-19 Overview and Infection Prevention and Control Priorities in non-U.S. Healthcare Settings | CDC\nCoronaviruses are a large family of viruses that can cause illness in animals or humans. In humans there are several known coronaviruses that cause respiratory infections. These coronaviruses range from the common cold to more severe diseases such as severe acute respiratory syndrome (SARS), Middle East respiratory syndrome (MERS), and COVID-19.\nTop of PageCoronavirus Disease 2019:\nEmergence\nCOVID-19 was identified in Wuhan, China in December 2019. COVID-19 is caused by the virus severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2), a new virus in humans causing respiratory illness which can be spread from person-to-person. Early in the outbreak, many patients were reported to have a link to a large seafood and live animal market; however, later cases with no link to the market confirmed person-to-person transmission of the disease. Additionally, travel-related exportation of cases occurred.\nTransmission\nThere are three main ways that COVID-19 can spread:\n\nBy breathing in air carrying droplets or aerosol particles that contain the SARS-CoV-2 virus when close to an infected person or in poorly ventilated spaces with infected persons\nBy having droplets and particles that contain the SARS-CoV-2 virus land on the eyes, nose, or mouth \u2013 especially through splashes and sprays like a cough or sneeze\nBy touching the eyes, nose, or mouth with hands that have the SARS-CoV-2 virus particles on them\n\nThe droplets that contain the SARS-CoV-2 virus are released when someone with COVID-19 sneezes, coughs, or talks. Infectious droplets can land in the mouths or noses of people who are nearby or possibly be inhaled into the lungs. A physical distance of at least 1 meter (3 ft) between persons is recommended by the WHO to avoid infection,1 whereas CDC recommends maintaining a physical distance of at least 1.8 meters (6ft) between persons.",
+          "title": "COVID-19 Overview and Infection Prevention and Control Priorities in non-U.S. Healthcare Settings | CDC",
+          "url": "https://www.cdc.gov/coronavirus/2019-ncov/hcp/non-us-settings/overview/index.html",
+          "score": 10.399642,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723739357
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "animal infect disease"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "e5778b06c4f6a3c7-2-2115",
+          "text": "Plague\nPlague\n\nskip to main content\n\n\r\n Your browser does not support iFrames\r\n \n\nNavigation menu\n\nDepartment of Health\n\nIndividuals/Families\n\nCOVID-19 Vaccine\nBirth, Death, Marriage & Divorce Records\nHealth Insurance Programs\nConsumer Health Care Information\nCommunity Health\nHealthy Lifestyles\nHealth & Safety in the Home, Workplace & Outdoors\nDiseases & Conditions\nData & Reports\nHealth Topics A to Z\n\nProviders/Professionals\n\nNovel Coronavirus\nNarcotic Enforcement\nEMS\nHealth Initiatives\nData & Reports\nDiseases & Conditions\nPatient Resources\nDisease Reporting\nClinical Guidelines, Standards & Quality of Care\nPermits, Licenses & Certification\nAll Health Care Professionals & Patient Safety\nHealth Topics A to Z\n\nHealth Facilities\n\nCompare Health Care Providers\nAdult Care Facilities/Assisted Living\nHome Care & Hospice\nHospitals & Clinics\nNew York State Veterans Homes\nNursing Homes\nSchool Based Health Centers\nAll Health Care Facilities\nHealth Topics A to Z\n\nHealth Data\n\nOpen Health Data\nNYS Health Connector\nData & Reports\n\nAbout Us\n\nAbout the Department\nRelated Sites\nHealth Topics A to Z\n\nSearch\n\nYou are Here: Home Page\n>\n Communicable Diseases A-Z\n> Plague\n\nPlague\nReviewed: December 2016 \nPlague is a severe disease that affects humans and other mammals and is caused by an infection with a type of bacteria, Yersinia pestis. Plague occurs naturally in the western United States and is transmitted by the bite of an infected flea, handling infected animals, or inhaling droplets from the cough of an infected person or animal. Plague in humans can require strict isolation and disinfection procedures for infected individuals. The disease is rare in the United States, with an average of seven cases reported each year. Exposure to plague is typically limited to the western and southwestern parts of the country.\n\nFacts\n\nPlague Fact Sheet\nCDC Plague Fact Sheet\n\nInformation for Health Care Providers\n\nProfessional Reporting Requirements\nReporting Form (PDF389)\nPlague Information for Health Professionals - CDC\n\nNYS Resources\n\nWhat to do if you think you or someone you know may have a communicable disease",
+          "title": "Plague",
+          "url": "https://www.health.ny.gov/diseases/communicable/plague/",
+          "score": 9.594701,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723739362
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "animal infect disease"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The document discusses several infectious diseases that can affect animals, including chronic wasting disease (CWD), plague, and West Nile virus. CWD is a slow-progressing neurological disease that affects deer, elk, and moose, and is caused by a misfolded prion protein. Plague is a severe bacterial infection that can affect humans and other mammals, and is typically transmitted through the bite of an infected flea or by handling infected animals. West Nile virus is a mosquito-borne virus that can cause fever, headache, and muscle weakness in humans, and can also infect birds, horses, and other animals.\nRegarding the spread and location of these diseases, CWD has been diagnosed in free-ranging deer, elk, and moose populations in 34 states and four Canadian provinces, as well as in captive elk and Sika deer in South Korea, and free-ranging moose and reindeer in Norway. Plague occurs naturally in the western United States and is transmitted by the bite of an infected flea, handling infected animals, or inhaling droplets from the cough of an infected person or animal. West Nile virus has been reported in all lower 48 states, with the highest number of cases occurring in states with warm, humid climates.\nAs for the symptoms, CWD causes infected animals to gradually become skinnier, emaciated or \"wasted\" despite continuing to eat, and may show abnormal behaviors such as a wide stance, staggering gait, or inability to keep their head up. Plague can cause fever, chills, headache, and weakness, and can progress to severe pneumonia if left untreated. West Nile virus can cause fever, headache, and muscle weakness, and in severe cases, can lead to meningitis or encephalitis.\nRegarding prevention, for CWD, it is recommended to avoid feeding or watering deer and elk in areas where CWD has been found, and to properly dispose of carcasses and tissues of infected animals. For plague, it is recommended to use insect repellent, wear long pants and sleeves, and avoid contact with wild rodents and their burrows. For West Nile virus, it is recommended to use insect repellent, wear long pants and sleeves, and"
+    },
+    {
+      "speaker": "user",
+      "text": "are these regionally affected?",
+      "timestamp": 1723740098,
+      "enrichments": {
+        "Question Type": [
+          "Factoid",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, these animal infectious diseases are regionally affected. Chronic wasting disease (CWD) has been diagnosed in free-ranging deer, elk, and moose populations in 34 states and four Canadian provinces. West Nile virus has been reported in nearly 44,000 cases in the United States since 1999, with some states reporting more cases than others. Plague is most commonly found in the western United States, particularly in rural areas. Regarding the regional distribution of CWD, it was first described in mule deer at a captive facility in Colorado in 1967.  Additionally, it has been found in captive elk and Sika deer in South Korea, free-ranging moose and reindeer in Norway, and free-ranging moose in Finland.  ",
+      "timestamp": 1723740105,
+      "contexts": [
+        {
+          "document_id": "838fffa336b64b99-1289-2846",
+          "text": "West Nile Virus | Sierra County, CA - Official Website\nWhat are the risks?In 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. Depending on the year, some states report more West Nile cases than others. Some areas of the United States also report cases of other viruses spread by mosquitoes, such as Eastern Equine Encephalitis Virus or La Crosse Encephalitis Virus.Though anyone can get infected with West Nile virus, some people are at higher risk for infection of the brain or spinal cord. For example, people over the age of 50 are at higher risk for encephalitis (swelling of the brain).What are the symptoms of a West Nile virus infection?No Symptoms in Most PeopleMost people (70-80%) who become infected with West Nile virus do not have any symptoms.Fever in Some PeopleAbout 1 in 5 people who are infected will develop a fever with other symptoms such as headache, body aches, joint pains, vomiting, diarrhea, or rash. Most people with this type of West Nile virus recover completely, but feeling tired and weak can last for weeks to months.Severe Symptoms in a Few PeopleLess than 1% of people who are infected will develop a serious neurologic illness such as encephalitis or meningitis (inflammation of the lining of the brain and spinal cord). The symptoms of neurologic illness can include headache, high fever, neck stiffness, disorientation, coma, tremors, seizures, or paralysis. See your healthcare provider if you think you have symptoms of West Nile virus.\n\n \n \n\n \n \n \n\nWhy risk a severe illness this summer?",
+          "title": "West Nile Virus | Sierra County, CA - Official Website",
+          "url": "https://www.sierracounty.ca.gov/518/West-Nile-Virus",
+          "score": 32.718662,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723740886
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Why do some states report more West Nile cases than others, and where are these states located?\n|assistant|: The number of West Nile cases reported in each state can vary depending on the year; in 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. However, the document neither provides specific information on why some states report more West Nile cases than others nor where these states are located.  It is recommended to check the CDC website or contact your local health department for the most recent and detailed data.\n|user|: when was the first time it discovered?\n|assistant|: The West Nile virus was first discovered in the United States in 1999. \n|user|: I mean historically.\n|assistant|: Sorry but the document does not provide an answer to your question.\n|user|: well, that is ok...but why you cannot answer to such seemingly an elementary question?\n|assistant|: I apologize for the confusion.  The document only mentions that it was first discovered in the United States in 1999, and it does not provide information about the discovery of the virus before that.\n|user|: animal infected diseases\n|assistant|: The document discusses several infectious diseases that can affect animals, including chronic wasting disease (CWD), plague, and West Nile virus. CWD is a slow-progressing neurological disease that affects deer, elk, and moose, and is caused by a misfolded prion protein. Plague is a severe bacterial infection that can affect humans and other mammals, and is typically transmitted through the bite of an infected flea or by handling infected animals. West Nile virus is a mosquito-borne virus that can cause fever, headache, and muscle weakness in humans, and can also infect birds, horses, and other animals.\n|user|: are these regionally affected?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "838fffa336b64b99-2-1810",
+          "text": "West Nile Virus | Sierra County, CA - Official Website\nWest Nile Virus | Sierra County, CA - Official Website\n\n \n\nSkip to Main Content\n\n \n\nSearch\n\n \n \n \n\nYour GovernmentCommunityCounty DepartmentsHow Do I\n\n \n\n \n\n \n\n \n\n \nHomeCounty DepartmentsPublic HealthCommunicable DiseaseWest Nile Virus\n\n\r\n\r\nWest Nile Virus\t\n\n \n \n \n\nDon\u2019t let mosquitoes wreck your summer fun. Protect yourself and your family from mosquito bites.Summertime means mosquitoes and West Nile virus season. An infected mosquito bite can make you or a family member sick with West Nile virus. Stay healthy this summer. Take steps to avoid mosquito bites, especially in from evening to morning when the mosquitoes that spread West Nile virus are most active.How many people get sick with West Nile virus?Nearly 44,000 cases of West Nile virus disease (West Nile virus) have been reported in the United States since 1999. Of those, over 20,000 people have had infections of the brain or spinal cord and more than 1,900 people have died. Many more cases of illness are not reported to CDC.\n\n \n \n\n \n \n\nFigure 1: West Nile virus activity by state in the United States, 2016. View map.See detailed case counts by state for 2015 (PDF).\n\n \n \n \n\n \n \n \n\nFigure 2. West Nile virus neurological disease incidence reported to ArboNET by state in the United States, 2016. View Map.\n\n \n \n \n\nWhat are the risks?In 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. Depending on the year, some states report more West Nile cases than others. Some areas of the United States also report cases of other viruses spread by mosquitoes, such as Eastern Equine Encephalitis Virus or La Crosse Encephalitis Virus.Though anyone can get infected with West Nile virus, some people are at higher risk for infection of the brain or spinal cord.",
+          "title": "West Nile Virus | Sierra County, CA - Official Website",
+          "url": "https://www.sierracounty.ca.gov/518/West-Nile-Virus",
+          "score": 31.888744,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723740889
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Why do some states report more West Nile cases than others, and where are these states located?\n|assistant|: The number of West Nile cases reported in each state can vary depending on the year; in 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. However, the document neither provides specific information on why some states report more West Nile cases than others nor where these states are located.  It is recommended to check the CDC website or contact your local health department for the most recent and detailed data.\n|user|: when was the first time it discovered?\n|assistant|: The West Nile virus was first discovered in the United States in 1999. \n|user|: I mean historically.\n|assistant|: Sorry but the document does not provide an answer to your question.\n|user|: well, that is ok...but why you cannot answer to such seemingly an elementary question?\n|assistant|: I apologize for the confusion.  The document only mentions that it was first discovered in the United States in 1999, and it does not provide information about the discovery of the virus before that.\n|user|: animal infected diseases\n|assistant|: The document discusses several infectious diseases that can affect animals, including chronic wasting disease (CWD), plague, and West Nile virus. CWD is a slow-progressing neurological disease that affects deer, elk, and moose, and is caused by a misfolded prion protein. Plague is a severe bacterial infection that can affect humans and other mammals, and is typically transmitted through the bite of an infected flea or by handling infected animals. West Nile virus is a mosquito-borne virus that can cause fever, headache, and muscle weakness in humans, and can also infect birds, horses, and other animals.\n|user|: are these regionally affected?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "dd2c94212064f84d-2896-5084",
+          "text": "\r\n\tChronic Wasting Disease\r\n\nCreutzfeldt-Jakob disease (CJD), a sporadic prion disease arising in 1:1,000,000 people, and variant Creutzfeldt-Jakob disease (vCJD), which has been linked to the consumption of infected cattle during the \u201cmad cow disease\u201d outbreak in Great Britain and Europe in the 1990s, are examples of TSEs in humans.\n\nHow is chronic wasting disease spread?\n\nThe misfolded prion that causes CWD is infectious to other cervids and can be spread through direct contact with infected individuals or through contact with a contaminated environment. Infectious prions can be excreted in urine, feces, and saliva of infected animals, even before they show any signs of the disease. Carcasses and tissues, especially brain, spinal cord, and lymph nodes, of infected animals contain infectious prions and may spread the disease if left out on the landscape. Prions are very stable and difficult to disinfect, persisting for years in a contaminated environment able to infect a susceptible deer or elk.\n\nWhere is chronic wasting disease?\n\nChronic wasting disease (CWD) was first described in mule deer at a captive facility in Colorado in 1967. Since then, CWD has been diagnosed in free-ranging deer, elk, and moose populations in 34\u00a0states (now including California) and four Canadian provinces. It has also been found in captive elk and Sika deer in South Korea, free-ranging moose and reindeer in Norway, and free-ranging moose in Finland.\u00a0For a map of current known CWD infected populations in North America, please visit the United States Geological Survey (USGS) CWD page. A timeline of the spread of CWD can be found by visiting the Chronic Wasting Disease Alliance website.\n\nWhat are the symptoms of chronic wasting disease?\n\nThe progression of chronic wasting disease (CWD) in an infected animal is very slow. It takes months or even years following infection for clinical signs of CWD to appear. Infected animals gradually become skinnier, emaciated or \u201cwasted\u201d despite continuing to eat. They may show abnormal behaviors such as a wide stance, staggering gait, or inability to keep their head up.\n\nWhat should I do if I see a sick deer or elk and am concerned it might be chronic wasting disease?",
+          "title": "\r\n\tChronic Wasting Disease\r\n",
+          "url": "https://wildlife.ca.gov/Conservation/Laboratories/Wildlife-Investigations/Monitoring/CWD",
+          "score": 25.555714,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723740894
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Why do some states report more West Nile cases than others, and where are these states located?\n|assistant|: The number of West Nile cases reported in each state can vary depending on the year; in 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. However, the document neither provides specific information on why some states report more West Nile cases than others nor where these states are located.  It is recommended to check the CDC website or contact your local health department for the most recent and detailed data.\n|user|: when was the first time it discovered?\n|assistant|: The West Nile virus was first discovered in the United States in 1999. \n|user|: I mean historically.\n|assistant|: Sorry but the document does not provide an answer to your question.\n|user|: well, that is ok...but why you cannot answer to such seemingly an elementary question?\n|assistant|: I apologize for the confusion.  The document only mentions that it was first discovered in the United States in 1999, and it does not provide information about the discovery of the virus before that.\n|user|: animal infected diseases\n|assistant|: The document discusses several infectious diseases that can affect animals, including chronic wasting disease (CWD), plague, and West Nile virus. CWD is a slow-progressing neurological disease that affects deer, elk, and moose, and is caused by a misfolded prion protein. Plague is a severe bacterial infection that can affect humans and other mammals, and is typically transmitted through the bite of an infected flea or by handling infected animals. West Nile virus is a mosquito-borne virus that can cause fever, headache, and muscle weakness in humans, and can also infect birds, horses, and other animals.\n|user|: are these regionally affected?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, these animal infectious diseases are regionally affected. Chronic wasting disease (CWD) has been diagnosed in free-ranging deer, elk, and moose populations in 34 states and four Canadian provinces. West Nile virus has been reported in nearly 44,000 cases in the United States since 1999, with some states reporting more cases than others. Plague is most commonly found in the western United States, particularly in rural areas.\nRegarding the regional distribution of CWD, the document states that it was first described in mule deer at a captive facility in Colorado in 1967 and has since been diagnosed in free-ranging deer, elk, and moose populations in 34 states and four Canadian provinces. Additionally, it has been found in captive elk and Sika deer in South Korea, free-ranging moose and reindeer in Norway, and free-ranging moose in Finland.\nRegarding the regional distribution of West Nile virus, the document provides a map of West Nile virus activity by state in the United States for the year 2016, showing the number of cases reported in each state. However, it does not provide information on why some states report more cases than others.\nRegarding plague, the document does not provide specific information on its regional distribution, but it is known to be most commonly found in the western United States, particularly in rural areas."
+    },
+    {
+      "speaker": "user",
+      "text": "With warming trend, West Niles virus can survive winter and more spreads in singht?",
+      "timestamp": 1723741807,
+      "enrichments": {
+        "Question Type": [
+          "Opinion"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Global warming could potentially affect the spread of West Nile virus. With warming trends, it is possible that the virus could survive winter more easily and potentially spread more widely. However, the document does not explicitly confirm this.",
+      "timestamp": 1723741811,
+      "contexts": [
+        {
+          "document_id": "dd2c94212064f84d-2896-5084",
+          "text": "\r\n\tChronic Wasting Disease\r\n\nCreutzfeldt-Jakob disease (CJD), a sporadic prion disease arising in 1:1,000,000 people, and variant Creutzfeldt-Jakob disease (vCJD), which has been linked to the consumption of infected cattle during the \u201cmad cow disease\u201d outbreak in Great Britain and Europe in the 1990s, are examples of TSEs in humans.\n\nHow is chronic wasting disease spread?\n\nThe misfolded prion that causes CWD is infectious to other cervids and can be spread through direct contact with infected individuals or through contact with a contaminated environment. Infectious prions can be excreted in urine, feces, and saliva of infected animals, even before they show any signs of the disease. Carcasses and tissues, especially brain, spinal cord, and lymph nodes, of infected animals contain infectious prions and may spread the disease if left out on the landscape. Prions are very stable and difficult to disinfect, persisting for years in a contaminated environment able to infect a susceptible deer or elk.\n\nWhere is chronic wasting disease?\n\nChronic wasting disease (CWD) was first described in mule deer at a captive facility in Colorado in 1967. Since then, CWD has been diagnosed in free-ranging deer, elk, and moose populations in 34\u00a0states (now including California) and four Canadian provinces. It has also been found in captive elk and Sika deer in South Korea, free-ranging moose and reindeer in Norway, and free-ranging moose in Finland.\u00a0For a map of current known CWD infected populations in North America, please visit the United States Geological Survey (USGS) CWD page. A timeline of the spread of CWD can be found by visiting the Chronic Wasting Disease Alliance website.\n\nWhat are the symptoms of chronic wasting disease?\n\nThe progression of chronic wasting disease (CWD) in an infected animal is very slow. It takes months or even years following infection for clinical signs of CWD to appear. Infected animals gradually become skinnier, emaciated or \u201cwasted\u201d despite continuing to eat. They may show abnormal behaviors such as a wide stance, staggering gait, or inability to keep their head up.\n\nWhat should I do if I see a sick deer or elk and am concerned it might be chronic wasting disease?",
+          "title": "\r\n\tChronic Wasting Disease\r\n",
+          "url": "https://wildlife.ca.gov/Conservation/Laboratories/Wildlife-Investigations/Monitoring/CWD",
+          "score": 34.386883,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1723742813
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Why do some states report more West Nile cases than others, and where are these states located?\n|assistant|: The number of West Nile cases reported in each state can vary depending on the year; in 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. However, the document neither provides specific information on why some states report more West Nile cases than others nor where these states are located.  It is recommended to check the CDC website or contact your local health department for the most recent and detailed data.\n|user|: when was the first time it discovered?\n|assistant|: The West Nile virus was first discovered in the United States in 1999. \n|user|: I mean historically.\n|assistant|: Sorry but the document does not provide an answer to your question.\n|user|: well, that is ok...but why you cannot answer to such seemingly an elementary question?\n|assistant|: I apologize for the confusion.  The document only mentions that it was first discovered in the United States in 1999, and it does not provide information about the discovery of the virus before that.\n|user|: animal infected diseases\n|assistant|: The document discusses several infectious diseases that can affect animals, including chronic wasting disease (CWD), plague, and West Nile virus. CWD is a slow-progressing neurological disease that affects deer, elk, and moose, and is caused by a misfolded prion protein. Plague is a severe bacterial infection that can affect humans and other mammals, and is typically transmitted through the bite of an infected flea or by handling infected animals. West Nile virus is a mosquito-borne virus that can cause fever, headache, and muscle weakness in humans, and can also infect birds, horses, and other animals.\n|user|: are these regionally affected?\n|assistant|: Yes, these animal infectious diseases are regionally affected. Chronic wasting disease (CWD) has been diagnosed in free-ranging deer, elk, and moose populations in 34 states and four Canadian provinces. West Nile virus has been reported in nearly 44,000 cases in the United States since 1999, with some states reporting more cases than others. Plague is most commonly found in the western United States, particularly in rural areas. Regarding the regional distribution of CWD, it was first described in mule deer at a captive facility in Colorado in 1967.  Additionally, it has been found in captive elk and Sika deer in South Korea, free-ranging moose and reindeer in Norway, and free-ranging moose in Finland.  \n|user|: With warming trend, West Niles virus can survive winter and more spreads in singht?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "838fffa336b64b99-1289-2846",
+          "text": "West Nile Virus | Sierra County, CA - Official Website\nWhat are the risks?In 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. Depending on the year, some states report more West Nile cases than others. Some areas of the United States also report cases of other viruses spread by mosquitoes, such as Eastern Equine Encephalitis Virus or La Crosse Encephalitis Virus.Though anyone can get infected with West Nile virus, some people are at higher risk for infection of the brain or spinal cord. For example, people over the age of 50 are at higher risk for encephalitis (swelling of the brain).What are the symptoms of a West Nile virus infection?No Symptoms in Most PeopleMost people (70-80%) who become infected with West Nile virus do not have any symptoms.Fever in Some PeopleAbout 1 in 5 people who are infected will develop a fever with other symptoms such as headache, body aches, joint pains, vomiting, diarrhea, or rash. Most people with this type of West Nile virus recover completely, but feeling tired and weak can last for weeks to months.Severe Symptoms in a Few PeopleLess than 1% of people who are infected will develop a serious neurologic illness such as encephalitis or meningitis (inflammation of the lining of the brain and spinal cord). The symptoms of neurologic illness can include headache, high fever, neck stiffness, disorientation, coma, tremors, seizures, or paralysis. See your healthcare provider if you think you have symptoms of West Nile virus.\n\n \n \n\n \n \n \n\nWhy risk a severe illness this summer?",
+          "title": "West Nile Virus | Sierra County, CA - Official Website",
+          "url": "https://www.sierracounty.ca.gov/518/West-Nile-Virus",
+          "score": 31.48723,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723742807
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Why do some states report more West Nile cases than others, and where are these states located?\n|assistant|: The number of West Nile cases reported in each state can vary depending on the year; in 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. However, the document neither provides specific information on why some states report more West Nile cases than others nor where these states are located.  It is recommended to check the CDC website or contact your local health department for the most recent and detailed data.\n|user|: when was the first time it discovered?\n|assistant|: The West Nile virus was first discovered in the United States in 1999. \n|user|: I mean historically.\n|assistant|: Sorry but the document does not provide an answer to your question.\n|user|: well, that is ok...but why you cannot answer to such seemingly an elementary question?\n|assistant|: I apologize for the confusion.  The document only mentions that it was first discovered in the United States in 1999, and it does not provide information about the discovery of the virus before that.\n|user|: animal infected diseases\n|assistant|: The document discusses several infectious diseases that can affect animals, including chronic wasting disease (CWD), plague, and West Nile virus. CWD is a slow-progressing neurological disease that affects deer, elk, and moose, and is caused by a misfolded prion protein. Plague is a severe bacterial infection that can affect humans and other mammals, and is typically transmitted through the bite of an infected flea or by handling infected animals. West Nile virus is a mosquito-borne virus that can cause fever, headache, and muscle weakness in humans, and can also infect birds, horses, and other animals.\n|user|: are these regionally affected?\n|assistant|: Yes, these animal infectious diseases are regionally affected. Chronic wasting disease (CWD) has been diagnosed in free-ranging deer, elk, and moose populations in 34 states and four Canadian provinces. West Nile virus has been reported in nearly 44,000 cases in the United States since 1999, with some states reporting more cases than others. Plague is most commonly found in the western United States, particularly in rural areas. Regarding the regional distribution of CWD, it was first described in mule deer at a captive facility in Colorado in 1967.  Additionally, it has been found in captive elk and Sika deer in South Korea, free-ranging moose and reindeer in Norway, and free-ranging moose in Finland.  \n|user|: With warming trend, West Niles virus can survive winter and more spreads in singht?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "838fffa336b64b99-2-1810",
+          "text": "West Nile Virus | Sierra County, CA - Official Website\nWest Nile Virus | Sierra County, CA - Official Website\n\n \n\nSkip to Main Content\n\n \n\nSearch\n\n \n \n \n\nYour GovernmentCommunityCounty DepartmentsHow Do I\n\n \n\n \n\n \n\n \n\n \nHomeCounty DepartmentsPublic HealthCommunicable DiseaseWest Nile Virus\n\n\r\n\r\nWest Nile Virus\t\n\n \n \n \n\nDon\u2019t let mosquitoes wreck your summer fun. Protect yourself and your family from mosquito bites.Summertime means mosquitoes and West Nile virus season. An infected mosquito bite can make you or a family member sick with West Nile virus. Stay healthy this summer. Take steps to avoid mosquito bites, especially in from evening to morning when the mosquitoes that spread West Nile virus are most active.How many people get sick with West Nile virus?Nearly 44,000 cases of West Nile virus disease (West Nile virus) have been reported in the United States since 1999. Of those, over 20,000 people have had infections of the brain or spinal cord and more than 1,900 people have died. Many more cases of illness are not reported to CDC.\n\n \n \n\n \n \n\nFigure 1: West Nile virus activity by state in the United States, 2016. View map.See detailed case counts by state for 2015 (PDF).\n\n \n \n \n\n \n \n \n\nFigure 2. West Nile virus neurological disease incidence reported to ArboNET by state in the United States, 2016. View Map.\n\n \n \n \n\nWhat are the risks?In 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. Depending on the year, some states report more West Nile cases than others. Some areas of the United States also report cases of other viruses spread by mosquitoes, such as Eastern Equine Encephalitis Virus or La Crosse Encephalitis Virus.Though anyone can get infected with West Nile virus, some people are at higher risk for infection of the brain or spinal cord.",
+          "title": "West Nile Virus | Sierra County, CA - Official Website",
+          "url": "https://www.sierracounty.ca.gov/518/West-Nile-Virus",
+          "score": 30.883158,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723742795
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Why do some states report more West Nile cases than others, and where are these states located?\n|assistant|: The number of West Nile cases reported in each state can vary depending on the year; in 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. However, the document neither provides specific information on why some states report more West Nile cases than others nor where these states are located.  It is recommended to check the CDC website or contact your local health department for the most recent and detailed data.\n|user|: when was the first time it discovered?\n|assistant|: The West Nile virus was first discovered in the United States in 1999. \n|user|: I mean historically.\n|assistant|: Sorry but the document does not provide an answer to your question.\n|user|: well, that is ok...but why you cannot answer to such seemingly an elementary question?\n|assistant|: I apologize for the confusion.  The document only mentions that it was first discovered in the United States in 1999, and it does not provide information about the discovery of the virus before that.\n|user|: animal infected diseases\n|assistant|: The document discusses several infectious diseases that can affect animals, including chronic wasting disease (CWD), plague, and West Nile virus. CWD is a slow-progressing neurological disease that affects deer, elk, and moose, and is caused by a misfolded prion protein. Plague is a severe bacterial infection that can affect humans and other mammals, and is typically transmitted through the bite of an infected flea or by handling infected animals. West Nile virus is a mosquito-borne virus that can cause fever, headache, and muscle weakness in humans, and can also infect birds, horses, and other animals.\n|user|: are these regionally affected?\n|assistant|: Yes, these animal infectious diseases are regionally affected. Chronic wasting disease (CWD) has been diagnosed in free-ranging deer, elk, and moose populations in 34 states and four Canadian provinces. West Nile virus has been reported in nearly 44,000 cases in the United States since 1999, with some states reporting more cases than others. Plague is most commonly found in the western United States, particularly in rural areas. Regarding the regional distribution of CWD, it was first described in mule deer at a captive facility in Colorado in 1967.  Additionally, it has been found in captive elk and Sika deer in South Korea, free-ranging moose and reindeer in Norway, and free-ranging moose in Finland.  \n|user|: With warming trend, West Niles virus can survive winter and more spreads in singht?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "5306392549c81595-28152-30373",
+          "text": "Global Warming\nEven if greenhouse gas concentrations stabilized today, the planet would continue to warm by about 0.6\u00b0C over the next century because of greenhouses gases already in the atmosphere.\nSee Earth\u2019s Big Heat Bucket, Correcting Ocean Cooling, and Climate Q&A: If we immediately stopped emitting greenhouse gases, would global warming stop? to learn more about the ocean heat and global warming.\n\nHow Will Global Warming Change Earth?\nThe impact of increased surface temperatures is significant in itself. But global warming will have additional, far-reaching effects on the planet. Warming modifies rainfall patterns, amplifies coastal erosion, lengthens the growing season in some regions, melts ice caps and glaciers, and alters the ranges of some infectious diseases. Some of these changes are already occurring.\n\nGlobal warming will shift major climate patterns, possibly prolonging and intensifying the current drought in the U.S. Southwest. The white ring of bleached rock on the once-red cliffs that hold Lake Powell indicate the drop in water level over the past decade\u2014the result of repeated winters with low snowfall. (Photograph \u00a92006 Tigresblanco.)\n\nChanging Weather\nFor most places, global warming will result in more frequent hot days and fewer cool days, with the greatest warming occurring over land. Longer, more intense heat waves will become more common. Storms, floods, and droughts will generally be more severe as precipitation patterns change. Hurricanes may increase in intensity due to warmer ocean surface temperatures.\n\nApart from driving temperatures up, global warming is likely to cause bigger, more destructive storms, leading to an overall increase in precipitation. With some exceptions, the tropics will likely receive less rain (orange) as the planet warms, while the polar regions will receive more precipitation (green). White areas indicate that fewer than two-thirds of the climate models agreed on how precipitation will change. Stippled areas reveal where more than 90 percent of the models agreed. (\u00a92007 IPCC WG1 AR-4.)\n\nIt is impossible to pin any single unusual weather event on global warming, but emerging evidence suggests that global warming is already influencing the weather.",
+          "title": "Global Warming",
+          "url": "http://earthobservatory.nasa.gov/Features/GlobalWarming",
+          "score": 8.923867,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723742791
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "warm weather and mosquitoe"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The document suggests that global warming could potentially affect the spread of West Nile virus. With warming trends, it is possible that the virus could survive winter more easily and potentially spread more widely. However, the document does not explicitly confirm this, so further research would be needed to make a definitive statement."
+    },
+    {
+      "speaker": "user",
+      "text": "our evironment is getting worse...scary!",
+      "timestamp": 1723742197,
+      "enrichments": {
+        "Question Type": [
+          "Factoid",
+          "Non-Question"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I understand that you might be concerned about the effects of global warming on infectious diseases like West Nile virus. It's true that warming temperatures can have various impacts on ecosystems and the spread of certain diseases.  The average global temperature on Earth has increased by at least 1.1\u00b0 Celsius (1.9\u00b0 Fahrenheit) since 1880 and has nearly doubled in the last 50 years.",
+      "timestamp": 1723742199,
+      "contexts": [
+        {
+          "document_id": "5306392549c81595-3041-5212",
+          "text": "Global Warming\nClimate has changed when the planet received more or less sunlight due to subtle shifts in its orbit, as the atmosphere or surface changed, or when the Sun\u2019s energy varied. But in the past century, another force has started to influence Earth\u2019s climate: humanity\nHow does this warming compare to previous changes in Earth\u2019s climate? How can we be certain that human-released greenhouse gases are causing the warming? How much more will the Earth warm? How will Earth respond? Answering these questions is perhaps the most significant scientific challenge of our time.\nWhat is Global Warming?\nGlobal warming is the unusually rapid increase in Earth\u2019s average surface temperature over the past century primarily due to the greenhouse gases released as people burn fossil fuels. The global average surface temperature rose 0.6 to 0.9 degrees Celsius (1.1 to 1.6\u00b0 F) between 1906 and 2005, and the rate of temperature increase has nearly doubled in the last 50 years. Temperatures are certain to go up further.\n\nDespite ups and downs from year to year, global average surface temperature is rising. By the beginning of the 21st century, Earth\u2019s temperature was roughly 0.5 degrees Celsius above the long-term (1951\u20131980) average. (NASA figure adapted from Goddard Institute for Space Studies Surface Temperature Analysis.)\n\nEarth\u2019s natural greenhouse effect\nEarth\u2019s temperature begins with the Sun. Roughly 30 percent of incoming sunlight is reflected back into space by bright surfaces like clouds and ice. Of the remaining 70 percent, most is absorbed by the land and ocean, and the rest is absorbed by the atmosphere. The absorbed solar energy heats our planet.\nAs the rocks, the air, and the seas warm, they radiate \u201cheat\u201d energy (thermal infrared radiation). From the surface, this energy travels into the atmosphere where much of it is absorbed by water vapor and long-lived greenhouse gases such as carbon dioxide and methane.\nWhen they absorb the energy radiating from Earth\u2019s surface, microscopic water or greenhouse gas molecules turn into tiny heaters\u2014 like the bricks in a fireplace, they radiate heat even after the fire goes out. They radiate in all directions.",
+          "title": "Global Warming",
+          "url": "http://earthobservatory.nasa.gov/Features/GlobalWarming",
+          "score": 14.830247,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723742601
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "global warming"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "5306392549c81595-1282-3632",
+          "text": "Global Warming\nGlobal warming is the unusually rapid increase in Earth\u2019s average surface temperature over the past century primarily due to the greenhouse gases released by people burning fossil fuels.\nHow Does Today\u2019s Warming Compare to Past Climate Change?\nEarth has experienced climate change in the past without help from humanity. But the current climatic warming is occurring much more rapidly than past warming events.\nWhy Do Scientists Think Current Warming Isn\u2019t Natural?\nIn Earth\u2019s history before the Industrial Revolution, Earth\u2019s climate changed due to natural causes unrelated to human activity. These natural causes are still in play today, but their influence is too small or they occur too slowly to explain the rapid warming seen in recent decades.\nHow Much More Will Earth Warm?\nModels predict that as the world consumes ever more fossil fuel, greenhouse gas concentrations will continue to rise, and Earth\u2019s average surface temperature will rise with them. Based on plausible emission scenarios, average surface temperatures could rise between 2\u00b0C and 6\u00b0C by the end of the 21st century. Some of this warming will occur even if future greenhouse gas emissions are reduced, because the Earth system has not yet fully adjusted to environmental changes we have already made.\nHow Will Earth Respond to Warming Temperatures?\nThe impact of global warming is far greater than just increasing temperatures. Warming modifies rainfall patterns, amplifies coastal erosion, lengthens the growing season in some regions, melts ice caps and glaciers, and alters the ranges of some infectious diseases. Some of these changes are already occurring.\nReferences and Related Resources\n\nGlobal Warming\nThroughout its long history, Earth has warmed and cooled time and again. Climate has changed when the planet received more or less sunlight due to subtle shifts in its orbit, as the atmosphere or surface changed, or when the Sun\u2019s energy varied. But in the past century, another force has started to influence Earth\u2019s climate: humanity\nHow does this warming compare to previous changes in Earth\u2019s climate? How can we be certain that human-released greenhouse gases are causing the warming? How much more will the Earth warm? How will Earth respond? Answering these questions is perhaps the most significant scientific challenge of our time.\nWhat is Global Warming?",
+          "title": "Global Warming",
+          "url": "http://earthobservatory.nasa.gov/Features/GlobalWarming",
+          "score": 14.635515,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723742484
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "global warming"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "5306392549c81595-5-1875",
+          "text": "Global Warming\nGlobal Warming\n\nAtmosphere\nHeat\nHuman Presence\nLand\nLife\n\nNatural\n Events\n\nAll\nDrought\nDust and Haze\nEarthquakes\nFires\nFloods\nLandslides\nMan-made\nSea and Lake Ice\nSevere Storms\nTemperature Extremes\nUnique Imagery\nVolcanoes\nWater Color\n\nRemote Sensing\nSnow & Ice\nWater\n\nCollections\n\nABCs from Space\nAir Quality\nAmazon Deforestation\nApplied Sciences\nAstronaut Photography\nBackgrounders\nBlue Marble\nEarth at Night\nEarth from Afar\nFall Colors\nFood and Agriculture\nInternational Parks and UNESCO Sites\nRenewable and Alternative Energy\nSea Level Rise\nU.S. National Parks\nWorld of Change\n\nEO Explorer\n\nTopics\n\nSearch\n\nImages\nGlobal Maps\nArticles\nBlogs\nEO Explorer\n\n\u00d7\n This page contains archived content and is no longer being updated. At the time of publication, it represented the best available science.\n\nGlobal Warming\nBy Holli Riebeek\nDesign by Robert Simmon\nJune 3, 2010\n\nThroughout its long history, Earth has warmed and cooled time and again. Climate has changed when the planet received more or less sunlight due to subtle shifts in its orbit, as the atmosphere or surface changed, or when the Sun\u2019s energy varied. But in the past century, another force has started to influence Earth\u2019s climate: humanity.\n\n(NASA astronaut photograph ISS022-E-6674.)\n\nWhat is Global Warming?\nGlobal warming is the unusually rapid increase in Earth\u2019s average surface temperature over the past century primarily due to the greenhouse gases released by people burning fossil fuels.\nHow Does Today\u2019s Warming Compare to Past Climate Change?\nEarth has experienced climate change in the past without help from humanity. But the current climatic warming is occurring much more rapidly than past warming events.\nWhy Do Scientists Think Current Warming Isn\u2019t Natural?\nIn Earth\u2019s history before the Industrial Revolution, Earth\u2019s climate changed due to natural causes unrelated to human activity.",
+          "title": "Global Warming",
+          "url": "http://earthobservatory.nasa.gov/Features/GlobalWarming",
+          "score": 14.261146,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723742471
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "global warming"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "0f84274cf74f7a49-5-1811",
+          "text": "World of Change: Global Temperatures\nWorld of Change: Global Temperatures\n\nAtmosphere\nHeat\nHuman Presence\nLand\nLife\n\nNatural\n Events\n\nAll\nDrought\nDust and Haze\nEarthquakes\nFires\nFloods\nLandslides\nMan-made\nSea and Lake Ice\nSevere Storms\nTemperature Extremes\nUnique Imagery\nVolcanoes\nWater Color\n\nRemote Sensing\nSnow & Ice\nWater\n\nCollections\n\nABCs from Space\nAir Quality\nAmazon Deforestation\nApplied Sciences\nAstronaut Photography\nBackgrounders\nBlue Marble\nEarth at Night\nEarth from Afar\nFall Colors\nFood and Agriculture\nInternational Parks and UNESCO Sites\nRenewable and Alternative Energy\nSea Level Rise\nU.S. National Parks\nWorld of Change\n\nEO Explorer\n\nTopics\n\nSearch\n\nImages\nGlobal Maps\nArticles\nBlogs\nEO Explorer\n\nplay\n\nprev\nnext\n\n3.5714285714286% Complete\n\n1880-1884\n2015-2019\n\n1880-1884\n\nPNG\nAll\n\nAir temperatures on Earth have been rising since the Industrial Revolution. While natural variability plays some part, the preponderance of evidence indicates that human activities\u2014particularly emissions of heat-trapping greenhouse gases\u2014are mostly responsible for making our planet warmer.\nAccording to an ongoing temperature analysis led by scientists at NASA\u2019s Goddard Institute for Space Studies (GISS), the average global temperature on Earth has increased by at least 1.1\u00b0 Celsius (1.9\u00b0 Fahrenheit) since 1880. The majority of the warming has occurred since 1975, at a rate of roughly 0.15 to 0.20\u00b0C per decade.\nThe maps above show temperature anomalies in five-year increments since 1880. (Click on the arrow to run the animation.) These are not absolute temperatures, but changes from the norm for each area. The data reflect how much warmer or cooler each region was compared to a base period of 1951-1980. (The global mean surface air temperature for that period was 14\u00b0C (57\u00b0F), with an uncertainty of several tenths of a degree.)",
+          "title": "World of Change: Global Temperatures",
+          "url": "https://earthobservatory.nasa.gov/world-of-change/global-temperatures",
+          "score": 14.14781,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723742433
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "global warming"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "I understand that you might be concerned about the effects of global warming on infectious diseases like West Nile virus. It's true that warming temperatures can have various impacts on ecosystems and the spread of certain diseases. However, it's important to stay informed and take actions based on accurate and reliable information. For more detailed and up-to-date information on this topic, I recommend checking the CDC website or contacting your local health department."
+    },
+    {
+      "speaker": "user",
+      "text": "heard prion protain is very persistant",
+      "timestamp": 1723742998,
+      "enrichments": {
+        "Question Type": [
+          "Non-Question",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, prions are known to be very stable and persistent in the environment.  It can survive in the environment for 10+ years, and can be absorbed by roots and distributed in growing forage,  able to infect susceptible deer or elk.  This makes chronic wasting disease (CWD) a challenging disease to control and eradicate.",
+      "timestamp": 1723743001,
+      "contexts": [
+        {
+          "document_id": "dd2c94212064f84d-2896-5084",
+          "text": "\r\n\tChronic Wasting Disease\r\n\nCreutzfeldt-Jakob disease (CJD), a sporadic prion disease arising in 1:1,000,000 people, and variant Creutzfeldt-Jakob disease (vCJD), which has been linked to the consumption of infected cattle during the \u201cmad cow disease\u201d outbreak in Great Britain and Europe in the 1990s, are examples of TSEs in humans.\n\nHow is chronic wasting disease spread?\n\nThe misfolded prion that causes CWD is infectious to other cervids and can be spread through direct contact with infected individuals or through contact with a contaminated environment. Infectious prions can be excreted in urine, feces, and saliva of infected animals, even before they show any signs of the disease. Carcasses and tissues, especially brain, spinal cord, and lymph nodes, of infected animals contain infectious prions and may spread the disease if left out on the landscape. Prions are very stable and difficult to disinfect, persisting for years in a contaminated environment able to infect a susceptible deer or elk.\n\nWhere is chronic wasting disease?\n\nChronic wasting disease (CWD) was first described in mule deer at a captive facility in Colorado in 1967. Since then, CWD has been diagnosed in free-ranging deer, elk, and moose populations in 34\u00a0states (now including California) and four Canadian provinces. It has also been found in captive elk and Sika deer in South Korea, free-ranging moose and reindeer in Norway, and free-ranging moose in Finland.\u00a0For a map of current known CWD infected populations in North America, please visit the United States Geological Survey (USGS) CWD page. A timeline of the spread of CWD can be found by visiting the Chronic Wasting Disease Alliance website.\n\nWhat are the symptoms of chronic wasting disease?\n\nThe progression of chronic wasting disease (CWD) in an infected animal is very slow. It takes months or even years following infection for clinical signs of CWD to appear. Infected animals gradually become skinnier, emaciated or \u201cwasted\u201d despite continuing to eat. They may show abnormal behaviors such as a wide stance, staggering gait, or inability to keep their head up.\n\nWhat should I do if I see a sick deer or elk and am concerned it might be chronic wasting disease?",
+          "title": "\r\n\tChronic Wasting Disease\r\n",
+          "url": "https://wildlife.ca.gov/Conservation/Laboratories/Wildlife-Investigations/Monitoring/CWD",
+          "score": 34.386883,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723743295
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Why do some states report more West Nile cases than others, and where are these states located?\n|assistant|: The number of West Nile cases reported in each state can vary depending on the year; in 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. However, the document neither provides specific information on why some states report more West Nile cases than others nor where these states are located.  It is recommended to check the CDC website or contact your local health department for the most recent and detailed data.\n|user|: when was the first time it discovered?\n|assistant|: The West Nile virus was first discovered in the United States in 1999. \n|user|: I mean historically.\n|assistant|: Sorry but the document does not provide an answer to your question.\n|user|: well, that is ok...but why you cannot answer to such seemingly an elementary question?\n|assistant|: I apologize for the confusion.  The document only mentions that it was first discovered in the United States in 1999, and it does not provide information about the discovery of the virus before that.\n|user|: animal infected diseases\n|assistant|: The document discusses several infectious diseases that can affect animals, including chronic wasting disease (CWD), plague, and West Nile virus. CWD is a slow-progressing neurological disease that affects deer, elk, and moose, and is caused by a misfolded prion protein. Plague is a severe bacterial infection that can affect humans and other mammals, and is typically transmitted through the bite of an infected flea or by handling infected animals. West Nile virus is a mosquito-borne virus that can cause fever, headache, and muscle weakness in humans, and can also infect birds, horses, and other animals.\n|user|: are these regionally affected?\n|assistant|: Yes, these animal infectious diseases are regionally affected. Chronic wasting disease (CWD) has been diagnosed in free-ranging deer, elk, and moose populations in 34 states and four Canadian provinces. West Nile virus has been reported in nearly 44,000 cases in the United States since 1999, with some states reporting more cases than others. Plague is most commonly found in the western United States, particularly in rural areas. Regarding the regional distribution of CWD, it was first described in mule deer at a captive facility in Colorado in 1967.  Additionally, it has been found in captive elk and Sika deer in South Korea, free-ranging moose and reindeer in Norway, and free-ranging moose in Finland.  \n|user|: With warming trend, West Niles virus can survive winter and more spreads in singht?\n|assistant|: Global warming could potentially affect the spread of West Nile virus. With warming trends, it is possible that the virus could survive winter more easily and potentially spread more widely. However, the document does not explicitly confirm this.\n|user|: our evironment is getting worse...scary!\n|assistant|: I understand that you might be concerned about the effects of global warming on infectious diseases like West Nile virus. It's true that warming temperatures can have various impacts on ecosystems and the spread of certain diseases.  The average global temperature on Earth has increased by at least 1.1\u00b0 Celsius (1.9\u00b0 Fahrenheit) since 1880 and has nearly doubled in the last 50 years.\n|user|: heard prion protain is very persistant"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "dd2c94212064f84d-9353-11478",
+          "text": "\r\n\tChronic Wasting Disease\r\n\nRemember CCR Title 14, Section 712 regulations import restrictions and Section 2353 Fish & Game Code declaration requirements when bringing any harvested cervid parts back to California.\nCheck the CWD status of state you are planning to hunt in and review the regulations concerning CWD for that state.\nIf the state you plan to hunt has CWD, visit the web page or call the Fish and Wildlife agency for the state you plan to hunt to understand local distribution of CWD where you plan to hunt, whether there are any statewide or hunt zone specific CWD testing requirements, and how to get your harvest tested.\nThe Chronic Wasting Disease Alliance maintains a great up to date resource about the latest news regarding this disease and its spread.\nCWD-Related Hunting Regulations\nCWD in North America\n\nI harvested an animal out of state what can I bring back?\n\nCCR Title 14, Section 712 regulations. Restriction of Importation of Hunter-Harvested Deer and Elk Carcasses.\n\t\nIt is unlawful to import, or possess any hunter harvested deer or elk (cervid) carcass or parts of any cervid carcass imported into the State, except for the following body parts:\n\t\n(a) portions of meat with no part of the spinal column, brain or head attached (other bones, such as legs and shoulders, may be attached).\n(b) hides and capes (no spinal column, brain tissue or head may be attached).\n(c) clean skull plates (no brain tissue may be present) with antlers attached.\n(d) antlers with no meat or tissue attached, except legally harvested and possessed antlers in the velvet stage are allowed, if no meat, brain or other tissue is attached.\n(e) finished taxidermy mounts with no meat or tissue attached (antlers in the velvet stage are allowed if no meat, brain or other tissue is attached).\n(f) upper canine teeth (buglers, whistlers, ivories).\n\nBasically, \u201cno skull, no backbone\u201d to avoid importing the highest risk tissues for carrying prion.\nBest practice and best recommendation is to only bring back packaged meat and/or finished taxidermy mounts.\n\nI harvested an animal out of state but didn\u2019t get it tested, can CDFW test the meat for me?",
+          "title": "\r\n\tChronic Wasting Disease\r\n",
+          "url": "https://wildlife.ca.gov/Conservation/Laboratories/Wildlife-Investigations/Monitoring/CWD",
+          "score": 16.115309,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723743292
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "chronic wasting disease"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "dd2c94212064f84d-15956-17937",
+          "text": "\r\n\tChronic Wasting Disease\r\n\nBoth the U.S. Centers for Disease Control (CDC) and the World Health Organization (WHO) recommend not consuming any tissues from CWD-infected animals.\nImproper disposal of meat or other parts \u00a0from CWD-positive animals is believed to be the greatest risk for introducing CWD into different/ undetected areas of California\u2019s deer and elk herds. Please do no bury, throw in the trash, leave out for scavengers, feed to your dog, or take to a landfill potentially contaminated meat or other tissues.\nPrions can survive in the environment for 10+ years, and can be absorbed by roots and distributed in growing forage.\u00a0\nIncineration is the safest disposal method for contaminated meat or tissues.\nPlease call your local CDFW office or the Wildlife Health Laboratory at (916) 358-2790, and we will arrange for the meat or tissues to be picked up and/or destroyed at no cost to you. Be prepared to provide the following information:\n\t\nState of harvest\nCWD test results\nLocation of harvest\nLocation of processing\nWeight of meat to be destroyed\nContact information\n\nIf your CWD positive animal was processed by a meat processor in California please be sure to inform your processor so that they can take the proper decontamination procedures.\n\nClick image to view in separate tab. Text version of infographic content.\n\nAdditional Resources\nCWD in North America(opens in new tab)\n\nCWD-Related Hunting Regulations(opens in new tab)\n\nCarcass Transport Regulations(opens in new tab)\n\nReport a Sick Deer\n\nDistribution of CWD in North America. Courtesy of USGS National Wildlife Health Center.\nCDFW Resources\n\nChronic Wasting Disease Brochure (PDF)(opens in new tab)\nFolleto Sobre la Enfermedad del Desgaste Cr\u00f3nico (PDF)(opens in new tab)\nRecommendations to Meat Processors about CWD (PDF)(opens in new tab)\nAdvanced Hunter Education Webinar on CWD (Video)(opens in new tab)\n\nExternal Resources\n\nCWD Alliance(opens in new tab)\nColorado Parks and Wildlife \u2013 CWD Info and Testing(opens in new tab)",
+          "title": "\r\n\tChronic Wasting Disease\r\n",
+          "url": "https://wildlife.ca.gov/Conservation/Laboratories/Wildlife-Investigations/Monitoring/CWD",
+          "score": 15.8575735,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723743287
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "chronic wasting disease"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, prions are known to be very stable and persistent in the environment. They can remain infectious for years in a contaminated environment, able to infect susceptible deer or elk. This makes chronic wasting disease (CWD) a challenging disease to control and eradicate."
+    },
+    {
+      "speaker": "user",
+      "text": "So, no game meat from now on!",
+      "timestamp": 1723744068,
+      "enrichments": {
+        "Question Type": [
+          "Non-Question"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Whether to consume game meat or not depends on the specific circumstances. If you are hunting in an area known to have chronic wasting disease (CWD) and you harvest a deer or elk, it is recommended to have the animal tested for CWD before consuming the meat. If the animal tests positive for CWD, it is best to not consume the meat. ",
+      "timestamp": 1723744072,
+      "contexts": [
+        {
+          "document_id": "dd2c94212064f84d-2896-5084",
+          "text": "\r\n\tChronic Wasting Disease\r\n\nCreutzfeldt-Jakob disease (CJD), a sporadic prion disease arising in 1:1,000,000 people, and variant Creutzfeldt-Jakob disease (vCJD), which has been linked to the consumption of infected cattle during the \u201cmad cow disease\u201d outbreak in Great Britain and Europe in the 1990s, are examples of TSEs in humans.\n\nHow is chronic wasting disease spread?\n\nThe misfolded prion that causes CWD is infectious to other cervids and can be spread through direct contact with infected individuals or through contact with a contaminated environment. Infectious prions can be excreted in urine, feces, and saliva of infected animals, even before they show any signs of the disease. Carcasses and tissues, especially brain, spinal cord, and lymph nodes, of infected animals contain infectious prions and may spread the disease if left out on the landscape. Prions are very stable and difficult to disinfect, persisting for years in a contaminated environment able to infect a susceptible deer or elk.\n\nWhere is chronic wasting disease?\n\nChronic wasting disease (CWD) was first described in mule deer at a captive facility in Colorado in 1967. Since then, CWD has been diagnosed in free-ranging deer, elk, and moose populations in 34\u00a0states (now including California) and four Canadian provinces. It has also been found in captive elk and Sika deer in South Korea, free-ranging moose and reindeer in Norway, and free-ranging moose in Finland.\u00a0For a map of current known CWD infected populations in North America, please visit the United States Geological Survey (USGS) CWD page. A timeline of the spread of CWD can be found by visiting the Chronic Wasting Disease Alliance website.\n\nWhat are the symptoms of chronic wasting disease?\n\nThe progression of chronic wasting disease (CWD) in an infected animal is very slow. It takes months or even years following infection for clinical signs of CWD to appear. Infected animals gradually become skinnier, emaciated or \u201cwasted\u201d despite continuing to eat. They may show abnormal behaviors such as a wide stance, staggering gait, or inability to keep their head up.\n\nWhat should I do if I see a sick deer or elk and am concerned it might be chronic wasting disease?",
+          "title": "\r\n\tChronic Wasting Disease\r\n",
+          "url": "https://wildlife.ca.gov/Conservation/Laboratories/Wildlife-Investigations/Monitoring/CWD",
+          "score": 34.386883,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723744627
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Why do some states report more West Nile cases than others, and where are these states located?\n|assistant|: The number of West Nile cases reported in each state can vary depending on the year; in 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. However, the document neither provides specific information on why some states report more West Nile cases than others nor where these states are located.  It is recommended to check the CDC website or contact your local health department for the most recent and detailed data.\n|user|: when was the first time it discovered?\n|assistant|: The West Nile virus was first discovered in the United States in 1999. \n|user|: I mean historically.\n|assistant|: Sorry but the document does not provide an answer to your question.\n|user|: well, that is ok...but why you cannot answer to such seemingly an elementary question?\n|assistant|: I apologize for the confusion.  The document only mentions that it was first discovered in the United States in 1999, and it does not provide information about the discovery of the virus before that.\n|user|: animal infected diseases\n|assistant|: The document discusses several infectious diseases that can affect animals, including chronic wasting disease (CWD), plague, and West Nile virus. CWD is a slow-progressing neurological disease that affects deer, elk, and moose, and is caused by a misfolded prion protein. Plague is a severe bacterial infection that can affect humans and other mammals, and is typically transmitted through the bite of an infected flea or by handling infected animals. West Nile virus is a mosquito-borne virus that can cause fever, headache, and muscle weakness in humans, and can also infect birds, horses, and other animals.\n|user|: are these regionally affected?\n|assistant|: Yes, these animal infectious diseases are regionally affected. Chronic wasting disease (CWD) has been diagnosed in free-ranging deer, elk, and moose populations in 34 states and four Canadian provinces. West Nile virus has been reported in nearly 44,000 cases in the United States since 1999, with some states reporting more cases than others. Plague is most commonly found in the western United States, particularly in rural areas. Regarding the regional distribution of CWD, it was first described in mule deer at a captive facility in Colorado in 1967.  Additionally, it has been found in captive elk and Sika deer in South Korea, free-ranging moose and reindeer in Norway, and free-ranging moose in Finland.  \n|user|: With warming trend, West Niles virus can survive winter and more spreads in singht?\n|assistant|: Global warming could potentially affect the spread of West Nile virus. With warming trends, it is possible that the virus could survive winter more easily and potentially spread more widely. However, the document does not explicitly confirm this.\n|user|: our evironment is getting worse...scary!\n|assistant|: I understand that you might be concerned about the effects of global warming on infectious diseases like West Nile virus. It's true that warming temperatures can have various impacts on ecosystems and the spread of certain diseases.  The average global temperature on Earth has increased by at least 1.1\u00b0 Celsius (1.9\u00b0 Fahrenheit) since 1880 and has nearly doubled in the last 50 years.\n|user|: heard prion protain is very persistant\n|assistant|: Yes, prions are known to be very stable and persistent in the environment.  It can survive in the environment for 10+ years, and can be absorbed by roots and distributed in growing forage,  able to infect susceptible deer or elk.  This makes chronic wasting disease (CWD) a challenging disease to control and eradicate.\n|user|: So, no game meat from now on!"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "838fffa336b64b99-1289-2846",
+          "text": "West Nile Virus | Sierra County, CA - Official Website\nWhat are the risks?In 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. Depending on the year, some states report more West Nile cases than others. Some areas of the United States also report cases of other viruses spread by mosquitoes, such as Eastern Equine Encephalitis Virus or La Crosse Encephalitis Virus.Though anyone can get infected with West Nile virus, some people are at higher risk for infection of the brain or spinal cord. For example, people over the age of 50 are at higher risk for encephalitis (swelling of the brain).What are the symptoms of a West Nile virus infection?No Symptoms in Most PeopleMost people (70-80%) who become infected with West Nile virus do not have any symptoms.Fever in Some PeopleAbout 1 in 5 people who are infected will develop a fever with other symptoms such as headache, body aches, joint pains, vomiting, diarrhea, or rash. Most people with this type of West Nile virus recover completely, but feeling tired and weak can last for weeks to months.Severe Symptoms in a Few PeopleLess than 1% of people who are infected will develop a serious neurologic illness such as encephalitis or meningitis (inflammation of the lining of the brain and spinal cord). The symptoms of neurologic illness can include headache, high fever, neck stiffness, disorientation, coma, tremors, seizures, or paralysis. See your healthcare provider if you think you have symptoms of West Nile virus.\n\n \n \n\n \n \n \n\nWhy risk a severe illness this summer?",
+          "title": "West Nile Virus | Sierra County, CA - Official Website",
+          "url": "https://www.sierracounty.ca.gov/518/West-Nile-Virus",
+          "score": 31.48723,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1723744619
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Why do some states report more West Nile cases than others, and where are these states located?\n|assistant|: The number of West Nile cases reported in each state can vary depending on the year; in 2015, 44 states and the District of Columbia in the continental United States have reported 2,175 cases of West Nile virus in people. However, the document neither provides specific information on why some states report more West Nile cases than others nor where these states are located.  It is recommended to check the CDC website or contact your local health department for the most recent and detailed data.\n|user|: when was the first time it discovered?\n|assistant|: The West Nile virus was first discovered in the United States in 1999. \n|user|: I mean historically.\n|assistant|: Sorry but the document does not provide an answer to your question.\n|user|: well, that is ok...but why you cannot answer to such seemingly an elementary question?\n|assistant|: I apologize for the confusion.  The document only mentions that it was first discovered in the United States in 1999, and it does not provide information about the discovery of the virus before that.\n|user|: animal infected diseases\n|assistant|: The document discusses several infectious diseases that can affect animals, including chronic wasting disease (CWD), plague, and West Nile virus. CWD is a slow-progressing neurological disease that affects deer, elk, and moose, and is caused by a misfolded prion protein. Plague is a severe bacterial infection that can affect humans and other mammals, and is typically transmitted through the bite of an infected flea or by handling infected animals. West Nile virus is a mosquito-borne virus that can cause fever, headache, and muscle weakness in humans, and can also infect birds, horses, and other animals.\n|user|: are these regionally affected?\n|assistant|: Yes, these animal infectious diseases are regionally affected. Chronic wasting disease (CWD) has been diagnosed in free-ranging deer, elk, and moose populations in 34 states and four Canadian provinces. West Nile virus has been reported in nearly 44,000 cases in the United States since 1999, with some states reporting more cases than others. Plague is most commonly found in the western United States, particularly in rural areas. Regarding the regional distribution of CWD, it was first described in mule deer at a captive facility in Colorado in 1967.  Additionally, it has been found in captive elk and Sika deer in South Korea, free-ranging moose and reindeer in Norway, and free-ranging moose in Finland.  \n|user|: With warming trend, West Niles virus can survive winter and more spreads in singht?\n|assistant|: Global warming could potentially affect the spread of West Nile virus. With warming trends, it is possible that the virus could survive winter more easily and potentially spread more widely. However, the document does not explicitly confirm this.\n|user|: our evironment is getting worse...scary!\n|assistant|: I understand that you might be concerned about the effects of global warming on infectious diseases like West Nile virus. It's true that warming temperatures can have various impacts on ecosystems and the spread of certain diseases.  The average global temperature on Earth has increased by at least 1.1\u00b0 Celsius (1.9\u00b0 Fahrenheit) since 1880 and has nearly doubled in the last 50 years.\n|user|: heard prion protain is very persistant\n|assistant|: Yes, prions are known to be very stable and persistent in the environment.  It can survive in the environment for 10+ years, and can be absorbed by roots and distributed in growing forage,  able to infect susceptible deer or elk.  This makes chronic wasting disease (CWD) a challenging disease to control and eradicate.\n|user|: So, no game meat from now on!"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "dd2c94212064f84d-10973-13089",
+          "text": "\r\n\tChronic Wasting Disease\r\n\n(e) finished taxidermy mounts with no meat or tissue attached (antlers in the velvet stage are allowed if no meat, brain or other tissue is attached).\n(f) upper canine teeth (buglers, whistlers, ivories).\n\nBasically, \u201cno skull, no backbone\u201d to avoid importing the highest risk tissues for carrying prion.\nBest practice and best recommendation is to only bring back packaged meat and/or finished taxidermy mounts.\n\nI harvested an animal out of state but didn\u2019t get it tested, can CDFW test the meat for me?\n\nCDFW cannot test \u201cmeat\u201d for CWD. While it is possible to test for and detect CWD prions in meat and other tissues, these tests are currently only available in specialized research labs and not for diagnostic or consumer use.\u00a0\nThere is no \u201cmeat safety\u201d test for CWD. For current testing options, results are reported as \u201cDetected\u201d or \u201cNot Detected\u201d for CWD and other prion diseases. That means we can be certain an animal is positive for CWD if the prions are \u201cdetected\u201d but we cannot be certain the animal did not have CWD if the results are \u201cnot detected.\u201d This is one of the major issues surrounding CWD and other prion diseases and is in large part because of the attributes of the pathogen itself (the prion) and the sensitivities of the currently available tests\u00a0\nFurthermore, if you brought back only the parts allowed by \u00a0CCR Title 14, Section 712 regulations, then the samples needed to perform an official CWD test are not available. These are the retropharyngeal lymph nodes or brainstem.\nBest practice is to have your animal tested for CWD in the state you are hunting, especially if that state or region has CWD. As such we recommend doing some research before hunting out-of-state to determine 1) CWD status of the state you are hunting in and 2) how to get an animal tested for CWD in the state it was harvested.\nSome labs such as Colorado State University Diagnostic Veterinary Laboratory or the Texas A&M Veterinary Medical Diagnostic Laboratory allow hunting public to submit samples themselves for testing for a fee.\n\nHow do I declare my game at the border checkpoint, and what can I expect?",
+          "title": "\r\n\tChronic Wasting Disease\r\n",
+          "url": "https://wildlife.ca.gov/Conservation/Laboratories/Wildlife-Investigations/Monitoring/CWD",
+          "score": 9.727517,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723744608
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "game meat test"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Whether to consume game meat or not depends on the specific circumstances. If you are hunting in an area known to have chronic wasting disease (CWD) and you harvest a deer or elk, it is recommended to have the animal tested for CWD before consuming the meat. If the animal tests positive for CWD, it is best to not consume the meat. As for West Nile virus, it is primarily transmitted through mosquito bites and there is no evidence that it can be transmitted through consuming properly cooked meat. However, it is always important to handle and cook all meat to the recommended temperature to reduce the risk of foodborne illness."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "created",
+      "timestamp": 1723744692
+    },
+    {
+      "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+      "status": "rejected",
+      "timestamp": 1725584431
+    },
+    {
+      "author": "d2b56e91-6d89-4df4-b89a-eef8d969850b",
+      "status": "edited",
+      "timestamp": 1726614563
+    },
+    {
+      "author": "d2b56e91-6d89-4df4-b89a-eef8d969850b",
+      "status": "accepted",
+      "timestamp": 1726614729
+    },
+    {
+      "author": "d2b56e91-6d89-4df4-b89a-eef8d969850b",
+      "status": "edited",
+      "timestamp": 1726680495
+    },
+    {
+      "author": "d2b56e91-6d89-4df4-b89a-eef8d969850b",
+      "status": "accepted",
+      "timestamp": 1726680776
+    }
+  ],
+  "editor": "d2b56e91-6d89-4df4-b89a-eef8d969850b",
+  "domain": "mt-rag-govt-elser-512-100-20240611",
+  "reviewer": "d2b56e91-6d89-4df4-b89a-eef8d969850b"
+}

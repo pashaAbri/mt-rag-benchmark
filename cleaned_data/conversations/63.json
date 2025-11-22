@@ -1,0 +1,897 @@
+{
+  "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-ibmcloud-elser-512-100-20240502",
+      "size": "72442"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "How do cloud computing security protocols evolve over time, and what are the potential implications for restoring volumes from backup snapshots in IBM Cloud VPC?",
+      "timestamp": 1723538485,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I am unable to provide a comprehensive overview of the evolution of cloud computing security protocols over time, but I can inform you about specific security features and practices related to restoring volumes from backup snapshots in IBM Cloud VPC. These features include data inheritance, encryption, and cross-regional backup copies, all of which contribute to a more secure and resilient cloud computing environment. Backup snapshots can be utilized to restore volumes in a different region for business continuity or geographic expansion purposes. The restoration of volumes from backup snapshots can be performed through the UI, CLI, API, or Terraform. By using the backup service, you can regularly back up your volume data based on a schedule you set up, with the option to create backup snapshots as frequently as every hour.",
+      "timestamp": 1723538496,
+      "contexts": [
+        {
+          "document_id": "ibmcld_15111-10169-12034",
+          "text": "\nBy using the [backup service](https://cloud.ibm.com/docs/vpc?topic=vpc-backup-service-about), you can regularly back up your volume data based on a schedule that you set up. You can create backup snapshots as frequently as 1 hour. However, the backup service does not provide continual backup with automatic failover, and restoring a volume from a backup or snapshot is a manual operation that takes time. If you require a higher level of service for automatic disaster recovery, see IBM's [Cloud disaster recovery solutions](https://www.ibm.com/cloud/disaster-recovery).\n\n\n\n\n\n What is restoring a volume from a snapshot? \n\nRestoring from a snapshot creates a new, fully provisioned boot or data volume. You can restore storage volumes during instance creation, instance modification, or when you provision a new stand-alone volume. For data volumes, you can also use the volumes API to create a data volume from a snapshot. For more information, see [Restoring a volume from a snapshot](https://cloud.ibm.com/docs/vpc?topic=vpc-snapshots-vpc-restore).\n\nFor best performance, you can enable snapshots for fast restore. By using the fast restore feature, you can create a volume from a snapshot that is fully provisioned when the volume is created. For more information, see [Snapshots fast restore](https://cloud.ibm.com/docs/vpc?topic=vpc-snapshots-vpc-aboutsnapshots_vpc_fast_restore).\n\n\n\n\n\n Can I add tags to a volume? \n\nYes, you can add user tags and access management tags to your volumes. User tags are used by the backup service to automatically create backup snapshots of the volume. Access management tags help organize access to your Block Storage for VPC volumes. For more information, see [Tags for Block Storage for VPC volumes](https://cloud.ibm.com/docs/vpc?topic=vpc-block-storage-about&interface=uistorage-about-tags).\n\n\n\n\n\n\n\n Performance questions",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-block-storage-vpc-faq",
+          "score": 21.753904,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723539910
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do cloud computing security protocols evolve over time, and what are the potential implications for restoring volumes from backup snapshots in IBM Cloud VPC?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_14984-4-2041",
+          "text": "\n* UI\n* CLI\n* API\n* Terraform\n\n\n\n\n\n\n\n Restoring a volume from a backup snapshot \n\nRestoring from a backup snapshot creates a fully provisioned boot or data volume that you can use to boot an instance or attach as auxiliary storage. You can restore volumes during instance creation or when you want to create stand-alone boot or data volumes to be used later. You can restore a data volume to add more storage to an existing instance. You can use backup snapshots to restore volumes in a different region for business continuity purposes or geographic expansion. You can restore volumes from backup snapshots in the UI, from the CLI, with the API, or Terraform.\n\n\n\n About restoring a volume from a backup snapshot \n\nWhen you restore a volume from a backup, the service creates another volume. The restored volume inherits the same [profile](https://cloud.ibm.com/docs/vpc?topic=vpc-block-storage-profiles), capacity, data, and metadata as the original volume. However, you can choose a different profile and capacity if you prefer. If the source volume used [customer-managed encryption](https://cloud.ibm.com/docs/vpc?topic=vpc-vpc-encryption-aboutvpc-customer-managed-encryption), the new volume inherits that encryption.\n\nRestoring a volume from a backup snapshot creates a boot or data volume, depending on whether the snapshot is bootable or nonbootable. The volume appears first as pending while it's being created. During the restoration, your data is copied from IBM Cloud\u00ae Object Storage to Block Storage for VPC. After the volume is hydrated (fully provisioned), you can use the new boot or data volume. For more information about how performance is affected during restoration, see [Performance impact when backup snapshots are used](https://cloud.ibm.com/docs/vpc?topic=vpc-baas-vpc-restorebaas-performance-considerations).\n\nFor best performance, use backups with fast restore. You can enable fast restore backup snapshots in multiple zones and use them to restore a volume that is fully provisioned when the volume is created.",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-baas-vpc-restore",
+          "score": 21.165892,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723539906
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do cloud computing security protocols evolve over time, and what are the potential implications for restoring volumes from backup snapshots in IBM Cloud VPC?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_15007-13930-15825",
+          "text": "\nRestoring from a bootable snapshot is slower than using a regular boot volume.\n\nWhile the creation of the backup requires the volumes to be attached to a running virtual server instance, you can also restore a data volume from a snapshot of an unattached volume. Backups, like snapshots, have a lifecycle that is independent from the source Block Storage for VPC volume.\n\nThe restored volume has the same capacity and IOPS tier profile as the original volume. For more information, see [Restoring a volume from a backup snapshot](https://cloud.ibm.com/docs/vpc?topic=vpc-baas-vpc-restore).\n\n\n\n\n\n Restoring a volume by using fast restore \n\nWhen you restore a volume by using fast restore, a fully hydrated volume is created.\n\nYou can create a [backup policy plan](https://cloud.ibm.com/docs/vpc?topic=vpc-create-backup-policy-and-plan&interface=uibackup-plan-ui) with fast restore zones, and add or remove zones later as needed. The fast restore feature caches one or more copies of a backup snapshot to the zones that you selected. Later, you can use these backup clones to create volumes in any zone within the same region.\n\nFor more information, see [Restoring a volume from a backup snapshot](https://cloud.ibm.com/docs/vpc?topic=vpc-baas-vpc-restore).\n\n\n\n\n\n Cross-regional backup copies \n\nNew\n\nYou can copy a backup snapshot from one region to another region, and later use that snapshot to restore a volume in the new region. You can use and manage the cross-regional snapshot in the target region independently from the parent volume or the original snapshot.\n\nIf the source snapshot is not encrypted with a customer key, the encryption of the copy remains provider-managed. If the source snapshot is protected by a customer-managed key, you must specify the customer-managed key that you want to use to encrypt the new copy.\n\nOnly one copy of the backup snapshot can exist in each region.",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-backup-service-about",
+          "score": 21.058332,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723539903
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do cloud computing security protocols evolve over time, and what are the potential implications for restoring volumes from backup snapshots in IBM Cloud VPC?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_15926-1517-3367",
+          "text": "\nHowever, you can specify a larger volume size, different IOPS profile, and different CRK if you prefer.\n\n\n\nYou can restore volumes from a manually created snapshot or from a snapshot that was created by a backup policy. This type of snapshot is called a backup. For more information, see [Restoring a volume from a backup snapshot](https://cloud.ibm.com/docs/vpc?topic=vpc-baas-vpc-restore).\n\nYou can restore a volume in a different region by using a cross-regional copy of a snapshot. For more information, see [Cross-regional snapshots](https://cloud.ibm.com/docs/vpc?topic=vpc-snapshots-vpc-aboutsnapshots_vpc_crossregion_copy).\n\nYou can also choose to restore a volume by using a fast restore snapshot clone. For more information about fast restore, see the [FAQs](https://cloud.ibm.com/docs/vpc?topic=vpc-snapshots-vpc-faqs&interface=uifaq-snapshot-fr).\n\nYou can restore volumes at various stages of the VPC lifecycle.\n\n\n\n* When you provision a virtual server instance, you can specify a snapshot of a boot or a snapshot of data volume. The restored boot volume is used to start the new instance. Restored data volumes are automatically attached to the instance as auxiliary storage.\n* When you want to add a new auxiliary storage to your existing instance, you can restore a data volume from a nonbootable snapshot.\n* When you create an unattached (stand-alone) Block Storage for VPC volume from a snapshot, you can still attach the volume to an instance later.\n\n\n\n\n\n\n\n Limitations of restoring a volume from a snapshot \n\nThe following limitations apply when you restore a volume from a snapshot.\n\n\n\n* To restore a volume, the snapshot must be in a stable state.\n* You can delete the new volume at any time. However, you can't delete the snapshot from which the volume is restored from unless the hydration is complete or the volume is deleted.",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-snapshots-vpc-restore",
+          "score": 25.522232,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723548172
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "restoring volumes from backup snapshots"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The evolution of cloud computing security protocols is influenced by various factors such as advancements in technology, changing threat landscapes, and regulatory requirements. These developments can impact the process of restoring volumes from backup snapshots in IBM Cloud VPC in several ways.\nFirstly, enhanced security measures might lead to more complex backup and restoration processes. This could mean additional steps or requirements when restoring volumes, such as multi-factor authentication or stricter access controls.\nSecondly, improvements in data encryption techniques could affect the restoration of volumes. For instance, the introduction of new encryption standards might require updates to the restoration process to ensure compatibility.\nThirdly, changes in legal and regulatory requirements could impact the restoration of volumes. For example, new data protection laws might necessitate additional checks or verifications during the restoration process.\nHowever, the provided documents do not contain specific information on how cloud computing security protocols have evolved over time in IBM Cloud VPC, nor do they detail the exact implications for restoring volumes from backup snapshots. Therefore, for a more precise understanding, it would be beneficial to refer to the latest documentation or updates provided by IBM Cloud."
+    },
+    {
+      "speaker": "user",
+      "text": "What is Data Encryption?",
+      "timestamp": 1723540172,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Data Encryption Keys (DEKs) encrypt your data and can be created and managed by your service or an IBM Cloud service. In the context of IBM Cloud VPC, data encryption can be applied to block storage volumes using either IBM-managed encryption or customer-managed encryption. When restoring a volume from a backup snapshot, if the source volume used customer-managed encryption, the new volume will inherit that encryption with the original customer root key (CRK).",
+      "timestamp": 1723540176,
+      "contexts": [
+        {
+          "document_id": "ibmcld_14984-4-2041",
+          "text": "\n* UI\n* CLI\n* API\n* Terraform\n\n\n\n\n\n\n\n Restoring a volume from a backup snapshot \n\nRestoring from a backup snapshot creates a fully provisioned boot or data volume that you can use to boot an instance or attach as auxiliary storage. You can restore volumes during instance creation or when you want to create stand-alone boot or data volumes to be used later. You can restore a data volume to add more storage to an existing instance. You can use backup snapshots to restore volumes in a different region for business continuity purposes or geographic expansion. You can restore volumes from backup snapshots in the UI, from the CLI, with the API, or Terraform.\n\n\n\n About restoring a volume from a backup snapshot \n\nWhen you restore a volume from a backup, the service creates another volume. The restored volume inherits the same [profile](https://cloud.ibm.com/docs/vpc?topic=vpc-block-storage-profiles), capacity, data, and metadata as the original volume. However, you can choose a different profile and capacity if you prefer. If the source volume used [customer-managed encryption](https://cloud.ibm.com/docs/vpc?topic=vpc-vpc-encryption-aboutvpc-customer-managed-encryption), the new volume inherits that encryption.\n\nRestoring a volume from a backup snapshot creates a boot or data volume, depending on whether the snapshot is bootable or nonbootable. The volume appears first as pending while it's being created. During the restoration, your data is copied from IBM Cloud\u00ae Object Storage to Block Storage for VPC. After the volume is hydrated (fully provisioned), you can use the new boot or data volume. For more information about how performance is affected during restoration, see [Performance impact when backup snapshots are used](https://cloud.ibm.com/docs/vpc?topic=vpc-baas-vpc-restorebaas-performance-considerations).\n\nFor best performance, use backups with fast restore. You can enable fast restore backup snapshots in multiple zones and use them to restore a volume that is fully provisioned when the volume is created.",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-baas-vpc-restore",
+          "score": 47.539562,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723540589
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do cloud computing security protocols evolve over time, and what are the potential implications for restoring volumes from backup snapshots in IBM Cloud VPC?\n|assistant|: The document does not give a complete overview of the evolution of cloud computing security protocols over time, but it does emphasize certain security features and practices related to restoring volumes from backup snapshots in IBM Cloud VPC. These features include data inheritance, encryption, and cross-regional backup copies, all of which contribute to a more secure and resilient cloud computing environment. Backup snapshots can be used to restore volumes in a different region for business continuity or geographic expansion purposes. You can restore volumes from backup snapshots through the UI, CLI, API, or Terraform. Using the backup service, you can regularly back up your volume data based on a schedule you set up, with the option to create backup snapshots as frequently as every hour. Although creating the backup requires the volumes to be attached to a running virtual server instance, you can also restore a data volume from a snapshot of an unattached volume. Backups, like snapshots, have a lifecycle independent from the source Block Storage for VPC volume.\n|user|: What is Data Encryption?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_14996-4-1904",
+          "text": "\n* UI\n* CLI\n* API\n* Terraform\n\n\n\n\n\n\n\n Restoring a volume from a backup snapshot \n\nRestoring from a backup snapshot creates a fully provisioned boot or data volume that you can use to boot an instance or attach as auxiliary storage. You can restore volumes during instance creation or when you want to create stand-alone boot or data volumes to be used later. You can restore a data volume to add more storage to an existing instance. You can use backup snapshots to restore volumes in a different region for business continuity purposes or geographic expansion. You can restore volumes from backup snapshots in the UI, from the CLI, with the API, or Terraform.\n\n\n\n About restoring a volume from a backup snapshot \n\nWhen you restore a volume from a backup, the service creates another volume. The restored volume inherits the same [profile](https://cloud.ibm.com/docs/vpc?topic=vpc-block-storage-profiles), capacity, data, and metadata as the original volume. However, you can choose a different profile and capacity if you prefer. If the source volume used [customer-managed encryption](https://cloud.ibm.com/docs/vpc?topic=vpc-vpc-encryption-aboutvpc-customer-managed-encryption), the new volume inherits that encryption.\n\nRestoring a volume from a backup snapshot creates a boot or data volume, depending on whether the snapshot is bootable or nonbootable. The volume appears first as pending while it's being created. During the restoration, your data is copied from IBM Cloud\u00ae Object Storage to Block Storage for VPC. After the volume is hydrated (fully provisioned), you can use the new boot or data volume. For more information about how performance is affected during restoration, see [Performance impact when backup snapshots are used](https://cloud.ibm.com/docs/vpc?topic=vpc-baas-vpc-restore&interface=uibaas-performance-considerations).\n\nFor best performance, use backups with fast restore.",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-baas-vpc-restore&interface=ui",
+          "score": 47.100468,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723540584
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do cloud computing security protocols evolve over time, and what are the potential implications for restoring volumes from backup snapshots in IBM Cloud VPC?\n|assistant|: The document does not give a complete overview of the evolution of cloud computing security protocols over time, but it does emphasize certain security features and practices related to restoring volumes from backup snapshots in IBM Cloud VPC. These features include data inheritance, encryption, and cross-regional backup copies, all of which contribute to a more secure and resilient cloud computing environment. Backup snapshots can be used to restore volumes in a different region for business continuity or geographic expansion purposes. You can restore volumes from backup snapshots through the UI, CLI, API, or Terraform. Using the backup service, you can regularly back up your volume data based on a schedule you set up, with the option to create backup snapshots as frequently as every hour. Although creating the backup requires the volumes to be attached to a running virtual server instance, you can also restore a data volume from a snapshot of an unattached volume. Backups, like snapshots, have a lifecycle independent from the source Block Storage for VPC volume.\n|user|: What is Data Encryption?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_15926-4-1908",
+          "text": "\n* UI\n* CLI\n* API\n* Terraform\n\n\n\n\n\n\n\n Restoring a volume from a snapshot \n\nRestoring data from a snapshot creates a new, fully provisioned volume that you can use to start an instance or attach as auxiliary storage. You can restore boot and data volumes during instance creation or when you modify an existing instance. You can also restore a data volume from a snapshot of a volume that is not attached to an instance. Volumes can be restored from snapshots that were created manually or by a backup policy. You can restore volumes from fast restore clones and cross-regional copies of snapshots, too. You can create volumes from snapshots in the UI, from the CLI, with the API, or Terraform.\n\n\n\n About restoring a volume from a snapshot \n\nRestoring a volume from a snapshot creates a boot or data volume, depending on whether the snapshot is bootable or nonbootable.\n\n\n\n* Restoring from a bootable snapshot creates a boot volume that you can use to start a virtual server instance. The boot volume uses a general-purpose profile and is limited to 250 GB.\n* A new data volume that was created from nonbootable snapshot inherits its properties from the original volume, such as [profile](https://cloud.ibm.com/docs/vpc?topic=vpc-block-storage-profiles), capacity, data, and metadata. If the source volume used [customer-managed encryption](https://cloud.ibm.com/docs/vpc?topic=vpc-vpc-encryption-aboutvpc-customer-managed-encryption), the volume inherits that encryption with the original customer root key (CRK). However, you can specify a larger volume size, different IOPS profile, and different CRK if you prefer.\n\n\n\nYou can restore volumes from a manually created snapshot or from a snapshot that was created by a backup policy. This type of snapshot is called a backup. For more information, see [Restoring a volume from a backup snapshot](https://cloud.ibm.com/docs/vpc?topic=vpc-baas-vpc-restore).",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-snapshots-vpc-restore",
+          "score": 45.148647,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723540581
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do cloud computing security protocols evolve over time, and what are the potential implications for restoring volumes from backup snapshots in IBM Cloud VPC?\n|assistant|: The document does not give a complete overview of the evolution of cloud computing security protocols over time, but it does emphasize certain security features and practices related to restoring volumes from backup snapshots in IBM Cloud VPC. These features include data inheritance, encryption, and cross-regional backup copies, all of which contribute to a more secure and resilient cloud computing environment. Backup snapshots can be used to restore volumes in a different region for business continuity or geographic expansion purposes. You can restore volumes from backup snapshots through the UI, CLI, API, or Terraform. Using the backup service, you can regularly back up your volume data based on a schedule you set up, with the option to create backup snapshots as frequently as every hour. Although creating the backup requires the volumes to be attached to a running virtual server instance, you can also restore a data volume from a snapshot of an unattached volume. Backups, like snapshots, have a lifecycle independent from the source Block Storage for VPC volume.\n|user|: What is Data Encryption?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_09081-1687-4004",
+          "text": "\nData encryption keys (DEKs) are designed to encrypt your data and can be generated and managed by your service or an IBM Cloud service.\n\nEnvelope encryption offers several benefits for protecting your data:\n\n\n\n* Protection under a combination of multiple algorithms Envelope encryption uses the best benefits from symmetric and public key algorithms to keep your keys secure.\n\n\n\n1. Symmetric key algorithms work faster, are more scalable, and more secure than public key algorithms. Public key algorithms use complicated mathematics that increase computational overhead, especially when dealing with large volumes of data. Public key algorithms are also more susceptible to brute force attacks due to having a private key algorithm component that is easily recognizable by hackers. Symmetric key algorithms requires less computed power and are resistant to brute force attacks due to having a less recognizable structure.\n2. Public key algorithms allow for easier access control when granting access to keys at an individual level compared to symmetric key algorithms. Symmetric key algorithms have a key exchange problem, which is that access to a secret key can only be exchanged through a secure transfer. By using public key algorithms, encrypted DEKs (wDEKs) can be shared and unencrypted only by those with access to the encrypting root key, mitigating the key exchange problem of symmetric algorithms.\n\n\n\n* Easier key management You can encrypt multiple DEKs under a singular root key, which minimizes the amount of keys that you might need to manage in a key management service. You can also choose to save time on key maintenance by only rotating your root keys, instead of rotating and re-encrypting all of your DEKs. Note that in cases such as personnel turnover, process malfunctions, or the detection of a security issue, it is recommended to rotate all DEKs and root keys associated with the incident.\n* Data Key Protection Since your DEKs are wrapped by a root key, you do not have to worry about how to store the encrypted data key. Due to this, you can store the wDEK with alongside the associated encrypted data.\n\n\n\nKey Protect uses the Advanced Encryption Standard algorithm in Galois/Counter Mode (AES GCM) to wrap and unwrap DEKs. CRKs that are not imported are created with 256-bit key material.",
+          "url": "https://cloud.ibm.com/docs/key-protect?topic=key-protect-envelope-encryption",
+          "score": 16.273008,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723540569
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Data Encryption"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Data encryption is a security measure that involves converting data into a code to prevent unauthorized access. It is commonly used in cloud computing environments to protect sensitive information. In the context of IBM Cloud VPC, data encryption can be applied to block storage volumes using either IBM-managed encryption or customer-managed encryption. When restoring a volume from a backup snapshot, if the source volume used customer-managed encryption, the new volume will inherit that encryption with the original customer root key (CRK)."
+    },
+    {
+      "speaker": "user",
+      "text": "It is the same as data backup and disaster recovery, right?",
+      "timestamp": 1723540666,
+      "enrichments": {
+        "Question Type": [
+          "Comparative"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "No, data encryption is not the same as data backup and disaster recovery. Encryption uses a two-way function to transform data into a form that hides its original value but can be converted back to the original state. On the other hand, the disaster recovery kit is an off-site and protected repository that includes hardware, software, and system secure configurations, as well as one-time keys and the disaster recovery plan. Meanwhile, data encryption keys are specifically designed to encrypt your data.",
+      "timestamp": 1723540672,
+      "contexts": [
+        {
+          "document_id": "ibmcld_03869-10240-12288",
+          "text": "\nEncryption uses a two-way function to transform data into a form that hides its original value, but can be converted back to the original state. As an example, when data is sent over a network that is secured using TLS, the data is encrypted using a TLS certificate. It is then sent over the network as crypto text, and then decrypted by the recipient. The encrypted text contains all the original data, and can be decrypted using a private key. However, hashing is a one-way function that uses data to create a unique string of numbers and letters. The hashed data cannot be converted back to the original form using the hash. To verify the data that created the hash, a recipient needs to create a new hash of the original data using the same hash function, and verify that the hash values match. A third party cannot use the hash without a copy of the original data.\n\nIt is important to be aware with this option that while Orgs A and B cannot see the actual ledger data because it is hashed, they are still able to see that Orgs C and D are transacting and can see the volume of transactions that are occurring between them.\n\nAlso, consider that data inside a private data collection can be purged from the peers that store it. While data is stored on a channel forever, collections allow members to specify how many blocks are committed to a channel before the [private data is purged](https://hyperledger-fabric.readthedocs.io/en/release-2.2/private_data_tutorial.htmlpd-purge). Once data is removed from the private data collection, the hash on the channel can no longer be used to verify the transaction that created it. In the example network in Figure 3, Org C and Org D can use a block to live policy to ensure that any data that does not need to persist forever is removed from the network entirely within a specified time period.\n\n\n\n\n\n Option two: Private data collections on a separate channel \n\nOrg C and Org D can also use private data collections in the context of a separate channel to provide additional isolation for their data.",
+          "url": "https://cloud.ibm.com/docs/blockchain?topic=blockchain-console-icp-about-data-residency",
+          "score": 28.101377,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723541382
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Encryption uses a two-way function to transform data into a form that hides its original value, "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_07502-5502-7788",
+          "text": "\nThe disaster recovery kit is an off-site and protected repository that includes hardware, software, and system secure configurations, one-time keys, and the disaster recovery plan. Use this disaster recovery kit during an incident response to restore services.\n\n\n\n Infrastructure as code \n\nInfrastructure as code ensures that good backup practices are implemented in a uniform way across the organization. Include implementation of backups as part of deployable architectures. Keep backup configuration close to provisioning code so that it is easier to ensure that backups are adjusted as information system changes occur. Create and configure backup accounts as code.\n\n\n\n\n\n Backup accounts \n\nEach BU account group should include a separate backup account and an additional backup account should be used for the centralized accounts. These backup accounts provide an extra layer of protection for the confidentiality and integrity of the backed up data. If credentials to a source account are compromised, it should not be possible to use that access to tamper with backups.\n\nSupporting this effort, authorization to backup data in the backup account should use service-to-service or service to trusted profile authorization where possible. Otherwise, use secure storage of credentials with least privilege access.\n\nIf you are using Cloud Object Storage for backup, at minimum, use separate buckets for backing up different workload accounts. Also, use separate backup credentials for each bucket where service to service policies are not possible. Use Cloud Object Storage versioning or [immutable buckets](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-immutable) for maximum security.\n\nServices that provide built in backup facilities might have limitations regarding backup accounts.\n\n\n\n\n\n Service-specific considerations \n\n\n\n IBM Cloud Databases \n\n[IBM Cloud Databases](https://cloud.ibm.com/docs/cloud-databases?topic=cloud-databases-about) provide automatic daily backups that are stored in the same account and geography. Backups are typically stored in [cross-regional storage](https://cloud.ibm.com/docs/cloud-databases?topic=cloud-databases-dashboard-backups&interface=uibackup-locations) and should therefore be immune to a single region outage.",
+          "url": "https://cloud.ibm.com/docs/enterprise-account-architecture?topic=enterprise-account-architecture-bcdr",
+          "score": 21.700197,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723541378
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "he disaster recovery kit is an off-site and protected repository"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_09081-1687-4004",
+          "text": "\nData encryption keys (DEKs) are designed to encrypt your data and can be generated and managed by your service or an IBM Cloud service.\n\nEnvelope encryption offers several benefits for protecting your data:\n\n\n\n* Protection under a combination of multiple algorithms Envelope encryption uses the best benefits from symmetric and public key algorithms to keep your keys secure.\n\n\n\n1. Symmetric key algorithms work faster, are more scalable, and more secure than public key algorithms. Public key algorithms use complicated mathematics that increase computational overhead, especially when dealing with large volumes of data. Public key algorithms are also more susceptible to brute force attacks due to having a private key algorithm component that is easily recognizable by hackers. Symmetric key algorithms requires less computed power and are resistant to brute force attacks due to having a less recognizable structure.\n2. Public key algorithms allow for easier access control when granting access to keys at an individual level compared to symmetric key algorithms. Symmetric key algorithms have a key exchange problem, which is that access to a secret key can only be exchanged through a secure transfer. By using public key algorithms, encrypted DEKs (wDEKs) can be shared and unencrypted only by those with access to the encrypting root key, mitigating the key exchange problem of symmetric algorithms.\n\n\n\n* Easier key management You can encrypt multiple DEKs under a singular root key, which minimizes the amount of keys that you might need to manage in a key management service. You can also choose to save time on key maintenance by only rotating your root keys, instead of rotating and re-encrypting all of your DEKs. Note that in cases such as personnel turnover, process malfunctions, or the detection of a security issue, it is recommended to rotate all DEKs and root keys associated with the incident.\n* Data Key Protection Since your DEKs are wrapped by a root key, you do not have to worry about how to store the encrypted data key. Due to this, you can store the wDEK with alongside the associated encrypted data.\n\n\n\nKey Protect uses the Advanced Encryption Standard algorithm in Galois/Counter Mode (AES GCM) to wrap and unwrap DEKs. CRKs that are not imported are created with 256-bit key material.",
+          "url": "https://cloud.ibm.com/docs/key-protect?topic=key-protect-envelope-encryption",
+          "score": 16.273008,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723541375
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Data encryption"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "No, data backup, disaster recovery, and data encryption are not the same thing. Data backup involves creating copies of data to protect against data loss or corruption. Disaster recovery refers to the process of restoring data and systems after a catastrophic event. Data encryption, on the other hand, is the process of converting plaintext data into ciphertext to prevent unauthorized access. While data backup and disaster recovery can help protect against data loss, they do not provide the same level of security as data encryption, which ensures that even if data is lost or stolen, it cannot be read without the decryption key."
+    },
+    {
+      "speaker": "user",
+      "text": "VPC",
+      "timestamp": 1723541556,
+      "enrichments": {
+        "Question Type": [
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The IBM Cloud\u00ae Virtual Private Cloud is a virtual network connected to your customer account. It allows you to have precise control over your virtual infrastructure and network traffic segmentation. This provides cloud security and the flexibility to scale as needed. With IBM Cloud\u00ae Virtual Private Cloud, you can create your own space within IBM Cloud\u00ae. A virtual private cloud (VPC) is a secure, isolated virtual network that blends the security of a private cloud with the scalability and accessibility of IBM's public cloud. The Virtual Private Cloud (VPC) ensures network isolation and security within the IBM Cloud. It can serve as a foundational unit that encompasses a business division (such as marketing, development, accounting) or a set of microservices managed by a DevSecOps team.\n",
+      "timestamp": 1723541562,
+      "contexts": [
+        {
+          "document_id": "ibmcld_14762-7-2008",
+          "text": "\nVirtual Private Cloud overview \n\nThe IBM Cloud\u00ae Virtual Private Cloud is a virtual network that is linked to your customer account. It gives you cloud security, with the ability to scale dynamically, by providing fine-grained control over your virtual infrastructure and your network traffic segmentation.\n\nEach VPC is deployed to a single region. Within that region, the VPC can span multiple zones.\n\nIBM Cloud virtual or IBM Cloud bare metal server presented in your VPC is attached to subnets. Subnets within the VPC offer private connectivity, thus your servers can communicate within and between the subnets by using an implicit router. Subnets in your VPC can connect to the public internet through an optional public gateway, or you can assign floating IP addresses to any network interface of the servers.\n\nThe following diagram shows an overview of IBM Cloud VPC.\n\nZoom\n\n![IBM VPC connectivity and security](https://cloud.ibm.com/docs-content/v1/content/5bdb37c0149145723c5437e8176651928565e722/vmwaresolutions/images/vpc-ryo-diagrams-overview-virtual.svg)\n\nFigure 1. IBM Cloud VPC connectivity and security\n\nReview the following concepts to understand how IBM Cloud VPC is constructed. The terminology is used throughout this architecture solution.\n\nA region is an abstraction that is related to the geographic area in which a VPC is deployed. Each region contains multiple zones, which represent independent fault domains. A VPC can span multiple zones within its assigned region. A region is also often referred to a multizone region or MZR.\n\nA zone is an abstraction that refers to the physical data center, which hosts the compute, network, storage resources, and the related cooling and power, which provides services and applications. Zones are isolated from each other, so to create no shared single point of failure, improved fault tolerance, and reduced latency. Each zone is assigned a default address prefix, which specifies the range of addresses in which subnets can be created.",
+          "url": "https://cloud.ibm.com/docs/vmwaresolutions?topic=vmwaresolutions-vpc-ryo-vpc",
+          "score": 24.682812,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723541839
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "What is a virtual private cloud?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16729-187656-189537",
+          "text": "\nA Virtual Private Cloud (VPC) provides network isolation and security in the IBM Cloud. A VPC can be a building block that encapsulates a corporate division (marketing, development, accounting, ...) or a collection of microservices owned by a DevSecOps team. VPCs can be connected to an on-premises enterprise and each other. This may create the need to route traffic through centralized firewall-gateway appliances. This tutorial will walk through the implementation of a hub and spoke architecture depicted in this high-level view:\n\nVirtual Private Cloud (VPC) Transit Gateway\n\n+1\n\nDirect Link on Classic\n\n\n\n* 2 hours\n* 2023-05-05\n\n\n\n[Centralize communication through a VPC Transit Hub and Spoke architecture - Part two](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vpc-transit2)Centralize communication through a VPC Transit Hub and Spoke architecture - Part two\n\nA layered architecture will introduce resources and demonstrate connectivity. Each layer will add additional connectivity and resources. The layers are implemented in Terraform. It will be possible to change parameters, like number of zones, by changing a Terraform variable. A layered approach allows the tutorial to introduce small problems and demonstrate a solution in the context of a complete architecture.\n\nVirtual Private Cloud (VPC) Transit Gateway\n\n+4\n\nDirect Link on Classic,DNS Services,IBM Cloud Databases,Databases For Redis\n\n\n\n* 2 hours\n* 2023-05-05\n\n\n\n[Connecting Locations with IBM Cloud using Direct Link](https://cloud.ibm.com/docs/satellite?topic=satellite-direct-link-tutorial)Connecting Locations with IBM Cloud using Direct Link\n\nUse a secure IBM Cloud\u00ae Direct Link connection for Satellite Link communications between your services running in an IBM Cloud Satellite\u00ae Location and IBM Cloud\u00ae.\n\nSatellite Kubernetes service\n\n+1\n\nDirect Link\n\n\n\n* 2 hours\n* 2023-07-05",
+          "url": "https://cloud.ibm.com/docs?tab=tutorials",
+          "score": 24.934782,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723541836
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "What is a virtual private cloud?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_14916-7-2291",
+          "text": "\nOverview \n\nUse IBM Cloud\u00ae Virtual Private Cloud to create your own space in IBM Cloud\u00ae. A virtual private cloud (VPC) is a secure, isolated virtual network that combines the security of a private cloud with the availability and scalability of IBM's public cloud.\n\n\n\n Logical isolation \n\nVPC gives your applications logical isolation from other networks, while providing scalability and security. To make this logical isolation possible, the VPC is divided into subnets that use a range of private IP addresses. You can create subnets in suggested prefix ranges, or bring your own public IP address range (BYOIP) to your IBM Cloud account. By default, all resources within the same VPC can communicate with each other over the private network, regardless of their subnet.\n\n\n\n\n\n Quick instance provisioning with high network performance \n\nYou can quickly provision scalable compute resources in your VPC by creating virtual server instances with the core and RAM configuration that's best for your workload. You can select from the supported stock images or custom images that were imported from IBM Cloud Object Storage. All images are cloud-init enabled. You can connect to your instance without using a password by adding SSH keys.\n\nYou can create instances with up to 80 Gbps network bandwidth per instance. Each instance can be multi-homed, that is, you can create multiple network interfaces per instance.\n\n\n\n\n\n Multi-architecture images \n\nYou can choose to create virtual server instances with different operating systems on x86_64 or s390x processor architecture. For more information, see [Images](https://cloud.ibm.com/docs/vpc?topic=vpc-about-images).\n\n\n\n\n\n Storage capabilities \n\nWhen you create an instance, a 100 GB block storage volume is automatically attached as a primary boot volume. To add secondary data volumes to your instance, create block storage volumes.\n\n\n\n\n\n External connectivity \n\nSeveral options are available for enabling your instances to communicate with the public internet:\n\n\n\n* To enable all instances in a subnet to send outgoing traffic, attach a public gateway to the subnet.\n* To enable communication to and from a particular instance, independent of whether the subnet is attached to a public gateway, associate the instance with a floating IP.",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-about-vpc",
+          "score": 26.346514,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723541834
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "What is a virtual private cloud?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "VPC stands for Virtual Private Cloud. It is a networking service that enables you to define a virtual network within the IBM Cloud. With a VPC, you can create and manage virtual servers, subnets, and security groups, among other resources. This virtual network is isolated from other networks and provides you with complete control over your virtual environment. By using VPC, you can create and configure a virtual network according to your needs, including selecting IP address ranges, configuring routes, setting up firewalls, and attaching additional services. This allows you to build a secure and scalable infrastructure for your applications and workloads."
+    },
+    {
+      "speaker": "user",
+      "text": "What are the different types of clouds?",
+      "timestamp": 1723542959,
+      "enrichments": {
+        "Question Type": [
+          "Comparative"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "There are three main types of clouds: public, private, and hybrid.\nA public cloud consists of shared resources that provide access to a company's resources. It is hosted in a multi-tenant environment on a virtual server and can be accessed from anywhere.\nA private cloud consists of resources that provide access to a company's resources. It is hosted on dedicated hardware, such as a bare metal server, either onsite at the company's office (or across offices) or by a cloud provider. A private cloud can be accessed from anywhere.\nA hybrid cloud is a flexible solution that combines aspects of both public and private clouds. It is hosted both onsite at a company's office or across multiple offices, and by a cloud provider. This allows a hybrid cloud to be accessed from any location, making it an attractive option for many businesses.\n",
+      "timestamp": 1723542964,
+      "contexts": [
+        {
+          "document_id": "ibmcld_04734-4788-6538",
+          "text": "\n[External link icon](https://cloud.ibm.com/docs-content/v1/content/8aa0853d34cf2349f1d2db8e5c61e6422a580169/icons/launch-glyph.svg)](https://www.ibm.com/blogs/cloud-computing/2016/08/10/practical-guide-paas/).\n\nWith the SaaS model, your provider maintains the systems through the actual application. The application is cloud-aware, and users can use different end points, depending on the software provider, to use the software. The cloud provider is responsible for all infrastructure and application management, which includes software updates, hardware repairs, and network settings. This model is often used in pay-as-you-go software licensing models. For more information, see [SaaS applications for business and IT](https://www.ibm.com/cloud/saas)![External link icon](https://cloud.ibm.com/docs-content/v1/content/8aa0853d34cf2349f1d2db8e5c61e6422a580169/icons/launch-glyph.svg).\n\n\n\n\n\n Cloud types \n\nThere are three different types of clouds available: public, private, and hybrid. A public cloud includes a shared set of resources that are provisioned to allow access to a company's resources. It is hosted in a multi-tenant environment on a virtual server, and it can be accessed from anywhere.\n\nA private cloud includes resources that are provisioned to allow access to a company's resources. It is hosted on dedicated hardware, such as a bare metal server, and either onsite at the company's office (or across offices) or by a cloud provider. A private cloud can be accessed from anywhere.\n\nA hybrid cloud includes resources that combine the aspects of both public and private clouds. It is hosted both onsite at a company's office (or across offices) and by a cloud provider. A hybrid cloud can be accessed from anywhere.\n\n\n\n\n\n Next steps",
+          "url": "https://cloud.ibm.com/docs/cloud-infrastructure?topic=cloud-infrastructure-getting-started-tutorial",
+          "score": 16.297256,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723543382
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "public cloud"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "There are three main types of clouds: Public clouds, private clouds, and hybrid clouds.\n1. Public clouds: These clouds are owned and operated by third-party service providers, who deliver resources, such as applications and storage, available to the general public over the internet. Examples include IBM Cloud, Amazon Web Services (AWS), and Microsoft Azure.\n2. Private clouds: These clouds are exclusively operated for a single organization, whether managed internally or by a third party. They can be hosted on-premises or off-premises.\n3. Hybrid clouds: These clouds are a combination of public and private clouds, bound together by technology that enables data and application portability. They allow organizations to take advantage of both public and private cloud benefits while addressing their unique business, operational, and technical requirements.\nIn the context of the user's query, IBM Cloud VPC falls under the category of a public cloud, as it is owned and operated by IBM Cloud and offers resources to the general public over the internet."
+    },
+    {
+      "speaker": "user",
+      "text": "Is it free?",
+      "timestamp": 1723543928,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The VPC infrastructure is not free. The pricing varies depending on the regional location and sustained usage. When you provision storage, you need to select the right storage type and class for your specific use case. The charges will depend on the type of storage, its location, and the specifications of the storage instance. For some storage solutions like file and block storage, you can choose between hourly and monthly rates.\n",
+      "timestamp": 1723543931,
+      "contexts": [
+        {
+          "document_id": "ibmcld_10116-16035-17814",
+          "text": "\nPricing for VPC infrastructure varies based on regional location and sustained usage.\n\nThis information applies to VPC worker nodes only.\n\nRegional uplift charges\n: When you create a cluster on VPC infrastructure, the worker nodes might incur an uplift charge that varies by the [multizone location](https://cloud.ibm.com/docs/openshift?topic=openshift-regions-and-zoneszones-vpc) that you create the cluster in. The uplift charge is a percentage (%) of the hourly rate (r), and is added to the hourly rate of the worker node. The total hourly rate cost for a worker node can be calculated as r + (r \u00d7 %). In the [Red Hat OpenShift cluster creation console](https://cloud.ibm.com/kubernetes/catalog/create?platformType=openshift), this uplift is reflected in the pricing calculator as you configure your cluster details. The following table describes the pricing uplift by region.\n: For a table that describes the pricing uplift by region, see [Regional pricing for VPC](https://cloud.ibm.com/vpc-ext/provision/vs).\n\nSustained usage discounts\n: For virtual server instances that are billed at an hourly rate, discounted prices depend on how long the instance runs during the billing month. For more information, expand the Sustained usage discounts on IBM Cloud Virtual Servers for VPC section on the [Pricing for VPC](https://cloud.ibm.com/vpc-ext/provision/vs) page.\n\n\n\n\n\n\n\n Estimating costs \n\nSee [Estimating your costs](https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-costcost).\n\nKeep in mind that some charges are not reflected in the estimate, such as tiered pricing for increased hourly usage. For more information, see [Understanding costs for your clusters](https://cloud.ibm.com/docs/openshift?topic=openshift-costscosts-for-clusters).\n\n\n\n\n\n Managing costs",
+          "url": "https://cloud.ibm.com/docs/openshift?topic=openshift-costs",
+          "score": 17.009754,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723544804
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "VPC pricing"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_05666-7536-9272",
+          "text": "\n* VPC clusters: A Load Balancer for VPC is automatically created in your VPC for your cluster. For cost information, see [Pricing for Load Balancer for VPC](https://cloud.ibm.com/vpc-ext/provision/vs).\n\n\n\n\n\n\n\n Storage \n\nWhen you provision storage, you can choose the storage type and storage class that is correct for your use case. Charges vary depending on the type of storage, the location, and the specs of the storage instance. Some storage solutions, such as file and block storage offer hourly and monthly rates that you can choose from.\n\nTo choose the correct storage solution, see [Planning highly available persistent storage](https://cloud.ibm.com/docs/containers?topic=containers-storage-plan). For more information, see:\n\n\n\n* [File Storage for Classic](https://www.ibm.com/products/file-storage)\n* [Block Storage for Classic](https://www.ibm.com/products/block-storage)\n* [File Storage for VPC](https://www.ibm.com/products/file-storage)\n* [Block Storage for VPC](https://www.ibm.com/products/block-storage)\n* [IBM Cloud Object Storage](https://www.ibm.com/cloud/object-storage)\n* [Portworx Enterprise pricing](https://cloud.ibm.com/catalog/services/portworx-enterprise)\n\n\n\n\n\n\n\n IBM Cloud services \n\nEach service that you integrate with your cluster has its own pricing model. Review each product documentation and use the IBM Cloud console to [estimate costs](https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-costcost).\n\n\n\n\n\n Operators and other third-party integrations \n\nOperators and other [third-party integrations](https://cloud.ibm.com/docs/containers?topic=containers-supported_integrations) are a convenient way to add services to your cluster from community, third-party, your own, or other providers.",
+          "url": "https://cloud.ibm.com/docs/containers?topic=containers-costs",
+          "score": 15.774978,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723544799
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "VPC pricing"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "No, the use of IBM Cloud Virtual Private Cloud (VPC) and its related services, including volume restoration from backup snapshots, is not free. Pricing for these services depends on various factors, such as the chosen resources, their locations, and the duration of usage. To get detailed pricing information, you should refer to the official IBM Cloud pricing page or contact IBM sales representatives directly."
+    },
+    {
+      "speaker": "user",
+      "text": "Use.",
+      "timestamp": 1723545011,
+      "enrichments": {
+        "Question Type": [
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The IBM Virtual Private Cloud (VPC) enables you to create a virtual private cloud by defining a virtual network isolated from other public cloud tenants. The software-defined networking (SDN) and virtual network functions allow you to set up the necessary network structures quickly and on-premises connectivity for running your workload. A VPC remains private by default, but it can be configured to enable public connectivity, such as through a public gateway or floating IP. With VPC, you can:\n- Create a software-defined network (SDN)\n- Isolate workloads\n- Have fine control over inbound and outbound traffic",
+      "timestamp": 1723545014,
+      "contexts": [
+        {
+          "document_id": "ibmcld_16080-1378-3052",
+          "text": "\nIn short, using VPC you can:\n\n\n\n* create a software-defined network (SDN),\n* isolate workloads,\n* have fine control of inbound and outbound traffic.\n\n\n\n\n\n Objectives \n\n\n\n* Understand the infrastructure objects available for virtual private clouds\n* Learn how to create a virtual private cloud, subnets and server instances\n* Know how to apply security groups to secure access to the servers\n\n\n\nZoom\n\n![Architecture](https://cloud.ibm.com/docs-content/v1/content/f02b9c9adcbb7328d95a45e105cec371d50f15eb/vpc/includes/solution-tutorials/includes/solution-tutorials/images/solution40-vpc-public-app-private-backend/Architecture.svg)\n\nFigure 1. Architecture diagram of the tutorial\n\n\n\n1. The admin (DevOps) sets up the required infrastructure (VPC, subnets, security groups with rules, VSIs) on the cloud.\n2. The internet user makes an HTTP/HTTPS request to the web server on the frontend.\n3. The frontend requests private resources from the secured backend and serves results to the user.\n\n\n\n\n\n\n\n Before you begin \n\n\n\n* Check for user permissions. Be sure that your user account has sufficient permissions to create and manage VPC resources. See the list of [required permissions](https://cloud.ibm.com/docs/vpc?topic=vpc-managing-user-permissions-for-vpc-resources) for VPC.\n* You need an SSH key to connect to the virtual servers. If you don't have an SSH key, see [the instructions](https://cloud.ibm.com/docs/vpc?topic=vpc-ssh-keys) for creating a key for VPC.\n\n\n\n\n\n\n\n Step 1: Create a Virtual Private Cloud and subnets \n\nTo tighten the security of your servers, it is recommended to only allow connections to the ports required by the applications deployed on the servers.",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-vpc-public-app-private-backend",
+          "score": 18.353401,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723546366
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "VPC use cases"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_14870-7-1912",
+          "text": "\nDeployment Journey Overview \n\nIBM Cloud\u00ae Virtual Private Cloud(VPC) allows you to establish your own virtual private cloud by defining a virtual network that is logically isolated from all other public cloud tenants. The underlying software defined networking (SDN) and virtual network functions allows you to quickly establish the network constructs and on-prem connectivity needed to run your workload. The information contained within this document is meant to serve as a technical guide for beginning with a new IBM Cloud Account and leading towards a fully configured VPC network environment.\n\nWelcome to the Deployment Journey for VPC on IBM Cloud! Use the sidebar on the left to navigate between the journey points.\n\n\n\n Journey Map \n\n![Architecture](https://cloud.ibm.com/docs-content/v1/content/d50364af907081c3c38f99c11f35dd9cab4b2510/vpc-journey/images/overview/journey-map.png)\n\n\n\n\n\n Assumptions \n\nThis deployment guide will be assuming the following points. Please note that while your circumstance may not be exactly identical, you will still benefit from the overall journey steps and concepts covered in this guide.\n\n\n\n* You are already familar with the concepts introduced in the \"Tour IBM Cloud\" videos available on the [Getting Started with IBM Cloud](https://cloud.ibm.com/cloud/get-started) page.\n* Access groups will need to be defined so only certain users have the ability to create and manage the VPC network settings (i.e. CIDR ranges, Subnet ACL rules, etc.,).\n* You have a networking background and familar with concepts such as IP Addressing, subnets, routing, etc.,\n* Focus will be on establishing the underlying network connectivity to support VPC based workloads.\n\n\n\n* Note: A separate deployment guide will cover the compute resources which runs within the VPC like IBM Kubernetes Services (IKS), Red Hat OpenShift, IBM Code Engine, and VPC Virtual Server Instances (VSIs).",
+          "url": "https://cloud.ibm.com/docs/vpc-journey?topic=vpc-journey-vpc-overview",
+          "score": 18.155756,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723546360
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "VPC use "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "It seems like your message got cut off before you could finish your question or statement. Could you please provide more context or clarify what you would like to know about using IBM Cloud VPC or any other related topic? I'm here to help!"
+    },
+    {
+      "speaker": "user",
+      "text": "What are the benefits?",
+      "timestamp": 1723546413,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Virtual Servers for VPC is an Infrastructure-as-a-Service (IaaS) offering that provides the benefits of VPC, including network isolation, security, and flexibility. This flexibility allows you to customize the system according to your specific needs, giving you control over your infrastructure.\nWith Virtual Servers for VPC, you can quickly provision instances with high network performance. When you provision an instance, you select a profile that matches the amount of memory and computing power needed for the application you plan to run. Instances are available on the x86 architecture.\nIBM Cloud\u00ae Virtual Private Cloud (VPC) allows you to establish your virtual private cloud by defining a virtual network that is logically isolated from all other public cloud tenants. The software-defined networking (SDN) and virtual network functions allow you to quickly establish the network constructs and on-prem connectivity needed to run your workload.\nHyper Protect Virtual Servers for VPC takes advantage of IBM Secure Execution for Linux to provide a boundary around each instance, offering protection from internal and external threats. It provides the following benefits:\n- Secure Execution boundary for protection from internal and external threats\n- Technical assurance that unauthorized users, including IBM Cloud admins, do not have access to the application\n- Individual, instance-level secure boundaries lock down workloads\n- Multiparty contract and attestation of deployment\n- Zero Trust principles from workload development through deployment.",
+      "timestamp": 1723546418,
+      "contexts": [
+        {
+          "document_id": "ibmcld_07986-11524-13676",
+          "text": "\nVirtual Servers for VPC is an infrastructure-as-a-service (IaaS) offering that gives you access to all of the benefits of VPC, including network isolation, security, and flexibility.\n\nWith Virtual Servers for VPC, you can quickly provision instances with high network performance. When you provision an instance, you select a profile that matches the amount of memory and compute power that you need for the application that you plan to run on the instance. Instances are available on the x86 architecture.\n\n\n\n\n\n Dedicated hosts for VPC (optional) \n\nWith [Dedicated hosts for VPC](https://cloud.ibm.com/docs/vpc?topic=vpc-creating-dedicated-hosts-instances), you can carve out a single-tenant compute node, free from users outside of your organization. Within that dedicated space, you can create virtual server instances according to your needs. Additionally, you can create dedicated host groups that contain dedicated hosts for a specific purpose. Because a dedicated host is a single-tenant space, only users within your account that have the required permissions can create instances on the host.\n\nDedicated hosts are highly recommended when you use virtual servers, particularly for any parts of your application that process regulated data and keep it in memory.\n\n\n\n\n\n IBM Cloud Auto Scale for VPC (optional) \n\n[Auto Scale for VPC](https://cloud.ibm.com/docs/vpc?topic=vpc-creating-auto-scale-instance-group) is highly recommended if you are using virtual servers. With Auto Scale for VPC, you can improve performance and costs by dynamically creating virtual server instances to meet the demands of your environment. You set scaling policies that define your desired average utilization for metrics like CPU, memory, and network usage. The policies that you define determine when virtual server instances are added or removed from your instance group.\n\n\n\n\n\n\n\n Containers \n\n\n\n Red Hat OpenShift on IBM Cloud \n\nIn addition to Virtual Servers for VPC, you can use [Red Hat OpenShift on IBM Cloud](https://cloud.ibm.com/docs/openshift?topic=openshift-roks-overview) if you want to run containers. {{site.data.content.openshift-service-description}}",
+          "url": "https://cloud.ibm.com/docs/framework-financial-services?topic=framework-financial-services-vpc-architecture-about",
+          "score": 17.684824,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723547101
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "VPC benefits"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_14870-7-1912",
+          "text": "\nDeployment Journey Overview \n\nIBM Cloud\u00ae Virtual Private Cloud(VPC) allows you to establish your own virtual private cloud by defining a virtual network that is logically isolated from all other public cloud tenants. The underlying software defined networking (SDN) and virtual network functions allows you to quickly establish the network constructs and on-prem connectivity needed to run your workload. The information contained within this document is meant to serve as a technical guide for beginning with a new IBM Cloud Account and leading towards a fully configured VPC network environment.\n\nWelcome to the Deployment Journey for VPC on IBM Cloud! Use the sidebar on the left to navigate between the journey points.\n\n\n\n Journey Map \n\n![Architecture](https://cloud.ibm.com/docs-content/v1/content/d50364af907081c3c38f99c11f35dd9cab4b2510/vpc-journey/images/overview/journey-map.png)\n\n\n\n\n\n Assumptions \n\nThis deployment guide will be assuming the following points. Please note that while your circumstance may not be exactly identical, you will still benefit from the overall journey steps and concepts covered in this guide.\n\n\n\n* You are already familar with the concepts introduced in the \"Tour IBM Cloud\" videos available on the [Getting Started with IBM Cloud](https://cloud.ibm.com/cloud/get-started) page.\n* Access groups will need to be defined so only certain users have the ability to create and manage the VPC network settings (i.e. CIDR ranges, Subnet ACL rules, etc.,).\n* You have a networking background and familar with concepts such as IP Addressing, subnets, routing, etc.,\n* Focus will be on establishing the underlying network connectivity to support VPC based workloads.\n\n\n\n* Note: A separate deployment guide will cover the compute resources which runs within the VPC like IBM Kubernetes Services (IKS), Red Hat OpenShift, IBM Code Engine, and VPC Virtual Server Instances (VSIs).",
+          "url": "https://cloud.ibm.com/docs/vpc-journey?topic=vpc-journey-vpc-overview",
+          "score": 17.00602,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723547098
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "VPC benefits"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_11554-1776-3838",
+          "text": "\nVPC infrastructure contains a number of Infrastructure-as-a-Service (IaaS) offerings, including Virtual Servers for VPC. Use the following information to understand a simple use case for planning, creating, and configuring resources for your VPC, and learn about more VPC overviews and VPC tutorials. For more information about VPC, see [Getting started with Virtual Private Cloud (VPC)](https://cloud.ibm.com/docs/vpc?topic=vpc-getting-started).\n\n\n\n\n\n SAP products architecture on IBM Cloud VPC \n\nA [Virtual Private Cloud (VPC)](https://www.ibm.com/cloud/learn/vpc?mhsrc=ibmsearch_a&mhq=VPC) contains one of the most secure and reliable cloud environments for SAP applications within your own VPC with its included virtual server instances. This represents an Infrastructure as a Service (IaaS) within IBM Cloud that offers all of the benefits of isolated, secure, and flexible virtual cloud infrastructure from IBM. In comparison, the IBM Cloud classic infrastructure virtual servers offering uses virtual instances with native and VLAN networking to communicate to each other within a data center; however, the instances are restricted in one well-working pod by using subnet and VLAN networking as a gap scale up of virtual resources should rely between the pods. What\u2019s new with IBM Cloud VPC is a network orchestrator layer concept that eliminates the pod boundaries and restrictions, so this new concept handles all the networking for every virtual instance running within VPC across regions and zones.\n\n\n\n\n\n 1. Highly available system for SAP NetWeaver on IBM Cloud VPC \n\nIn a highly available (HA) system, every instance can run on a separate IBM Cloud virtual server instance. The cluster HA configuration for the SAP application server consists of two virtual server instances, each of them located in the same zone within the region by using placement groups. Placement groups assure that both cluster resources and cloud resources are also located in different compute nodes as specified in the following placement groups section.\n\nZoom\n\n![Figure 1.",
+          "url": "https://cloud.ibm.com/docs/sap?topic=sap-automate-sap-ha-deployment-overview",
+          "score": 16.920137,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723547094
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "VPC benefits"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_14910-1571-3489",
+          "text": "\nCheck out the [tutorial](https://cloud.ibm.com/docs/vpc?topic=vpc-financial-transaction-confidential-computing-on-hyper-protect-virtual-server-for-vpc) and the [video](https://mediacenter.ibm.com/media/Confidential+Computing+for+a+financial+transaction+using+Hyper+Protect+Virtual+Server+for+VPC/1_vv3j2oo6) on Confidential Computing for a financial transaction using Hyper Protect Virtual Server for VPC. You can learn about how to protect Personally Identifiable Information and credit card information entered into web forms by using Confidential Computing on Hyper Protect Virtual Server for VPC.\n\nFor the on-prem version of Hyper Protect Virtual Servers, see [IBM Hyper Protect Virtual Servers v2.1](https://community.ibm.com/community/user/ibmz-and-linuxone/blogs/nicolas-mding/2022/10/06/ibm-hyper-protect-virtual-servers-v21).\n\n\n\n Hyper Protect Virtual Servers for VPC \n\nThe Hyper Protect Virtual Servers for VPC takes advantage of the IBM Secure Execution for Linux to provide a boundary around each instance and provides the following benefits:\n\n\n\n* Secure Execution boundary for protection from internal and external threats\n\nHyper Protect Virtual Servers for VPC provides technical assurance that unauthorized users, including IBM Cloud admins, do not have access to the application. Workloads are locked down by individual, instance-level secure boundaries.\n* Multiparty contract and attestation of deployment\n\nApply Zero Trust principles from workload development through deployment. As multiple personas and legal entities collaborate, it\u2019s essential to separate duty and access. Hyper Protect Virtual Servers for VPC is based on a newly introduced [encrypted contract](https://cloud.ibm.com/docs/vpc?topic=vpc-about-contract_se) concept. It enables each persona to provide its contribution and be ensured through encryption that none of the other personas can access this data or intellectual property.",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-about-se",
+          "score": 16.859728,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723547091
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "VPC benefits"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The IBM Cloud Virtual Private Cloud (VPC) offers several benefits, including:\n- Network Isolation: A VPC provides a private, isolated network for your resources, ensuring better security and reducing the risk of unauthorized access.\n- Scalability: VPC allows you to scale your resources up or down as needed, making it a flexible solution for businesses with fluctuating demands.\n- Customization: With VPC, you can customize your network configuration, including subnets, route tables, and security groups, to meet your specific needs.\n- On-premises Connectivity: VPC supports on-premises connectivity options, allowing you to seamlessly integrate your cloud and on-premises resources.\n- Cost-effective: VPC offers a cost-effective solution for managing your virtual infrastructure, as you only pay for the resources you use.\n- Compliance: VPC helps you meet various compliance requirements by providing a secure and isolated network environment.\n- Global Reach: IBM Cloud VPC is available in multiple regions worldwide, enabling you to deploy your applications closer to your users for improved performance."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "created",
+      "timestamp": 1723548172
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "rejected",
+      "timestamp": 1725551211
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "edited",
+      "timestamp": 1726734420
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "accepted",
+      "timestamp": 1726735199
+    }
+  ],
+  "editor": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+  "domain": "mt-rag-ibmcloud-elser-512-100-20240502",
+  "reviewer": "9dcd142c-415e-4161-a82f-c8b14bfb36ac"
+}

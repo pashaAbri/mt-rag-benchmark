@@ -1,0 +1,944 @@
+{
+  "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-govt-elser-512-100-20240611",
+      "size": "49607"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "What are the scientific objectives of NASA's Deep Impact Extended Mission?",
+      "timestamp": 1724113437,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The Deep Impact Extended Investigation (DIXI) aims to fly by comet 103P/Hartley 2 and return images and data. The Extrasolar Planet Observation and Characterization (EPOCh) investigation uses the Deep Impact imaging system to observe nearby bright stars with known large planets. This part of the mission characterizes the planets as they orbit behind and in front of the stars and searches for other planets in those systems.",
+      "timestamp": 1724113454,
+      "contexts": [
+        {
+          "document_id": "a38987d211c62a61-5878-7995",
+          "text": "NASA - NSSDCA - Spacecraft - Details\nAt this point (about 961 seconds after impact) imaging ended as the spacecraft reoriented itself by 45 degrees to optimize protection from dust damage as it flew by the nucleus. Closest approach to the nucleus was at a distance of about 500 km. At 1270 seconds the crossing of the inner coma was complete and the spacecraft oriented itself to look back at the comet and begin imaging again. At 3000 seconds the spacecraft began playback of data to Earth at 20 to 200 kilobits per second. The comet and spacecraft were about 0.89 AU from Earth and 1.5 AU from the Sun during the encounter. Real time return of selected impactor images and flyby images and spectra were returned to Earth during the encounter. Primary data return took place over the first day after encounter, with a 28 day supplemental data return period. Earth-based observatories also studied the impact. The spacecraft ranged over a distance of 0.93 to 1.56 AU from the Sun during the primary mission. End of primary mission was August 2005. The total budget for the primary mission was $240 million.\n\nEPOXI Extended Mission\n\nDeep Impact has been funded for an extended mission which has two parts. The Deep Impact Extended Investigation (DIXI) involved flying by comet 103P/Hartley 2 on 4 November 2010 at a closest approach of approximately 700 km. (The original target was comet Boethin on 5 December 2008) and returning images and data. The Extrasolar Planet Observation and Characterization (EPOCh) investigation used the Deep Impact imaging system to observe nearby bright stars with known large planets to characterize the planets as they orbit behind and in front of the stars and to search other planets in those systems. This phase of the mission began 26 January 2008 and continued until the end of July. The spacecraft made three close Earth / Moon flybys to target itself for Hartley 2, on 31 December 2007, 29 December 2008, and 27 June 2010. Scientific observations of the Earth and Moon were made. The encounter with Hartley 2 took place on 4 November 2010 at approximately 14:00 UT (10:00 a.m. EDT) at a distance of roughly 700 km.",
+          "title": "NASA - NSSDCA - Spacecraft - Details",
+          "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2005-001A",
+          "score": 12.143994,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724113648
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Deep Impact has been funded for an extended mission which has two parts."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The scientific objectives of NASA's Deep Impact Extended Mission are twofold. The Deep Impact Extended Investigation (DIXI) aims to fly by comet 103P/Hartley 2 and return images and data. The Extrasolar Planet Observation and Characterization (EPOCh) investigation uses the Deep Impact imaging system to observe nearby bright stars with known large planets. This part of the mission characterizes the planets as they orbit behind and in front of the stars and searches for other planets in those systems."
+    },
+    {
+      "speaker": "user",
+      "text": "what about the goal of Deep Impact mission?",
+      "timestamp": 1724113729,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The goal of the Deep Impact mission was to rendezvous with comet 9P/Tempel 1 and launch a projectile into the comet nucleus. Observations were then made of the ejecta, crater formation process, the resulting crater, and outgassing from the nucleus, particularly the newly exposed surface. The mission aimed to improve the knowledge of the physical characteristics of cometary nuclei and directly assess the interior of cometary nucleus, determine properties of the surface layers, study the relationship between the surface layers of a cometary nucleus and the possibly pristine materials of the interior, and improve our understanding of the evolution of cometary nuclei, particularly their approach to dormancy.",
+      "timestamp": 1724113732,
+      "contexts": [
+        {
+          "document_id": "a38987d211c62a61-2-2173",
+          "text": "NASA - NSSDCA - Spacecraft - Details\nNASA - NSSDCA - Spacecraft - Details\n\nFriday, 22 March 2024\n\nDeep Impact/EPOXINSSDCA/COSPAR ID:\u00a02005-001ADescriptionThe goals of the Deep Impact mission were to rendezvous with comet 9P/Tempel 1 and launch a projectile into the comet nucleus. Observations were made of the ejecta, much of which represented pristine material from the interior of the comet, the crater formation process, the resulting crater, and outgassing from the nucleus, particularly the newly exposed surface. The scientific objectives of the mission are to: improve the knowledge of the physical characteristics of cometary nuclei and directly assess the interior of cometary nucleus; determine properties of the surface layers such as density, strength, porosity, and composition from the crater and its formation; study the relationship between the surface layers of a cometary nucleus and the possibly pristine materials of the interior by comparison of the interior of the crater with the surface before impact; and improve our understanding of the evolution of cometary nuclei, particularly their approach to dormancy, by comparing the interior and the surface. This project was selected as a Discovery class mission in July, 1999. After the primary mission, Deep Impact was selected for a two-part extended mission designated EPOXI.\n\nSpacecraft and Subsystems\n\nThe spacecraft consists of a 370 kg cylindrical copper impactor attached to a 650 kg flyby bus. The spacecraft is a box-shaped honeycomb aluminum framework with a flat rectangular Whipple debris shield mounted on one side to protect components during comet close approach. Body mounted on the framework are one high- and one medium-resolution instrument, each of which consists of an imaging camera and an infrared spectrometer which will be used to observe the ejected ice and dust, much of which will be exposed to space for the first time in over 4 billion years. The medium resolution camera has a field of view (FOV) of 0.587 degrees and a resolution of 7 m/pixel at 700 km distance and is used for navigation and context images. The high resolution camera has a FOV of 0.118 degrees and a resolution of 1.4 m/pixel at 700 km.",
+          "title": "NASA - NSSDCA - Spacecraft - Details",
+          "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2005-001A",
+          "score": 26.782648,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724113764
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "The goals of the Deep Impact mission were to rendezvous with comet 9P/Tempel 1 and launch a projectil"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The primary goal of the Deep Impact mission was to rendezvous with comet 9P/Tempel 1 and launch a projectile into the comet nucleus. Observations were then made of the ejecta, crater formation process, the resulting crater, and outgassing from the nucleus, particularly the newly exposed surface. The mission aimed to improve the knowledge of the physical characteristics of cometary nuclei and directly assess the interior of cometary nucleus, determine properties of the surface layers, study the relationship between the surface layers of a cometary nucleus and the possibly pristine materials of the interior, and improve our understanding of the evolution of cometary nuclei, particularly their approach to dormancy."
+    },
+    {
+      "speaker": "user",
+      "text": "Deep Impact mission Spacecraft and Subsystems ",
+      "timestamp": 1724113823,
+      "enrichments": {
+        "Question Type": [
+          "Keyword",
+          "Non-Question"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The Deep Impact spacecraft consists of a 370 kg cylindrical copper impactor attached to a 650 kg flyby bus. The spacecraft is a box-shaped honeycomb aluminum framework with a flat rectangular Whipple debris shield mounted on one side. There are two high- and medium-resolution instruments, each consisting of an imaging camera and an infrared spectrometer. The medium resolution camera has a field of view of 0.587 degrees and a resolution of 7 m/pixel at 700 km distance, while the high resolution camera has a field of view of 0.118 degrees and a resolution of 1.4 m/pixel at 700 km. These instruments are used to observe the ejected ice and dust from the comet nucleus.",
+      "timestamp": 1724113841,
+      "contexts": [
+        {
+          "document_id": "a38987d211c62a61-2-2173",
+          "text": "NASA - NSSDCA - Spacecraft - Details\nNASA - NSSDCA - Spacecraft - Details\n\nFriday, 22 March 2024\n\nDeep Impact/EPOXINSSDCA/COSPAR ID:\u00a02005-001ADescriptionThe goals of the Deep Impact mission were to rendezvous with comet 9P/Tempel 1 and launch a projectile into the comet nucleus. Observations were made of the ejecta, much of which represented pristine material from the interior of the comet, the crater formation process, the resulting crater, and outgassing from the nucleus, particularly the newly exposed surface. The scientific objectives of the mission are to: improve the knowledge of the physical characteristics of cometary nuclei and directly assess the interior of cometary nucleus; determine properties of the surface layers such as density, strength, porosity, and composition from the crater and its formation; study the relationship between the surface layers of a cometary nucleus and the possibly pristine materials of the interior by comparison of the interior of the crater with the surface before impact; and improve our understanding of the evolution of cometary nuclei, particularly their approach to dormancy, by comparing the interior and the surface. This project was selected as a Discovery class mission in July, 1999. After the primary mission, Deep Impact was selected for a two-part extended mission designated EPOXI.\n\nSpacecraft and Subsystems\n\nThe spacecraft consists of a 370 kg cylindrical copper impactor attached to a 650 kg flyby bus. The spacecraft is a box-shaped honeycomb aluminum framework with a flat rectangular Whipple debris shield mounted on one side to protect components during comet close approach. Body mounted on the framework are one high- and one medium-resolution instrument, each of which consists of an imaging camera and an infrared spectrometer which will be used to observe the ejected ice and dust, much of which will be exposed to space for the first time in over 4 billion years. The medium resolution camera has a field of view (FOV) of 0.587 degrees and a resolution of 7 m/pixel at 700 km distance and is used for navigation and context images. The high resolution camera has a FOV of 0.118 degrees and a resolution of 1.4 m/pixel at 700 km.",
+          "title": "NASA - NSSDCA - Spacecraft - Details",
+          "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2005-001A",
+          "score": 23.792995,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724114007
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "The spacecraft consists of a 370 kg cylindrical copper impactor attached to a 650 kg flyby bus"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "a38987d211c62a61-1615-3491",
+          "text": "NASA - NSSDCA - Spacecraft - Details\nBody mounted on the framework are one high- and one medium-resolution instrument, each of which consists of an imaging camera and an infrared spectrometer which will be used to observe the ejected ice and dust, much of which will be exposed to space for the first time in over 4 billion years. The medium resolution camera has a field of view (FOV) of 0.587 degrees and a resolution of 7 m/pixel at 700 km distance and is used for navigation and context images. The high resolution camera has a FOV of 0.118 degrees and a resolution of 1.4 m/pixel at 700 km. The infrared spectrometers cover the range from 1.05 to 4.8 micrometers with FOV of 0.29 degrees (hi-res) and 1.45 degrees (lo-res). The total flyby bus instrument payload has a mass of 90 kg and will use an average of 92 W during encounter.\n\nThe flyby spacecraft measures approximately 3.2 m x 1.7 m x 2.3 m, is three-axis stabilized and uses a blowdown hydrazine primary propulsion system with 5000 N-s RCS total impulse providing a total delta-V of 190 m/s. Communications with the ground from the flyby bus are via X-band (8.000 MHz) through a 1 meter diameter parabolic dish antenna mounted on a 2-axis gimbal or through a fixed low-gain antenna. Communication between the impactor and flyby spacecraft is in S-band. The uplink data rate will be 125 bps, downlink will be at 175 kbps. Power of 620 W at the encounter is provided by a 7.2 square meter solar array and stored in a small NiH2 battery. The spacecraft control system consists of four hemispherical resonator gyros, two star trackers, reaction wheels, and hydrazine thrusters. Pointing accuracy is 200 microradians with 65 microradian knowledge. Thermal control is achieved by insulating blankets, surface radiators, finishes, and heaters. The spacecraft has two redundant RAD750 computers with 309 MB each of memory for scientific data.\n\nThe Impactor",
+          "title": "NASA - NSSDCA - Spacecraft - Details",
+          "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2005-001A",
+          "score": 27.388607,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724114010
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "The high resolution camera has a FOV of 0.118 degrees and a resolution of 1.4 m/pixel at 700 km."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "speaker": "user",
+      "text": "can you give summary of this Deep Impact mission?",
+      "timestamp": 1724114099,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The Deep Impact mission, launched in 2005, was designed to study comet 9P/Tempel 1. The spacecraft transferred into a heliocentric orbit and will rendezvous with comet P/Tempel 1 in July 2005.The spacecraft consisted of a flyby bus and a copper impactor, which were used to collide with the comet's nucleus and study the resulting ejecta and crater. The mission's scientific objectives included improving our understanding of the physical characteristics of cometary nuclei, determining the properties of the surface layers, studying the relationship between the surface and interior of the comet, and learning more about the evolution of cometary nuclei. After the primary mission, Deep Impact was extended to include the Deep Impact Extended Investigation (DIXI) and the Extrasolar Planet Observation and Characterization (EPOCh) investigations. DIXI involved flying by comet 103P/Hartley 2, while EPOCh used the Deep Impact imaging system to observe nearby bright stars with known large planets and search for other planets in those systems.",
+      "timestamp": 1724114117,
+      "contexts": [
+        {
+          "document_id": "a38987d211c62a61-2-2173",
+          "text": "NASA - NSSDCA - Spacecraft - Details\nNASA - NSSDCA - Spacecraft - Details\n\nFriday, 22 March 2024\n\nDeep Impact/EPOXINSSDCA/COSPAR ID:\u00a02005-001ADescriptionThe goals of the Deep Impact mission were to rendezvous with comet 9P/Tempel 1 and launch a projectile into the comet nucleus. Observations were made of the ejecta, much of which represented pristine material from the interior of the comet, the crater formation process, the resulting crater, and outgassing from the nucleus, particularly the newly exposed surface. The scientific objectives of the mission are to: improve the knowledge of the physical characteristics of cometary nuclei and directly assess the interior of cometary nucleus; determine properties of the surface layers such as density, strength, porosity, and composition from the crater and its formation; study the relationship between the surface layers of a cometary nucleus and the possibly pristine materials of the interior by comparison of the interior of the crater with the surface before impact; and improve our understanding of the evolution of cometary nuclei, particularly their approach to dormancy, by comparing the interior and the surface. This project was selected as a Discovery class mission in July, 1999. After the primary mission, Deep Impact was selected for a two-part extended mission designated EPOXI.\n\nSpacecraft and Subsystems\n\nThe spacecraft consists of a 370 kg cylindrical copper impactor attached to a 650 kg flyby bus. The spacecraft is a box-shaped honeycomb aluminum framework with a flat rectangular Whipple debris shield mounted on one side to protect components during comet close approach. Body mounted on the framework are one high- and one medium-resolution instrument, each of which consists of an imaging camera and an infrared spectrometer which will be used to observe the ejected ice and dust, much of which will be exposed to space for the first time in over 4 billion years. The medium resolution camera has a field of view (FOV) of 0.587 degrees and a resolution of 7 m/pixel at 700 km distance and is used for navigation and context images. The high resolution camera has a FOV of 0.118 degrees and a resolution of 1.4 m/pixel at 700 km.",
+          "title": "NASA - NSSDCA - Spacecraft - Details",
+          "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2005-001A",
+          "score": 45.33807,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724114187
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What are the scientific objectives of NASA's Deep Impact Extended Mission?\n|assistant|: The Deep Impact Extended Investigation (DIXI) aims to fly by comet 103P/Hartley 2 and return images and data. The Extrasolar Planet Observation and Characterization (EPOCh) investigation uses the Deep Impact imaging system to observe nearby bright stars with known large planets. This part of the mission characterizes the planets as they orbit behind and in front of the stars and searches for other planets in those systems.\n|user|: what about the goal of Deep Impact mission?\n|assistant|: The goal of the Deep Impact mission was to rendezvous with comet 9P/Tempel 1 and launch a projectile into the comet nucleus. Observations were then made of the ejecta, crater formation process, the resulting crater, and outgassing from the nucleus, particularly the newly exposed surface. The mission aimed to improve the knowledge of the physical characteristics of cometary nuclei and directly assess the interior of cometary nucleus, determine properties of the surface layers, study the relationship between the surface layers of a cometary nucleus and the possibly pristine materials of the interior, and improve our understanding of the evolution of cometary nuclei, particularly their approach to dormancy.\n|user|: Deep Impact mission Spacecraft and Subsystems \n|assistant|: The Deep Impact spacecraft consists of a 370 kg cylindrical copper impactor attached to a 650 kg flyby bus. The spacecraft is a box-shaped honeycomb aluminum framework with a flat rectangular Whipple debris shield mounted on one side. There are two high- and medium-resolution instruments, each consisting of an imaging camera and an infrared spectrometer. The medium resolution camera has a field of view of 0.587 degrees and a resolution of 7 m/pixel at 700 km distance, while the high resolution camera has a field of view of 0.118 degrees and a resolution of 1.4 m/pixel at 700 km. These instruments are used to observe the ejected ice and dust from the comet nucleus.\n|user|: can you give summary of this Deep Impact mission?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "a38987d211c62a61-5878-7995",
+          "text": "NASA - NSSDCA - Spacecraft - Details\nAt this point (about 961 seconds after impact) imaging ended as the spacecraft reoriented itself by 45 degrees to optimize protection from dust damage as it flew by the nucleus. Closest approach to the nucleus was at a distance of about 500 km. At 1270 seconds the crossing of the inner coma was complete and the spacecraft oriented itself to look back at the comet and begin imaging again. At 3000 seconds the spacecraft began playback of data to Earth at 20 to 200 kilobits per second. The comet and spacecraft were about 0.89 AU from Earth and 1.5 AU from the Sun during the encounter. Real time return of selected impactor images and flyby images and spectra were returned to Earth during the encounter. Primary data return took place over the first day after encounter, with a 28 day supplemental data return period. Earth-based observatories also studied the impact. The spacecraft ranged over a distance of 0.93 to 1.56 AU from the Sun during the primary mission. End of primary mission was August 2005. The total budget for the primary mission was $240 million.\n\nEPOXI Extended Mission\n\nDeep Impact has been funded for an extended mission which has two parts. The Deep Impact Extended Investigation (DIXI) involved flying by comet 103P/Hartley 2 on 4 November 2010 at a closest approach of approximately 700 km. (The original target was comet Boethin on 5 December 2008) and returning images and data. The Extrasolar Planet Observation and Characterization (EPOCh) investigation used the Deep Impact imaging system to observe nearby bright stars with known large planets to characterize the planets as they orbit behind and in front of the stars and to search other planets in those systems. This phase of the mission began 26 January 2008 and continued until the end of July. The spacecraft made three close Earth / Moon flybys to target itself for Hartley 2, on 31 December 2007, 29 December 2008, and 27 June 2010. Scientific observations of the Earth and Moon were made. The encounter with Hartley 2 took place on 4 November 2010 at approximately 14:00 UT (10:00 a.m. EDT) at a distance of roughly 700 km.",
+          "title": "NASA - NSSDCA - Spacecraft - Details",
+          "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2005-001A",
+          "score": 35.71696,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724114189
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What are the scientific objectives of NASA's Deep Impact Extended Mission?\n|assistant|: The Deep Impact Extended Investigation (DIXI) aims to fly by comet 103P/Hartley 2 and return images and data. The Extrasolar Planet Observation and Characterization (EPOCh) investigation uses the Deep Impact imaging system to observe nearby bright stars with known large planets. This part of the mission characterizes the planets as they orbit behind and in front of the stars and searches for other planets in those systems.\n|user|: what about the goal of Deep Impact mission?\n|assistant|: The goal of the Deep Impact mission was to rendezvous with comet 9P/Tempel 1 and launch a projectile into the comet nucleus. Observations were then made of the ejecta, crater formation process, the resulting crater, and outgassing from the nucleus, particularly the newly exposed surface. The mission aimed to improve the knowledge of the physical characteristics of cometary nuclei and directly assess the interior of cometary nucleus, determine properties of the surface layers, study the relationship between the surface layers of a cometary nucleus and the possibly pristine materials of the interior, and improve our understanding of the evolution of cometary nuclei, particularly their approach to dormancy.\n|user|: Deep Impact mission Spacecraft and Subsystems \n|assistant|: The Deep Impact spacecraft consists of a 370 kg cylindrical copper impactor attached to a 650 kg flyby bus. The spacecraft is a box-shaped honeycomb aluminum framework with a flat rectangular Whipple debris shield mounted on one side. There are two high- and medium-resolution instruments, each consisting of an imaging camera and an infrared spectrometer. The medium resolution camera has a field of view of 0.587 degrees and a resolution of 7 m/pixel at 700 km distance, while the high resolution camera has a field of view of 0.118 degrees and a resolution of 1.4 m/pixel at 700 km. These instruments are used to observe the ejected ice and dust from the comet nucleus.\n|user|: can you give summary of this Deep Impact mission?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "a38987d211c62a61-4556-6466",
+          "text": "NASA - NSSDCA - Spacecraft - Details\nFor the Deep Impact Impactor (DII) spacecraft record, see:\n\nhttp://nssdc.gsfc.nasa.gov/nmc/spacecraftDisplay.do?id=2005-001D\n\nMission Profile\n\nDeep Impact launched on 12 January 2005 at 18:47:08.574 UT (1:47:08 p.m. EST) on a Delta II. The spacecraft transferred into a heliocentric orbit and will rendezvous with comet P/Tempel 1 in July 2005. Deep Impact was 880,000 km from the comet on 3 July 2005 moving at a velocity of 10.2 km/s relative to the comet. The projectile was released at this point and shortly after release the flyby spacecraft executed a maneuver to slow down relative to the impactor by 120 m/s and divert by 6 m/s. On 4 July the impactor struck the sunlit side of the comet nucleus 24 hours after release, at 5:52 UT (1:52 a.m. EDT). At 10.2 km/s velocity, the impactor had an impact energy of about 19 gigajoules, and hit at an oblique angle of approximately 25 degrees. Material from the nucleus was ejected into space and the impactor and much of the ejecta was vaporized.\n\nThe flyby spacecraft was approximately 10,000 km away at the time of impact and began imaging 60 seconds before impact. At 600 seconds after impact the spacecraft was about 4000 km from the nucleus and observations of the crater began and continued up to a range of about 700 km, about 50 seconds before closest approach. At this point (about 961 seconds after impact) imaging ended as the spacecraft reoriented itself by 45 degrees to optimize protection from dust damage as it flew by the nucleus. Closest approach to the nucleus was at a distance of about 500 km. At 1270 seconds the crossing of the inner coma was complete and the spacecraft oriented itself to look back at the comet and begin imaging again. At 3000 seconds the spacecraft began playback of data to Earth at 20 to 200 kilobits per second. The comet and spacecraft were about 0.89 AU from Earth and 1.5 AU from the Sun during the encounter.",
+          "title": "NASA - NSSDCA - Spacecraft - Details",
+          "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2005-001A",
+          "score": 19.953218,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724114235
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Deep Impact launched on 12 January 2005 at 18:47:08.574"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The Deep Impact mission, launched in 2005, was designed to study comet 9P/Tempel 1. The spacecraft consisted of a flyby bus and a copper impactor, which were used to collide with the comet's nucleus and study the resulting ejecta and crater. The mission's scientific objectives included improving our understanding of the physical characteristics of cometary nuclei, determining the properties of the surface layers, studying the relationship between the surface and interior of the comet, and learning more about the evolution of cometary nuclei. After the primary mission, Deep Impact was extended to include the Deep Impact Extended Investigation (DIXI) and the Extrasolar Planet Observation and Characterization (EPOCh) investigations. DIXI involved flying by comet 103P/Hartley 2, while EPOCh used the Deep Impact imaging system to observe nearby bright stars with known large planets and search for other planets in those systems."
+    },
+    {
+      "speaker": "user",
+      "text": "you mentioned about Comet. Can you please more clarification?",
+      "timestamp": 1724114371,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Certainly! 1. Comet 9P/Tempel 1: This is a periodic comet with an orbital period of 5.51 years. It has a semi-major axis of 3.12 astronomical units (AU) and a perihelion distance of 1.5 AU, which places it between the orbits of Mars and Jupiter. The nucleus of Tempel 1 is estimated to be around 14 km long and 4 km wide. 2. Comet 103P/Hartley 2: Also known as Hartley 2, this is another periodic comet with an orbital period of 6.46 years. Its semi-major axis is 3.46 AU, and it has a perihelion distance of 1.05 AU. The nucleus of Hartley 2 is elongated, measuring about 2 km long by 0.5 km wide. ",
+      "timestamp": 1724114384,
+      "contexts": [
+        {
+          "document_id": "a38987d211c62a61-7578-9316",
+          "text": "NASA - NSSDCA - Spacecraft - Details\nThis phase of the mission began 26 January 2008 and continued until the end of July. The spacecraft made three close Earth / Moon flybys to target itself for Hartley 2, on 31 December 2007, 29 December 2008, and 27 June 2010. Scientific observations of the Earth and Moon were made. The encounter with Hartley 2 took place on 4 November 2010 at approximately 14:00 UT (10:00 a.m. EDT) at a distance of roughly 700 km. The spacecraft and comet were 1.064 AU from the Sun and 0.156 AU from Earth at encounter. Approach phase angle was 86 degrees, MRI resolution at closest approach was 7 m per pixel. The two extended missions together are known as EPOXI. Following Hartley 2, remote observations were made of Comet Garradd (C/2009 P1) and comet ISON (C/2012 S1). After a period in which communications could not be established in 2013, it was concluded on 16 September 2013 that the spacecraft was lost, and end of mission was announced on 19 September. Total cost of the extended mission is $40 million.\n\nComet Tempel 1\n\nComet 9P/Tempel 1 is a periodic comet which orbits the Sun every 5.51 years. It has a semi-major axis of 3.12 astronomical units (AU, the distance from the Sun to the Earth) and a perihelion distance of 1.5 AU, which puts it between the orbits of Mars and Jupiter. Its orbit is inclined 10.5 degrees to the ecliptic. The orbit has changed in the past but the perihelion has been within 10 AU for at least 300,000 years. The nucleus is estimated to be roughly 14 km long and 4 km wide. The perihelion occurs on 5 July 2005, the day after the encounter. The comet was discovered on 3 April 1867 by Ernst Wilhelm Leberecht Tempel and was first recognized to be periodic in May of that year by C. Bruhns.\n\nComet Hartley 2",
+          "title": "NASA - NSSDCA - Spacecraft - Details",
+          "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2005-001A",
+          "score": 16.408,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724114447
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "is a periodic comet which orbits the Sun"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "a38987d211c62a61-8916-10686",
+          "text": "NASA - NSSDCA - Spacecraft - Details\nThe orbit has changed in the past but the perihelion has been within 10 AU for at least 300,000 years. The nucleus is estimated to be roughly 14 km long and 4 km wide. The perihelion occurs on 5 July 2005, the day after the encounter. The comet was discovered on 3 April 1867 by Ernst Wilhelm Leberecht Tempel and was first recognized to be periodic in May of that year by C. Bruhns.\n\nComet Hartley 2\n\nComet 103P/Hartley, commonly known as Hartley 2, is a periodic comet which takes 6.46 years to orbit the Sun. Its semi-major axis is 3.46 AU with a perihelion distance of 1.05 AU and a perihelion date of 28 October 2010, 7 days before encounter. Its orbit is inclined 13.6 degrees to the ecliptic. The elongated nucleus is about 2 km long by 0.5 km wide. It was discovered by Malcolm Hartley on 15 March 1986.Alternate Names28517DIFDeep ImpactDeep Impact Flyby SpacecraftDeepImpactEPOXIurn:nasa:pds:context:instrument_host:spacecraft.difFacts in BriefLaunch Date:\u00a02005-01-12Launch\u00a0Vehicle:\u00a0Delta IILaunch\u00a0Site:\u00a0Cape Canaveral, United StatesMass:\u00a0650\u00a0kgNominal\u00a0Power:\u00a0620\u00a0WFunding AgencyNational Aeronautics and Space Administration\u00a0(United States)DisciplinePlanetary ScienceAdditional InformationLaunch/Orbital information for Deep Impact/EPOXITelecommunications information for Deep Impact/EPOXIExperiments on Deep Impact/EPOXIData collections from Deep Impact/EPOXI\n Questions and comments about this spacecraft can be directed to:\n Dr. David R. Williams\u00a0PersonnelNameRoleOriginal\u00a0AffiliationE-mailDr. Michael F. A'HearnMission Principal InvestigatorUniversity of MarylandDr. Tim LarsonProject ManagerNASA Jet Propulsion Laboratorytimothy.w.larson@nasa.govSelected\u00a0ReferencesBelton, M. J. S., and M. F. A'Hearn, Deep sub-surface exploration of cometary nuclei,\n Adv.",
+          "title": "NASA - NSSDCA - Spacecraft - Details",
+          "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2005-001A",
+          "score": 12.150268,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724114449
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "commonly known as Hartley 2"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Certainly! Comets are icy bodies that originate from the distant outer regions of the solar system. When they come close to the Sun, they vaporize, producing a glowing coma and often a tail, making them fascinating objects to study.\nIn the provided document, there are details about two specific comets:\n1. Comet 9P/Tempel 1: This is a periodic comet with an orbital period of 5.51 years. It has a semi-major axis of 3.12 astronomical units (AU) and a perihelion distance of 1.5 AU, which places it between the orbits of Mars and Jupiter. The nucleus of Tempel 1 is estimated to be around 14 km long and 4 km wide. The Deep Impact mission studied this comet by sending an impactor into its nucleus and observing the resulting ejecta and crater.\n2. Comet 103P/Hartley 2: Also known as Hartley 2, this is another periodic comet with an orbital period of 6.46 years. Its semi-major axis is 3.46 AU, and it has a perihelion distance of 1.05 AU. The nucleus of Hartley 2 is elongated, measuring about 2 km long by 0.5 km wide. The Deep Impact Extended Mission included a flyby of this comet to collect images and data.\nThese comets provide valuable insights into the composition and evolution of the early solar system, as they are believed to contain materials that have remained relatively unchanged since the formation of the Sun and planets."
+    },
+    {
+      "speaker": "user",
+      "text": "I want to watch some press conference about Deep Impact",
+      "timestamp": 1724114590,
+      "enrichments": {
+        "Question Type": [
+          "Non-Question"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Here are some Deep Impact Press Release: NASA sends spacecraft on mission to Comet Hartley 2 - 13 December 2007  New extended missions chosen for Deep Impact - 3 July 2007  Deep Impact extended missions chosen for further study - 30 October 2006  NASA's Deep Impact tells a tale of the comet - 4 July 2005  Deep Impact kicks off Fourth of July with deep space fireworks - 4 July 2005  NASA announces spectacular day of the comet - 9 June 2005  NASA's Deep Impact spacecraft spots its quarry, stalking begins - 27 April 2005  NASA releases Deep Impact mission status report - 25 March 2005  Deep Impact launched and flying toward date with a comet - 12 January 2005  Deep Impact arrives in Florida to prepare for launch - 18 October 2004  Deep Impact launch date changed - 01 April 2003  University of Maryland Press Release on Deep Impact - 07 July 1999",
+      "timestamp": 1724114593,
+      "contexts": [
+        {
+          "document_id": "a38987d211c62a61-11288-12969",
+          "text": "NASA - NSSDCA - Spacecraft - Details\nRev., 117, No. 1-2, 95-121, doi:10.1007/s11214-005-3394-4, Mar. 2005.Veverka, J., et al., Return to Comet Tempel 1: Overview of Stardust-NExT results,\n Icarus, 222, No. 2, 424-435, doi:10.1016/j.icarus.2012.03.034, Feb. 2013.Wellnitz, D. D., et al., The location of the impact point of the Deep Impact Impactor on Comet 9P/Tempel 1,\n Icarus, 222, No. 2, 487-491, doi:10.1016/j.icarus.2012.08.003, Feb. 2013.Schultz, P. H., et al., The Deep Impact crater on 9P/Tempel-1 from Stardust-NExT,\n Icarus, 222, No. 2, 502-515, doi:10.1016/j.icarus.2012.06.018, Feb. 2013.\n\nComet Hartley 2 at EPOXI closest approach - 4 November 2010\n\n Images of the Deep Impact encounter with Comet Tempel 1 - 4 July 2005\n\n Call for CCD Observations of Comet Tempel 1\n\n Comet Page\n\n Comet Fact Sheet\n\n NASA's Discovery Program\n\nDeep Impact Press Releases\n\n NASA sends spacecraft on mission to Comet Hartley 2 - 13 December 2007\n\n New extended missions chosen for Deep Impact - 3 July 2007\n\n Deep Impact extended missions chosen for further study - 30 October 2006\n\n NASA's Deep Impact tells a tale of the comet - 4 July 2005\n\n Deep Impact kicks off Fourth of July with deep space fireworks - 4 July 2005\n\n NASA announces spectacular day of the comet - 9 June 2005\n\n NASA's Deep Impact spacecraft spots its quarry, stalking begins - 27 April 2005\n\n NASA releases Deep Impact mission status report - 25 March 2005\n\n Deep Impact launched and flying toward date with a comet - 12 January 2005\n\n Deep Impact arrives in Florida to prepare for launch - 18 October 2004\n\n Deep Impact launch date changed - 01 April 2003\n\n University of Maryland Press Release on Deep Impact - 07 July 1999\n\n EPOXI Project Home Page",
+          "title": "NASA - NSSDCA - Spacecraft - Details",
+          "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2005-001A",
+          "score": 18.004217,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724114668
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "NASA sends spacecraft on mission to Comet Hartley 2 - 13 December 2007"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "a38987d211c62a61-12469-13272",
+          "text": "NASA - NSSDCA - Spacecraft - Details\nNASA announces spectacular day of the comet - 9 June 2005\n\n NASA's Deep Impact spacecraft spots its quarry, stalking begins - 27 April 2005\n\n NASA releases Deep Impact mission status report - 25 March 2005\n\n Deep Impact launched and flying toward date with a comet - 12 January 2005\n\n Deep Impact arrives in Florida to prepare for launch - 18 October 2004\n\n Deep Impact launch date changed - 01 April 2003\n\n University of Maryland Press Release on Deep Impact - 07 July 1999\n\n EPOXI Project Home Page\n\n Deep Impact Project Home PageNSSDCA Master Catalog Search\n\nSpacecraft\nExperiments\nData Collections\nPersonnel\nPublications\nMaps\nNew/Updated Data\nLunar/Planetary Events\n\n \n\n+ Privacy Policy and Important Notices\n\nNASA Official: Dr. David R. Williams\nCurator: E. Bell, II\nVersion 5.1.15, 28 October 2022",
+          "title": "NASA - NSSDCA - Spacecraft - Details",
+          "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2005-001A",
+          "score": 16.631256,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724114669
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "NASA sends spacecraft on mission to Comet Hartley 2 - 13 December 2007"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "You can visit the following NASA press release websites to find press conferences and related media about the Deep Impact mission:\n1. [Deep Impact Press Releases](https://www.nasa.gov/deepimpact/news/index.html)\n2. [NASA's Deep Impact tells a tale of the comet](https://www.nasa.gov/mission_pages/deepimpact/multimedia/deepimpact20050704.html)\n3. [Deep Impact kicks off Fourth of July with deep space fireworks](https://www.nasa.gov/mission_pages/deepimpact/multimedia/deepimpact20050704b.html)\n4. [NASA announces spectacular day of the comet](https://www.nasa.gov/mission_pages/deepimpact/multimedia/deepimpact20050609.html)\n5. [NASA's Deep Impact spacecraft spots its quarry, stalking begins](https://www.nasa.gov/mission_pages/deepimpact/multimedia/deepimpact20050427.html)\n6. [NASA releases Deep Impact mission status report](https://www.nasa.gov/mission_pages/deepimpact/multimedia/deepimpact20050325.html)\nThese links contain various press releases, images, videos, and audio clips related to the Deep Impact mission."
+    },
+    {
+      "speaker": "user",
+      "text": "what is NASA Discovery Program? Is Deep Impact Mission part of NASA Discovery program?",
+      "timestamp": 1724114977,
+      "enrichments": {
+        "Question Type": [
+          "Composite"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "NASA's Discovery Program is a series of cost-effective missions that aim to answer critical questions in solar system science. The program supports the development and implementation of over 20 missions and instruments. The selected investigations will be managed by the Planetary Missions Program Office at NASA's Marshall Space Flight Center in Huntsville, Alabama. The goals of the program are to provide frequent opportunities for principal investigator-led investigations in planetary sciences that can be accomplished under a not-to-exceed cost cap. Yes, Deep Impact Mission is part of NASA Discovery program.",
+      "timestamp": 1724114980,
+      "contexts": [
+        {
+          "document_id": "0c4d7fef596217da-1-2169",
+          "text": "Discovery Program\nDiscovery Program NASA's Discovery Program \r\r\rThe primary goal of NASA's Discovery program is to conduct a series of \rfrequent, highly focused, cost-effective missions to answer critical \rquestions in solar system science. Formally started in NASA's FY 1994 \rbudget, the Discovery program featured small planetary exploration\rspacecraft with focused science goals that could be built in\r36 months or less, for less than $190 million in development costs \rand a total mission cost of less than $299 million. The program has \rexpanded since then, but still concentrates on smaller missions that \rrequire less resources and shorter development times than the larger \r\"flagship\" missions. \r\rThe program encourages the use of new technologies, transfer of these \rtechnologies to the private sector, increased participation of small \rand disadvantaged businesses, the pursuit of innovative ways of doing \rbusiness, and support of the nation's educational initiatives. \rThe objective is to perform high-quality scientific investigations \rwhich will assure continuity in the U.S. solar system exploration \rprogram and enhance general public awareness of, and appreciation \rfor, solar system exploration.\r\r\rSeventeen missions have been selected for the Discovery program so far:\r DAVINCI+ \r- Venus orbiter and atmospheric probe (to be launched 2028-2030) VERITAS \r- Venus orbiter (to be launched 2028-2030) Psyche \r- Asteroid Psyche orbiter (to be launched August 2022) Lucy \r- Trojan asteroid flyby mission (launched 16 October 2021) InSight \r- Mars geophysical lander (launched 5 May 2018) GRAIL A\rand \r\rGRAIL B \r- Lunar gravity orbiters (launched 10 September 2011) Lunar Reconnaissance Orbiter \r- Lunar surface studies orbiter (launched 18 June 2009) Kepler \r- Exoplanet observation mission (launched 7 March 2009) Dawn \r- Asteroid Vesta and Ceres orbiter (launched 27 September 2007) Deep Impact \r- Mission to Comet Tempel 1 (launched 12 January 2005) MESSENGER \r- Mission to orbit Mercury (launched 3 August 2004) CONTOUR \r- Mission to fly by three comet nuclei (launched 3 July 2002 - failed) Genesis \r- Solar wind sample return mission (launched 8 August 2001) Stardust",
+          "title": "Discovery Program",
+          "url": "http://nssdc.gsfc.nasa.gov/planetary/discovery.html",
+          "score": 23.712862,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724115040
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "NASA's Discovery Program"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "0c4d7fef596217da-1755-3919",
+          "text": "Discovery Program\n- Exoplanet observation mission (launched 7 March 2009) Dawn \r- Asteroid Vesta and Ceres orbiter (launched 27 September 2007) Deep Impact \r- Mission to Comet Tempel 1 (launched 12 January 2005) MESSENGER \r- Mission to orbit Mercury (launched 3 August 2004) CONTOUR \r- Mission to fly by three comet nuclei (launched 3 July 2002 - failed) Genesis \r- Solar wind sample return mission (launched 8 August 2001) Stardust \r- Comet P/Wild 2 coma sample return (launched 7 February 1999) Lunar Prospector \r- Lunar orbiter (launched 7 January 1998) Mars Pathfinder \r- Mars surface lander and rover (launched 4 December 1996) Near Earth Asteroid Rendezvous (NEAR) \r- Asteroid 433 Eros Orbiter (launched 17 February 1996) Discovery Missions of Opportunity MEGANE \r- MMX gamma-ray/neutron spectrometer EPOXI \r- Deep Impact extended mission Stardust-NExT \r- Stardust extended mission Moon Mineralogy Mapper (M3) \r- Chandrayaan 1 imaging spectrometer ASPERA-3 \r- Mars Express ion, electron, and neutral atom analyzer Strofio \r- BepiColombo Mercury mass spectrometer More Information on the Discovery Program and Missions \rNASA selects 2 missions to study 'lost habitable' world of Venus - Press Release (June 2021) \rNASA selects two missions to explore the early solar system - Press Release (January 2017) \rNASA selects investigations for future key planetary mission - Press Release (September 2015) \rNew insight on Mars expected from new NASA mission - Press Release (August 2012) \rNASA selects investigations for future key planetary mission - Press Release (May 2011) \rNew NASA Mission to Reveal Moon's Internal Structure and Evolution - Press Release (December 2007) \rThree new concept studies and three missions of opportunity - Press Release (October 2006) \rTwo new missions, Dawn and Kepler, selected - Press Release (December 2001) \rThree new missions under consideration - Press Release (January 2001) \rSelection of MESSENGER and Deep Impact - Press Release (July 1999) \rFive missions selected for further study - Press Release (November 1998) \rSelection of CONTOUR and Genesis - Press Release (October 1997) \rLunar Prospector Selection - Press Release (February 1995)",
+          "title": "Discovery Program",
+          "url": "http://nssdc.gsfc.nasa.gov/planetary/discovery.html",
+          "score": 21.097895,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724115041
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "NASA's Discovery Program"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "0c4d7fef596217da-3414-4553",
+          "text": "Discovery Program\nThree new concept studies and three missions of opportunity - Press Release (October 2006) \rTwo new missions, Dawn and Kepler, selected - Press Release (December 2001) \rThree new missions under consideration - Press Release (January 2001) \rSelection of MESSENGER and Deep Impact - Press Release (July 1999) \rFive missions selected for further study - Press Release (November 1998) \rSelection of CONTOUR and Genesis - Press Release (October 1997) \rLunar Prospector Selection - Press Release (February 1995) \rStardust Selection - Press Release (November 1995) \rMore information on the five 1997 Discovery candidates - Press Release (April 1997) \rStardust, Suess-Urey, and Venus Multi-Probe \r- The 3 final candidates for the 4th Discovery mission Discovery Program Home Page Discovery Program Acquisition Other Past, Current, and Future Planetary Missions NSSDCA Planetary Science Home Page \n\nAuthor/Curator:\nDr. David R. Williams, dave.williams@nasa.gov\nNSSDCA, Mail Code 690.1\nNASA Goddard Space Flight Center\nGreenbelt, MD 20771\n+1-301-286-1258\n\nNASA Official: Dave Williams, david.r.williams@nasa.gov\n\n\rLast Updated: 31 January 2022, DRW ",
+          "title": "Discovery Program",
+          "url": "http://nssdc.gsfc.nasa.gov/planetary/discovery.html",
+          "score": 21.095562,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724115043
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "NASA's Discovery Program"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "5cc83523c44261bc-10778-12955",
+          "text": "NASA Selects 2 Missions to Study \u2018Lost Habitable\u2019 World of Venus - NASA\nIn addition to the two missions, NASA selected a pair of technology demonstrations to fly along with them.\u00a0VERITAS\u00a0will host the Deep Space Atomic Clock-2, built by JPL and funded by NASA\u2019s Space Technology Mission Directorate. The ultra-precise clock signal generated with this technology will ultimately help enable autonomous spacecraft maneuvers and enhance radio science observations.\u00a0\nDAVINCI+\u00a0will host the Compact Ultraviolet to Visible Imaging Spectrometer (CUVIS) built by Goddard. CUVIS will make high resolution measurements of ultraviolet light using a new instrument based on freeform optics. These observations will be used to determine the nature of the unknown ultraviolet absorber in\u00a0Venus\u2019 atmosphere\u00a0that absorbs up to half the incoming solar energy.\nEstablished in 1992, NASA\u2019s Discovery Program has supported the development and implementation of over 20 missions and instruments. These selections are part of the ninth Discovery Program competition.\nThe concepts were chosen from proposals submitted in 2019 under NASA Announcement of Opportunity NNH19ZDA010O. The selected investigations will be managed by the Planetary Missions Program Office at NASA\u2019s Marshall Space Flight Center in Huntsville, Alabama, as part of the Discovery Program. The Discovery Program conducts space science investigations in the Planetary Science Division of NASA\u2019s Science Mission Directorate. The goals of the program are to provide frequent opportunities for principal investigator-led investigations in planetary sciences that can be accomplished under a not-to-exceed cost cap.\nFor more information about NASA\u2019s planetary science, visit:\nhttps://www.nasa.gov/solarsystem\n-end-\nAlana Johnson / Karen Fox\nHeadquarters, Washington\n202-672-4780 / 301-286-6284\nalana.r.johnson@nasa.gov\u00a0/\u00a0karen.c.fox@nasa.gov\n\nThe National Aeronautics and Space Administration\nNASA explores the unknown in air and space, innovates for the benefit of humanity, and inspires the world through discovery.\n\nAbout NASA's Mission\n\nJoin Us\n\nHome\nNews & Events\nMultimedia\nNASA+\nMissions\nHumans in Space\nEarth & Climate\nThe Solar System\nThe Universe\nScience\nAeronautics\nTechnology\nLearning Resources",
+          "title": "NASA Selects 2 Missions to Study \u2018Lost Habitable\u2019 World of Venus - NASA",
+          "url": "https://www.nasa.gov/press-release/nasa-selects-2-missions-to-study-lost-habitable-world-of-venus",
+          "score": 20.048174,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724115044
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "NASA's Discovery Program"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "NASA's Discovery Program is a series of cost-effective missions that aim to answer critical questions in solar system science. The program supports the development and implementation of over 20 missions and instruments. However, the Deep Impact mission is not part of the Discovery Program. Instead, it is managed by the Planetary Missions Program Office at NASA's Marshall Space Flight Center in Huntsville, Alabama. The Discovery Program focuses on smaller missions with a not-to-exceed cost cap, while the Deep Impact mission is a larger-scale mission with a different management structure."
+    },
+    {
+      "speaker": "user",
+      "text": "Are there names for the data collected through this deep impact program?",
+      "timestamp": 1724115346,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, the data collections have their names. Here are some examples: 1. Deep Impact SPICE Navigation Files (PDS) 2. Deep Impact/EPOXI: High Resolution Instrument (HRI) 3. Deep Impact/EPOXI: Medium Resolution Instrument (MRI) 4. Deep Impact Comet Tempel 1 Support Archives (PDS) 5. Deep Impact HRIV Raw Image Calibration Archive, Cruise Phase (PDS) 6. Deep Impact/EPOXI: High Resolution Instrument (HRI) Deep Impact HRIV Raw Image Archive, 9P/Tempel 1 Encounter (PDS) 7. Deep Impact/EPOXI: High Resolution Instrument (HRI) Deep Impact HRIV Reduced Image Archive, Comet 9P/Tempel 1 Encounter (PDS) 8. Deep Impact/EPOXI: High Resolution Instrument (HRI) Deep Impact HRII Raw Spectral Image Archive, 9P/Tempel 1 Encounter (PDS) 9. Deep Impact/EPOXI: High Resolution Instrument (HRI) Deep Impact HRII Raw Spectral Image Calibration Archive, 9P/Tempel 1 Cruise (PDS) 10. Deep Impact/EPOXI: High Resolution Instrument (HRI) Deep Impact HRII Reduced Spectral Image Archive, 9P/Tempel 1 Encounter (PDS) 11. Deep Impact/EPOXI: Medium Resolution Instrument (MRI) Deep Impact MRI Raw Image Archive, Encounter Phase (PDS) 12. Deep Impact/EPOXI: Medium Resolution Instrument (MRI) Deep Impact MRI Reduced Image Archive, Encounter Phase (PDS) 13. Deep Impact/EPOXI: Medium Resolution Instrument (MRI) Deep Impact Spice Files (PDS) 14. Deep Impact/EPOXIDeep Impact HRII Reduced Spectral Image Archive, 9P/Tempel 1 Encounter (Version 2) (PDS) These data collections contain various types of data, such as",
+      "timestamp": 1724115350,
+      "contexts": [
+        {
+          "document_id": "73743fc9895c48ab-3244-4229",
+          "text": "NASA - NSSDCA - NMC - Data Collection - Query Results\nHawaii (PDS)Deep Impact/EPOXIDeep Impact MRI Raw Navigation Image Archive, Cruise Phase (PDS)Deep Impact/EPOXI:Medium Resolution Instrument (MRI)Deep Impact MRI Raw Navigation Image Archive, Encounter Phase (PDS)Deep Impact/EPOXI:Medium Resolution Instrument (MRI)Deep Impact MRI Reduced Navigation Image Archive, Encounter Phase (PDS)Deep Impact/EPOXI:Medium Resolution Instrument (MRI)Deep Impact Support Data - IRTF Mid-Infrared Images of Tempel 1 (PDS)Deep Impact/EPOXIDeep Impact Support Data - IRTF Near-Infrared Images of Tempel 1 (PDS)Deep Impact/EPOXIDeep Impact Support Data - IRTF Near-Infrared Spectra of Tempel 1 (PDS)Deep Impact/EPOXISan Pedro Martir Optical Imaging of Tempel 1 (PDS)Deep Impact/EPOXIPLATE SHAPE MODEL OF COMET 9P/TEMPEL 1 V2.0 (PDS)Deep Impact/EPOXI:High Resolution Instrument (HRI)Deep Impact/EPOXI:Medium Resolution Instrument (MRI)Deep Impact Impactor (DII) Vehicle:Impactor targeting Sensor (ITS)Stardust/NExT:Imaging and Navigation CameraEPOXI 103P",
+          "title": "NASA - NSSDCA - NMC - Data Collection - Query Results",
+          "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/displayDataset.action?spacecraftId=2005-001A",
+          "score": 11.185427,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724115467
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Deep Impact Thermal Vacuum Test Archive (PDS)"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "73743fc9895c48ab-1716-3243",
+          "text": "NASA - NSSDCA - NMC - Data Collection - Query Results\nEPOXI:High Resolution Instrument (HRI)Deep Impact HRIV Reduced Spectral Image Archive, 9P/Tempel 1 Encounter (Version 2) (PDS)Deep Impact/EPOXI:High Resolution Instrument (HRI)Raw KPNO/SQIID Near-IR Images of Comet Tempel 1, Deep Impact Support Archive (PDS)Deep Impact/EPOXIDeep Impact MRI Reduced Image Archive, 9P/Tempel 1 Encounter (Version 2) (PDS)Deep Impact/EPOXI:Medium Resolution Instrument (MRI)Deep Impact HRIV Raw Navigation Image Archive, Cruise Phase (PDS)Deep Impact/EPOXI:High Resolution Instrument (HRI)Deep Impact HRIV Raw Navigation Image Archive, Encounter Phase (PDS)Deep Impact/EPOXI:High Resolution Instrument (HRI)Deep Impact HRIV Reduced Navigation Image Archive, Encounter Phase (PDS)Deep Impact/EPOXI:High Resolution Instrument (HRI)Deep Impact MRI Raw Navigation Image Archive, Cruise Phase - Superceded (PDS)Deep Impact/EPOXI:Medium Resolution Instrument (MRI)Deep Impact MRI Raw Navigation Image Archive, Encounter Phase - Superceded (PDS)Deep Impact/EPOXI:Medium Resolution Instrument (MRI)Deep Impact MRI Reduced Navigation Image Archive, Encounter Phase - Superceded (PDS)Deep Impact/EPOXI:Medium Resolution Instrument (MRI)Deep Impact Shape Model of Comet 9P/Tempel 1 (PDS)Deep Impact/EPOXI:High Resolution Instrument (HRI)Deep Impact/EPOXI:Medium Resolution Instrument (MRI)Deep Impact Impactor (DII) Vehicle:Impactor targeting Sensor (ITS)Deep Impact Radio Science Data, Encounter Phase (PDS)Deep Impact/EPOXI:Radio Science Subsystem (RSS)Ground-based 2.2m Images of Comet 9P/Tempel 1, Univ.",
+          "title": "NASA - NSSDCA - NMC - Data Collection - Query Results",
+          "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/displayDataset.action?spacecraftId=2005-001A",
+          "score": 10.556878,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724115469
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Deep Impact Thermal Vacuum Test Archive (PDS)"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "73743fc9895c48ab-4229-5256",
+          "text": "NASA - NSSDCA - NMC - Data Collection - Query Results\n/HARTLEY2 ENCOUNTER - MRI PHOTOMETRY V1.0 (PDS)Deep Impact/EPOXI:Medium Resolution Instrument (MRI)PLATE SHAPE MODEL OF COMET 103P/HARTLEY 2 V1.0 (PDS)Deep Impact/EPOXI:High Resolution Instrument (HRI)Deep Impact/EPOXI:Medium Resolution Instrument (MRI)EPOXI 103P/HARTLEY2 ENCOUNTER - HRIV DECONVOLVED IMGS V1.0 (PDS)Deep Impact/EPOXI:High Resolution Instrument (HRI)EPOXI HRII/HRIV/MRI INSTRUMENT TEMPERATURES V2.1 (PDS)Deep Impact/EPOXI:High Resolution Instrument (HRI)Deep Impact/EPOXI:Medium Resolution Instrument (MRI)EPOXI 103P/HARTLEY2 ENCOUNTER - HRII CALIBRATED SPECTRA V2.0 (PDS)Deep Impact/EPOXI:High Resolution Instrument (HRI)DEEP IMPACT/EPOXI DOCUMENTATION SET V4.0 (PDS)Deep Impact/EPOXI:High Resolution Instrument (HRI)Deep Impact/EPOXI:Medium Resolution Instrument (MRI)Deep Impact Impactor (DII) Vehicle:Impactor targeting Sensor (ITS)DEEP IMPACT 9P/TEMPEL ENCOUNTER - REDUCED HRII SPECTRA V3.0\n (PDS)Deep Impact/EPOXI:High Resolution Instrument (HRI)DEEP IMPACT 9P/TEMPEL ENCOUNTER - REDUCED HRIV IMAGES V3.0",
+          "title": "NASA - NSSDCA - NMC - Data Collection - Query Results",
+          "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/displayDataset.action?spacecraftId=2005-001A",
+          "score": 9.672127,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724115471
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Deep Impact Thermal Vacuum Test Archive (PDS)"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "73743fc9895c48ab-6742-7521",
+          "text": "NASA - NSSDCA - NMC - Data Collection - Query Results\nCALIBRATED SPECTRA V1.0 (PDS)Deep Impact/EPOXI:High Resolution Instrument (HRI)EPOXI C/ISON (2012 S1) - MRI RAW IMAGES V1.0 (PDS)Deep Impact/EPOXI:Medium Resolution Instrument (MRI)EPOXI C/ISON (2012 S1) - MRI CALIBRATED IMAGES V1.0 (PDS)Deep Impact/EPOXI:Medium Resolution Instrument (MRI)EPOXI MARS OBS - HRII CALIBRATED SPECTRA V1.0 (PDS)Deep Impact/EPOXI:High Resolution Instrument (HRI)EPOXI MARS OBS - HRIV CALIBRATED IMAGES V2.0 (PDS)Deep Impact/EPOXI:High Resolution Instrument (HRI)EPOXI MARS OBS - MRI CALIBRATED IMAGES V2.0 (PDS)Deep Impact/EPOXI:Medium Resolution Instrument (MRI)EPOXI HRII/HRIV/MRI INSTRUMENT TEMPERATURES V3.0 (PDS)Deep Impact/EPOXI:High Resolution Instrument (HRI)Deep Impact/EPOXI:Medium Resolution Instrument (MRI)STOOKE SMALL BODIES MAPS V3.0 (",
+          "title": "NASA - NSSDCA - NMC - Data Collection - Query Results",
+          "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/displayDataset.action?spacecraftId=2005-001A",
+          "score": 8.790587,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724115472
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Deep Impact Thermal Vacuum Test Archive (PDS)"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "73743fc9895c48ab-2-1716",
+          "text": "NASA - NSSDCA - NMC - Data Collection - Query Results\nNASA - NSSDCA - NMC - Data Collection - Query Results\n\nSaturday, 25 May 2024\n\nData Collection Search Results\n There\n were 66\n data collections returned.\n Data Collection NameSpacecraft: ExperimentDeep Impact SPICE Navigation Files (PDS)Deep Impact/EPOXIDeep Impact Impactor (DII) VehicleDeep Impact Thermal Vacuum Test Archive (PDS)Deep Impact/EPOXI:High Resolution Instrument (HRI)Deep Impact/EPOXI:Medium Resolution Instrument (MRI)Deep Impact Comet Tempel 1 Support Archives (PDS)IRAS:IR TelescopeDeep Impact HRIV Raw Image Calibration Archive, Cruise Phase (PDS)Deep Impact/EPOXI:High Resolution Instrument (HRI)Deep Impact HRIV Raw Image Archive, 9P/Tempel 1 Encounter (PDS)Deep Impact/EPOXI:High Resolution Instrument (HRI)Deep Impact HRIV Reduced Image Archive, Comet 9P/Tempel 1 Encounter (PDS)Deep Impact/EPOXI:High Resolution Instrument (HRI)Deep Impact HRII Raw Spectral Image Archive, 9P/Tempel 1 Encounter (PDS)Deep Impact/EPOXI:High Resolution Instrument (HRI)Deep Impact HRII Raw Spectral Image Calibration Archive, 9P/Tempel 1 Cruise (PDS)Deep Impact/EPOXI:High Resolution Instrument (HRI)Deep Impact HRII Reduced Spectral Image Archive, 9P/Tempel 1 Encounter (PDS)Deep Impact/EPOXI:High Resolution Instrument (HRI)Deep Impact MRI Raw Image Calibration Archive, Cruise Phase (PDS)Deep Impact/EPOXI:Medium Resolution Instrument (MRI)Deep Impact MRI Raw Image Archive, Encounter Phase (PDS)Deep Impact/EPOXI:Medium Resolution Instrument (MRI)Deep Impact MRI Reduced Image Archive, Encounter Phase (PDS)Deep Impact/EPOXI:Medium Resolution Instrument (MRI)Deep Impact Spice Files (PDS)Deep Impact/EPOXIDeep Impact HRII Reduced Spectral Image Archive, 9P/Tempel 1 Encounter (Version 2) (PDS)Deep Impact/",
+          "title": "NASA - NSSDCA - NMC - Data Collection - Query Results",
+          "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/displayDataset.action?spacecraftId=2005-001A",
+          "score": 12.997743,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724115473
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Deep Impact Thermal Vacuum Test Archive (PDS)"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, the data collected through the Deep Impact program are organized and stored as data collections with specific names. Here are some examples:\n1. Deep Impact SPICE Navigation Files (PDS)\n2. Deep Impact/EPOXI: High Resolution Instrument (HRI)\n3. Deep Impact/EPOXI: Medium Resolution Instrument (MRI)\n4. Deep Impact Comet Tempel 1 Support Archives (PDS)\n5. Deep Impact HRIV Raw Image Calibration Archive, Cruise Phase (PDS)\n6. Deep Impact/EPOXI: High Resolution Instrument (HRI) Deep Impact HRIV Raw Image Archive, 9P/Tempel 1 Encounter (PDS)\n7. Deep Impact/EPOXI: High Resolution Instrument (HRI) Deep Impact HRIV Reduced Image Archive, Comet 9P/Tempel 1 Encounter (PDS)\n8. Deep Impact/EPOXI: High Resolution Instrument (HRI) Deep Impact HRII Raw Spectral Image Archive, 9P/Tempel 1 Encounter (PDS)\n9. Deep Impact/EPOXI: High Resolution Instrument (HRI) Deep Impact HRII Raw Spectral Image Calibration Archive, 9P/Tempel 1 Cruise (PDS)\n10. Deep Impact/EPOXI: High Resolution Instrument (HRI) Deep Impact HRII Reduced Spectral Image Archive, 9P/Tempel 1 Encounter (PDS)\n11. Deep Impact/EPOXI: Medium Resolution Instrument (MRI) Deep Impact MRI Raw Image Archive, Encounter Phase (PDS)\n12. Deep Impact/EPOXI: Medium Resolution Instrument (MRI) Deep Impact MRI Reduced Image Archive, Encounter Phase (PDS)\n13. Deep Impact/EPOXI: Medium Resolution Instrument (MRI) Deep Impact Spice Files (PDS)\n14. Deep Impact/EPOXIDeep Impact HRII Reduced Spectral Image Archive, 9P/Tempel 1 Encounter (Version 2) (PDS)\nThese data collections contain various types of data, such as"
+    },
+    {
+      "speaker": "user",
+      "text": "I want to another discovery program summary other than deep impact mission here",
+      "timestamp": 1724115684,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "1. Lunar Discovery and Exploration - NASA Science helps us understand the influence the Moon has had on the Earth, the record of the ancient Sun, and it serves as a platform to study the rest of the universe. 2. The low-cost Mars Pathfinder mission in 1997 was viewed as proof that spacecraft could be built more often and for far less money \u2014 a radical cultural change NASA termed \u201cFaster, Better, Cheaper.\u201d 3. NASA's Near Earth Asteroid Rendezvous (NEAR) Shoemaker spacecraft, the first to orbit an asteroid, has met all its scientific goals in its year of orbiting the asteroid Eros.",
+      "timestamp": 1724115706,
+      "contexts": [
+        {
+          "document_id": "f392995135e819ea-5761-7690",
+          "text": "Lunar Discovery and Exploration - NASA Science\nIt also helps us understand the influence the Moon has had on the Earth, the record of the ancient Sun, and it serves as a platform to study the rest of the universe.Read MoreNASA\u2019s Lunar Reconnaissance Orbiter (LRO) team released this topographical image of the Moon\u2019s surface which was achieved by using the LRO Wide Angle Camera (WAC) and the Lunar Orbiter Laser Altimeter (LOLA). The pixel scale is about 100 meters which means a single measure of elevation (one pixel) is about two football fields side-by-side. This map is a near-globe representation of the moon with an elevation color chart on the right measured in meters. Credit: NASA\u2019s Goddard Space Flight Center/DLR/Arizona State UniversityElementsThe Lunar Discovery and Exploration Program (LDEP) has several coordinated and focused elements to facilitate study and exploration of the Moon.DEP supports industry partnerships and innovative approaches to accomplishing exploration and science goals, including the Commercial Lunar Payload Services (CLPS).Read MoreTim Crain, second from the right, speaks with Thomas Zurbuchen, second from the left, about the lunar lander pictured. Crain is the vice president of Research and Development of Intuitive Machines which is one of three companies that will provide the first lunar landers for the Artemis program\u2019s lunar surface exploration. Zurbuchen is the NASA Associate Administrator for the Science Mission Directorate (SMD) and he met Crain at Goddard Space Flight Center in Maryland. Image credit: NASA/Aubrey GemignaniCLPS OverviewCommercial Lunar Payload Services DeliveriesCLPS deliveries and lunar surface destinations that are planned for the near-term and represent the deliveries for which there are selected instruments/payloads.Read MoreArtist\u2019s infographic of planned flights through CLPS and their approximate landing locations on the Moon; includes name and image likeness of commercial CLPS landers.",
+          "title": "Lunar Discovery and Exploration - NASA Science",
+          "url": "https://science.nasa.gov/lunar-science",
+          "score": 9.745429,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724115738
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Discovery Program"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "9915fb9b255fc7dc-9461-11542",
+          "text": "Documentary Series: JPL and the Space Age\nThe Pathfinders retraces the journey of this daring mission to Mars that captured the hearts and minds of people around the world with its dramatic landing and its tiny rover \u2014 the first wheels ever to roll on Mars.View episode \u203aEpisode 9: The Breaking PointThe Jet Propulsion Laboratory\u2019s success in landing the low-cost Mars Pathfinder mission in 1997 was viewed as proof that spacecraft could be built more often and for far less money \u2014 a radical cultural change NASA termed \u201cFaster, Better, Cheaper.\u201d The \u201cFaster, Better, Cheaper\u201d era also coincided with the discovery of a Mars rock that hinted at the possibility of microbial life elsewhere in the solar system. NASA\u2019s reaction was to envision a steady stream of missions to Mars \u2014 all done at cut-rate costs. In fact, the next challenge taken on by the Jet Propulsion Laboratory was to fly two missions to Mars for the price of the single Pathfinder mission. Mars Climate Orbiter and the Mars Polar Lander both made it to the launch pad, on time and on budget, but were lost upon arrival at Mars, resulting in one of the most difficult periods in the history of JPL. The Breaking Point tells the story of the demise of these two missions and the abrupt end of NASA\u2019s Faster, Better, Cheaper.View episode \u203aEpisode 10: Saving GalileoIf any spacecraft could be said to have had nine lives, it was Galileo. At the time of its launch, this mission to Jupiter was the most sophisticated science spacecraft ever built. But the expectation of great science rewards almost was ruined when the spacecraft\u2019s main antenna refused to unfurl. Saving Galileo is the story of how NASA\u2019s Galileo mission \u2014 designed, built and operated by NASA\u2019s Jet Propulsion Laboratory \u2014 was kept alive despite a multitude of technical challenges, including a years-long launch delay after the loss of the space shuttle Challenger and then the devastating failure of its main antenna following the spacecraft\u2019s launch. It is also the story of a tight-knit team of scientists and engineers who were forged by adversity into what many came to call a family.",
+          "title": "Documentary Series: JPL and the Space Age",
+          "url": "https://www.jpl.nasa.gov/who-we-are/documentary-series-jpl-and-the-space-age",
+          "score": 21.657434,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724115817
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Mars Pathfinder "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "33158b8b7cfd601f-2-1901",
+          "text": "NEAR Mission Completes Main Task, Now Will Go Where No Spacecraft Has Gone Before\nNEAR Mission Completes Main Task, Now Will Go Where No Spacecraft Has Gone Before\n\n--------------- Planetary News ---------------\n\nNEAR Mission Completes Main Task, Now Will Go Where No Spacecraft Has Gone Before\nJanuary 31, 2001\n\n NASA's Near Earth Asteroid Rendezvous (NEAR) Shoemaker \nspacecraft, the first to orbit an asteroid, has met all its \nscientific goals in its year of orbiting the asteroid Eros, \nand will now attempt another first: a controlled descent to \nthe surface of the asteroid on Feb. 12. \n\nThe chief goal of the controlled descent to the surface is to \ngather close-up pictures of the boulder-strewn surface of 433 \nEros, more than 196 million miles from Earth.\n\n\"NEAR Shoemaker has set a high standard for low-cost \nplanetary exploration,\" said Dr. Edward Weiler, Associate \nAdministrator for Space Science, NASA Headquarters, \nWashington, DC. \"This mission has provided answers to a range \nof fundamental science questions, and it has excited the \npublic with its exploration and great images. The team at \nJohns Hopkins University Applied Physics Laboratory and its \nmany partner institutions are to be congratulated for \nachieving this historic first in space exploration.\"\n\nDuring its 5-year, 2-billion-mile journey, the NEAR Shoemaker \nmission, which was built and is managed by The Applied \nPhysics Laboratory (APL) in Laurel, MD, provided the most \ndetailed profile yet of a small celestial body. It began a \nyearlong orbit of Eros on Feb. 14, 2000, and has collected 10 \ntimes more data than originally planned.\n\nThe data include a detailed shape-model culled from more than \n11 million laser pulses; radar and laser data on Eros' weak \ngravity and solid but cracked interior; X-ray, gamma-ray and \ninfrared readings on its composition and spectral properties; \nand about 160,000 images covering all of the 21-mile-long \nasteroid's bouldered, cratered, dusty terrain.",
+          "title": "NEAR Mission Completes Main Task, Now Will Go Where No Spacecraft Has Gone Before",
+          "url": "http://nssdc.gsfc.nasa.gov/planetary/news/near_descent_pr_20010131.html",
+          "score": 14.551761,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724115867
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Near Earth Asteroid Rendezvous (NEAR)"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Sure, here's a brief overview of another mission that is part of NASA's Discovery Program - the Kepler Space Telescope:\nThe Kepler Space Telescope is a space observatory launched by NASA in 2009 to discover Earth-like planets orbiting other stars. It was the first mission of NASA's Discovery Program to search for exoplanets using the transit method, where the telescope measures the dimming of a star's light as a planet passes in front of it.\nKepler's primary mission was to survey a portion of the sky in the constellations Cygnus and Lyra, searching for planets in the habitable zone of their host stars, where liquid water could exist on the surface. The mission was highly successful, discovering over 2,600 confirmed exoplanets and thousands of additional planet candidates during its lifetime.\nThe Kepler mission ended in 2018, but its legacy continues through the K2 mission and other exoplanet hunting projects. The data collected by Kepler has significantly advanced our understanding of the prevalence and diversity of exoplanets in the galaxy, and has paved the way for future missions to study these planets in greater detail."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+      "status": "created",
+      "timestamp": 1724116005
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "accepted",
+      "timestamp": 1725580095
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "edited",
+      "timestamp": 1726735316
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "accepted",
+      "timestamp": 1726735767
+    }
+  ],
+  "editor": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+  "domain": "mt-rag-govt-elser-512-100-20240611",
+  "reviewer": "9dcd142c-415e-4161-a82f-c8b14bfb36ac"
+}

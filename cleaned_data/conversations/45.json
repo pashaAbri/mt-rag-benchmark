@@ -1,0 +1,560 @@
+{
+  "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-govt-elser-512-100-20240611",
+      "size": "49607"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "What is the Web extension for federal government websites and how do we ensure the site is secure?",
+      "timestamp": 1724765474,
+      "enrichments": {
+        "Question Type": [
+          "Composite"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The web extension for federal government websites often ends in .gov or .mil. To ensure the site is secure, look for the \"https://\" in the website's URL. This indicates that you are connected to the official website and any information you provide will be encrypted and transmitted securely.",
+      "timestamp": 1724765475,
+      "contexts": [
+        {
+          "document_id": "a618f0371eb48adf-2-1800",
+          "text": "Identity Theft and Online Security | Consumer Advice\nIdentity Theft and Online Security | Consumer Advice\n\nSkip to main content\n\nAn official website of the United States government\nHere\u2019s how you know\n\nHere's how you know\n\nThe .gov means it\u2019s official.\n\n Federal government websites often end in .gov or .mil. Before sharing sensitive information, make sure you\u2019re on a federal government site.\n \n\nThe site is secure.\n\n The https:// ensures that you are connecting to the official website and that any information you provide is encrypted and transmitted securely.\n \n\nCFG: Translation Menu\n\nEspa\u00f1ol\n\nCFG: Secondary Menu\n\nReport Fraud\n\nRead Consumer Alerts\n\nGet Consumer Alerts\n\nVisit ftc.gov\n\nMenu\n\nCFG: Main Menu Mega\n\nShow/hide Shopping and Donating menu items\n\nShopping and Donating\nMake smart shopping decisions, know your rights, and solve problems when you shop or donate to charity.\nView Shopping and Donating\n\nVideo\n\nTopics\n\nTopics\n\nShopping\n\nFor the Home\n\nHealth\n\nFunerals\n\nBuying and Owning a Car\n\nDonating to Charity\n\nConsumer Alerts\n\nSpot an ad on social for a low, low price on a brand name product? Think twice\n\nMay 13, 2024\n\nCristina Miranda\n\n Social media feeds are flooded with ads offering steep discounts on brand-name products, including luxury items. But are these offers real or a scam? When a low-priced \u201cdeal\u201d pops into your socials, take a closer look before you buy. Here\u2019s why.\n\nView all Consumer Alerts\nGet Consumer Alerts\n\nShow/hide Credit, Loans, and Debt menu items\n\nCredit, Loans, and Debt\nLearn about getting and using credit, borrowing money, and managing debt.\nView Credit, Loans, and Debt\n\nVideo\n\nTopics\n\nTopics\n\nCredit and Debt\n\nLoans and Mortgages\n\nConsumer Alerts\n\nSkip the scams as you look for options to avoid foreclosure \n\nApril 23, 2024\n\nGema de las Heras \n\n Are you having a hard time paying your mortgage?",
+          "title": "Identity Theft and Online Security | Consumer Advice",
+          "url": "https://www.consumer.ftc.gov/identity-theft-online-security",
+          "score": 12.1683445,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724788000
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What is the Web extension for federal government websites and how do we ensure the site is secure?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The web extension for federal government websites often ends in .gov or .mil. To ensure the site is secure, look for the \"https://\" in the website's URL. This indicates that the connection to the website is secure and any information you provide will be encrypted and transmitted securely."
+    },
+    {
+      "speaker": "user",
+      "text": "How can I protect my personal information from identity theft",
+      "timestamp": 1724805415,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Here are some tips to protect your personal information from identity theft:\n1. Do not respond to or click on any links within unsolicited emails or pop-up boxes. They can put your personal information in jeopardy.\n2. Be cautious when using your debit card online. Consider using a credit card instead as they typically provide added protection against fraudulent charges.\n3. Only download mobile applications from official app stores and check other users\u2019 reviews, as well as the app\u2019s privacy policies, before downloading.\n4. Use a variety of strong and unique passwords for your online activities. Avoid using the same password for all your accounts.\n5. Keep your financial documents and records in a secure place. Shred sensitive materials before disposing of them.\n6. Secure your wireless network with a strong password and turn on Wireless Network Encryption if available.\n7. Lock your computer when you are using it in a public or shared space.\n8. Regularly update anti-virus protection software on your computer and keep your computer system and browser up to date.\n9. Double-check mailings and always make sure that documents are not stuck together and that the recipient\u2019s information is correct before sending any Personally Identifiable Information.\n10. Avoid sending any sensitive information via email. If you must use email, consider purchasing encryption software.\n11. Use social media responsibly and monitor your privacy settings.\n12. Consider purchasing and using a reputable Virtual Private Network or VPN software to use while online using public networks.\nFor parents, it's important to start the conversation about online safety with your children, establish rules, monitor their playtime, and teach them about cell phone safety.",
+      "timestamp": 1724805422,
+      "contexts": [
+        {
+          "document_id": "d63ebad40e46f471-10669-12870",
+          "text": "Identity Theft Awareness - Privacy\nDo not be fooled by spam. We all enjoy finding a bargain, but do not be fooled by spam emails offering great deals or claiming they support good causes. If it seems too good to be true it probably is. Responding to or clicking on any link within an unsolicited email or pop-up box can put your personal information in jeopardy.\nGive your debit card a break. Be especially wary of using your debit card when shopping online. If an identity thief gets hold of your debit card information, he or she can drain your bank account or open new accounts in your name. If you have a credit card, use it instead. Credit cards typically provide added protection against fraudulent charges.\nBe cautious when downloading mobile applications. Mobile apps often take more data from you than they need, either for their own use or to sell to third parties. To prevent your information from getting into the wrong hands, only download applications from official app stores and check other users\u2019 reviews, as well as the app\u2019s privacy policies, before downloading.\nUse a variety of passwords. If you use the same password for all your online activities, and an identity thief uncovers it, he or she could have access to your bank, email, and other personal accounts. As you shop at different online retailers, choose a different password for each new account that you create. Also, avoid using your name or the names of family members in your password. Social media has made those passwords even easier to crack.\nIdentity Theft Prevention Tips for Traveling\nTraveling offers identity thieves plenty of opportunity to steal your information. Hotel rooms, airplanes and trains, public internet access \u2013 all can be problematic if you let your privacy guard down. The following are successful strategies for safeguarding your identity when away from home.\nClean out your wallet. Before you travel, plan to carry only the necessities for your trip and nothing extra. This way, if your wallet gets misplaced or stolen during your travels, you will have reduced the number of things that need to be replaced, as well as the amount of personal information that could be at risk.\nCopy and disperse copies of your identification.",
+          "title": "Identity Theft Awareness - Privacy",
+          "url": "https://department.va.gov/privacy/identity-theft/#identity-theft-tips",
+          "score": 23.200758,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724805609
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "protect my personal information from identity theft"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "d63ebad40e46f471-5080-7474",
+          "text": "Identity Theft Awareness - Privacy\nVA offers extra training, information sessions, and events designed to raise awareness of information protection responsibilities and best practices.\nCredit MonitoringIf an incident ever occurs involving VA information, the Department offers free credit monitoring to Veterans and beneficiaries whose data is considered at risk after internal review. Credit monitoring detects if any unusual or unauthorized activity is taking place.\n\nIdentity Theft Prevention TipsGeneral Identity Theft Prevention Tips\nUse strong passwords. Create passwords that employ a combination of uppercase and lowercase letters, numbers, and symbols. Avoid obvious passwords\u2014never use your birth date, mother\u2019s maiden name, or the last four digits of your Social Security number.\nLock up your records. Keep any financial documents and records containing your sensitive information in a secure place in your home or office. Try to avoid carrying around items that contain your personal information. For digital records, consider the use of encrypted storage drives or password-protected files.\nShred sensitive documents. Tear, cut up, or shred sensitive materials, such as old records, files, bills, prescription labels, or expired credit cards before disposing of them. Once information leaves your hands, there is no way of knowing who may get their hands on it.\nSecure your wireless network. Like public or shared computers, unprotected wireless networks can put sensitive information in jeopardy. Make sure your wireless network at home is protected with a strong password, the default administrator username has been changed, and turn on Wireless Network Encryption if available.\nLock your computer. If you are using a computer at your office or in a public place, make sure to lock it before you walk away to safeguard any personal information stored on the computer.\nProtect against viruses. Regularly update anti-virus protection software on your computer. In addition, keep your computer system and browser up to date and set at the highest security level.\nDouble-check mailings. Always make sure that documents are not stuck together, and that the recipient\u2019s information is correct before sending any Personally Identifiable Information.\nKeep your emails safe. Avoid sending any sensitive information via email. If you absolutely must use email to send personal data, consider purchasing encryption software.",
+          "title": "Identity Theft Awareness - Privacy",
+          "url": "https://department.va.gov/privacy/identity-theft/#identity-theft-tips",
+          "score": 22.982191,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724805619
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "protect my personal information from identity theft"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "d63ebad40e46f471-6954-9447",
+          "text": "Identity Theft Awareness - Privacy\nRegularly update anti-virus protection software on your computer. In addition, keep your computer system and browser up to date and set at the highest security level.\nDouble-check mailings. Always make sure that documents are not stuck together, and that the recipient\u2019s information is correct before sending any Personally Identifiable Information.\nKeep your emails safe. Avoid sending any sensitive information via email. If you absolutely must use email to send personal data, consider purchasing encryption software. Encrypting emails is the only way to ensure that the information you are sending is received securely.\nUse social media responsibly. Assume that anything you post online can be accessed by anyone. An identity thief can use the information he or she learns about you on social media sites to answer \u201cchallenge\u201d questions and potentially gain access to your personal accounts. Monitor your privacy settings and consider limiting access to your page to a small number of people.\nA Virtual Private Network for public networks. Consider purchasing and using a reputable Virtual Private Network or VPN software to use while online using public networks. Virtual Private Networks provide an additional layer of security for you and your information while using potentially unsafe internet connections.\nIdentity Theft Prevention Tips for Parents with Children \n\nWe live in the age of screens. Between online shopping and gaming, streaming video and music, and virtual schooling, today\u2019s children are spending significant time on a smartphone or computer. Setting boundaries for online activities and teaching children how to protect sensitive information is necessary.\nChildren in Elementary School (Ages 5-10)\nStart the conversation.\u202f\u00a0Ask questions to establish your child\u2019s understanding of computers, the capabilities of the Internet, and what is considered personal information. Fill in any gaps in understanding that they have. Emphasize that they should never give out any information online \u2013 just as you would tell them not to talk to strangers).\nEstablish the rules. Pick a list of appropriate websites, games, and other programs. Use parental controls to limit access and block inappropriate sites.\nMonitor their playtime. Keep a close eye on what programs your child is using to ensure they are not providing any personal information. Avoid sharing your passwords with your children to maintain control over what they can access and prevent accidental online purchases.",
+          "title": "Identity Theft Awareness - Privacy",
+          "url": "https://department.va.gov/privacy/identity-theft/#identity-theft-tips",
+          "score": 22.31278,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724805703
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "protect my personal information from identity theft"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "d63ebad40e46f471-8900-11092",
+          "text": "Identity Theft Awareness - Privacy\nEmphasize that they should never give out any information online \u2013 just as you would tell them not to talk to strangers).\nEstablish the rules. Pick a list of appropriate websites, games, and other programs. Use parental controls to limit access and block inappropriate sites.\nMonitor their playtime. Keep a close eye on what programs your child is using to ensure they are not providing any personal information. Avoid sharing your passwords with your children to maintain control over what they can access and prevent accidental online purchases.\nChildren in Middle School and High School (Ages 11-18)\nContinue the dialogue. Maintain a dialogue about how they use the Internet as they start to buy things online and use social media. Explain how to keep their information safe when making purchases. If they are using your credit card to purchase things online, they are potentially putting your information at risk.\nKeep an eye on social media. Establish ground rules on what information is and is not okay to share via social media, regardless of the site. Have them set their profiles to the \u201cprivate\u201d setting, and make sure they are only interacting with people they know.\nTeach cell phone safety. Talk to them about screening phone calls from unknown numbers, locking their phone with a password, and only downloading apps from known sources.\n\nIdentity Theft Prevention Tips for Online Shopping\nThere were approximately 256 million digital buyers in the US during 2020 \u2013 about 88 percent of the adult population. This number is projected to climb even more, reaching an expected 263 million in 2021 and more than 278 million in 2024. Growing use means increased opportunity for identity theft. The following are recommended strategies for shopping safely online.\nDo not be fooled by spam. We all enjoy finding a bargain, but do not be fooled by spam emails offering great deals or claiming they support good causes. If it seems too good to be true it probably is. Responding to or clicking on any link within an unsolicited email or pop-up box can put your personal information in jeopardy.\nGive your debit card a break. Be especially wary of using your debit card when shopping online.",
+          "title": "Identity Theft Awareness - Privacy",
+          "url": "https://department.va.gov/privacy/identity-theft/#identity-theft-tips",
+          "score": 20.914906,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724805705
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "protect my personal information from identity theft"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "speaker": "user",
+      "text": "can you clarify the definition of identity theft?",
+      "timestamp": 1724805773,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes.\u00a0Identity theft occurs when someone steals your identity to commit fraud.\u00a0Stealing your identity could mean using personal information without your permission, such as your name, Social Security number, bank account information, or credit card number.",
+      "timestamp": 1724805778,
+      "contexts": [
+        {
+          "document_id": "f81a8bb78e5bbc6f-5426-7600",
+          "text": "Fraud and scam answers | Consumer Financial Protection Bureau\nIdentity theft occurs when someone steals your identity to commit fraud.Stealing your identity could mean using personal information without your permission, such as your name, Social Security number, bank account information, or credit card number. The Federal Trade Commission offers information about preventing and responding to identify theft.\n\n Imposter scams\n \n\nImposter scammers try to convince you to send money by pretending to be someone you know or trust like a sheriff, local, state, or federal government employee, or charity organization. Remember, caller ID can be faked. You can always call the organization or government agency and ask if the person works for them before giving any money.\n\n Mail fraud\n \n\nMail fraud letters look real but the promises are fake. A common warning sign is a letter asking you to send money or personal information now to get something valuable after you send the money or information.\n\n Phishing\n \n\nIn phishing, a scammer impersonates a business or a person to trick you into giving out your personal information, such as passwords, credit card numbers, or bank account information. A scammer may use fraudulent emails, texts, or websites to steal this information from you. These emails can look authentic.\n\n Security freeze for prevention\n \n\nA security freeze prevents new creditors from accessing your credit file and others from opening accounts requiring a credit check in your name, until you lift the freeze.Because most businesses will not open credit accounts without checking your credit report, a freeze can stop identity thieves from opening new accounts in your name. Be mindful that a freeze doesn\u2019t prevent identity thieves from taking over existing accounts. Read more.\n\n Spoofing\n \n\nSpoofing occurs when a caller disguises the information shown on your caller ID. This gives the caller the ability to disguise or \"spoof\" the name and/or number to appear as though they are calling as a certain person from a specific location.\n\n Wire or money transfer fraud\n \n\nSome scammers trick you into wiring or transferring money to steal from you. One common example of a wire transfer fraud is the \u201cgrandparent scam.\u201d",
+          "title": "Fraud and scam answers | Consumer Financial Protection Bureau",
+          "url": "https://www.consumerfinance.gov/consumer-tools/fraud/answers/key-terms/#imposter-scams",
+          "score": 23.749596,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724805930
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "what is identity theft?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Absolutely, I'd be happy to clarify! Identity theft is a form of fraud where someone unlawfully obtains and uses another person's personal information, such as their name, Social Security number, bank account information, or credit card number, with the intent to commit theft or fraud. This can lead to various illegal activities, including opening new credit accounts, making purchases, or even committing crimes in the victim's name."
+    },
+    {
+      "speaker": "user",
+      "text": "what do systems use to protect my personal information?",
+      "timestamp": 1724806095,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "UNANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I'm sorry, but I don't have any information to share about that topic.",
+      "timestamp": 1724806100,
+      "contexts": [
+        {
+          "document_id": "0144e4a408fe1c40-5440-7824",
+          "text": "Privacy Policy\nThe CPUC takes reasonable precautions to protect the personal information on individuals collected or maintained by the CPUC against loss, unauthorized access, use, modification, or disclosure. The CPUC has security measures in place to protect against loss, unauthorized access, use, modification, or disclosure of the information under its control. Information that is physically located within the CPUC is protected by various security measures which may include the following: on our Web sites, the CPUC uses encryption software to protect the security of individuals\u2019 personal information during transmission of such information throughout the CPUC\u2019s Web sites. Personal information is stored in secure locations. CPUC staff are trained on procedures for the management and release of personal information, and access to personal information is limited to those staff whose work requires it. Confidential information is destroyed according to the CPUC\u2019s records retention schedules. The CPUC conducts periodic audits to ensure that proper information management policies and procedures are being followed.\nThe CPUC will perform a Privacy Threshold Assessment (PTA) and, if required, a Privacy Impact Assessment (PTI), for any systems that collect personal information data, to ensure that the CPUC is compliant with any applicable privacy laws, polices, regulations, and government or industry standards.\nUsers have the right to have their electronically collected personal information be deleted. A user may request that his/her electronically collected personal information be deleted by emailing the request to privacy@cpuc.ca.gov.\nThis policy is effective 01/04/2023 and shall be reviewed annually or as required. Please note that our Privacy Policy reflects current CPUC business practices and changes will be reflected on the website.\nIf you have further questions, comments, or complaints about the CPUC privacy policy or policy compliance, you may contact:\nCalifornia Public Utilities Commission\nATTN: Privacy Officer\n505 Van Ness\nSan Francisco, CA 94102\nprivacy@cpuc.ca.gov\n415-696-7400\nSee also \"Conditions of use\" for further information on how CPUC adheres to the Privacy Policies set out by the State of California.\n\n\r\n More in this Section\r\n \n\nConditions of Use\nAccessibility\nContact Us\n\nHow can we help?\n\nEmergency? Call 911\n\nFile a Complaint\n\nLate Bill Assistance",
+          "title": "Privacy Policy",
+          "url": "https://www.cpuc.ca.gov/about-cpuc/privacy-policy",
+          "score": 15.970438,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724806168
+              },
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "no",
+                "timestamp": 1726744621
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "personal information protection "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "eb9d8dd2d8b1be01-6978-8201",
+          "text": "CMD Privacy Policy | Cal Guard\nWe take reasonable precautions to protect the personal information collected or maintained by the CMD against loss, unauthorized access, and illegal use or disclosure. The CMD uses encryption software to protect the security of individuals\u2019 personal information during transmission of such information through the CMD\u2019s websites. Such personal information is stored by the CMD in secure locations. The CMD\u2019s staff is trained on procedures for the management of personal information, including limitations on the release of information. Access to personal information is limited to those members of the CMD\u2019s staff whose work requires such access. Confidential information is\u00a0destroyed according to the CMD\u2019s records retention schedule. The CMD conducts periodic reviews to ensure that proper information management policies and procedures are understood and followed.\nPlease note that our Privacy Policy reflects the CMD\u2019s current business practices and is subject to change without notice.\nFederal Privacy Act 1974 InformationState of California Online Privacy Information\nUpdated: 05/07/2021\n\n \n\n \n \n \n \n\nBack to Top\n\nCMD Privacy Policy\n\nAccessibility\n\nCopyright \u00a9 State of California\nPowered by: CAWeb Publishing Service",
+          "title": "CMD Privacy Policy | Cal Guard",
+          "url": "https://calguard.ca.gov/cmd_privacypolicy/",
+          "score": 16.026476,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724806254
+              },
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "no",
+                "timestamp": 1726744625
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "personal information protection "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "When you share your personal information with systems, they use various measures to protect it. These measures can include encryption software to secure the information during transmission, storage in secure locations, limiting access to authorized personnel, and destroying confidential information according to a retention schedule. Additionally, regular audits are conducted to ensure these policies and procedures are being followed correctly.\nRegarding online activities, ensuring that websites have 'https://' in their URL helps maintain secure connections, and using strong and unique passwords for different accounts can also provide better protection. Furthermore, keeping your financial documents secure, monitoring your social media privacy settings, and being cautious with email communications can also contribute to safeguarding your personal information."
+    },
+    {
+      "speaker": "user",
+      "text": "I want to understand the definition of personal information we are talking about here",
+      "timestamp": 1724806358,
+      "enrichments": {
+        "Question Type": [
+          "Explanation",
+          "Non-Question"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "\"Personal information\" refers to data that can be used to identify or describe an individual, such as their name, social security number, physical description, home address, home telephone number, education, financial matters, medical or employment history, readily identifiable to that specific individual. However, a domain name or Internet Protocol address is not considered personal information, but rather \"electronically collected personal information.\"",
+      "timestamp": 1724806363,
+      "contexts": [
+        {
+          "document_id": "e7938c21a9f53428-1156-3768",
+          "text": "Privacy Policy - CDT\nThis Privacy Policy only applies to the Department of Technology.\n\u201cPersonal information\u201d is information about a natural person that identifies or describes an individual, including, but not limited to, his or her name, social security number, physical description, home address, home telephone number, education, financial matters, and medical or employment history, readily identifiable to that specific individual. A domain name or Internet Protocol address is not considered personal information; however, it is considered \u201celectronically collected personal information.\u201d\nAccording to Government Code \u00a7 11015.5, \u201celectronically collected personal information\u201d means any information that is maintained by an agency that identifies or describes an individual user, including, but not limited to, his or her name, social security number, physical description, home address, home telephone number, education, financial matters, medical or employment history, password, electronic mail address, and information that reveals any network location or identity, but excludes any information manually submitted to a State agency by a user, whether electronically or in written form, and information on or relating to individuals who are users, serving in a business capacity, including, but not limited to, business owners, officers, or principals of that business.\n\u201cElectronically collected personal information\u201d that we automatically collect includes your domain name or Internet Protocol address, and statistical information about which web pages you visit. If you voluntarily participate in an activity that asks for specific information (i.e., completing a request for assistance, personalizing the content of the web site, sending an e-mail, or participating in a survey) more detailed data will be collected. If you choose not to participate in these activities, your choice will in no way affect your ability to use any other feature of the web site.\nIf any type of personal information is requested on the web site or volunteered by the users, it is governed by state law, including California Civil Code section 1798 et seq., Government Code 11015.5, the California Public Records Act, and the Federal Privacy Act. This information may become a public record once it is provided and except for electronically collected information, it may be subject to public inspection and copying if not otherwise protected by federal or state law. However, some information we collect is confidential, which may include but is not limited to: social security numbers, medical information, and financial or employment data.",
+          "title": "Privacy Policy - CDT",
+          "url": "https://cdt.ca.gov/privacy-policy/",
+          "score": 16.077976,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724806420
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "personal information protection "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "22a8c50943dda969-4916-7497",
+          "text": "Use Policy - California State Library\nBe sure to review those policies as you access additional sites within the State.\n\nPersonal Information and Choice\n\u201cPersonal information\u201d is information about a natural person that identifies or describes an individual, including, but not limited to, his or her name, social security number, physical description, home address, home telephone number, education, financial matters, and medical or employment history, readily identifiable to that specific individual. A domain name or Internet Protocol address is not considered personal information, however, it is considered \u201celectronically collected personal information.\u201d\nAccording to Government Code \u00a7 11015.5, \u201cElectronically collected personal information\u201d means any information that is maintained by an agency that identifies or describes an individual user, including, but not limited to, his or her name, social security number, physical description, home address, home telephone number, education, financial matters, medical or employment history, password, electronic mail address, and information that reveals any network location or identity, but excludes any information manually submitted to a state agency by a user, whether electronically or in written form, and information on or relating to individuals who are users, serving in a business capacity, including, but not limited to, business owners, officers, or principals of that business.\n\u201cElectronically collected personal information\u201d we automatically collect includes your domain name or Internet Protocol address, and statistical information about which web pages you visit. If you voluntarily participate in an activity that asks for specific information (i.e. completing a request for assistance, personalizing the content of the website, sending an e-mail or participating in a survey) more detailed data will be collected. If you choose not to participate in these activities, your choice will in no way affect your ability to use any other feature of the website.\nIf any type of personal information is requested on the website or volunteered by the user, state law, including Information Practices Act of 1977, Government Code Section 11015.5, and the federal Privacy Act of 1974 may protect it. However, this information may be a public record once you provide it, and may be subject to public inspection and copying if not otherwise protected by federal or state law.\nAdditionally, departments and agencies of the State of California are required to adhere to the Privacy Policy which is also accessible on this website.\nA Special Note About Children",
+          "title": "Use Policy - California State Library",
+          "url": "https://www.library.ca.gov/use/#children",
+          "score": 15.326403,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724806422
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "personal information protection "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "4eadefd15b981784-1290-3848",
+          "text": "Conditions of Use Policy\nShow All\n\nPersonal Information and Choice\n\n\"Personal information\" is information about a natural person that identifies or describes an individual, including, but not limited to, his or her name, social security number, physical description, home address, home telephone number, education, financial matters, and medical or employment history, readily identifiable to that specific individual. A domain name or Internet Protocol address is not considered personal information; however, it is considered \"electronically collected personal information.\"\nAccording to Government Code \u00a7 11015.5., \"electronically collected personal information\" means any information that is maintained by an agency that identifies or describes an individual user, including, but not limited to, his or her name, social security number, physical description, home address, home telephone number, education, financial matters, medical or employment history, password, electronic mail address, and information that reveals any network location or identity, but excludes any information manually submitted to a State agency by a user, whether electronically or in written form, and information on or relating to individuals who are users, serving in a business capacity, including, but not limited to, business owners, officers, or principals of that business.\n\"Electronically collected personal information\" that we automatically collect includes your domain name or Internet Protocol address, and statistical information about which web pages you visit. If you voluntarily participate in an activity that asks for specific information (i.e., completing a request for assistance, personalizing the content of the website, sending an email, or participating in a survey) more detailed data will be collected. If you choose not to participate in these activities, your choice will in no way affect your ability to use any other feature of the website.\nIf any type of personal information is requested on the website or volunteered by the user, State law, including the Information Practices Act of 1977, Government Code Section 11015.5., and the federal Privacy Act of 1974 may protect it. However, this information may be a public record once you provide it, and may be subject to public inspection and copying if not otherwise protected by federal or State law.\nAdditionally, departments and agencies of the State of California under the authority of the Governor are required to adhere to the Privacy Policy which is also accessible on this website.\n\nA Special Note about Children",
+          "title": "Conditions of Use Policy",
+          "url": "https://edd.ca.gov/en/about_edd/conditions_of_use/",
+          "score": 15.364464,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724806424
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "personal information protection "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "In the context of these documents, \"personal information\" refers to data that can be used to identify or describe an individual, such as their name, social security number, physical description, home address, home telephone number, education, financial matters, medical or employment history, password, electronic mail address, and information that reveals any network location or identity. However, a domain name or Internet Protocol address is not considered personal information, but rather \"electronically collected personal information.\""
+    },
+    {
+      "speaker": "user",
+      "text": "do you have any programs you can recommend for me to download on my computer for information protection?",
+      "timestamp": 1724806862,
+      "enrichments": {
+        "Question Type": [
+          "Opinion"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "UNANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I am sorry, but I do not have specific program names to share. ",
+      "timestamp": 1724806872,
+      "contexts": [
+        {
+          "document_id": "37ad9e7531e08b27-1672-3010",
+          "text": "Stay Safe | Auburn, CA\nThey need to be educated about how to handle threats, how to safely use social media, and how to keep their software up to date\u2014especially antivirus programs.The information on this website is: (1) provided for informational purposes only, (2) necessarily general and not intended to be a complete guide to all things that can or should be done regarding safety and preparedness, (3) subject to change at any time, and (3) may not apply to your specific needs and/or circumstances. Safety and preparedness are your responsibility.\n\n \n \n \n\n \n\nTell a Cop\n\nNeighborhood Officer Program\n\nCommunity Action Team\n\n \n\nNotify Me\u00ae\n\nReport a Concern\n\nBusiness Licenses\n\nAirport\u00a0\n\nEmployment\n\nMeetings & Agendas\n\n \n \n \n\n \n\nConnect With Us\n \n\n \n \n\n \n\n \n \n \n\n \n\nFacebook\nTwitter\nPinterest\nDelicious\nBlogger\nLinkedIn\n\n \n \n\nHome\nMy Account\nPrinter Friendly\nEmail Page\nContact Us\nRSS\nSite Map\nTranslate Page\nNotifications\nDocuments\n\n \n \n \n\n \n\nCity Hall \u00a0\u2022 \u00a01225 Lincoln Way \u00a0\u2022 \u00a0Auburn, CA \u00a095603 \u00a0\u2022 \u00a0Phone: 530-823-4211 \u00a0\u2022 \u00a0Contact UsPhotos courtesy of Keith Sutter Photography\nHome \u00a0 \u00a0 \u00a0 \u00a0 \u00a0 \u00a0Site Map \u00a0 \u00a0 \u00a0 \u00a0 \u00a0 \u00a0Accessibility \u00a0 \u00a0 \u00a0 \u00a0 \u00a0 \u00a0Copyright Notices \u00a0 \u00a0 \u00a0 \u00a0 \u00a0 \u00a0Government Websites by CivicPlus\u00ae\n\n \n\n \n \n\n \n\n \n\n \n\n \n \n \n\n \n \n \n\nLoading\n\n\r\n\tLoading\r\n\t\n\nDo Not Show Again\nClose\n\nArrow Left\n\nArrow Right\n\n[]\n\nSlideshow Left Arrow\n\nSlideshow Right Arrow",
+          "title": "Stay Safe | Auburn, CA",
+          "url": "https://auburn.ca.gov/573/Stay-Safe",
+          "score": 9.184539,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724807346
+              },
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "no",
+                "timestamp": 1726745330
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "computer anti virus software"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Based on the information provided, I cannot recommend any specific software as the document does not provide any recommendations. However, it is suggested to use anti-virus protection software and keep it updated on your computer. Additionally, using a Virtual Private Network (VPN) can help protect your information when using public networks. Always ensure to download software from trusted sources, read reviews, and check the software's privacy policies before downloading."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+      "status": "created",
+      "timestamp": 1724807432
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "edited",
+      "timestamp": 1726745429
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "accepted",
+      "timestamp": 1726745566
+    }
+  ],
+  "editor": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+  "domain": "mt-rag-govt-elser-512-100-20240611",
+  "reviewer": "9dcd142c-415e-4161-a82f-c8b14bfb36ac"
+}

@@ -1,0 +1,616 @@
+{
+  "author": "8163b85d-d338-4ed1-8ebf-cd065ac3dc12",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-clapnq-elser-512-100-20240503",
+      "size": "183408"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"bool\": {\n    \"must\": {\n      \"text_expansion\": {\n        \"ml.tokens\": {\n          \"model_id\": \".elser_model_1\",\n          \"model_text\": \"${QUERY}\"\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "who takes photos of planes in the air",
+      "timestamp": 1722018235,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "In ground-to-air photography, photos of aircraft in flight are taken with the photographer on the ground. This type of photography is common at airshows or airports.",
+      "timestamp": 1722018237,
+      "contexts": [
+        {
+          "document_id": "825986711_374-788-0-414",
+          "text": "Aviation photography\nAviation photography is the act of taking images of aircraft , either in flight , or on the ground . Types of aviation photography include air - to - air , ground - to - air , ground - static , and remote photography . Military aviation photography , especially air - to - air , requires additional skills , as the photo and target aircraft often fly at velocities of over Mach 1 , while under moderate to high G .",
+          "title": "Aviation photography",
+          "score": 16.976954,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1722018346
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: who takes photos of planes in the air"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "825986711_1099-1546-0-447",
+          "text": "Aviation photography\nIn ground - static photography , photos of stationary aircraft are taken by photographers on the ground . Photos can be of aircraft exteriors , interiors , and aircraft details . The photographer has full control over lighting , aircraft placement , camera angles , and background . Involving other subjects such as the pilot or other aircraft is much easier to accomplish in ground - static photography than in other forms of aerial photography .",
+          "title": "Aviation photography",
+          "score": 16.602432,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "no",
+                "timestamp": 1722018348
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: who takes photos of planes in the air"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "825986711_2085-2489-0-404",
+          "text": "Aviation photography\nIn ground - to - air photography , photos of aircraft in flight are taken with the photographer on the ground . This type of photography is common at airshows or airports . Generally , a long focus photographic lens is necessary due to the greater distance between the photographer and the target aircraft . Along with ground - static photography , this is the most popular form of aviation photography .",
+          "title": "Aviation photography",
+          "score": 16.475857,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1722018314
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: who takes photos of planes in the air"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "speaker": "user",
+      "text": "No, I meant photos in the air.",
+      "timestamp": 1722018380,
+      "enrichments": {
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Question Type": [
+          "Factoid"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Air - to - air aviation photography is the art of photographing aircraft in the air, while using another aircraft as a photo platform.",
+      "timestamp": 1722018382,
+      "contexts": [
+        {
+          "document_id": "825986711_2085-2489-0-404",
+          "text": "Aviation photography\nIn ground - to - air photography , photos of aircraft in flight are taken with the photographer on the ground . This type of photography is common at airshows or airports . Generally , a long focus photographic lens is necessary due to the greater distance between the photographer and the target aircraft . Along with ground - static photography , this is the most popular form of aviation photography .",
+          "title": "Aviation photography",
+          "score": 25.835537,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "no",
+                "timestamp": 1722018403
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: who takes photos of planes in the air\n|assistant|: In ground-to-air photography, photos of aircraft in flight are taken with the photographer on the ground. This type of photography is common at airshows or airports.\n|user|: No, I meant photos in the air."
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "825986711_1099-1546-0-447",
+          "text": "Aviation photography\nIn ground - static photography , photos of stationary aircraft are taken by photographers on the ground . Photos can be of aircraft exteriors , interiors , and aircraft details . The photographer has full control over lighting , aircraft placement , camera angles , and background . Involving other subjects such as the pilot or other aircraft is much easier to accomplish in ground - static photography than in other forms of aerial photography .",
+          "title": "Aviation photography",
+          "score": 21.167343,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "no",
+                "timestamp": 1722018412
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: who takes photos of planes in the air\n|assistant|: In ground-to-air photography, photos of aircraft in flight are taken with the photographer on the ground. This type of photography is common at airshows or airports.\n|user|: No, I meant photos in the air."
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "825986711_374-788-0-414",
+          "text": "Aviation photography\nAviation photography is the act of taking images of aircraft , either in flight , or on the ground . Types of aviation photography include air - to - air , ground - to - air , ground - static , and remote photography . Military aviation photography , especially air - to - air , requires additional skills , as the photo and target aircraft often fly at velocities of over Mach 1 , while under moderate to high G .",
+          "title": "Aviation photography",
+          "score": 21.103935,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1722018416
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: who takes photos of planes in the air\n|assistant|: In ground-to-air photography, photos of aircraft in flight are taken with the photographer on the ground. This type of photography is common at airshows or airports.\n|user|: No, I meant photos in the air."
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "825986711_3052-3893-0-841",
+          "text": "Aviation photography\nAir - to - air photography is the art of photographing aircraft in the air , while using another aircraft as a photo platform . The subject aircraft is photographed while both aircraft are in flight . This allows the photographer to position the subject in specific locations and angles to get the most desirable shot . Some things that must be considered to achieve best results are lighting and background . Proper lighting is achieved through correct placement of the aircraft relative to the sun , and is accomplished flying only at certain times of the day and / or by flying at a heading that lines the sun up on the subject aircraft properly . The background can highlight or distract from the subject and must be carefully considered when taking shots . Air - to - air photography uses include commercial use and advertising . Remote",
+          "title": "Aviation photography",
+          "score": 16.415531,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1722018708
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "in air aviation photograph"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "In air-to-air photography, images of aircraft in flight are taken from another aircraft. However, this type of photography often requires additional skills, especially in military aviation photography where both the photo and target aircraft may be moving at high speeds and under high G-forces."
+    },
+    {
+      "speaker": "user",
+      "text": "So does that mean pilot of the second aircraft also acts as a photographer?",
+      "timestamp": 1722019108,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Standalone Type": [
+          "Non-standalone"
+        ],
+        "Answerability": [
+          "UNANSWERABLE"
+        ]
+      },
+      "alternatives": [
+        {
+          "text": "In air-to-air aviation photography, does the pilot of the non-subject aircraft acts as a photographer?",
+          "enrichments": {
+            "answerability": [
+              "UNANSWERABLE"
+            ],
+            "Standalone Type": [
+              "Standalone"
+            ],
+            "Question Type": [
+              "Factoid"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "speaker": "agent",
+      "text": "I am sorry I don't have any specific knowledge about who acts as a photographer in air-to-air aviation photography. ",
+      "timestamp": 1722019110,
+      "contexts": [
+        {
+          "document_id": "825986711_2085-2489-0-404",
+          "text": "Aviation photography\nIn ground - to - air photography , photos of aircraft in flight are taken with the photographer on the ground . This type of photography is common at airshows or airports . Generally , a long focus photographic lens is necessary due to the greater distance between the photographer and the target aircraft . Along with ground - static photography , this is the most popular form of aviation photography .",
+          "title": "Aviation photography",
+          "score": 26.28962,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "no",
+                "timestamp": 1722019375
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: who takes photos of planes in the air\n|assistant|: In ground-to-air photography, photos of aircraft in flight are taken with the photographer on the ground. This type of photography is common at airshows or airports.\n|user|: No, I meant photos in the air.\n|assistant|: Air - to - air aviation photography is the art of photographing aircraft in the air, while using another aircraft as a photo platform.\n|user|: So does that mean pilot of the second aircraft also acts as a photographer?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "825986711_374-788-0-414",
+          "text": "Aviation photography\nAviation photography is the act of taking images of aircraft , either in flight , or on the ground . Types of aviation photography include air - to - air , ground - to - air , ground - static , and remote photography . Military aviation photography , especially air - to - air , requires additional skills , as the photo and target aircraft often fly at velocities of over Mach 1 , while under moderate to high G .",
+          "title": "Aviation photography",
+          "score": 22.672867,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "no",
+                "timestamp": 1722019387
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: who takes photos of planes in the air\n|assistant|: In ground-to-air photography, photos of aircraft in flight are taken with the photographer on the ground. This type of photography is common at airshows or airports.\n|user|: No, I meant photos in the air.\n|assistant|: Air - to - air aviation photography is the art of photographing aircraft in the air, while using another aircraft as a photo platform.\n|user|: So does that mean pilot of the second aircraft also acts as a photographer?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "825986711_1099-1546-0-447",
+          "text": "Aviation photography\nIn ground - static photography , photos of stationary aircraft are taken by photographers on the ground . Photos can be of aircraft exteriors , interiors , and aircraft details . The photographer has full control over lighting , aircraft placement , camera angles , and background . Involving other subjects such as the pilot or other aircraft is much easier to accomplish in ground - static photography than in other forms of aerial photography .",
+          "title": "Aviation photography",
+          "score": 22.165741,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "no",
+                "timestamp": 1722019390
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: who takes photos of planes in the air\n|assistant|: In ground-to-air photography, photos of aircraft in flight are taken with the photographer on the ground. This type of photography is common at airshows or airports.\n|user|: No, I meant photos in the air.\n|assistant|: Air - to - air aviation photography is the art of photographing aircraft in the air, while using another aircraft as a photo platform.\n|user|: So does that mean pilot of the second aircraft also acts as a photographer?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, in air-to-air aviation photography, the pilot of the second aircraft often acts as the photographer. However, it's also common for a dedicated photographer to be present in the second aircraft, working alongside the pilot."
+    },
+    {
+      "speaker": "user",
+      "text": "Is air-to-air phtography more difficult that ground-to-air?",
+      "timestamp": 1722019419,
+      "enrichments": {
+        "Question Type": [
+          "Comparative",
+          "Opinion"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Air-to-air military aviation photography,  requires additional skills , as the photo and target aircraft often fly at velocities of over Mach 1, while under moderate to high G . On the other hand, in ground-to-air settings a long focus photographic lens is necessary due to the greater distance between the photographer and the target aircraft. Thus is it hard to say if one is more difficult than other conclusively.",
+      "timestamp": 1722019422,
+      "contexts": [
+        {
+          "document_id": "825986711_2085-2489-0-404",
+          "text": "Aviation photography\nIn ground - to - air photography , photos of aircraft in flight are taken with the photographer on the ground . This type of photography is common at airshows or airports . Generally , a long focus photographic lens is necessary due to the greater distance between the photographer and the target aircraft . Along with ground - static photography , this is the most popular form of aviation photography .",
+          "title": "Aviation photography",
+          "score": 25.29773,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1722020344
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: who takes photos of planes in the air\n|assistant|: In ground-to-air photography, photos of aircraft in flight are taken with the photographer on the ground. This type of photography is common at airshows or airports.\n|user|: No, I meant photos in the air.\n|assistant|: Air - to - air aviation photography is the art of photographing aircraft in the air, while using another aircraft as a photo platform.\n|user|: So does that mean pilot of the second aircraft also acts as a photographer?\n|assistant|: I am sorry I don't have any specific knowledge about who acts as a photographer in air-to-air aviation photography. \n|user|: Is air-to-air phtography more difficult that ground-to-air?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "825986711_374-788-0-414",
+          "text": "Aviation photography\nAviation photography is the act of taking images of aircraft , either in flight , or on the ground . Types of aviation photography include air - to - air , ground - to - air , ground - static , and remote photography . Military aviation photography , especially air - to - air , requires additional skills , as the photo and target aircraft often fly at velocities of over Mach 1 , while under moderate to high G .",
+          "title": "Aviation photography",
+          "score": 22.217976,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1722020339
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: who takes photos of planes in the air\n|assistant|: In ground-to-air photography, photos of aircraft in flight are taken with the photographer on the ground. This type of photography is common at airshows or airports.\n|user|: No, I meant photos in the air.\n|assistant|: Air - to - air aviation photography is the art of photographing aircraft in the air, while using another aircraft as a photo platform.\n|user|: So does that mean pilot of the second aircraft also acts as a photographer?\n|assistant|: I am sorry I don't have any specific knowledge about who acts as a photographer in air-to-air aviation photography. \n|user|: Is air-to-air phtography more difficult that ground-to-air?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "825986711_3052-3893-0-841",
+          "text": "Aviation photography\nAir - to - air photography is the art of photographing aircraft in the air , while using another aircraft as a photo platform . The subject aircraft is photographed while both aircraft are in flight . This allows the photographer to position the subject in specific locations and angles to get the most desirable shot . Some things that must be considered to achieve best results are lighting and background . Proper lighting is achieved through correct placement of the aircraft relative to the sun , and is accomplished flying only at certain times of the day and / or by flying at a heading that lines the sun up on the subject aircraft properly . The background can highlight or distract from the subject and must be carefully considered when taking shots . Air - to - air photography uses include commercial use and advertising . Remote",
+          "title": "Aviation photography",
+          "score": 22.136675,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1722020333
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: who takes photos of planes in the air\n|assistant|: In ground-to-air photography, photos of aircraft in flight are taken with the photographer on the ground. This type of photography is common at airshows or airports.\n|user|: No, I meant photos in the air.\n|assistant|: Air - to - air aviation photography is the art of photographing aircraft in the air, while using another aircraft as a photo platform.\n|user|: So does that mean pilot of the second aircraft also acts as a photographer?\n|assistant|: I am sorry I don't have any specific knowledge about who acts as a photographer in air-to-air aviation photography. \n|user|: Is air-to-air phtography more difficult that ground-to-air?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, air-to-air aviation photography can be considered more difficult than ground-to-air photography. This is because the photographer has to consider additional factors such as the movement and speed of both aircraft, proper lighting, and the background while taking shots. All these factors need to be carefully managed to get the most desirable shot."
+    },
+    {
+      "speaker": "user",
+      "text": "are there any other types of aviation photography?",
+      "timestamp": 1722020571,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, there are other types of aviation photography. These include ground-static photography, which involves taking pictures of aircraft on the ground, and remote photography, where the camera is mounted onto the external aircraft structure away from the photographer and is triggered remotely using a mechanical or electrical shutter release .",
+      "timestamp": 1722020575,
+      "contexts": [
+        {
+          "document_id": "825986711_374-788-0-414",
+          "text": "Aviation photography\nAviation photography is the act of taking images of aircraft , either in flight , or on the ground . Types of aviation photography include air - to - air , ground - to - air , ground - static , and remote photography . Military aviation photography , especially air - to - air , requires additional skills , as the photo and target aircraft often fly at velocities of over Mach 1 , while under moderate to high G .",
+          "title": "Aviation photography",
+          "score": 25.251076,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1722020608
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: who takes photos of planes in the air\n|assistant|: In ground-to-air photography, photos of aircraft in flight are taken with the photographer on the ground. This type of photography is common at airshows or airports.\n|user|: No, I meant photos in the air.\n|assistant|: Air - to - air aviation photography is the art of photographing aircraft in the air, while using another aircraft as a photo platform.\n|user|: So does that mean pilot of the second aircraft also acts as a photographer?\n|assistant|: I am sorry I don't have any specific knowledge about who acts as a photographer in air-to-air aviation photography. \n|user|: Is air-to-air phtography more difficult that ground-to-air?\n|assistant|: Air-to-air military aviation photography,  requires additional skills , as the photo and target aircraft often fly at velocities of over Mach 1, while under moderate to high G . On the other hand, a long focus photographic lens is necessary due to the greater distance between the photographer and the target aircraft in ground-to-air settings. Thus is it hard to say if one is more difficult than other conclusively.\n|user|: are there any other types of aviation photography?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "825986711_1099-1546-0-447",
+          "text": "Aviation photography\nIn ground - static photography , photos of stationary aircraft are taken by photographers on the ground . Photos can be of aircraft exteriors , interiors , and aircraft details . The photographer has full control over lighting , aircraft placement , camera angles , and background . Involving other subjects such as the pilot or other aircraft is much easier to accomplish in ground - static photography than in other forms of aerial photography .",
+          "title": "Aviation photography",
+          "score": 10.712845,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1722020660
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "ground static photgraphy"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "825986711_3903-4468-0-565",
+          "text": "Aviation photography\nRemote photography is a variation on aerial air - to - air photography , whereby the camera is mounted onto the external aircraft structure away from the photographer and is triggered remotely using a mechanical or electrical shutter release . The image has to be composed when the aircraft is on the ground , because the photographer has no access to the camera while the aircraft is in flight . Much brainstorming and planning must be done while setting up the camera to get the desired shot . Remote photography is the least common type of aviation photography .",
+          "title": "Aviation photography",
+          "score": 18.899406,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1722020662
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "remote photography"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, there are other types of aviation photography. These include ground-static photography, which involves taking pictures of aircraft on the ground, and remote photography, where photographs are taken remotely, without a physical photographer present."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "8163b85d-d338-4ed1-8ebf-cd065ac3dc12",
+      "status": "created",
+      "timestamp": 1722021015
+    },
+    {
+      "author": "87334bc6-dd39-4565-ae2b-832e60a24b08",
+      "status": "edited",
+      "timestamp": 1726088112
+    },
+    {
+      "author": "8908d11f-01bd-4e38-8f46-3584f19f879b",
+      "status": "edited",
+      "timestamp": 1726860731
+    },
+    {
+      "author": "8908d11f-01bd-4e38-8f46-3584f19f879b",
+      "status": "accepted",
+      "timestamp": 1726860836
+    }
+  ],
+  "editor": "8908d11f-01bd-4e38-8f46-3584f19f879b",
+  "domain": "mt-rag-clapnq-elser-512-100-20240503",
+  "reviewer": "8908d11f-01bd-4e38-8f46-3584f19f879b"
+}

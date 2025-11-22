@@ -1,0 +1,788 @@
+{
+  "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-fiqa-beir-elser-512-100-20240501",
+      "size": "61022"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"bool\": {\n    \"must\": {\n      \"text_expansion\": {\n        \"ml.tokens\": {\n          \"model_id\": \".elser_model_1\",\n          \"model_text\": \"${QUERY}\"\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "What's the difference between Market Cap and NAV?",
+      "timestamp": 1723451602,
+      "enrichments": {
+        "Question Type": [
+          "Comparative"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Market capitalization, or Market Cap, is calculated by multiplying the share price by the number of shares. It represents the current market perception of the company's worth. On the other hand, NAV, or net asset value, is the value of the company's stock divided by the number of shares, also known as the book value. NAV reflects the value of the company's assets if it were to sell everything, pay off its debts, and shut down. While Market Cap represents current market sentiment and future expectations, NAV provides a measure of the company's tangible asset value per share. These two values often differ significantly, especially for companies expected to grow or those with substantial intangible assets. NAV is a measurable value, derived from known factors, while Market Cap is determined by the stock price, which is influenced not only by NAV but also by future expectations.",
+      "timestamp": 1723451609,
+      "contexts": [
+        {
+          "document_id": "471123-0-798",
+          "text": "\n\"Market caps is just the share price, multiplied by the number of shares. It doesn't represent any value (if people decide to pay more or less for the shares, the market cap goes up or down). It does represent what people think the company is worth.  NAV sounds very much like book value. It basically says \"\"how much cash would we end up with if we sold everything the company owns, paid back all the debt, and closed down the business? \"\" Since closing down the business is rarely a good idea, this underestimates the value of the business enormously. Take a hairdresser who owns nothing but a pair of scissors, but has a huge number of repeat customers, charges $200 for a haircut, and makes tons of money every year. The business has a huge value, but NAV = price of one pair of used scissors.\"",
+          "score": 17.773918,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723466930
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What's the difference between Market Cap and NAV?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "414940-0-474",
+          "text": "\nNAV is  how much is the stuff of the company worth divided by the number of shares. This total is also called book value. The market cap is share price times number of shares. For Amazon  today people are willing to pay 290 a share for a company with a NAV of 22 a share. If of nav and price were equal the P/B (price to book ratio) would be 1, but for Amazon it is 13.  Why? Because investors believe Amazon is worth a lot more than a money losing company with a NAV of 22.",
+          "score": 17.006063,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723466927
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What's the difference between Market Cap and NAV?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "178-0-1083",
+          "text": "\n\"At any given moment, one can tally the numbers used for NAV. It's math, and little more. The Market Cap, which as you understand is a result of share value. Share value (stock price) is what the market will pay today for the shares. It's not only based on NAV today, but on future expectations. And expectations aren't the same for each of us. Which is why there are always sellers for the buyers of a stock, and vice-versa.  From your question, we agree that NAV can be measured, it's the result of adding up things that are all known. (For now, let's ignore things such as \"\"goodwill.\"\") Rarely is a stock price simply equal to the NAV divided by the number of shares. Often, it's quite higher. The simplest way to look at it is that the stock price not only reflects the NAV, but investors' expectations looking into the future.  If you look for two companies with identical NAV per share but quite different share prices, you'll see that the companies differ in that one might be a high growth company, the other, a solid one but with a market that's not in such a growth mode.\"",
+          "score": 19.60588,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723466923
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "What's the difference between Market Cap and NAV?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Market Cap and NAV, or Net Asset Value, are two different ways to measure a company's worth. Market Cap is calculated by multiplying the current share price by the total number of outstanding shares. It represents what people think the company is worth, and can change based on the perception of the company's value. On the other hand, NAV is calculated by dividing the total value of the company's assets by the number of outstanding shares. This is also known as the book value, and it represents the value of the company's assets if they were to be sold and all debts were paid off. However, NAV may not accurately reflect the true value of a company, especially if the company has a lot of intangible assets or growth potential."
+    },
+    {
+      "speaker": "user",
+      "text": "What are the key factors to consider when purchasing a business?",
+      "timestamp": 1723454013,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Before making a purchase, it's crucial to thoroughly explore at least 6-10 other options, and if it's a significant business transaction, consider researching even more options. Relying on luck in such transactions can be risky due to the high dollar amounts and liabilities involved. Here are some steps to consider before making a purchase:\n1. Clarify your goals.\n2. Work with trustworthy professionals.\n3. Establish a budget.\n4. Be prepared to handle unexpected surprises in the process.\nThe key to successful investing is understanding what you are investing in. For instance, if you are buying stock in a company that produces product X, it's important to comprehend the business. It's advisable to invest in good companies, but it's also crucial to do so at good prices. This requires understanding metrics such as price-to-earnings, price-to-revenue, and price-to-book ratios.",
+      "timestamp": 1723454028,
+      "contexts": [
+        {
+          "document_id": "263518-0-273",
+          "text": "\nIn the situation you describe, I would strongly consider purchasing.  Before purchasing, I would do the following: Think about your goals. Work with good people. Set a budget. Be able to handle surprises. If buying a home makes sense, you can do the following after buying:",
+          "score": 14.874179,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723455883
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "What should I consider when buying a business?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "365648-1685-3806",
+          "text": "\nAnd by \"\"others\"\", I mean that you should really not consider buying absolutely anything until you've viewed at least 6-10 other options in some depth - and you probably want to double or triple that number if you are looking to make this the last big business transaction of your life. If you don't you'll be relying on little more than dumb luck to carry you through - which in this area of business, you don't want to do because the dollar amounts and liabilities involved can bankrupt you in no time flat. With that general advice out of the way, here's a tiny nutshell version of valuation of commercial real estate. There are a few key parts involved in commercial real estate: land, improvements (buildings, docks, stuff like that), income, and wages. Land: the value of the land is based upon what you could sell it for, as-is. That is to say - who else might want it? This alone has many important factors, such as zoning laws, the neighborhood (including your neighbors), water/utilities, pacts on the land (someone may have insisted the land not be paved into a parking lot, or really anything like that), alternative uses (could you put a golf course on it, or is the land suitable for a big building or farming?), etc. And is this in a growing area, where you might hope the value will increase over the next decade, or decrease, or basically stay flat (and possibly cause losses compared to inflation)? Improvements: anything on the land is both an asset and a liability. It's an asset because it could add to the value of the land, but it might also reduce the land value if it interferes with alternate land uses. It's a liability, both in the legal sense and in that it requires maintenance. If you want to rent them out, especially, that means concern about any foundations involved, termites, roofs, sewage/septic tanks, utilities that are your responsibility (pipes, poles, wires), as well as any sort of ac/heating you may have, docks, and so on. These things are rarely free and absolutely can eat you alive. Income: Ah, the best part, the constant influx of cash! But wait, is it a constant influx?",
+          "score": 14.970931,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723455886
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "What should I consider when buying a business?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "444261-0-404",
+          "text": "\nThe key to good investing is you need to understand what you are investing in. That is, if you are buying a company that makes product X, you need to understand that. It is a good idea to buy stock in good companies but that is not sufficient. You need to buy stock in good companies at good prices. That means you need to understand things like price to earnings, price to revenue and price to book. Bob",
+          "score": 16.504862,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723456113
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "buying a business or investing in it? "
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "While I don't have specific information about purchasing a business in the document, I can provide some general factors to consider based on common business practices. These may include:\n1. Financial health: Review the company's financial statements, such as balance sheets, income statements, and cash flow statements, to assess its profitability, solvency, and liquidity.\n2. Growth potential: Analyze the market trends, competition, and the company's business model to estimate its growth prospects.\n3. Management and employees: Evaluate the quality of the management team, employee skills, and organizational culture, as they play a crucial role in driving business success.\n4. Intellectual property and intangible assets: Consider the value of patents, trademarks, copyrights, and other intangible assets that contribute to the company's competitive advantage.\n5. Legal and regulatory compliance: Ensure the business complies with relevant laws and regulations, minimizing potential legal liabilities and financial penalties.\n6. Market position and brand reputation: Assess the company's market share, customer base, and brand recognition within its industry.\n7. Integration and synergy opportunities: If acquiring another business, consider how well the two entities align strategically, operationally, and culturally, and whether there are opportunities for cost savings, revenue enhancement, or strategic benefits.\n8. Deal structure and financing: Determine the appropriate deal structure (e.g., asset purchase, stock purchase, merger) and financing options, considering tax implications, risk allocation, and negotiation leverage.\n9. Risk assessment: Identify potential risks associated with the acquisition, such as cultural clashes, operational challenges, or market disruptions, and develop strategies to mitigate these risks.\n10. Exit strategy: Plan for potential exit scenarios, such as selling the business or going public, to ensure flexibility and maximize returns on investment."
+    },
+    {
+      "speaker": "user",
+      "text": "Will purchasing stocks give me control over it?",
+      "timestamp": 1723456718,
+      "enrichments": {
+        "Question Type": [
+          "Explanation",
+          "Opinion"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "You will own a fraction of the company that you buy. You must buy 100% of the outstanding stock to own the company entirely.  Purchasing most of the shares allows you to control the company. The process may be complex, and you may need to appoint board members at preset intervals. The company's charter may include conditions to prevent a change in control. Depending on your jurisdiction, owning a certain percentage of shares may come with specific requirements.",
+      "timestamp": 1723456723,
+      "contexts": [
+        {
+          "document_id": "336017-0-671",
+          "text": "\nYou'll own whatever fraction you bought. To own the company (as in, boolean - yes or no) you need to buy 100% of the outstanding stock. RE controlling the company, in general the answer is yes - although the mechanism for this might not be so straight forward (ie. you may have to appoint board members and may only be able to do so at pre-set intervals) and there may be conditions in the company charter designed to stop this happening. Depending on your jurisdiction certain ownership percentages can also trigger the need to do certain things so you may not be able to just buy 50% - in Australia when you reach 20% ownership you have to launch a formal takeover bid.",
+          "score": 18.411293,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723457870
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Will purchasing stocks in a company give me control over it?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "404936-0-756",
+          "text": "\nDepends on the structure of the company and what shares are outstanding.  If the pink sheet stock has no voting power then buying all that stock doesn't get you any control at all.  On the other hand, if the outstanding shares only represent 20% of the company's overall shares, then buying all the shares isn't likely enough to have a controlling interest. Thus, you'll have to dig into the details.  If you want an example of where I'd have my doubts, look at Nestle's stock which has the ticker of NSRGY.  There can be companies that are structured with stock on multiple exchanges that can also be a challenge at times.  There is also something to be said if you own enough stock in a company that this has to be disclosed to the SEC when you buy more.",
+          "score": 19.507673,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723457872
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Will purchasing stocks in a company give me control over it?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "266613-0-314",
+          "text": "\nThe stockholders of company A vote to approve or disapprove the buy out. That is the only control you have on the price: Vote to approve or disapprove.  If the deal is approved then you get the money, or stock in B, or both, in accordance with the terms of the deal. It will arrive into your account automatically.",
+          "score": 18.010176,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723457875
+              },
+              "868c6e58-57c1-48ee-8c67-832dbedcac18": {
+                "value": "no",
+                "timestamp": 1726665939
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Will purchasing stocks in a company give me control over it?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "No, purchasing stocks does not give you direct control over the company. When you buy stocks, you become a shareholder, which means you own a portion of the company. However, this does not translate into operational control. The management team and board of directors make decisions regarding the company's operations and direction. As a shareholder, you have the right to vote on certain matters, such as the election of board members, but this influence is typically limited."
+    },
+    {
+      "speaker": "user",
+      "text": "Value?",
+      "timestamp": 1723459260,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The concept of value is a subject where economic theories often differ, and each school of thought has valid points. One school of thought argues that monetary value can always be determined by the net labor involved or the cost of inputs. The other school of thought suggests that economic value does not exist inherently and that only the market can determine value. For instance, the value of a stock is solely determined by the price people are willing to pay for it and the price at which those who have it are willing to sell. Even if something drastic happens to a company, such as their only factory burning down and traders remaining indifferent, the value of the stock would not change in that scenario.",
+      "timestamp": 1723459269,
+      "contexts": [
+        {
+          "document_id": "297694-0-1042",
+          "text": "\nValue is one area where economic theories tend to diverge and the (very) basic schools of thought both have excellent points in their favor. You've identified both here; one being that economic value can always be determined by net labor* or at least cost of inputs and the other being that economic value does not exist in and of itself and that only a market can determine value. In some ways it is just a question of world-view as much as anything but the concepts of natural prices or innate worth are difficult to argue against. At the same time, without exchange the concept of value has little meaning. So, as usual, it is some sophistry mixed with some sense.  Both have elements of truth and both are considerably more complex than they seem at first. Interestingly though, neither seems to work very well as predictive models despite providing the basis for some incredibly complex and interesting mathematical workups.       * Note that net labor is the sum of ALL labor involved and is incredibly difficult to quantify accurately.",
+          "score": 16.805944,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723460122
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "What determines value in a business?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "59988-0-1382",
+          "text": "\n\"Yes, the value of a stock is completely, 100% determined by what people are willing to pay for it in conjunction with what people who have it are willing to sell it for. If something really bad happened to a company, like their only factory burned to the ground, and the traders didn't care, then I guess, in that scenario, the value of the stock would not change. But you can spin all sorts of hypotheticals of that sort. If dogs could talk, would German Shepherds speak German? Etc. Any answer is pretty meaningless because the premise is wildly unlikely. As CQM notes, \"\"traders\"\" in this context means everyone who buys or sells stock. If you buy stock, that includes you. They're not some mystical cabal somewhere. If you see a stock listed at, whatever, $50, and you are not willing to pay more than $40 for it, then you refuse to buy, and so you tend to force the price down. If you're not a billionaire, then your impact on the market is tiny, but the market is made up of millions of people each with tiny influence. Note that all this is true not just of the stock market, but of every product on the market. A product is worth whatever the owner is willing to sell it for and people are willing to pay. This is what determines the price of everything from houses to toasters. It's a little theory I've invented that I like to call, \"\"the law of supply and demand\"\". :-)\"",
+          "score": 16.197819,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723460125
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "What determines value in a business?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "580084-0-702",
+          "text": "\nYou're assuming here that anything that is difficult to obtain will be highly desired.  For me, value is largely determined by the buyer. Even if it takes the same effort to get 20 bushels of apples and a nugget of gold, if the majority of people find a nugget of gold to be worth 100 bushels, that will be the value of gold.   Conversely, lets say there is an element buried deep in the earth that has no use whatsoever. Even if it takes the effort of 10 nuggets of gold, because nobody has any use for it, its value will be zero. Even though there is high effort to procure.  I hope that clarifies your question of the exchange rate. It is determined by how much each party values the goods involved.",
+          "score": 16.065851,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723460317
+              },
+              "868c6e58-57c1-48ee-8c67-832dbedcac18": {
+                "value": "no",
+                "timestamp": 1726665998
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "What determines value in a business?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "It seems like your question might be about the value of stocks or businesses, but it's a bit unclear. When discussing the value of a stock, there are several key metrics to consider, such as the price-to-earnings (P/E) ratio, price-to-revenue (P/S) ratio, and price-to-book (P/B) ratio. These ratios help investors understand whether a stock is overvalued or undervalued compared to its financial performance and asset value.\nWhen considering the value of a business, it's essential to look beyond just the financial figures. Factors like the company's reputation, competitive position, growth potential, and the quality of its management team can significantly impact its overall worth. Additionally, understanding the industry trends and market conditions is crucial to evaluating a business's value accurately.\nIf you could provide more context or clarify your question, I'd be happy to give a more specific answer."
+    },
+    {
+      "speaker": "user",
+      "text": "Good decisions ",
+      "timestamp": 1723461881,
+      "enrichments": {
+        "Question Type": [
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Any decisions a business makes are for one reason: $$$. Decision-makers must CONSTANTLY re-evaluate not only the current climate but the future. \u00a0If business owners aren't careful, it very well could collapse, and in the end, if it fails, nobody else is responsible except themselves. So, in times of success, yes, the business owners reap profit, but in tough times, they have to take full responsibility and the consequences of reality.\u00a0You can't run a business without making \" $$$.\" Good will and good intentions only go so far, and they do not always equate to positive results. Capitalism rewards the positive results of proper decision-making in the marketplace as businesses generate enough profit to allow them to stay afloat and expand, while those businesses that do not follow through with appropriate decision-making reap negative results, fail, and eventually go out of business. ",
+      "timestamp": 1723461886,
+      "contexts": [
+        {
+          "document_id": "371426-0-1227",
+          "text": "\n\"Another aspect is decision makers must CONSTANTLY re-evaluate not only the current climate, but the future.   I'm not sure if anyone noticed but the economy and consumer confidence is in the toilet. If business owners arent careful it very well could collapse and in the end if it does fail there is nobody else responsible but themselves.  So in times of success, yes the business owners reap profit, but in tough times so too do they have to take full responsibility and consequences of reality. Salary employees have no such liability, they go to work at 9am and leave at 5pm and while most want increased responsbility because that usually yields increased competition, most have no interest in taking true responsibility for the company's health.   As the sole principal of the company it is wholly his choice what direction and decisions to make for the company. I guarantee you his decision will not be based on vengence or grudge but rather weighing incentives to continue, and being an older gentlemen decide it's no longer worth it and retire.   I've personally see many smaller companies do this in the past 10 years. \"\"Why go through the stress? I've got cash. I'm going to sell or close the company and retire.\"\"\"",
+          "score": 13.6574335,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723462420
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Good business decisions "
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "295045-0-1802",
+          "text": "\n\"You can't run a business without making \"\"$$$\"\".   Good will and good intentions only go so far and they do not always equate to positive results. Capitalism rewards the positive results of proper decision making in the market place as businesses generate enough profit to allow them to stay afloat and expand, while those businesses that do not follow through with proper decision making reap negative results, fail and eventually go out of business. These are irrefutable facts which govern how capitalism works, i.e. success is rewarded, failure is punished and both of these results serve as lessons for all others in the marketplace who dare to heed these lessons based offered up by success and failure which are to be found in a capitalist economy.   So if the current market conditions dictate that allowing workers more free time, increased perks, etc will increase productivity and lead to success then it is only rational and reasonable for businesses to attend to the needs of their employees.   However if the costs of these perks begin to spiral out of control and/or are no longer relevant or favorable in the marketplace then cost cutting measures are needed to ensure that businesses are able to secure their profits and stay afloat. Those who do not rein in or alleviate these cost issues in their businesses will quickly go under as these costs eat out their bottom line and competitors move in to under-cut them in the market place. Nevertheless attempting to place some sort of emotional or political reasoning and judgment as to how and why businesses act in regards to cost cutting measures without first taking into account the reality of the circumstances in which they must operate in, i.e. having to make a profit in order to survive, is unreasonable and flat out childish.\"",
+          "score": 12.874401,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723462416
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Good business decisions "
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "536212-0-923",
+          "text": "\n\"Essentially, yes.  Any and all decisions a business make are for one reason: $$$      Your paid vacation?  That's an incentive to get better, more productive workers.  Your company has done a cost/benefit analysis and they've figured out that it's worth their money to pay you to do nothing for a week because that paid vacation is a perk of the job that will get them better job applicants.  OR they want you taking a vacation because you'll come back rested and refreshed. And that makes them money. (See also: every other job benefit.)    \"\"Oh, well my company is a great civic member who does good work for the community.\"\"  And I bet they never pass up an opportunity to tell people about it.  Because they don't care about feeding the homeless kittens.  They care about customers KNOWING they feed the homeless kittens.  Because it makes them money.      The point of a business is to make money, not employ people.\"",
+          "score": 12.371204,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723462413
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Good business decisions "
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "When it comes to making good decisions, especially in the context of business or investing, there are several strategies to consider. First, it's essential to gather as much relevant information as possible and analyze it carefully. This includes understanding the business or investment you're considering, its financials, and the market conditions. \nSecond, it's crucial to have clear goals and a well-defined strategy. This will help you stay focused and make decisions that align with your objectives. \nThird, seeking advice from trusted professionals or experts in the field can be beneficial. They can provide valuable insights and perspectives that you might not have considered.\nLastly, it's important to remain disciplined and avoid making impulsive decisions based on short-term market fluctuations or emotions. Instead, stick to your strategy and make decisions based on thorough analysis and a long-term perspective.\nRemember, every decision involves some degree of risk, and there are no guarantees of success. However, by following these strategies, you can increase your chances of making good decisions that lead to successful outcomes."
+    },
+    {
+      "speaker": "user",
+      "text": "What about employees? ",
+      "timestamp": 1723463426,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "As your company grows, you tend to add people in \"layers.\" The top layer is the first founder or founder. There may be one, two, three, or more of you, but you all start working at about the same time, and you all take the same risk: quitting your jobs to work for a new and unproven company. \nThe second layer is the first actual employees. By the time you hire this layer, you've got cash coming in from somewhere (investors or customers\u2014doesn't matter). These people didn't take as much risk because they got a salary from day one, and honestly, they didn't start the company, they joined it as a job. The third layer consists of later employees. By the time they joined the company, it was going pretty well. Each \"layer\" will be approximately one year for many companies. When your company is big enough to sell to Google or go public, you probably have about six layers: the founders and roughly five layers of employees. Each successive layer is more significant. It's very important to keep your employees happy and ensure they feel part of something other than a job. Make them feel like they're part of a family and support system.",
+      "timestamp": 1723463431,
+      "contexts": [
+        {
+          "document_id": "36366-1678-3648",
+          "text": "\nHere's the principle. As your company grows, you tend to add people in \"\"layers\"\". The top layer is the first founder or founders. There may be 1, 2, 3, or more of you, but you all start working about the same time, and you all take the same risk... quitting your jobs to go work for a new and unproven company. The second layer is the first real employees. By the time you hire this layer, you've got cash coming in from somewhere (investors or customers--doesn't matter). These people didn't take as much risk because they got a salary from day one, and honestly, they didn't start the company, they joined it as a job. The third layer are later employees. By the time they joined the company, it was going pretty well. For many companies, each \"\"layer\"\" will be approximately one year long. By the time your company is big enough to sell to Google or go public or whatever, you probably have about 6 layers: the founders and roughly five layers of employees. Each successive layer is larger. There might be two founders, five early employees in layer 2, 25 employees in layer 3, and 200 employees in layer 4. The later layers took less risk. OK, now here's how you use that information: The founders should end up with about 50% of the company, total. Each of the next five layers should end up with about 10% of the company, split equally among everyone in the layer. Example: Two founders start the company. They each take 2500 shares. There are 5000 shares outstanding, so each founder owns half. They hire four employees in year one. These four employees each take 250 shares. There are 6000 shares outstanding. They hire another 20 employees in year two. Each one takes 50 shares. They get fewer shares because they took less risk, and they get 50 shares because we're giving each layer 1000 shares to divide up. By the time the company has six layers, you have given out 10,000 shares. Each founder ends up owning 25%. Each employee layer owns 10% collectively.",
+          "score": 16.335264,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723463816
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "When should I start to add employees? "
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "229054-0-440",
+          "text": "\nIt's all about keeping your employees happy and ensuring they feel like they're part of something other than a job. Make them feel like they're part of a family and support system. Throw in other things besides pizza parties once a month. Have corporate parties at your house on a weekend, or frequent happy hours. Have an employee of a month kind of thing or recognize your employees for the hard work they do. BUILD, SUPPORT, and SUSTAIN.",
+          "score": 12.782804,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723463813
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "When should I start to add employees? "
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Employees play a crucial role in the success of a business. While the ultimate goal of a business is to generate profits, it cannot be achieved without the hard work and dedication of its employees. Business owners should ensure that their employees are well-compensated, motivated, and treated fairly. This not only helps in maintaining a positive work environment but also contributes to the overall growth and success of the business. Employees who feel valued and appreciated are more likely to be productive and contribute positively to the decision-making process of the business. Therefore, while profits are essential for a business to survive, it is equally important to prioritize the well-being and satisfaction of employees."
+    },
+    {
+      "speaker": "user",
+      "text": "Why sell?",
+      "timestamp": 1723465598,
+      "enrichments": {
+        "Question Type": [
+          "Opinion",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The ideal time to sell a business is when it is highly profitable, and you are no longer interested in expanding it. You may also want to sell if the stock no longer aligns with your strategy if you have lost faith in the company or want to take out your initial investment to purchase something else. Additionally, it's advantageous to sell when there is high demand for the industry in which the business operates, such as during a boom like the dot-com bubble.",
+      "timestamp": 1723465601,
+      "contexts": [
+        {
+          "document_id": "217837-0-391",
+          "text": "\nwhy sell?  Because the stock no longer fits your strategy.  Or you've lost faith in the company. In our case, it's because we're taking our principal out and buying something else.  Our strategy is, basically, to sell (or offer to sell) after the we can sell and get our principal out, after taxes.  That includes dividends -- we reduce the sell price a little with every dividend collected.",
+          "score": 13.934373,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723465885
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "I want to sell my company"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "475479-0-447",
+          "text": "\nThe perfect conditions to sell a business are when it is very valuable (lots of profit each year) and you've lost interest in growing it any further. Also if you're in a particular industry when everyone is dying to get into that industry (like the dot com bubble) those are perfect conditions to sell. Other things like low interest rates and excess M&A capital might contribute to good conditions, but the two cases above are perfect conditions.",
+          "score": 13.356126,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723465888
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "I want to sell my company"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Selling a business can be motivated by various reasons. Business owners might choose to sell if they see a profitable opportunity, such as a lucrative offer from a potential buyer. Selling can also be an exit strategy for retiring owners or a way to cash out and distribute profits to shareholders. In some cases, selling may be necessary due to financial difficulties, intense competition, or changes in the market environment. Regardless of the motivation, selling a business involves careful planning, valuation, and negotiation to ensure a successful outcome."
+    },
+    {
+      "speaker": "user",
+      "text": "Advise",
+      "timestamp": 1723466483,
+      "enrichments": {
+        "Question Type": [
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "A financial advisor is a professional service provider who can handle tasks that you either don't have time for or prefer someone else to manage. If you lack the time or interest to manage your investments, hiring a financial advisor is a good idea. It's generally better to work with an advisor who charges an annual fee based on a percentage of your account value rather than one who gets paid based on transactions. Advisors compensated in the latter way may have a vested interest in making frequent changes to your account, which might not be in your best interest. It's important to be cautious of advisors who promote expensive mutual funds with sales loads or annuities. Additionally, your advisor's compensation structure should be transparent.",
+      "timestamp": 1723466489,
+      "contexts": [
+        {
+          "document_id": "304081-0-561",
+          "text": "\nIf you don't have the time or interest to manage investments, you need a financial advisor.  Generally speaking, you're better served by an advisor who collects an annual fee based on a percentage of your account value. Advisors who are compensated based on transactions have a vested interest to churn your account, which is often not in your best interest. You also need to be wary of advisors who peddle expensive mutual funds with sales loads (aka kick-backs to the advisor) or annuities. Your advisor's compensation structure should be transparent as well.",
+          "score": 21.73293,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723466802
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Does a business owner needs a financial advisor?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "88345-0-489",
+          "text": "\nA financial advisor is a service professional.  It is his/her job to do things for you that you could do for yourself, but you're either too busy to do it yourself (and you want to pay somebody else), or you'd rather not. Just like some people hire tax preparers, or maids, or people to change their oil, or re-roof their houses. Me, I choose to self-manage.  I get some advise from Fidelity and Vanguard.  But we hired somebody this year to re-roof our house and someone else to paint it.",
+          "score": 21.36155,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723466805
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Does a business owner needs a financial advisor?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Based on the information provided, here's a general advice:\nWhen considering purchasing a business, it's important to thoroughly research and explore multiple options. Set clear goals, work with trustworthy professionals, and establish a budget. Understanding the business and the metrics associated with its stock is also crucial.\nRegarding the control of a company, purchasing a significant portion of the shares may allow you to control the company, but it depends on various factors such as the company's structure and the types of shares outstanding.\nAs for the value of a stock, it's determined by the price people are willing to pay for it. Different economic theories have different views on the determination of value.\nIn terms of decision-making in business, it's driven by the pursuit of profit. Business owners must constantly re-evaluate the current and future climate. While goodwill and good intentions are important, they do not always equate to positive results.\nEmployees are a vital part of a business. As the company grows, it's important to keep adding people in layers and ensuring they feel part of something more than just a job.\nThe decision to sell a business depends on various factors such as the profitability of the business, your interest in expanding it, the alignment of the stock with your strategy, and the demand for the industry in which the business operates."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "created",
+      "timestamp": 1723466930
+    },
+    {
+      "author": "d2b56e91-6d89-4df4-b89a-eef8d969850b",
+      "status": "accepted",
+      "timestamp": 1725908503
+    },
+    {
+      "author": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+      "status": "edited",
+      "timestamp": 1726667538
+    },
+    {
+      "author": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+      "status": "accepted",
+      "timestamp": 1726669200
+    }
+  ],
+  "editor": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+  "domain": "mt-rag-fiqa-beir-elser-512-100-20240501",
+  "reviewer": "868c6e58-57c1-48ee-8c67-832dbedcac18"
+}

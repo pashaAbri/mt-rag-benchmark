@@ -1,0 +1,903 @@
+{
+  "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-govt-elser-512-100-20240611",
+      "size": "49607"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"bool\": {\n    \"must\": {\n      \"text_expansion\": {\n        \"ml.tokens\": {\n          \"model_id\": \".elser_model_1\",\n          \"model_text\": \"${QUERY}\"\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "Can you get free tests if you have Medi-Cal?",
+      "timestamp": 1722995525,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      },
+      "alternatives": [
+        {
+          "text": "Can you get free covid tests if I have Medi-Cal?",
+          "enrichments": {
+            "answerability": [
+              "ANSWERABLE"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, if you have Medi-Cal, you can receive free COVID-19 tests. You can visit the MyTurn.ca.gov to find more resources for testing. ",
+      "timestamp": 1722995528,
+      "contexts": [
+        {
+          "document_id": "17a25b07af4a6429-2-1918",
+          "text": "Testing Options | Sierra County, CA - Official Website\nTesting Options | Sierra County, CA - Official Website\n\n \n\nSkip to Main Content\n\n \n\nSearch\n\n \n \n \n\nYour GovernmentCommunityCounty DepartmentsHow Do I\n\n \n\n \n\n \n\n \n\n \nHomeCounty DepartmentsPublic HealthCommunicable DiseaseCoronavirus (COVID-19)Testing Options \n\n\r\n\r\nTesting Options \t\n\nResidential households in the U.S. can order one set of #4 FREE at-home tests from USPS.com. Here's what you need to know about your order:Limit of one order per residential addressOne order includes #4 individual rapid antigen COVID-19 tests (COVID.gov/tests\u00a0has more details about at-home tests, including extended shelf life and updated expiration dates)Have Medi-Cal?\u00a0Follow these steps to receive free tests.\n\n \n \n\nMyTurn.ca.gov to find testing\n \n \n \n \n \n\nMore resources for testing\n \n \n \n \n\nBelow are facilities offering testing in or near Sierra County. Many clinics offer Drive-Thru Testing options.Eastern Plumas Health Care (Loyalton) - (530) 993-1231Monday thru Thursday by appointmentEastern Plumas Health Care (Portola)- (530) 832-6600\u00a0Monday thru Friday by appointmentPlumas District Hospital (Quincy) - (530) 283-5640Sierra Nevada Medical Center (Grass Valley) - (530) 274-6000Tahoe Forest Hospital (Truckee) - (530) 582-3450\u00a0Western Sierra Medical Clinic (Downieville) - (530) 274-9762Find Testing Near You Search Tools in California\u00a0and\u00a0Nevada\n\n \n \n \n\nFAQs about payment for COVID-19 testing:1. Must health plans cover COVID-19 testing?\u00a0Yes. Health plans must cover COVID-19 tests that are FDA approved or authorized, or approved by the state, without prior authorization and at no cost to the enrollee. This includes follow-up (serial/sequential) tests. This requirement applies to such tests administered by a skilled nursing facility. \u00a0Biden-Harris Administration Requires Insurance Companies and Group Health Plans to Cover the Cost of At-Home COVID-19 Tests, Increasing Access to Free Tests (January 10, 2022)2.",
+          "title": "Testing Options | Sierra County, CA - Official Website",
+          "url": "https://www.sierracounty.ca.gov/586/Testing-Options",
+          "score": 13.211225,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1722995664
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: Can you get free tests if you have Medi-Cal?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "914c180e07b780f0-1919-3898",
+          "text": "Government Benefits\nCare Management for Seniors\r\n\t\n\nNeed help with your care? Find out which care management program is right for you.\n\n \r\n\tMedi-Cal and other Health Services\r\n\t\n\nMedi-Cal is a program that offers free or low-cost health coverage for children and adults with limited income and resources. If you qualify, you can enroll in Medi-Cal year-round.\n\n \r\n\tMedicare Counseling\r\n\t\n\nFree information to help you choose the Medicare plan that's right for you.\n\n \r\n\tCalFresh/EBT Food Benefits\r\n\t\n\nCalFresh provides monthly assistance to low- or no-income individuals and families. Benefits are loaded onto an EBT card that works like a debit card to use at stores to buy food.\n\nResources\n\nAdult Protective Services\nReport elder and dependant adult abuse 24/7\n\nVeterans\nGet information on benefits available to veterans and their families.\n\nInformation & Assistance\nChat online or on the phone about support to stay living at home safely and more.\n\nAging and Disability Resource Guide\nFind local resources for seniors and people with disabilities.\n\nBecome a Caregiver\nEarn money with flexible hours while providing housekeeping and basic in-home assistnace.\n\n \n\nAdult and Aging Division\n\nIn-person Lobby Hours\nMonday \u2013 Friday\n8:00 AM \u2013 5:00 PM\n\nContact us by Phone\nPhone:\u00a0(707) 565-5900\nCA Relay:\u00a0711\n\nLocations\nSanta Rosa Office\n3725 Westwind Blvd, 1st Floor\n\nSanta Rosa, CA 95403\nGoogle Maps\u2122 Directions\n\nPetaluma Office\n\n5350 Old Redwood Hwy N #100\nPetaluma, CA 94954\nGoogle Maps\u2122 Directions\n\nCounty of Sonoma\n\n \n\n \r\n\tSoCoEmergency.org\r\n\t\n\n \r\n\tPay Property Taxes\r\n\t\n\n \r\n\tView Road Closures and Delays \r\n\t\n\n \r\n\tBoard Meetings, Agendas and Minutes\r\n\t\n\n \r\n\tView All County News\r\n\t\n\n \r\n\tView All County Press Releases\r\n\t\n\n \r\n\tView All County Events\r\n\t\n\n \r\n\tCounty Department Directory\r\n\t\n\n\r\n Subscribe to SoCo Correspondent email newsletter\r\n \n\n\r\n \u00a92022 County of Sonoma. All rights reserved.\r\n \n\nBack to Top\n|\n\r\n\tAccessibility Information\r\n\t\n|\n\r\n\tSB 272\r\n\t\n|\n\r\n\tTerms of Use\r\n\t\n|\n\r\n\tWeb Standards",
+          "title": "Government Benefits",
+          "url": "http://sonomacounty.ca.gov/health-and-human-services/human-services/older-adults-people-with-disabilities/government-benefits",
+          "score": 12.43583,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1722995613
+              },
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "no",
+                "timestamp": 1726586943
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: Can you get free tests if you have Medi-Cal?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, if you have Medi-Cal, you can follow certain steps to receive free COVID-19 tests. However, the specific process is not detailed in the document. It is recommended to visit the MyTurn.ca.gov website or contact your healthcare provider for more information."
+    },
+    {
+      "speaker": "user",
+      "text": "how long will it take for me to get the testing result back?",
+      "timestamp": 1722995724,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Testing results vary widely, depending on where you get tested and what lab the test is sent to. Some places usually have test results in about 3 to 4 days. PCR tests can take up to 3 days to return results, while antigen tests typically provide results in 15-30 minutes. However, the document also notes that antigen tests may be less likely to detect the virus than PCR tests, especially when symptoms are not present. Sometimes testing results generally take two to 12 days, as it takes time to ship the samples and for labs to process the tests. However, some facilities with their own labs or nearby facilities may provide results in as little as 24 hours. It is recommended to consult with your healthcare provider for more specifics regarding the testing location you chose.",
+      "timestamp": 1722995727,
+      "contexts": [
+        {
+          "document_id": "712a92e8d5dc6ee6-2859-4850",
+          "text": "Coronavirus FAQs: What Veterans Need To Know | Veterans Affairs\nWe usually have test results in about\u00a03 to 4 days.\u00a0\u00a0\nIf you\u00a0were\u00a0tested at a VA health facility and\u00a0you\u00a0have a My HealtheVet Premium account,\u00a0you can get your test results online\u00a0as soon as\u00a0we\u00a0have them.\u00a0If you don\u2019t have a My HealtheVet Premium account, you can get one now.\u00a0\nLearn\u00a0how to\u00a0get\u00a0your results through My HealtheVet\u00a0\u00a0\nYour VA or community care provider will also call you with your test results\u00a0when they\u2019re available. If you have concerns about your results, call or send a secure message to your provider.\nGet answers to more questions about COVID-19 testing at VA\n\n What should I do if the results of my COVID-19 self-test are positive? \n \n\nIf you didn\u2019t take your\u00a0test during a VA video appointment, take a picture of your test results.\u00a0You can share this picture with your VA health care team.\nContact your VA health care team right away.\u00a0If you need treatment, you must start it early for it to work. Some treatments must start within 5 days of your first symptoms.\nSeparate yourself to keep others safe.\u00a0Isolate for at least 5 days from when you first started having symptoms or from when you tested positive. If you can\u2019t fully isolate, wear a well-fitting mask any time you\u2019re around other people for at least 5 days.\nTell anyone who you\u2019ve been in close contact with in the past few days\u00a0that you tested positive.\u00a0For COVID-19, a\u00a0close contact\u00a0is anyone who was less than 6 feet away from you for a combined total of 15 minutes or more over a 24-hour period.\u00a0\nMonitor your symptoms.\u00a0If your symptoms get worse, contact your\u00a0provider or nearest VA health facility.\u00a0To get reminders for\u00a0when to contact your care team or a nurse advice line, you can use our\u00a0Annie text messaging service.\nSubscribe to the Annie text messaging service\n\nIf you have any signs of emergency, call 911 or get help right away.\u00a0Signs of emergency include symptoms like trouble breathing or continued pain or pressure in your chest.\nGet the latest COVID-19 symptom information on the CDC website",
+          "title": "Coronavirus FAQs: What Veterans Need To Know | Veterans Affairs",
+          "url": "https://www.va.gov/coronavirus-veteran-frequently-asked-questions/#debt-copays-appeals-and-other-",
+          "score": 18.078178,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1722995864
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "covid testing result wait time"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "026140356ab2c1f6-1508-3420",
+          "text": "Testing | Senator Scott Wiener\nHowever, now that testing capacity has significantly expanded in the state, most people are able to receive testing at\u00a0some local facilities.\u00a0\n\u00a0\n2) How long will test results take?\nTesting results vary widely, depending on where you get tested and what lab the test is sent to. Rapid-results testing is being expanded but has limited availability. The vast majority of test sites send the samples to a lab off-site, like Quest or LabCorp, and results generally take two to 12 days because it takes time to ship the samples, and time for the labs to process the tests. You can expect test results\u00a0in as little as 24 hours at facilities with their own labs or that use a nearby facility. Consult with your healthcare provider for more specifics.\u00a0\n\u00a0\n3) How many people have been tested?\nAs of July 10, close to 5\u00a0milion tests have been conducted in the state. Daily coronavirus testing is averaging 80,000 - 100,000 tests per day.\n\u00a0\nOpen Testing Sites\nSan Francisco\n\u00a0CityTestSF, a collaboration between the city of San Francisco, local tech companies and medical providers has two sites. Both are by appointment only. To schedule appointments, see www.sf.gov/citytestsf.\nOne site, at Piers 30-32, is a drive-through site run by Carbon Health and Color Genomics and serves essential workers with symptoms. A doctor\u2019s note is not needed.\nA second, at 600 7th St., is a drive-through site operated by One Medical and Verily. It is open to any San Francisco resident experiencing COVID-19 symptoms. Visit www.projectbaseline.com/COVID19 to learn more.\nSFGH has a drive-through and walk-up testing center in the hospital parking lot at 23rd Street and Potrero Avenue.\nA UCSF drive-thru testing site is set-up at Laurel Heights.\nDignity Health-GoHealth Urgent Care is conducting rapid tests for anyone, even if you don\u2019t have insurance, in the Castro. Hours are 8 am to 8 pm Monday to Friday and 9 am to 5 pm on weekends.",
+          "title": "Testing | Senator Scott Wiener",
+          "url": "https://sd11.senate.ca.gov/testing",
+          "score": 17.799505,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1722995867
+              },
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1726587222
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "covid testing result wait time"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "f6341a832b8dbe3f-1425-3432",
+          "text": "COVID-19 Testing: What You Need to Know | CDC\nViral tests look for a current infection with SARS-CoV-2, the virus that causes COVID-19, by testing specimens from your nose or mouth.\nThere are two main types of viral tests:\n\nPolymerase chain reaction (PCR) tests\nAntigen tests\n\nPCR Tests\nPCR tests are the \u201cgold standard\u201d for COVID-19 tests. They are a type of nucleic acid amplification test (NAAT), which are more likely to detect the virus than antigen tests. Your sample will usually be taken by a healthcare provider and transported to a laboratory for testing. It may take up to 3 days to receive results.\nAntigen Tests\nAntigen tests* are rapid tests that usually produce results in 15-30 minutes. Positive results are accurate and reliable. However, in general, antigen tests are less likely to detect the virus than PCR tests, especially when symptoms are not present. Therefore, a single negative antigen test cannot rule out infection. To be confident you do not have COVID-19, FDA recommends 2 negative antigen tests for individuals with symptoms or 3 antigen tests for those without symptoms, performed 48 hours apart. A single PCR test can be used to confirm an antigen test result.\n\n*Self-tests, or at-home tests, are antigen tests that can be taken anywhere without having to go to a specific testing site. Read self-test package inserts thoroughly and follow the instructions closely when performing the test.\nTop of PageChoosing a COVID-19 Test\nI want to get tested and:\nI have not had COVID-19 or I have not had a positive test within the past 90 days.You may choose a PCR or antigen test.\nIf you use an antigen test and your result is negative, repeat testing following FDA recommendations.\nI tested positive for COVID-19 in the last 90 days.My first positive test result was within:30 days or less\n\nI have symptoms\nUse an antigen test. Repeat negative tests following FDA recommendations.\nI do not have symptoms\nTesting is not recommended to detect a new infection.\nMy first positive test result was within:31-90 days\n\nI have symptoms",
+          "title": "COVID-19 Testing: What You Need to Know | CDC",
+          "url": "https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/testing.html",
+          "score": 17.898863,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1722995869
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "covid testing result wait time"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The time it takes to receive COVID-19 test results can vary depending on the type of test and the location of the testing site. According to the document provided by the CDC, PCR tests can take up to 3 days to return results, while antigen tests typically provide results in 15-30 minutes. However, the document also notes that antigen tests may be less likely to detect the virus than PCR tests, especially when symptoms are not present.\nIn the context of the Senator Scott Wiener's document, testing results generally take two to 12 days, as it takes time to ship the samples and for labs to process the tests. However, some facilities with their own labs or nearby facilities may provide results in as little as 24 hours.\nIt is recommended to consult with your healthcare provider for more specifics regarding the testing location you chose."
+    },
+    {
+      "speaker": "user",
+      "text": "I am not sure what to do if my covid test result is positive",
+      "timestamp": 1722996195,
+      "enrichments": {
+        "Question Type": [
+          "Non-Question"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "A positive COVID-19 test means the virus was detected and you have or recently had an infection. Seek health care right away for treatment if you have risk factors for severe illness. Treatment needs to be started within a few days of when your symptoms begin. A positive at-\u2060home test result means that the test found the virus, and you very likely have COVID-\u206019.If you test positive, follow the latest CDC guidance for isolation. Treatments for COVID-19 are now widely available. If you have any signs of emergency, call 911 or get help right away.",
+      "timestamp": 1722996223,
+      "contexts": [
+        {
+          "document_id": "f6341a832b8dbe3f-4606-6623",
+          "text": "COVID-19 Testing: What You Need to Know | CDC\nTalk to a doctor or healthcare provider about other testing options that may be available to you.\nIf you are a person with a disability, the Disability Information and Access Line can help you access a test or find a test location.\n\nTop of PageInterpreting Your Results\nIf Your COVID-19 Test IsPositiveA positive COVID-19 test means the virus was detected and you have or recently had an infection.\n\nTake steps to prevent spreading\u00a0COVID-19.\nMonitor your symptoms. If you have any emergency warning signs, seek emergency care immediately.\nSeek health care right away for treatment if you have risk factors for severe illness. Treatment may be an option to make your symptoms less severe and shorten the time you are sick. Treatment needs to be started within a few days of when your symptoms begin.\n\nIf Your COVID-19 Test IsNegativeA negative COVID-19 test means the test did not detect the virus, but this\u00a0doesn\u2019t rule out that you could have an infection. If you used an antigen test, follow FDA recommendations for repeat testing.\n\nIf you have symptoms:\n\nYou may have COVID-19 but tested before the virus was detectable.\nYou may have another viral infection or illness.\nTake actions to help protect yourself and others from health risks caused by respiratory viruses.\nContact a healthcare provider if you have any questions about your test result.\n\n Testing Resources for Healthcare Professionals: Healthcare Workers |\u00a0Labs\n\nArchived ContentSearch for and find historical COVID-19 pages and files. Please note the content on these pages and files is no longer being updated and may be out of date.\n\nVisit archive.cdc.gov for a historical snapshot of the COVID-19 website, capturing the end of the Federal Public Health Emergency on June 28, 2023.\nVisit the dynamic COVID-19 collection\u00a0to search the COVID-19 website as far back as July 30, 2021.\n\n\r\n\tLast Updated May 2, 2024\tSource: \tNational Center for Immunization and Respiratory Diseases (NCIRD), Division of Viral Diseases\n\nFacebook\nTwitter\nLinkedIn\nSyndicate",
+          "title": "COVID-19 Testing: What You Need to Know | CDC",
+          "url": "https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/testing.html",
+          "score": 14.987487,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1722996651
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "covid test positive"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "8b41cffc6a0a1320-7815-9278",
+          "text": "COVID-19 Testing At VA | Veterans Affairs\nTo get reminders for\u00a0when to contact your care team or a nurse advice line, you can use our\u00a0Annie text messaging service.\nSubscribe to the Annie text messaging service\n\nIf you have any signs of emergency, call 911 or get help right away.\u00a0Signs of emergency include symptoms like trouble breathing or continued pain or pressure in your chest.\nGet the latest COVID-19 symptom information on the CDC website\n\n If your lab test results are negative \n \n\nThis means you didn\u2019t have an active infection at the time of testing. It doesn\u2019t mean you haven\u2019t been infected since that time or won\u2019t become infected in the future.\nContinue to follow safe practices.\u00a0These include practices\u00a0like wearing a mask, physical distancing, and washing your hands often.\u00a0\nNote:\u00a0This test\u00a0also\u00a0won\u2019t tell you if you were infected with the coronavirus in the past. That\u2019s a different type of test called an antibody test.\nLearn more about COVID-19 tests on the FDA website\u00a0\n\n Request a lab test by secure message\n\nTags\n\n All Veterans\n \n\nThank you for your feedback.\n\nRelated information\n\nVA benefits\n\n Health care\n \n\nApply for VA health care, find out how to access services, and manage your health and benefits online.\n\nNeed more help?\n\nHealth benefits hotline: \n\n 877-222-VETS (8387)\n \n\nMy HealtheVet help desk: \n \n\neBenefits technical support: \n \n\nMyVA411 main information line: \n \n\nTelecommunications Relay Services (using TTY) \n\n TTY: 711\n \n\nLast updated: October 13, 2023\n\nFeedback",
+          "title": "COVID-19 Testing At VA | Veterans Affairs",
+          "url": "https://www.va.gov/resources/covid-19-testing-at-va",
+          "score": 14.493037,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1722996653
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "covid test positive"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "fe793848d1ffc486-2878-4822",
+          "text": "COVID-19 Testing | COVID.gov\nIf you think your COVID-19 test may have expired, check the FDA's website for information on\u00a0authorized at-home test diagnostic tests and expiration dates.If you begin having COVID-\u206019 symptoms like fever, sore throat, runny nose, or loss of taste or smell, orAt least 5 days after you come into close contact with someone with COVID-\u206019, orWhen you\u2019re going to gather with a group of people, especially those who are at risk of severe disease or may not be\u00a0up to date on their COVID-\u206019 vaccines\n\n \n\nWhat if you test\u00a0Positive?A\u00a0positive\u00a0at-\u2060home test result means that the test found the virus, and you very likely have COVID-\u206019.If you test positive, follow the\u00a0latest CDC guidance for isolation.Treatments for COVID-19 are now widely available. If you test positive and are at high risk for severe COVID-19 (age 50 and over or you have a weakened immune system or\u00a0other health conditions), talk to a doctor as soon as possible about\u00a0available treatment options.The Test-to-Treat program is one easy way to get treatment. Test-to-Treat locations will give you a test and treatment.\u00a0Find a Test-to-Treat location near youWhat if you test\u00a0Negative?A\u00a0negative\u00a0at-\u2060\u2060home test result means that the test did not find the virus, and you may have a lower risk of spreading COVID-\u2060\u206019 to others. Check your test\u2019s instructions for specific next steps. If you test negative, you should test again 48 hours after your first test. Take a third test, 48 hours after the second, if the second test was negative and you don\u2019t have symptomsIf you test negative, follow the\u00a0latest CDC guidance for self-\u2060testing.\n\nContent last reviewed: March 11, 2024\nContent last reviewed: March 11, 2024\nPrintable View\n\nBack to top\n\ncovid.gov\nAn official website of the U.S. Department of Health and Human Services\n\nFederal Resources\n\nCOVID.gov\n\nCDC.gov\n\nUSA.gov\n\nHealthCare.gov\n\nUSAspending.gov\n\nDOL.gov\n\nWhiteHouse.gov\n\n HHS Headquarters\n \n\n200 Independence Avenue, S.W.",
+          "title": "COVID-19 Testing | COVID.gov",
+          "url": "https://www.covidtests.gov/tools-and-resources/resources",
+          "score": 14.38975,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1722996656
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "covid test positive"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "If your COVID-1"
+    },
+    {
+      "speaker": "user",
+      "text": "can you clarify the treatments here? Do I take medicine? ",
+      "timestamp": 1722997263,
+      "enrichments": {
+        "Question Type": [
+          "Composite"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "There is no cure for COVID-19 at this time. But there are treatments for COVID-19. Talk to your health care provider before taking any medications to prevent or treat COVID-19. You can also resources to plan meals on a budget, cook at home safely, and find food assistance during the coronavirus disease (COVID-19) pandemic.",
+      "timestamp": 1722997269,
+      "contexts": [
+        {
+          "document_id": "712a92e8d5dc6ee6-7459-9503",
+          "text": "Coronavirus FAQs: What Veterans Need To Know | Veterans Affairs\nThere is no cure for COVID-19 at this time. There are treatments for COVID-19, but the risk of severe illness and death are still high in certain groups of people.\u00a0\nTalk to your health care provider before taking any medications to prevent or treat COVID-19.\u00a0\nIf you have questions about a treatment, call or send a secure message to your VA provider.\nLearn more about COVID-19 treatments on the CDC website\nGet answers to COVID-19 treatment questions on the FDA website\n\nAt VA, we've completed thousands of research studies with the goal of improving the health and well-being of Veterans.\u00a0Because of this research history, we have the long-term data to best\u00a0understand how illnesses, vaccines, and treatments affect Veterans.\n\nWe're now working to find ways to prevent and treat COVID-19\u00a0for Veterans and others.\u00a0We have a lot to learn. We can\u2019t learn without doing research. And we can\u2019t do research without people who volunteer to participate in research studies.\u00a0\n\nAs a research study participant, you can help us:\n\nBetter understand how COVID-19 affects different people\nFind ways to prevent and treat COVID-19 for you, your family, and your community\nMake sure vaccines and treatments are safe and effective in people of all ages, genders, races, and ethnicities\n\nAs a research participant, you may also:\n\nLearn more about your own health\nReceive more regular health check-ins as part of your study visits\nGet early access to a new vaccine or treatment\n\nLearn more about volunteering for coronavirus research at VA\n\nHealth care, appointments, and more\n\nAppointments and health protection levels\n\n What are VA health facilities\u2019 guidelines on masks? \n \n\nWhen you come to a VA health facility, your health and safety are our priorities.\nAll facilities require masks in high-risk areas like these:\u00a0\n\nChemotherapy units\nDialysis units\nEmergency departments and urgent care\u00a0\nPost-transplant units\u00a0\n\nMasks are also required for people who are sick with COVID-19 or other viral respiratory illnesses.\u00a0\nYou can choose to wear a mask at any time.",
+          "title": "Coronavirus FAQs: What Veterans Need To Know | Veterans Affairs",
+          "url": "https://www.va.gov/coronavirus-veteran-frequently-asked-questions/#debt-copays-appeals-and-other-",
+          "score": 14.497052,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1722997702
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "covid treatment"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "57a472c572a3dfd2-563-2609",
+          "text": "Coronavirus Pandemic and Food | Nutrition.gov\nHomeAbout UsTopics ASCENDBasic NutritionEating for Exercise and SportsEating VegetarianHealthy EatingMyPlate ResourcesOnline ToolsFood and Nutrition Apps and BlogsPrintable Materials and HandoutsWater, Hydration, and HealthCoronavirus Pandemic and FoodDiet and Health ConditionsAIDS/HIVDementia and Alzheimer'sCancerDiabetesDigestive DisordersEating DisordersFood Allergies and IntolerancesHeart HealthHigh Blood PressureKidney DiseaseOsteoporosisOverweight and ObesityDietary SupplementsDietary Supplements for AthletesHerbal SupplementsSafety and Health ClaimsVitamin and Mineral SupplementsExercise and FitnessExercise Examples and VideosTools for Getting and Staying ActiveFood SafetyFood PoisoningFood Safety On the GoSafe Food PreparationSafe Food StorageFood Security and AccessFood Assistance ProgramsNutrition on a BudgetHealthy Living and WeightBody ImageStrategies for SuccessInterested in Losing Weight?Weight Management for YouthWhat You Should Know About Popular DietsNutrition by Life StageInfantsToddlersChildrenFood and NutritionKids' CornerKids in the KitchenTeensFor Tweens and TeensFor Parents, Caregivers, and TeachersAdultsMenWomenOlder AdultsPregnancyBreastfeedingShopping, Cooking and Meal PlanningCulture and FoodEmergency Food SuppliesFarmers MarketsFood LabelsFood Shopping and Meal PlanningMeal Prep and Cooking TipsRecipe CollectionSustainable EatingWhat's In FoodCarbohydratesFatsFiberFood Additives and CompoundsPhytonutrientsProteinsSalt and SodiumVitamins and MineralsAll TopicsRecipesUSDA - REEExpert Q&AContact Us \n\n \n\n \n\nHome\n\nTopics\n\n Coronavirus Pandemic and Food\n \n\nCoronavirus Pandemic and Food\n\nUse these resources to plan meals on a budget, cook at home safely, and find food assistance\u00a0during the coronavirus disease (COVID-19) pandemic. These resources are being shared for information purposes only.\n\nFind Meals for Kids When Schools are Closed\n\nUSDA, Food and Nutrition Service \nUse this interactive map to find sites providing free meals to students during COVID-19 related school building closures.",
+          "title": "Coronavirus Pandemic and Food | Nutrition.gov",
+          "url": "https://www.nutrition.gov/topics/coronavirus-pandemic-and-food",
+          "score": 14.727447,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1722997704
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "what to eat for covid"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "2251c4827c59360d-1567-3644",
+          "text": "About COVID-19 Vaccines | Veterans Affairs\nThe COVID-19 vaccines are safe. Scientists studied all the original Food and Drug Administration (FDA) authorized vaccines in at least 3 phases of clinical trials to ensure they are safe and effective. They continue to study the updated vaccines. Hundreds of millions of people have safely received COVID-19 vaccines in the U.S.\nThere is no cure for COVID-19 at this time. There are treatments for COVID-19. But the risk of severe illness and death are still high in certain groups of people.\u00a0Talk to your health care provider before taking any medications to prevent or treat COVID-19.\u00a0\nLearn more about COVID-19 treatments on the CDC website\nSome people report long-term effects of COVID-19.\u00a0Most people get better in weeks. But some people have effects that last for a longer time. These effects may include symptoms like\u00a0dizziness, depression, or feeling very tired. They may also include effects on vital organs like your heart or lungs. The effects can happen even after a mild illness.\nLearn more about long-term COVID-19 effects on the CDC website\nWhen you\u2019re up to date on your COVID-19 vaccines, you can do more.\u00a0This may include visiting with family and friends or going to different activities. Staying up to date with your vaccines reduces your risk of severe illness\u00a0or death from COVID-19.\u00a0\nYou can get a free COVID-19 vaccine\u2014even if you don\u2019t have health insurance.\nFind out how to get a COVID-19 vaccine at VA\nFind COVID-19 vaccines near you on the CDC website\n\nVaccine effectiveness\nScientists studied the original FDA authorized COVID-19 vaccines in tens of thousands of people in clinical trials. The trials included people of all ages, genders, races, and ethnicities. Scientists continue to monitor the effectiveness of the vaccines over time.\u00a0\u00a0\nResults show that the vaccines work well in these ways:\n\nThe vaccines help protect you from getting COVID-19. Vaccines help train your body\u2019s natural immune system to recognize and fight a specific disease by stimulating a response to the virus that causes that disease. Over time, this protection decreases.",
+          "title": "About COVID-19 Vaccines | Veterans Affairs",
+          "url": "https://www.va.gov/health-care/covid-19-vaccine/about-covid-19-vaccine",
+          "score": 13.051346,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1722997707
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "covid drug"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "\nThere are various treatments for COVID-19, but it's important to consult with your healthcare provider before taking any medication to prevent or treat COVID-19. The most suitable treatment for you would depend on your medical history and current health status. Some treatments may involve taking antiviral medications, using corticosteroids to reduce inflammation, or receiving supportive care to manage symptoms. Clinical trials are also ongoing to find new and more effective ways to prevent and treat COVID-19.\nIt's crucial to stay informed about the latest guidance from the Centers for Disease Control and Prevention (CDC) and the Food and Drug Administration (FDA) regarding COVID-19 treatments. You can find more information on their respective websites:\n* Learn more about COVID-19 treatments on the CDC website: <https://www.cdc.gov/coronavirus/2019-ncov/hcp/clinical-care/covid19-treatment-plans.html>\n* Get answers to COVID-19 treatment questions on the FDA website: <https://www.fda.gov/emergency-preparedness-and-response/mcm-legal-regulatory-and-policy-framework/emergency-use-authorization#covid19 treatments>"
+    },
+    {
+      "speaker": "user",
+      "text": "how did I get covid tho...",
+      "timestamp": 1722997979,
+      "enrichments": {
+        "Question Type": [
+          "Opinion"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Unfortunately I am not able to give you an exact answer to how you got infected. However, the droplets that contain the  virus are released when someone with COVID-19 sneezes, coughs, or talks. People can then become infected with COVID-19 from touching hands, objects or surfaces with droplets and then touching their eyes, nose, or mouth. ",
+      "timestamp": 1722997984,
+      "contexts": [
+        {
+          "document_id": "00e9adb15f35b625-3085-4945",
+          "text": "COVID-19 Overview and Infection Prevention and Control Priorities in non-U.S. Healthcare Settings | CDC\nCoronaviruses are a large family of viruses that can cause illness in animals or humans. In humans there are several known coronaviruses that cause respiratory infections. These coronaviruses range from the common cold to more severe diseases such as severe acute respiratory syndrome (SARS), Middle East respiratory syndrome (MERS), and COVID-19.\nTop of PageCoronavirus Disease 2019:\nEmergence\nCOVID-19 was identified in Wuhan, China in December 2019. COVID-19 is caused by the virus severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2), a new virus in humans causing respiratory illness which can be spread from person-to-person. Early in the outbreak, many patients were reported to have a link to a large seafood and live animal market; however, later cases with no link to the market confirmed person-to-person transmission of the disease. Additionally, travel-related exportation of cases occurred.\nTransmission\nThere are three main ways that COVID-19 can spread:\n\nBy breathing in air carrying droplets or aerosol particles that contain the SARS-CoV-2 virus when close to an infected person or in poorly ventilated spaces with infected persons\nBy having droplets and particles that contain the SARS-CoV-2 virus land on the eyes, nose, or mouth \u2013 especially through splashes and sprays like a cough or sneeze\nBy touching the eyes, nose, or mouth with hands that have the SARS-CoV-2 virus particles on them\n\nThe droplets that contain the SARS-CoV-2 virus are released when someone with COVID-19 sneezes, coughs, or talks. Infectious droplets can land in the mouths or noses of people who are nearby or possibly be inhaled into the lungs. A physical distance of at least 1 meter (3 ft) between persons is recommended by the WHO to avoid infection,1 whereas CDC recommends maintaining a physical distance of at least 1.8 meters (6ft) between persons.",
+          "title": "COVID-19 Overview and Infection Prevention and Control Priorities in non-U.S. Healthcare Settings | CDC",
+          "url": "https://www.cdc.gov/coronavirus/2019-ncov/hcp/non-us-settings/overview/index.html",
+          "score": 19.752256,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1722998457
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "how to get covid"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "00e9adb15f35b625-4505-6636",
+          "text": "COVID-19 Overview and Infection Prevention and Control Priorities in non-U.S. Healthcare Settings | CDC\nThe droplets that contain the SARS-CoV-2 virus are released when someone with COVID-19 sneezes, coughs, or talks. Infectious droplets can land in the mouths or noses of people who are nearby or possibly be inhaled into the lungs. A physical distance of at least 1 meter (3 ft) between persons is recommended by the WHO to avoid infection,1 whereas CDC recommends maintaining a physical distance of at least 1.8 meters (6ft) between persons. Respiratory droplets can land on hands, objects, or surfaces around the person when they cough or talk, and people can then become infected with COVID-19 from touching hands, objects or surfaces with droplets and then touching their eyes, nose, or mouth. Additionally, transmission can occur from those with mild symptoms or from those who do not feel ill.\nThere are certain circumstances that can increase the risk of infection for COVID-19 such as poorly ventilated space. In indoor spaces with poor ventilation, the concentration of virus particles is often higher than outdoors.2,3 Other factors that are associated with increased COVID-19 risk include prolonged exposure to those infected with COVID-19, close contact with infected persons, and any other activity that leads to exposure to a greater amount of respiratory droplets and particles.\nSymptoms\nA wide range of symptoms for COVID-19 have been reported.4 These symptoms include:\n\nFever or chills\nCough\nMuscle or body aches\nAnorexia\nSore throat\nNasal congestion or runny nose\nHeadache\nDiarrhea\nNausea\nShortness of breath or difficulty breathing\nLoss of smell or taste\n\nThe estimated incubation period is between 2 and 14 days with a median of 5 days. It is important to note that some people become infected and do not develop any symptoms or feel ill.\nPeople at Higher Risk for Severe Illness\nCOVID-19 is a relatively new disease; therefore, additional risk factors for severe COVID-19 may continue to be identified. In some cases, people who get COVID-19 can develop severe complications, including difficulty breathing, causing a need for hospitalization and intensive care. 5 These severe complications often lead to death.",
+          "title": "COVID-19 Overview and Infection Prevention and Control Priorities in non-U.S. Healthcare Settings | CDC",
+          "url": "https://www.cdc.gov/coronavirus/2019-ncov/hcp/non-us-settings/overview/index.html",
+          "score": 12.031065,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1722998460
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "people sneeze"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "You might have gotten COVID-1"
+    },
+    {
+      "speaker": "user",
+      "text": "how can I prevent myself and family from covid?",
+      "timestamp": 1722998638,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Vaccination is the best protection. The CDC recommends that you get vaccinated even if you have already had COVID-19. You can also take booster shot.",
+      "timestamp": 1722998648,
+      "contexts": [
+        {
+          "document_id": "97819f62800639ce-6680-8757",
+          "text": "Frequently Asked Questions | Department of Health\nThe CDC recommends that you get vaccinated even if you have already had COVID-19, because you can\u00a0be infected\u00a0more than once. While you may have some short-term antibody protection after recovering from COVID-19, we don\u2019t know how long this protection\u00a0will last.\u00a0Vaccination is the best protection, and it is safe. People who get COVID-19 may have serious illnesses, and some have debilitating symptoms that persist for months.\u00a0\u00a0\n\n Development\n \n \n \n\nWhat is in the COVID-19\u00a0vaccines?The ingredients in\u00a0Pfizer\u2019s COVID-19\u00a0vaccine\u00a0are listed\u00a0on page 2\u00a0here.The ingredients in\u00a0Moderna\u2019s COVID-19 vaccine\u00a0are listed\u00a0on page 2 here.Did the clinical trials include people with comorbidities including diabetes or hypertension?Yes. Clinical trials for both vaccines included participants identified as having at least one condition that put them at increased risk of severe complications of COVID-19 including:Chronic lung disease (e.g., emphysema and chronic bronchitis, idiopathic pulmonary fibrosis, and cystic fibrosis) or moderate to severe asthmaSignificant cardiac disease (e.g., heart failure, coronary artery disease, congenital heart disease, cardiomyopathies, and pulmonary hypertension)Obesity (body mass index \u2265 30 kg/m2)Diabetes (Type 1, Type 2 or gestational)Liver diseaseHuman Immunodeficiency Virus (HIV) infection (not included in the efficacy evaluation)Do COVID-19 vaccines contain animal-based\u00a0ingredients?\u00a0No. The Moderna, Pfizer/BioNTech and Johnson & Johnson/Janssen COVID-19 vaccines contain no human or animal products, preservatives or adjuvants and utilize no ingredients of human or animal origin.\n\n Availability\n \n \n \n\nWhen should I get the vaccine?\u00a0COVID-19 vaccines are updated periodically to better protect against new strains of the virus. For more information on the most up- to- date vaccine formulation and vaccination schedule, visit the CDC website.I'm homebound. How can I get the vaccine?COVID vaccines are widely available at pharmacies, local health departments, clinics, Federally Qualified Health Centers and health care provider offices.",
+          "title": "Frequently Asked Questions | Department of Health",
+          "url": "https://coronavirus.health.ny.gov/frequently-asked-questions-0",
+          "score": 24.061602,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1722999138
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "should I covid vaccine?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "3464686257d18d56-1116-3057",
+          "text": "About Vaccine for COVID-19 | Sierra County, CA - Official Website\nThe Western States Scientific Safety Review Workgroup released a statement affirming these updates.Second Booster Shot for Some Individuals\u00a0Based on\u00a0expanded FDA EUAs,\u00a0the following individuals may receive a second booster dose at least four months after their first booster dose:A first booster dose for children aged 5-11People 12 years and older who are moderately or severely immunocompromisedPeople 50 years and older who are not moderately or severely immunocompromised\u00a0People 18-49 years old who are not moderately or severely immunocompromised and who received Janssen COVID-19 vaccine as both their primary series dose and booster dose\n\n \n \n\nChoosing the COVID-19 Vaccine that is Right for YouCOVID-19 Booster VaccinesCOVID-19 Vaccine Booster Questions & AnswersGet the Facts on COVID-19 Vaccines, Boosters , and Additional DosesFACT SHEET: Pfizer COVID-19 Vaccine (Comirnaty)Benefits and Risks (PDF)FACT SHEET: Johnson & Johnson COVID-19 VaccineBenefits and RiskFACT SHEET: Moderna COVID-19 Vaccine (Spikevax)Benefits and Risks\n\n \n \n\nCOVID-19 Vaccines While Pregnant or BreastfeedingCOVID-19 vaccination is recommended for all people aged 5 years and older, including people who are pregnant, breastfeeding, trying to get pregnant now, or might become pregnant in the future. Pregnant and recently pregnant people are more likely to get severely ill with COVID-19 compared with non-pregnant people. Getting a COVID-19 vaccine can protect you from severe illness from COVID-19. What You Need to Know, Vaccination During Pregnancy Guidance (ca.gov).\u00a0\n\n \n \n\nWhere do I report a reaction to a vaccination?Report an adverse event to VAERS -Vaccine Adverse Event Reporting System. VAERS is a passive reporting system, meaning it relies on individuals to send in reports of their experiences. Anyone can submit a report to VAERS, including parents and patients.\n\n \n \n \n\n \n\nContact Us\n\nDeborah Perkins, RNInfection Prevention SpecialistDr.",
+          "title": "About Vaccine for COVID-19 | Sierra County, CA - Official Website",
+          "url": "https://www.sierracounty.ca.gov/616/About-Vaccine-for-COVID-19",
+          "score": 22.079323,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1722999140
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "should I covid vaccine?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "To prevent yourself and your family from getting COVID-19, follow these guidelines from the CDC:\n1. Get vaccinated as soon as possible if you are eligible. Vaccines are the most effective way to prevent COVID-19.\n2. Wear masks that cover your nose and mouth in public settings, especially when you are unable to maintain a safe distance from others.\n3. Practice social distancing by staying at least 6 feet away from people who do not live in your household.\n4. Avoid close contact with people who are sick.\n5. Wash your hands often with soap and water for at least 20 seconds, or use hand sanitizer with at least 60% alcohol if soap and water are not available.\n6. Avoid touching your eyes, nose, and mouth with unwashed hands.\n7. Clean and disinfect frequently touched surfaces daily.\n8. Stay home if you are feeling sick, except to get medical care.\n9. Cover your mouth and nose with a tissue or your sleeve when coughing or sneezing.\n10. Monitor local guidance on travel and gatherings.\nRemember, these measures are most effective when used together."
+    },
+    {
+      "speaker": "user",
+      "text": "Is the covid vaccine safe? any side-effect?",
+      "timestamp": 1722999454,
+      "enrichments": {
+        "Question Type": [
+          "Composite",
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes,\u00a0COVID-19 vaccines\u00a0have been thoroughly tested for safety and efficacy. They have undergone at least three phases of clinical trials. The vaccines have been proven to help protect against\u00a0COVID-19 and\u00a0reduce the risk of severe illness and death. Like any vaccine or medication,\u00a0the COVID-19 vaccines\u00a0can cause side effects, although most are mild and short-lived. Common side effects include\u00a0a sore arm where\u00a0the shot was given, headache, chills, fever, and Tiredness. These side effects usually go away on their own within a few days. Also,\u00a0people can have allergic reactions to any medication or biological product, such as a vaccine.",
+      "timestamp": 1722999458,
+      "contexts": [
+        {
+          "document_id": "97819f62800639ce-6680-8757",
+          "text": "Frequently Asked Questions | Department of Health\nThe CDC recommends that you get vaccinated even if you have already had COVID-19, because you can\u00a0be infected\u00a0more than once. While you may have some short-term antibody protection after recovering from COVID-19, we don\u2019t know how long this protection\u00a0will last.\u00a0Vaccination is the best protection, and it is safe. People who get COVID-19 may have serious illnesses, and some have debilitating symptoms that persist for months.\u00a0\u00a0\n\n Development\n \n \n \n\nWhat is in the COVID-19\u00a0vaccines?The ingredients in\u00a0Pfizer\u2019s COVID-19\u00a0vaccine\u00a0are listed\u00a0on page 2\u00a0here.The ingredients in\u00a0Moderna\u2019s COVID-19 vaccine\u00a0are listed\u00a0on page 2 here.Did the clinical trials include people with comorbidities including diabetes or hypertension?Yes. Clinical trials for both vaccines included participants identified as having at least one condition that put them at increased risk of severe complications of COVID-19 including:Chronic lung disease (e.g., emphysema and chronic bronchitis, idiopathic pulmonary fibrosis, and cystic fibrosis) or moderate to severe asthmaSignificant cardiac disease (e.g., heart failure, coronary artery disease, congenital heart disease, cardiomyopathies, and pulmonary hypertension)Obesity (body mass index \u2265 30 kg/m2)Diabetes (Type 1, Type 2 or gestational)Liver diseaseHuman Immunodeficiency Virus (HIV) infection (not included in the efficacy evaluation)Do COVID-19 vaccines contain animal-based\u00a0ingredients?\u00a0No. The Moderna, Pfizer/BioNTech and Johnson & Johnson/Janssen COVID-19 vaccines contain no human or animal products, preservatives or adjuvants and utilize no ingredients of human or animal origin.\n\n Availability\n \n \n \n\nWhen should I get the vaccine?\u00a0COVID-19 vaccines are updated periodically to better protect against new strains of the virus. For more information on the most up- to- date vaccine formulation and vaccination schedule, visit the CDC website.I'm homebound. How can I get the vaccine?COVID vaccines are widely available at pharmacies, local health departments, clinics, Federally Qualified Health Centers and health care provider offices.",
+          "title": "Frequently Asked Questions | Department of Health",
+          "url": "https://coronavirus.health.ny.gov/frequently-asked-questions-0",
+          "score": 17.284317,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1722999797
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "covid vaccine"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "808d567bf79dd929-2-1890",
+          "text": "Coronavirus Disease 2019 (COVID-19) | CDC\nCoronavirus Disease 2019 (COVID-19) | CDC\n \n \n\n \n\n \n\nSkip directly to site content\nSkip directly to search\n\nEspa\u00c3\u00b1ol | \nOther Languages\n\nAn official website of the United States government Here's how you know \n\nOfficial websites use .gov\nA .gov website belongs to an official government organization in the United States.\n\nSecure .gov websites use HTTPS\nA lock ( ) or https:// means you've safely connected to the .gov website. Share sensitive information only on official, secure websites.\n\n \n\nCenters for Disease Control and Prevention. CDC twenty four seven. Saving Lives, Protecting People\n\n\u00c3\u0097\n\nSubmit\n\nHOME\n COVID-19\n\n \n\n \n\n \n\nMinus\n\nRelated Pages\n\nCOVID-19 Vaccines\nCOVID-19 vaccines are safe, effective, and free. Everyone 6 months and older can get an updated COVID-19 vaccine. Learn more.\n\nHighlights\n\nHow to Protect Yourself and Others \nPeople with Certain Medical Conditions\u00a0\nVentilation in Buildings\n\nCOVID-19 Vaccines\nCOVID-19 vaccines are safe, effective, and free. Everyone 6 months and older can get an updated COVID-19 vaccine. Learn more.\n\nHighlights\n\nHow to Protect Yourself and Others \nPeople with Certain Medical Conditions\u00a0\nVentilation in Buildings\n\nSymptoms of COVID-19People may experience sudden fever or chills, cough, shortness of breath, loss of taste or smell, and other symptoms.\n\nTesting for COVID-19Use viral tests like PCR or rapid at-home tests to determine if you are sick with COVID-19. Learn how to get tested.\n\nTreatments and MedicationsAntiviral medications are available to treat mild to moderate COVID-19. Start treatment as soon as you develop symptoms.\n\nGet the Latest on COVID-19, Flu, and RSVLearn more about all three of these respiratory viruses, who is most at risk, and how they are affecting your state right now. You can use some of the same strategies to protect yourself from all three viruses.\nGet the Latest on COVID-19, Flu, and RSV",
+          "title": "Coronavirus Disease 2019 (COVID-19) | CDC",
+          "url": "https://www.cdc.gov/coronavirus/2019-ncov/",
+          "score": 16.591356,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1722999819
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "covid vaccine"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "2251c4827c59360d-1567-3644",
+          "text": "About COVID-19 Vaccines | Veterans Affairs\nThe COVID-19 vaccines are safe. Scientists studied all the original Food and Drug Administration (FDA) authorized vaccines in at least 3 phases of clinical trials to ensure they are safe and effective. They continue to study the updated vaccines. Hundreds of millions of people have safely received COVID-19 vaccines in the U.S.\nThere is no cure for COVID-19 at this time. There are treatments for COVID-19. But the risk of severe illness and death are still high in certain groups of people.\u00a0Talk to your health care provider before taking any medications to prevent or treat COVID-19.\u00a0\nLearn more about COVID-19 treatments on the CDC website\nSome people report long-term effects of COVID-19.\u00a0Most people get better in weeks. But some people have effects that last for a longer time. These effects may include symptoms like\u00a0dizziness, depression, or feeling very tired. They may also include effects on vital organs like your heart or lungs. The effects can happen even after a mild illness.\nLearn more about long-term COVID-19 effects on the CDC website\nWhen you\u2019re up to date on your COVID-19 vaccines, you can do more.\u00a0This may include visiting with family and friends or going to different activities. Staying up to date with your vaccines reduces your risk of severe illness\u00a0or death from COVID-19.\u00a0\nYou can get a free COVID-19 vaccine\u2014even if you don\u2019t have health insurance.\nFind out how to get a COVID-19 vaccine at VA\nFind COVID-19 vaccines near you on the CDC website\n\nVaccine effectiveness\nScientists studied the original FDA authorized COVID-19 vaccines in tens of thousands of people in clinical trials. The trials included people of all ages, genders, races, and ethnicities. Scientists continue to monitor the effectiveness of the vaccines over time.\u00a0\u00a0\nResults show that the vaccines work well in these ways:\n\nThe vaccines help protect you from getting COVID-19. Vaccines help train your body\u2019s natural immune system to recognize and fight a specific disease by stimulating a response to the virus that causes that disease. Over time, this protection decreases.",
+          "title": "About COVID-19 Vaccines | Veterans Affairs",
+          "url": "https://www.va.gov/health-care/covid-19-vaccine/about-covid-19-vaccine",
+          "score": 16.53664,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1722999821
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "covid vaccine"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "2251c4827c59360d-14377-15067",
+          "text": "About COVID-19 Vaccines | Veterans Affairs\nYour body then makes antibodies in response. Vaccines are a safer way for your body to learn to make antibodies to some of the more dangerous viruses, like COVID-19. But vaccines use the same natural process of your immune system, which is already activated often by germs and viruses.\u00a0\nWe know that COVID-19 vaccines work well to prevent severe illness and death from COVID-19.\u00a0Scientists continue to study the effectiveness of the COVID-19 vaccines as new variants appear.\nAs the vaccine science evolves, the CDC may recommend additional updated vaccines. That shouldn\u2019t prevent you from getting a dose of COVID-19 vaccine now if you\u2019re eligible.\n\nLast updated: January 24, 2024\n\nFeedback",
+          "title": "About COVID-19 Vaccines | Veterans Affairs",
+          "url": "https://www.va.gov/health-care/covid-19-vaccine/about-covid-19-vaccine",
+          "score": 16.364939,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1722999824
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "covid vaccine"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "2251c4827c59360d-12713-14851",
+          "text": "About COVID-19 Vaccines | Veterans Affairs\nScientists have been studying vaccines for more than 100 years. Scientists have been studying the technology for mRNA vaccines for more than 20 years. And the National Institutes of Health (NIH) was working on creating a coronavirus vaccine even before the COVID-19 pandemic.\nThey got the funding they needed to work quickly.\u00a0The COVID-19 pandemic was a public health emergency. So the U.S. government invested millions of dollars to help study and test vaccines.\nThey used a faster review process with all the same steps.\u00a0The FDA authorized the original COVID-19 vaccines under their Emergency Use Authorization (EUA). An EUA follows the same steps that full-term clinical trials take. This includes testing each vaccine on thousands of human participants. The only difference is that an EUA speeds up the FDA\u2019s review process. This helps get critical vaccines to people faster while still making sure the vaccines are safe and that they work well.\nThey involved many experts in reviewing data.\u00a0Independent groups also reviewed trial results to make sure the vaccines are safe. These include groups like the National Medical Association, the leading professional society of Black doctors.\n\nThe FDA continues to monitor COVID-19 vaccines even after they\u2019re approved.\nPlay this FDA video to learn more about the EUA process (YouTube)\n\n It\u2019s safe to get several vaccines in the same year \n \n\nVaccines have pieces of germs or viruses, killed germs, or weakened germs in them.\nThe goal of a vaccine is to teach your immune system to make antibodies to fight off the real virus if you\u2019re exposed to it. In the natural state, your body is exposed to thousands of germs. Your body then makes antibodies in response. Vaccines are a safer way for your body to learn to make antibodies to some of the more dangerous viruses, like COVID-19. But vaccines use the same natural process of your immune system, which is already activated often by germs and viruses.\u00a0\nWe know that COVID-19 vaccines work well to prevent severe illness and death from COVID-19.\u00a0Scientists continue to study the effectiveness of the COVID-19 vaccines as new variants appear.",
+          "title": "About COVID-19 Vaccines | Veterans Affairs",
+          "url": "https://www.va.gov/health-care/covid-19-vaccine/about-covid-19-vaccine",
+          "score": 16.361887,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1722999878
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "covid vaccine"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "97819f62800639ce-3299-5414",
+          "text": "Frequently Asked Questions | Department of Health\nIs it safe to get a COVID-19 vaccine if I have an underlying medical condition?Yes. COVID-19 vaccination is especially important for people with underlying health problems like heart disease, lung disease, diabetes, and obesity. People with these conditions are more likely to get very sick from COVID-19. Please consult with your health care provider if you have specific questions about the COVID vaccine and your health.\u00a0If I already had COVID-19 and recovered, do I still need to get vaccinated?\u00a0Yes. CDC recommends that you get vaccinated even if you have already had COVID-19, because you can catch it more than once. While you may have some short-term antibody protection after recovering from COVID-19, we don\u2019t know how long this protection will last.\u00a0Will the vaccine make me sick or will I have side effects?You may not notice any changes in how you feel after getting the shot. But it\u2019s also possible to feel a little \u201cunder the weather.\u201d This can happen after\u00a0any\u00a0vaccine. It is the body\u2019s immune response to getting vaccinated and a sign that the vaccine is starting to work.After the COVID-19 vaccine, you may have:A sore arm where you got the shotA headacheChillsFeverTirednessOver the counter pain relievers and fever reducers may help.You should feel better in a day or two. If you still don't feel well after two or three days, talk to your health care provider.Do COVID-19 vaccines work against variants\u00a0of the virus?\u00a0All COVID-19 vaccines authorized or approved for emergency use in the United States have proven extremely effective at preventing serious illness, hospitalization, and death from COVID-19. The effectiveness of the FDA-approved and -authorized vaccines remains strong even against newer strains, including against\u00a0variants.Those who are unvaccinated have the greatest risk of becoming seriously ill, which is why the New York State Department of Health urges all eligible New Yorkers to get vaccinated as soon as they are able.\u00a0Can I get an allergic reaction from the COVID-19 vaccine?People can have allergic reactions to any medication or biological product such as a vaccine.",
+          "title": "Frequently Asked Questions | Department of Health",
+          "url": "https://coronavirus.health.ny.gov/frequently-asked-questions-0",
+          "score": 16.314974,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1722999890
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "covid vaccine"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, COVID-19 vaccines have been thoroughly tested for safety and efficacy. They have undergone at least three phases of clinical trials involving tens of thousands of people of all ages, genders, races, and ethnicities. The vaccines have been proven to help protect against COVID-19 and reduce the risk of severe illness and death.\nLike any vaccine or medication, COVID-19 vaccines can cause side effects, although most are mild and short-lived. Common side effects include a sore arm where the shot was given, fatigue, headache, muscle pain, chills, fever, and nausea. These side effects usually go away on their own within a few days. Serious side effects are rare, but if you experience any symptoms of a severe allergic reaction, such as difficulty breathing, swelling of the face and throat, or a fast heartbeat, seek medical attention immediately.\nIt is important to note that the benefits of getting vaccinated far outweigh the risks of experiencing side effects or developing severe illness from COVID-19. I encourage you to speak with your healthcare provider if you have any concerns about the vaccine or if you would like more information."
+    },
+    {
+      "speaker": "user",
+      "text": "how does covid vaccine work?",
+      "timestamp": 1723000427,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The COVID-19 vaccines work by teaching our bodies how to make a protein that triggers an immune response. This immune response helps our bodies recognize and fight the virus. COVID-19 vaccines injects a harmless piece of the virus or using a gene from the virus. None of these methods can cause COVID-19. The mRNA vaccines, in particular, do not alter your DNA. Instead, they work outside of your cell's nucleus (where your DNA is kept) and teach your cells how to make the protein that triggers the immune response. Once your cells have finished using the instructions, they break down the mRNA and get rid of it.",
+      "timestamp": 1723000431,
+      "contexts": [
+        {
+          "document_id": "2251c4827c59360d-14377-15067",
+          "text": "About COVID-19 Vaccines | Veterans Affairs\nYour body then makes antibodies in response. Vaccines are a safer way for your body to learn to make antibodies to some of the more dangerous viruses, like COVID-19. But vaccines use the same natural process of your immune system, which is already activated often by germs and viruses.\u00a0\nWe know that COVID-19 vaccines work well to prevent severe illness and death from COVID-19.\u00a0Scientists continue to study the effectiveness of the COVID-19 vaccines as new variants appear.\nAs the vaccine science evolves, the CDC may recommend additional updated vaccines. That shouldn\u2019t prevent you from getting a dose of COVID-19 vaccine now if you\u2019re eligible.\n\nLast updated: January 24, 2024\n\nFeedback",
+          "title": "About COVID-19 Vaccines | Veterans Affairs",
+          "url": "https://www.va.gov/health-care/covid-19-vaccine/about-covid-19-vaccine",
+          "score": 16.50133,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723000647
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "covid vaccine  work flow"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "2251c4827c59360d-9487-11504",
+          "text": "About COVID-19 Vaccines | Veterans Affairs\nWe\u2019ve used this type of vaccine in the U.S for more than 30 years.\u00a0\nThe Novavax COVID-19 vaccine injects the coronavirus spike protein itself into the body to induce an immune response. In contrast, mRNA COVID-19 vaccines\u00a0(Pfizer, Moderna) teach our body how to make the spike protein to induce an immune response.\n\n mRNA COVID-19 vaccines don\u2019t change your DNA \n \n\nmRNA vaccines that protect you from COVID-19 don\u2019t alter your DNA. These vaccines work outside of your cell\u2019s nucleus (where your DNA is kept). The vaccines teach your cells how to make a protein that triggers an immune response. Your cells then break down the mRNA and get rid of it soon after they\u2019ve finished using the instructions.\n\n COVID-19 vaccines can\u2019t give you COVID-19 \n \n\nThe current COVID-19 vaccines, and the vaccines still in development, use one of these methods:\n\nAn inactivated virus\nA harmless piece of the virus\nA gene from the virus\n\nNone of these can cause COVID-19.\nLearn more about how COVID-19 vaccines work on the CDC website\n\n Vaccines protect you, your family, and your community \n \n\nHow vaccines protect you\nVaccines help train your body\u2019s natural immune system to recognize and fight a specific disease by stimulating a response to the virus that causes that disease.\nWhen a virus is introduced to your body for the first time, your immune system mounts a defense. This includes making antibodies that help kill or neutralize the virus. If you\u2019re exposed to the same virus again, these antibodies also help your immune system recognize and fight the virus quickly.\nLearn more about how COVID-19 vaccines work on the CDC website\nHow vaccines protect the people around you\nProtecting whole communities from diseases like COVID-19 is an important reason for everyone to get vaccines. We call this \u201ccommunity immunity.\u201d\nWhen enough people are vaccinated and develop immunity to a certain virus, that virus can\u2019t spread as easily from person to person. This means that everyone in the community is less likely to get infected.",
+          "title": "About COVID-19 Vaccines | Veterans Affairs",
+          "url": "https://www.va.gov/health-care/covid-19-vaccine/about-covid-19-vaccine",
+          "score": 16.362339,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723000649
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "covid vaccine  work flow"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The COVID-19 vaccines work by teaching our bodies how to make a protein that triggers an immune response, similar to how our bodies would respond to the actual virus. This immune response helps our bodies recognize and fight the virus if we are exposed to it in the future. There are different types of COVID-19 vaccines, including those that use mRNA technology (like the Pfizer and Moderna vaccines), and those that use other methods such as injecting a harmless piece of the virus or using a gene from the virus. None of these methods can cause COVID-19. The mRNA vaccines, in particular, do not alter your DNA. Instead, they work outside of your cell's nucleus (where your DNA is kept) and teach your cells how to make the protein that triggers the immune response. Once your cells have finished using the instructions, they break down the mRNA and get rid of it."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+      "status": "created",
+      "timestamp": 1723000816
+    },
+    {
+      "author": "f957d3a2-1ebf-4b62-818d-070afd0a133d",
+      "status": "edited",
+      "timestamp": 1723837524
+    },
+    {
+      "author": "f957d3a2-1ebf-4b62-818d-070afd0a133d",
+      "status": "edited",
+      "timestamp": 1723837524
+    },
+    {
+      "author": "87334bc6-dd39-4565-ae2b-832e60a24b08",
+      "status": "accepted",
+      "timestamp": 1726000312
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "edited",
+      "timestamp": 1726587699
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "accepted",
+      "timestamp": 1726587972
+    }
+  ],
+  "editor": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+  "domain": "mt-rag-govt-elser-512-100-20240611",
+  "reviewer": "9dcd142c-415e-4161-a82f-c8b14bfb36ac"
+}

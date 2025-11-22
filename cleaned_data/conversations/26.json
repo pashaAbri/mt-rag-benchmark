@@ -1,0 +1,957 @@
+{
+  "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-ibmcloud-elser-512-100-20240502",
+      "size": "72442"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "I cannot get select query to work, what steps should I take?",
+      "timestamp": 1724206229,
+      "enrichments": {
+        "Question Type": [
+          "Troubleshooting"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "1. Check if you have the correct access rights: You need at least 'Reader' access to the buckets that contain the input objects. 2. After the FROM keyword, specify one or more unique resource identifiers (URIs) which can be thought of as tables. Each URI can specify one or more input objects, which can also be thought of as table partitions. 3. If the format of the input objects is CSV, and no special options are required, it is not necessary to specify a STORED AS clause. However, if the format is JSON, ORC, Parquet, or AVRO, after the FROM clause, specify STORED AS JSON, STORED AS ORC, STORED AS PARQUET, or STORED AS AVRO. 4. If text formats, such as JSON and CSV, are compressed with either gzip or bzip2 and have the extensions .gz and .bz, they automatically get recognized as compressed files. However, do not use these kinds of compressed files due to performance reasons. 5. If the format of the input objects is CSV and a delimiter other than the default , (comma) is used, you must specify the delimiter by using the FIELDS TERMINATED BY option of the STORED AS clause. All single Unicode characters are allowed as delimiters. 6. Check for a header line: By default, it is assumed that CSV input objects have a header line that specifies the names of the input columns.",
+      "timestamp": 1724206239,
+      "contexts": [
+        {
+          "document_id": "ibmcld_09989-0-1547",
+          "text": "\n\n\n\n\n\n\n  Query editor \n\nWith the query editor, you can run SQL queries on a specific host and database. You can also save any of the queries that you create.\n\n\n\n  Creating queries \n\n\n\n1.  Go to Query editor.\n2.  From Data objects, select the database and schema in which you want to run the query.\nIf you do not pick a schema, the default database schema is selected.\n3.  Type the SQL query that you want to run.\nIf your query is a select statement, a Set Limit option shows up to allow you to specify how many rows of data you would like to retrieve. The default is No limit.\n\nIn the Worksheet settings you can specify your Default maximum number of rows limit in result. If you decide, however, to add a limit clause in a select statement that is greater than your Default maximum number of rows limit in result, for example: select * from table1 limit 10;, the Results field shows the smaller value of these two parameters.\n\nIn the Worksheet settings you can also specify the Statement separator you want to use. A semicolon (\";\") is the default Statement separator and you must change it to an ampersand (\"&\") when your queries contain semicolons (\";\") to avoid errors.\n4.  When you input the information, you can do one of the following:\n\n\n\n*  Click Run to run the query.\nThe results of the query are displayed in the panel.\n*  Click the floppy disk icon that is in the SQLworksheet toolbar to save the query as a template.\nThe saved query is added to Saved queries and Queries > Recent Queries.\n*  Click Clear to clear the query.\n\n\n\n\n\n\n\n\n\n\n\n\n",
+          "url": "https://cloud.ibm.com/docs/netezza?topic=netezza-query-editor",
+          "score": 11.602196,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724206365
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: I cannot get select query to work, what steps should I take?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16662-0-1981",
+          "text": "\n\n\n\n\n\n\n  Running SQL queries \n\nSQL is a standardized language for defining and manipulating data in a relational database. You can use the Query workspace interface in IBM\u00ae watsonx.data to run SQL queries and scripts against your data.\n\nThe Query workspace has the following components:\n\n\n\n*  Data objects: To view the engines, catalogs, schemas, tables, and columns.\n*  Engine: To select an engine and view the associated catalogs.\n*  Saved queries: To view the saved queries.\n*  Worksheet: To write SQL queries.\n\n\n\nThe Query workspace page provides basic options to undo, redo, cut, copy, paste, save, clear, and delete.\n\nFormat selection option is enabled only when an SQL statement in a query worksheet is selected. The Format worksheet option formats all the content in the worksheet. Comment selection is used to explain sections of SQL statements.\n\nThe Delete option is enabled only after an SQL query is saved.\n\nTo run the SQL queries, do the following steps:\n\n\n\n1.  Log in to the watsonx.data console.\n2.  From the navigation menu, select SQL. The Query workspace page opens.\n3.  Select an engine from the Engine drop-down.\n4.  Select the catalog, schema, table, or column in which you want to run the query.\n5.  Click the overflow menu and select the required query.\n\n\n\n*  For a catalog and schema, you can run the Generate Path query.\n*  For a table, you can run the Generate path, Generate SELECT, Generate ALTER, and Generate DROP query.\n*  For a column, you can run the Generate path, Generate SELECT, and Generate DROP query.\n\n\n\n6.  Click the Save icon to save the query. A Save query confirmation dialog appears.\n7.  Click Save.\n8.  Click the Run button to run the query.\n9.  Select Result set or Details tab to view the results.\n10. Click Saved queries to view the saved queries.\n11. Click [Explain](https://cloud.ibm.com/docs/watsonxdata?topic=watsonxdata-explain_sql_query) to view the logical or distributed plan of execution for a specified SQL query.\n\n\n\n\n\n\n\n\n\n",
+          "url": "https://cloud.ibm.com/docs/watsonxdata?topic=watsonxdata-run_sql",
+          "score": 11.508322,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724206294
+              },
+              "868c6e58-57c1-48ee-8c67-832dbedcac18": {
+                "value": "no",
+                "timestamp": 1726670260
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: I cannot get select query to work, what steps should I take?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_13493-7-1679",
+          "text": "\nRunning a query \n\nWatch the following video to learn more about Data Engine and how you can get started to run a basic query.\n\nIn SQL, the term query is just another way of saying SELECT statement. To run a query:\n\n\n\n1. In the SQL editor field of the Data Engine UI, enter a SELECT statement.\n\n\n\n* After the FROM keyword, specify one or more [unique resource identifiers](https://cloud.ibm.com/docs/sql-query?topic=sql-query-runningunique) (URIs). Each URI can be thought of as a table. It specifies one or more input objects; each input object can be thought of as a table partition. You must have at least 'Reader' access to the buckets that contain the input objects.\n* If the format of the input objects is CSV, and no special options are required, it is not necessary to specify a STORED AS clause. However, if the format is JSON, ORC, Parquet, or AVRO, after the FROM clause, specify STORED AS JSON, STORED AS ORC, STORED AS PARQUET, or STORED AS AVRO.\n* If text formats, such as JSON and CSV, are compressed with either gzip or bzip2 and have the extensions .gz and .bz, they automatically get recognized as compressed files. However, do not use these kinds of compressed files due to performance reasons.\n* If the format of the input objects is CSV and a delimiter other than the default , (comma) is used, you must specify the delimiter by using the FIELDS TERMINATED BY option of the [STORED AS](https://cloud.ibm.com/docs/sql-query?topic=sql-query-sql-referenceexternalTableSpec) clause. All single Unicode characters are allowed as delimiters.\n* By default, it is assumed that CSV input objects have a header line that specifies the names of the input columns.",
+          "url": "https://cloud.ibm.com/docs/sql-query?topic=sql-query-running",
+          "score": 11.254827,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724206272
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: I cannot get select query to work, what steps should I take?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Based on the information provided in the documents, here are some steps you can take to troubleshoot your SELECT query:\n1. Check if you have the correct access rights: You need at least 'Reader' access to the buckets that contain the input objects.\n2. Ensure the correct syntax: After the FROM keyword, specify one or more unique resource identifiers (URIs) which can be thought of as tables. Each URI can specify one or more input objects, which can also be thought of as table partitions.\n3. Specify the correct format: If the format of the input objects is CSV, and no special options are required, it is not necessary to specify a STORED AS clause. However, if the format is JSON, ORC, Parquet, or AVRO, after the FROM clause, specify STORED AS JSON, STORED AS ORC, STORED AS PARQUET, or STORED AS AVRO.\n4. Handle compressed files: If text formats, such as JSON and CSV, are compressed with either gzip or bzip2 and have the extensions .gz and .bz, they automatically get recognized as compressed files. However, do not use these kinds of compressed files due to performance reasons.\n5. Specify the correct delimiter: If the format of the input objects is CSV and a delimiter other than the default , (comma) is used, you must specify the delimiter by using the FIELDS TERMINATED BY option of the STORED AS clause. All single Unicode characters are allowed as delimiters.\n6. Check for a header line: By default, it is assumed that CSV input objects have a header line that specifies the names of the input columns.\nIf you've checked all these points and the query still doesn't work, you may want to reach out for further assistance."
+    },
+    {
+      "speaker": "user",
+      "text": "query definition",
+      "timestamp": 1724206647,
+      "enrichments": {
+        "Question Type": [
+          "Non-Question"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The Query is a standard JavaScript object, which is passed to the db.find function which it POSTs to the _find endpoint on your behalf. To retrieve data from Discovery after it is ingested, indexed, and enriched, submit a query.",
+      "timestamp": 1724206652,
+      "contexts": [
+        {
+          "document_id": "ibmcld_00580-39512-41555",
+          "text": "\nThe Query is a standard JavaScript object, which is passed to the db.find function which it POSTs to the _find endpoint on your behalf.\n\nNow, time for a practical exercise. Devise your own IBM Cloudant Query that finds the titles of books that are written in the 20th Century. The IBM Cloudant Query documentation is at the on-screen URL if you need it.\n\nPause the presentation here if you don't want to know the answer...\n\nSee one solution:\n\nI use the $and operator to combine two clauses on the date attribute. One clause to locate documents whose date >= 1900, the other to find documents whose date is < the year 2000. Both clauses have to be true to select a document. As we need only the title of the matching books, we can supply a fields attribute instead of being returned the entire document.\n\nTo summarize, IBM Cloudant Query is a query language that is inspired by MongoDB where the syntax is expressed in JSON form.\n\nQueries select subsets of documents from the database by using clauses that operate on data inside the document - not just the document's _id.\n\nQueries are sent to the database's _find endpoint, either programmatically, by using curl, or by using the Dashboard.\n\nThe query's selector decides which cut of data is required,\n\nThat's the end of this part. The next part is called Indexing.\n\n\n\n\n\n\n\n Indexing video \n\nLearn how indexing can speed up your query process.\n\n\n\n* Indexing video script\n\nWelcome to the Introduction to IBM Cloudant course, an 17-part video series that gives you an overview of the IBM Cloudant database-as-a-service.\n\nThis video is part 11 - Indexing.\n\nThe queries that we executed in the previous part were not optimal: to get the answer, IBM Cloudant had to spool through every document in the database in turn to see whether it met with the search criteria.\n\nTo make queries that are run in a performant and scalable way, we need Indexing.\n\nWith IBM Cloudant, you can specify any number of Indexes (or indices).\n\nAn index is a secondary data structure that is built from the document list.",
+          "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-learning-center",
+          "score": 10.422415,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724206785
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "query "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_07086-7-2167",
+          "text": "\nQuery overview \n\nIBM Watson\u00ae Discovery offers powerful content search capabilities through search queries.\n\nTo retrieve data from Discovery after it is ingested, indexed, and enriched, submit a query.\n\nAs data is added to Discovery, a representation of each file is stored in the index as a JSON-formatted document. Enrichments that are applied to your collections identify meaningful information in the data and store it in new fields in these documents. To search your data, submit a query to return the most relevant documents and extract the information you're looking for.\n\n\n\n Query types \n\nDiscovery accepts one of the following supported query types:\n\nQuery\n: Finds documents with values of interest in specific fields in your documents. Queries of this type use Discovery Query Language syntax to define the search criteria.\n\nParameter name: query\n\nNatural Language Query (NLQ)\n: Finds answers to queries that are written in natural language. NLQ requests accept a text string value.\n\nParameter name: natural_language_query\n\nAlong with the query that you specify by using one of the supported query types, you can include one or both of the following parameters. The values for these parameters are also specified by using the Discovery Query Language (DQL) syntax:\n\n\n\n* filter\n* aggregation\n\n\n\nFor more information about the Discovery Query Language, see [DQL overview](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-query-dql-overview).\n\nQueries that are submitted from the product user interface are natural language queries. A few other supported parameters are specified and given default values based on the project type in use. For more information, see [Default query settings](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-query-defaults).\n\nDiscovery does not log query request data. You cannot opt in to request logging.\n\n\n\n\n\n Choosing the right query type \n\nThe following table summarizes the capabilities that are supported for each query type. Use it to help you determine which type of query to submit.\n\n\n\nQuery types comparison\nThis table has row and column headers. The row headers identify query types.",
+          "url": "https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-query-concepts",
+          "score": 9.48598,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724206783
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "query "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "A query definition generally includes the following components:\n1. **Data Source**: This refers to the location of the data that you want to query. It could be a database, a collection, or a table.\n2. **Query Type**: This refers to the type of query you want to execute. Common query types include Select, Insert, Update, and Delete.\n3. **Selector**: This is the condition or set of conditions that the data must meet to be selected. In SQL, this would be the WHERE clause. For example, you might want to select all books written in the 20th century.\n4. **Fields**: This refers to the specific data you want to retrieve from the selected data. In SQL, this would be the SELECT clause. For example, you might only want to retrieve the titles of the books.\n5. **Sorting and Limiting**: This refers to how you want the results to be ordered and potentially limited. In SQL, this would be the ORDER BY and LIMIT clauses.\nIn the context of IBM Cloudant Query, the query definition would be expressed in JSON form, using the IBM Cloudant Query syntax. The example provided in the document uses the $and operator to combine two clauses on the date attribute, to find documents whose date is greater than or equal to 1900 and less than 2000. The fields attribute is used to specify that only the title of the matching books should be returned."
+    },
+    {
+      "speaker": "user",
+      "text": "how can I improve query",
+      "timestamp": 1724209769,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "You can use the tools that are built into Discovery to make improvements. If you want more control over how queries are handled, you must use the query API. Cataloging improves your query performance, especially for text-based data formats where the schema inference requires a full scan of the data before the actual query execution. Adding a custom stop words list can improve the relevance of results for natural language queries. You can also improve the quality of search results by expanding the meaning of the queries that are submitted by customers.",
+      "timestamp": 1724209784,
+      "contexts": [
+        {
+          "document_id": "ibmcld_07045-7-2118",
+          "text": "\nImproving your query results \n\nLearn about actions you can take to improve the quality of your query results.\n\nYou can use the tools that are built in to Discovery to make improvements.\n\n\n\n Results include more than exact matches \n\nUnlike some other search applications, adding quotation marks to a phrase that you submit does not return only exact matches. Queries that are submitted from the product user interface are natural language queries. When quoted text is submitted in a natural language query, the phrase is used to boost result scores. However, results are not limited to documents that contain the entire phrase.\n\nIf you want more control over how queries are handled, you must use the query API. For more information about the phrase operator of the query API, see [Query operators](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-query-operatorsphrase).\n\n\n\n\n\n A short query returns irrelevant results \n\nIt might be that your query contains too many stop words and not enough distinct terms to trigger a meaningful search. When you submit a query, the query text is analyzed and optimized before it is submitted to the project. One of the changes that occurs is the removal of any stop words from the text. A stop word is a word that is considered to be not useful in distinguishing the semantic meaning of the content. Examples of stop words include terms such as and, the, and about. Discovery defines a list of stop words that it ignores automatically both when the data is indexed and when it is searched. When you submit a query that contains mostly or only stop words, such as About us, it is equivalent to submitting an empty query.\n\nAlthough us is not included in the stop words list, it is lemmatized to we, which is listed as a stop word.\n\nYou can edit the stop words that are used by your collection. However, you can only augment the stop words list; you cannot remove stop words. And the stop words that you define are used only at query time. They do not affect the stop word list that is used by Discovery when data is added to a collection and the index is created.",
+          "url": "https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-improvements",
+          "score": 13.19539,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724209870
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "improve query"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_13498-1605-3435",
+          "text": "\nThus, cataloging improves your query performance, especially for text-based data formats, such as CSV and JSON, where the schema inference requires a full scan of the data before the actual query execution.\n\n\n\n\n\n\n\n Select \n\nSee the following examples for an outline of the general syntax of an SQL query statement that uses the query clause and the namedQuery clause.\n\n\n\n query \n\n\n\n\n\n namedQuery \n\n\n\n\n\n intoClause \n\nThe query statement supports common table expressions. A common table expression permits defining a result table with a table name that can be specified as a table name in any FROM clause of the fullselect that follows.\n\nCommon table expressions are defined by using the reserved keyword WITH followed by one or more named queries. Each common table expression that is specified can also be referenced by name in the FROM clause of subsequent common table expressions.\n\nCreating a common table expression avoids the overhead of creating and dropping an intermediate result object on Cloud Object Storage that is needed only for a certain query.\n\nMoreover, a common table expression is beneficial when the same result table must be shared in a fullselect.\n\n\n\n\n\n Examples \n\nThe common table expression examples use values clauses to define tables inline. For more information about the values clause, see [valuesClause](https://cloud.ibm.com/docs/sql-query?topic=sql-query-sql-referencevaluesClause).\n\n-- find the department with the highest total pay\nWITH dtotal AS (\nSELECT\ncol1 AS deptno,\nSUM(col3+col4) AS totalpay\nFROM VALUES -- deptno, empid, salary, bonus\n(1, 1, 1000, 0), (1, 2, 2000, 500), (1, 3, 3000, 0),\n(2, 4, 5000, 200), (2, 5, 6000, 0), (2, 6, 4000, 0),\n(3, 7, 2000, 500), (3, 8, 2000, 500), (3, 9, 8000, 0)\nGROUP BY col1\n)\nSELECT deptno\nFROM dtotal\nWHERE totalpay = (SELECT MAX(totalpay) FROM dtotal)",
+          "url": "https://cloud.ibm.com/docs/sql-query?topic=sql-query-sql-reference",
+          "score": 11.480839,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724209872
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "improve query"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_07163-1627-3707",
+          "text": "\nSee [Confidence scores](https://cloud.ibm.com/docs/discovery?topic=discovery-improving-result-relevance-with-the-toolingconfidence) for details.\n\nAdding a custom stopwords list can improve the relevance of results for natural language queries. See [Defining stopwords](https://cloud.ibm.com/docs/discovery?topic=discovery-query-conceptsstopwords) for more information.\n\nSee [Training data requirements](https://cloud.ibm.com/docs/discovery?topic=discovery-improving-result-relevance-with-the-apireqs) for the minimum requirements for training, as well as the training limits.\n\nSee [Usage monitoring](https://cloud.ibm.com/docs/discovery?topic=discovery-usage) for details on tracking usage and using this data to help you understand and improve your applications.\n\nThe components needed to train a Discovery instance include the following:\n\n\n\n* Training data. This is the set of queries and examples the service uses to refine query results.\n* Query. A natural-language query that applies to the training-data set. Each query has one or more associated examples, as described in the following bullet point. Each query must be unique within the training-data set.\n* Example. This is a document indexed in a Discovery collection that acts as an exemplar, good or bad, for the associated query. When you add an example to a training-data query, you include a relevance label that indicates the relevance (or \"goodness\" versus \"badness\") of the document as it applies to the specified query.\n\nExamples are identified by the indexed document ID. As noted, every example must include a label that indicates the \"goodness\" or \"badness\" of the document as it pertains to the query.\n\nExamples can optionally specify a cross-reference query. The cross-reference query needs to return only the example document and must be independent of the unique Watson Discovery document ID. Cross-reference queries are not currently used automatically but can be used to repair training data in the event that new IDs are assigned to documents during an ingestion event.\n\n\n\n\n\n Training data requirements",
+          "url": "https://cloud.ibm.com/docs/discovery?topic=discovery-improving-result-relevance-with-the-api",
+          "score": 11.536515,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724209873
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "improve query"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_13075-7-2200",
+          "text": "\nImproving result relevance with the tooling \n\nThe relevance of natural language query results can be improved in IBM Watson\u2122 Discovery with training. You can train your private collections using either the Discovery tooling, or the Discovery APIs. See [Improving the relevance of your query results with the API](https://cloud.ibm.com/docs/discovery?topic=discovery-improving-result-relevance-with-the-api) if you would prefer to use the APIs.\n\nRelevancy training is optional; if the results of your queries meet your needs, no further training is necessary. For information about use cases for relevancy training, see [Improve your natural language query results from Watson Discovery](https://developer.ibm.com/blogs/improving-your-natural-language-query-results-from-watson-discovery/).\n\nTo train Watson, you must provide the following:\n\n\n\n* Example queries that are representative of the queries your users enter\n* Ratings that indicate which results for each query are relevant and not relevant\n\n\n\nAfter Watson has enough training input, the information that you provide about which results are good and bad for each query is used to learn about your collection. Watson does not just memorize, but it also learns from the specific information about individual queries and applies the patterns it detects to all new queries. It does so, using machine-learning Watson techniques that find signals in your content and questions. After training, Discovery then reorders the query results to display the most relevant results at the top. As you add more and more training data, Discovery becomes more accurate in the ordering of query results.\n\nRelevance training currently applies only to natural language queries in private collections. It is not intended for use with structured Discovery Query Language queries. For more about the Discovery Query Language, see [Query concepts](https://cloud.ibm.com/docs/discovery?topic=discovery-query-concepts).\n\nAll private collections return a confidence score in the query results in most cases. For more information, see [Confidence scores](https://cloud.ibm.com/docs/discovery?topic=discovery-improving-result-relevance-with-the-toolingconfidence).",
+          "url": "https://cloud.ibm.com/docs/services/discovery?topic=discovery-improving-result-relevance-with-the-tooling",
+          "score": 11.319935,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724209875
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "improve query"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_07108-7-1958",
+          "text": "\nExpanding the meaning of queries \n\nYou can improve the quality of search results by expanding the meaning of the queries that are submitted by customers.\n\nTo expand the scope of a query beyond exact matches, add a synonyms list to your collection. When synonyms are defined, the customer does not need to submit an exact phrase or keyword that your project is trained to understand. Even variations of the term are recognized and used to find the best results. For example, you can expand a query for ibm to include international business machines and big blue. Query expansion terms are typically synonyms, antonyms, or common misspellings for terms.\n\nSynonyms that you add to improve the search results function differently from synonyms that you add to a dictionary. Dictionary synonyms are recognized and tagged at the time that a document is ingested. The synonyms that you define are recognized and tagged as occurrences of the associated dictionary term, so that they can be retrieved later by search. For more information about adding synonyms that are recognized when documents are processed, see [Dictionaries](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-domain-dictionary).\n\nYou can define two types of expansions:\n\nBidirectional\n: Each entry in the expanded_terms list expands to include all expanded terms. For example, a query for ibm expands to ibm OR international business machines OR big blue.\n\nBidirectional example:\n\n{\n\"expansions\": [\n{\n\"expanded_terms\":\n\"ibm\",\n\"international business machines\",\n\"big blue\"\n]\n}\n]\n}\n\nUnidirectional\n: The input_terms in the query is replaced by the expanded_terms. For example, a query for banana is converted to plantain OR fruit and does not contain the original term, banana. If you want an input term to be included in the query, then repeat the input term in the expanded terms list.\n\nUnidirectional example:\n\n{\n\"expansions\": [\n{\n\"input_terms\":\n\"banana\"\n],\n\"expanded_terms\":",
+          "url": "https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-search-settings",
+          "score": 11.390717,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724209877
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "improve query"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "There are several ways to improve your query:\n1. Use the `query` API instead of the product user interface for more control over how queries are handled. This allows you to use the phrase operator for exact matches.\n2. Avoid using too many stop words in your query, as they are automatically removed and can lead to irrelevant results. You can edit the stop words list used by your collection, but you can only augment it, not remove stop words.\n3. Consider adding a custom stopwords list to improve the relevance of results for natural language queries.\n4. Ensure that your training data meets the minimum requirements and follow the training limits.\n5. Use common table expressions to avoid the overhead of creating and dropping intermediate result objects on Cloud Object Storage and to share result tables in a fullselect.\n6. For natural language queries in private collections, consider using relevancy training to improve the relevance of query results. This involves providing example queries and ratings for relevant and not relevant results.\n7. Expand the meaning of queries by adding a synonyms list to your collection. This allows for query expansion terms, such as synonyms, antonyms, or common misspellings, to be recognized and used to find the best results."
+    },
+    {
+      "speaker": "user",
+      "text": "can you give more details about the query API?",
+      "timestamp": 1724210082,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Watson Query provides REST APIs that you can use to interact with your instance. When you submit a search from the product user interface, your text is passed as a natural language query value to the Query API. You can use operators when you write queries to submit to Discovery by using the Query API. The API coordination node can make a request directly to servers that host that data rather than needing to combine responses from many servers. The API coordination node is also free from buffering the response since it has no combination step to carry out. As a result, the data arrives at the client more quickly.",
+      "timestamp": 1724210089,
+      "contexts": [
+        {
+          "document_id": "ibmcld_06308-0-500",
+          "text": "\n\n\n\n\n\n\n  APIs and SDKs \n\nWatson Query provides REST APIs that you can use to interact with your instance.\n\nTo access data, view and create database objects, administer, and monitor your service, use the [Watson Query APIs](https://cloud.ibm.com/apidocs/data-virtualization-on-cloud).\n\nThe following Watson Query SDKs are supported by IBM:\n\n\n\n*  [Go SDK](https://github.com/IBM/data-virtualization-on-cloud-go-sdk/)\n*  [Java SDK](https://github.com/IBM/data-virtualization-on-cloud-java-sdk/)\n\n\n\n\n\n\n\n\n\n",
+          "url": "https://cloud.ibm.com/docs/data-virtualization?topic=data-virtualization-con_rest_api",
+          "score": 15.024299,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724210488
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "query API"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_07094-7-1956",
+          "text": "\nDefault query settings \n\nLearn about how the search query is configured for each project type by default.\n\nWhen you submit a search from the product user interface, your text is passed as a natural language query value to the Query API. Other parameters that you can define when you use the API are assigned default values for queries that are made from the user interface. The following tables explain which values are specified by default for each project type. For more information about the Query API, see [Query reference](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-query-reference).\n\nYou can override some of the default values by using improvement tools in the user interface. For example, you can use the Search results tool to change parameters such as passages.enabled. For more information, see [Changing the result content](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-query-resultsquery-results-content).\n\nThe enrichments that are applied to your data autmoatically differ by project type. For more information, see [Default project settings](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-projectsprojects-include-project-defaults-reuse).\n\n\n\n Default query settings \n\n\n\nDefault query settings\n\n Query default Document Retrieval Document Retrieval for Contracts \n\n aggregation [term(enriched_text.entities.text,name:entities)] [term(enriched_html.contract. elements.categories.label,count:25,name:categories)] \n count 10 10 \n highlight false false \n passages.characters 200 200 \n passages.count 10 10 \n passages.enabled true true \n passages.fields [\"text\", \"title\"] [\"text\", \"title\"] \n passages.find_answers false false \n passages.max_answers_per_passage 1 1 \n passages.max_per_document 1 1 \n passages.per_document true true \n return [] [] \n spelling_suggestions false true \n sort \"\" \"\" \n table_results.count 10 10 \n table_results.enabled false true \n table_results.per_document 0 0",
+          "url": "https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-query-defaults",
+          "score": 14.2016735,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724210490
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "query API"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_07096-7-1899",
+          "text": "\nQuery operators \n\nYou can use operators when you write queries to submit to Discovery by using the Query API.\n\nThe types of operators that are supported differ by query type:\n\n\n\n* [Natural language queries](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-query-operatorsnlq-operator)\n* [Discovery Query Language (DQL) queries](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-query-operatorsdql-operators)\n\n\n\n\n\n Natural Language Query (NLQ) operator \n\nThe natural_language_query parameter accepts a string value.\n\n\n\n \"\" (Phrase query) \n\nUse quotation marks to emphasize a single word or phrase in the query that is most important to match. For example, the following request boosts documents that contain the term \u201cnomination\u201d in them.\n\n{\n\"natural_language_query\":\"What is the process for \"nomination\" of bonds?\"\n}\n\nSpecifying a quoted phrase does not prevent documents without the phrase from being returned. It merely gives more weight to documents with the phrase than those without it. For example, the query results might also contain documents that mention \u201cbonds\u201d or \u201cprocess\u201d and do not contain the word \u201cnomination\u201d.\n\nThe following request boosts the phrase \u201cchange in monetary policy\u201d and also matches \u201cchange\u201d or \u201cmonetary\u201d or \u201cpolicy\u201d.\n\n{\n\"natural_language_query\":\"\"change in monetary policy\"\"\n}\n\nSingle quotation marks (') are not supported. You cannot use wildcards (*) in phrase queries.\n\n\n\n\n\n\n\n Discovery Query Language (DQL) operators \n\nOperators are the separators between different parts of a query.\n\n\n\n . (JSON delimiter) \n\nThis delimiter separates the levels of hierarchy in the JSON schema\n\nFor example, the following query argument identifies the section of the enriched_text object that contains entities and the text recognized as an entity.\n\nenriched_text.entities.text\n\nThe JSON representation of this section looks as follows:\n\nZoom\n\n!",
+          "url": "https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-query-operators",
+          "score": 14.247873,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724210492
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "query API"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_00512-5160-7348",
+          "text": "\nSee also a brief overview of the underlying querying mechanism that you use to select the query mechanism that is best for each query your application needs to make.\n\n\n\n Global querying \n\nYou can make global queries to the following index types:\n\n\n\n* IBM Cloudant Query\n* Views\n* Search\n\n\n\nWhen you make a global query, the database must perform a scatter-gather operation across all data in the database. This action means making requests of many individual database servers. The API coordination node receives the responses from all these servers and combines them to form a single response to the client. This response might involve buffering data and delaying the response to the client if, for example, data requires sorting.\n\n\n\n\n\n Partition querying \n\nYou can make partition queries to the following index types:\n\n\n\n* IBM Cloudant Query\n* Views\n* Search\n\n\n\nWhen you make a partition query, the database can query just the data within a single partition. A partition's data resides in just one shard (with three replicas). The API coordination node can make a request directly to servers that host that data rather than needing to combine responses from many servers. The API coordination node is also free from buffering the response since it has no combination step to carry out. As a result, the data arrives at the client more quickly.\n\nAs the size of a database increases, the number of shards must also increase. The increase in shards directly increases the number of queries that the API coordination node needs to make to servers that host data when you use global queries. However, when you use partition queries, the number of shards has no effect on the number of servers the API coordination node needs to contact. As this number stays small, increasing data size has no effect on query latency, unlike global queries.\n\n\n\n\n\n\n\n Partitioned databases tutorials \n\nYou can see two examples of using partitioned databases:\n\n\n\n1. Read about [partitioned databases and Node.js](https://blog.cloudant.com/2019/05/24/Partitioned-Databases-with-Cloudant-Libraries.html) in this blog article that includes how to create a partitioned database, search, views, and a global index.\n2.",
+          "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-database-partitioning",
+          "score": 14.303577,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724210495
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "query API"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The Query API is a more advanced way to handle queries in Discovery. It allows for more control and customization compared to the built-in tools. With the Query API, you can specify various parameters such as filters, sorting, and pagination. You can also use it to perform more complex operations like faceting and aggregations. The Query API uses Discovery Query Language (DQL), which is a SQL-like language specifically designed for searching and querying data in Discovery. DQL supports various operators, functions, and clauses that enable you to create sophisticated queries. For more information on the Query API and DQL, please refer to the official documentation."
+    },
+    {
+      "speaker": "user",
+      "text": "Can I address my storage space limits? how can I add or delete storage?",
+      "timestamp": 1724211033,
+      "enrichments": {
+        "Question Type": [
+          "Composite"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, you can take the following actions to free up space: 1. Delete snapshot versions of any models that you do not expect to need to revert to. 2. Delete any models that you do not need. 3. If your models are too important to delete, consider upgrading your plan to one that provides a larger allotment of storage space. 4. After you remove models or model versions, wait an hour before you retry the action that resulted in the error message. Regarding add or delete storage question: In the VMware Solutions console, click Resources > VMware as a Service from the left navigation pane. In the VMware as a Service table, click the Cloud director sites tab, then click an instance name.. Click the Infrastructure tab. On the Clusters tab, click a cluster name to expand its details. Click Edit NFS storage. In the Edit shared storage window, increase or decrease the current sizings for the performance tiers available. Review the new cost, select the confirmation checkbox, and click Change to confirm.",
+      "timestamp": 1724211038,
+      "contexts": [
+        {
+          "document_id": "ibmcld_16551-0-1579",
+          "text": "\n\n\n\n\n\n\n  How can I address storage space limits? \n\nDepending on your subscription plan, you might reach the storage limit that is specified for your plan and be prevented from completing tasks.\n\n  What\u2019s happening \n\nYou might see a message about exceeding the allowed storage space when you attempt to perform one of these tasks:\n\n\n\n*  Upload documents or dictionaries\n*  Deploy a model or version a model\n*  Run a pre-annotator on documents\n\n\n\n  Why it\u2019s happening \n\nThe storage limit is met or exceeded if the action proceeds.\n\n  How to fix it \n\nThe largest consumers of storage space are machine learning and rule-based models. To free up space, you can take the following actions:\n\n\n\n*  Delete snapshot versions of any models that you do not expect to need to revert to.\n*  Delete any models that you do not need.\n*  If your models are too important to delete, consider upgrading your plan to one that provides a larger allotment of storage space.\n\n\n\nAfter you remove models or model versions, wait an hour before you retry the action that resulted in the error message. It can take up to an hour for the storage space that you freed up to be available for use.\n\nTo manage your monthly bill, if the Admin role is assigned to you and you have a Premium or Standard account, you can set a storage limit on the Service Details page in Knowledge Studio. To see the Service Details page and set the storage limit, from the top navigation bar in Knowledge Studio, click the Settings icon, click the View/modify service details link, and then click the Set storage limit link.\n\n\n\n\n\n\n",
+          "url": "https://cloud.ibm.com/docs/watson-knowledge-studio?topic=watson-knowledge-studio-wks_ts_storage",
+          "score": 12.333948,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724211087
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Editing storage details in topology view"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_14573-0-1280",
+          "text": "\n\n\n\n\n\n\n  Adding and deleting storage \n\nYou can increase or decrease the NFS storage capacity of your deployment by adding or deleting storage to and from a cluster.\n\n\n\n1.  In the VMware Solutions console, click Resources > VMware as a Service from the left navigation pane.\n2.  In the VMware as a Service table, click the Cloud director sites tab, then click an instance name..\n3.  Click the Infrastructure tab.\n4.  On the Clusters tab, click a cluster name to expand its details.\n5.  Click Edit NFS storage.\n6.  In the Edit shared storage window, increase or decrease the current sizings for the performance tiers available.\n7.  Review the new cost, select the confirmation checkbox, and click Change to confirm.\n\n\n\nEditing the storage details might take up to 24 hours to complete. If a storage update is in progress, you cannot edit the storage until the previous operation is complete.\n\n\n\n  Related links \n\n\n\n*  [Adding virtual data centers](https://cloud.ibm.com/docs/vmware-service?topic=vmware-service-vdc-adding)\n*  [Viewing and deleting virtual data centers](https://cloud.ibm.com/docs/vmware-service?topic=vmware-service-vdc-view-delete)\n*  [Viewing VMware as a Service instances](https://cloud.ibm.com/docs/vmware-service?topic=vmware-service-tenant-viewing)\n\n\n\n\n\n\n\n\n\n\n\n",
+          "url": "https://cloud.ibm.com/docs/vmwaresolutions?topic=vmwaresolutions-storage-adding-deleting",
+          "score": 12.416895,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724211088
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Editing storage details in topology view"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, you can address your storage space limits by adding or deleting storage. Here are the steps to follow:\n1. Open the VMware Solutions console.\n2. Click on \"Resources\" in the left navigation pane, then select \"VMware as a Service.\"\n3. Click on the \"Cloud director sites\" tab and select an instance name.\n4. Click on the \"Infrastructure\" tab, then select the \"Clusters\" tab.\n5. Choose a cluster name to expand its details.\n6. Click on \"Edit NFS storage.\"\n7. In the Edit shared storage window, adjust the current sizings for the performance tiers available.\n8. Review the new cost, select the confirmation checkbox, and click \"Change\" to confirm.\nPlease note that editing the storage details might take up to 24 hours to complete. If a storage update is in progress, you cannot edit the storage until the previous operation is complete.\nIf you want to manage your monthly bill, and you have the Admin role assigned to you with a Premium or Standard account, you can set a storage limit on the Service Details page in Knowledge Studio.\nTo see the Service Details page and set the storage limit, from the top navigation bar in Knowledge Studio, click the Settings icon, then click the \"View/modify service details\" link, and finally click the \"Set storage limit\" link."
+    },
+    {
+      "speaker": "user",
+      "text": "what is Data lakes",
+      "timestamp": 1724212655,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "A data lake is an approach to storing data in its native format for organizational use. It is an essential tool for storing structured and unstructured data on the cloud. You can create a data lake for your organization using Object Storage.",
+      "timestamp": 1724212658,
+      "contexts": [
+        {
+          "document_id": "ibmcld_16728-6533-8457",
+          "text": "\nDefinitions of the term data lake vary, but in the context of this tutorial, a data lake is an approach to storing data in its native format for organizational use. To that end, you will create a data lake for your organization using Object Storage. By combining Object Storage and Data Engine, data analysts can query data where it lies using Structured Query Language (SQL). You'll also leverage the Data Engine (previously SQL Query) service in a Jupyter Notebook to conduct a simple analysis. When you're done, allow non-technical users to discover their own insights.\n\n![solution tutorial icon](https://cloud.ibm.com/media/docs/images/homepage/solution-tutorial.svg) [Build a database-driven Slackbot](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-slack-chatbot-database-watson)Build a database-driven Slackbot Solution tutorial\n\nIn this tutorial, you are going to build a Slackbot which allows to search and create entries in a backend Db2 on Cloud database. The Slackbot is backed by the IBM Watson\u00ae Assistant service. You will integrate Slack and IBM Watson\u00ae Assistant using an Assistant integration. Db2 on Cloud is made available to Watson Assistant as custom extension.\n\n![solution tutorial icon](https://cloud.ibm.com/media/docs/images/homepage/solution-tutorial.svg) [Build, deploy, test and monitor a predictive machine learning model](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-create-deploy-retrain-machine-learning-model)Build, deploy, test and monitor a predictive machine learning model Solution tutorial\n\nThis tutorial walks you through the process of building a predictive machine learning model, deploying the generated model as an API to be used in your applications and testing the model all of this happening in an integrated and unified self-service experience on IBM Cloud. You will then monitor the deployed model with IBM Watson OpenScale.\n\n!",
+          "url": "https://cloud.ibm.com/docs?tab=solutions",
+          "score": 9.965686,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724212708
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "You can explore, change, or discover structured data o"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_09984-0-1283",
+          "text": "\n\n\n\n\n\n\n  Overview \n\nData lakes are an essential tool for storing structured and unstructured data on the cloud. With IBM\u00ae Netezza\u00ae Performance Server for IBM Cloud Pak\u00ae for Data as a Service, you can use external tables to access parquet files that are stored outside of your database in data lakes (on AWS S3). Also, you can analyze this data by using the robust and massively parallel Netezza Performance Server execution engine.\n\nExternal data sources use connection strings to specify how you can access an external system. Each connection string describes where your data is placed and how to authenticate to your data source. Each external data source has a definition (schema), but the actual data exists external to the Netezza Performance Server database.\n\nYou cannot backup (nzbackup) and restore (nzrestore) external data source objects.\n\nUse cases for external data source include:\n\n\n\n*  [Running queries against parquet data that is stored in a data lake](https://cloud.ibm.com/docs/netezza?topic=netezza-querying_singularity).\n*  [Ingesting data into Netezza Performance Server](https://cloud.ibm.com/docs/netezza?topic=netezza-ingest_singularity).\n*  [Querying both local and remote data](https://cloud.ibm.com/docs/netezza?topic=netezza-merging_singularity).\n\n\n\n\n\n\n\n\n\n",
+          "url": "https://cloud.ibm.com/docs/netezza?topic=netezza-overview_singularity",
+          "score": 9.732456,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724212709
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "You can explore, change, or discover structured data o"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "A data lake is an approach to storing data in its native format for organizational use. It typically involves storing large amounts of raw data in a centralized repository, allowing for flexible and scalable analytics and reporting. Data lakes can store both structured and unstructured data, and can be implemented using various technologies, including Object Storage and IBM Netezza Performance Server for IBM Cloud Pak for Data as a Service."
+    },
+    {
+      "speaker": "user",
+      "text": "how to create schema or tables?",
+      "timestamp": 1724212855,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Here are the steps to create a schema and tables: To create a schema: 1. Go to Databases. 2. Select the database in which you want to create a schema. 3. Click Create schema. 4. Type a name for the schema. 5. Specify the retention time interval (in days) for the schema. 6. Click Create. To create a table: 1. Log in to IBM\u00ae watsonx.data console. 2. From the navigation menu, select Data manager. 3. Select the engine from the Engine menu. Catalogs that are associated with the selected engine are listed. 4. Click Create and select Create table. 5. In the Create table form, drag a file to the box or click to upload. 6. Click the data type and choose the required data types for each column. Click Next. 7. In the Target form, select the Engine, Catalog, and Schema in which the table is created. 8. Enter a name for the table in the Table name field and click Next. 9. Verify the details in the Summary page and scroll down to view the DDL preview. 10. Click Create. 11. Verify that the table creation status in the Result set is successful, indicated as true. 12. Go to the Data manager page and select the schema under which you created the table and click the refresh icon. The newly created table is listed.",
+      "timestamp": 1724212864,
+      "contexts": [
+        {
+          "document_id": "ibmcld_16612-0-523",
+          "text": "\n\n\n\n\n\n\n  Creating schema \n\nYou can create schema from the Data manager page by using the web console.\n\n\n\n1.  Log in to IBM\u00ae watsonx.data console.\n2.  Select Data manager from the navigation menu.\n3.  Select the engine from the Engine menu. The catalogs that are associated with the selected engine are displayed.\n4.  Click the Create drop-down and select Create schema.\n\n\n\n1.  In the Create schema form, select the catalog and enter schema name.\n2.  Click Create. The schema is created under the selected catalog.\n\n\n\n\n\n\n\n\n\n\n",
+          "url": "https://cloud.ibm.com/docs/watsonxdata?topic=watsonxdata-create_schema",
+          "score": 15.262759,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724212918
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Creating schema"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_09947-0-947",
+          "text": "\n\n\n\n\n\n\n  Schemas \n\n\n\n  Creating schemas \n\n\n\n1.  Go to Databases.\n2.  Select the database in which you want to create a schema.\n3.  Click Create schema.\n4.  Type a name for the schema.\nIf the name contains special characters, enclose it in double quotation marks. The dot character (\".\") is not supported.\n5.  Specify the retention time interval (in days) for the schema.\n6.  Click Create.\n\n\n\n\n\n\n\n  Updating retention time interval (time travel) for schemas \n\n\n\n1.  Go to Databases.\n2.  Select the database in which the schema that you want to alter is.\n3.  From the overflow menu, click Update interval.\n4.  Type a retention time interval.\nYou can select between 1 day and up to 99 days, or zero to alter a temporal schema to nontemporal.\nFor more information on retention time interval and time travel, see [Netezza Performance Server time travel](https://cloud.ibm.com/docs/netezza?topic=netezza-enablingdisabling_tt).\n5.  Click Save.\n\n\n\n\n\n\n\n\n\n\n\n",
+          "url": "https://cloud.ibm.com/docs/netezza?topic=netezza-create-schemas",
+          "score": 14.040297,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724212924
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Creating schema"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16613-0-1165",
+          "text": "\n\n\n\n\n\n\n  Creating table \n\nYou can generate, configure, and run DDL from the Data manager page by using the web console.\n\n\n\n1.  Log in to IBM\u00ae watsonx.data console.\n2.  From the navigation menu, select Data manager.\n3.  Select the engine from the Engine menu. Catalogs that are associated with the selected engine are listed.\n4.  Click Create and select Create table.\n5.  In the Create table form, drag a file to the box or click to upload.\n\n.CSV, .Parquet, .json, .txt are the supported data file formats. For .json file, you must enclose the content in [].\n6.  Click the data type and choose the required data types for each column. Click Next.\n7.  In the Target form, select the Engine, Catalog, and Schema in which the table is created.\n8.  Enter a name for the table in the Table name field and click Next.\n9.  Verify the details in the Summary page and scroll down to view the DDL preview.\n10. Click Create.\n11. Verify that the table creation status in the Result set is successful, indicated as true.\n12. Go to the Data manager page and select the schema under which you created the table and click the refresh icon. The newly created table is listed.\n\n\n\n\n\n\n\n\n",
+          "url": "https://cloud.ibm.com/docs/watsonxdata?topic=watsonxdata-create_table",
+          "score": 15.638288,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724212926
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Creating table"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Based on the documents provided, here are the steps to create a schema and tables:\nTo create a schema:\n1. Go to Databases.\n2. Select the database in which you want to create a schema.\n3. Click Create schema.\n4. Type a name for the schema.\n5. Specify the retention time interval (in days) for the schema.\n6. Click Create.\nTo create a table:\n1. Log in to IBM\u00ae watsonx.data console.\n2. From the navigation menu, select Data manager.\n3. Select the engine from the Engine menu. Catalogs that are associated with the selected engine are listed.\n4. Click Create and select Create table.\n5. In the Create table form, drag a file to the box or click to upload.\n6. Click the data type and choose the required data types for each column. Click Next.\n7. In the Target form, select the Engine, Catalog, and Schema in which the table is created.\n8. Enter a name for the table in the Table name field and click Next.\n9. Verify the details in the Summary page and scroll down to view the DDL preview.\n10. Click Create.\n11. Verify that the table creation status in the Result set is successful, indicated as true.\n12. Go to the Data manager page and select the schema under which you created the table and click the refresh icon. The newly created table is listed."
+    },
+    {
+      "speaker": "user",
+      "text": "use IBM Cloudant Query",
+      "timestamp": 1724213178,
+      "enrichments": {
+        "Question Type": [
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "IBM Cloudant Query uses Mongo-style query syntax to search for documents by using logical operators. IBM Cloudant Query is a combination of a view and a search indexFor faster performance, an IBM Cloudant Query _find must be backed by a suitable secondary index. You will be able to create an index, run a simple query, run a query with two fields and run a query with operators via IBM Cloudant Query.",
+      "timestamp": 1724213184,
+      "contexts": [
+        {
+          "document_id": "ibmcld_00539-7-1755",
+          "text": "\nUsing IBM Cloudant Query FAQ \n\n[IBM\u00ae Cloudant\u00ae for IBM Cloud\u00ae Query](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query) is an API for querying slices of data based on the values of a database's document attributes. It is a flexible API that must be used carefully to ensure that database performance can be maintained as the data size grows over time.\n\n\n\n How do I use IBM Cloudant Query? \n\nIBM Cloudant Query is accessed through the [POST /{db}/_find](https://cloud.ibm.com/apidocs/cloudantpostfind) API endpoint where the JSON specification of the query is passed in the HTTP POST body. For example, this query finds up to 10 documents where the firstname is \"Charles\" and the surname is \"Dickens\":\n\n{\n\"selector\": {\n\"firstname\": \"Charles\",\n\"surname\": \"Dickens\"\n},\n\"limit\": 10\n}\n\nFor more information, see [Selector Syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-queryselector-syntax).\n\n\n\n\n\n How do I create an index to support an IBM Cloudant Query? \n\nWithout a suitable secondary index, IBM Cloudant Query scans each document in the database in turn until it has enough matches to satisfy the query. The larger the data set and the more documents it has to scan to find matching documents, the slower the response time. For faster performance, an IBM Cloudant Query _find must be backed by a suitable secondary index. A secondary index is a pre-calculated data structure that allows IBM Cloudant to quickly jump to the slice of data it needs without scanning irrelevant documents. For the surname fields, we call the [POST /{db}/_index](https://cloud.ibm.com/apidocs/cloudantpostindex) endpoint to pass the JSON index definition as the HTTP POST body:\n\n{\n\"index\": {\n\"fields\": [\"firstname\", \"surname\"]\n},\n\"ddoc\": \"jsonindexes\",",
+          "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-faq-using-cloudant-query",
+          "score": 20.026327,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724213315
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Using IBM Cloudant Query"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_00491-1283-3050",
+          "text": "\n(Optional) [Create an acurl alias](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-working-with-curlencode-user-name-and-password).\n\n\n\nIf you decide not to set up acurl, use the following URL with curl instead of the one provided in the exercises, curl \"https://$USERNAME:$PASSWORD@$ACCOUNT.cloudant.com/databasedemo\".\n\nThe acurl alias is more secure. It prevents someone from reading your password over your shoulder as you type. It also makes sure that your password isn\u2019t sent in plain text over the network by enforcing HTTPS.\n\nNow, we're ready to learn how to run queries against the database you created in step two of [Before you begin](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-creating-an-ibm-cloudant-querybefore-you-begin-qt).\n\n\n\n\n\n Step 1: Creating an index \n\nIBM Cloudant Query uses Mongo-style query syntax to search for documents by using logical operators. IBM Cloudant Query is a combination of a view and a search index.\n\nWhen you use IBM Cloudant Query, the query planner looks at the selector (your query) to determine the correct index to choose from. In memory, you filter out the documents by the selector, which is why, even without an index, you can still query with various fields.\n\nIf no available defined index matches the specified query, then IBM Cloudant uses the _all_docs index, which looks up documents by ID. In the worst case scenario, it returns all the documents by ID (full table scan). Full table scans are expensive to process. It is recommended that you create an index.\n\nTo create an index, follow these steps:\n\n\n\n1. Copy the following sample JSON data into a file named query-demo-index.json:\n\n{\n\"index\": {\n\"fields\": [\n\"descriptionField\",\n\"temperatureField\"\n],\n\"partial_filter_selector\": {\n\"descriptionField\": {",
+          "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-creating-an-ibm-cloudant-query",
+          "score": 19.767525,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724213317
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Using IBM Cloudant Query"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_00491-3787-5406",
+          "text": "\nStep 2: Running a simple query \n\nThis example demonstrates how IBM Cloudant Query finds documents based on the descriptionField with the value boiling.\n\nTo run the query, follow these steps:\n\n\n\n1. Copy the following sample JSON into a data file named query1.json:\n\n{\n\"selector\": {\n\"descriptionField\": \"boiling\"\n}\n}\n2. Run the following command to query the database:\n\nacurl \"https://$ACCOUNT.cloudant.com/databasedemo/_find\" -X POST -H \"Content-Type: application/json\" -d @query1.json\n3. Review the query results:\n\n{\n\"docs\": [{\n\"_id\": \"91d1fa833d28efe15069604f98de701d\",\n\n\"_rev\": \"1-f998fc7b89d4466c1e7bb204b1b00f74\",\n\"numberField\": 1,\n\"nameField\": \"one\",\n\"descriptionField\": \"boiling\",\n\"temperatureField\": 100\n}],\n\"bookmark\": \"g1AAAABweJzLYWBgYMpgSmHgKy5JLCrJTq2MT8lPzkzJBYorWBqmGKYlWhgbpxhZpKalGpoamFmaGZikWVqkpJobGKaA9HHA9BGlIwsAmn8eLw\",\n\"warning\": \"No matching index found, create an index to optimize query time.\"\n}\n\n\n\nNext, you find a document in the database by using two fields.\n\n\n\n\n\n Step 3: Running a query with two fields \n\nThis example uses two fields to find a document with the values: freezing and -5.\n\nThe search is described by using a ['selector' expression](https://cloud.ibm.com/apidocs/cloudantpostfind) that looks like the following example:\n\n{\n\"selector\": {\n\"descriptionField\": \"freezing\",\n\"temperatureField\": -5\n}\n}\n\nYou can tailor the results by adding more details within the selector expression. The fields parameter specifies the fields to include with the results. In our example, the results include the nameField, descriptionField, and temperatureField, as shown in the following example.",
+          "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-creating-an-ibm-cloudant-query",
+          "score": 13.767165,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724213318
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Step 2: Running a simple query"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_00491-6023-7483",
+          "text": "\n\"bookmark\": \"g1AAAABweJzLYWBgYMpgSmHgKy5JLCrJTq2MT8lPzkzJBYorpBiYGJolWaSZmaWYpFqmGBiYmKclphhappqZmRglG5uD9HHA9BGlIwsAms8eJw\",\n\"warning\": \"No matching index found, create an index to optimize query time.\"\n}\n\n\n\nNext, you find a document in the database by using multiple operators.\n\n\n\n\n\n Step 4: Running a query with operators \n\nIn this example, the $gt (greater than) and $eq (equal) operators are used to search for documents that include a temperature that is greater than 20 degrees and a description that contains the value hot. The results include the descriptionField and temperatureField, shown in descending order by temperature.\n\nYou use a selector expression like the following example:\n\n{\n\"selector\": {\n\"temperatureField\": {\n\"$gt\": 50\n},\n\"descriptionField\": {\n\"$eq\": \"hot\"\n}\n},\n\"fields\": [\n\"descriptionField\",\n\"temperatureField\"\n],\n\"sort\": [{\n\"temperatureField\": \"desc\"\n}],\n\"use_index\": \"_design/query-demo-index\"\n}\nShow more\n\nTo run the query, follow these steps:\n\n\n\n1. Copy the following sample JSON to a file named query3.json.\n\n{\n\"selector\": {\n\"descriptionField\": {\n\"$eq\": \"hot\"\n},\n\"temperatureField\": {\n\"$gt\": 50\n}\n},\n\"fields\": [\n\"descriptionField\",\n\"temperatureField\"\n],\n\"sort\": [{\n\"temperatureField\": \"desc\"\n}],\n\"use_index\": \"_design/query-demo-index\"\n}\nShow more\n2. Run this query:\n\nacurl \"https://$ACCOUNT.cloudant.com/databasedemo/_find\" -X POST -H \"Content-Type: application/json\" -d @query3.json\n3. Review the query results:\n\n{\n\"docs\": [{",
+          "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-creating-an-ibm-cloudant-query",
+          "score": 15.878329,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724213320
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Running a query with operators"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Sure! To use IBM Cloudant Query, you need to access it through the `POST /{db}/_find` API endpoint and pass the JSON specification of the query in the HTTP POST body. Here's an example query that finds up to 10 documents where the `firstname` is \"Charles\" and the `surname` is \"Dickens\":\n```json\n{\n \"selector\": {\n   \"firstname\": \"Charles\",\n   \"surname\": \"Dickens\"\n },\n \"limit\": 10\n}\n```\nFor faster performance, it's recommended to create a secondary index to support the query. You can create an index by calling the `POST /{db}/_index` endpoint and passing the JSON index definition as the HTTP POST body. For example, to create an index for the `firstname` and `surname` fields, you can use the following JSON definition:\n```json\n{\n \"index\": {\n   \"fields\": [\"firstname\", \"surname\"]\n },\n \"ddoc\": \"jsonindexes\"\n}\n```\nFor more information, you can refer to the Selector Syntax documentation for the query syntax and the Indexing documentation for creating indexes."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+      "status": "created",
+      "timestamp": 1724213560
+    },
+    {
+      "author": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+      "status": "accepted",
+      "timestamp": 1725531243
+    },
+    {
+      "author": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+      "status": "edited",
+      "timestamp": 1726671542
+    },
+    {
+      "author": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+      "status": "accepted",
+      "timestamp": 1726738461
+    }
+  ],
+  "editor": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+  "domain": "mt-rag-ibmcloud-elser-512-100-20240502",
+  "reviewer": "868c6e58-57c1-48ee-8c67-832dbedcac18"
+}

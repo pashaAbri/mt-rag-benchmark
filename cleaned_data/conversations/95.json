@@ -1,0 +1,777 @@
+{
+  "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-ibmcloud-elser-512-100-20240502",
+      "size": "72442"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "collections": {
+        "regex": "mt-rag*"
+      },
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "How can I update the cluster master?",
+      "timestamp": 1724985700,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "To update the cluster master, you should follow these steps:\n1. Check if your cluster is unsupported by reviewing the State field in the output of the `ibmcloud ks cluster ls` command or in the IBM Cloud Kubernetes Service console.\n2. If your cluster is unsupported, you need to create a new cluster and deploy your apps to the new cluster. Then, you can delete the unsupported cluster.\n3. Before updating to the latest version, make sure to update deprecated clusters to a supported version that is one or two behind the current version. For example, you can update to version 1.21 or 1.22 before updating to the latest version, 1.23.\n4. If the worker nodes run a version two or more behind the master, update them to the same version as the master to avoid issues with your pods.\n5. Finally, update the cluster using the instructions provided in the IBM Cloud documentation: <https://cloud.ibm.com/docs/containers?topic=containers-updateupdate>.\nKeep in mind that updating a cluster to a new version may impact deployed apps, so it's essential to prepare accordingly.",
+      "timestamp": 1724985705,
+      "contexts": [
+        {
+          "document_id": "ibmcld_05728-10229-11925",
+          "text": "\nIf the cluster master runs two or more versions behind the oldest supported version, you can no longer apply updates and must delete the cluster and create a new one.\n5. Archived: The version is unsupported with no upgrade path. IBM provides no support. IBM reserves the right to shut down the control planes for such clusters.\n\n\n\nIf you wait until your cluster is two or more minor versions behind the oldest supported version, you can't update the cluster. Instead, [create a new cluster](https://cloud.ibm.com/docs/containers?topic=containers-clustersclusters), [deploy your apps](https://cloud.ibm.com/docs/containers?topic=containers-appapp) to the new cluster, and [delete](https://cloud.ibm.com/docs/containers?topic=containers-remove) the unsupported cluster. To avoid this issue, update deprecated clusters to a supported version that is one or two behind the current version, such as 1.21 or 1.22 and then update to the latest version, 1.23. If the worker nodes run a version two or more behind the master, you might see your pods fail by entering a state such as MatchNodeSelector, CrashLoopBackOff, or ContainerCreating until you update the worker nodes to the same version as the master. After you update from a deprecated to a supported version, your cluster can resume normal operations and continue receiving support. You can find out whether your cluster is unsupported by reviewing the State field in the output of the ibmcloud ks cluster ls command or in the [IBM Cloud Kubernetes Service console](https://cloud.ibm.com/kubernetes/clusters).\n\n\n\n\n\n Preparing to update \n\nUpdating a cluster to a new version from the previous version is likely to have an impact on deployed apps.",
+          "url": "https://cloud.ibm.com/docs/containers?topic=containers-cs_versions",
+          "score": 20.472004,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724985904
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How can I update the cluster master?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_05597-10227-11923",
+          "text": "\nIf the cluster master runs two or more versions behind the oldest supported version, you can no longer apply updates and must delete the cluster and create a new one.\n5. Archived: The version is unsupported with no upgrade path. IBM provides no support. IBM reserves the right to shut down the control planes for such clusters.\n\n\n\nIf you wait until your cluster is two or more minor versions behind the oldest supported version, you can't update the cluster. Instead, [create a new cluster](https://cloud.ibm.com/docs/containers?topic=containers-clustersclusters), [deploy your apps](https://cloud.ibm.com/docs/containers?topic=containers-appapp) to the new cluster, and [delete](https://cloud.ibm.com/docs/containers?topic=containers-remove) the unsupported cluster. To avoid this issue, update deprecated clusters to a supported version that is one or two behind the current version, such as 1.21 or 1.22 and then update to the latest version, 1.23. If the worker nodes run a version two or more behind the master, you might see your pods fail by entering a state such as MatchNodeSelector, CrashLoopBackOff, or ContainerCreating until you update the worker nodes to the same version as the master. After you update from a deprecated to a supported version, your cluster can resume normal operations and continue receiving support. You can find out whether your cluster is unsupported by reviewing the State field in the output of the ibmcloud ks cluster ls command or in the [IBM Cloud Kubernetes Service console](https://cloud.ibm.com/kubernetes/clusters).\n\n\n\n\n\n Preparing to update \n\nUpdating a cluster to a new version from the previous version is likely to have an impact on deployed apps.",
+          "url": "https://cloud.ibm.com/docs/containers?topic=containers-changelog",
+          "score": 20.472004,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724985902
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How can I update the cluster master?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_05728-12623-13559",
+          "text": "\nAlthough your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes, or update the cluster to the next version. Review the potential impacts and immediately [update the cluster](https://cloud.ibm.com/docs/containers?topic=containers-updateupdate) to continue receiving important security updates and support. If your cluster master is two or more versions behind the oldest supported version, you must [make a new cluster](https://cloud.ibm.com/docs/containers?topic=containers-clustersclusters) and [deploy your apps](https://cloud.ibm.com/docs/containers?topic=containers-appapp) to the new cluster.\n\nUnsupported Kubernetes versions\n: [Archived version history](https://cloud.ibm.com/docs/containers?topic=containers-cs_sitemapsitemap_archived_version_history)",
+          "url": "https://cloud.ibm.com/docs/containers?topic=containers-cs_versions",
+          "score": 19.71453,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724985899
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How can I update the cluster master?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "speaker": "user",
+      "text": "CIS Kubernetes Benchmark",
+      "timestamp": 1724986079,
+      "enrichments": {
+        "Question Type": [
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The CIS Kubernetes Benchmark is a framework of specific steps to configure Kubernetes more securely and with standards that are commensurate to various industry regulations. It is published by the Center for Internet Security (CIS). When a new Kubernetes version is released, IBM engineers compare the default configuration of a cluster that runs that Kubernetes version against the benchmark and publishes the results in the IBM Cloud documentation. The benchmark recommendations are provided by the Center for Internet Security, and it covers recommendations for master components, etcd, control plane configurations, worker nodes, and policies such as for users, network, and pod security.",
+      "timestamp": 1724986087,
+      "contexts": [
+        {
+          "document_id": "ibmcld_05608-1309-3624",
+          "text": "\nAs a security administrator or auditor, you might want to compare your company's internal standards and external regulatory requirements with the CIS Kubernetes Benchmark. The benchmark recommendations are provided by the Center for Internet Security, not by IBM. IBM might not configure default settings in a way that meets every recommendation, but documents whether the recommendation is met to help you in your review. For example, you might use the benchmark in an audit to confirm that basic security measures are in place, and to identify areas where you might enhance your security.\n\n\n\n What does the benchmark cover? \n\nThe benchmark covers recommendations for master components, etcd, control plane configurations, worker nodes, and policies such as for users, network, and pod security.\n\n\n\n\n\n What do the benchmark recommendations mean? \n\nThe benchmark recommendations have scoring, levels, result status, and responsibilities as follows.\n\n\n\n* Scoring\n\n\n\n* Scored: The overall benchmark score increases or decreases depending on whether the recommendation is met.\n* Not scored: The overall benchmark score is not impacted, whether the recommendation is met.\n\n\n\n* Levels\n\n\n\n* Level 1: Practical security measures that can be configured without inhibiting the service.\n* Level 2: More in-depth security measures that might reduce the performance or functionality of a service.\n\n\n\n* Result\n\n\n\n* Pass: The service complies with the benchmark recommendation.\n* Fail: The service does not comply with the benchmark recommendation by default. Refer to the remediation section for an explanation and possible actions that you can take to comply with the benchmark recommendation.\n\n\n\n* Responsibility\n\n\n\n* IBM: IBM is responsible for configuring the setting that the benchmark recommends.\n* Shared: You and IBM share responsibility for configuring the setting that the benchmark recommends.\n\n\n\n\n\n\n\n\n\n What parts of the benchmark am I responsible for? \n\nBecause IBM Cloud Kubernetes Service is a managed offering, IBM already configures many security settings for you. For example, IBM manages and automatically applies updates to your cluster master. For your worker nodes, IBM provides security and version updates, but you must apply the updates. You are also responsible for your workload applications and data.",
+          "url": "https://cloud.ibm.com/docs/containers?topic=containers-cis-benchmark",
+          "score": 13.807187,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724986277
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "As a security administrator or auditor, you might want to compare your company'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_10070-7-1616",
+          "text": "\nCIS Kubernetes Benchmark \n\nThe Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/) as a framework of specific steps to configure Kubernetes more securely and with standards that are commensurate to various industry regulations.\n\nWhen a new Kubernetes version is released as part of a [supported Red Hat OpenShift version](https://cloud.ibm.com/docs/openshift?topic=openshift-openshift_versions), IBM engineers compare the default configuration of a cluster that runs that Kubernetes version against the benchmark and publishes the results in this documentation. You can review how specific versions of your Red Hat\u00ae OpenShift\u00ae on IBM Cloud\u00ae clusters meet the CIS Kubernetes Benchmark.\n\n\n\n Available benchmark versions \n\nUse the list to find CIS Kubernetes Benchmark results for available versions.\n\n\n\n* [Version 4.12](https://cloud.ibm.com/docs/openshift?topic=openshift-cis-benchmark-412)\n* [Version 4.11](https://cloud.ibm.com/docs/openshift?topic=openshift-cis-benchmark-411)\n* [Version 4.10](https://cloud.ibm.com/docs/openshift?topic=openshift-cis-benchmark-410)\n* [Version 4.9](https://cloud.ibm.com/docs/openshift?topic=openshift-cis-benchmark-49)\n* [Version 4.8](https://cloud.ibm.com/docs/openshift?topic=openshift-cis-benchmark-48)\n\n\n\n\n\n\n\n Using the benchmark \n\nAs a security administrator or auditor, you might want to compare your company's internal standards and external regulatory requirements with the CIS Kubernetes Benchmark. The benchmark recommendations are provided by the Center for Internet Security, not by IBM.",
+          "url": "https://cloud.ibm.com/docs/openshift?topic=openshift-cis-benchmark",
+          "score": 20.275232,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724986281
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "The Center for Internet Security (CIS) publishes the CIS Kubernetes Benchmark"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_05608-7-1899",
+          "text": "\nCIS Kubernetes Benchmark \n\nThe Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/) as a framework of specific steps to configure Kubernetes more securely and with standards that are commensurate to various industry regulations.\n\nWhen a new [Kubernetes version](https://cloud.ibm.com/docs/containers?topic=containers-cs_versions) is released, IBM engineers compare the default configuration of a cluster that runs that Kubernetes version against the benchmark and publishes the results in this documentation. You can review how specific versions of your IBM Cloud\u00ae Kubernetes Service clusters meet the CIS Kubernetes Benchmark.\n\n\n\n Available benchmark versions \n\nUse the list to find CIS Kubernetes Benchmark results for available versions.\n\n\n\n* [Version 1.27](https://cloud.ibm.com/docs/containers?topic=containers-cis-benchmark-127)\n* [Version 1.26](https://cloud.ibm.com/docs/containers?topic=containers-cis-benchmark-126)\n* [Version 1.25](https://cloud.ibm.com/docs/containers?topic=containers-cis-benchmark-125)\n* [Version 1.24](https://cloud.ibm.com/docs/containers?topic=containers-cis-benchmark-124)\n* [Version 1.23](https://cloud.ibm.com/docs/containers?topic=containers-cis-benchmark-123)\n\n\n\n\n\n\n\n Using the benchmark \n\nAs a security administrator or auditor, you might want to compare your company's internal standards and external regulatory requirements with the CIS Kubernetes Benchmark. The benchmark recommendations are provided by the Center for Internet Security, not by IBM. IBM might not configure default settings in a way that meets every recommendation, but documents whether the recommendation is met to help you in your review. For example, you might use the benchmark in an audit to confirm that basic security measures are in place, and to identify areas where you might enhance your security.",
+          "url": "https://cloud.ibm.com/docs/containers?topic=containers-cis-benchmark",
+          "score": 19.752323,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724986284
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "The Center for Internet Security (CIS) publishes the CIS Kubernetes Benchmark"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The CIS Kubernetes Benchmark is a framework of specific steps to configure Kubernetes more securely and with standards that are commensurate to various industry regulations. It is published by the Center for Internet Security (CIS). When a new Kubernetes version is released, IBM engineers compare the default configuration of a cluster that runs that Kubernetes version against the benchmark and publishes the results in the IBM Cloud documentation. You can review how specific versions of your IBM Cloud Kubernetes Service clusters meet the CIS Kubernetes Benchmark.\nHere are some available benchmark versions for IBM Cloud Kubernetes Service:\n* Version 1.27: <https://cloud.ibm.com/docs/containers?topic=containers-cis-benchmark-127>\n* Version 1.26: <https://cloud.ibm.com/docs/containers?topic=containers-cis-benchmark-126>\n* Version 1.25: <https://cloud.ibm.com/docs/containers?topic=containers-cis-benchmark-125>\n* Version 1.24: <https://cloud.ibm.com/docs/containers?topic=containers-cis-benchmark-124>\n* Version 1.23: <https://cloud.ibm.com/docs/containers?topic=containers-cis-benchmark-123>\nFor Red Hat OpenShift on IBM Cloud, here are some available benchmark versions:\n* Version 4.12: <https://cloud.ibm.com/docs/openshift?topic=openshift-cis-benchmark-412>\n* Version 4.11: <https://cloud.ibm.com/docs/openshift?topic=openshift-cis-benchmark-411>\n* Version 4.10: <https://cloud.ibm.com/docs/openshift?topic=openshift-cis-benchmark-410>\n* Version 4.9: <https://cloud.ibm.com/docs/openshift?topic=openshift-cis-benchmark-49>\n* Version "
+    },
+    {
+      "speaker": "user",
+      "text": "Can I use IBM Cloud\u00ae Kubernetes Service clusters only in USA?",
+      "timestamp": 1724986498,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "No, you can deploy IBM Cloud\u00ae Kubernetes Service clusters worldwide, not just in the USA. Cloud Kubernetes Service is available in a subset of these locations, including worldwide multizone regions and single zone regions.",
+      "timestamp": 1724986503,
+      "contexts": [
+        {
+          "document_id": "ibmcld_06038-7-1830",
+          "text": "\nLocations \n\nYou can deploy IBM Cloud\u00ae Kubernetes Service clusters worldwide. When you create a cluster, its resources remain in the location that you deploy the cluster to. To work with your cluster, you can access the service via a global API endpoint.\n\nZoom\n\n![IBM Cloud Kubernetes Service locations](https://cloud.ibm.com/docs-content/v1/content/4d497aff9e27b92fbbc2ee4e343a9ec4549cb1d7/containers/images/locations.svg)\n\nFigure 1. IBM Cloud Kubernetes Service locations\n\nThis image is an artistic representation and does not reflect actual political or geographic boundaries.\n\n\n\n IBM Cloud Kubernetes Service locations \n\nIBM Cloud resources are organized into a hierarchy of geographic locations. IBM Cloud Kubernetes Service is available in a subset of these locations, including worldwide multizone regions and single zone regions. Other IBM Cloud services might be available globally or within a specific location.\n\nibmcloud ks locations\n\n\n\n How locations are organized \n\nThe following image is used as an example to explain how IBM Cloud Kubernetes Service locations are organized. For more information, see [Locations for resource deployment](https://cloud.ibm.com/docs/overview?topic=overview-locations).\n\nZoom\n\n![Organization of IBM Cloud Kubernetes Service locations](https://cloud.ibm.com/docs-content/v1/content/4d497aff9e27b92fbbc2ee4e343a9ec4549cb1d7/containers/images/cs_regions_hierarchy.png)\n\nFigure 1. Organization of IBM Cloud Kubernetes Service locations\n\n\n\nOrganization of IBM Cloud Kubernetes Service locations.\n\n Type Example Description \n\n Geography North America (na) An organizational grouping that is based on geographic continents. \n Country Canada (ca) The location's country within the geography. \n Metro For example, Dallas (dal). The name of a city where 1 or more data centers are located.",
+          "url": "https://cloud.ibm.com/docs/containers?topic=containers-regions-and-zones",
+          "score": 27.985893,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724986601
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "You can deploy IBM Cloud\u00ae Kubernetes Service clusters worldwide. "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_10469-2788-4532",
+          "text": "\nTo determine whether a location has a multizone region, your can run ibmcloud oc locations and look for the value in the Multizone Metro column.\n\n\n\nAvailable multizone metro locations for classic clusters in Red Hat OpenShift on IBM Cloud.\n\n Geography Country Metro Region Zones \n\n Asia Pacific Australia Sydney au-syd syd01, syd04, syd05 \n Asia Pacific Japan Osaka jp-osa osa21, osa22, osa23 \n Asia Pacific Japan Tokyo jp-tok tok02, tok04, tok05 \n Europe Germany Frankfurt de-fra fra02, fra04, fra05 \n Europe United Kingdom London uk-lon lon02, lon04, lon05, lon06 \n North America United States Dallas us-dal dal10, dal12, dal13 \n North America United States Washington DC us-wdc wdc04, wdc06, wdc07 \n\n\n\n\n\n\n\n Classic single zone regions \n\nIf you create a classic cluster in a single zone region, you can create multiple worker nodes but you can't spread them across data centers (zones). The highly available master includes three replicas on separate hosts, but is not spread across zones.\n\nClassic single zone clusters are managed from the regional endpoint located in the nearest region that supports classic multizone, such as mon01 to us-east or sao01 to us-south.\n\n\n\nAvailable single zone data center locations for classic clusters in Red Hat OpenShift on IBM Cloud.\n\n Geography Country Metro Region Zone Managed from region \n\n Asia Pacific India Chennai in-che che01 AP North (ap-north, jp-tok) \n Asia Pacific Singapore Singapore sng-mtr sng01 AP North (ap-north, jp-tok) \n Europe Italy Milan it-mil mil01 EU Central (eu-central, eu-de) \n Europe Netherlands Amsterdam nl-ams ams03 EU Central (eu-central, eu-de) \n North America Canada Montreal ca-mon mon01 US East (us-east) \n North America Canada Toronto ca-tor tor01 US East (us-east)",
+          "url": "https://cloud.ibm.com/docs/openshift?topic=openshift-regions-and-zones",
+          "score": 19.622375,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724986603
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Classic single zone regions"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "No, you can deploy IBM Cloud\u00ae Kubernetes Service clusters worldwide, not just in the USA. The locations where you can deploy these clusters include worldwide multizone regions and single zone regions. You can find the full list of available locations in the IBM Cloud documentation."
+    },
+    {
+      "speaker": "user",
+      "text": "what are some practices for IBM Cloud Kubernetes Service do you recommend?",
+      "timestamp": 1724986953,
+      "enrichments": {
+        "Question Type": [
+          "Opinion"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Here are some best practices for using IBM Cloud Kubernetes Service: 1. Keep your cluster up-to-date: Regularly update your cluster to avoid getting into an unsupported state and experiencing operational impact. 2. Ensure compatibility between master and worker nodes: Your worker nodes can't run a later major.minor Kubernetes version than the master. They can be up to two versions behind the master version (n-2). 3. Update worker nodes for each patch version: Unlike the master, you must update your workers for each patch version. 4. Review the version archive instructions: If your cluster runs an unsupported Kubernetes version, follow the version archive instructions.",
+      "timestamp": 1724986977,
+      "contexts": [
+        {
+          "document_id": "ibmcld_06209-1393-3390",
+          "text": "\nIf your cluster runs an unsupported Kubernetes version, follow the [version archive instructions](https://cloud.ibm.com/docs/containers?topic=containers-cs_versionsk8s_version_archive). To avoid getting in an unsupported state and operational impact, keep your cluster up-to-date.\n\nCan my worker nodes run a later version than the master?\n: Your worker nodes can't run a later major.minor Kubernetes version than the master. Additionally, your worker nodes can be only up to two versions behind the master version (n-2). First, [update your master](https://cloud.ibm.com/docs/containers?topic=containers-updateupdate_master) to the latest Kubernetes version. Then, [update the worker nodes](https://cloud.ibm.com/docs/containers?topic=containers-updateworker_node) in your cluster.\n\nWorker nodes can run later patch versions than the master, such as patch versions that are specific to worker nodes for security updates.\n\nHow are patch updates applied?\n: By default, patch updates for the master are applied automatically over the course of several days, so a master patch version might show up as available before it is applied to your master. The update automation also skips clusters that are in an unhealthy state or have operations currently in progress. Occasionally, IBM might disable automatic updates for a specific master fix pack, such as a patch that is only needed if a master is updated from one minor version to another. In any of these cases, you can [check the versions change log](https://cloud.ibm.com/docs/containers?topic=containers-changelog) for any potential impact and choose to safely use the ibmcloud ks cluster master update[command](https://cloud.ibm.com/docs/containers?topic=containers-kubernetes-service-clics_cluster_update) yourself without waiting for the update automation to apply.\n\nUnlike the master, you must update your workers for each patch version.\n\nWhat happens during the master update?\n: Your master is highly available with three replica master pods.",
+          "url": "https://cloud.ibm.com/docs/containers?topic=containers-update",
+          "score": 50.76136,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724987437
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How can I update the cluster master?\n|assistant|: To update the cluster master, you should follow these steps:\n1. Check if your cluster is unsupported by reviewing the State field in the output of the `ibmcloud ks cluster ls` command or in the IBM Cloud Kubernetes Service console.\n2. If your cluster is unsupported, you need to create a new cluster and deploy your apps to the new cluster. Then, you can delete the unsupported cluster.\n3. Before updating to the latest version, make sure to update deprecated clusters to a supported version that is one or two behind the current version. For example, you can update to version 1.21 or 1.22 before updating to the latest version, 1.23.\n4. If the worker nodes run a version two or more behind the master, update them to the same version as the master to avoid issues with your pods.\n5. Finally, update the cluster using the instructions provided in the IBM Cloud documentation: <https://cloud.ibm.com/docs/containers?topic=containers-updateupdate>.\nKeep in mind that updating a cluster to a new version may impact deployed apps, so it's essential to prepare accordingly.\n|user|: CIS Kubernetes Benchmark\n|assistant|: The CIS Kubernetes Benchmark is a framework of specific steps to configure Kubernetes more securely and with standards that are commensurate to various industry regulations. It is published by the Center for Internet Security (CIS). When a new Kubernetes version is released, IBM engineers compare the default configuration of a cluster that runs that Kubernetes version against the benchmark and publishes the results in the IBM Cloud documentation. The benchmark recommendations are provided by the Center for Internet Security, and it covers recommendations for master components, etcd, control plane configurations, worker nodes, and policies such as for users, network, and pod security.\n|user|: Can I use IBM Cloud\u00ae Kubernetes Service clusters only in USA?\n|assistant|: No, you can deploy IBM Cloud\u00ae Kubernetes Service clusters worldwide, not just in the USA. Cloud Kubernetes Service is available in a subset of these locations, including worldwide multizone regions and single zone regions.\n|user|: what are some practices for IBM Cloud Kubernetes Service do you recommend?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Here are some best practices for using IBM Cloud Kubernetes Service:\n1. Keep your cluster up-to-date: Regularly update your cluster to avoid getting into an unsupported state and experiencing operational impact.\n2. Ensure compatibility between master and worker nodes: Your worker nodes can't run a later major.minor Kubernetes version than the master. They can be up to two versions behind the master version (n-2).\n3. Update worker nodes for each patch version: Unlike the master, you must update your workers for each patch version.\n4. Review the version archive instructions: If your cluster runs an unsupported Kubernetes version, follow the version archive instructions.\n5. Check the versions changelog: Before applying a patch update, check the versions changelog for any potential impact.\n6. Monitor your cluster: Regularly monitor your cluster to ensure its health and stability.\n7. Secure your cluster: Follow the CIS Kubernetes Benchmark recommendations to configure your cluster more securely and with standards that are commensurate to various industry regulations.\n8. Use private registries: Consider using private registries for sensitive data and applications.\n9. Plan for disaster recovery: Have a disaster recovery plan in place to minimize downtime and data loss.\n10. Utilize built-in tools: Make use of the built-in tools provided by IBM Cloud Kubernetes Service to simplify management and monitoring tasks."
+    },
+    {
+      "speaker": "user",
+      "text": "I keep seeing the word Kubernetes , but I am not understanding this term",
+      "timestamp": 1724987557,
+      "enrichments": {
+        "Question Type": [
+          "Non-Question"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Kubernetes is an open source platform for managing containerized workloads and services across multiple hosts, and offers managements tools for deploying, automating, monitoring, and scaling containerized apps with minimal to no manual intervention.",
+      "timestamp": 1724987560,
+      "contexts": [
+        {
+          "document_id": "ibmcld_05777-7-1924",
+          "text": "\nFAQs \n\nReview frequently asked questions (FAQs) for using IBM Cloud\u00ae Kubernetes Service.\n\n\n\n What is Kubernetes? \n\nKubernetes is an open source platform for managing containerized workloads and services across multiple hosts, and offers managements tools for deploying, automating, monitoring, and scaling containerized apps with minimal to no manual intervention. All containers that make up your microservice are grouped into pods, a logical unit to ensure easy management and discovery. These pods run on compute hosts that are managed in a Kubernetes cluster that is portable, extensible, and self-healing in case of failures.\n\nFor more information about Kubernetes, see the [Kubernetes documentation](https://kubernetes.io/docs/home/?path=users&persona=app-developer<=vel=foundational).\n\n\n\n\n\n How does IBM Cloud Kubernetes Service work? \n\nWith IBM Cloud Kubernetes Service, you can create your own Kubernetes cluster to deploy and manage containerized apps on IBM Cloud. Your containerized apps are hosted on IBM Cloud infrastructure compute hosts that are called worker nodes. You can choose to provision your compute hosts as [virtual machines](https://cloud.ibm.com/docs/containers?topic=containers-planning_worker_nodesvm) with shared or dedicated resources, or as [bare metal machines](https://cloud.ibm.com/docs/containers?topic=containers-planning_worker_nodesbm) that can be optimized for GPU and software-defined storage (SDS) usage. Your worker nodes are controlled by a highly available Kubernetes master that is configured, monitored, and managed by IBM. You can use the IBM Cloud Kubernetes Service API or CLI to work with your cluster infrastructure resources and the Kubernetes API or CLI to manage your deployments and services.\n\nFor more information about how your cluster resources are set up, see the [Service architecture](https://cloud.ibm.com/docs/containers?topic=containers-service-arch).",
+          "url": "https://cloud.ibm.com/docs/containers?topic=containers-faqs",
+          "score": 29.133385,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724987604
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Kubernetes is an open source platform for managing containerized workloads"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Kubernetes is an open-source platform for managing containerized workloads and services across multiple hosts. It offers management tools for deploying, automating, monitoring, and scaling containerized applications with minimal manual intervention. Containers that make up your application are grouped into logical units called pods, which run on compute hosts managed in a Kubernetes cluster. This cluster is portable, extensible, and self-healing in case of failures. For more information, you can refer to the Kubernetes documentation here: https://kubernetes.io/docs/home/?path=users&persona=app-developer<=vel=foundational."
+    },
+    {
+      "speaker": "user",
+      "text": "How does IBM Cloud Kubernetes Service work and why should I use it?",
+      "timestamp": 1724987645,
+      "enrichments": {
+        "Question Type": [
+          "Composite"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Your containerized apps are hosted on IBM Cloud infrastructure compute hosts that are called worker nodes. You can choose to provision your compute hosts as virtual machines with shared or dedicated resources, or as bare metal machines that can be optimized for GPU and software-defined storage (SDS) usage. Your worker nodes are controlled by a highly available Kubernetes master that is configured, monitored, and managed by IBM. You can use the IBM Cloud Kubernetes Service API or CLI to work with your cluster infrastructure resources and the Kubernetes API or CLI to manage your deployments and services. IBM Cloud Kubernetes Service is a managed Kubernetes offering that provides powerful tools, an intuitive user experience, and built-in security for rapid delivery of apps that you can bind to cloud services related to IBM Watson, AI, IoT, DevOps, security, and data analytics. It offers features like intelligent scheduling, self-healing, horizontal scaling, service discovery and load balancing, automated rollouts and rollbacks, and secret and configuration management. Additionally, it has advanced capabilities around simplified cluster management, container security and isolation policies, the ability to design your own cluster, and integrated operational tools for consistency in deployment. ",
+      "timestamp": 1724987653,
+      "contexts": [
+        {
+          "document_id": "ibmcld_05777-7-1924",
+          "text": "\nFAQs \n\nReview frequently asked questions (FAQs) for using IBM Cloud\u00ae Kubernetes Service.\n\n\n\n What is Kubernetes? \n\nKubernetes is an open source platform for managing containerized workloads and services across multiple hosts, and offers managements tools for deploying, automating, monitoring, and scaling containerized apps with minimal to no manual intervention. All containers that make up your microservice are grouped into pods, a logical unit to ensure easy management and discovery. These pods run on compute hosts that are managed in a Kubernetes cluster that is portable, extensible, and self-healing in case of failures.\n\nFor more information about Kubernetes, see the [Kubernetes documentation](https://kubernetes.io/docs/home/?path=users&persona=app-developer<=vel=foundational).\n\n\n\n\n\n How does IBM Cloud Kubernetes Service work? \n\nWith IBM Cloud Kubernetes Service, you can create your own Kubernetes cluster to deploy and manage containerized apps on IBM Cloud. Your containerized apps are hosted on IBM Cloud infrastructure compute hosts that are called worker nodes. You can choose to provision your compute hosts as [virtual machines](https://cloud.ibm.com/docs/containers?topic=containers-planning_worker_nodesvm) with shared or dedicated resources, or as [bare metal machines](https://cloud.ibm.com/docs/containers?topic=containers-planning_worker_nodesbm) that can be optimized for GPU and software-defined storage (SDS) usage. Your worker nodes are controlled by a highly available Kubernetes master that is configured, monitored, and managed by IBM. You can use the IBM Cloud Kubernetes Service API or CLI to work with your cluster infrastructure resources and the Kubernetes API or CLI to manage your deployments and services.\n\nFor more information about how your cluster resources are set up, see the [Service architecture](https://cloud.ibm.com/docs/containers?topic=containers-service-arch).",
+          "url": "https://cloud.ibm.com/docs/containers?topic=containers-faqs",
+          "score": 29.08731,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724987778
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "With IBM Cloud Kubernetes Service, you can create your own Kubernetes cluster to deploy and manage"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_07578-373434-375500",
+          "text": "\nIBM Cloud Kubernetes Service is a managed Kubernetes offering that delivers powerful tools, an intuitive user experience, and built-in security for rapid delivery of apps that you can bind to cloud services that are related to IBM Watson\u00ae, AI, IoT, DevOps, security, and data analytics. As a certified Kubernetes provider, IBM Cloud Kubernetes Service provides intelligent scheduling, self-healing, horizontal scaling, service discovery and load balancing, automated rollouts and rollbacks, and secret and configuration management. The service also has advanced capabilities around simplified cluster management, container security and isolation policies, the ability to design your own cluster, and integrated operational tools for consistency in deployment.\n\nFor a detailed overview of capabilities and benefits, see [Benefits of using the service](https://cloud.ibm.com/docs/containers?topic=containers-cs_ovbenefits).\n* Can I get a free cluster?\n\nThe free tier option is deprecated and will be unsupported on 25 July 2023. Existing free tier clusters will be allowed to finish their 30-day trial window. If you want to try IBM Cloud Kubernetes Service, [contact IBM Sales](https://www.ibm.com/account/reg/us-en/signup?formid=MAIL-wcp).\n\nYou can have 1 free cluster at a time in IBM Cloud Kubernetes Service, and each free cluster expires in 30 days. Free clusters are ideal for testing out Kubernetes deployments and getting familiar with the IBM Cloud Kubernetes Service API, CLI, and console tools. After you are done testing your free cluster, you can [copy your configuration files and redeploy them to a standard cluster](https://cloud.ibm.com/docs/containers?topic=containers-update_appcopy_apps_cluster).\n* What container platforms are available for my cluster?\n\nWith IBM Cloud, you can create clusters for your containerized workloads from two different container management platforms: the IBM version of community Kubernetes and Red Hat OpenShift on IBM Cloud. The container platform that you select is installed on your cluster master and worker nodes.",
+          "url": "https://cloud.ibm.com/docs/faqs",
+          "score": 28.019844,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724987781
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "IBM Cloud Kubernetes Service is a managed Kubernetes offering that delivers powerful tools"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16727-373408-375474",
+          "text": "\nIBM Cloud Kubernetes Service is a managed Kubernetes offering that delivers powerful tools, an intuitive user experience, and built-in security for rapid delivery of apps that you can bind to cloud services that are related to IBM Watson\u00ae, AI, IoT, DevOps, security, and data analytics. As a certified Kubernetes provider, IBM Cloud Kubernetes Service provides intelligent scheduling, self-healing, horizontal scaling, service discovery and load balancing, automated rollouts and rollbacks, and secret and configuration management. The service also has advanced capabilities around simplified cluster management, container security and isolation policies, the ability to design your own cluster, and integrated operational tools for consistency in deployment.\n\nFor a detailed overview of capabilities and benefits, see [Benefits of using the service](https://cloud.ibm.com/docs/containers?topic=containers-cs_ovbenefits).\n* Can I get a free cluster?\n\nThe free tier option is deprecated and will be unsupported on 25 July 2023. Existing free tier clusters will be allowed to finish their 30-day trial window. If you want to try IBM Cloud Kubernetes Service, [contact IBM Sales](https://www.ibm.com/account/reg/us-en/signup?formid=MAIL-wcp).\n\nYou can have 1 free cluster at a time in IBM Cloud Kubernetes Service, and each free cluster expires in 30 days. Free clusters are ideal for testing out Kubernetes deployments and getting familiar with the IBM Cloud Kubernetes Service API, CLI, and console tools. After you are done testing your free cluster, you can [copy your configuration files and redeploy them to a standard cluster](https://cloud.ibm.com/docs/containers?topic=containers-update_appcopy_apps_cluster).\n* What container platforms are available for my cluster?\n\nWith IBM Cloud, you can create clusters for your containerized workloads from two different container management platforms: the IBM version of community Kubernetes and Red Hat OpenShift on IBM Cloud. The container platform that you select is installed on your cluster master and worker nodes.",
+          "url": "https://cloud.ibm.com/docs?tab=faqs",
+          "score": 28.019844,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724987782
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "IBM Cloud Kubernetes Service is a managed Kubernetes offering that delivers powerful tools"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "IBM Cloud Kubernetes Service is a managed Kubernetes offering that provides powerful tools, an intuitive user experience, and built-in security for rapid delivery of apps that you can bind to cloud services related to IBM Watson, AI, IoT, DevOps, security, and data analytics. It offers features like intelligent scheduling, self-healing, horizontal scaling, service discovery and load balancing, automated rollouts and rollbacks, and secret and configuration management. Additionally, it has advanced capabilities around simplified cluster management, container security and isolation policies, the ability to design your own cluster, and integrated operational tools for consistency in deployment.\nUsing IBM Cloud Kubernetes Service allows you to focus on developing applications without worrying about managing the underlying infrastructure. It offers a free tier option for testing Kubernetes deployments and getting familiar with the API, CLI, and console tools. However, please note that the free tier option will be unsupported after 25th July 2023.\nIBM Cloud Kubernetes Service supports two different container management platforms: the IBM version of community Kubernetes and Red Hat OpenShift on IBM Cloud. The container platform you select is installed on your cluster master and worker nodes.\nTo understand how IBM Cloud Kubernetes Service works, you can refer to the FAQs document, which explains the basics of Kubernetes and how IBM Cloud Kubernetes Service uses it to provide a managed environment for deploying and managing containerized applications."
+    },
+    {
+      "speaker": "user",
+      "text": "what options and access should I give out to secure my cluster?",
+      "timestamp": 1724988136,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "To secure your cluster in IBM Cloud Kubernetes Service, you can use built-in security features to protect various components such as the Kubernetes API server, etcd data store, worker node, network, storage, images, and deployments against malicious attacks. These features help ensure security compliance and data integrity. Additionally, you can leverage built-in logging and monitoring tools to detect malicious attacks and suspicious usage patterns. As for access policies, IBM Cloud Kubernetes Service uses Cloud Identity and Access Management (IAM) to grant access to cluster resources through IAM platform access roles and Kubernetes role-based access control (RBAC) policies through IAM service access roles. The access policies that you assign users depend on what you want your users to be able to do. You can find more information about what roles authorize which types of actions on the User access reference page or in the following table's links. For steps to assign policies, see Granting users access to your cluster through IBM Cloud IAM.",
+      "timestamp": 1724988145,
+      "contexts": [
+        {
+          "document_id": "ibmcld_07578-380995-382843",
+          "text": "\n* What options do I have to secure my cluster?\n\nYou can use built-in security features in IBM Cloud Kubernetes Service to protect the components in your cluster, your data, and app deployments to ensure security compliance and data integrity. Use these features to secure your Kubernetes API server, etcd data store, worker node, network, storage, images, and deployments against malicious attacks. You can also leverage built-in logging and monitoring tools to detect malicious attacks and suspicious usage patterns.\n\nFor more information about the components of your cluster and how you can meet security standards for each component, see [Security for IBM Cloud Kubernetes Service](https://cloud.ibm.com/docs/containers?topic=containers-securitysecurity).\n* What access policies do I give my cluster users?\n\nIBM Cloud Kubernetes Service uses Cloud Identity and Access Management (IAM) to grant access to cluster resources through IAM platform access roles and Kubernetes role-based access control (RBAC) policies through IAM service access roles. For more information about types of access policies, see [Pick the correct access policy and role for your users](https://cloud.ibm.com/docs/containers?topic=containers-access-overviewaccess_roles).\n\nThe access policies that you assign users vary depending on what you want your users to be able to do. You can find more information about what roles authorize which types of actions on the [User access reference page](https://cloud.ibm.com/docs/containers?topic=containers-access_reference) or in the following table's links. For steps to assign policies, see [Granting users access to your cluster through IBM Cloud IAM](https://cloud.ibm.com/docs/containers?topic=containers-userschecking-perms).\n\n\n\nTypes of roles you might assign to meet different use cases.\n\n Use case Example roles and scope",
+          "url": "https://cloud.ibm.com/docs/faqs",
+          "score": 28.924881,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724988392
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "You can use built-in security features in IBM Cloud Kubernetes Service to protect the components in your cluster, y"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16727-380969-382817",
+          "text": "\n* What options do I have to secure my cluster?\n\nYou can use built-in security features in IBM Cloud Kubernetes Service to protect the components in your cluster, your data, and app deployments to ensure security compliance and data integrity. Use these features to secure your Kubernetes API server, etcd data store, worker node, network, storage, images, and deployments against malicious attacks. You can also leverage built-in logging and monitoring tools to detect malicious attacks and suspicious usage patterns.\n\nFor more information about the components of your cluster and how you can meet security standards for each component, see [Security for IBM Cloud Kubernetes Service](https://cloud.ibm.com/docs/containers?topic=containers-securitysecurity).\n* What access policies do I give my cluster users?\n\nIBM Cloud Kubernetes Service uses Cloud Identity and Access Management (IAM) to grant access to cluster resources through IAM platform access roles and Kubernetes role-based access control (RBAC) policies through IAM service access roles. For more information about types of access policies, see [Pick the correct access policy and role for your users](https://cloud.ibm.com/docs/containers?topic=containers-access-overviewaccess_roles).\n\nThe access policies that you assign users vary depending on what you want your users to be able to do. You can find more information about what roles authorize which types of actions on the [User access reference page](https://cloud.ibm.com/docs/containers?topic=containers-access_reference) or in the following table's links. For steps to assign policies, see [Granting users access to your cluster through IBM Cloud IAM](https://cloud.ibm.com/docs/containers?topic=containers-userschecking-perms).\n\n\n\nTypes of roles you might assign to meet different use cases.\n\n Use case Example roles and scope",
+          "url": "https://cloud.ibm.com/docs?tab=faqs",
+          "score": 28.924881,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724988394
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "You can use built-in security features in IBM Cloud Kubernetes Service to protect the components in your cluster, y"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "To secure your cluster in IBM Cloud Kubernetes Service, you can use built-in security features to protect various components such as the Kubernetes API server, etcd data store, worker node, network, storage, images, and deployments against malicious attacks. These features help ensure security compliance and data integrity. Additionally, you can leverage built-in logging and monitoring tools to detect malicious attacks and suspicious usage patterns.\nAs for access policies, IBM Cloud Kubernetes Service uses Cloud Identity and Access Management (IAM) to grant access to cluster resources through IAM platform access roles and Kubernetes role-based access control (RBAC) policies through IAM service access roles. The access policies that you assign users depend on what you want your users to be able to do. You can find more information about what roles authorize which types of actions on the User access reference page or in the following table's links. For steps to assign policies, see Granting users access to your cluster through IBM Cloud IAM.\nHere are some examples of roles you might assign to meet different use cases:\n| Use case | Example roles and scope |\n|---|---|\n| Deploying and managing apps | Developer, Operator, Administrator |\n| Monitoring and troubleshooting | Viewer, Operator, Administrator |\n| Managing cluster infrastructure | Infrastructure Administrator, Cluster Administrator |\n| Performing maintenance tasks | Operator, Cluster Administrator |\nFor instance, if you want a user to be able to deploy and manage apps, you might assign them the Developer, Operator, or Administrator role. If you want a user to be able to monitor and troubleshoot, you might assign them the Viewer, Operator, or Administrator role. If you want a user to be able to manage cluster infrastructure, you might assign them the Infrastructure Administrator or Cluster Administrator role. And if you want a user to be able to perform maintenance tasks, you might assign them the Operator or Cluster Administrator role."
+    },
+    {
+      "speaker": "user",
+      "text": "can I get some information about service support in case I run into some issues?",
+      "timestamp": 1724988503,
+      "enrichments": {
+        "Question Type": [
+          "Troubleshooting"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "IBM Cloud Kubernetes Service concurrently supports multiple versions of Kubernetes. However, when a new version (n) is released, versions up to 2 behind (n-2) are supported. If you need support on worker node operated systems by cluster version, please see the Kubernetes version information. Certain VPC worker node flavors offer GPU support. For more information, see the VPC flavors.",
+      "timestamp": 1724988508,
+      "contexts": [
+        {
+          "document_id": "ibmcld_07578-388106-390013",
+          "text": "\nKeep in mind that some services such as Ingress might require multiple worker nodes for high availability, and you might not be able to run these services or your apps in the smallest size cluster possible.\n* Which Kubernetes versions does the service support?\n\nIBM Cloud Kubernetes Service concurrently supports multiple versions of Kubernetes. When a new version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported.\n\nFor more information about supported versions and update actions that you must take to move from one version to another, see [Kubernetes version information](https://cloud.ibm.com/docs/containers?topic=containers-cs_versions)\n* Which worker node operating systems does the service support?\n\nFor a list of supported worker node operated systems by cluster version, see [Kubernetes version information](https://cloud.ibm.com/docs/containers?topic=containers-cs_versions).\n* Where is the service available?\n\nIBM Cloud Kubernetes Service is available worldwide. You can create clusters in every supported IBM Cloud Kubernetes Service region.\n\nFor more information about supported regions, see [Locations](https://cloud.ibm.com/docs/containers?topic=containers-regions-and-zonesregions-and-zones).\n* Is the service highly available?\n\nYes. By default, IBM Cloud Kubernetes Service sets up many components such as the cluster master with replicas, anti-affinity, and other options to increase the high availability (HA) of the service. You can increase the redundancy and failure toleration of your cluster worker nodes, storage, networking, and workloads by configuring them in a highly available architecture. For an overview of the default setup and your options to increase HA, see [High availability for IBM Cloud Kubernetes Service](https://cloud.ibm.com/docs/containers?topic=containers-ha).",
+          "url": "https://cloud.ibm.com/docs/faqs",
+          "score": 23.06808,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724988562
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "IBM Cloud Kubernetes Service concurrently supports multiple versions of Kubernetes"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_07578-406083-407747",
+          "text": "\nFor more information about what is included in a security patch, refer to the [version change log](https://cloud.ibm.com/docs/containers?topic=containers-cs_versionscs_versions_available).\n* Does the service offer support for bare metal and GPU?\n\nCertain VPC worker node flavors offer GPU support. For more information, see the [VPC flavors](https://cloud.ibm.com/docs/openshift?topic=openshift-vpc-flavors).\n\nYes, you can provision your worker node as a single-tenant physical bare metal server. Bare metal servers come with high-performance benefits for workloads such as data, GPU, and AI. Additionally, all the hardware resources are dedicated to your workloads, so you don't have to worry about \"noisy neighbors\".\n\nFor more information about available bare metal flavors and how bare metal is different from virtual machines, see [Physical machines (bare metal)](https://cloud.ibm.com/docs/openshift?topic=openshift-planning_worker_nodesbm).\n* What is the smallest size cluster that I can make?\n\nYour cluster must have at least 2 worker nodes to run default Kubernetes and OpenShift Container Platform components. You can't have a cluster with 0 worker nodes, and you can't power off or suspend billing for your worker nodes. Additionally, the type of cluster and the number of worker pools that you have can impact the size of your cluster.\n\n\n\n* Single zone clusters: [Create a cluster](https://cloud.ibm.com/docs/openshift?topic=openshift-clusters) with 2 worker nodes in the default worker pool.\n* Multizone clusters: You must [create a cluster](https://cloud.ibm.com/docs/openshift?topic=openshift-clusters) with 1 worker node per zone in the worker pool.",
+          "url": "https://cloud.ibm.com/docs/faqs",
+          "score": 21.690649,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724988738
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Does the service offer support for bare metal and GPU?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16727-406057-407721",
+          "text": "\nFor more information about what is included in a security patch, refer to the [version change log](https://cloud.ibm.com/docs/containers?topic=containers-cs_versionscs_versions_available).\n* Does the service offer support for bare metal and GPU?\n\nCertain VPC worker node flavors offer GPU support. For more information, see the [VPC flavors](https://cloud.ibm.com/docs/openshift?topic=openshift-vpc-flavors).\n\nYes, you can provision your worker node as a single-tenant physical bare metal server. Bare metal servers come with high-performance benefits for workloads such as data, GPU, and AI. Additionally, all the hardware resources are dedicated to your workloads, so you don't have to worry about \"noisy neighbors\".\n\nFor more information about available bare metal flavors and how bare metal is different from virtual machines, see [Physical machines (bare metal)](https://cloud.ibm.com/docs/openshift?topic=openshift-planning_worker_nodesbm).\n* What is the smallest size cluster that I can make?\n\nYour cluster must have at least 2 worker nodes to run default Kubernetes and OpenShift Container Platform components. You can't have a cluster with 0 worker nodes, and you can't power off or suspend billing for your worker nodes. Additionally, the type of cluster and the number of worker pools that you have can impact the size of your cluster.\n\n\n\n* Single zone clusters: [Create a cluster](https://cloud.ibm.com/docs/openshift?topic=openshift-clusters) with 2 worker nodes in the default worker pool.\n* Multizone clusters: You must [create a cluster](https://cloud.ibm.com/docs/openshift?topic=openshift-clusters) with 1 worker node per zone in the worker pool.",
+          "url": "https://cloud.ibm.com/docs?tab=faqs",
+          "score": 21.690649,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724988740
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Does the service offer support for bare metal and GPU?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_05777-14691-16338",
+          "text": "\nFor more information about what is included in a security patch, refer to the [version change log](https://cloud.ibm.com/docs/containers?topic=containers-cs_versionscs_versions_available).\n\n\n\n\n\n Does the service offer support for bare metal and GPU? \n\nCertain VPC worker node flavors offer GPU support. For more information, see the [VPC flavors](https://cloud.ibm.com/docs/containers?topic=containers-vpc-flavors).\n\nYes, you can provision your worker node as a single-tenant physical bare metal server. Bare metal servers come with high-performance benefits for workloads such as data, GPU, and AI. Additionally, all the hardware resources are dedicated to your workloads, so you don't have to worry about \"noisy neighbors\".\n\nFor more information about available bare metal flavors and how bare metal is different from virtual machines, see [Physical machines (bare metal)](https://cloud.ibm.com/docs/containers?topic=containers-planning_worker_nodesbm).\n\n\n\n\n\n What is the smallest size cluster that I can make? \n\nYour cluster must have at least 1 worker node to run default Kubernetes components. You can't have a cluster with 0 worker nodes, and you can't power off or suspend billing for your worker nodes. Additionally, the type of cluster and the number of worker pools that you have can impact the size of your cluster.\n\n\n\n* Single zone clusters: [Create a cluster](https://cloud.ibm.com/docs/containers?topic=containers-clusters) with 1 worker node in the default worker pool.\n* Multizone clusters: You must [create a cluster](https://cloud.ibm.com/docs/containers?topic=containers-clusters) with 1 worker node per zone in the worker pool.",
+          "url": "https://cloud.ibm.com/docs/containers?topic=containers-faqs",
+          "score": 21.386656,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1724988742
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Does the service offer support for bare metal and GPU?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "IBM Cloud Kubernetes Service provides support for multiple versions of Kubernetes, with new versions (n) being supported along with versions up to 2 behind (n-2). Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported. For a list of supported worker node operating systems by cluster version, you can refer to the Kubernetes version information in the IBM Cloud documentation.\nIf you encounter issues or need assistance, you can reach out to the IBM Cloud support team. They are available 24/7 and can be contacted through the IBM Cloud console, by phone, or via email. The support options available to you depend on your IBM Cloud account type and level. For more information, you can refer to the IBM Cloud documentation on getting help and support.\nIn addition to official support, IBM also offers various resources to help you troubleshoot and resolve issues on your own. These include a comprehensive knowledge base, a community forum where you can ask questions and share knowledge with other IBM Cloud users, and documentation and tutorials on using IBM Cloud Kubernetes Service.\nIf you are unable to find a solution to your issue through these resources, you may want to consider engaging an IBM Cloud partner or consultant for additional assistance. IBM Cloud partners are certified experts who can provide consulting, migration, and management services to help you get the most out of IBM Cloud Kubernetes Service. You can find a list of IBM Cloud partners on the IBM Cloud website."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+      "status": "created",
+      "timestamp": 1724988961
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "accepted",
+      "timestamp": 1726751560
+    }
+  ],
+  "editor": null,
+  "domain": "mt-rag-ibmcloud-elser-512-100-20240502",
+  "reviewer": "9dcd142c-415e-4161-a82f-c8b14bfb36ac"
+}

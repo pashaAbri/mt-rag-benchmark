@@ -1,0 +1,595 @@
+{
+  "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-clapnq-elser-512-100-20240503",
+      "size": "183408"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "collections": {
+        "regex": "mt-rag*"
+      },
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "Where do guinea pigs sleep in the wild?",
+      "timestamp": 1725504996,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "In the wild, guinea pigs, which are social animals, tend to  seek shelter in the burrows of other animals, as well as in crevices and tunnels formed by vegetation where they most likely sleep.",
+      "timestamp": 1725505000,
+      "contexts": [
+        {
+          "document_id": "850931827_11086-12414-0-1328",
+          "text": "Guinea pig\nC. porcellus is not found naturally in the wild ; it is likely descended from closely related species of cavies , such as C. aperea , C. fulgida , and C. tschudii , which are still commonly found in various regions of South America . Studies from 2007 -- 2010 applied molecular markers and studied the skull and skeletal morphology of current and mummified animals , thereby revealing the ancestor to most likely be Cavia tschudii . Some species of cavy identified in the 20th century , such as C. anolaimae and C. guianae , may be domestic guinea pigs that have become feral by reintroduction into the wild . Wild cavies are found on grassy plains and occupy an ecological niche similar to that of cattle . They are social , living in the wild in small groups that consist of several females ( sows ) , a male ( boar ) , and the young ( which , in a break with the preceding porcine nomenclature , are called `` pups '' not `` piglets '' ) . They move together in groups ( herds ) eating grass or other vegetation , and do not store food . While they do not burrow themselves or build nests , they frequently seek shelter in the burrows of other animals , as well as in crevices and tunnels formed by vegetation . They tend to be most active during dawn and dusk ( crepuscular ) , when it is harder for predators to spot them .",
+          "title": "Guinea pig",
+          "score": 19.10362,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1725505820
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Where do guinea pigs sleep in the wild?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "In the wild, guinea pigs, which are social animals, tend to be most active during dawn and dusk (crepuscular) and seek shelter in the burrows of other animals, as well as in crevices and tunnels formed by vegetation. However, the documents do not provide specific information about where or how guinea pigs sleep in the wild."
+    },
+    {
+      "speaker": "user",
+      "text": "where does Domestic guinea pigs live and what does Domestic guinea pigs activity look like?",
+      "timestamp": 1725505914,
+      "enrichments": {
+        "Question Type": [
+          "Composite"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Domestic guinea pigs thrive in groups of two or more and can learn to recognize and bond with other individual pigs. They have developed a different biological rhythm from their wild counterparts, with longer periods of activity followed by short periods of sleep throughout the day. Activity is scattered randomly throughout the day, with no regular circadian patterns, aside from an avoidance of intense light. Domestic guinea pigs generally live in cages, although some owners of large numbers of guinea pigs dedicate entire rooms to their pets.",
+      "timestamp": 1725505921,
+      "contexts": [
+        {
+          "document_id": "850931827_12432-13339-0-907",
+          "text": "Guinea pig\nDomesticated guinea pigs thrive in groups of two or more ; groups of sows , or groups of one or more sows and a neutered boar are common combinations , but boars can sometimes live together . Guinea pigs learn to recognize and bond with other individual pigs , and testing of boars shows their neuroendocrine stress response is significantly lowered in the presence of a bonded female when compared to the presence of unfamiliar females . Groups of boars may also get along , provided their cage has enough space , they are introduced at an early age , and no females are present . Domestic guinea pigs have developed a different biological rhythm from their wild counterparts , and have longer periods of activity followed by short periods of sleep in between . Activity is scattered randomly throughout the day ; aside from an avoidance of intense light , no regular circadian patterns are apparent . This",
+          "title": "Guinea pig",
+          "score": 21.828062,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1725506014
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Where do guinea pigs sleep in the wild?\n|assistant|: In the wild, guinea pigs, which are social animals, tend to be most active during dawn and dusk (crepuscular) and seek shelter in the burrows of other animals, as well as in crevices and tunnels formed by vegetation. However, I do not provide specific information about where guinea pigs sleep in the wild.\n|user|: where does Domestic guinea pigs live and what does Domestic guinea pigs activity look like?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "850931827_13486-14754-0-1268",
+          "text": "Guinea pig\nDomestic guinea pigs generally live in cages , although some owners of large numbers of guinea pigs dedicate entire rooms to their pets . Cages with solid or wire mesh floors are used , although wire mesh floors can cause injury and may be associated with an infection commonly known as bumblefoot ( ulcerative pododermatitis ) . `` Cubes and Coroplast '' ( C&C ) style cages are now a common choice . Cages are often lined with wood shavings or a similar material . Bedding made from red cedar ( Eastern or Western ) and pine , both softwoods , were commonly used in the past , but these materials are now believed to contain harmful phenols ( aromatic hydrocarbons ) and oils . Safer bedding materials made from hardwoods ( such as aspen ) , paper products , and corn cob materials are other alternatives . Guinea pigs tend to be messy within their cages ; they often jump into their food bowls or kick bedding and feces into them , and their urine sometimes crystallizes on cage surfaces , making it difficult to remove . After its cage has been cleaned , a guinea pig typically urinates and drags its lower body across the floor of the cage to mark its territory . Male guinea pigs may also mark their territory in this way when they are taken out of their cages .",
+          "title": "Guinea pig",
+          "score": 17.94472,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1725506048
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "guinea pigs sleeping area"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Domestic guinea pigs thrive in groups of two or more and can learn to recognize and bond with other individual pigs. They have developed a different biological rhythm from their wild counterparts, with longer periods of activity followed by short periods of sleep throughout the day. Activity is scattered randomly throughout the day, with no regular circadian patterns, aside from an avoidance of intense light. I don't have specific information on where domestic guinea pigs live, but they are often kept as pets in homes."
+    },
+    {
+      "speaker": "user",
+      "text": "more about guinea pig appearance or body",
+      "timestamp": 1725506223,
+      "enrichments": {
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Question Type": [
+          "Explanation"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Guinea pig has a stout, compact body, and its normal body temperature is 101--104\u00b0 F ( 38 -- 40 \u00b0 C ). Domesticated guinea pigs occur in many breeds:  The most common varieties found in pet stores are the English shorthair ( also known as the American ) , which have a short , smooth coat , and the Abyssinian , whose coat is ruffled with cowlicks , or rosettes . Also popular among breeders are the Peruvian and the Sheltie ( or Silkie ) , both straight longhair breeds , and the Texel , a curly longhair.",
+      "timestamp": 1725506238,
+      "contexts": [
+        {
+          "document_id": "850931827_28415-29015-0-594",
+          "text": "Guinea pig\nBecause the guinea pig has a stout , compact body , it more easily tolerates excessive cold than excessive heat . Its normal body temperature is 101 -- 104 \u00b0 F ( 38 -- 40 \u00b0 C ) , so its ideal ambient air temperature range is similar to a human 's , about 65 -- 75 \u00b0 F ( 18 -- 24 \u00b0 C ) . Consistent ambient temperatures in excess of 90 \u00b0 F ( 32 \u00b0 C ) have been linked to hyperthermia and death , especially among pregnant sows . Guinea pigs are not well suited to environments that feature wind or frequent drafts , and respond poorly to extremes of humidity outside of the range of 30 -- 70 % .",
+          "title": "Guinea pig",
+          "score": 14.233223,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1725506316
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "guinea pigs sleeping area"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "850931827_30793-31505-0-712",
+          "text": "Guinea pig\nDomesticated guinea pigs occur in many breeds , which have been developed since their introduction to Europe and North America . These varieties vary in hair and color composition . The most common varieties found in pet stores are the English shorthair ( also known as the American ) , which have a short , smooth coat , and the Abyssinian , whose coat is ruffled with cowlicks , or rosettes . Also popular among breeders are the Peruvian and the Sheltie ( or Silkie ) , both straight longhair breeds , and the Texel , a curly longhair . Grooming of guinea pigs is primarily accomplished using combs or brushes . Shorthair breeds are typically brushed weekly , while longhair breeds may require daily grooming .",
+          "title": "Guinea pig",
+          "score": 14.12187,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1725506318
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "guinea pigs sleeping area"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Domesticated guinea pigs come in various breeds, which differ in hair and color composition. The most common breeds found in pet stores are the English shorthair (also known as the American), characterized by a short, smooth coat, and the Abyssinian, whose coat features ruffled cowlicks or rosettes. Other popular breeds include the Peruvian and Sheltie (or Silkie), both of which have straight long hair, and the Texel, which has curly long hair. Guinea pigs' body temperature ranges between 101 - 104 \u00b0F (38 - 40 \u00b0C), and they are more tolerant of cold than heat. They prefer consistent ambient temperatures within the range of 65 - 75 \u00b0F (18 - 24 \u00b0C). Excessive heat, especially for pregnant sows, can lead to hyperthermia and death. Guinea pigs are sensitive to wind, drafts, and humidity outside the range of 30 - 70%."
+    },
+    {
+      "speaker": "user",
+      "text": "can you clarify the breed here? is there different species of Guinea pig? maybe they are from different origin?",
+      "timestamp": 1725506506,
+      "enrichments": {
+        "Question Type": [
+          "Composite"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The most common varieties found in pet stores are the English shorthair ( also known as the American ), and the Abyssinian. Also popular among breeders are the Peruvian and the Sheltie ( or Silkie ). The guinea pig or domestic guinea pig ( Cavia porcellus ) is a species of rodent belonging to the family Caviidae and the genus Cavia. Guinea pig C. porcellus is likely descended from closely related species of cavies , such as C. aperea , C. fulgida , and C. tschudii. ",
+      "timestamp": 1725506520,
+      "contexts": [
+        {
+          "document_id": "850931827_30793-31505-0-712",
+          "text": "Guinea pig\nDomesticated guinea pigs occur in many breeds , which have been developed since their introduction to Europe and North America . These varieties vary in hair and color composition . The most common varieties found in pet stores are the English shorthair ( also known as the American ) , which have a short , smooth coat , and the Abyssinian , whose coat is ruffled with cowlicks , or rosettes . Also popular among breeders are the Peruvian and the Sheltie ( or Silkie ) , both straight longhair breeds , and the Texel , a curly longhair . Grooming of guinea pigs is primarily accomplished using combs or brushes . Shorthair breeds are typically brushed weekly , while longhair breeds may require daily grooming .",
+          "title": "Guinea pig",
+          "score": 14.12187,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1725506590
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "guinea pigs sleeping area"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "850931827_588-1089-0-501",
+          "text": "Guinea pig\nThe guinea pig or domestic guinea pig ( Cavia porcellus ) , also known as cavy or domestic cavy , is a species of rodent belonging to the family Caviidae and the genus Cavia . Despite their common name , these animals are not in the pig family Suidae , nor do they come from Guinea in Africa ; they originated in the Andes of South America and studies based on biochemistry and hybridization suggest they are domestic , not wild , descendants of a closely related species of cavy such as C. tschudii .",
+          "title": "Guinea pig",
+          "score": 14.538113,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1725506601
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "guinea pigs sleeping area"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "850931827_11086-12414-0-1328",
+          "text": "Guinea pig\nC. porcellus is not found naturally in the wild ; it is likely descended from closely related species of cavies , such as C. aperea , C. fulgida , and C. tschudii , which are still commonly found in various regions of South America . Studies from 2007 -- 2010 applied molecular markers and studied the skull and skeletal morphology of current and mummified animals , thereby revealing the ancestor to most likely be Cavia tschudii . Some species of cavy identified in the 20th century , such as C. anolaimae and C. guianae , may be domestic guinea pigs that have become feral by reintroduction into the wild . Wild cavies are found on grassy plains and occupy an ecological niche similar to that of cattle . They are social , living in the wild in small groups that consist of several females ( sows ) , a male ( boar ) , and the young ( which , in a break with the preceding porcine nomenclature , are called `` pups '' not `` piglets '' ) . They move together in groups ( herds ) eating grass or other vegetation , and do not store food . While they do not burrow themselves or build nests , they frequently seek shelter in the burrows of other animals , as well as in crevices and tunnels formed by vegetation . They tend to be most active during dawn and dusk ( crepuscular ) , when it is harder for predators to spot them .",
+          "title": "Guinea pig",
+          "score": 19.125776,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1725506670
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "guinea pigs species"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "850931827_212-587-0-375",
+          "text": "Guinea pig\nDomestic guinea pig Two adult guinea pigs Conservation status Domesticated Scientific classification Kingdom : Animalia Phylum : Chordata Class : Mammalia Order : Rodentia Family : Caviidae Genus : Cavia Species : C. porcellus Binomial name Cavia porcellus ( Linnaeus , 1758 ) Synonyms Mus porcellus Cavia cobaya Cavia anolaimae Cavia cutleri Cavia leucopyga Cavia longipilis",
+          "title": "Guinea pig",
+          "score": 18.405012,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1725506672
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "guinea pigs species"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The term \"breed\" is used to describe the different varieties of domesticated guinea pigs, which have been developed based on differences in hair and color composition. The most common breeds found in pet stores are the English shorthair (also known as the American), which have a short, smooth coat, and the Abyssinian, whose coat is ruffled with cowlicks or rosettes. Other popular breeds include the Peruvian and the Sheltie (or Silkie), both straight longhair breeds, and the Texel, a curly longhair.\nRegarding their origins, all domesticated guinea pigs belong to the same species, Cavia porcellus. They are not different species but rather different varieties of the same species. These animals are believed to be descendants of wild cavies native to the Andes of South America, particularly Cavia tschudii, according to recent studies. However, they are not found naturally in the wild and are considered domesticated animals."
+    },
+    {
+      "speaker": "user",
+      "text": "why is Guinea pig called pig?",
+      "timestamp": 1725506858,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "How the animals came to be called `` pigs '' is not clear. Some thinks it is because of how it looks like, and some say they emit are similar to those made by pigs. Ironically , breeders tend to use the more formal cavy '' to describe the animal , while in scientific and laboratory contexts , it is far more commonly referred to by the more colloquial `` guinea pig '' .",
+      "timestamp": 1725506866,
+      "contexts": [
+        {
+          "document_id": "850931827_3168-3898-0-728",
+          "text": "Guinea pig\nThe scientific name of the common species is Cavia porcellus , with porcellus being Latin for `` little pig '' . Cavia is New Latin ; it is derived from cabiai , the animal 's name in the language of the Galibi tribes once native to French Guiana . Cabiai may be an adaptation of the Portuguese \u00e7avia ( now savia ) , which is itself derived from the Tupi word sauj\u00e1 , meaning rat . Guinea pigs are called quwi or jaca in Quechua and cuy or cuyo ( plural cuyes , cuyos ) in the Spanish of Ecuador , Peru , and Bolivia . Ironically , breeders tend to use the more formal `` cavy '' to describe the animal , while in scientific and laboratory contexts , it is far more commonly referred to by the more colloquial `` guinea pig '' .",
+          "title": "Guinea pig",
+          "score": 20.253887,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1725506917
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "guinea pigs is pig"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "850931827_3899-4355-0-456",
+          "text": "Guinea pig\nHow the animals came to be called `` pigs '' is not clear . They are built somewhat like pigs , with large heads relative to their bodies , stout necks , and rounded rumps with no tail of any consequence ; some of the sounds they emit are very similar to those made by pigs , and they also spend a large amount of time eating . They can survive for long periods in small quarters , like a ' pig pen ' , and were thus easily transported on ships to Europe .",
+          "title": "Guinea pig",
+          "score": 19.952223,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1725506919
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "guinea pigs is pig"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The reason guinea pigs are called \"pigs\" is not entirely clear, but it could be due to their physical resemblance to pigs, such as their large heads, stout necks, rounded rumps, and the sounds they make. Additionally, guinea pigs can survive in small spaces for extended periods, making them easy to transport on ships, much like pigs in a pen. The name \"guinea pig\" is believed to have originated from their association with the country of Guinea and their use in medical experiments, even though they are not native to Guinea and are not true pigs."
+    },
+    {
+      "speaker": "user",
+      "text": "do you think I can have guinea pig as my pet?",
+      "timestamp": 1725507046,
+      "enrichments": {
+        "Question Type": [
+          "Opinion"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Guinea pigs can make great pets due to their docile nature, friendly responsiveness to handling, and relatively easy care. It is popular as exotic pets among the upper classes and royalty in Europe. If handled correctly early in life , guinea pigs become amenable to being picked up and carried , and seldom bite or scratch. Guinea pigs that become familiar with their owner will whistle on the owner 's approach.",
+      "timestamp": 1725507051,
+      "contexts": [
+        {
+          "document_id": "850931827_1589-2154-0-565",
+          "text": "Guinea pig\nIn Western societies , the domestic guinea pig has enjoyed widespread popularity as a household pet , a type of pocket pet , ever since its introduction by European traders in the 16th century . Their docile nature ; friendly , even affectionate responsiveness to handling and feeding ; and the relative ease of caring for them continue to make guinea pigs a popular choice of pet . Organizations devoted to competitive breeding of guinea pigs have been formed worldwide , and many specialized breeds with varying coat colors and textures are selected by breeders .",
+          "title": "Guinea pig",
+          "score": 19.135925,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1725507176
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "guinea pigs pet"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "850931827_8563-10133-0-1570",
+          "text": "Guinea pig\nSpanish , Dutch , and English traders brought guinea pigs to Europe , where they quickly became popular as exotic pets among the upper classes and royalty , including Queen Elizabeth I . The earliest known written account of the guinea pig dates from 1547 , in a description of the animal from Santo Domingo ; because cavies are not native to Hispaniola , the animal was earlier believed to have been introduced there by Spanish travelers . However , based on more recent excavations on West Indian islands , the animal must have been introduced by ceramic - making horticulturalists from South America to the Caribbean around 500 BC , and it was present in the Ostionoid period , for example , on Puerto Rico , long before the advent of the Spaniards . The guinea pig was first described in the West in 1554 by the Swiss naturalist Conrad Gessner . Its binomial scientific name was first used by Erxleben in 1777 ; it is an amalgam of Pallas ' generic designation ( 1766 ) and Linnaeus ' specific conferral ( 1758 ) . The earliest known illustration of a domestic guinea pig is a painting ( artist unknown ) in the collection of the National Portrait Gallery in London , dated to 1580 , which shows a girl in typical Elizabethan dress holding a tortoise - shell guinea pig in her hands ; she is flanked by her two brothers , one of whom holds a pet bird . The picture dates from the same period as the oldest recorded guinea pig remains in England , which are a partial cavy skeleton found at Hill Hall , an Elizabethan manor house in Essex , and dated to around 1575 .",
+          "title": "Guinea pig",
+          "score": 17.774786,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1725507178
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "guinea pigs pet"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "850931827_30008-30728-0-720",
+          "text": "Guinea pig\nIf handled correctly early in life , guinea pigs become amenable to being picked up and carried , and seldom bite or scratch . They are timid explorers and often hesitate to attempt an escape from their cage even when an opportunity presents itself . Still , they show considerable curiosity when allowed to walk freely , especially in familiar and safe terrain . Guinea pigs that become familiar with their owner will whistle on the owner 's approach ; they will also learn to whistle in response to the rustling of plastic bags or the opening of refrigerator doors , where their food is most commonly stored . In Switzerland , owning a single guinea pig is considered harmful to its well - being and forbidden by law .",
+          "title": "Guinea pig",
+          "score": 18.140282,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1725507181
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "teach guinea pigs "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Based on the information provided, guinea pigs can make great pets due to their docile nature, friendly responsiveness to handling, and relatively easy care. However, it's important to consider factors such as time commitment, space, and resources required to care for a guinea pig properly before deciding to get one as a pet. It's also recommended to handle and interact with guinea pigs prior to getting one to ensure a good fit with your lifestyle."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+      "status": "created",
+      "timestamp": 1725507280
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "edited",
+      "timestamp": 1726501290
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "accepted",
+      "timestamp": 1726503244
+    }
+  ],
+  "editor": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+  "domain": "mt-rag-clapnq-elser-512-100-20240503",
+  "reviewer": "f6ce971c-68d2-4c26-b1c0-477dd28a5181"
+}

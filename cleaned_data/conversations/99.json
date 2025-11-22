@@ -1,0 +1,814 @@
+{
+  "author": "085be9e4-6fe3-4f6c-b438-ad7805e64241",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-ibmcloud-elser-512-100-20240502",
+      "size": "72442"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "How does version 6.15.0 differ from 6.14.0?",
+      "timestamp": 1724260866,
+      "enrichments": {
+        "Question Type": [
+          "Comparative"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Assuming the question is about the IBM Cloud\u00ae Virtual Private Cloud (VPC) command line interface (CLI),  version 6.15.0 includes the following changes over version 6.14.0. It introduces new commands image-obsolete and image-deprecate for image lifecycle management. It also adds support for image lifecycle management in image-create, image-update, and images commands and it fixes an issue with using the SSH key generated from UI in CLI.",
+      "timestamp": 1724260871,
+      "contexts": [
+        {
+          "document_id": "ibmcld_16034-7-1778",
+          "text": "\nVPC CLI release notes \n\nThe following release notes are for the IBM Cloud\u00ae Virtual Private Cloud (VPC) command line interface (CLI).\n\n\n\n v6.15.0 \n\nVersion 6.15.0 was released on 2023-07-11.\n\n\n\n New commands \n\n\n\n* New commands image-obsolete and image-deprecate are introduced to support image lifecycle management.\n\n\n\n\n\n\n\n Updated commands \n\n\n\n* Added support for image lifecycle management in image-create, image-update, and images commands.\n\n\n\n\n\n\n\n Removed commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n Notes \n\n\n\n* N/A\n\n\n\n\n\n\n\n\n\n v6.14.1 \n\nVersion 6.14.1 was released on 2023-06-30.\n\n\n\n New commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n Updated commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n Removed commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n Notes \n\n\n\n* Fixed issue with using the SSH key generated from UI in CLI.\n\n\n\n\n\n\n\n\n\n v6.14.0 \n\nVersion 6.14.0 was released on 2023-06-23.\n\n\n\n New commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n Updated commands \n\n\n\n* Added support for more algorithms in the SSH key key-create command.\n\n\n\n\n\n\n\n Removed commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n\n\n v6.13.0 \n\nVersion 6.13.0 was released on 2023-06-22.\n\n\n\n New commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n Updated commands \n\n\n\n* Added support for snapshot and backup cross region copy in snaphot-create, snapshots, backup-policy-plan-create and backup-policy-plan-update commands.\n\n\n\n\n\n\n\n Removed commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n\n\n v6.12.0 \n\nVersion 6.12.0 was released on 2023-06-01.\n\n\n\n New commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n Updated commands \n\n\n\n* Added support for fileshare mount targets in share commands (Beta).\n\n\n\n\n\n\n\n Removed commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n Notes \n\n\n\n* Fixed bare-metal-server-network-interfaces, bare-metal-server-profiles and bare-metal-servers commands to print correct response values.\n\n\n\n\n\n\n\n\n\n v6.11.1 \n\nVersion 6.11.1 was released on 2023-05-03.\n\n\n\n New commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n Updated commands",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-vpc-cli-rn",
+          "score": 14.791778,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "yes",
+                "timestamp": 1724261809
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "v6.14.1 release notes"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Version 6.15.0, released on 2023-07-11, introduced new commands image-obsolete and image-deprecate for image lifecycle management. It also added support for image lifecycle management in image-create, image-update, and images commands. On the other hand, version 6.14.0, released on 2023-06-23, did not introduce any new commands but added support for more algorithms in the SSH key key-create command."
+    },
+    {
+      "speaker": "user",
+      "text": "Tell me more about the new commands",
+      "timestamp": 1724261620,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The new commands introduced in version 6.15.0 of the IBM Cloud\u00ae Virtual Private Cloud (VPC) command line interface (CLI) are image-obsolete and image-deprecate. These commands support image lifecycle management, allowing users to manage the lifecycle of their custom images more effectively. The image-obsolete command can be used to mark an image as obsolete, indicating that it is no longer available to be used to provision an instance. The image-deprecate command can be used to mark an image as deprecated, discouraging its use before it becomes obsolete.",
+      "timestamp": 1724261624,
+      "contexts": [
+        {
+          "document_id": "ibmcld_16034-7-1778",
+          "text": "\nVPC CLI release notes \n\nThe following release notes are for the IBM Cloud\u00ae Virtual Private Cloud (VPC) command line interface (CLI).\n\n\n\n v6.15.0 \n\nVersion 6.15.0 was released on 2023-07-11.\n\n\n\n New commands \n\n\n\n* New commands image-obsolete and image-deprecate are introduced to support image lifecycle management.\n\n\n\n\n\n\n\n Updated commands \n\n\n\n* Added support for image lifecycle management in image-create, image-update, and images commands.\n\n\n\n\n\n\n\n Removed commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n Notes \n\n\n\n* N/A\n\n\n\n\n\n\n\n\n\n v6.14.1 \n\nVersion 6.14.1 was released on 2023-06-30.\n\n\n\n New commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n Updated commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n Removed commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n Notes \n\n\n\n* Fixed issue with using the SSH key generated from UI in CLI.\n\n\n\n\n\n\n\n\n\n v6.14.0 \n\nVersion 6.14.0 was released on 2023-06-23.\n\n\n\n New commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n Updated commands \n\n\n\n* Added support for more algorithms in the SSH key key-create command.\n\n\n\n\n\n\n\n Removed commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n\n\n v6.13.0 \n\nVersion 6.13.0 was released on 2023-06-22.\n\n\n\n New commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n Updated commands \n\n\n\n* Added support for snapshot and backup cross region copy in snaphot-create, snapshots, backup-policy-plan-create and backup-policy-plan-update commands.\n\n\n\n\n\n\n\n Removed commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n\n\n v6.12.0 \n\nVersion 6.12.0 was released on 2023-06-01.\n\n\n\n New commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n Updated commands \n\n\n\n* Added support for fileshare mount targets in share commands (Beta).\n\n\n\n\n\n\n\n Removed commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n Notes \n\n\n\n* Fixed bare-metal-server-network-interfaces, bare-metal-server-profiles and bare-metal-servers commands to print correct response values.\n\n\n\n\n\n\n\n\n\n v6.11.1 \n\nVersion 6.11.1 was released on 2023-05-03.\n\n\n\n New commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n Updated commands",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-vpc-cli-rn",
+          "score": 49.5585,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "yes",
+                "timestamp": 1724262545
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How does version 6.15.0 differ from 6.14.0?\n|assistant|: Assuming the question is about the IBM Cloud\u00ae Virtual Private Cloud (VPC) command line interface (CLI),  version 6.15.0 includes the following changes over version 6.14.0. It introduced new commands image-obsolete and image-deprecate for image lifecycle management. It also added support for image lifecycle management in image-create, image-update, and images commands and it fixed an issue with using the SSH key generated from UI in CLI.\n|user|: Tell me more about the new commands"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_15507-5434-7003",
+          "text": "\nTo remove a scheduled status change, see [Remove a scheduled custom image lifecycle status change by using the CLI](https://cloud.ibm.com/docs/vpc?topic=vpc-image-from-volume-vpc-manageschedule-reset-ilm-status-change-cli). After you remove the scheduled status change, you can make an immediate status change.\n\n\n\n* Change the image lifecycle status to deprecate.\n\nibmcloud is image-deprecate IMAGE\n* Change the image lifecycle status to obsolete.\n\nibmcloud is image-obsolete IMAGE\n\n\n\nTo schedule a status change, use the following example.\n\nFor the deprecate-at or obsolete-at option, specify a date in the ISO 8601 (YYYY-MM-DDThh:mm:ss+hh:mm) date and time format.\n\n\n\n* YYYY is the four digit year\n* MM is the two digit month\n* DD is the two digit day\n* T separates the date and time information\n* hh is the two digit hours\n* mm is the two digit minutes\n* +hh:mm or -hh:mm is the UTC time zone\n\n\n\nThus, the date of 30 September 2023 at 8:00 p.m. in the North American Central Standard Time Zone (CST) would be 2023-09-30T20:00:00-06:00\n\nWhen scheduling the date and time, you can't use your current date and time. For example, if it is 8 a.m. on June 12, then the scheduled date and time must be after 8 a.m. on June 12. If you define both the deprecate-at and obsolete-at dates, the obsolete-at date must be after the deprecate-at date.\n\nibmcloud is image-update IMAGE [--deprecate-at YYYY-MM-DDThh:mm:ss+hh:mm] [--obsolete-at YYYY-MM-DDThh:mm:ss+hh:mm]\n\nIf you want to change the deprecate-at and obsolete-at date and time entries, you can run these commands again.",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-image-from-volume-vpc-manage",
+          "score": 21.32464,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "yes",
+                "timestamp": 1724262548
+              },
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "no",
+                "timestamp": 1727123906
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Change the custom image lifecycle status by using the CLI"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_15646-25256-26940",
+          "text": "\nYou can make an immediate status change by using the ibmcloud is image-deprecate or ibmcloud is image-obsolete commands. You can also schedule these status changes for a future date and time by using the ibmcloud is image-update command. Specify the name or ID of the custom image with the IMAGE variable.\n\nTo make an immediate status change, use one of the following examples.\n\nYou can make an immediate status change only if a future status change is not scheduled. To remove a scheduled status change, see [Remove a scheduled custom image lifecycle status change by using the CLI](https://cloud.ibm.com/docs/vpc?topic=vpc-managing-custom-imagesschedule-reset-ilm-status-change-cli). After you remove the scheduled status change, you can make an immediate status change.\n\n\n\n* Change the image lifecycle status to deprecate.\n\nibmcloud is image-deprecate IMAGE\n* Change the image lifecycle status to obsolete.\n\nibmcloud is image-obsolete IMAGE\n\n\n\nTo schedule a status change, use the following example.\n\nFor the deprecate-at or obsolete-at option, specify a date in the ISO 8601 (YYYY-MM-DDThh:mm:ss+hh:mm) date and time format.\n\n\n\n* YYYY is the four digit year\n* MM is the two digit month\n* DD is the two digit day\n* T separates the date and time information\n* hh is the two digit hours\n* mm is the two digit minutes\n* +hh:mm or -hh:mm is the UTC time zone\n\n\n\nThus, the date of 30 September 2023 at 8:00 p.m. in the North American Central Standard Time Zone (CST) would be 2023-09-30T20:00:00-06:00\n\nWhen scheduling the date and time, you can't use your current date and time. For example, if it is 8 a.m. on June 12, then the scheduled date and time must be after 8 a.m. on June 12.",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-managing-custom-images",
+          "score": 20.325733,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "yes",
+                "timestamp": 1724262550
+              },
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "no",
+                "timestamp": 1727123850
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Change the custom image lifecycle status by using the CLI"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_15507-4206-5974",
+          "text": "\n[More Actions icon](https://cloud.ibm.com/docs-content/v1/content/f02b9c9adcbb7328d95a45e105cec371d50f15eb/icons/action-menu-icon.svg) for a specific image and select from the available options.\n3. Select Schedule lifecycle.\n4. Select Schedule complete lifecycle.\n\n\n\n* If you selected By calendar date, enter the date and time for when you want the status change occur.\n* If you selected By number of days, put in the number of days that you want to pass before the status is changed.\n\n\n\nThe date for obsolescence must be after the deprecation date.\n5. Click Schedule.\n\n\n\n\n\n\n\n Changing an image from volume lifecycle status by using the CLI \n\nYou can change the lifecycle status of an IBM Cloud VPC image from volume by using the command-line interface (CLI). You can make an immediate status change by using the ibmcloud is image-deprecate or ibmcloud is image-obsolete commands. You can also schedule these status changes for a future date and time by using the ibmcloud is image-update command. Specify the name or ID of the custom image with the IMAGE variable.\n\nTo make an immediate status change, use one of the following examples.\n\nYou can make an immediate status change only if a future status change is not scheduled. To remove a scheduled status change, see [Remove a scheduled custom image lifecycle status change by using the CLI](https://cloud.ibm.com/docs/vpc?topic=vpc-image-from-volume-vpc-manageschedule-reset-ilm-status-change-cli). After you remove the scheduled status change, you can make an immediate status change.\n\n\n\n* Change the image lifecycle status to deprecate.\n\nibmcloud is image-deprecate IMAGE\n* Change the image lifecycle status to obsolete.\n\nibmcloud is image-obsolete IMAGE\n\n\n\nTo schedule a status change, use the following example.",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-image-from-volume-vpc-manage",
+          "score": 19.97168,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "yes",
+                "timestamp": 1724262553
+              },
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "no",
+                "timestamp": 1727123864
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Change the custom image lifecycle status by using the CLI"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_15647-25269-26966",
+          "text": "\nYou can make an immediate status change by using the ibmcloud is image-deprecate or ibmcloud is image-obsolete commands. You can also schedule these status changes for a future date and time by using the ibmcloud is image-update command. Specify the name or ID of the custom image with the IMAGE variable.\n\nTo make an immediate status change, use one of the following examples.\n\nYou can make an immediate status change only if a future status change is not scheduled. To remove a scheduled status change, see [Remove a scheduled custom image lifecycle status change by using the CLI](https://cloud.ibm.com/docs/vpc?topic=vpc-managing-custom-images&interface=uischedule-reset-ilm-status-change-cli). After you remove the scheduled status change, you can make an immediate status change.\n\n\n\n* Change the image lifecycle status to deprecate.\n\nibmcloud is image-deprecate IMAGE\n* Change the image lifecycle status to obsolete.\n\nibmcloud is image-obsolete IMAGE\n\n\n\nTo schedule a status change, use the following example.\n\nFor the deprecate-at or obsolete-at option, specify a date in the ISO 8601 (YYYY-MM-DDThh:mm:ss+hh:mm) date and time format.\n\n\n\n* YYYY is the four digit year\n* MM is the two digit month\n* DD is the two digit day\n* T separates the date and time information\n* hh is the two digit hours\n* mm is the two digit minutes\n* +hh:mm or -hh:mm is the UTC time zone\n\n\n\nThus, the date of 30 September 2023 at 8:00 p.m. in the North American Central Standard Time Zone (CST) would be 2023-09-30T20:00:00-06:00\n\nWhen scheduling the date and time, you can't use your current date and time. For example, if it is 8 a.m. on June 12, then the scheduled date and time must be after 8 a.m. on June 12.",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-managing-custom-images&interface=ui",
+          "score": 19.816315,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "yes",
+                "timestamp": 1724262555
+              },
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "no",
+                "timestamp": 1727123872
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Change the custom image lifecycle status by using the CLI"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_15646-2393-4239",
+          "text": "\nSchedule lifecycle Opens the Schedule image lifecycle panel. You can make an immediate status change or schedule a statue change for a future date and time. You can schedule a single status change or schedule the complete lifecycle of the images. The image statuses are:<br><br><br><br> * available: The image can be used to create an instance.<br> * deprecated: The image is still available to use to provision and instance. Using the deprecated status can discourage use of the image before the status changes to obsolete.<br> * obsolete: The image is not available to use to provision an instancce.<br> * Schedule complete lifecycle: You can schedule both the deprecated and obsolete status changes at the same time.<br><br><br><br>You can move back and forth between the three statuses. Only the statuses you can change to are displayed. You can schedule status changes by by using calendar date and time or number of days. The obsolescence dates must always be after the deprecation date. \n Delete Delete the custom image.<br><br>If you want to delete a custom image in a private catalog, see [Deleting a custom image in a private catalog](https://cloud.ibm.com/docs/vpc?topic=vpc-planning-custom-imagesdeleting-private-catalog-custom-image-vpc). \n\n\n\n\n\n\n\n Listing custom images by using the CLI \n\nYou can list all of the IBM Cloud VPC custom images in your region by using the command-line interface (CLI).\n\nTo list all custom images by using the CLI, use the ibmcloud is images command. Custom images are private to the account where they are created, so the --visibility option is private.\n\nibmcloud is images --visibility private\n\nFor more information, see [ibmcloud is images](https://cloud.ibm.com/docs/vpc?topic=vpc-infrastructure-cli-plugin-vpc-referenceimages) in the VPC CLI reference page.\n\n\n\n\n\n Listing all images by using the API",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-managing-custom-images",
+          "score": 19.557747,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "yes",
+                "timestamp": 1724262559
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Change the custom image lifecycle status by using the CLI"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The new commands introduced in version 6.15.0 of the IBM Cloud\u00ae Virtual Private Cloud (VPC) command line interface (CLI) are image-obsolete and image-deprecate. These commands support image lifecycle management, allowing users to manage the lifecycle of their custom images more effectively. The image-obsolete command can be used to mark an image as obsolete, indicating that it should no longer be used. The image-deprecate command can be used to mark an image as deprecated, discouraging its use before it becomes obsolete.\nAdditionally, version 6.15.0 added support for image lifecycle management in existing commands such as image-create, image-update, and images. This allows users to manage the lifecycle of their images directly from these commands, without needing to use the new image-obsolete and image-deprecate commands."
+    },
+    {
+      "speaker": "user",
+      "text": "How do I use them?",
+      "timestamp": 1724265474,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "To use the new `image-obsolete` and `image-deprecate` commands, you need to specify the name or ID of the custom image with the `IMAGE` variable.  To mark an image as deprecated, use the following command:  ```  ibmcloud is image-deprecate IMAGE  ``` - To mark an image as obsolete, use the following command:  ```  ibmcloud is image-obsolete IMAGE  ``` These commands allow you to make an immediate status change. Alternatively, you can schedule these status changes for a future date and time by using the `ibmcloud is image-update` command with the `--deprecate-at` or `--obsolete-at` options. Finally, please note that you can only make an immediate status change if a future status change is not scheduled. If you have a scheduled status change, you need to remove it first.",
+      "timestamp": 1724265486,
+      "contexts": [
+        {
+          "document_id": "ibmcld_15507-5434-7003",
+          "text": "\nTo remove a scheduled status change, see [Remove a scheduled custom image lifecycle status change by using the CLI](https://cloud.ibm.com/docs/vpc?topic=vpc-image-from-volume-vpc-manageschedule-reset-ilm-status-change-cli). After you remove the scheduled status change, you can make an immediate status change.\n\n\n\n* Change the image lifecycle status to deprecate.\n\nibmcloud is image-deprecate IMAGE\n* Change the image lifecycle status to obsolete.\n\nibmcloud is image-obsolete IMAGE\n\n\n\nTo schedule a status change, use the following example.\n\nFor the deprecate-at or obsolete-at option, specify a date in the ISO 8601 (YYYY-MM-DDThh:mm:ss+hh:mm) date and time format.\n\n\n\n* YYYY is the four digit year\n* MM is the two digit month\n* DD is the two digit day\n* T separates the date and time information\n* hh is the two digit hours\n* mm is the two digit minutes\n* +hh:mm or -hh:mm is the UTC time zone\n\n\n\nThus, the date of 30 September 2023 at 8:00 p.m. in the North American Central Standard Time Zone (CST) would be 2023-09-30T20:00:00-06:00\n\nWhen scheduling the date and time, you can't use your current date and time. For example, if it is 8 a.m. on June 12, then the scheduled date and time must be after 8 a.m. on June 12. If you define both the deprecate-at and obsolete-at dates, the obsolete-at date must be after the deprecate-at date.\n\nibmcloud is image-update IMAGE [--deprecate-at YYYY-MM-DDThh:mm:ss+hh:mm] [--obsolete-at YYYY-MM-DDThh:mm:ss+hh:mm]\n\nIf you want to change the deprecate-at and obsolete-at date and time entries, you can run these commands again.",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-image-from-volume-vpc-manage",
+          "score": 38.25948,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "yes",
+                "timestamp": 1724265815
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How does version 6.15.0 differ from 6.14.0?\n|assistant|: Assuming the question is about the IBM Cloud\u00ae Virtual Private Cloud (VPC) command line interface (CLI),  version 6.15.0 includes the following changes over version 6.14.0. It introduced new commands image-obsolete and image-deprecate for image lifecycle management. It also added support for image lifecycle management in image-create, image-update, and images commands and it fixed an issue with using the SSH key generated from UI in CLI.\n|user|: Tell me more about the new commands\n|assistant|: The new commands introduced in version 6.15.0 of the IBM Cloud\u00ae Virtual Private Cloud (VPC) command line interface (CLI) are image-obsolete and image-deprecate. These commands support image lifecycle management, allowing users to manage the lifecycle of their custom images more effectively. The image-obsolete command can be used to mark an image as obsolete, indicating that it is no longer available to be used to provision an instance. The image-deprecate command can be used to mark an image as deprecated, discouraging its use before it becomes obsolete.\n|user|: How do I use them?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_15646-25256-26940",
+          "text": "\nYou can make an immediate status change by using the ibmcloud is image-deprecate or ibmcloud is image-obsolete commands. You can also schedule these status changes for a future date and time by using the ibmcloud is image-update command. Specify the name or ID of the custom image with the IMAGE variable.\n\nTo make an immediate status change, use one of the following examples.\n\nYou can make an immediate status change only if a future status change is not scheduled. To remove a scheduled status change, see [Remove a scheduled custom image lifecycle status change by using the CLI](https://cloud.ibm.com/docs/vpc?topic=vpc-managing-custom-imagesschedule-reset-ilm-status-change-cli). After you remove the scheduled status change, you can make an immediate status change.\n\n\n\n* Change the image lifecycle status to deprecate.\n\nibmcloud is image-deprecate IMAGE\n* Change the image lifecycle status to obsolete.\n\nibmcloud is image-obsolete IMAGE\n\n\n\nTo schedule a status change, use the following example.\n\nFor the deprecate-at or obsolete-at option, specify a date in the ISO 8601 (YYYY-MM-DDThh:mm:ss+hh:mm) date and time format.\n\n\n\n* YYYY is the four digit year\n* MM is the two digit month\n* DD is the two digit day\n* T separates the date and time information\n* hh is the two digit hours\n* mm is the two digit minutes\n* +hh:mm or -hh:mm is the UTC time zone\n\n\n\nThus, the date of 30 September 2023 at 8:00 p.m. in the North American Central Standard Time Zone (CST) would be 2023-09-30T20:00:00-06:00\n\nWhen scheduling the date and time, you can't use your current date and time. For example, if it is 8 a.m. on June 12, then the scheduled date and time must be after 8 a.m. on June 12.",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-managing-custom-images",
+          "score": 21.181143,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "yes",
+                "timestamp": 1724265827
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Change the image lifecycle status to deprecate."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_15647-25269-26966",
+          "text": "\nYou can make an immediate status change by using the ibmcloud is image-deprecate or ibmcloud is image-obsolete commands. You can also schedule these status changes for a future date and time by using the ibmcloud is image-update command. Specify the name or ID of the custom image with the IMAGE variable.\n\nTo make an immediate status change, use one of the following examples.\n\nYou can make an immediate status change only if a future status change is not scheduled. To remove a scheduled status change, see [Remove a scheduled custom image lifecycle status change by using the CLI](https://cloud.ibm.com/docs/vpc?topic=vpc-managing-custom-images&interface=uischedule-reset-ilm-status-change-cli). After you remove the scheduled status change, you can make an immediate status change.\n\n\n\n* Change the image lifecycle status to deprecate.\n\nibmcloud is image-deprecate IMAGE\n* Change the image lifecycle status to obsolete.\n\nibmcloud is image-obsolete IMAGE\n\n\n\nTo schedule a status change, use the following example.\n\nFor the deprecate-at or obsolete-at option, specify a date in the ISO 8601 (YYYY-MM-DDThh:mm:ss+hh:mm) date and time format.\n\n\n\n* YYYY is the four digit year\n* MM is the two digit month\n* DD is the two digit day\n* T separates the date and time information\n* hh is the two digit hours\n* mm is the two digit minutes\n* +hh:mm or -hh:mm is the UTC time zone\n\n\n\nThus, the date of 30 September 2023 at 8:00 p.m. in the North American Central Standard Time Zone (CST) would be 2023-09-30T20:00:00-06:00\n\nWhen scheduling the date and time, you can't use your current date and time. For example, if it is 8 a.m. on June 12, then the scheduled date and time must be after 8 a.m. on June 12.",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-managing-custom-images&interface=ui",
+          "score": 20.965822,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "yes",
+                "timestamp": 1724265834
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Change the image lifecycle status to deprecate."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "To use the new `image-obsolete` and `image-deprecate` commands, you need to specify the name or ID of the custom image with the `IMAGE` variable. Here are some examples:\n- To mark an image as deprecated, use the following command:\n ```\n ibmcloud is image-deprecate IMAGE\n ```\n- To mark an image as obsolete, use the following command:\n ```\n ibmcloud is image-obsolete IMAGE\n ```\nThese commands allow you to change the image lifecycle status to deprecate or obsolete, respectively. However, please note that you can only make an immediate status change if a future status change is not scheduled. If you have a scheduled status change, you need to remove it first by following the instructions provided in the document [Remove a scheduled custom image lifecycle status change by using the CLI](https://cloud.ibm.com/docs/vpc?topic=vpc-managing-custom-images&interface=uischedule-reset-ilm-status-change-cli). After removing the scheduled status change, you can make an immediate status change.\nAdditionally, you can also schedule these status changes for a future date and time by using the `ibmcloud is image-update` command with the `--deprecate-at` or `--obsolete-at` options. The date and time should be specified in the ISO 8601 (YYYY-MM-DDThh:mm:ss+hh:mm) date and time format. When scheduling the date and time, you can't use your current date and time. For example, if it is 8 a.m. on June 12, then the scheduled date and time must be after 8 a.m. on June 12."
+    },
+    {
+      "speaker": "user",
+      "text": "Can I use the scheduling functionality to schedule a status change to obsolete in a month and to deprecated in two months?",
+      "timestamp": 1724267717,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, as I described previously, you can use the scheduling functionality to schedule a status change to obsolete and deprecated in the future using the `ibmcloud is image-update` command with the `--obsolete-at` and `--deprecate-at` options. Note, if you define both the deprecate-at and obsolete-at dates, the obsolete-at date must be after the deprecate-at date. In addition, when scheduling the date and time, you can't use your current date and time but a month and two months in the future is acceptable.",
+      "timestamp": 1724267728,
+      "contexts": [
+        {
+          "document_id": "ibmcld_15646-25256-26940",
+          "text": "\nYou can make an immediate status change by using the ibmcloud is image-deprecate or ibmcloud is image-obsolete commands. You can also schedule these status changes for a future date and time by using the ibmcloud is image-update command. Specify the name or ID of the custom image with the IMAGE variable.\n\nTo make an immediate status change, use one of the following examples.\n\nYou can make an immediate status change only if a future status change is not scheduled. To remove a scheduled status change, see [Remove a scheduled custom image lifecycle status change by using the CLI](https://cloud.ibm.com/docs/vpc?topic=vpc-managing-custom-imagesschedule-reset-ilm-status-change-cli). After you remove the scheduled status change, you can make an immediate status change.\n\n\n\n* Change the image lifecycle status to deprecate.\n\nibmcloud is image-deprecate IMAGE\n* Change the image lifecycle status to obsolete.\n\nibmcloud is image-obsolete IMAGE\n\n\n\nTo schedule a status change, use the following example.\n\nFor the deprecate-at or obsolete-at option, specify a date in the ISO 8601 (YYYY-MM-DDThh:mm:ss+hh:mm) date and time format.\n\n\n\n* YYYY is the four digit year\n* MM is the two digit month\n* DD is the two digit day\n* T separates the date and time information\n* hh is the two digit hours\n* mm is the two digit minutes\n* +hh:mm or -hh:mm is the UTC time zone\n\n\n\nThus, the date of 30 September 2023 at 8:00 p.m. in the North American Central Standard Time Zone (CST) would be 2023-09-30T20:00:00-06:00\n\nWhen scheduling the date and time, you can't use your current date and time. For example, if it is 8 a.m. on June 12, then the scheduled date and time must be after 8 a.m. on June 12.",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-managing-custom-images",
+          "score": 50.34854,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "yes",
+                "timestamp": 1724268093
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How does version 6.15.0 differ from 6.14.0?\n|assistant|: Assuming the question is about the IBM Cloud\u00ae Virtual Private Cloud (VPC) command line interface (CLI),  version 6.15.0 includes the following changes over version 6.14.0. It introduced new commands image-obsolete and image-deprecate for image lifecycle management. It also added support for image lifecycle management in image-create, image-update, and images commands and it fixed an issue with using the SSH key generated from UI in CLI.\n|user|: Tell me more about the new commands\n|assistant|: The new commands introduced in version 6.15.0 of the IBM Cloud\u00ae Virtual Private Cloud (VPC) command line interface (CLI) are image-obsolete and image-deprecate. These commands support image lifecycle management, allowing users to manage the lifecycle of their custom images more effectively. The image-obsolete command can be used to mark an image as obsolete, indicating that it is no longer available to be used to provision an instance. The image-deprecate command can be used to mark an image as deprecated, discouraging its use before it becomes obsolete.\n|user|: How do I use them?\n|assistant|: To use the new `image-obsolete` and `image-deprecate` commands, you need to specify the name or ID of the custom image with the `IMAGE` variable. Here are some examples: - To mark an image as deprecated, use the following command:  ```  ibmcloud is image-deprecate IMAGE  ``` - To mark an image as obsolete, use the following command:  ```  ibmcloud is image-obsolete IMAGE  ``` These commands allow you to make an immediate status change. Alternatively, you can schedule these status changes for a future date and time by using the `ibmcloud is image-update` command with the `--deprecate-at` or `--obsolete-at` options. Finally, please note that you can only make an immediate status change if a future status change is not scheduled. If you have a scheduled status change, you need to remove it first.\n|user|: Can I use the scheduling functionality to schedule right a status change to obsolete in a month and to deprecated in two months?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_15647-25269-26966",
+          "text": "\nYou can make an immediate status change by using the ibmcloud is image-deprecate or ibmcloud is image-obsolete commands. You can also schedule these status changes for a future date and time by using the ibmcloud is image-update command. Specify the name or ID of the custom image with the IMAGE variable.\n\nTo make an immediate status change, use one of the following examples.\n\nYou can make an immediate status change only if a future status change is not scheduled. To remove a scheduled status change, see [Remove a scheduled custom image lifecycle status change by using the CLI](https://cloud.ibm.com/docs/vpc?topic=vpc-managing-custom-images&interface=uischedule-reset-ilm-status-change-cli). After you remove the scheduled status change, you can make an immediate status change.\n\n\n\n* Change the image lifecycle status to deprecate.\n\nibmcloud is image-deprecate IMAGE\n* Change the image lifecycle status to obsolete.\n\nibmcloud is image-obsolete IMAGE\n\n\n\nTo schedule a status change, use the following example.\n\nFor the deprecate-at or obsolete-at option, specify a date in the ISO 8601 (YYYY-MM-DDThh:mm:ss+hh:mm) date and time format.\n\n\n\n* YYYY is the four digit year\n* MM is the two digit month\n* DD is the two digit day\n* T separates the date and time information\n* hh is the two digit hours\n* mm is the two digit minutes\n* +hh:mm or -hh:mm is the UTC time zone\n\n\n\nThus, the date of 30 September 2023 at 8:00 p.m. in the North American Central Standard Time Zone (CST) would be 2023-09-30T20:00:00-06:00\n\nWhen scheduling the date and time, you can't use your current date and time. For example, if it is 8 a.m. on June 12, then the scheduled date and time must be after 8 a.m. on June 12.",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-managing-custom-images&interface=ui",
+          "score": 50.315083,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "yes",
+                "timestamp": 1724268095
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How does version 6.15.0 differ from 6.14.0?\n|assistant|: Assuming the question is about the IBM Cloud\u00ae Virtual Private Cloud (VPC) command line interface (CLI),  version 6.15.0 includes the following changes over version 6.14.0. It introduced new commands image-obsolete and image-deprecate for image lifecycle management. It also added support for image lifecycle management in image-create, image-update, and images commands and it fixed an issue with using the SSH key generated from UI in CLI.\n|user|: Tell me more about the new commands\n|assistant|: The new commands introduced in version 6.15.0 of the IBM Cloud\u00ae Virtual Private Cloud (VPC) command line interface (CLI) are image-obsolete and image-deprecate. These commands support image lifecycle management, allowing users to manage the lifecycle of their custom images more effectively. The image-obsolete command can be used to mark an image as obsolete, indicating that it is no longer available to be used to provision an instance. The image-deprecate command can be used to mark an image as deprecated, discouraging its use before it becomes obsolete.\n|user|: How do I use them?\n|assistant|: To use the new `image-obsolete` and `image-deprecate` commands, you need to specify the name or ID of the custom image with the `IMAGE` variable. Here are some examples: - To mark an image as deprecated, use the following command:  ```  ibmcloud is image-deprecate IMAGE  ``` - To mark an image as obsolete, use the following command:  ```  ibmcloud is image-obsolete IMAGE  ``` These commands allow you to make an immediate status change. Alternatively, you can schedule these status changes for a future date and time by using the `ibmcloud is image-update` command with the `--deprecate-at` or `--obsolete-at` options. Finally, please note that you can only make an immediate status change if a future status change is not scheduled. If you have a scheduled status change, you need to remove it first.\n|user|: Can I use the scheduling functionality to schedule right a status change to obsolete in a month and to deprecated in two months?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_15507-6657-8493",
+          "text": "\nIf you define both the deprecate-at and obsolete-at dates, the obsolete-at date must be after the deprecate-at date.\n\nibmcloud is image-update IMAGE [--deprecate-at YYYY-MM-DDThh:mm:ss+hh:mm] [--obsolete-at YYYY-MM-DDThh:mm:ss+hh:mm]\n\nIf you want to change the deprecate-at and obsolete-at date and time entries, you can run these commands again. The previous dates and times are then replaced with the new dates and times.\n\n\n\n\n\n Removing previously scheduled image from volume lifecycle statuses by using the CLI \n\nYou can remove a scheduled status change by using the --reset-deprecate-at or --reset-obsolete-at options. If you use either of these options with the ibmcloud is image-update command, the date and time are removed from the image. The image is no longer scheduled for that status change.\n\nibmcloud is image-update IMAGE [--reset-deprecate-at] [--reset-obsolete-at]\n\nIf you use both the --reset-deprecate-at and --reset-obsolete-at options, the image status returns to available.\n\n\n\n\n\n Changing an image from volume lifecycle status by using the API \n\nYou can change the lifecycle status of a IBM Cloud VPC image from volume by using the application programming interface (API). You can make an immediate status change or schedule a status change to happen later.\n\nTo make an immediate status change, use one of the following examples. For the$image_id variable, specify the ID of the custom image for the status change.\n\nYou can make an immediate status change only if a future status change is not scheduled. To remove a scheduled status change, see [Remove a scheduled custom image lifecycle status change by using the API](https://cloud.ibm.com/docs/vpc?topic=vpc-image-from-volume-vpc-manageschedule-ilm-reset-status-change-API). After you remove the scheduled status change, you can make an immediate status change.",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-image-from-volume-vpc-manage",
+          "score": 49.271297,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "yes",
+                "timestamp": 1724268089
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How does version 6.15.0 differ from 6.14.0?\n|assistant|: Assuming the question is about the IBM Cloud\u00ae Virtual Private Cloud (VPC) command line interface (CLI),  version 6.15.0 includes the following changes over version 6.14.0. It introduced new commands image-obsolete and image-deprecate for image lifecycle management. It also added support for image lifecycle management in image-create, image-update, and images commands and it fixed an issue with using the SSH key generated from UI in CLI.\n|user|: Tell me more about the new commands\n|assistant|: The new commands introduced in version 6.15.0 of the IBM Cloud\u00ae Virtual Private Cloud (VPC) command line interface (CLI) are image-obsolete and image-deprecate. These commands support image lifecycle management, allowing users to manage the lifecycle of their custom images more effectively. The image-obsolete command can be used to mark an image as obsolete, indicating that it is no longer available to be used to provision an instance. The image-deprecate command can be used to mark an image as deprecated, discouraging its use before it becomes obsolete.\n|user|: How do I use them?\n|assistant|: To use the new `image-obsolete` and `image-deprecate` commands, you need to specify the name or ID of the custom image with the `IMAGE` variable. Here are some examples: - To mark an image as deprecated, use the following command:  ```  ibmcloud is image-deprecate IMAGE  ``` - To mark an image as obsolete, use the following command:  ```  ibmcloud is image-obsolete IMAGE  ``` These commands allow you to make an immediate status change. Alternatively, you can schedule these status changes for a future date and time by using the `ibmcloud is image-update` command with the `--deprecate-at` or `--obsolete-at` options. Finally, please note that you can only make an immediate status change if a future status change is not scheduled. If you have a scheduled status change, you need to remove it first.\n|user|: Can I use the scheduling functionality to schedule right a status change to obsolete in a month and to deprecated in two months?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_15545-195860-197138",
+          "text": "\nibmcloud is image-update IMAGE --name NEW_NAME [--deprecate-at DEPRECATE_AT | --reset-deprecate-at] [--obsolete-at OBSOLETE_AT | --reset-obsolete-at] [--output JSON] [-q, --quiet]\n\n\n\n Command examples \n\n\n\n* ibmcloud is image-update 72251a2e-d6c5-42b4-97b0-b5f8e8d1f479 --name my-image\n* ibmcloud is image-update my-image-from-volume-cli --name my-image-from-volume-cli-do-not-delete --obsolete-at \"2023-03-02T04:20:00+05:30\"\n* ibmcloud is image-update my-image-from-volume-cli-do-not-delete --deprecate-at \"2023-03-03T04:20:00+05:30\"\n* ibmcloud is image-update my-image-from-volume-cli-do-not-delete --reset-deprecate-at\n* ibmcloud is image-update my-image-from-volume-cli-do-not-delete --reset-obsolete-at\n\n\n\n\n\n\n\n Command options \n\n\n\n* IMAGE: ID or name of the image.\n* --name: New name of the image.\n* --deprecate-at: The deprecation date and time to set for this image. The date and time must not be in the past, and must be earlier than \"obsolete_at\". Date and time must be in ISO 8601 format: 2024-03-05T15:31:50.701Z or 2024-03-05T15:31:50.701+8:00.\n* --reset-deprecate-at: Specify this flag to remove an existing deprecation date and time. If the image status is \"deprecated\", it becomes \"available\".\n* --obsolete-at: The obsolescence date and time to set for this image.",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-infrastructure-cli-plugin-vpc-reference",
+          "score": 22.250614,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "yes",
+                "timestamp": 1724268099
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "ibmcloud is image-update --deprecate-at"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_15558-195912-197190",
+          "text": "\nibmcloud is image-update IMAGE --name NEW_NAME [--deprecate-at DEPRECATE_AT | --reset-deprecate-at] [--obsolete-at OBSOLETE_AT | --reset-obsolete-at] [--output JSON] [-q, --quiet]\n\n\n\n Command examples \n\n\n\n* ibmcloud is image-update 72251a2e-d6c5-42b4-97b0-b5f8e8d1f479 --name my-image\n* ibmcloud is image-update my-image-from-volume-cli --name my-image-from-volume-cli-do-not-delete --obsolete-at \"2023-03-02T04:20:00+05:30\"\n* ibmcloud is image-update my-image-from-volume-cli-do-not-delete --deprecate-at \"2023-03-03T04:20:00+05:30\"\n* ibmcloud is image-update my-image-from-volume-cli-do-not-delete --reset-deprecate-at\n* ibmcloud is image-update my-image-from-volume-cli-do-not-delete --reset-obsolete-at\n\n\n\n\n\n\n\n Command options \n\n\n\n* IMAGE: ID or name of the image.\n* --name: New name of the image.\n* --deprecate-at: The deprecation date and time to set for this image. The date and time must not be in the past, and must be earlier than \"obsolete_at\". Date and time must be in ISO 8601 format: 2024-03-05T15:31:50.701Z or 2024-03-05T15:31:50.701+8:00.\n* --reset-deprecate-at: Specify this flag to remove an existing deprecation date and time. If the image status is \"deprecated\", it becomes \"available\".\n* --obsolete-at: The obsolescence date and time to set for this image.",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-infrastructure-cli-plugin-vpc-reference&interface=ui",
+          "score": 22.250614,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "yes",
+                "timestamp": 1724268101
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "ibmcloud is image-update --deprecate-at"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16082-195756-197034",
+          "text": "\nibmcloud is image-update IMAGE --name NEW_NAME [--deprecate-at DEPRECATE_AT | --reset-deprecate-at] [--obsolete-at OBSOLETE_AT | --reset-obsolete-at] [--output JSON] [-q, --quiet]\n\n\n\n Command examples \n\n\n\n* ibmcloud is image-update 72251a2e-d6c5-42b4-97b0-b5f8e8d1f479 --name my-image\n* ibmcloud is image-update my-image-from-volume-cli --name my-image-from-volume-cli-do-not-delete --obsolete-at \"2023-03-02T04:20:00+05:30\"\n* ibmcloud is image-update my-image-from-volume-cli-do-not-delete --deprecate-at \"2023-03-03T04:20:00+05:30\"\n* ibmcloud is image-update my-image-from-volume-cli-do-not-delete --reset-deprecate-at\n* ibmcloud is image-update my-image-from-volume-cli-do-not-delete --reset-obsolete-at\n\n\n\n\n\n\n\n Command options \n\n\n\n* IMAGE: ID or name of the image.\n* --name: New name of the image.\n* --deprecate-at: The deprecation date and time to set for this image. The date and time must not be in the past, and must be earlier than \"obsolete_at\". Date and time must be in ISO 8601 format: 2024-03-05T15:31:50.701Z or 2024-03-05T15:31:50.701+8:00.\n* --reset-deprecate-at: Specify this flag to remove an existing deprecation date and time. If the image status is \"deprecated\", it becomes \"available\".\n* --obsolete-at: The obsolescence date and time to set for this image.",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-vpc-reference",
+          "score": 22.250614,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "yes",
+                "timestamp": 1724268103
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "ibmcloud is image-update --deprecate-at"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16092-195812-197090",
+          "text": "\nibmcloud is image-update IMAGE --name NEW_NAME [--deprecate-at DEPRECATE_AT | --reset-deprecate-at] [--obsolete-at OBSOLETE_AT | --reset-obsolete-at] [--output JSON] [-q, --quiet]\n\n\n\n Command examples \n\n\n\n* ibmcloud is image-update 72251a2e-d6c5-42b4-97b0-b5f8e8d1f479 --name my-image\n* ibmcloud is image-update my-image-from-volume-cli --name my-image-from-volume-cli-do-not-delete --obsolete-at \"2023-03-02T04:20:00+05:30\"\n* ibmcloud is image-update my-image-from-volume-cli-do-not-delete --deprecate-at \"2023-03-03T04:20:00+05:30\"\n* ibmcloud is image-update my-image-from-volume-cli-do-not-delete --reset-deprecate-at\n* ibmcloud is image-update my-image-from-volume-cli-do-not-delete --reset-obsolete-at\n\n\n\n\n\n\n\n Command options \n\n\n\n* IMAGE: ID or name of the image.\n* --name: New name of the image.\n* --deprecate-at: The deprecation date and time to set for this image. The date and time must not be in the past, and must be earlier than \"obsolete_at\". Date and time must be in ISO 8601 format: 2024-03-05T15:31:50.701Z or 2024-03-05T15:31:50.701+8:00.\n* --reset-deprecate-at: Specify this flag to remove an existing deprecation date and time. If the image status is \"deprecated\", it becomes \"available\".\n* --obsolete-at: The obsolescence date and time to set for this image.",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-vpc-reference&interface=cli",
+          "score": 22.250614,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "yes",
+                "timestamp": 1724268106
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "ibmcloud is image-update --deprecate-at"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, you can use the scheduling functionality to schedule a status change to obsolete in a month and to deprecated in two months. To do this, you can use the `ibmcloud is image-update` command with the `--obsolete-at` and `--deprecate-at` options.\nFor example, if you want to schedule the image to become obsolete in a month from today, and deprecated in two months from today, you can use the following commands:\n```\nibmcloud is image-update IMAGE --obsolete-at \"YYYY-MM-DDThh:mm:ss+hh:mm\"\nibmcloud is image-update IMAGE --deprecate-at \"YYYY-MM-DDThh:mm:ss+hh:mm\"\n```\nReplace `IMAGE` with the name or ID of the custom image, and replace the date and time in the format of `YYYY-MM-DDThh:mm:ss+hh:mm` with the desired date and time for the status change.\nPlease note that when scheduling the date and time, you can't use your current date and time. For example, if it is 8 a.m. on June 12, then the scheduled date and time must be after 8 a.m. on June 12.\nAlso, you should check the documentation for the exact date and time format required by the command.\nAnd finally, please note that you can only schedule a status change if there is no other future status change already scheduled. If you have a scheduled status change, you need to remove it first."
+    },
+    {
+      "speaker": "user",
+      "text": "Thank you!",
+      "timestamp": 1724268398,
+      "enrichments": {
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Question Type": [
+          "Factoid"
+        ],
+        "Answerability": [
+          "CONVERSATIONAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "You're welcome! I'm glad I could help. Let me know if you have any other questions.",
+      "timestamp": 1724268402,
+      "contexts": [
+        {
+          "document_id": "ibmcld_15646-25256-26940",
+          "text": "\nYou can make an immediate status change by using the ibmcloud is image-deprecate or ibmcloud is image-obsolete commands. You can also schedule these status changes for a future date and time by using the ibmcloud is image-update command. Specify the name or ID of the custom image with the IMAGE variable.\n\nTo make an immediate status change, use one of the following examples.\n\nYou can make an immediate status change only if a future status change is not scheduled. To remove a scheduled status change, see [Remove a scheduled custom image lifecycle status change by using the CLI](https://cloud.ibm.com/docs/vpc?topic=vpc-managing-custom-imagesschedule-reset-ilm-status-change-cli). After you remove the scheduled status change, you can make an immediate status change.\n\n\n\n* Change the image lifecycle status to deprecate.\n\nibmcloud is image-deprecate IMAGE\n* Change the image lifecycle status to obsolete.\n\nibmcloud is image-obsolete IMAGE\n\n\n\nTo schedule a status change, use the following example.\n\nFor the deprecate-at or obsolete-at option, specify a date in the ISO 8601 (YYYY-MM-DDThh:mm:ss+hh:mm) date and time format.\n\n\n\n* YYYY is the four digit year\n* MM is the two digit month\n* DD is the two digit day\n* T separates the date and time information\n* hh is the two digit hours\n* mm is the two digit minutes\n* +hh:mm or -hh:mm is the UTC time zone\n\n\n\nThus, the date of 30 September 2023 at 8:00 p.m. in the North American Central Standard Time Zone (CST) would be 2023-09-30T20:00:00-06:00\n\nWhen scheduling the date and time, you can't use your current date and time. For example, if it is 8 a.m. on June 12, then the scheduled date and time must be after 8 a.m. on June 12.",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-managing-custom-images",
+          "score": 50.03188,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "no",
+                "timestamp": 1724268425
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How does version 6.15.0 differ from 6.14.0?\n|assistant|: Assuming the question is about the IBM Cloud\u00ae Virtual Private Cloud (VPC) command line interface (CLI),  version 6.15.0 includes the following changes over version 6.14.0. It introduced new commands image-obsolete and image-deprecate for image lifecycle management. It also added support for image lifecycle management in image-create, image-update, and images commands and it fixed an issue with using the SSH key generated from UI in CLI.\n|user|: Tell me more about the new commands\n|assistant|: The new commands introduced in version 6.15.0 of the IBM Cloud\u00ae Virtual Private Cloud (VPC) command line interface (CLI) are image-obsolete and image-deprecate. These commands support image lifecycle management, allowing users to manage the lifecycle of their custom images more effectively. The image-obsolete command can be used to mark an image as obsolete, indicating that it is no longer available to be used to provision an instance. The image-deprecate command can be used to mark an image as deprecated, discouraging its use before it becomes obsolete.\n|user|: How do I use them?\n|assistant|: To use the new `image-obsolete` and `image-deprecate` commands, you need to specify the name or ID of the custom image with the `IMAGE` variable. Here are some examples: - To mark an image as deprecated, use the following command:  ```  ibmcloud is image-deprecate IMAGE  ``` - To mark an image as obsolete, use the following command:  ```  ibmcloud is image-obsolete IMAGE  ``` These commands allow you to make an immediate status change. Alternatively, you can schedule these status changes for a future date and time by using the `ibmcloud is image-update` command with the `--deprecate-at` or `--obsolete-at` options. Finally, please note that you can only make an immediate status change if a future status change is not scheduled. If you have a scheduled status change, you need to remove it first.\n|user|: Can I use the scheduling functionality to schedule right a status change to obsolete in a month and to deprecated in two months?\n|assistant|: You can use the scheduling functionality to schedule a status change to obsolete and deprecated in the future. To do this, you can use the `ibmcloud is image-update` command with the `--obsolete-at` and `--deprecate-at` options. However, if you define both the deprecate-at and obsolete-at dates, the obsolete-at date must be after the deprecate-at date.\n|user|: Thank you!"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_15647-25269-26966",
+          "text": "\nYou can make an immediate status change by using the ibmcloud is image-deprecate or ibmcloud is image-obsolete commands. You can also schedule these status changes for a future date and time by using the ibmcloud is image-update command. Specify the name or ID of the custom image with the IMAGE variable.\n\nTo make an immediate status change, use one of the following examples.\n\nYou can make an immediate status change only if a future status change is not scheduled. To remove a scheduled status change, see [Remove a scheduled custom image lifecycle status change by using the CLI](https://cloud.ibm.com/docs/vpc?topic=vpc-managing-custom-images&interface=uischedule-reset-ilm-status-change-cli). After you remove the scheduled status change, you can make an immediate status change.\n\n\n\n* Change the image lifecycle status to deprecate.\n\nibmcloud is image-deprecate IMAGE\n* Change the image lifecycle status to obsolete.\n\nibmcloud is image-obsolete IMAGE\n\n\n\nTo schedule a status change, use the following example.\n\nFor the deprecate-at or obsolete-at option, specify a date in the ISO 8601 (YYYY-MM-DDThh:mm:ss+hh:mm) date and time format.\n\n\n\n* YYYY is the four digit year\n* MM is the two digit month\n* DD is the two digit day\n* T separates the date and time information\n* hh is the two digit hours\n* mm is the two digit minutes\n* +hh:mm or -hh:mm is the UTC time zone\n\n\n\nThus, the date of 30 September 2023 at 8:00 p.m. in the North American Central Standard Time Zone (CST) would be 2023-09-30T20:00:00-06:00\n\nWhen scheduling the date and time, you can't use your current date and time. For example, if it is 8 a.m. on June 12, then the scheduled date and time must be after 8 a.m. on June 12.",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-managing-custom-images&interface=ui",
+          "score": 50.006332,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "no",
+                "timestamp": 1724268428
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How does version 6.15.0 differ from 6.14.0?\n|assistant|: Assuming the question is about the IBM Cloud\u00ae Virtual Private Cloud (VPC) command line interface (CLI),  version 6.15.0 includes the following changes over version 6.14.0. It introduced new commands image-obsolete and image-deprecate for image lifecycle management. It also added support for image lifecycle management in image-create, image-update, and images commands and it fixed an issue with using the SSH key generated from UI in CLI.\n|user|: Tell me more about the new commands\n|assistant|: The new commands introduced in version 6.15.0 of the IBM Cloud\u00ae Virtual Private Cloud (VPC) command line interface (CLI) are image-obsolete and image-deprecate. These commands support image lifecycle management, allowing users to manage the lifecycle of their custom images more effectively. The image-obsolete command can be used to mark an image as obsolete, indicating that it is no longer available to be used to provision an instance. The image-deprecate command can be used to mark an image as deprecated, discouraging its use before it becomes obsolete.\n|user|: How do I use them?\n|assistant|: To use the new `image-obsolete` and `image-deprecate` commands, you need to specify the name or ID of the custom image with the `IMAGE` variable. Here are some examples: - To mark an image as deprecated, use the following command:  ```  ibmcloud is image-deprecate IMAGE  ``` - To mark an image as obsolete, use the following command:  ```  ibmcloud is image-obsolete IMAGE  ``` These commands allow you to make an immediate status change. Alternatively, you can schedule these status changes for a future date and time by using the `ibmcloud is image-update` command with the `--deprecate-at` or `--obsolete-at` options. Finally, please note that you can only make an immediate status change if a future status change is not scheduled. If you have a scheduled status change, you need to remove it first.\n|user|: Can I use the scheduling functionality to schedule right a status change to obsolete in a month and to deprecated in two months?\n|assistant|: You can use the scheduling functionality to schedule a status change to obsolete and deprecated in the future. To do this, you can use the `ibmcloud is image-update` command with the `--obsolete-at` and `--deprecate-at` options. However, if you define both the deprecate-at and obsolete-at dates, the obsolete-at date must be after the deprecate-at date.\n|user|: Thank you!"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_15507-6657-8493",
+          "text": "\nIf you define both the deprecate-at and obsolete-at dates, the obsolete-at date must be after the deprecate-at date.\n\nibmcloud is image-update IMAGE [--deprecate-at YYYY-MM-DDThh:mm:ss+hh:mm] [--obsolete-at YYYY-MM-DDThh:mm:ss+hh:mm]\n\nIf you want to change the deprecate-at and obsolete-at date and time entries, you can run these commands again. The previous dates and times are then replaced with the new dates and times.\n\n\n\n\n\n Removing previously scheduled image from volume lifecycle statuses by using the CLI \n\nYou can remove a scheduled status change by using the --reset-deprecate-at or --reset-obsolete-at options. If you use either of these options with the ibmcloud is image-update command, the date and time are removed from the image. The image is no longer scheduled for that status change.\n\nibmcloud is image-update IMAGE [--reset-deprecate-at] [--reset-obsolete-at]\n\nIf you use both the --reset-deprecate-at and --reset-obsolete-at options, the image status returns to available.\n\n\n\n\n\n Changing an image from volume lifecycle status by using the API \n\nYou can change the lifecycle status of a IBM Cloud VPC image from volume by using the application programming interface (API). You can make an immediate status change or schedule a status change to happen later.\n\nTo make an immediate status change, use one of the following examples. For the$image_id variable, specify the ID of the custom image for the status change.\n\nYou can make an immediate status change only if a future status change is not scheduled. To remove a scheduled status change, see [Remove a scheduled custom image lifecycle status change by using the API](https://cloud.ibm.com/docs/vpc?topic=vpc-image-from-volume-vpc-manageschedule-ilm-reset-status-change-API). After you remove the scheduled status change, you can make an immediate status change.",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-image-from-volume-vpc-manage",
+          "score": 48.971634,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "no",
+                "timestamp": 1724268430
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How does version 6.15.0 differ from 6.14.0?\n|assistant|: Assuming the question is about the IBM Cloud\u00ae Virtual Private Cloud (VPC) command line interface (CLI),  version 6.15.0 includes the following changes over version 6.14.0. It introduced new commands image-obsolete and image-deprecate for image lifecycle management. It also added support for image lifecycle management in image-create, image-update, and images commands and it fixed an issue with using the SSH key generated from UI in CLI.\n|user|: Tell me more about the new commands\n|assistant|: The new commands introduced in version 6.15.0 of the IBM Cloud\u00ae Virtual Private Cloud (VPC) command line interface (CLI) are image-obsolete and image-deprecate. These commands support image lifecycle management, allowing users to manage the lifecycle of their custom images more effectively. The image-obsolete command can be used to mark an image as obsolete, indicating that it is no longer available to be used to provision an instance. The image-deprecate command can be used to mark an image as deprecated, discouraging its use before it becomes obsolete.\n|user|: How do I use them?\n|assistant|: To use the new `image-obsolete` and `image-deprecate` commands, you need to specify the name or ID of the custom image with the `IMAGE` variable. Here are some examples: - To mark an image as deprecated, use the following command:  ```  ibmcloud is image-deprecate IMAGE  ``` - To mark an image as obsolete, use the following command:  ```  ibmcloud is image-obsolete IMAGE  ``` These commands allow you to make an immediate status change. Alternatively, you can schedule these status changes for a future date and time by using the `ibmcloud is image-update` command with the `--deprecate-at` or `--obsolete-at` options. Finally, please note that you can only make an immediate status change if a future status change is not scheduled. If you have a scheduled status change, you need to remove it first.\n|user|: Can I use the scheduling functionality to schedule right a status change to obsolete in a month and to deprecated in two months?\n|assistant|: You can use the scheduling functionality to schedule a status change to obsolete and deprecated in the future. To do this, you can use the `ibmcloud is image-update` command with the `--obsolete-at` and `--deprecate-at` options. However, if you define both the deprecate-at and obsolete-at dates, the obsolete-at date must be after the deprecate-at date.\n|user|: Thank you!"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "You're welcome! I'm glad I could help. Let me know if you have any other questions. To schedule a status change to obsolete in a month and to deprecated in two months, you can use the `ibmcloud is image-update` command with the `--obsolete-at` and `--deprecate-at` options. Just make sure that the obsolete-at date is after the deprecate-at date."
+    },
+    {
+      "speaker": "user",
+      "text": "BTW, how about version 6.16.0? Does it include any other changes?",
+      "timestamp": 1724268543,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "UNANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I don't have specific information about version 6.16.0 of the IBM Cloud\u00ae Virtual Private Cloud (VPC) command line interface (CLI).",
+      "timestamp": 1724268549,
+      "contexts": [
+        {
+          "document_id": "ibmcld_16034-7-1778",
+          "text": "\nVPC CLI release notes \n\nThe following release notes are for the IBM Cloud\u00ae Virtual Private Cloud (VPC) command line interface (CLI).\n\n\n\n v6.15.0 \n\nVersion 6.15.0 was released on 2023-07-11.\n\n\n\n New commands \n\n\n\n* New commands image-obsolete and image-deprecate are introduced to support image lifecycle management.\n\n\n\n\n\n\n\n Updated commands \n\n\n\n* Added support for image lifecycle management in image-create, image-update, and images commands.\n\n\n\n\n\n\n\n Removed commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n Notes \n\n\n\n* N/A\n\n\n\n\n\n\n\n\n\n v6.14.1 \n\nVersion 6.14.1 was released on 2023-06-30.\n\n\n\n New commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n Updated commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n Removed commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n Notes \n\n\n\n* Fixed issue with using the SSH key generated from UI in CLI.\n\n\n\n\n\n\n\n\n\n v6.14.0 \n\nVersion 6.14.0 was released on 2023-06-23.\n\n\n\n New commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n Updated commands \n\n\n\n* Added support for more algorithms in the SSH key key-create command.\n\n\n\n\n\n\n\n Removed commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n\n\n v6.13.0 \n\nVersion 6.13.0 was released on 2023-06-22.\n\n\n\n New commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n Updated commands \n\n\n\n* Added support for snapshot and backup cross region copy in snaphot-create, snapshots, backup-policy-plan-create and backup-policy-plan-update commands.\n\n\n\n\n\n\n\n Removed commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n\n\n v6.12.0 \n\nVersion 6.12.0 was released on 2023-06-01.\n\n\n\n New commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n Updated commands \n\n\n\n* Added support for fileshare mount targets in share commands (Beta).\n\n\n\n\n\n\n\n Removed commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n Notes \n\n\n\n* Fixed bare-metal-server-network-interfaces, bare-metal-server-profiles and bare-metal-servers commands to print correct response values.\n\n\n\n\n\n\n\n\n\n v6.11.1 \n\nVersion 6.11.1 was released on 2023-05-03.\n\n\n\n New commands \n\n\n\n* N/A\n\n\n\n\n\n\n\n Updated commands",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-vpc-cli-rn",
+          "score": 11.457497,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "no",
+                "timestamp": 1724268672
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "v6.15.0 cli"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "I don't have specific information about version 6.16.0 of the IBM Cloud\u00ae Virtual Private Cloud (VPC) command line interface (CLI) as it was not provided in the document. However, based on the pattern of the previous versions, it may include new commands, updated commands, removed commands, and notes related to bug fixes or improvements."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "085be9e4-6fe3-4f6c-b438-ad7805e64241",
+      "status": "created",
+      "timestamp": 1724268672
+    },
+    {
+      "author": "085be9e4-6fe3-4f6c-b438-ad7805e64241",
+      "status": "edited",
+      "timestamp": 1724269253
+    },
+    {
+      "author": "085be9e4-6fe3-4f6c-b438-ad7805e64241",
+      "status": "edited",
+      "timestamp": 1724269253
+    },
+    {
+      "author": "87334bc6-dd39-4565-ae2b-832e60a24b08",
+      "status": "edited",
+      "timestamp": 1727124250
+    },
+    {
+      "author": "87334bc6-dd39-4565-ae2b-832e60a24b08",
+      "status": "accepted",
+      "timestamp": 1727124318
+    }
+  ],
+  "editor": "87334bc6-dd39-4565-ae2b-832e60a24b08",
+  "domain": "mt-rag-ibmcloud-elser-512-100-20240502",
+  "reviewer": "87334bc6-dd39-4565-ae2b-832e60a24b08"
+}

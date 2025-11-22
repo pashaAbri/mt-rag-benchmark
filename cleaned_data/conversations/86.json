@@ -1,0 +1,375 @@
+{
+  "author": "8908d11f-01bd-4e38-8f46-3584f19f879b",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-govt-elser-512-100-20240611",
+      "size": "49607"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"bool\": {\n    \"must\": {\n      \"text_expansion\": {\n        \"ml.tokens\": {\n          \"model_id\": \".elser_model_1\",\n          \"model_text\": \"${QUERY}\"\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "Name the sources of light pollution that affect skywatching.",
+      "timestamp": 1722975225,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Light pollution is caused by stray light from various human activities, including parking lots, sport complexes, street lights, and other sources. This scattered light makes it difficult to observe fainter stars and the Milky Way in the night sky. The larger and more developed a city is, the more light pollution it tends to produce, and the effect decreases the farther away you travel from a city.",
+      "timestamp": 1722975227,
+      "contexts": [
+        {
+          "document_id": "bfd4514593f8c09e-21337-23369",
+          "text": "Skywatching - NASA Science\nWide open areas without lots of tall trees or mountains nearby make for good viewing spots, since you can see more of the sky. Examples include\u00a0places like a large field, a wide valley, and the shore of a lake or the ocean. Any location you select should be a place where you can feel safe at night.> More about finding a good skywatching locationQ: What can I see in the night sky?The whole universe is accessible to skywatchers. Your own eyes will show you stars, a handful of bright planets, the Moon, comets and meteors (shooting stars), to name a few sights. Binoculars or a small telescope enable you to see finer details than your eyes can detect, making visible things like the large moons of Jupiter and the rings of Saturn, as well as star clusters and double stars. A larger telescope enables you to see fainter objects, like nebulas and other galaxies.Q: How does light pollution affect skywatching?Light pollution is stray light from parking lots, sport complexes, street lights, and other human activity, scattered into the night sky. It's a combined effect of scattered light from these things that manifests as a glow in the night sky that makes it difficult to observe fainter stars and the Milky Way. The larger and more developed a city is, the more light pollution it tends to produce. The effect decreases the farther away you travel from a city. Heading out to less developed areas, away from town, will enable you to see more stars.> More about finding a good skywatching locationQ: How can I involve my children in skywatching?Parents can prepare to involve their children in skywatching by learning some of the basics, like the phases of the Moon, the names of a few easy to recognize constellations, and knowing how to identify bright stars and planets using a favorite astronomy app. Staying up to date with the month's skywatching highlights, with resources like NASA's What's Up video series, makes it easy to know what there is to observe, and provides some fun facts to share when out under the stars.",
+          "title": "Skywatching - NASA Science",
+          "url": "https://solarsystem.nasa.gov/skywatching/",
+          "score": 17.189386,
+          "feedback": {
+            "relevant": {
+              "8908d11f-01bd-4e38-8f46-3584f19f879b": {
+                "value": "yes",
+                "timestamp": 1722975496
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: Name the sources of light pollution that affect skywatching."
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "351d62c973f5a12e-2967-4975",
+          "text": "Skywatching FAQ\nIt's a combined effect of scattered light from these things that manifests as a glow in the night sky that makes it difficult to observe fainter stars and the Milky Way. The larger and more developed a city is, the more light pollution it tends to produce. The effect decreases the farther away you travel from a city. Heading out to less developed areas, away from town, will enable you to see more stars.> More about how light pollution impacts locations for stargazingCan I see ____ from my location on Earth? How do I know if objects and events described here are visible where I live? Most skywatching phenomena featured on these webpages and in our What's Up videos are visible for observers across the mid-latitudes of the Northern Hemisphere (that is, from about 25\u00b0 to 50\u00b0 north latitude). Plenty of these highlights are also visible from other locations farther north and south.If an object like a star or planet appears high overhead for the U.S. mainland, then it will also appear high overhead across much of Europe, the Mediterranean and Middle East, and Eastern Asia. These regions share the same range of latitudes, so their view of the night sky is similar.We recommend using skywatching apps for mobile devices and computers for determining if something can be seen from your location, and when to look for it. They enable you to enter your location on Earth and see the sky as it will look on a particular date and time.How big is a \"degree\" when describing how close objects appear in the sky? A degree is about the with of your little finger held at arm's length. Most of us are familiar with the idea that there are 360 degrees in a circle, and that making a 180-degree turn is to face the opposite direction. If you imagine the sky as a sphere with the stars fixed onto it and pick any point, and draw a circle all the way around the sky until you return to that point, you will have rotated through 360 degrees. To approximate 5 degrees, hold up your three middle fingers on one hand.",
+          "title": "Skywatching FAQ",
+          "url": "https://solarsystem.nasa.gov/skywatching/faq/",
+          "score": 17.153433,
+          "feedback": {
+            "relevant": {
+              "8908d11f-01bd-4e38-8f46-3584f19f879b": {
+                "value": "yes",
+                "timestamp": 1722975489
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: Name the sources of light pollution that affect skywatching."
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "351d62c973f5a12e-1481-3556",
+          "text": "Skywatching FAQ\nIf you have access to binoculars or a telescope, they will extend your vision and enhance the experience \u2013 but they are by no means necessary to get started.\u00a0How do I find a good location for skywatching or stargazing?The number one priority when seeking an excellent location for skywatching is to get away from bright city lights. Scattered light from urban areas creates light pollution that washes out the fainter stars and the Milky Way. Wide open areas without lots of tall trees or mountains nearby make for good viewing spots, since you can see more of the sky. Examples include\u00a0places like a large field, a wide valley, and the shore of a lake or the ocean. Any location you select should be a place where you can feel safe at night.> More about finding a good skywatching locationWhat can I see in the night sky?The whole universe is accessible to skywatchers. Your own eyes will show you stars, a handful of bright planets, the Moon, comets and meteors (shooting stars), to name a few sights. Binoculars or a small telescope enable you to see finer details than your eyes can detect, making visible things like the large moons of Jupiter and the rings of Saturn, as well as star clusters and double stars. A larger telescope enables you to see fainter objects, like nebulas and other galaxies.How does light pollution affect skywatching?Light pollution is stray light from parking lots, sport complexes, street lights, and other human activity, scattered into the night sky. It's a combined effect of scattered light from these things that manifests as a glow in the night sky that makes it difficult to observe fainter stars and the Milky Way. The larger and more developed a city is, the more light pollution it tends to produce. The effect decreases the farther away you travel from a city. Heading out to less developed areas, away from town, will enable you to see more stars.> More about how light pollution impacts locations for stargazingCan I see ____ from my location on Earth? How do I know if objects and events described here are visible where I live?",
+          "title": "Skywatching FAQ",
+          "url": "https://solarsystem.nasa.gov/skywatching/faq/",
+          "score": 16.206657,
+          "feedback": {
+            "relevant": {
+              "8908d11f-01bd-4e38-8f46-3584f19f879b": {
+                "value": "yes",
+                "timestamp": 1722975493
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: Name the sources of light pollution that affect skywatching."
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "speaker": "user",
+      "text": "if I get away from the city can I see jupiter's rings?",
+      "timestamp": 1722975692,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The light pollution effect decreases the farther away you travel from a city. Additionally, if you use binoculars or a small telescope you will be able to see details of things like the large moons of Jupiter.",
+      "timestamp": 1722975696,
+      "contexts": [
+        {
+          "document_id": "bfd4514593f8c09e-21337-23369",
+          "text": "Skywatching - NASA Science\nWide open areas without lots of tall trees or mountains nearby make for good viewing spots, since you can see more of the sky. Examples include\u00a0places like a large field, a wide valley, and the shore of a lake or the ocean. Any location you select should be a place where you can feel safe at night.> More about finding a good skywatching locationQ: What can I see in the night sky?The whole universe is accessible to skywatchers. Your own eyes will show you stars, a handful of bright planets, the Moon, comets and meteors (shooting stars), to name a few sights. Binoculars or a small telescope enable you to see finer details than your eyes can detect, making visible things like the large moons of Jupiter and the rings of Saturn, as well as star clusters and double stars. A larger telescope enables you to see fainter objects, like nebulas and other galaxies.Q: How does light pollution affect skywatching?Light pollution is stray light from parking lots, sport complexes, street lights, and other human activity, scattered into the night sky. It's a combined effect of scattered light from these things that manifests as a glow in the night sky that makes it difficult to observe fainter stars and the Milky Way. The larger and more developed a city is, the more light pollution it tends to produce. The effect decreases the farther away you travel from a city. Heading out to less developed areas, away from town, will enable you to see more stars.> More about finding a good skywatching locationQ: How can I involve my children in skywatching?Parents can prepare to involve their children in skywatching by learning some of the basics, like the phases of the Moon, the names of a few easy to recognize constellations, and knowing how to identify bright stars and planets using a favorite astronomy app. Staying up to date with the month's skywatching highlights, with resources like NASA's What's Up video series, makes it easy to know what there is to observe, and provides some fun facts to share when out under the stars.",
+          "title": "Skywatching - NASA Science",
+          "url": "https://solarsystem.nasa.gov/skywatching/",
+          "score": 33.426857,
+          "feedback": {
+            "relevant": {
+              "8908d11f-01bd-4e38-8f46-3584f19f879b": {
+                "value": "yes",
+                "timestamp": 1722975748
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: Name the sources of light pollution that affect skywatching.\n|assistant|: Light pollution is caused by stray light from various human activities, including parking lots, sport complexes, street lights, and other sources. This scattered light makes it difficult to observe fainter stars and the Milky Way in the night sky. The larger and more developed a city is, the more light pollution it tends to produce, and the effect decreases the farther away you travel from a city.\n|user|: if I get away from the city can I see jupiter's rings?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "351d62c973f5a12e-1481-3556",
+          "text": "Skywatching FAQ\nIf you have access to binoculars or a telescope, they will extend your vision and enhance the experience \u2013 but they are by no means necessary to get started.\u00a0How do I find a good location for skywatching or stargazing?The number one priority when seeking an excellent location for skywatching is to get away from bright city lights. Scattered light from urban areas creates light pollution that washes out the fainter stars and the Milky Way. Wide open areas without lots of tall trees or mountains nearby make for good viewing spots, since you can see more of the sky. Examples include\u00a0places like a large field, a wide valley, and the shore of a lake or the ocean. Any location you select should be a place where you can feel safe at night.> More about finding a good skywatching locationWhat can I see in the night sky?The whole universe is accessible to skywatchers. Your own eyes will show you stars, a handful of bright planets, the Moon, comets and meteors (shooting stars), to name a few sights. Binoculars or a small telescope enable you to see finer details than your eyes can detect, making visible things like the large moons of Jupiter and the rings of Saturn, as well as star clusters and double stars. A larger telescope enables you to see fainter objects, like nebulas and other galaxies.How does light pollution affect skywatching?Light pollution is stray light from parking lots, sport complexes, street lights, and other human activity, scattered into the night sky. It's a combined effect of scattered light from these things that manifests as a glow in the night sky that makes it difficult to observe fainter stars and the Milky Way. The larger and more developed a city is, the more light pollution it tends to produce. The effect decreases the farther away you travel from a city. Heading out to less developed areas, away from town, will enable you to see more stars.> More about how light pollution impacts locations for stargazingCan I see ____ from my location on Earth? How do I know if objects and events described here are visible where I live?",
+          "title": "Skywatching FAQ",
+          "url": "https://solarsystem.nasa.gov/skywatching/faq/",
+          "score": 32.74165,
+          "feedback": {
+            "relevant": {
+              "8908d11f-01bd-4e38-8f46-3584f19f879b": {
+                "value": "yes",
+                "timestamp": 1722975746
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: Name the sources of light pollution that affect skywatching.\n|assistant|: Light pollution is caused by stray light from various human activities, including parking lots, sport complexes, street lights, and other sources. This scattered light makes it difficult to observe fainter stars and the Milky Way in the night sky. The larger and more developed a city is, the more light pollution it tends to produce, and the effect decreases the farther away you travel from a city.\n|user|: if I get away from the city can I see jupiter's rings?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "351d62c973f5a12e-2967-4975",
+          "text": "Skywatching FAQ\nIt's a combined effect of scattered light from these things that manifests as a glow in the night sky that makes it difficult to observe fainter stars and the Milky Way. The larger and more developed a city is, the more light pollution it tends to produce. The effect decreases the farther away you travel from a city. Heading out to less developed areas, away from town, will enable you to see more stars.> More about how light pollution impacts locations for stargazingCan I see ____ from my location on Earth? How do I know if objects and events described here are visible where I live? Most skywatching phenomena featured on these webpages and in our What's Up videos are visible for observers across the mid-latitudes of the Northern Hemisphere (that is, from about 25\u00b0 to 50\u00b0 north latitude). Plenty of these highlights are also visible from other locations farther north and south.If an object like a star or planet appears high overhead for the U.S. mainland, then it will also appear high overhead across much of Europe, the Mediterranean and Middle East, and Eastern Asia. These regions share the same range of latitudes, so their view of the night sky is similar.We recommend using skywatching apps for mobile devices and computers for determining if something can be seen from your location, and when to look for it. They enable you to enter your location on Earth and see the sky as it will look on a particular date and time.How big is a \"degree\" when describing how close objects appear in the sky? A degree is about the with of your little finger held at arm's length. Most of us are familiar with the idea that there are 360 degrees in a circle, and that making a 180-degree turn is to face the opposite direction. If you imagine the sky as a sphere with the stars fixed onto it and pick any point, and draw a circle all the way around the sky until you return to that point, you will have rotated through 360 degrees. To approximate 5 degrees, hold up your three middle fingers on one hand.",
+          "title": "Skywatching FAQ",
+          "url": "https://solarsystem.nasa.gov/skywatching/faq/",
+          "score": 31.01699,
+          "feedback": {
+            "relevant": {
+              "8908d11f-01bd-4e38-8f46-3584f19f879b": {
+                "value": "no",
+                "timestamp": 1722975744
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: Name the sources of light pollution that affect skywatching.\n|assistant|: Light pollution is caused by stray light from various human activities, including parking lots, sport complexes, street lights, and other sources. This scattered light makes it difficult to observe fainter stars and the Milky Way in the night sky. The larger and more developed a city is, the more light pollution it tends to produce, and the effect decreases the farther away you travel from a city.\n|user|: if I get away from the city can I see jupiter's rings?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, you can see Jupiter's rings with a small telescope even when you are not in the city, as long as you have a clear view of the planet. However, it is important to note that what is actually seen are the large moons of Jupiter, not the rings, as Jupiter does not have rings like Saturn. The rings that can be seen are the orbits of these moons. But to see such details, you would need a small telescope, as the human eye alone cannot resolve them."
+    },
+    {
+      "speaker": "user",
+      "text": "oh I meant saturn",
+      "timestamp": 1722975882,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, if you get away from the city and use a small telescope, you can see the rings of Saturn. ",
+      "timestamp": 1722975885,
+      "contexts": [
+        {
+          "document_id": "bfd4514593f8c09e-21337-23369",
+          "text": "Skywatching - NASA Science\nWide open areas without lots of tall trees or mountains nearby make for good viewing spots, since you can see more of the sky. Examples include\u00a0places like a large field, a wide valley, and the shore of a lake or the ocean. Any location you select should be a place where you can feel safe at night.> More about finding a good skywatching locationQ: What can I see in the night sky?The whole universe is accessible to skywatchers. Your own eyes will show you stars, a handful of bright planets, the Moon, comets and meteors (shooting stars), to name a few sights. Binoculars or a small telescope enable you to see finer details than your eyes can detect, making visible things like the large moons of Jupiter and the rings of Saturn, as well as star clusters and double stars. A larger telescope enables you to see fainter objects, like nebulas and other galaxies.Q: How does light pollution affect skywatching?Light pollution is stray light from parking lots, sport complexes, street lights, and other human activity, scattered into the night sky. It's a combined effect of scattered light from these things that manifests as a glow in the night sky that makes it difficult to observe fainter stars and the Milky Way. The larger and more developed a city is, the more light pollution it tends to produce. The effect decreases the farther away you travel from a city. Heading out to less developed areas, away from town, will enable you to see more stars.> More about finding a good skywatching locationQ: How can I involve my children in skywatching?Parents can prepare to involve their children in skywatching by learning some of the basics, like the phases of the Moon, the names of a few easy to recognize constellations, and knowing how to identify bright stars and planets using a favorite astronomy app. Staying up to date with the month's skywatching highlights, with resources like NASA's What's Up video series, makes it easy to know what there is to observe, and provides some fun facts to share when out under the stars.",
+          "title": "Skywatching - NASA Science",
+          "url": "https://solarsystem.nasa.gov/skywatching/",
+          "score": 36.590782,
+          "feedback": {
+            "relevant": {
+              "8908d11f-01bd-4e38-8f46-3584f19f879b": {
+                "value": "yes",
+                "timestamp": 1722976002
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: Name the sources of light pollution that affect skywatching.\n|assistant|: Light pollution is caused by stray light from various human activities, including parking lots, sport complexes, street lights, and other sources. This scattered light makes it difficult to observe fainter stars and the Milky Way in the night sky. The larger and more developed a city is, the more light pollution it tends to produce, and the effect decreases the farther away you travel from a city.\n|user|: if I get away from the city can I see jupiter's rings?\n|assistant|: If you use binoculars or a small telescope you will be able to see details of things like the large moons of Jupiter.\n|user|: oh I meant saturn"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "351d62c973f5a12e-1481-3556",
+          "text": "Skywatching FAQ\nIf you have access to binoculars or a telescope, they will extend your vision and enhance the experience \u2013 but they are by no means necessary to get started.\u00a0How do I find a good location for skywatching or stargazing?The number one priority when seeking an excellent location for skywatching is to get away from bright city lights. Scattered light from urban areas creates light pollution that washes out the fainter stars and the Milky Way. Wide open areas without lots of tall trees or mountains nearby make for good viewing spots, since you can see more of the sky. Examples include\u00a0places like a large field, a wide valley, and the shore of a lake or the ocean. Any location you select should be a place where you can feel safe at night.> More about finding a good skywatching locationWhat can I see in the night sky?The whole universe is accessible to skywatchers. Your own eyes will show you stars, a handful of bright planets, the Moon, comets and meteors (shooting stars), to name a few sights. Binoculars or a small telescope enable you to see finer details than your eyes can detect, making visible things like the large moons of Jupiter and the rings of Saturn, as well as star clusters and double stars. A larger telescope enables you to see fainter objects, like nebulas and other galaxies.How does light pollution affect skywatching?Light pollution is stray light from parking lots, sport complexes, street lights, and other human activity, scattered into the night sky. It's a combined effect of scattered light from these things that manifests as a glow in the night sky that makes it difficult to observe fainter stars and the Milky Way. The larger and more developed a city is, the more light pollution it tends to produce. The effect decreases the farther away you travel from a city. Heading out to less developed areas, away from town, will enable you to see more stars.> More about how light pollution impacts locations for stargazingCan I see ____ from my location on Earth? How do I know if objects and events described here are visible where I live?",
+          "title": "Skywatching FAQ",
+          "url": "https://solarsystem.nasa.gov/skywatching/faq/",
+          "score": 35.882618,
+          "feedback": {
+            "relevant": {
+              "8908d11f-01bd-4e38-8f46-3584f19f879b": {
+                "value": "yes",
+                "timestamp": 1722975992
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: Name the sources of light pollution that affect skywatching.\n|assistant|: Light pollution is caused by stray light from various human activities, including parking lots, sport complexes, street lights, and other sources. This scattered light makes it difficult to observe fainter stars and the Milky Way in the night sky. The larger and more developed a city is, the more light pollution it tends to produce, and the effect decreases the farther away you travel from a city.\n|user|: if I get away from the city can I see jupiter's rings?\n|assistant|: If you use binoculars or a small telescope you will be able to see details of things like the large moons of Jupiter.\n|user|: oh I meant saturn"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "351d62c973f5a12e-2967-4975",
+          "text": "Skywatching FAQ\nIt's a combined effect of scattered light from these things that manifests as a glow in the night sky that makes it difficult to observe fainter stars and the Milky Way. The larger and more developed a city is, the more light pollution it tends to produce. The effect decreases the farther away you travel from a city. Heading out to less developed areas, away from town, will enable you to see more stars.> More about how light pollution impacts locations for stargazingCan I see ____ from my location on Earth? How do I know if objects and events described here are visible where I live? Most skywatching phenomena featured on these webpages and in our What's Up videos are visible for observers across the mid-latitudes of the Northern Hemisphere (that is, from about 25\u00b0 to 50\u00b0 north latitude). Plenty of these highlights are also visible from other locations farther north and south.If an object like a star or planet appears high overhead for the U.S. mainland, then it will also appear high overhead across much of Europe, the Mediterranean and Middle East, and Eastern Asia. These regions share the same range of latitudes, so their view of the night sky is similar.We recommend using skywatching apps for mobile devices and computers for determining if something can be seen from your location, and when to look for it. They enable you to enter your location on Earth and see the sky as it will look on a particular date and time.How big is a \"degree\" when describing how close objects appear in the sky? A degree is about the with of your little finger held at arm's length. Most of us are familiar with the idea that there are 360 degrees in a circle, and that making a 180-degree turn is to face the opposite direction. If you imagine the sky as a sphere with the stars fixed onto it and pick any point, and draw a circle all the way around the sky until you return to that point, you will have rotated through 360 degrees. To approximate 5 degrees, hold up your three middle fingers on one hand.",
+          "title": "Skywatching FAQ",
+          "url": "https://solarsystem.nasa.gov/skywatching/faq/",
+          "score": 31.788809,
+          "feedback": {
+            "relevant": {
+              "8908d11f-01bd-4e38-8f46-3584f19f879b": {
+                "value": "no",
+                "timestamp": 1722975984
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: Name the sources of light pollution that affect skywatching.\n|assistant|: Light pollution is caused by stray light from various human activities, including parking lots, sport complexes, street lights, and other sources. This scattered light makes it difficult to observe fainter stars and the Milky Way in the night sky. The larger and more developed a city is, the more light pollution it tends to produce, and the effect decreases the farther away you travel from a city.\n|user|: if I get away from the city can I see jupiter's rings?\n|assistant|: If you use binoculars or a small telescope you will be able to see details of things like the large moons of Jupiter.\n|user|: oh I meant saturn"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, if you get away from the city and use a small telescope, you can see the rings of Saturn. With just your eyes, you can see Saturn as a bright point of light, but the rings are too faint to be seen without the aid of a telescope."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "8908d11f-01bd-4e38-8f46-3584f19f879b",
+      "status": "created",
+      "timestamp": 1722976153
+    },
+    {
+      "author": "87334bc6-dd39-4565-ae2b-832e60a24b08",
+      "status": "edited",
+      "timestamp": 1726087803
+    },
+    {
+      "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+      "status": "edited",
+      "timestamp": 1726228239
+    },
+    {
+      "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+      "status": "accepted",
+      "timestamp": 1726228354
+    }
+  ],
+  "editor": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+  "domain": "mt-rag-govt-elser-512-100-20240611",
+  "reviewer": "dc79eb51-e320-43c1-841c-3b1baa66d0aa"
+}

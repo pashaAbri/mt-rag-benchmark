@@ -1,0 +1,629 @@
+{
+  "author": "f957d3a2-1ebf-4b62-818d-070afd0a133d",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-fiqa-beir-elser-512-100-20240501",
+      "size": "61022"
+    },
+    "parameters": {
+      "max_count": 5,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "how to balance 401k?",
+      "timestamp": 1724436972,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Balancing a 401k involves reallocating and rebalancing the investments within the account. You should determine the overall allocation between bonds, stocks, international, REIT, etc. This will depend on your risk tolerances and the total money in your 401k and IRA.  Once you figure out the allocation, map the available funds in your 401k according to this allocation. It is important to rebalance your 401k every year to maintain your desired asset allocation. Additionally you should review your allocation in a few years or after a life event such as a change of job, getting married, having kids, or buying a house. You can move from investment X to investment Y within your 401k without tax consequences. ",
+      "timestamp": 1724436980,
+      "contexts": [
+        {
+          "document_id": "74041-0-1013",
+          "text": "\nBen Miller's answer is very thorough, and I up voted it. I believe that the ability to rebalance without tax implications is very import, but there are two aspects of the question that were not covered: The 401K in many cases comes with a company match. Putting enough money into the fund each year to maximize the match, give you free money that is not available in the non-retirement accounts. The presence of that match is to encourage employees to contribute: even if they are tying up their funds until retirement age; and they are into a plan with only a handful of investment options; and they may have higher expenses in the 401K. The question also had a concern about the annual limits for the 401K (18,000) and the IRA (5,500). The use of a retirement account doesn't in any way limit your ability to invest in non-retirement accounts. You can choose to invest from 0 to 23,500 in the retirement accounts and from 0 to unlimited into the non-retirement accounts. Double those amounts if you are married.",
+          "score": 17.635784,
+          "feedback": {
+            "relevant": {
+              "f957d3a2-1ebf-4b62-818d-070afd0a133d": {
+                "value": "no",
+                "timestamp": 1724437305
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: how to balance 401k?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "151045-0-337",
+          "text": "\nThe numbers aside (I'd not assume 12%/yr) there is no limit to the balance. There are 401(k) accounts that have great matching and profit sharing deposits putting the per year limit closer to $45k, combine that with company stock in, say, Apple which has risen 60 fold this past decade, and balances in the tens of millions are possible.",
+          "score": 17.282402,
+          "feedback": {
+            "relevant": {
+              "f957d3a2-1ebf-4b62-818d-070afd0a133d": {
+                "value": "no",
+                "timestamp": 1724437301
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: how to balance 401k?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "530703-0-1045",
+          "text": "\nOne of the strengths of 401K accounts is that you can move from investment X in the program to investment Y in the program without tax consequences. As you move through your lifetime you will tend to want to lower risk by investing in funds that are less aggressive. The only way this works is if there is an ability to move funds. If there were only one or two funds to pick from or that you were locked in to your initial choices that would be a very poor 401K to be enrolled in. On your benefits/401K website you should be able to adjust three sets of numbers: Some have you enter the current money as a percentage others allow you to enter it in dollars. They might limit the number of changes you can do in a month to the current money balances to avoid the temptation to try and time the market. These changes usually happen within 1 business day.  Regarding new and match money they could limit the lowest non zero percent to 5% or 10%, but they might allow numbers as low as 1%. These changes take place generally with the next paycheck.",
+          "score": 17.18085,
+          "feedback": {
+            "relevant": {
+              "f957d3a2-1ebf-4b62-818d-070afd0a133d": {
+                "value": "yes",
+                "timestamp": 1724437297
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: how to balance 401k?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "570117-0-935",
+          "text": "\nThe benefit of the 401K and IRAs are that reallocating and re balancing are easy. They don't want you to move the funds every day, but you are not locked in to your current allocations. The fact that you mentioned in a comment that you also have a Roth IRA means that you should look at all retirements as a whole.  Look at what options you have in the 401K and also what options you have with the IRA. Then determine the overall allocation between bonds, stocks, international, REIT, etc. Then use the mix of funds  in the IRA and 401K to meet that goal. Asking if the 401K should be small and mid cap only can't be answered without knowing not just your risk tolerances but the total money in the 401K and IRA.  Pick an allocation, map the available funds to that allocation. Rebalance every year. But review the allocation in a few years or after a life event such as: change of job, getting married, having kids, or buying a house.",
+          "score": 17.051914,
+          "feedback": {
+            "relevant": {
+              "f957d3a2-1ebf-4b62-818d-070afd0a133d": {
+                "value": "yes",
+                "timestamp": 1724437290
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: how to balance 401k?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "168890-0-843",
+          "text": "\nCompanies usually have a minimum account balance required to keep a 401k for former employees. You will have to check whether $10k is sufficient to keep your funds in your former employer's 401k. If you are below their threshold, you will have to move your money. One option is to rollover into the new employer's 401k.  You can rollover a 401k into a traditional IRA account that is independent of your employer. A traditional IRA has the same tax benefits as a 401k; it grows tax-free until you withdraw money from the account. Companies that offer IRAs include Vanguard, Fidelity, TIAA.  Many companies have significant overhead costs in the their 401k management. It may be better for you to rollover your money into an IRA to save on these costs.  I am not knowledgeable about loaning from retirement accounts, so I cannot help with that.",
+          "score": 16.90845,
+          "feedback": {
+            "relevant": {
+              "f957d3a2-1ebf-4b62-818d-070afd0a133d": {
+                "value": "no",
+                "timestamp": 1724437285
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: how to balance 401k?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Balancing a 401k involves reallocating and rebalancing the investments within the account. Here are some steps you can follow:\n1. Determine your overall allocation between bonds, stocks, international, REIT, etc. This will depend on your risk tolerances and the total money in your 401k and IRA.\n2. Map the available funds in your 401k to this allocation.\n3. Rebalance your 401k every year to maintain your desired asset allocation.\n4. Review your allocation in a few years or after a life event such as a change of job, getting married, having kids, or buying a house.\nAdditionally, within your 401k, you can move from investment X to investment Y without tax consequences. This allows you to adjust your investments as you move through different stages of your life and want to lower your risk by investing in funds that are less aggressive.\nIf you are a former employee, you may need to check if there is a minimum account balance required to keep your funds in your former employer's 401k. If you are below their threshold, you will have to move your money. One option is to rollover into the new employer's 401k or into a traditional IRA account.\nRemember, companies may have significant overhead costs in their 401k management. It may be better for you to rollover your money into an IRA to save on these costs."
+    },
+    {
+      "speaker": "user",
+      "text": "How is 401k account taxed?",
+      "timestamp": 1724437376,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Standalone Type": [
+          "Standalone"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "401(k) contributions are pre-tax dollars. A 401k account is taxed when you withdraw the money upon retirement. This is similar to how an IRA is taxed. The idea behind this is that you will likely be in a lower tax bracket at the time of retirement. It's important to note that 401k contributions reduce your taxable income for each paycheck, but they do not impact the level of your social security and medicare taxes. Also, the employer match is considered free money.",
+      "timestamp": 1724437381,
+      "contexts": [
+        {
+          "document_id": "253391-0-168",
+          "text": "\n401(k) contributions are pre-tax dollars, but at the cost of locking the money up.  So you wouldn't have to pay taxes on it, but the funds wouldn't be available either.",
+          "score": 18.917196,
+          "feedback": {
+            "relevant": {
+              "f957d3a2-1ebf-4b62-818d-070afd0a133d": {
+                "value": "yes",
+                "timestamp": 1724438147
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "401k tax"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "361510-0-483",
+          "text": "\nIf your employer offers a 401k retirement plan then you can contribute a portion of your salary to your retirement and that will lower your effective income to remain in the 15% bracket (although as others have pointed out, only the dollars that exceed the 15% bracket will be taxed at the higher rate anyway). AND if your employer offers any kind of 401k matching contribution, that's effectively a pay-raise or 100% return on investment (depending on how you prefer to look at it).",
+          "score": 19.701138,
+          "feedback": {
+            "relevant": {
+              "f957d3a2-1ebf-4b62-818d-070afd0a133d": {
+                "value": "no",
+                "timestamp": 1724438261
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "401k tax"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "383472-0-727",
+          "text": "\nWith a 401k you will be taxed when you withdraw the money upon retirement (just like an IRA), but conventional wisdom had it that you're likely to be in a lower tax bracket at that time. That may not necessarily be the case though, in which case a Roth IRA would be a better option because you're paying for it with after tax dollars and distributions are untaxed. If you wanted to hedge your bets you could have both an IRA/401k and a Roth IRA.  An IRA has income limits above which the contributions are no longer tax deductible, I don't believe a 401k has the same limitations (for completion's sake: a Roth IRA has income limits above which you can't contribute to one). And like you said, the employer match is free money.",
+          "score": 18.434887,
+          "feedback": {
+            "relevant": {
+              "f957d3a2-1ebf-4b62-818d-070afd0a133d": {
+                "value": "yes",
+                "timestamp": 1724438263
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "401k tax"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "597574-0-1950",
+          "text": "\nThe amount you contribute will reduce the taxable income for each paycheck, but it won't impact the level of your social security and medicare taxes. A 401(k) plan is a qualified deferred compensation plan in which an   employee can elect to have the employer contribute a portion of his or   her cash wages to the plan on a pretax basis. Generally, these   deferred wages (commonly referred to as elective contributions) are   not subject to income tax withholding at the time of deferral, and   they are not reflected on your Form 1040 (PDF) since they were not   included in the taxable wages on your Form W-2 (PDF). However, they   are included as wages subject to withholding for social security and   Medicare taxes. In addition, employers must report the elective   contributions as wages subject to federal unemployment taxes. You might be able to keep this up for more than 7 weeks if the company offers health, dental and vision insurance. Your contributions for these policies would need to be paid for before you contribute to the 401K. Of course these items are also pre-tax so they will keep the taxable amount at zero. If there was a non-pretax deduction on your pay check that would keep the check at zero, but there would be taxes owed. This might be union dues, but it can also be some life and disability insurance polices. Most stubs specify which deductions are pre-tax, and which are post-tax. Warning. If you get the company match some companies give you the maximum match for those 7 weeks, then zero for the rest of the year. Others will still credit you with a match at the end of the year saying if you should get the benefit. It is not required that they do this. Check the company documents. You could also contribute post-tax money, which is different than Roth 401K, for the rest of the year to keep the match going. Note: If you are turning 50 this year, or are already 50, then you can contribute an additional $5,500",
+          "score": 18.546162,
+          "feedback": {
+            "relevant": {
+              "f957d3a2-1ebf-4b62-818d-070afd0a133d": {
+                "value": "yes",
+                "timestamp": 1724438265
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "401k tax"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "\nA 401k account is taxed when you withdraw the money upon retirement. This is similar to how an IRA is taxed. The idea behind this is that you will likely be in a lower tax bracket at the time of retirement. However, if this is not the case, a Roth IRA might be a better option because you pay for it with after-tax dollars and distributions are untaxed. If you want to hedge your bets, you could have both an IRA/401k and a Roth IRA. It's important to note that 401k contributions reduce your taxable income for each paycheck, but they do not impact the level of your social security and medicare taxes. Also, the employer match is considered free money."
+    },
+    {
+      "speaker": "user",
+      "text": "What do you mean by IRA?",
+      "timestamp": 1724438366,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Standalone Type": [
+          "Non-standalone"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "IRA stands for Individual Retirement Account. It's a type of retirement account where you can delay paying taxes now on your deposits or avoid paying taxes on your earnings later. You can set up a personal IRA for yourself, but not for employees. The investments within an IRA can vary - you can invest in certificates of deposit, stocks, bonds, mutual funds, or any mix of these. The taxation of an IRA is similar to a 401k, where contributions are made with pre-tax dollars and withdrawals are taxed upon retirement.",
+      "timestamp": 1724438371,
+      "contexts": [
+        {
+          "document_id": "94496-0-2276",
+          "text": "\nFirst of all, there are some differences between the retirement accounts that you mentioned regarding taxes. Traditional IRA and 401(k) accounts allow you to make pre-tax contributions, giving you an immediate tax deduction when you contribute. Roth IRA, Roth 401(k) are funded with after tax money, and a non-retirement account is, of course, also funded with after tax money. So if you are looking for the immediate tax deduction, this is a point in favor of the retirement accounts. Roth IRA & Roth 401(k) accounts allow the investment to grow tax-free, which means that the growth is not taxed, even when taking the investment out at retirement. With Traditional IRA and 401(k) accounts, you need to pay tax on the gains realized in the account when you withdraw the money, just as you do with a non-retirement account. This is a point in favor of the Roth retirement accounts. To answer your question about capital gains, yes, it is true that you do not have a capital gain until an investment is sold. So, discounting the contribution tax deductions of the retirement accounts, if you only bought individual stocks that never paid a dividend, and never sold them until retirement, you are correct that it really wouldn't matter if you had it in a regular brokerage account or in a traditional IRA. However, even people dedicated to buy-and-hold rarely actually buy only individual stocks and hold them for 30 years. There are several different circumstances that will generally happen in the time between now and when you want to withdraw the money in retirement that would be taxable events if you are not in a retirement account: If you sell an investment and buy a different one, the gains would be taxable. If you want to rebalance your holdings, this also involves selling a portion of your investments. For example, if you want to maintain an 80% stock/20% bond ratio, and your stock values have gone up to 90%, you might want to sell some stock and buy bonds. Or if you are getting closer to retirement, you might decide to go with a higher percentage of bonds. This would trigger capital gains. Inside a mutual fund, anytime the management sells investments inside the fund and realizes capital gains, these gains are passed on to the investors, and are taxable.",
+          "score": 28.973036,
+          "feedback": {
+            "relevant": {
+              "f957d3a2-1ebf-4b62-818d-070afd0a133d": {
+                "value": "yes",
+                "timestamp": 1724438958
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: how to balance 401k?\n|assistant|: Balancing a 401k involves reallocating and rebalancing the investments within the account. You should determine the overall allocation between bonds, stocks, international, REIT, etc. This will depend on your risk tolerances and the total money in your 401k and IRA.  Once you figure out the allocation, map the available funds in your 401k according to this allocation. It is important to rebalance your 401k every year to maintain your desired asset allocation. Additionally you should review your allocation in a few years or after a life event such as a change of job, getting married, having kids, or buying a house. You can move from investment X to investment Y within your 401k without tax consequences. \n|user|: How is 401k account taxed?\n|assistant|: 401(k) contributions are pre-tax dollars. A 401k account is taxed when you withdraw the money upon retirement. This is similar to how an IRA is taxed. The idea behind this is that you will likely be in a lower tax bracket at the time of retirement. It's important to note that 401k contributions reduce your taxable income for each paycheck, but they do not impact the level of your social security and medicare taxes. Also, the employer match is considered free money.\n|user|: What do you mean by IRA?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "532839-0-712",
+          "text": "\nOK, so first of all, employers don't set up IRAs.  IRA stands for Individual Retirement Account.  You can set up a personal IRA for yourself, but not for employees.  If that is what you're after, then just set one up for yourself - no special rules there for self employment. As far as setting up a 401(k), I'd suggest checking with benefits management companies.  If you're small, you probably don't have an HR department, so managing a 401(k) yourself would likely be overly burdensome.  Outsourcing this to a company which handles HR for you (maybe running payroll, etc. also), would be the best option.  Barring that, I'd try calling a large financial institution (Schwab, Fidelity, etc.) for clear guidance.",
+          "score": 13.865365,
+          "feedback": {
+            "relevant": {
+              "f957d3a2-1ebf-4b62-818d-070afd0a133d": {
+                "value": "yes",
+                "timestamp": 1724438962
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Individual Retirement Account (IRA)"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "448260-0-1360",
+          "text": "\nA 401K (pre-tax or Roth) account or an IRA (Deductible or Roth) account is a retirement account. Which means you delay paying taxes now on your deposits, or you avoid paying taxes on your earnings later.  But a retirement account doesn't  perform any different than any other account year-to-year. Being a retirement account doesn't  dictate a type of investment. You can invest in a certificate of deposit that is guaranteed to make x% this year; or you can invest in stocks, bonds, mutual funds that infest in stocks or bonds. Those stocks and bonds can be growth focused, or income focused; they can be from large companies or small companies; US companies or international companies. Or whatever mix you want. The graph in your question shows that if you invest early in your adulthood, and keep investing, and you make the average return you should make more money than starting later. But a couple of notes:  So to your exact questions: An S&P 500 investment should perform exactly the same this year if it is in a 401K, IRA, or taxable account With a few exceptions:  Yes any investment can lose money. The last 6 months have been volatile and the last month and a half especially so. A retirement account isn't any different. An investment in mutual fund X in a retirement account is just as depressed a one in the same fund but from a taxable account.",
+          "score": 12.7045,
+          "feedback": {
+            "relevant": {
+              "f957d3a2-1ebf-4b62-818d-070afd0a133d": {
+                "value": "yes",
+                "timestamp": 1724438965
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Individual Retirement Account (IRA)"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "speaker": "user",
+      "text": "Got it. Can I change my 401k contribution mid-year, in case my financial state changed for some reason?",
+      "timestamp": 1724439038,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Standalone Type": [
+          "Standalone"
+        ],
+        "Answerability": [
+          "UNANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I'm sorry, but I don't have information on whether you can change the contribution mid-year. ",
+      "timestamp": 1724439044,
+      "contexts": [
+        {
+          "document_id": "570117-0-935",
+          "text": "\nThe benefit of the 401K and IRAs are that reallocating and re balancing are easy. They don't want you to move the funds every day, but you are not locked in to your current allocations. The fact that you mentioned in a comment that you also have a Roth IRA means that you should look at all retirements as a whole.  Look at what options you have in the 401K and also what options you have with the IRA. Then determine the overall allocation between bonds, stocks, international, REIT, etc. Then use the mix of funds  in the IRA and 401K to meet that goal. Asking if the 401K should be small and mid cap only can't be answered without knowing not just your risk tolerances but the total money in the 401K and IRA.  Pick an allocation, map the available funds to that allocation. Rebalance every year. But review the allocation in a few years or after a life event such as: change of job, getting married, having kids, or buying a house.",
+          "score": 34.963203,
+          "feedback": {
+            "relevant": {
+              "f957d3a2-1ebf-4b62-818d-070afd0a133d": {
+                "value": "no",
+                "timestamp": 1725445064
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: how to balance 401k?\n|assistant|: Balancing a 401k involves reallocating and rebalancing the investments within the account. You should determine the overall allocation between bonds, stocks, international, REIT, etc. This will depend on your risk tolerances and the total money in your 401k and IRA.  Once you figure out the allocation, map the available funds in your 401k according to this allocation. It is important to rebalance your 401k every year to maintain your desired asset allocation. Additionally you should review your allocation in a few years or after a life event such as a change of job, getting married, having kids, or buying a house. You can move from investment X to investment Y within your 401k without tax consequences. \n|user|: How is 401k account taxed?\n|assistant|: 401(k) contributions are pre-tax dollars. A 401k account is taxed when you withdraw the money upon retirement. This is similar to how an IRA is taxed. The idea behind this is that you will likely be in a lower tax bracket at the time of retirement. It's important to note that 401k contributions reduce your taxable income for each paycheck, but they do not impact the level of your social security and medicare taxes. Also, the employer match is considered free money.\n|user|: What do you mean by IRA?\n|assistant|: IRA stands for Individual Retirement Account. It's a type of retirement account where you can delay paying taxes now on your deposits or avoid paying taxes on your earnings later. You can set up a personal IRA for yourself, but not for employees. The investments within an IRA can vary - you can invest in certificates of deposit, stocks, bonds, mutual funds, or any mix of these. The taxation of an IRA is similar to a 401k, where contributions are made with pre-tax dollars and withdrawals are taxed upon retirement.\n|user|: Got it. Can I change my 401k contribution mid-year, in case my financial state changed for some reason?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "94496-0-2276",
+          "text": "\nFirst of all, there are some differences between the retirement accounts that you mentioned regarding taxes. Traditional IRA and 401(k) accounts allow you to make pre-tax contributions, giving you an immediate tax deduction when you contribute. Roth IRA, Roth 401(k) are funded with after tax money, and a non-retirement account is, of course, also funded with after tax money. So if you are looking for the immediate tax deduction, this is a point in favor of the retirement accounts. Roth IRA & Roth 401(k) accounts allow the investment to grow tax-free, which means that the growth is not taxed, even when taking the investment out at retirement. With Traditional IRA and 401(k) accounts, you need to pay tax on the gains realized in the account when you withdraw the money, just as you do with a non-retirement account. This is a point in favor of the Roth retirement accounts. To answer your question about capital gains, yes, it is true that you do not have a capital gain until an investment is sold. So, discounting the contribution tax deductions of the retirement accounts, if you only bought individual stocks that never paid a dividend, and never sold them until retirement, you are correct that it really wouldn't matter if you had it in a regular brokerage account or in a traditional IRA. However, even people dedicated to buy-and-hold rarely actually buy only individual stocks and hold them for 30 years. There are several different circumstances that will generally happen in the time between now and when you want to withdraw the money in retirement that would be taxable events if you are not in a retirement account: If you sell an investment and buy a different one, the gains would be taxable. If you want to rebalance your holdings, this also involves selling a portion of your investments. For example, if you want to maintain an 80% stock/20% bond ratio, and your stock values have gone up to 90%, you might want to sell some stock and buy bonds. Or if you are getting closer to retirement, you might decide to go with a higher percentage of bonds. This would trigger capital gains. Inside a mutual fund, anytime the management sells investments inside the fund and realizes capital gains, these gains are passed on to the investors, and are taxable.",
+          "score": 30.392904,
+          "feedback": {
+            "relevant": {
+              "f957d3a2-1ebf-4b62-818d-070afd0a133d": {
+                "value": "no",
+                "timestamp": 1724439669
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: how to balance 401k?\n|assistant|: Balancing a 401k involves reallocating and rebalancing the investments within the account. You should determine the overall allocation between bonds, stocks, international, REIT, etc. This will depend on your risk tolerances and the total money in your 401k and IRA.  Once you figure out the allocation, map the available funds in your 401k according to this allocation. It is important to rebalance your 401k every year to maintain your desired asset allocation. Additionally you should review your allocation in a few years or after a life event such as a change of job, getting married, having kids, or buying a house. You can move from investment X to investment Y within your 401k without tax consequences. \n|user|: How is 401k account taxed?\n|assistant|: 401(k) contributions are pre-tax dollars. A 401k account is taxed when you withdraw the money upon retirement. This is similar to how an IRA is taxed. The idea behind this is that you will likely be in a lower tax bracket at the time of retirement. It's important to note that 401k contributions reduce your taxable income for each paycheck, but they do not impact the level of your social security and medicare taxes. Also, the employer match is considered free money.\n|user|: What do you mean by IRA?\n|assistant|: IRA stands for Individual Retirement Account. It's a type of retirement account where you can delay paying taxes now on your deposits or avoid paying taxes on your earnings later. You can set up a personal IRA for yourself, but not for employees. The investments within an IRA can vary - you can invest in certificates of deposit, stocks, bonds, mutual funds, or any mix of these. The taxation of an IRA is similar to a 401k, where contributions are made with pre-tax dollars and withdrawals are taxed upon retirement.\n|user|: Got it. Can I change my 401k contribution mid-year, in case my financial state changed for some reason?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "74041-0-1013",
+          "text": "\nBen Miller's answer is very thorough, and I up voted it. I believe that the ability to rebalance without tax implications is very import, but there are two aspects of the question that were not covered: The 401K in many cases comes with a company match. Putting enough money into the fund each year to maximize the match, give you free money that is not available in the non-retirement accounts. The presence of that match is to encourage employees to contribute: even if they are tying up their funds until retirement age; and they are into a plan with only a handful of investment options; and they may have higher expenses in the 401K. The question also had a concern about the annual limits for the 401K (18,000) and the IRA (5,500). The use of a retirement account doesn't in any way limit your ability to invest in non-retirement accounts. You can choose to invest from 0 to 23,500 in the retirement accounts and from 0 to unlimited into the non-retirement accounts. Double those amounts if you are married.",
+          "score": 29.73015,
+          "feedback": {
+            "relevant": {
+              "f957d3a2-1ebf-4b62-818d-070afd0a133d": {
+                "value": "no",
+                "timestamp": 1724439673
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: how to balance 401k?\n|assistant|: Balancing a 401k involves reallocating and rebalancing the investments within the account. You should determine the overall allocation between bonds, stocks, international, REIT, etc. This will depend on your risk tolerances and the total money in your 401k and IRA.  Once you figure out the allocation, map the available funds in your 401k according to this allocation. It is important to rebalance your 401k every year to maintain your desired asset allocation. Additionally you should review your allocation in a few years or after a life event such as a change of job, getting married, having kids, or buying a house. You can move from investment X to investment Y within your 401k without tax consequences. \n|user|: How is 401k account taxed?\n|assistant|: 401(k) contributions are pre-tax dollars. A 401k account is taxed when you withdraw the money upon retirement. This is similar to how an IRA is taxed. The idea behind this is that you will likely be in a lower tax bracket at the time of retirement. It's important to note that 401k contributions reduce your taxable income for each paycheck, but they do not impact the level of your social security and medicare taxes. Also, the employer match is considered free money.\n|user|: What do you mean by IRA?\n|assistant|: IRA stands for Individual Retirement Account. It's a type of retirement account where you can delay paying taxes now on your deposits or avoid paying taxes on your earnings later. You can set up a personal IRA for yourself, but not for employees. The investments within an IRA can vary - you can invest in certificates of deposit, stocks, bonds, mutual funds, or any mix of these. The taxation of an IRA is similar to a 401k, where contributions are made with pre-tax dollars and withdrawals are taxed upon retirement.\n|user|: Got it. Can I change my 401k contribution mid-year, in case my financial state changed for some reason?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "448260-0-1360",
+          "text": "\nA 401K (pre-tax or Roth) account or an IRA (Deductible or Roth) account is a retirement account. Which means you delay paying taxes now on your deposits, or you avoid paying taxes on your earnings later.  But a retirement account doesn't  perform any different than any other account year-to-year. Being a retirement account doesn't  dictate a type of investment. You can invest in a certificate of deposit that is guaranteed to make x% this year; or you can invest in stocks, bonds, mutual funds that infest in stocks or bonds. Those stocks and bonds can be growth focused, or income focused; they can be from large companies or small companies; US companies or international companies. Or whatever mix you want. The graph in your question shows that if you invest early in your adulthood, and keep investing, and you make the average return you should make more money than starting later. But a couple of notes:  So to your exact questions: An S&P 500 investment should perform exactly the same this year if it is in a 401K, IRA, or taxable account With a few exceptions:  Yes any investment can lose money. The last 6 months have been volatile and the last month and a half especially so. A retirement account isn't any different. An investment in mutual fund X in a retirement account is just as depressed a one in the same fund but from a taxable account.",
+          "score": 28.580523,
+          "feedback": {
+            "relevant": {
+              "f957d3a2-1ebf-4b62-818d-070afd0a133d": {
+                "value": "no",
+                "timestamp": 1724439679
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: how to balance 401k?\n|assistant|: Balancing a 401k involves reallocating and rebalancing the investments within the account. You should determine the overall allocation between bonds, stocks, international, REIT, etc. This will depend on your risk tolerances and the total money in your 401k and IRA.  Once you figure out the allocation, map the available funds in your 401k according to this allocation. It is important to rebalance your 401k every year to maintain your desired asset allocation. Additionally you should review your allocation in a few years or after a life event such as a change of job, getting married, having kids, or buying a house. You can move from investment X to investment Y within your 401k without tax consequences. \n|user|: How is 401k account taxed?\n|assistant|: 401(k) contributions are pre-tax dollars. A 401k account is taxed when you withdraw the money upon retirement. This is similar to how an IRA is taxed. The idea behind this is that you will likely be in a lower tax bracket at the time of retirement. It's important to note that 401k contributions reduce your taxable income for each paycheck, but they do not impact the level of your social security and medicare taxes. Also, the employer match is considered free money.\n|user|: What do you mean by IRA?\n|assistant|: IRA stands for Individual Retirement Account. It's a type of retirement account where you can delay paying taxes now on your deposits or avoid paying taxes on your earnings later. You can set up a personal IRA for yourself, but not for employees. The investments within an IRA can vary - you can invest in certificates of deposit, stocks, bonds, mutual funds, or any mix of these. The taxation of an IRA is similar to a 401k, where contributions are made with pre-tax dollars and withdrawals are taxed upon retirement.\n|user|: Got it. Can I change my 401k contribution mid-year, in case my financial state changed for some reason?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "148632-0-1871",
+          "text": "\nAlso, almost by definition rebalancing involves making more trades   than you would have otherwise; wouldn't the additional trading fees   you incurred in doing so reduce the benefits of this strategy? You forgot to mention taxes. Rebalancing does or rather can incur costs. One way to minimize the costs is to use the parts of the portfolio that have essentially zero cost of moving. These generally are the funds in your retirement accounts. In the United States they can be in IRAs or 401Ks; they can be regular or Roth. Selling winners withing the structure of the plan doesn't trigger capital gains taxes, and many have funds within them that have zero loads.  Another way to reduce trading fees is to only rebalance once a year or once every two years; or by setting a limit on how far out of balance. For example don't rebalance at 61/39 to get back to 60/40 even if it has been two years.  Given that the ratio of investments is often rather arbitrary to begin   with, how do I know whether I'm selling high and buying low or just   obstinately sticking with a losing asset ratio? The ratio used in an example or in an article may be arbitrary, but your desired ratio isn't arbitrary. You selected the ratio of your investments based on several criteria: your age, your time horizon, your goals for the money, how comfortable you are with risk. As these change during your investing career those ratios would also morph. But they aren't arbitrary.  These decisions to rebalance are separate from the ones to sell a particular investment. You could sell Computer Company X because of how it is performing, and buy stock in Technology Company Y because you think it has a better chance of growing. That transaction would not be a re-balancing. Selling part of your stock in Domestic Company A to buy stock in international Company B would be part of a re-balancing.",
+          "score": 28.240623,
+          "feedback": {
+            "relevant": {
+              "f957d3a2-1ebf-4b62-818d-070afd0a133d": {
+                "value": "no",
+                "timestamp": 1724439632
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: how to balance 401k?\n|assistant|: Balancing a 401k involves reallocating and rebalancing the investments within the account. You should determine the overall allocation between bonds, stocks, international, REIT, etc. This will depend on your risk tolerances and the total money in your 401k and IRA.  Once you figure out the allocation, map the available funds in your 401k according to this allocation. It is important to rebalance your 401k every year to maintain your desired asset allocation. Additionally you should review your allocation in a few years or after a life event such as a change of job, getting married, having kids, or buying a house. You can move from investment X to investment Y within your 401k without tax consequences. \n|user|: How is 401k account taxed?\n|assistant|: 401(k) contributions are pre-tax dollars. A 401k account is taxed when you withdraw the money upon retirement. This is similar to how an IRA is taxed. The idea behind this is that you will likely be in a lower tax bracket at the time of retirement. It's important to note that 401k contributions reduce your taxable income for each paycheck, but they do not impact the level of your social security and medicare taxes. Also, the employer match is considered free money.\n|user|: What do you mean by IRA?\n|assistant|: IRA stands for Individual Retirement Account. It's a type of retirement account where you can delay paying taxes now on your deposits or avoid paying taxes on your earnings later. You can set up a personal IRA for yourself, but not for employees. The investments within an IRA can vary - you can invest in certificates of deposit, stocks, bonds, mutual funds, or any mix of these. The taxation of an IRA is similar to a 401k, where contributions are made with pre-tax dollars and withdrawals are taxed upon retirement.\n|user|: Got it. Can I change my 401k contribution mid-year, in case my financial state changed for some reason?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, you can typically change your 401k contribution amount mid-year. Many employers allow you to adjust your contribution percentage as often as once a month, although some may have more limited options. If your financial situation has changed, it would be a good idea to review your 401k contribution and consider adjusting it accordingly. However, keep in mind that changing your contribution may affect your take-home pay and your ability to receive any employer matching funds. It's always a good idea to check with your HR department or plan administrator for specific details about your plan's rules and procedures for changing contributions."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "f957d3a2-1ebf-4b62-818d-070afd0a133d",
+      "status": "created",
+      "timestamp": 1724439799
+    },
+    {
+      "author": "f957d3a2-1ebf-4b62-818d-070afd0a133d",
+      "status": "edited",
+      "timestamp": 1725445064
+    },
+    {
+      "author": "f957d3a2-1ebf-4b62-818d-070afd0a133d",
+      "status": "edited",
+      "timestamp": 1725445064
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "edited",
+      "timestamp": 1726487096
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "accepted",
+      "timestamp": 1726487557
+    }
+  ],
+  "editor": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+  "domain": "mt-rag-fiqa-beir-elser-512-100-20240501",
+  "reviewer": "9dcd142c-415e-4161-a82f-c8b14bfb36ac"
+}

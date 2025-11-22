@@ -1,0 +1,546 @@
+{
+  "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-govt-elser-512-100-20240611",
+      "size": "49607"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "collections": {
+        "regex": "mt-rag*"
+      },
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "What size should the bin be for compost?",
+      "timestamp": 1725425784,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "In Madison County, NY., the bin for composting should be at least 3x3x3 feet in size.",
+      "timestamp": 1725425786,
+      "contexts": [
+        {
+          "document_id": "d0cad7a60e0694bc-2-1676",
+          "text": "Backyard Composting | Madison County, NY\nBackyard Composting | Madison County, NY\n\n \n\nSkip to Main Content\n\n \n\nSearch\n\n \n \n \n\nPrograms & ServicesFacilitiesSystem OverviewResourcesContact Us\n\n \n\n \n\n \n\n \n\n \nHomeDepartmentsDepartments M-ZSolid WasteResourcesBackyard Composting\n\n\r\n\r\nBackyard Composting\t\n\nFour Easy Steps to Composting at HomeKindly put together by Julie Poplaski, Master Gardener Volunteer with CCE Madison\n\n \n \n \n\nStep 1: Pick Out A BinMake sure your bin is at least 3x3x3 feet in size.A sunny vs. shady spot will impact how fast your compost will dry out or hold\u00a0water.A closed bin (like a tumbler) is the only way to ensure you will keep critters out. It will\u00a0also keep out microbes which are needed to break down your waste. If you use a closed bin make sure to add a shovel full of soil from the ground.Keep your bin somewhere convenient to use and access. It can be helpful to have a hose within reach if weather is dry.Pallets make great open compost bins and free if you can get a hold of them. They should be stamped, look for ones that say HT for heat treated. If stamp says MB leave them be and keep looking.If you make your own closed bin with a vessel like a garbage can, you will need to drill holes to allow oxygen exchange.Step 2: Gather MaterialsA common way to describe materials that go in your compost is brown or greens. Browns are higher in carbon while greens have a higher nitrogen to carbon ratio.3 parts brown to 1 part green is optimal. This ratio does not have to be exact but will generally\u00a0achieve the best results.Leave out feces from cats and dogs, invasive plants, weed seeds, oil, fats, plastics or non organic matter.Gather kitchen waste in a container by your sink.",
+          "title": "Backyard Composting | Madison County, NY",
+          "url": "https://www.madisoncounty.ny.gov/2961/Backyard-Composting",
+          "score": 16.870033,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1725426656
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What size should the bin be for compost?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The bin for composting should be at least 3x3x3 feet in size, according to the document from Madison County, NY."
+    },
+    {
+      "speaker": "user",
+      "text": "can you please explain the steps for composting at home?",
+      "timestamp": 1725426638,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Sure, I'd be happy to explain the steps for composting at home as outlined by Madison County, NY. Step 1: Pick Out A Bin - The bin should be at least 3x3x3 feet in size. The location can affect how fast your compost dries out or holds water. A closed bin is recommended to keep critters out. If you use a closed bin, add a shovel full of soil from the ground. Keep your bin somewhere convenient to use and access. Step 2: Gather Materials - Browns are higher in carbon, and greens are higher in nitrogen. The optimal ratio is 3 parts brown to 1 part green. Avoid feces from cats and dogs, invasive plants, weed seeds, oil, fats, plastics, or non-organic matter. Gather kitchen waste in a container by your sink. Step 3: Maintain - If you have an open bin, layer some small sticks and twigs at the bottom to help with air and drainage. Layer your browns and greens, imagining you're making a bowl for your greens to lay in the middle and then adding more browns on top. Keep your compost at 40-60% water content, like a wrung out sponge. Turning helps a pile break down faster and ensures oxygen is present. Step 4: Harvest and More! - You will know when your compost is done when it has an earthy smell and looks like rich dark soil. If you do not fully turn the pile, your finished compost will be at the bottom of the pile. If you're running out of browns, shredded newspaper, paper towel, and toilet paper rolls make good brown additions. For more resources, you can check out www.compost.css.cornell.edu, www.epa.gov/recycle/composting-home, and www.dec.ny.gov/",
+      "timestamp": 1725426647,
+      "contexts": [
+        {
+          "document_id": "d0cad7a60e0694bc-2-1676",
+          "text": "Backyard Composting | Madison County, NY\nBackyard Composting | Madison County, NY\n\n \n\nSkip to Main Content\n\n \n\nSearch\n\n \n \n \n\nPrograms & ServicesFacilitiesSystem OverviewResourcesContact Us\n\n \n\n \n\n \n\n \n\n \nHomeDepartmentsDepartments M-ZSolid WasteResourcesBackyard Composting\n\n\r\n\r\nBackyard Composting\t\n\nFour Easy Steps to Composting at HomeKindly put together by Julie Poplaski, Master Gardener Volunteer with CCE Madison\n\n \n \n \n\nStep 1: Pick Out A BinMake sure your bin is at least 3x3x3 feet in size.A sunny vs. shady spot will impact how fast your compost will dry out or hold\u00a0water.A closed bin (like a tumbler) is the only way to ensure you will keep critters out. It will\u00a0also keep out microbes which are needed to break down your waste. If you use a closed bin make sure to add a shovel full of soil from the ground.Keep your bin somewhere convenient to use and access. It can be helpful to have a hose within reach if weather is dry.Pallets make great open compost bins and free if you can get a hold of them. They should be stamped, look for ones that say HT for heat treated. If stamp says MB leave them be and keep looking.If you make your own closed bin with a vessel like a garbage can, you will need to drill holes to allow oxygen exchange.Step 2: Gather MaterialsA common way to describe materials that go in your compost is brown or greens. Browns are higher in carbon while greens have a higher nitrogen to carbon ratio.3 parts brown to 1 part green is optimal. This ratio does not have to be exact but will generally\u00a0achieve the best results.Leave out feces from cats and dogs, invasive plants, weed seeds, oil, fats, plastics or non organic matter.Gather kitchen waste in a container by your sink.",
+          "title": "Backyard Composting | Madison County, NY",
+          "url": "https://www.madisoncounty.ny.gov/2961/Backyard-Composting",
+          "score": 28.501944,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1725426680
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What size should the bin be for compost?\n|assistant|: In Madison County, NY., the bin for composting should be at least 3x3x3 feet in size.\n|user|: can you please explain the steps for composting at home?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "d0cad7a60e0694bc-1046-3115",
+          "text": "Backyard Composting | Madison County, NY\nIf stamp says MB leave them be and keep looking.If you make your own closed bin with a vessel like a garbage can, you will need to drill holes to allow oxygen exchange.Step 2: Gather MaterialsA common way to describe materials that go in your compost is brown or greens. Browns are higher in carbon while greens have a higher nitrogen to carbon ratio.3 parts brown to 1 part green is optimal. This ratio does not have to be exact but will generally\u00a0achieve the best results.Leave out feces from cats and dogs, invasive plants, weed seeds, oil, fats, plastics or non organic matter.Gather kitchen waste in a container by your sink. If you can not have the bowl inside a cabinet get a container with a lid to help minimize fruit flies and pests.BrownsGreensLeavesVegetable ScrapsStrawCoffee GroundsWood ChipsAlfalfaSawdustGrass ClippingsNewspaperManure *herbivores onlyCardboardGarden Waste\u00a0Step 3: MaintainIf you have a open bin, layer some small sticks and twigs at the bottom to help with air and drainage when starting.From here, you should layer your browns and greens. You can imagine you are making a bowl for your greens to lay in the middle and then add more browns on top.Because your greens are mostly made in the kitchen and will need to go out frequently it is handy to have a large pile of browns near your bin to add when greens are ready.Keep your compost at 40-60% water content. It should be the consistency of a wrung out sponge.Turning helps a pile break down faster and makes sure oxygen is present.Step 4: Harvest and More!You will know when your compost is done when it has a earthy smell and looks like rich dark soil.If you do not fully turn the pile, your finished compost will be at the bottom of the pile.If you are running out of browns; shredded newspaper, paper towel and toilet paper rolls make good brown additions.Other Resources:www.compost.css.cornell.eduwww.epa.gov/recycle/composting-homewww.dec.ny.gov/chemical/8799.html\n\n \n \n \n\n \n\n \n\nAdditional Resources\n\nBackyard Composting\n\nForms\n\nRequest a Tour or Presentation\n\nIllegal Dumping",
+          "title": "Backyard Composting | Madison County, NY",
+          "url": "https://www.madisoncounty.ny.gov/2961/Backyard-Composting",
+          "score": 24.845217,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1725426684
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What size should the bin be for compost?\n|assistant|: In Madison County, NY., the bin for composting should be at least 3x3x3 feet in size.\n|user|: can you please explain the steps for composting at home?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "d0cad7a60e0694bc-2441-4075",
+          "text": "Backyard Composting | Madison County, NY\nIt should be the consistency of a wrung out sponge.Turning helps a pile break down faster and makes sure oxygen is present.Step 4: Harvest and More!You will know when your compost is done when it has a earthy smell and looks like rich dark soil.If you do not fully turn the pile, your finished compost will be at the bottom of the pile.If you are running out of browns; shredded newspaper, paper towel and toilet paper rolls make good brown additions.Other Resources:www.compost.css.cornell.eduwww.epa.gov/recycle/composting-homewww.dec.ny.gov/chemical/8799.html\n\n \n \n \n\n \n\n \n\nAdditional Resources\n\nBackyard Composting\n\nForms\n\nRequest a Tour or Presentation\n\nIllegal Dumping\n\nComments and Suggestions\n\nHousehold Hazardous Waste Reservation Form\n\nFrequently Asked Questions\n\nRecycling Guides\n\nTours and Presentations\n\n \n\n \n\nContact Us\n\nRecycle & Dispose\n\nCOUNTY HOME\n\n \n \n \n\n \n\nRecycling Guides\n\nHousehold Hazardous Waste\n\n \n \n\nFAQ\n\nFORMS\n\nLocation& Hours\n\n \n \n \n\n \n\n \n\n \n \n\n \n \n\nContact Us\n\nMadison County NY138 N Court StreetWampsville, NY 13163Hours: Monday-Friday 8 a.m. - 4 p.m.\n \n\n \n \n\n \n \n\nSocial Media\n\nFacebook\n\nYouTube\n\n \n \n\n \n \n\nPopular Resources\n\nCounty Campus Map\n\nResource Directory\n\nFEMA - Plan & Prepare Ways to Protect Your Family & Property\n\nOnline Citizen Preparedness Training\n\nReady - Prepare, Plan, Stay Informed\n\n/QuickLinks.aspx\n\n \n \n \n\n \n\nHome\n\nSite Map\n\nContact Us\n\nAccessibility\n\nCopyright Notices\n\nDirections to County Offices\n\nPrivacy Policy\n\nEmployee Portal\n\n/QuickLinks.aspx\n\n \n \n \n\nLoading\n\n\r\n\tLoading\r\n\t\n\nDo Not Show Again\nClose\n\nArrow Left\n\nArrow Right\n\n[]\n\nSlideshow Left Arrow\n\nSlideshow Right Arrow",
+          "title": "Backyard Composting | Madison County, NY",
+          "url": "https://www.madisoncounty.ny.gov/2961/Backyard-Composting",
+          "score": 22.144014,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1725426704
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What size should the bin be for compost?\n|assistant|: In Madison County, NY., the bin for composting should be at least 3x3x3 feet in size.\n|user|: can you please explain the steps for composting at home?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Sure, I'd be happy to explain the steps for composting at home as outlined by Madison County, NY.\nStep 1: Pick Out A Bin - The bin should be at least 3x3x3 feet in size. The location can affect how fast your compost dries out or holds water. A closed bin is recommended to keep critters out and ensure the presence of microbes for breaking down waste. If you use a closed bin, add a shovel full of soil from the ground. Keep your bin somewhere convenient to use and access.\nStep 2: Gather Materials - Materials for composting can be described as 'browns' or 'greens'. Browns are higher in carbon and include leaves, straw, wood chips, sawdust, grass clippings, newspaper, manure from herbivores, cardboard, and garden waste. Greens are higher in nitrogen and include vegetable scraps, coffee grounds, and fresh grass clippings. The optimal ratio is 3 parts brown to 1 part green. Avoid feces from cats and dogs, invasive plants, weed seeds, oil, fats, plastics, or non-organic matter. Gather kitchen waste in a container by your sink.\nStep 3: Maintain - If you have an open bin, layer some small sticks and twigs at the bottom to help with air and drainage. Layer your browns and greens, imagining you're making a bowl for your greens to lay in the middle and then adding more browns on top. Keep your compost at 40-60% water content, like a wrung out sponge. Turning helps a pile break down faster and ensures oxygen is present.\nStep 4: Harvest and More! - You will know when your compost is done when it has an earthy smell and looks like rich dark soil. If you do not fully turn the pile, your finished compost will be at the bottom of the pile. If you're running out of browns, shredded newspaper, paper towel, and toilet paper rolls make good brown additions.\nFor more resources, you can check out www.compost.css.cornell.edu, www.epa.gov/recycle/composting-home, and www.dec.ny.gov/"
+    },
+    {
+      "speaker": "user",
+      "text": "compost temperature requirement ",
+      "timestamp": 1725427040,
+      "enrichments": {
+        "Question Type": [
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The optimal temperature range for beneficial microorganisms in a compost pile is between 131 to 160 degrees Fahrenheit. This temperature range promotes rapid decomposition and destroys pathogens and weed seeds. Pile temperatures must remain at 131 degrees Fahrenheit or above for several days to meet standards for reducing pathogens. The exact amount of time depends on the method of composting. Controlling the oxygen, moisture, pile structure, and nutrient balance helps achieve the optimal temperature range in a compost pile. The ideal temperature for a vermicomposting system is 55 to 80 degrees Fahrenheit.",
+      "timestamp": 1725427046,
+      "contexts": [
+        {
+          "document_id": "41168a49b304126a-4632-6781",
+          "text": "Approaches to Composting | US EPA\nTurning the pile, blowing air into the pile through pipes or vents, and adding bulking agents such as wood chips and dry leaves to the pile all help increase aeration.\nTemperature\nBeneficial microorganisms in a compost pile require a certain temperature range for optimal activity \u2013 131 to 160 degrees Fahrenheit. Pile conditions within that range will promote rapid decomposition and destroy pathogens and weed seeds. Above that temperature range, beneficial microorganisms cannot survive. Below that range, decomposition will occur more slowly, and pathogens and weed seeds may remain in the final compost. Pile temperatures must remain at 131 degrees Fahrenheit or above for several days to meet standards for reducing pathogens. The exact amount of time depends on the method of composting. Controlling the oxygen, moisture, pile structure, and nutrient balance helps achieve the optimal temperature range in a compost pile.\nModels of Composting\nComposting can take place at a range of scales and locations. Site and facility management can be public, private, or a combination. Materials arrive at composting sites through different collection programs.\nThe fundamentals of composting are the same no matter the size or scale of an operation. However, the volume of materials composted, the types of feedstock, and the composting methods and equipment used may differ. Composting operations that handle large volumes of materials and certain feedstocks - such as biosolids or manures - may have additional permitting or zoning requirements, depending on state and local regulations.\n\nBackyard/Home Composting\nBackyard/home composting occurs in residential settings \u2013 often in a backyard pile or a small, enclosed bin. Vermicomposting, or worm composting, is also an option for home composters. Home composting systems mostly handle food scraps (except for meat, bones, and dairy products) and yard trimmings. By composting at home, households reduce their trash going to the landfill or incinerator and use the compost they produce in their garden, yard, or house plants. To learn more, visit EPA\u2019s Home Composting webpage.\nCommunity Composting",
+          "title": "Approaches to Composting | US EPA",
+          "url": "https://www.epa.gov/sustainable-management-food/approaches-composting",
+          "score": 20.059837,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1725427209
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "bin for compost temperature"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "41168a49b304126a-13272-15299",
+          "text": "Approaches to Composting | US EPA\nWindrows are the most common method of composting in the United States. Windrows can be turned periodically or have perforated pipes underneath them to allow air flow. Small to large volumes and a wide variety of materials can be composted using this method, which makes it adaptable to many scales and sites for composting. Windrow composting often requires equipment such as front-end loaders, excavators, or windrow turners.\nIn-Vessel\nIn-vessel composting can process a variety of organic materials without taking up much space. This method involves feeding materials into a vessel, such as a drum, silo, concrete-lined trench, or similar enclosed equipment. The materials are then mechanically turned or mixed in the vessel with bulking agents like wood chips to ensure aeration. Vessels, also known as bioreactors, vary in size and capacity. A similar composting method that takes place in an enclosed area is an agitated bay system where mixing and aerating equipment moves compost along walled bays or beds as it decomposes and stabilizes.\nWorm Composting (Vermicomposting)\n\n Resources\n \n\nCheck out EPA\u2019s Home Composting page as well as vermicomposting resources from North Carolina State University Cooperative Extension.\n\nWorm composting, or vermicomposting, relies on earthworms and microorganisms to break down organic materials into vermicompost, or worm castings, a high-quality soil amendment. A vermicomposting system can be indoors or outdoors in the shade and sized to match the volume of food scraps put into the system. Vermicomposting can used by households, schools, farms, institutions, and businesses. A properly maintained vermicomposting system does not produce odors or attract pests.\nIt is essential to use a suitable worm species, such as red wrigglers (Eisenia fetida). Worms are kept in a closed bin or system that should be shielded from light and rain, with sufficient air flow, and a way to drain excess liquid. The ideal temperature for a vermicomposting system is 55 to 80 degrees Fahrenheit.",
+          "title": "Approaches to Composting | US EPA",
+          "url": "https://www.epa.gov/sustainable-management-food/approaches-composting",
+          "score": 18.106525,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1725427212
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "bin for compost temperature"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The optimal temperature range for beneficial microorganisms in a compost pile is between 131 to 160 degrees Fahrenheit. This temperature range promotes rapid decomposition and destroys pathogens and weed seeds. Pile temperatures must remain at 131 degrees Fahrenheit or above for several days to meet standards for reducing pathogens. The exact amount of time depends on the method of composting. Controlling the oxygen, moisture, pile structure, and nutrient balance helps achieve the optimal temperature range in a compost pile. (Sources: US EPA - Approaches to Composting, US EPA - Models of Composting)"
+    },
+    {
+      "speaker": "user",
+      "text": "should I bag my recycles just in case if it rains?",
+      "timestamp": 1725427314,
+      "enrichments": {
+        "Question Type": [
+          "Opinion"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "No, please do not put recyclables in a plastic bag. recyclables should be kept loose in curbside bins and at the transfer station containers. It is okay if your recyclables get wet from the rain. We recommend you to place your heavier plastic/metal/glass recycling bin on top of your paper/cardboard recycling bin to weigh everything down and keep the paper dry.",
+      "timestamp": 1725427318,
+      "contexts": [
+        {
+          "document_id": "9060ac11354f286a-2-1937",
+          "text": "FAQs | Madison County, NY\nFAQs | Madison County, NY\n\n \n\nSkip to Main Content\n\n \n\nSearch\n\n \n \n \n\nPrograms & ServicesFacilitiesSystem OverviewResourcesContact Us\n\n \n\n \n\n \n\n \n\n \nHomeDepartmentsDepartments M-ZSolid WasteResourcesFrequently Asked Questions\n\n\r\n\r\nFAQs\t\n\nShould I bag my recyclables?\u00a0No, recyclables should be kept loose in curbside bins and at the transfer station containers. Paper/cardboard must be kept in a separate recycling bin from plastic/metal/glass containers.\u00a0Where can I get a new recycling bin?\u00a0Residents of Madison County can pick up new recycling bins at their local transfer station, when they are open. Recycling bins are FREE, while supplies last.Will the rain affect my recycling?\u00a0It is okay if your recyclables get wet from the rain. To help keep recyclables dry and to keep recyclables from blowing out of the container, we recommend placing your heavier plastic/metal/glass recycling bin on top of your paper/cardboard recycling bin to weigh everything down and keep the paper dry.Do I need to tarp my waste materials when I drop it off at the Transfer Station or Landfill?Yes! All waste materials including recyclables, trash, and construction/demolition debris should be tarped and tied down in a truck bed. Unsecure items, even if they are bagged, can fall out of the truck bed and create unsafe roads along with litter. Make sure to secure your garbage to help keep Madison County roads safe and clean.Why do I need a punch card and where can I get one?Residents that drop off garbage and other bulky items at our transfer stations need to buy a punch card before visiting. Punch cards are sold at the landfill scale house, village and town clerk offices, and other local businesses across the county. Punch cards are not sold at transfer stations. View a list of local businesses that sell our punch cards. \u00a0Can I recycle plastic items that have a #1-7 on them?Unfortunately, not all plastics can be recycled in our program.",
+          "title": "FAQs | Madison County, NY",
+          "url": "https://www.madisoncounty.ny.gov/2461/Frequently-Asked-Questions",
+          "score": 25.138666,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1725427352
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "No, recyclables should be kept loose in curbside bins and at the transfer station containers."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "98725809e2754974-77-2147",
+          "text": "Recycling | Madison County, NY\nPrograms & ServicesFacilitiesSystem OverviewResourcesContact Us\n\n \n\n \n\n \n\n \n\n \nHomeDepartmentsDepartments M-ZSolid WastePrograms & ServicesRecycling\n\n\r\n\r\nRecycling\t\n\nMadison County uses a\u00a0two-bin\u00a0recycling system where paper products are placed into one bin and plastic/metal/glass containers are placed into another.\u00a0Do NOT put recyclables in a plastic bag. Keep recyclables loose in the recycling bins.\u00a0All recyclables must be\u00a0empty, clean & dry.Recycling bins are available for Madison County residents at our 4 transfer stations, when they are open.Paper Bin:Accepted Items in Your 'Paper' Recycling Bin:\u00a0Newspaper & InsertsMagazines & CatalogsNon-Metallic Greeting Cards/Wrapping PaperCereal Boxes & Dry Food BoxesProduct BoxesCardboard (flattened)Telephone BooksPaper BagsGift BoxesPaper Towel & Toilet Paper TubesPaper, Mail & EnvelopesShredded Paper (put in paper bags)Take-Out Pizza Boxes (grease is okay)Other BoxboardNot Accepted in Your 'Paper' Recycling Bin:\u00a0Frozen, Refrigerated or Microwave Product BoxesSoda & Beer Cartons/CarriersWax-Coated Corrugated BoxesFolders or Spiral Books with Metal PartsAnything Containing Foil, Metal or PlasticPaper CupsMilk or Juice CartonsCarbon or Wax PaperPaper Egg CartonsTissue PaperContainers Bin:Accepted in Your 'Containers' Recycling Bin:\u00a0Plastic Bottles & Jugs with a neck such as:Plastic Milk and Water JugsSoap and Detergent BottlesWater BottlesDeposit BottlesPlastic Yogurt & Dairy TubsGlass Bottles & JarsAluminum CansAluminum FoilAluminum Plates or TraysMetal Food Containers & Metal LidsEmpty Aerosol CansNot Accepted in Your 'Containers' Recycling Bin:\u00a0Plastic Clamshell ContainersPlastic Bags and other FilmsPlastic Toys, Buckets or PailsPartially or Full ContainersCeramic or Crystal housewarePlastic Take-Out ContainersPlastic Cups, Straws & LidsBottles that contained hazardous productsPots and PansLight BulbsBlack PlasticAny other Plastics\u00a0Scrap Metal ItemsWindow or Auto GlassMirrorsCan I recycle plastic items that have a #1-7 on them?Unfortunately, not all plastics can be recycled in our program.",
+          "title": "Recycling | Madison County, NY",
+          "url": "https://www.madisoncounty.ny.gov/2376/Recycling",
+          "score": 20.204544,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1725427454
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Do NOT put recyclables in a plastic bag. Keep recyclables loose in the recycling bins"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "No, recyclables should be kept loose in curbside bins and at the transfer station containers. If you're concerned about your recyclables getting wet from the rain, you can place your heavier plastic/metal/glass recycling bin on top of your paper/cardboard recycling bin to weigh everything down and keep the paper dry. However, there's no need to bag your recyclables."
+    },
+    {
+      "speaker": "user",
+      "text": "what are the differences between paper and container recycling bins?",
+      "timestamp": 1725427735,
+      "enrichments": {
+        "Question Type": [
+          "Comparative"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Accepted Items in your 'Paper' Recycling Bin include Newspaper, Inserts Magazines, Catalogs, Non-Metallic Greeting Cards, Wrapping Paper, Cereal Boxes, Dry Food Boxes Product Boxes Cardboard (flattened) Telephone, Books, Paper Bags, Gift Boxes, Paper Towel, Toilet Paper, Tubes Paper, Mail & Envelopes, Shredded Paper (put in paper bags), Take-Out Pizza Boxes (grease is okay), and Other Boxboard. Accepted in your 'Containers' Recycling Bin include Plastic Bottles & Jugs with a neck like Plastic Milk and Water Jugs Soap and Detergent, Bottles Water, Bottles Deposit, Bottles Plastic Yogurt, Dairy Tubs Glass Bottles, Jars Aluminum, Cans Aluminum, Foil Aluminum Plates, Trays Metal Food Containers, Metal Lids, and Empty Aerosol Cans.",
+      "timestamp": 1725427740,
+      "contexts": [
+        {
+          "document_id": "98725809e2754974-482-2554",
+          "text": "Recycling | Madison County, NY\nAll recyclables must be\u00a0empty, clean & dry.Recycling bins are available for Madison County residents at our 4 transfer stations, when they are open.Paper Bin:Accepted Items in Your 'Paper' Recycling Bin:\u00a0Newspaper & InsertsMagazines & CatalogsNon-Metallic Greeting Cards/Wrapping PaperCereal Boxes & Dry Food BoxesProduct BoxesCardboard (flattened)Telephone BooksPaper BagsGift BoxesPaper Towel & Toilet Paper TubesPaper, Mail & EnvelopesShredded Paper (put in paper bags)Take-Out Pizza Boxes (grease is okay)Other BoxboardNot Accepted in Your 'Paper' Recycling Bin:\u00a0Frozen, Refrigerated or Microwave Product BoxesSoda & Beer Cartons/CarriersWax-Coated Corrugated BoxesFolders or Spiral Books with Metal PartsAnything Containing Foil, Metal or PlasticPaper CupsMilk or Juice CartonsCarbon or Wax PaperPaper Egg CartonsTissue PaperContainers Bin:Accepted in Your 'Containers' Recycling Bin:\u00a0Plastic Bottles & Jugs with a neck such as:Plastic Milk and Water JugsSoap and Detergent BottlesWater BottlesDeposit BottlesPlastic Yogurt & Dairy TubsGlass Bottles & JarsAluminum CansAluminum FoilAluminum Plates or TraysMetal Food Containers & Metal LidsEmpty Aerosol CansNot Accepted in Your 'Containers' Recycling Bin:\u00a0Plastic Clamshell ContainersPlastic Bags and other FilmsPlastic Toys, Buckets or PailsPartially or Full ContainersCeramic or Crystal housewarePlastic Take-Out ContainersPlastic Cups, Straws & LidsBottles that contained hazardous productsPots and PansLight BulbsBlack PlasticAny other Plastics\u00a0Scrap Metal ItemsWindow or Auto GlassMirrorsCan I recycle plastic items that have a #1-7 on them?Unfortunately, not all plastics can be recycled in our program. In an effort to educate the public on what plastics can and cannot be recycled, we have moved our messaging away from using the #1-7 symbols. These numbers reflect the type of plastic used to make a product and does not mean that an item can be recycled. Instead, our messaging focuses on the shape of the material such as plastic bottles/jugs that have a \"neck\" or taper at the top and plastic dairy tubs.",
+          "title": "Recycling | Madison County, NY",
+          "url": "https://www.madisoncounty.ny.gov/2376/Recycling",
+          "score": 19.156698,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1725427786
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Accepted in Your 'Containers' Recycling Bin: "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "98725809e2754974-77-2147",
+          "text": "Recycling | Madison County, NY\nPrograms & ServicesFacilitiesSystem OverviewResourcesContact Us\n\n \n\n \n\n \n\n \n\n \nHomeDepartmentsDepartments M-ZSolid WastePrograms & ServicesRecycling\n\n\r\n\r\nRecycling\t\n\nMadison County uses a\u00a0two-bin\u00a0recycling system where paper products are placed into one bin and plastic/metal/glass containers are placed into another.\u00a0Do NOT put recyclables in a plastic bag. Keep recyclables loose in the recycling bins.\u00a0All recyclables must be\u00a0empty, clean & dry.Recycling bins are available for Madison County residents at our 4 transfer stations, when they are open.Paper Bin:Accepted Items in Your 'Paper' Recycling Bin:\u00a0Newspaper & InsertsMagazines & CatalogsNon-Metallic Greeting Cards/Wrapping PaperCereal Boxes & Dry Food BoxesProduct BoxesCardboard (flattened)Telephone BooksPaper BagsGift BoxesPaper Towel & Toilet Paper TubesPaper, Mail & EnvelopesShredded Paper (put in paper bags)Take-Out Pizza Boxes (grease is okay)Other BoxboardNot Accepted in Your 'Paper' Recycling Bin:\u00a0Frozen, Refrigerated or Microwave Product BoxesSoda & Beer Cartons/CarriersWax-Coated Corrugated BoxesFolders or Spiral Books with Metal PartsAnything Containing Foil, Metal or PlasticPaper CupsMilk or Juice CartonsCarbon or Wax PaperPaper Egg CartonsTissue PaperContainers Bin:Accepted in Your 'Containers' Recycling Bin:\u00a0Plastic Bottles & Jugs with a neck such as:Plastic Milk and Water JugsSoap and Detergent BottlesWater BottlesDeposit BottlesPlastic Yogurt & Dairy TubsGlass Bottles & JarsAluminum CansAluminum FoilAluminum Plates or TraysMetal Food Containers & Metal LidsEmpty Aerosol CansNot Accepted in Your 'Containers' Recycling Bin:\u00a0Plastic Clamshell ContainersPlastic Bags and other FilmsPlastic Toys, Buckets or PailsPartially or Full ContainersCeramic or Crystal housewarePlastic Take-Out ContainersPlastic Cups, Straws & LidsBottles that contained hazardous productsPots and PansLight BulbsBlack PlasticAny other Plastics\u00a0Scrap Metal ItemsWindow or Auto GlassMirrorsCan I recycle plastic items that have a #1-7 on them?Unfortunately, not all plastics can be recycled in our program.",
+          "title": "Recycling | Madison County, NY",
+          "url": "https://www.madisoncounty.ny.gov/2376/Recycling",
+          "score": 17.425415,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1725427815
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Accepted in Your 'Containers' Recycling Bin: "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The paper recycling bin is for accepting paper products such as newspaper, magazines, cardboard, paper bags, and mail. The container recycling bin, on the other hand, is for accepting plastic bottles and jugs, glass bottles and jars, aluminum cans, and metal food containers and lids. It is important to note that plastic bags, plastic clamshell containers, and plastic toys are not accepted in either bin. Additionally, all recyclables must be empty, clean, and dry."
+    },
+    {
+      "speaker": "user",
+      "text": "what about Residential Yard Waste ?",
+      "timestamp": 1725428145,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Accepted Materials for Yard Waste include Grass clippings, Leaves Weeds, Wood Chips/Mulch Brush and Branches (up to 6 inches in diameter and no longer than 10 feet in length). Yard waste shall be placed in the green container(s).",
+      "timestamp": 1725428150,
+      "contexts": [
+        {
+          "document_id": "97a1e0156fea0a8a-0-2188",
+          "text": "Yard Waste | Madison County, NY\n\n\nYard Waste | Madison County, NY\n\n \n\nSkip to Main Content\n\n \n\nSearch\n\n \n \n \n\nPrograms & ServicesFacilitiesSystem OverviewResourcesContact Us\n\n \n\n \n\n \n\n \n\n \nHomeDepartmentsDepartments M-ZSolid WastePrograms & ServicesSpecial ProgramsYard Waste\n\n\r\n\r\nYard Waste\t\n\nAs of January 1, 2020, there is a charge for commercial yard waste drop-off. All commercial yard waste must go to 6641 Buyea Road, Canastota and go over the scales before unloading.Residential Yard Waste\u00a0No Charge for items up to 6 inches in diameter and no longer than 10 feet in length. Bring to any of the 4 transfer stations and see an attendant before unloading.Commercial Yard Waste, Buyea Road ONLY\u00a0$25.00 per ton, must go over the scales before unloading.Stumps and Oversized Tree Limbs, Buyea Road ONLY$35.00 per ton, must go over the scales before unloading. Accepted Materials:Grass clippingsLeavesWeedsWood Chips/MulchBrush and Branches (up to 6 inches in diameter and no longer than 10 feet in length)NOT Accepted:Any contaminated productTreated Wood, Construction Debris, Plastic, Dirt, Trash, Concrete, Stone or MetalCoal AshesPlastic BagsWhen available, wood chips and compost are FREE to Madison County Residents.\u00a0NOT for Commercial Business.\n\n \n \n \n\n \n\n \n\nAgricultural Plastics\n\nBulbs, Batteries & Ink Cartridges\n\nExpanded Polystyrene\n\nScrap Metal\n\nTextiles\n\nThermostats\n\nYard Waste\n\n \n\n \n\nContact Us\n\nRecycle & Dispose\n\nCOUNTY HOME\n\n \n \n \n\n \n\nRecycling Guides\n\nHousehold Hazardous Waste\n\n \n \n\nFAQ\n\nFORMS\n\nLocation& Hours\n\n \n \n \n\n \n\n \n\n  \n \n\n  \n \n\nContact Us\n\nMadison County NY138 N Court StreetWampsville, NY 13163Hours: Monday-Friday 8 a.m. - 4 p.m.\n \n\n  \n \n\n  \n \n\nSocial Media\n\nFacebook\n\nYouTube\n\n \n \n\n  \n \n\nPopular Resources\n\nCounty Campus Map\n\nResource Directory\n\nFEMA - Plan & Prepare Ways to Protect Your Family & Property\n\nOnline Citizen Preparedness Training\n\nReady - Prepare, Plan, Stay Informed\n\n/QuickLinks.aspx\n\n \n \n \n\n \n\nHome\n\nSite Map\n\nContact Us\n\nAccessibility\n\nCopyright Notices\n\nDirections to County Offices\n\nPrivacy Policy\n\nEmployee Portal\n\n/QuickLinks.aspx\n\n \n \n \n\nLoading\n\n\r\n\tLoading\r\n\t\n\nDo Not Show Again\nClose\n\nArrow Left\n\nArrow Right\n\n[]\n\nSlideshow Left Arrow\n\nSlideshow Right Arrow\n\n",
+          "title": "Yard Waste | Madison County, NY",
+          "url": "https://www.madisoncounty.ny.gov/2388/Yard-Waste",
+          "score": 21.399445,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1725428188
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Residential Yard Waste "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "62964e3a38783558-6793-9007",
+          "text": "FAQs \u2022 Monterey Park, CA \u2022 CivicEngage\nNo other containers shall be used;\u00a0 \u00a0 (b) \u00a0 \u00a0If the capacity of the containers provided by the servicer is insufficient for the quantity of all refuse, recyclables and/or yard waste generated at the premises between pickups, then the residential service customer shall subscribe to such additional service as determined and required by the servicer to protect the public health, safety, and well-being against the growth and spread of vectors from such refuse, recyclables and/or yard waste;\u00a0 \u00a0 (c) \u00a0 \u00a0All refuse and recyclables to be collected shall be placed in the containers provided by servicer, as follows:\u00a0 \u00a0 (1) \u00a0 \u00a0Curbside Service;\u00a0 \u00a0 (A) \u00a0 Refuse and recyclables (not including yard waste) shall be placed in the black container(s);\u00a0 \u00a0 (B) \u00a0 Yard waste shall be placed in the green container(s);\u00a0 \u00a0 (C) \u00a0 No such container may be placed for pickup if its contents exceed three hundred pounds;\u00a0 \u00a0 (2) \u00a0 \u00a0Bin Service. The occupant shall place refuse and recyclables in the bin(s) provided by the servicer;\u00a0 \u00a0 (3) \u00a0 \u00a0Construction and demolition debris. Except for disposal by a self hauler pursuant to Section 6.08.280, construction and demolition debris shall be placed in the debris box(es) provided by the servicer and/or the black container(s) for refuse and recyclables provided by the servicer (the black containers are subject to the three hundred pound weight limit);\u00a0 \u00a0 (d) \u00a0 \u00a0To minimize interference with the public rights-of-way, no person shall place a container or bulky item on a parkway for collection service earlier than twenty-four hours prior to the normal collection date as specified by the director of public works. To minimize interference with public rights-of-way, any containers not collected from or any bulky items not removed shall be removed from the public right-of-way location by midnight of the scheduled day of collection;\u00a0 \u00a0 (e) \u00a0 \u00a0Unless otherwise directed by the servicer, containers shall be placed for collection on the street with the wheels of each against the curb and at least one foot distance between each container. In instances where no curb exists, containers shall be placed as close to the edge of the street as practicable with the wheels toward the lot.",
+          "title": "FAQs \u2022 Monterey Park, CA \u2022 CivicEngage",
+          "url": "https://www.montereypark.ca.gov/faq.aspx",
+          "score": 16.462101,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1725428431
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Yard Waste"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Residential Yard Waste is not explicitly mentioned in the provided document. However, the document suggests composting as a method for handling organic waste, which includes yard waste. For specific guidelines on residential yard waste disposal in Madison County, NY, I would recommend visiting the county's official website or contacting their Solid Waste Department."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+      "status": "created",
+      "timestamp": 1725428468
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "accepted",
+      "timestamp": 1726580042
+    }
+  ],
+  "editor": null,
+  "domain": "mt-rag-govt-elser-512-100-20240611",
+  "reviewer": "9dcd142c-415e-4161-a82f-c8b14bfb36ac"
+}

@@ -1,0 +1,1334 @@
+{
+  "author": "87334bc6-dd39-4565-ae2b-832e60a24b08",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-fiqa-beir-elser-512-100-20240501",
+      "size": "61022"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "collections": {
+        "regex": "mt-rag*"
+      },
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "As an employee, when is it inappropriate to request to see your young/startup company's financial statements?",
+      "timestamp": 1726252264,
+      "enrichments": {
+        "Question Type": [
+          "Opinion"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "If you approach the request professionally, directly, and briefly it is not inappropriate to request to see the financial statements. It is also suggested to keep the request vague to avoid pushing for specific information that may not be disclosed. ",
+      "timestamp": 1726252270,
+      "contexts": [
+        {
+          "document_id": "466835-1840-3964",
+          "text": "\nIf you approach it professionally, directly, and briefly (do not over-explain yourself) with the responsible accountant or HR person (if any), then I imagine it should not be a problem for them to give some information. Conversely, you may feel comfortable enough to review a high-level summary sheet with a founder, or to find some other way of tactfully reviewing the right information. In any case, I would keep the request vague, simple, and direct, and see what information they show you. If your request is too specific, then you risk pushing them to show information A, which they refuse to do, but a vague request would've prompted them to show you information B. A too-specific request might get you information X when a vague request could have garnered XYZ. Vague requests are also less aggressive and may raise fewer objections. The third question is difficult to say. My personal understanding is some perspective of how venture capitalists look at the investment opportunity (you didn't say how new this startup is or what series/stage they are on, so I'll try to stay vague). The actual financials are less relevant for startups than they are for other investments because the situation will definitely change. Most venture capital firms like to look at the burn rate or amount of cash spent, usually at a monthly rate. A high burn rate relative to infusions of cash suggests the company is growing rapidly but may have a risk of toppling (i.e. failing before exit). Burn rate can change drastically during the early life of the startup. Of course burn rate needs the context of revenues and reserves (and latest valuation is helpful as a benchmark, but you may be able to calculate that from the restricted share offer made to you). High burn rate might not be bad, if the company is booming along towards a successful exit. You might also want to look at some sort of business plan or info sheet, rather than financials alone. You want to gauge the size of the market (most startups like to claim 9- or 10-figure markets, so even a few percentage points of market share will hit revenue into the 8-figures).",
+          "score": 12.010623,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726252435
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: As an employee, when is it inappropriate to request to see your young/startup company's financial statements?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "9938-0-415",
+          "text": "\nThe best source of financial statements would be from the company in question. On corporate websites of public listed companies, you can find such financial statements uploaded in the Investor's Relations section of their website. If their company does not have an online presence, another alternative would be to go to the website of the exchange the company is trading in (e.g. NYSE or NASDAQ) for financial data.",
+          "score": 10.329447,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "no",
+                "timestamp": 1726252442
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: As an employee, when is it inappropriate to request to see your young/startup company's financial statements?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "11263-0-780",
+          "text": "\nThe actual financial statements should always be referenced first before opening or closing a position. For US companies, they are freely available on EDGAR.  Annual reports are called 10-Ks, and quarterly reports are called 10-Qs. YHOO and GOOG do a great job of posting financials that are quickly available, but money.msn has the best.  These should be starting point, quick references.  As you can see, they may all have the same strange accounting. Sometimes, it's difficult to find the information one seeks in the consolidated financial statements as in this case, so searching through the filing is necessary. The notes can be helpful, but Ctrl-F seems to do everything I need when I want something in a report. In AAPL's case, the Interest expense can be found in Note 3.",
+          "score": 10.118838,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "no",
+                "timestamp": 1726252471
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: As an employee, when is it inappropriate to request to see your young/startup company's financial statements?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Based on the information provided, it is not inappropriate for an employee to request to see a young or startup company's financial statements. However, it is recommended to approach the request professionally, directly, and briefly. It is also suggested to keep the request vague to avoid pushing for specific information that may not be disclosed. The documents provided do not mention any circumstances where such a request would be inappropriate. However, the company may have its own policies regarding the disclosure of financial information to employees. Therefore, it would be best to check with a responsible accountant, HR person, or founder in a tactful manner."
+    },
+    {
+      "speaker": "user",
+      "text": "what are the risks of working at a startup?",
+      "timestamp": 1726252708,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Working at a startup can involve several risks. One of the primary risks is the possibility of the business failing, which could result in your shares becoming worthless. There is also a risk that if the startup succeeds, the financial rewards may not be evenly distributed among employees. Additionally, startups often require long working hours and high levels of responsibility, and there may be a risk of job security as the company grows and hires new employees.",
+      "timestamp": 1726252714,
+      "contexts": [
+        {
+          "document_id": "370976-0-1146",
+          "text": "\nEverything in life is a combination of luck and skill.  Startups are no different.  The risks are higher and most sensible people know and understand that.  You know why we worship the successes?  Because against all odds, those startups stood up to your salaried buddies who work for faceless large corporations and have tons of people and kicked their asses.  At some point, they deserve it.  You see startups as gambling, others see it as betting on yourself.  Especially founding or joining an early stage startup.  It's also taking on huge responsibility.  In a mega-corp your failures and shortcomings will be covered and almost certainly won't tank the company.  Your creativity probably won't flourish and their is an incentive to do just well enough.  Why should you work your ass off for a company that you're not invested in other than a paycheck?  Startups aren't for everyone.  Hell, startups probably aren't for most people.  But there are some people, those select few, who simply can't imagine not working for themselves, creating things, tinkering, trying to change the world.  It's not even gambling to them, it's a way of life.",
+          "score": 15.768389,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726253039
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "startup risk"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "106249-1515-2225",
+          "text": "\nFor third, shares are a risk. If I or any other in the startup screw really, my pay might be a lot less than expected. Of course, if it works out I'm rich(er). This is the inherent risk of a start-up, so there's no getting around the fact that there's a chance that the business may fail and your shares become worthless. Up to you if you think the risk is acceptable. Where you can mitigate risk is in ensuring that there's a well-written and enforceable set of documents that define what rights go with the shares, who controls the company, how profits will be distributed, etc. Don't do this by spoken agreement only. Get it all written down, and then get it checked by a lawyer representing your interests.",
+          "score": 15.386435,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726253036
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "startup risk"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "585887-0-872",
+          "text": "\nA startup is a great place to work if it looks like it's going to have a future and YOU ARE ONE OF THE FOUNDERS.  Otherwise? A startup is a good way to spend a good chunk of a decade working very long weeks, only to get shoved into a back room or laid off once they reach a certain size. Maybe if you're lucky you'll manage to stick around and have a bigger paycheck than most of your newly-hired peers. Maybe you'll even make most of what your new boss(es) that have been there a fifth as long as you and never pulled those 110 hour workweeks make. Of course, it's quite possible that simply working a second job during the time you were pulling mad hours and not getting OT for it would've made you just as much.  On the other hand, if you're talking about your own startup? Sure, go for it. If it all works out, those extra hours will be well compensated in the future.",
+          "score": 12.836973,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726253037
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "startup pros"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Working at a startup can involve several risks. One of the primary risks is the possibility of the business failing, which could result in your shares becoming worthless. There is also a risk that if the startup succeeds, the financial rewards may not be evenly distributed among employees. Additionally, startups often require long working hours and high levels of responsibility, and there may be a risk of job security as the company grows and hires new employees.\nThe document also mentions that while startups can be exciting and rewarding places to work, especially for founders, they may not be suitable for everyone. Some people may prefer the stability and predictability of a more established company. Ultimately, whether or not the risks associated with working at a startup are acceptable is a personal decision that depends on individual preferences and career goals."
+    },
+    {
+      "speaker": "user",
+      "text": "tips for starting my own",
+      "timestamp": 1726253306,
+      "enrichments": {
+        "Question Type": [
+          "How-To",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Here are some tips for starting your own business:\n1. Start small and grow it up. You can start online with a website and dedicate an hour a day to researching and planning.\n2. Get your family involved \n3. Look for incubators in your area that can provide mentorship and seed money to promising startups.\n4. Consider crowdfunding as an alternative financing method.\n5. When raising money, be prepared to answer questions about your business strategy and what you will do with the funds to generate profits in the future.\n6. Be aware that most startups fail, but also keep in mind that many successful businesses were started by people who were willing to take the risk.\n7. Develop forward and backward linkages with the help of startup advisors who can provide expertise and guidance in different verticals of the economy.\n8. Be persistent in presenting your business plan to potential investors, but avoid overwhelming them with continuous bombardment.\n9. Get business mentors and startup advisors\n10. Hire a tax advisor regarding startup costs\nConsider reading \"The $100 Startup\" by Chris Guillebeau and \"The 4 Hour Workweek\" by Timothy Ferriss for helpful guidance.",
+      "timestamp": 1726253317,
+      "contexts": [
+        {
+          "document_id": "214032-0-631",
+          "text": "\nI would suggest to start small and grow it up. By starting small I mean. Start online with something like a website. It is amazing what you can do if you simply just put an hour a day aside to do this. Do some research, listen to audiobooks on your commute or when you're eating breakfast in the morning, and get your family involved that will definitely help a lot. If you haven't read this book I would highly suggest it: The $100 Startup by Chris Guillebeau 100startup.com/ , and The 4 Hour Workweek by Timothy Ferriss https://fourhourworkweek.com/ . I was not sponsored by these books I just think they will genuinely help you.",
+          "score": 16.49053,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726253777
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "startup long \nhours"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6871-0-323",
+          "text": "\nBusiness mentors ensure viability through holistic assistive orientations for startups in deliberates on the significance of startup advisor services by business consultant firms.They guide the new ventures by helping them adopt the best practices and avoid the bad decisions.For More Info:- http://www.startupmentor.co.in/",
+          "score": 22.108559,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726253775
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "startup mentor"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "72724-0-271",
+          "text": "\nYour best bet is to look for incubators in your area. Incubators are scaled down versions of private equity firms that provide mentorship and seed money to promising startups. They are usually affiliated with a city because they are trying to attract entrepreneurs to it.",
+          "score": 13.737869,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726253773
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "startup mentor"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "127584-0-340",
+          "text": "\nYes you can. You should talk to your tax advisor re the specific expenditures that can be accounted as startup-costs (legal fees are a good candidate, for example). If they add up to significant amounts (>$5K), you'll have to capitalize them over a certain period of time, and deduct from your business' income. This is not a tax advice.:-)",
+          "score": 12.727913,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726253770
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "startup mentor"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "347015-0-309",
+          "text": "\nDevelopment of forward and backward linkages is also facilitated by such startup advisors. These assistances are bred out of their expertise in different verticals of the economy and their accumulated knowledge about the best practices and potential fault zones.For More Info:- http://www.startupmentor.co.in/",
+          "score": 12.025768,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726253767
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "startup mentor"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "275249-0-2208",
+          "text": "\n\"There are three (or four) ways that a company can grow: (Crowdfunding is a relatively new (in mainstream businesses) alternative financing method where people will finance a company with the expectation that they will benefit from the product or service that they provide.) Obviously a startup has no prior income to use, so it must either raise money through equity or debt. People say that one must borrow contingent on their salary. Banks lend money based on the ability to pay the loan back plus interest. For individuals, their income is their primary source of cash flow, so, yes, it is usually the determining factor in getting a loan. For a business the key factor is future cash flows. So a business will borrow money, say, to buy a new asset (like a factory) that will be used to generate cash flows in the future so that they can pay down the debt. If the bank believes that the use of the money is going to be profitable enough that they will get their money back with interest, they'll loan the money. Equity investors are essentially the same, but since they don't get a guaranteed payback (they only get paid through non-guaranteed dividends or liquidation), their risk is higher and they are looking for higher expected returns. So the question I'd have as a bank or equity investor is \"\"what are you going to do with the money?\"\" What is your business strategy? What are you going to do that will make profits in the future? Do you have a special idea or skill that you can turn into a profitable business? (Crowdfunding would be similar - people are willing to give you money based on either the social or personal benefit of some product or service.) So any business either starts small and grows over time (which is how the vast majority of businesses grow), or has some special idea, asset, skill, or something that would make a bank willing to take a risk on a huge loan. I know, again, that people here tend to turn blind eyes on unfortunate realities, but people do make giant businesses without having giant incomes. The \"\"unfortunate reality\"\" is that most startups fail. Which may sound bad, but also keep in mind that most startups are created by people that are OK with failing.",
+          "score": 16.465122,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726253765
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "startup funding"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "264473-0-625",
+          "text": "\nNow days, startup business owners are so desperate for tapping into the billions of pounds hovering around various establishments that they will definitely go to greater lengths for getting or presenting  their business plan to the top investor. This kind of continuous bombardment might frustrate several investors to certain extent that they will never want to listen about those specific organizations again. Venture capitals might also invest in various startup businesses beyond pitches of their own research thematic into industries or sectors where they consider disorderly organizations can materialize too. Know More",
+          "score": 15.201359,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726253763
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "startup funding"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Here are some tips for starting your own business:\n1. Start small and grow it up. You can start online with a website and dedicate an hour a day to researching and planning.\n2. Get your family involved and consider reading \"The $100 Startup\" by Chris Guillebeau and \"The 4 Hour Workweek\" by Timothy Ferriss for helpful guidance.\n3. Look for incubators in your area that can provide mentorship and seed money to promising startups.\n4. Consider crowdfunding as an alternative financing method.\n5. When raising money, be prepared to answer questions about your business strategy and what you will do with the funds to generate profits in the future.\n6. Be aware that most startups fail, but also keep in mind that many successful businesses were started by people who were willing to take the risk.\n7. Develop forward and backward linkages with the help of startup advisors who can provide expertise and guidance in different verticals of the economy.\n8. Be persistent in presenting your business plan to potential investors, but avoid overwhelming them with continuous bombardment."
+    },
+    {
+      "speaker": "user",
+      "text": "that sounds like a lot of work maybe I should just invest in existing startups",
+      "timestamp": 1726253821,
+      "enrichments": {
+        "Question Type": [
+          "Non-Question",
+          "Opinion"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "There are opportunities for outside investors and it can be a way to potentially earn significant returns if you are able to pick successful startups before their valuation increases.  It's important to note that this is a high-risk investment strategy. Investors usually also becoming involved in the day-to-day operations of the businesses you invest in. Resources such as Paul Graham's essays at www.paulgraham.com and being skeptical about what you are getting for your investment.",
+      "timestamp": 1726253828,
+      "contexts": [
+        {
+          "document_id": "425435-0-1030",
+          "text": "\nIt requires fairly large levels of capital, but what about seed funding/angel investments in startups? This would be before venture capital gets involved, so the amounts are relatively low (tens of thousands, vs. millions of USD), but as valuations this early in the game are also low, you can get a significant portion of equity in a startup that you feel is being run by good people and is in a promising market. Paul Graham of Y-Combinator has a number of articles about this from both sides of the table that you can take a look at and see if this is for you. It's definitely very high-risk, but if you can pick successful startups before their valuation shoots up, get some equity, help them succeed, and they eventually go public or get acquired, you can stand to bring in some big returns. Note that this isn't a hands-off investment. You'll need to build connections in the startup community, and it isn't uncommon for angel investors to become involved in the day-to-day operations of the businesses in which they invest.",
+          "score": 16.666063,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726253935
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "startup investment"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "234506-0-1144",
+          "text": "\nTurukawa's answer is quite good, and for your own specific situation, you might begin by being sceptical about what you are getting for investing a few thousand dollars.  With the exception of Paul Graham's Y-Combinator, there are very few opportunities to invest at that type of level, and Y-Combinator provides a lot of other assistance besides their modest initial investment.   I can tell from your post that you think like an investor.  It is highly unlikely that the entrepreneurial programmers that you will be backing will be wired that way.   From the modest amount that you are investing, you are unlikely to be the lead investor in this opportunity.  If you are interested in proceeding, simply stick along for the ride, examining the terms and documents that more significant investors will be demanding.  Remain positive and supportive, but simply wait to sign on the dotted line until others have done the heavy lifting. For more insights into startups themselves, see Paul Graham's essays at www.paulgraham.com.  He's the real deal, and his recent essays will provide you with current insights about software startups. Good luck.",
+          "score": 15.681533,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726253937
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "startup investment"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "318347-0-572",
+          "text": "\n\"In most cases, startups are growth companies. That's because they are founded with an idea and a little money. Outside investors are paying for a piece of the founders' \"\"idea,\"\" and the hope that the idea will make a little money grow into a lot of money. There are exceptions. Startups in hard assets companies such as real estate and oil and gas are value investments. That is, they take \"\"ideas\"\" that are solidly proven, so you are getting a lot of \"\"house\"\" or oil drilling equipment for your money. Unlike the standard startup, you're not paying for the \"\"idea.\"\"\"",
+          "score": 19.815762,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726255114
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "startup investment"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Investing in existing startups can also be a lot of work, as it involves researching and evaluating different investment opportunities, building connections in the startup community, and potentially becoming involved in the day-to-day operations of the businesses you invest in. However, it can be a way to potentially earn significant returns if you are able to pick successful startups before their valuation increases. It's important to note that this is a high-risk investment strategy, and you should carefully consider your own financial situation and risk tolerance before deciding to invest in startups. The documents suggest consulting resources such as Paul Graham's essays at www.paulgraham.com and being skeptical about what you are getting for your investment."
+    },
+    {
+      "speaker": "user",
+      "text": "but is it ok if I only can invest a little?",
+      "timestamp": 1726254437,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, it is possible to invest a small amount in a startup ( a few thousand dollars), such as Paul Graham's Y-Combinator, but there are very few opportunities for this. The cost and hassle of raising small amounts would prevent most startups from doing it.",
+      "timestamp": 1726254467,
+      "contexts": [
+        {
+          "document_id": "425435-0-1030",
+          "text": "\nIt requires fairly large levels of capital, but what about seed funding/angel investments in startups? This would be before venture capital gets involved, so the amounts are relatively low (tens of thousands, vs. millions of USD), but as valuations this early in the game are also low, you can get a significant portion of equity in a startup that you feel is being run by good people and is in a promising market. Paul Graham of Y-Combinator has a number of articles about this from both sides of the table that you can take a look at and see if this is for you. It's definitely very high-risk, but if you can pick successful startups before their valuation shoots up, get some equity, help them succeed, and they eventually go public or get acquired, you can stand to bring in some big returns. Note that this isn't a hands-off investment. You'll need to build connections in the startup community, and it isn't uncommon for angel investors to become involved in the day-to-day operations of the businesses in which they invest.",
+          "score": 14.7665415,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726254766
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "seed funding"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "234506-0-1144",
+          "text": "\nTurukawa's answer is quite good, and for your own specific situation, you might begin by being sceptical about what you are getting for investing a few thousand dollars.  With the exception of Paul Graham's Y-Combinator, there are very few opportunities to invest at that type of level, and Y-Combinator provides a lot of other assistance besides their modest initial investment.   I can tell from your post that you think like an investor.  It is highly unlikely that the entrepreneurial programmers that you will be backing will be wired that way.   From the modest amount that you are investing, you are unlikely to be the lead investor in this opportunity.  If you are interested in proceeding, simply stick along for the ride, examining the terms and documents that more significant investors will be demanding.  Remain positive and supportive, but simply wait to sign on the dotted line until others have done the heavy lifting. For more insights into startups themselves, see Paul Graham's essays at www.paulgraham.com.  He's the real deal, and his recent essays will provide you with current insights about software startups. Good luck.",
+          "score": 14.023475,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726254764
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Y-combinator"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "232388-0-687",
+          "text": "\n\"Previous answers have done a great job with the \"\"Should I invest?\"\" question.   One thing you may be overlooking is the question \"\"Am I allowed to invest?\"\" For most offerings of stock in a startup, investors are required to be accredited by the SEC's definition.  See this helpful quora post for more information on requirements to invest in startups. To be honest, if a startup is looking for investors to put in \"\"a few thousand dollars\"\" each, this would raise my alarm bells.  The cost and hassle of the paperwork to (legitimately) issue shares in that small of number would lead me just to use a credit card to keep me going until I was able to raise a larger amount of capital.\"",
+          "score": 14.571461,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726254762
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "invest startup small"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, it is possible to invest a small amount in a startup, but it's important to keep in mind that most startups have a minimum investment requirement. Also, as a small investor, you may not have the same level of influence or access to information as larger investors. Additionally, you should make sure that you meet the SEC's accreditation requirements for investing in startups.\nAccording to the document, \"For most offerings of stock in a startup, investors are required to be accredited by the SEC's definition. See this helpful quora post for more information on requirements to invest in startups. To be honest, if a startup is looking for investors to put in 'a few thousand dollars' each, this would raise my alarm bells. The cost and hassle of the paperwork to (legitimately) issue shares in that small of number would lead me just to use a credit card to keep me going until I was able to raise a larger amount of capital.\"\nSo, it's important to be cautious and do your due diligence before investing a small amount in a startup."
+    },
+    {
+      "speaker": "user",
+      "text": "Am I better off going to work for a FAANG?",
+      "timestamp": 1726256165,
+      "enrichments": {
+        "Question Type": [
+          "Opinion"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I can't tell you much about working for a FAANG (Facebook, Amazon, Apple, Netflix, Google) company, but large companies offer resources such as the opportunity to learn from experienced people, and teams dedicated to support you.  There isn't a single \"\"right\"\" place to work. FAANG companies tend to offer 6-figure salaries.",
+      "timestamp": 1726256172,
+      "contexts": [
+        {
+          "document_id": "571418-0-1334",
+          "text": "\n\"I, too, have worked in both small and large companies; I started with the small ones and am currently at a big one. I agree with all of your points about the upside of working for small companies. Some of the upsides I find at the big company where I work are:  - there are people around you that know more than you do. There is a huge opportunity to learn from them, which is a lot harder when you're the lone expert at a 5-person company (you rely on whatever you can scrape up from the internet, etc.). Most people learn faster with good mentoring.  - there is money to spend on things that you need. No raised eyebrows from the CEO when you say that you need a $20 lamp for your desk, or even more serious issues like adequate hardware for what you need to do, getting tools you need, etc. (Less of an issue at a VC-funded startup, until the money starts running low.)  - there are entire teams that help with things like documentation, customer support, sales, tools, and other things, which frees me up to do what I'm good at, which is making software.  I remember reading some advice a while ago that still rings true to me, which is that there isn't a single \"\"right\"\" place to work (small/large, etc.); the right thing to do is get experience with a variety of different environments - in the end you'll be stronger for it.\"",
+          "score": 8.173125,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726256669
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "job big company"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "539733-0-1057",
+          "text": "\n\"I still think this tech boom is different. The 2000 boom/bust was so much based around a fiction. Namely, the infrastructure and logistics. The country was not yet set up for streaming services or online retail, the main drivers of that boom/bust. Today, broadband is ubiquitous, there's a computer in every home, and a smartphone in every pocket. Big data and automation drives vastly more efficient logistics, with the only main obstacle still yet to be worked out is AI that will allow companies like Uber and Tesla to realize their valuations. And the main drivers of tech are the so-called FAANG stocks (Facebook, Alphabet, Amazon, Apple and Netflix), as well as other tech like Microsoft and Cisco. What's the difference between these and, say, Pets.com or HotBot? *These are real companies.* Pets.com went boom to bust in less than a year. Broadcast.com sold for $5+billion...in 1999 (u kidin me?) Today's \"\"overvalued\"\" stocks have product, customers, business models and strategies in place. And the infrastructure they depend on actually exists.\"",
+          "score": 8.6957035,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726256673
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "FAANG"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "236747-0-315",
+          "text": "\nAs a point of comparison, the starting salary at Microsoft for a new college graduate is six figures. For senior positions it's easily much higher than that. That's similar to Apple and Google, except that Seattle has a far lower cost of living than Silicon Valley. Somehow, I don't think adequate pay is a problem.",
+          "score": 16.53858,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726256675
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "salary google"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "559393-0-281",
+          "text": "\n\"Six figures for college graduates. It's comparable to Apple and Google, except that Seattle has a lower cost of living than Silicon Valley so it's comparatively better pay. The downside is that there's a perception that working for Microsoft isn't as \"\"cool\"\" as Apple or Google.\"",
+          "score": 15.514161,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726256677
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "salary google"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Deciding whether to work for a FAANG (Facebook, Amazon, Apple, Netflix, Google) or a startup depends on your personal preferences and career goals. FAANG companies offer stability, resources, and a well-established brand, while startups offer the opportunity to be part of something new and potentially impactful, as well as the chance to gain a wider range of experience and responsibilities. However, startups also come with a higher level of risk.\nIn terms of financial rewards, FAANG companies typically offer competitive salaries and benefits packages, while startups may offer equity in the company as a form of compensation. However, the distribution of financial rewards at a startup is not guaranteed and may not be evenly distributed among employees.\nUltimately, the decision of where to work comes down to your individual circumstances, risk tolerance, and career aspirations. It may be helpful to consider factors such as the industry you are interested in, the type of work environment you prefer, and the opportunities for growth and development."
+    },
+    {
+      "speaker": "user",
+      "text": "which FAANG pays the most?",
+      "timestamp": 1726256899,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "UNANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I'm sorry I don't have that information.",
+      "timestamp": 1726256904,
+      "contexts": [
+        {
+          "document_id": "214032-0-631",
+          "text": "\nI would suggest to start small and grow it up. By starting small I mean. Start online with something like a website. It is amazing what you can do if you simply just put an hour a day aside to do this. Do some research, listen to audiobooks on your commute or when you're eating breakfast in the morning, and get your family involved that will definitely help a lot. If you haven't read this book I would highly suggest it: The $100 Startup by Chris Guillebeau 100startup.com/ , and The 4 Hour Workweek by Timothy Ferriss https://fourhourworkweek.com/ . I was not sponsored by these books I just think they will genuinely help you.",
+          "score": 24.158724,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "no",
+                "timestamp": 1726256908
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: As an employee, when is it inappropriate to request to see your young/startup company's financial statements?\n|assistant|: If you approach the request professionally, directly, and briefly it is not inappropriate to request to see the financial statements. It is also suggested to keep the request vague to avoid pushing for specific information that may not be disclosed. \n|user|: what are the risks of working at a startup?\n|assistant|: Working at a startup can involve several risks. One of the primary risks is the possibility of the business failing, which could result in your shares becoming worthless. There is also a risk that if the startup succeeds, the financial rewards may not be evenly distributed among employees. Additionally, startups often require long working hours and high levels of responsibility, and there may be a risk of job security as the company grows and hires new employees.\n|user|: tips for starting my own\n|assistant|: Here are some tips for starting your own business:\n1. Start small and grow it up. You can start online with a website and dedicate an hour a day to researching and planning.\n2. Get your family involved \n3. Look for incubators in your area that can provide mentorship and seed money to promising startups.\n4. Consider crowdfunding as an alternative financing method.\n5. When raising money, be prepared to answer questions about your business strategy and what you will do with the funds to generate profits in the future.\n6. Be aware that most startups fail, but also keep in mind that many successful businesses were started by people who were willing to take the risk.\n7. Develop forward and backward linkages with the help of startup advisors who can provide expertise and guidance in different verticals of the economy.\n8. Be persistent in presenting your business plan to potential investors, but avoid overwhelming them with continuous bombardment.\n9. Get business mentors and startup advisors\n10. Hire a tax advisor regarding startup costs\nConsider reading \"The $100 Startup\" by Chris Guillebeau and \"The 4 Hour Workweek\" by Timothy Ferriss for helpful guidance.\n|user|: that sounds like a lot of work maybe I should just invest in existing startups\n|assistant|: There are opportunities for outside investors and it can be a way to potentially earn significant returns if you are able to pick successful startups before their valuation increases.  It's important to note that this is a high-risk investment strategy. Investors usually also becoming involved in the day-to-day operations of the businesses you invest in. Resources such as Paul Graham's essays at www.paulgraham.com and being skeptical about what you are getting for your investment.\n|user|: but is it ok if I only can invest a little?\n|assistant|: Yes, it is possible to invest a small amount in a startup ( a few thousand dollars), such as Paul Graham's Y-Combinator, but there are very few opportunities for this. The cost and hassle of raising small amounts would prevent most startups from doing it.\n|user|: Am I better off going to work for a FAANG?\n|assistant|: I can't tell you much about working for a FAANG (Facebook, Amazon, Apple, Netflix, Google) company, but large companies offer resources such as the opportunity to learn from experienced people, and teams dedicated to support you.  There isn't a single \"\"right\"\" place to work. FAANG companies tend to offer 6-figure salaries.\n|user|: which FAANG pays the most?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "466835-1840-3964",
+          "text": "\nIf you approach it professionally, directly, and briefly (do not over-explain yourself) with the responsible accountant or HR person (if any), then I imagine it should not be a problem for them to give some information. Conversely, you may feel comfortable enough to review a high-level summary sheet with a founder, or to find some other way of tactfully reviewing the right information. In any case, I would keep the request vague, simple, and direct, and see what information they show you. If your request is too specific, then you risk pushing them to show information A, which they refuse to do, but a vague request would've prompted them to show you information B. A too-specific request might get you information X when a vague request could have garnered XYZ. Vague requests are also less aggressive and may raise fewer objections. The third question is difficult to say. My personal understanding is some perspective of how venture capitalists look at the investment opportunity (you didn't say how new this startup is or what series/stage they are on, so I'll try to stay vague). The actual financials are less relevant for startups than they are for other investments because the situation will definitely change. Most venture capital firms like to look at the burn rate or amount of cash spent, usually at a monthly rate. A high burn rate relative to infusions of cash suggests the company is growing rapidly but may have a risk of toppling (i.e. failing before exit). Burn rate can change drastically during the early life of the startup. Of course burn rate needs the context of revenues and reserves (and latest valuation is helpful as a benchmark, but you may be able to calculate that from the restricted share offer made to you). High burn rate might not be bad, if the company is booming along towards a successful exit. You might also want to look at some sort of business plan or info sheet, rather than financials alone. You want to gauge the size of the market (most startups like to claim 9- or 10-figure markets, so even a few percentage points of market share will hit revenue into the 8-figures).",
+          "score": 22.00724,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "no",
+                "timestamp": 1726256910
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: As an employee, when is it inappropriate to request to see your young/startup company's financial statements?\n|assistant|: If you approach the request professionally, directly, and briefly it is not inappropriate to request to see the financial statements. It is also suggested to keep the request vague to avoid pushing for specific information that may not be disclosed. \n|user|: what are the risks of working at a startup?\n|assistant|: Working at a startup can involve several risks. One of the primary risks is the possibility of the business failing, which could result in your shares becoming worthless. There is also a risk that if the startup succeeds, the financial rewards may not be evenly distributed among employees. Additionally, startups often require long working hours and high levels of responsibility, and there may be a risk of job security as the company grows and hires new employees.\n|user|: tips for starting my own\n|assistant|: Here are some tips for starting your own business:\n1. Start small and grow it up. You can start online with a website and dedicate an hour a day to researching and planning.\n2. Get your family involved \n3. Look for incubators in your area that can provide mentorship and seed money to promising startups.\n4. Consider crowdfunding as an alternative financing method.\n5. When raising money, be prepared to answer questions about your business strategy and what you will do with the funds to generate profits in the future.\n6. Be aware that most startups fail, but also keep in mind that many successful businesses were started by people who were willing to take the risk.\n7. Develop forward and backward linkages with the help of startup advisors who can provide expertise and guidance in different verticals of the economy.\n8. Be persistent in presenting your business plan to potential investors, but avoid overwhelming them with continuous bombardment.\n9. Get business mentors and startup advisors\n10. Hire a tax advisor regarding startup costs\nConsider reading \"The $100 Startup\" by Chris Guillebeau and \"The 4 Hour Workweek\" by Timothy Ferriss for helpful guidance.\n|user|: that sounds like a lot of work maybe I should just invest in existing startups\n|assistant|: There are opportunities for outside investors and it can be a way to potentially earn significant returns if you are able to pick successful startups before their valuation increases.  It's important to note that this is a high-risk investment strategy. Investors usually also becoming involved in the day-to-day operations of the businesses you invest in. Resources such as Paul Graham's essays at www.paulgraham.com and being skeptical about what you are getting for your investment.\n|user|: but is it ok if I only can invest a little?\n|assistant|: Yes, it is possible to invest a small amount in a startup ( a few thousand dollars), such as Paul Graham's Y-Combinator, but there are very few opportunities for this. The cost and hassle of raising small amounts would prevent most startups from doing it.\n|user|: Am I better off going to work for a FAANG?\n|assistant|: I can't tell you much about working for a FAANG (Facebook, Amazon, Apple, Netflix, Google) company, but large companies offer resources such as the opportunity to learn from experienced people, and teams dedicated to support you.  There isn't a single \"\"right\"\" place to work. FAANG companies tend to offer 6-figure salaries.\n|user|: which FAANG pays the most?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "275249-0-2208",
+          "text": "\n\"There are three (or four) ways that a company can grow: (Crowdfunding is a relatively new (in mainstream businesses) alternative financing method where people will finance a company with the expectation that they will benefit from the product or service that they provide.) Obviously a startup has no prior income to use, so it must either raise money through equity or debt. People say that one must borrow contingent on their salary. Banks lend money based on the ability to pay the loan back plus interest. For individuals, their income is their primary source of cash flow, so, yes, it is usually the determining factor in getting a loan. For a business the key factor is future cash flows. So a business will borrow money, say, to buy a new asset (like a factory) that will be used to generate cash flows in the future so that they can pay down the debt. If the bank believes that the use of the money is going to be profitable enough that they will get their money back with interest, they'll loan the money. Equity investors are essentially the same, but since they don't get a guaranteed payback (they only get paid through non-guaranteed dividends or liquidation), their risk is higher and they are looking for higher expected returns. So the question I'd have as a bank or equity investor is \"\"what are you going to do with the money?\"\" What is your business strategy? What are you going to do that will make profits in the future? Do you have a special idea or skill that you can turn into a profitable business? (Crowdfunding would be similar - people are willing to give you money based on either the social or personal benefit of some product or service.) So any business either starts small and grows over time (which is how the vast majority of businesses grow), or has some special idea, asset, skill, or something that would make a bank willing to take a risk on a huge loan. I know, again, that people here tend to turn blind eyes on unfortunate realities, but people do make giant businesses without having giant incomes. The \"\"unfortunate reality\"\" is that most startups fail. Which may sound bad, but also keep in mind that most startups are created by people that are OK with failing.",
+          "score": 21.162174,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "no",
+                "timestamp": 1726256944
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: As an employee, when is it inappropriate to request to see your young/startup company's financial statements?\n|assistant|: If you approach the request professionally, directly, and briefly it is not inappropriate to request to see the financial statements. It is also suggested to keep the request vague to avoid pushing for specific information that may not be disclosed. \n|user|: what are the risks of working at a startup?\n|assistant|: Working at a startup can involve several risks. One of the primary risks is the possibility of the business failing, which could result in your shares becoming worthless. There is also a risk that if the startup succeeds, the financial rewards may not be evenly distributed among employees. Additionally, startups often require long working hours and high levels of responsibility, and there may be a risk of job security as the company grows and hires new employees.\n|user|: tips for starting my own\n|assistant|: Here are some tips for starting your own business:\n1. Start small and grow it up. You can start online with a website and dedicate an hour a day to researching and planning.\n2. Get your family involved \n3. Look for incubators in your area that can provide mentorship and seed money to promising startups.\n4. Consider crowdfunding as an alternative financing method.\n5. When raising money, be prepared to answer questions about your business strategy and what you will do with the funds to generate profits in the future.\n6. Be aware that most startups fail, but also keep in mind that many successful businesses were started by people who were willing to take the risk.\n7. Develop forward and backward linkages with the help of startup advisors who can provide expertise and guidance in different verticals of the economy.\n8. Be persistent in presenting your business plan to potential investors, but avoid overwhelming them with continuous bombardment.\n9. Get business mentors and startup advisors\n10. Hire a tax advisor regarding startup costs\nConsider reading \"The $100 Startup\" by Chris Guillebeau and \"The 4 Hour Workweek\" by Timothy Ferriss for helpful guidance.\n|user|: that sounds like a lot of work maybe I should just invest in existing startups\n|assistant|: There are opportunities for outside investors and it can be a way to potentially earn significant returns if you are able to pick successful startups before their valuation increases.  It's important to note that this is a high-risk investment strategy. Investors usually also becoming involved in the day-to-day operations of the businesses you invest in. Resources such as Paul Graham's essays at www.paulgraham.com and being skeptical about what you are getting for your investment.\n|user|: but is it ok if I only can invest a little?\n|assistant|: Yes, it is possible to invest a small amount in a startup ( a few thousand dollars), such as Paul Graham's Y-Combinator, but there are very few opportunities for this. The cost and hassle of raising small amounts would prevent most startups from doing it.\n|user|: Am I better off going to work for a FAANG?\n|assistant|: I can't tell you much about working for a FAANG (Facebook, Amazon, Apple, Netflix, Google) company, but large companies offer resources such as the opportunity to learn from experienced people, and teams dedicated to support you.  There isn't a single \"\"right\"\" place to work. FAANG companies tend to offer 6-figure salaries.\n|user|: which FAANG pays the most?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "As of 2"
+    },
+    {
+      "speaker": "user",
+      "text": "what about goldman sachs or other finance companies",
+      "timestamp": 1726258196,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Goldman Sachs and the other top finance companies offer high paychecks with low 6 figure starting salaries and a potential to make 400k or more. Note, the starting salary can vary greatly based on the cost of living in different locations.",
+      "timestamp": 1726258206,
+      "contexts": [
+        {
+          "document_id": "404295-0-1628",
+          "text": "\nDo you work with low-skilled employees? Specifically, do you ever have to manage them? I am going to make the assumption that you do not based on the comments you are making. It is impossible to say ALL of anything is a certain way. I'm not suggesting that at all. I'm going to specifically talk about averages. It seems like you've never been around the average.  The average minimum wage employee doesn't have a high school education. It is fairly safe to say that they continuously are not developing skills that provide value both to themselves and others. If a person refuses to provide more for society, should society fill the gap?  You suggest that people who are poor didn't get there because of their own right. Are people who are self-made millionaires (on average) good with finances? Why would that be? If yes, why do you assume those that are successful are so because of their own merit but cannot be blamed for failure?  Seattle is a nice place. My exterior painter is doing a job there right now. It's a 3 month job. He is painting 1,000 apartments. He took 7 guys with him that he pays around $1,750 a week plus room and board. He had to take 7 guys with him because he can't find workers up in Washington. Can you imagine that? People in Seattle have not developed the skill of exterior painting. That's the reality of your job market. Even further, companies do have massive incentives to move to cheaper locations. The starting salary of large corporations varies wildly based on cost of living. Goldman Sachs will offer nearly $100k a year starting to work in the NYC branch compared to $65-70k in Houston.",
+          "score": 21.088402,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726258393
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "goldman sachs salary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "303613-0-679",
+          "text": "\nMBA here. I had a relatively well-paying job with great benefits and tuition reimbursement. I ended up leaving it for a much lower-paying job though.  Why did I do that? I was miserable. The job was to do only as I was told. Also, they changed my project scope to something completely different after 4 months. I also was in a terrible city with no friends. I hated my job and eventually I hated my life.  I've since moved back to where I went to college.  I hate that business publications talk about MBA's like we're all mindless robots looking for the highest paycheck at Goldman Sachs. I'll gladly take friends, a better location, and a comfortable salary over anything else.",
+          "score": 17.85371,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726258395
+              },
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1726837846
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "goldman sachs salary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "273215-0-424",
+          "text": "\n\"Kids, know some shit about your bank before hopping on the crazy train. GS doesn't have an \"\"M&amp;A division\"\" and even partners make less than 1M salary - notoriously.  And whether you're at Goldman or anywhere else, nobody wants to hear \"\"I think investment banking is cool because there are a lot of rich people and I would like to be rich, that's just amazing to me\"\"  And learn to tie your tie. What a fucking goober\"",
+          "score": 17.671595,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726258503
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "goldman sachs salary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "474402-0-543",
+          "text": "\nThe highest paid finance role is a hedge fund manager at a top fund - but that's like winning the lotto so here's the most pragmatic way to make a lot of money:  * First 2-3 years out of college: Investment Banking Analyst  * Next 2-3 years: Switch to the buyside (Private Equity)  You'll easily top $400k by the time you're 26-27.  If you're promoted to VP you are golden. Most get forced out after their associate stint and go to a top MBA program, after which you'd go back into PE or do the CFO route.  Not sure w/o a degree, to be honest.",
+          "score": 17.722664,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726258398
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "finance salary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "409150-0-251",
+          "text": "\n\"If they go into \"\"high\"\" finance such as investment banking or hedge funds, definitely. But even some of the lower finance jobs (ie the bottom half of the Harvard students graduating with jobs in finance) have a reasonable shot at 200k/yr by age 30.\"",
+          "score": 15.738727,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726258400
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "finance salary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "106817-0-1205",
+          "text": "\n1.   It is difficult.  There is no formal process outside of undergrad and MBA programs to easily gain access to interviews.  At your level, its mostly about connections.  If willing to start near bottom, go to your business school and start applying to bank associate programs.  Sounds like you would like sales and trading more than M&amp;A, so focus there. 2.   If you got in at associate level, you would do 1-3 months of training and then get assigned a desk.  Finance going through a tough time right now, so trajectory isn't what it used to be.  Expect to be a VP after 2-4 years, then its all dependent on luck and skill. 3.   If you land a job at a top 15 bank, you should be making total comp of 150k or more after the first year.  Salaries not quite at 150k, but most VPS make over 150k salary, not to mention bigger bonus's.  4.   If you did M&amp;A you would be working very serious hours.  If you go into Sales and Trading your hours will be anywhere from 40 to 60 hours a week depending on the desk.  Trading hours tend to be the shortest. 5.  Boston isn't a hot bed for i-banking finance.  NYC, London, Sing, Hong Kong tend to be the places to be.  I know nobody in Boston that could help.",
+          "score": 14.942857,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726258401
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "finance salary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Goldman Sachs offers a higher starting salary in their New York City branch compared to their Houston branch. The starting salary can vary greatly based on the cost of living in different locations. However, I don't have specific information on how Goldman Sachs' salary offerings compare to other finance companies."
+    },
+    {
+      "speaker": "user",
+      "text": "so is it more or less than tech companies? ",
+      "timestamp": 1726258588,
+      "enrichments": {
+        "Question Type": [
+          "Comparative"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The starting salaries are comparable, both in the low 6-figures, however earning potential may differ as your career progresses.",
+      "timestamp": 1726258592,
+      "contexts": [
+        {
+          "document_id": "474402-0-543",
+          "text": "\nThe highest paid finance role is a hedge fund manager at a top fund - but that's like winning the lotto so here's the most pragmatic way to make a lot of money:  * First 2-3 years out of college: Investment Banking Analyst  * Next 2-3 years: Switch to the buyside (Private Equity)  You'll easily top $400k by the time you're 26-27.  If you're promoted to VP you are golden. Most get forced out after their associate stint and go to a top MBA program, after which you'd go back into PE or do the CFO route.  Not sure w/o a degree, to be honest.",
+          "score": 17.722664,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726258746
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "finance salary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "409150-0-251",
+          "text": "\n\"If they go into \"\"high\"\" finance such as investment banking or hedge funds, definitely. But even some of the lower finance jobs (ie the bottom half of the Harvard students graduating with jobs in finance) have a reasonable shot at 200k/yr by age 30.\"",
+          "score": 15.738727,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726258748
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "finance salary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "106817-0-1205",
+          "text": "\n1.   It is difficult.  There is no formal process outside of undergrad and MBA programs to easily gain access to interviews.  At your level, its mostly about connections.  If willing to start near bottom, go to your business school and start applying to bank associate programs.  Sounds like you would like sales and trading more than M&amp;A, so focus there. 2.   If you got in at associate level, you would do 1-3 months of training and then get assigned a desk.  Finance going through a tough time right now, so trajectory isn't what it used to be.  Expect to be a VP after 2-4 years, then its all dependent on luck and skill. 3.   If you land a job at a top 15 bank, you should be making total comp of 150k or more after the first year.  Salaries not quite at 150k, but most VPS make over 150k salary, not to mention bigger bonus's.  4.   If you did M&amp;A you would be working very serious hours.  If you go into Sales and Trading your hours will be anywhere from 40 to 60 hours a week depending on the desk.  Trading hours tend to be the shortest. 5.  Boston isn't a hot bed for i-banking finance.  NYC, London, Sing, Hong Kong tend to be the places to be.  I know nobody in Boston that could help.",
+          "score": 14.942857,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726258751
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "finance salary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "404295-0-1628",
+          "text": "\nDo you work with low-skilled employees? Specifically, do you ever have to manage them? I am going to make the assumption that you do not based on the comments you are making. It is impossible to say ALL of anything is a certain way. I'm not suggesting that at all. I'm going to specifically talk about averages. It seems like you've never been around the average.  The average minimum wage employee doesn't have a high school education. It is fairly safe to say that they continuously are not developing skills that provide value both to themselves and others. If a person refuses to provide more for society, should society fill the gap?  You suggest that people who are poor didn't get there because of their own right. Are people who are self-made millionaires (on average) good with finances? Why would that be? If yes, why do you assume those that are successful are so because of their own merit but cannot be blamed for failure?  Seattle is a nice place. My exterior painter is doing a job there right now. It's a 3 month job. He is painting 1,000 apartments. He took 7 guys with him that he pays around $1,750 a week plus room and board. He had to take 7 guys with him because he can't find workers up in Washington. Can you imagine that? People in Seattle have not developed the skill of exterior painting. That's the reality of your job market. Even further, companies do have massive incentives to move to cheaper locations. The starting salary of large corporations varies wildly based on cost of living. Goldman Sachs will offer nearly $100k a year starting to work in the NYC branch compared to $65-70k in Houston.",
+          "score": 21.088402,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726258754
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "goldman sachs salary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "236747-0-315",
+          "text": "\nAs a point of comparison, the starting salary at Microsoft for a new college graduate is six figures. For senior positions it's easily much higher than that. That's similar to Apple and Google, except that Seattle has a far lower cost of living than Silicon Valley. Somehow, I don't think adequate pay is a problem.",
+          "score": 16.838915,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726258756
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "google salary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "448718-0-1162",
+          "text": "\n&gt; Show me proof that Microsoft's starting salaries are over $100k. The last figure I saw was $86k.  That figure must be several years old - $86k base pay sounds about the range they were paying in 2006 or so. About a year ago Microsoft handed out massive across-the-board pay raises to everyone to bring their salaries in line with those offered by Apple and Google. But obviously like all companies they keep the exact figures hidden from public.  About two years ago I knew some college graduates going to work for Microsoft, and they were already in the $90k range even before the sweeping pay raises which happened mid last year.  And this is all of course all referring to base pay and doesn't count bonuses. Because of the way Microsoft's review process works, almost everyone receives a bonus at the end of the year. 90% of engineers at MS will receive as a bonus 10-20% of their annual salary in cash, and an additional 10-20% of their annual salary in stock.  Now people don't usually count those when comparing base pay, but if you want to look at total compensation it's *easily* past six figures even if you assume a really low base pay like $86k.",
+          "score": 16.700377,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726258758
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "google salary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "559393-0-281",
+          "text": "\n\"Six figures for college graduates. It's comparable to Apple and Google, except that Seattle has a lower cost of living than Silicon Valley so it's comparatively better pay. The downside is that there's a perception that working for Microsoft isn't as \"\"cool\"\" as Apple or Google.\"",
+          "score": 15.662861,
+          "feedback": {
+            "relevant": {
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1726258762
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "google salary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Top finance companies like Goldman Sachs tend to offer higher starting salaries compared to some tech companies, especially when considering the cost of living in different locations. However, the potential earnings in tech companies can also be high, especially in successful startups or established FAANG companies. It's important to consider other factors such as job satisfaction, career growth, and personal interests when choosing a career path."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "87334bc6-dd39-4565-ae2b-832e60a24b08",
+      "status": "created",
+      "timestamp": 1726258875
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "edited",
+      "timestamp": 1726837846
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "accepted",
+      "timestamp": 1726838590
+    }
+  ],
+  "editor": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+  "domain": "mt-rag-fiqa-beir-elser-512-100-20240501",
+  "reviewer": "f6ce971c-68d2-4c26-b1c0-477dd28a5181"
+}

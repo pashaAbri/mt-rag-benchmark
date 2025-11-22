@@ -1,0 +1,1190 @@
+{
+  "author": "53573702-4140-4812-8658-ae10a54edfc8",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-govt-elser-512-100-20240611",
+      "size": "49607"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"bool\": {\n    \"must\": {\n      \"text_expansion\": {\n        \"ml.tokens\": {\n          \"model_id\": \".elser_model_1\",\n          \"model_text\": \"${QUERY}\"\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "What is the goal of NASA\u201a\u00c4\u00f4s Europa Clipper mission?",
+      "timestamp": 1723033030,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The main science goal of NASA's Europa Clipper mission is to determine whether there are places below the surface of Jupiter's icy moon, Europa, that could support life. The mission's three main science objectives are to understand the nature of the ice shell and the ocean beneath it, to investigate its composition, and to characterize its geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.",
+      "timestamp": 1723033035,
+      "contexts": [
+        {
+          "document_id": "c3c65a23f89d1f39-2-2157",
+          "text": "Science | Mission \u2013 NASA's Europa Clipper\nScience | Mission \u2013 NASA's Europa Clipper\n\nNASA\n\nEuropa Clipper\n\nSkip Navigation\n\nmenu\n\nclose modal\n\nEuropa Clipper Mission\n\nScience\n\nMission\n\nMENU\n\nOverview\n\nScience\n\nTimeline\n\nThe Team\n\nOverview\n\nHistory\n\nFAQ\n\nKey Fact\n\nWhat is Europa Clipper's main science goal? \n\nEuropa Clipper\u2019s main science goal is to determine whether there are places below the surface of Jupiter\u2019s icy moon, Europa, that could support life.\n\nOverviewOverview\n\nDeep beneath the crust of Jupiter\u2019s frozen moon Europa lies a massive liquid water ocean. Exploring this ocean world with our Europa Clipper spacecraft could provide new clues in our search for life beyond Earth. Scheduled to launch in October 2024, Europa Clipper\u2019s main science goal is to determine whether there are places below the surface of Jupiter\u2019s icy moon, Europa, that could support life. Credit: NASA\n\nJupiter\u2019s moon Europa shows strong evidence for an ocean of liquid water beneath its icy crust. Beyond Earth, Europa is considered one of the most promising currently habitable environments in our solar system. \nBelow Europa\u2019s icy surface, evidence suggests there is a global ocean with more water than all of Earth\u2019s oceans combined. Europa could have all the \u201cingredients\u201d needed for life as we know it: \n\nWater: Twice as much as Earth\u2019s oceans \n\nOrganics: Essential chemical building blocks from a variety of sources\n\nEnergy: Chemical energy sources from the surface and the sea floor\n\nStability: Conditions remaining similar for 4 billion years\n\nNASA's Europa Clipper spacecraft will perform approximately 50 close flybys of the moon, gathering detailed measurements to investigate whether the moon could have conditions suitable for life. Europa Clipper is not a life detection mission \u2013 its main science goal is to determine whether there are places below Europa\u2019s surface that could support life.\n\nEuropa Up Close\n\nTake an in-depth look at Jupiter's icy moon and Europa Clipper's plans for investigation.\n\nLearn more \u203a\n\nScience ObjectivesScience Objectives\nEuropa Clipper has three main science objectives: \n\nDetermine the Thickness of Europa\u2019s Icy Shell & How the Ocean Interacts With the Surface",
+          "title": "Science | Mission \u2013 NASA's Europa Clipper",
+          "url": "https://europa.nasa.gov/mission/science/",
+          "score": 18.641035,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "yes",
+                "timestamp": 1723033284
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What is the goal of NASA\u201a\u00c4\u00f4s Europa Clipper mission?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ac42e129849231bf-1417-3559",
+          "text": "New Video Series Captures Team Working on NASA's Europa Clipper \u2013 NASA's Europa Clipper\nThe new video series \u201cSpacecraft Makers: Europa Clipper\u201d offers quick updates on the mission\u2019s progress and lifts the curtain on the exacting work that goes into making sure the spacecraft reaches the Jupiter system in 2030. Europa Clipper aims to help answer questions about the ocean that scientists strongly believe lies below Europa\u2019s icy crust.\n\nLearn More\n\nAssembly\n\nInstruments\n\nMeet Europa Clipper\n\nThe spacecraft will fly by the moon about 50 times while orbiting Jupiter. (It can\u2019t orbit Europa because doing so would bring Europa Clipper too close to the gas giant\u2019s brutal radiation belts. Learn more in the video.) On each flyby, a suite of science instruments will gather data on how deep the subsurface ocean is, how thick the ice crust is, and, potentially, the characteristics of any plumes that may be venting subsurface water into space. The goal is to find out whether Europa has the potential to support life.\nThe series\u2019 premiere episode features Europa Clipper Project Manager Jordan Evans, who also has worked on NASA\u2019s Curiosity Mars rover and the agency\u2019s Hubble Space Telescope. In the video, he joins Deputy Science Manager Trina Ray, who worked on NASA\u2019s Cassini and Galileo missions. They venture into JPL\u2019s storied High Bay 1 clean room, where the Europa Clipper spacecraft is under construction \u2013 and where all of NASA\u2019s Mars rovers, the twin Voyager spacecraft, and other historic spacecraft were assembled.\nWhile you\u2019re digging into the nuts and bolts of the spacecraft, check out a 24-hour live feed of assembly in progress in High Bay 1.\nAdditional episodes of \u201cSpacecraft Makers\u201d will include more activity inside other clean rooms where components of Europa Clipper are coming together. Future seasons of the series will cover other missions under construction at JPL.\nMore About the Mission\nEuropa Clipper\u2019s main science goal is to determine whether there are places below the surface of Jupiter\u2019s icy moon, Europa, that could support life. The mission\u2019s three main science objectives are to understand the nature of the ice shell and the ocean beneath it, along with the moon\u2019s composition and geology.",
+          "title": "New Video Series Captures Team Working on NASA's Europa Clipper \u2013 NASA's Europa Clipper",
+          "url": "https://europa.nasa.gov/news/90/new-video-series-captures-team-working-on-nasas-europa-clipper/",
+          "score": 18.361544,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "yes",
+                "timestamp": 1723033420
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What is the goal of NASA\u201a\u00c4\u00f4s Europa Clipper mission?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "4d10351b2923b2c0-11577-13535",
+          "text": "NASA\u2019s Europa Clipper Survives and Thrives in \u2018Outer Space\u2019 on Earth - NASA\nEuropa Clipper\u2019s main science goal is to determine whether there are places below the surface of Jupiter\u2019s icy moon, Europa, that could support life. The mission\u2019s three main science objectives are to determine the thickness of the moon\u2019s icy shell and its surface interactions with the ocean below, to investigate its composition, and to characterize its geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.\nManaged by Caltech in Pasadena, California, JPL leads the development of the Europa Clipper mission in partnership with the Johns Hopkins Applied Physics Laboratory (APL) in Laurel, Maryland, for NASA\u2019s Science Mission Directorate in Washington. APL designed the main spacecraft body in collaboration with JPL and NASA\u2019s Goddard Space Flight Center in Greenbelt, Maryland. The Planetary Missions Program Office at NASA\u2019s Marshall Space Flight Center in Huntsville, Alabama, executes program management of the Europa Clipper mission.\nFind more information about Europa here:\neuropa.nasa.gov\nNews Media Contacts\nGretchen McCartneyJet Propulsion Laboratory, Pasadena, Calif.818-393-6215gretchen.p.mccartney@jpl.nasa.gov\nKaren Fox / Charles BlueNASA Headquarters, Washington301-286-6284 / 202-802-5345karen.c.fox@nasa.gov / charles.e.blue@nasa.gov\n2024-032\n\nShare\n\nDetails\n\nLast Updated\n\nMar 27, 2024\n\nRelated TermsEuropa ClipperEuropaJet Propulsion LaboratoryJupiterThe Solar System\n\n \n\nExplore More\n\n \n\n6 min read\nNew Images From Euclid Mission Reveal Wide View of the Dark Universe\n\nArticle\n\n\t2 days ago\t\n\n \n\n4 min read\nNASA\u2019s Psyche Fires Up Its Sci-Fi-Worthy Thrusters\n\nArticle\n\n\t3 days ago\t\n\n \n\n7 min read\nNASA Tool Gets Ready to Image Faraway Planets\n\nArticle\n\n\t4 days ago\t\n\n \n\nKeep Exploring\nDiscover Related Topics\n\nMissions\n\n \n\nHumans in Space\n\n \n\nClimate Change\n\n \n\nSolar System\n\n \n\nThe National Aeronautics and Space Administration",
+          "title": "NASA\u2019s Europa Clipper Survives and Thrives in \u2018Outer Space\u2019 on Earth - NASA",
+          "url": "https://www.nasa.gov/missions/europa-clipper/nasas-europa-clipper-survives-and-thrives-in-outer-space-on-earth/",
+          "score": 18.014286,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "yes",
+                "timestamp": 1723033449
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What is the goal of NASA\u201a\u00c4\u00f4s Europa Clipper mission?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The main science goal of NASA's Europa Clipper mission is to determine whether there are places below the surface of Jupiter's icy moon, Europa, that could support life. The mission's three main science objectives are to understand the nature of the ice shell and the ocean beneath it, to investigate its composition, and to characterize its geology."
+    },
+    {
+      "speaker": "user",
+      "text": "I Europa livable for humans?",
+      "timestamp": 1723033732,
+      "enrichments": {
+        "Question Type": [
+          "Explanation",
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Europa is not considered directly habitable for humans, but it is one of the most promising environments in our solar system due to the presence of a vast ocean beneath its icy crust. This ocean could potentially contain conditions suitable for life as we know it. The Europa Clipper mission is designed to investigate whether the moon could have conditions suitable for life, but it is not a life detection mission. Europa could have all the necessary \"ingredients\" for life as we know it: \n- Water: Twice as much as Earth\u2019s oceans\n- Organics: Essential chemical building blocks from a variety of sources\n- Energy: Chemical energy sources from the surface and the sea floor\n- Stability: Conditions remaining similar for 4 billion years",
+      "timestamp": 1723033739,
+      "contexts": [
+        {
+          "document_id": "4d10351b2923b2c0-11577-13535",
+          "text": "NASA\u2019s Europa Clipper Survives and Thrives in \u2018Outer Space\u2019 on Earth - NASA\nEuropa Clipper\u2019s main science goal is to determine whether there are places below the surface of Jupiter\u2019s icy moon, Europa, that could support life. The mission\u2019s three main science objectives are to determine the thickness of the moon\u2019s icy shell and its surface interactions with the ocean below, to investigate its composition, and to characterize its geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.\nManaged by Caltech in Pasadena, California, JPL leads the development of the Europa Clipper mission in partnership with the Johns Hopkins Applied Physics Laboratory (APL) in Laurel, Maryland, for NASA\u2019s Science Mission Directorate in Washington. APL designed the main spacecraft body in collaboration with JPL and NASA\u2019s Goddard Space Flight Center in Greenbelt, Maryland. The Planetary Missions Program Office at NASA\u2019s Marshall Space Flight Center in Huntsville, Alabama, executes program management of the Europa Clipper mission.\nFind more information about Europa here:\neuropa.nasa.gov\nNews Media Contacts\nGretchen McCartneyJet Propulsion Laboratory, Pasadena, Calif.818-393-6215gretchen.p.mccartney@jpl.nasa.gov\nKaren Fox / Charles BlueNASA Headquarters, Washington301-286-6284 / 202-802-5345karen.c.fox@nasa.gov / charles.e.blue@nasa.gov\n2024-032\n\nShare\n\nDetails\n\nLast Updated\n\nMar 27, 2024\n\nRelated TermsEuropa ClipperEuropaJet Propulsion LaboratoryJupiterThe Solar System\n\n \n\nExplore More\n\n \n\n6 min read\nNew Images From Euclid Mission Reveal Wide View of the Dark Universe\n\nArticle\n\n\t2 days ago\t\n\n \n\n4 min read\nNASA\u2019s Psyche Fires Up Its Sci-Fi-Worthy Thrusters\n\nArticle\n\n\t3 days ago\t\n\n \n\n7 min read\nNASA Tool Gets Ready to Image Faraway Planets\n\nArticle\n\n\t4 days ago\t\n\n \n\nKeep Exploring\nDiscover Related Topics\n\nMissions\n\n \n\nHumans in Space\n\n \n\nClimate Change\n\n \n\nSolar System\n\n \n\nThe National Aeronautics and Space Administration",
+          "title": "NASA\u2019s Europa Clipper Survives and Thrives in \u2018Outer Space\u2019 on Earth - NASA",
+          "url": "https://www.nasa.gov/missions/europa-clipper/nasas-europa-clipper-survives-and-thrives-in-outer-space-on-earth/",
+          "score": 43.12103,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "no",
+                "timestamp": 1723033818
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What is the goal of NASA\u201a\u00c4\u00f4s Europa Clipper mission?\n|assistant|: The main science goal of NASA's Europa Clipper mission is to determine whether there are places below the surface of Jupiter's icy moon, Europa, that could support life. The mission's three main science objectives are to understand the nature of the ice shell and the ocean beneath it, to investigate its composition, and to characterize its geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.\n|user|: I Europa livable for humans?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "c3c65a23f89d1f39-2-2157",
+          "text": "Science | Mission \u2013 NASA's Europa Clipper\nScience | Mission \u2013 NASA's Europa Clipper\n\nNASA\n\nEuropa Clipper\n\nSkip Navigation\n\nmenu\n\nclose modal\n\nEuropa Clipper Mission\n\nScience\n\nMission\n\nMENU\n\nOverview\n\nScience\n\nTimeline\n\nThe Team\n\nOverview\n\nHistory\n\nFAQ\n\nKey Fact\n\nWhat is Europa Clipper's main science goal? \n\nEuropa Clipper\u2019s main science goal is to determine whether there are places below the surface of Jupiter\u2019s icy moon, Europa, that could support life.\n\nOverviewOverview\n\nDeep beneath the crust of Jupiter\u2019s frozen moon Europa lies a massive liquid water ocean. Exploring this ocean world with our Europa Clipper spacecraft could provide new clues in our search for life beyond Earth. Scheduled to launch in October 2024, Europa Clipper\u2019s main science goal is to determine whether there are places below the surface of Jupiter\u2019s icy moon, Europa, that could support life. Credit: NASA\n\nJupiter\u2019s moon Europa shows strong evidence for an ocean of liquid water beneath its icy crust. Beyond Earth, Europa is considered one of the most promising currently habitable environments in our solar system. \nBelow Europa\u2019s icy surface, evidence suggests there is a global ocean with more water than all of Earth\u2019s oceans combined. Europa could have all the \u201cingredients\u201d needed for life as we know it: \n\nWater: Twice as much as Earth\u2019s oceans \n\nOrganics: Essential chemical building blocks from a variety of sources\n\nEnergy: Chemical energy sources from the surface and the sea floor\n\nStability: Conditions remaining similar for 4 billion years\n\nNASA's Europa Clipper spacecraft will perform approximately 50 close flybys of the moon, gathering detailed measurements to investigate whether the moon could have conditions suitable for life. Europa Clipper is not a life detection mission \u2013 its main science goal is to determine whether there are places below Europa\u2019s surface that could support life.\n\nEuropa Up Close\n\nTake an in-depth look at Jupiter's icy moon and Europa Clipper's plans for investigation.\n\nLearn more \u203a\n\nScience ObjectivesScience Objectives\nEuropa Clipper has three main science objectives: \n\nDetermine the Thickness of Europa\u2019s Icy Shell & How the Ocean Interacts With the Surface",
+          "title": "Science | Mission \u2013 NASA's Europa Clipper",
+          "url": "https://europa.nasa.gov/mission/science/",
+          "score": 42.900482,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1726568616
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What is the goal of NASA\u201a\u00c4\u00f4s Europa Clipper mission?\n|assistant|: The main science goal of NASA's Europa Clipper mission is to determine whether there are places below the surface of Jupiter's icy moon, Europa, that could support life. The mission's three main science objectives are to understand the nature of the ice shell and the ocean beneath it, to investigate its composition, and to characterize its geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.\n|user|: I Europa livable for humans?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6e52d5b809f037b2-2126-4106",
+          "text": "Europa Clipper - NASA Science\nScientists predict Europa has a salty ocean beneath its icy crust that could hold the building blocks necessary to sustain life.TypeOrbiterLaunchOct. 10, 2024TargetEuropaObjectiveDetermine if Europa has conditions suitable to support lifeMission OverviewSpacecraftWhy Europa?What will Europa Clipper do?Europa Clipper\u2019s main science goal is to determine whether there are places below the surface of Jupiter\u2019s icy moon, Europa, that could support life.The mission\u2019s three main science objectives are to understand the nature of the ice shell and the ocean beneath it, along with the moon\u2019s composition and geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.Read MoreAn artist's concept of NASA\u2019s Europa Clipper spacecraft.NASA/JPL-CaltechWhat is NASA\u2019s Europa Clipper spacecraft?Europa Clipper is a robotic solar-powered spacecraft built to conduct the first detailed investigations of Jupiter's icy moon Europa.With its solar arrays deployed, Europa Clipper spans more than 100 feet (about 30 meters) \u2013 about the length of a basketball court. The main body of the spacecraft consists of its avionics vault, radiofrequency module, and propulsion module.Read MoreWorkers use a crane to lift Europa Clipper's high-gain antenna as they prepare to install it on the spacecraft on Aug. 14, 2023. NASA/JPL-CaltechWhy Europa?The search for life beyond Earth is one of NASA\u2019s primary objectives.\u00a0If humans are to truly understand our place in the universe, we must learn whether our planet is the only place where life exists. So the search is on! There is strong evidence Jupiter's moon Europa has a saltwater ocean that may be one of the best places to look for environments where life could exist beyond Earth.Read MoreThis view of Jupiter\u2019s icy moon Europa was captured by the JunoCam imager aboard NASA\u2019s Juno spacecraft during the mission\u2019s close flyby on Sept. 29, 2022.",
+          "title": "Europa Clipper - NASA Science",
+          "url": "https://science.nasa.gov/mission/europa-clipper/",
+          "score": 41.590862,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1726568640
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What is the goal of NASA\u201a\u00c4\u00f4s Europa Clipper mission?\n|assistant|: The main science goal of NASA's Europa Clipper mission is to determine whether there are places below the surface of Jupiter's icy moon, Europa, that could support life. The mission's three main science objectives are to understand the nature of the ice shell and the ocean beneath it, to investigate its composition, and to characterize its geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.\n|user|: I Europa livable for humans?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Based on the information provided, Europa is not considered directly livable for humans. However, it is considered one of the most promising currently habitable environments in our solar system due to the presence of a vast ocean beneath its icy crust. This ocean could potentially contain conditions suitable for life as we know it. The Europa Clipper mission is designed to investigate whether the moon could have conditions suitable for life, but it is not a life detection mission."
+    },
+    {
+      "speaker": "user",
+      "text": "The surface of Jupiter Europa",
+      "timestamp": 1723034011,
+      "enrichments": {
+        "Question Type": [
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The surface of Jupiter's moon, Europa, is made up of ice. It is covered in a thick crust of frozen water that is estimated to be between 10 to 100 kilometers thick. The surface also shows signs of past and present geological activity, such as ridges, chaos terrain, and lenticulae. These features suggest that there is heat being generated from within Europa, which is thought to be due to tidal heating caused by Jupiter's gravitational pull. Additionally, the surface of Europa is subject to bombardment by radiation from Jupiter, which can cause the ice to darken and form a reddish-brown color in some areas. The surface of Jupiter's moon Europa features a widely varied landscape, including ridges, bands, small rounded domes and disrupted spaces that geologists call \"chaos terrain.\"",
+      "timestamp": 1723034018,
+      "contexts": [
+        {
+          "document_id": "c3c65a23f89d1f39-2-2157",
+          "text": "Science | Mission \u2013 NASA's Europa Clipper\nScience | Mission \u2013 NASA's Europa Clipper\n\nNASA\n\nEuropa Clipper\n\nSkip Navigation\n\nmenu\n\nclose modal\n\nEuropa Clipper Mission\n\nScience\n\nMission\n\nMENU\n\nOverview\n\nScience\n\nTimeline\n\nThe Team\n\nOverview\n\nHistory\n\nFAQ\n\nKey Fact\n\nWhat is Europa Clipper's main science goal? \n\nEuropa Clipper\u2019s main science goal is to determine whether there are places below the surface of Jupiter\u2019s icy moon, Europa, that could support life.\n\nOverviewOverview\n\nDeep beneath the crust of Jupiter\u2019s frozen moon Europa lies a massive liquid water ocean. Exploring this ocean world with our Europa Clipper spacecraft could provide new clues in our search for life beyond Earth. Scheduled to launch in October 2024, Europa Clipper\u2019s main science goal is to determine whether there are places below the surface of Jupiter\u2019s icy moon, Europa, that could support life. Credit: NASA\n\nJupiter\u2019s moon Europa shows strong evidence for an ocean of liquid water beneath its icy crust. Beyond Earth, Europa is considered one of the most promising currently habitable environments in our solar system. \nBelow Europa\u2019s icy surface, evidence suggests there is a global ocean with more water than all of Earth\u2019s oceans combined. Europa could have all the \u201cingredients\u201d needed for life as we know it: \n\nWater: Twice as much as Earth\u2019s oceans \n\nOrganics: Essential chemical building blocks from a variety of sources\n\nEnergy: Chemical energy sources from the surface and the sea floor\n\nStability: Conditions remaining similar for 4 billion years\n\nNASA's Europa Clipper spacecraft will perform approximately 50 close flybys of the moon, gathering detailed measurements to investigate whether the moon could have conditions suitable for life. Europa Clipper is not a life detection mission \u2013 its main science goal is to determine whether there are places below Europa\u2019s surface that could support life.\n\nEuropa Up Close\n\nTake an in-depth look at Jupiter's icy moon and Europa Clipper's plans for investigation.\n\nLearn more \u203a\n\nScience ObjectivesScience Objectives\nEuropa Clipper has three main science objectives: \n\nDetermine the Thickness of Europa\u2019s Icy Shell & How the Ocean Interacts With the Surface",
+          "title": "Science | Mission \u2013 NASA's Europa Clipper",
+          "url": "https://europa.nasa.gov/mission/science/",
+          "score": 48.75366,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "no",
+                "timestamp": 1723034206
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What is the goal of NASA\u201a\u00c4\u00f4s Europa Clipper mission?\n|assistant|: The main science goal of NASA's Europa Clipper mission is to determine whether there are places below the surface of Jupiter's icy moon, Europa, that could support life. The mission's three main science objectives are to understand the nature of the ice shell and the ocean beneath it, to investigate its composition, and to characterize its geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.\n|user|: I Europa livable for humans?\n|assistant|: Based on the information provided, Europa is not considered directly livable for humans. However, it is considered one of the most promising currently habitable environments in our solar system due to the presence of a vast ocean beneath its icy crust. This ocean could potentially contain conditions suitable for life as we know it. The Europa Clipper mission is designed to investigate whether the moon could have conditions suitable for life, but it is not a life detection mission. Europa could have all the \u201cingredients\u201d needed for life as we know it:\nWater: Twice as much as Earth\u2019s oceans\nOrganics: Essential chemical building blocks from a variety of sourcesEnergy: Chemical energy sources from the surface and the sea floor\n\nStability: Conditions remaining similar for 4 billion years\n|user|: The surface of Jupiter Europa"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6e52d5b809f037b2-2126-4106",
+          "text": "Europa Clipper - NASA Science\nScientists predict Europa has a salty ocean beneath its icy crust that could hold the building blocks necessary to sustain life.TypeOrbiterLaunchOct. 10, 2024TargetEuropaObjectiveDetermine if Europa has conditions suitable to support lifeMission OverviewSpacecraftWhy Europa?What will Europa Clipper do?Europa Clipper\u2019s main science goal is to determine whether there are places below the surface of Jupiter\u2019s icy moon, Europa, that could support life.The mission\u2019s three main science objectives are to understand the nature of the ice shell and the ocean beneath it, along with the moon\u2019s composition and geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.Read MoreAn artist's concept of NASA\u2019s Europa Clipper spacecraft.NASA/JPL-CaltechWhat is NASA\u2019s Europa Clipper spacecraft?Europa Clipper is a robotic solar-powered spacecraft built to conduct the first detailed investigations of Jupiter's icy moon Europa.With its solar arrays deployed, Europa Clipper spans more than 100 feet (about 30 meters) \u2013 about the length of a basketball court. The main body of the spacecraft consists of its avionics vault, radiofrequency module, and propulsion module.Read MoreWorkers use a crane to lift Europa Clipper's high-gain antenna as they prepare to install it on the spacecraft on Aug. 14, 2023. NASA/JPL-CaltechWhy Europa?The search for life beyond Earth is one of NASA\u2019s primary objectives.\u00a0If humans are to truly understand our place in the universe, we must learn whether our planet is the only place where life exists. So the search is on! There is strong evidence Jupiter's moon Europa has a saltwater ocean that may be one of the best places to look for environments where life could exist beyond Earth.Read MoreThis view of Jupiter\u2019s icy moon Europa was captured by the JunoCam imager aboard NASA\u2019s Juno spacecraft during the mission\u2019s close flyby on Sept. 29, 2022.",
+          "title": "Europa Clipper - NASA Science",
+          "url": "https://science.nasa.gov/mission/europa-clipper/",
+          "score": 47.266315,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "no",
+                "timestamp": 1723034247
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What is the goal of NASA\u201a\u00c4\u00f4s Europa Clipper mission?\n|assistant|: The main science goal of NASA's Europa Clipper mission is to determine whether there are places below the surface of Jupiter's icy moon, Europa, that could support life. The mission's three main science objectives are to understand the nature of the ice shell and the ocean beneath it, to investigate its composition, and to characterize its geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.\n|user|: I Europa livable for humans?\n|assistant|: Based on the information provided, Europa is not considered directly livable for humans. However, it is considered one of the most promising currently habitable environments in our solar system due to the presence of a vast ocean beneath its icy crust. This ocean could potentially contain conditions suitable for life as we know it. The Europa Clipper mission is designed to investigate whether the moon could have conditions suitable for life, but it is not a life detection mission. Europa could have all the \u201cingredients\u201d needed for life as we know it:\nWater: Twice as much as Earth\u2019s oceans\nOrganics: Essential chemical building blocks from a variety of sourcesEnergy: Chemical energy sources from the surface and the sea floor\n\nStability: Conditions remaining similar for 4 billion years\n|user|: The surface of Jupiter Europa"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "4d10351b2923b2c0-11577-13535",
+          "text": "NASA\u2019s Europa Clipper Survives and Thrives in \u2018Outer Space\u2019 on Earth - NASA\nEuropa Clipper\u2019s main science goal is to determine whether there are places below the surface of Jupiter\u2019s icy moon, Europa, that could support life. The mission\u2019s three main science objectives are to determine the thickness of the moon\u2019s icy shell and its surface interactions with the ocean below, to investigate its composition, and to characterize its geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.\nManaged by Caltech in Pasadena, California, JPL leads the development of the Europa Clipper mission in partnership with the Johns Hopkins Applied Physics Laboratory (APL) in Laurel, Maryland, for NASA\u2019s Science Mission Directorate in Washington. APL designed the main spacecraft body in collaboration with JPL and NASA\u2019s Goddard Space Flight Center in Greenbelt, Maryland. The Planetary Missions Program Office at NASA\u2019s Marshall Space Flight Center in Huntsville, Alabama, executes program management of the Europa Clipper mission.\nFind more information about Europa here:\neuropa.nasa.gov\nNews Media Contacts\nGretchen McCartneyJet Propulsion Laboratory, Pasadena, Calif.818-393-6215gretchen.p.mccartney@jpl.nasa.gov\nKaren Fox / Charles BlueNASA Headquarters, Washington301-286-6284 / 202-802-5345karen.c.fox@nasa.gov / charles.e.blue@nasa.gov\n2024-032\n\nShare\n\nDetails\n\nLast Updated\n\nMar 27, 2024\n\nRelated TermsEuropa ClipperEuropaJet Propulsion LaboratoryJupiterThe Solar System\n\n \n\nExplore More\n\n \n\n6 min read\nNew Images From Euclid Mission Reveal Wide View of the Dark Universe\n\nArticle\n\n\t2 days ago\t\n\n \n\n4 min read\nNASA\u2019s Psyche Fires Up Its Sci-Fi-Worthy Thrusters\n\nArticle\n\n\t3 days ago\t\n\n \n\n7 min read\nNASA Tool Gets Ready to Image Faraway Planets\n\nArticle\n\n\t4 days ago\t\n\n \n\nKeep Exploring\nDiscover Related Topics\n\nMissions\n\n \n\nHumans in Space\n\n \n\nClimate Change\n\n \n\nSolar System\n\n \n\nThe National Aeronautics and Space Administration",
+          "title": "NASA\u2019s Europa Clipper Survives and Thrives in \u2018Outer Space\u2019 on Earth - NASA",
+          "url": "https://www.nasa.gov/missions/europa-clipper/nasas-europa-clipper-survives-and-thrives-in-outer-space-on-earth/",
+          "score": 44.20995,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "no",
+                "timestamp": 1723034566
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What is the goal of NASA\u201a\u00c4\u00f4s Europa Clipper mission?\n|assistant|: The main science goal of NASA's Europa Clipper mission is to determine whether there are places below the surface of Jupiter's icy moon, Europa, that could support life. The mission's three main science objectives are to understand the nature of the ice shell and the ocean beneath it, to investigate its composition, and to characterize its geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.\n|user|: I Europa livable for humans?\n|assistant|: Based on the information provided, Europa is not considered directly livable for humans. However, it is considered one of the most promising currently habitable environments in our solar system due to the presence of a vast ocean beneath its icy crust. This ocean could potentially contain conditions suitable for life as we know it. The Europa Clipper mission is designed to investigate whether the moon could have conditions suitable for life, but it is not a life detection mission. Europa could have all the \u201cingredients\u201d needed for life as we know it:\nWater: Twice as much as Earth\u2019s oceans\nOrganics: Essential chemical building blocks from a variety of sourcesEnergy: Chemical energy sources from the surface and the sea floor\n\nStability: Conditions remaining similar for 4 billion years\n|user|: The surface of Jupiter Europa"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "9b5636a0a8f53fe1-6379-8576",
+          "text": "Surface of Jupiter's Moon Europa Churned by Small Impacts \u2013 NASA's Europa Clipper\nJupiter\u2019s icy moon Europa may be the most promising place in the solar system to find present-day environments suitable for life beyond Earth. \n\nEuropa: A World of Ice, With Potential for Life\n\nJupiter\u2019s moon Europa has an icy crust covering a vast, global ocean. The rocky layer underneath may be hot enough to melt, leading to undersea volcanoes.\n\nEuropa's Interior May Be Hot Enough to Fuel Seafloor Volcanoes\n\nScientists have theorized on the origin of the water plumes possibly erupting from Jupiter's moon Europa. Recent research adds a new potential source to the mix.\n\nPotential Plumes on Europa Could Come From Water in the Crust\n\nNew lab experiments re-create the environment of Europa and find that the icy moon shines, even on its nightside. The effect is more than just a cool visual.\n\nEuropa Glows: Radiation Does a Bright Number on Jupiter's Moon\n\nThe surface of Jupiter's moon Europa features a widely varied landscape, including ridges, bands, small rounded domes and disrupted spaces that geologists call \"chaos terrain.\" Three newly reprocessed images, taken by NASA's Galileo spacecraft in the late 1990s, reveal details in diverse surface features on Europa.\n\nNewly Reprocessed Images of Europa Show 'Chaos Terrain' in Crisp Detail\n\nScientists discovered that the yellow color visible on portions of the surface of Europa is actually sodium chloride, a compound known on Earth as table salt, which is also the principal component of sea salt.\n\nTable Salt Compound Spotted on Europa\n\nA full-scale prototype antenna, which at 10 feet tall is the same height as a standard basketball hoop, is in the Experimental Test Range (ETR) at NASA's Langley Research Center in Hampton, Virginia.\n\nEuropa Clipper High Gain Antenna Undergoes Testing at Langley\n\nStudents and families can meet a Mars rover, take a virtual tour through our solar system and explore alien worlds with NASA's Jet Propulsion Laboratory at the Clippers SciFest SoCal.\n\nCatch NASA's JPL at the Clippers SciFest This Weekend\n\nNASA has decided to replace the current magnetometer on the upcoming Europa Clipper mission with a less complex instrument. \n\nNASA Seeks New Options for Science Instrument on Europa Clipper",
+          "title": "Surface of Jupiter's Moon Europa Churned by Small Impacts \u2013 NASA's Europa Clipper",
+          "url": "https://europa.nasa.gov/news/34/surface-of-jupiters-moon-europa-churned-by-small-impacts/",
+          "score": 21.183256,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "yes",
+                "timestamp": 1723034786
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "The surface of Jupiter Europa"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "9b5636a0a8f53fe1-2-2116",
+          "text": "Surface of Jupiter's Moon Europa Churned by Small Impacts \u2013 NASA's Europa Clipper\nSurface of Jupiter's Moon Europa Churned by Small Impacts \u2013 NASA's Europa Clipper\n\nNASA\n\nEuropa Clipper\n\nSkip Navigation\n\nmenu\n\nclose modal\n\nNews\n\n| July 12, 2021\n\nSurface of Jupiter's Moon Europa Churned by Small Impacts\n\nIn this zoomed-in image of Europa\u2019s surface, captured by NASA\u2019s Galileo mission, the thin, bright layer, visible atop a cliff in the center shows the kind of areas churned by impact gardening. Credit: NASA/JPL-Caltech\n\nJupiter\u2019s moon Europa and its global ocean may currently have conditions suitable for life. Scientists are studying processes on the icy surface as they prepare to explore.\nIt\u2019s easy to see the impact of space debris on our Moon, where the ancient, battered surface is covered with craters and scars. Jupiter\u2019s icy moon Europa withstands a similar trouncing \u2013 along with a punch of super-intense radiation. As the uppermost surface of the icy moon churns, material brought to the surface is zapped by high-energy electron radiation accelerated by Jupiter.\nNASA-funded scientists are studying the cumulative effects of small impacts on Europa\u2019s surface as they prepare to explore the distant moon with the Europa Clipper mission and study the possibilities for a future lander mission. Europa is of particular scientific interest because its salty ocean, which lies beneath a thick layer of ice, may currently have conditions suitable for existing life. That water may even make its way into the icy crust and onto the moon\u2019s surface.\nNew research and modeling estimate how far down that surface is disturbed by the process called \u201cimpact gardening.\u201d The work, published July 12 in Nature Astronomy, estimates that the surface of Europa has been churned by small impacts to an average depth of about 12 inches (30 centimeters) over tens of millions of years. And any molecules that might qualify as potential biosignatures, which include chemical signs of life, could be affected at that depth.\nThat\u2019s because the impacts would churn some material to the surface, where radiation would likely break the bonds of any potential large, delicate molecules generated by biology.",
+          "title": "Surface of Jupiter's Moon Europa Churned by Small Impacts \u2013 NASA's Europa Clipper",
+          "url": "https://europa.nasa.gov/news/34/surface-of-jupiters-moon-europa-churned-by-small-impacts/",
+          "score": 20.931223,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "yes",
+                "timestamp": 1723035044
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "The surface of Jupiter Europa"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "eac24e3f410b8bf2-8141-10336",
+          "text": "Europa's Interior May Be Hot Enough to Fuel Seafloor Volcanoes \u2013 NASA's Europa Clipper\nGreenland Ice, Jupiter Moon Share Similar Feature\n\nJupiter\u2019s moon Europa and its global ocean may currently have conditions suitable for life. Scientists are studying processes on the icy surface as they prepare to explore.\n\nSurface of Jupiter's Moon Europa Churned by Small Impacts\n\nJupiter\u2019s icy moon Europa may be the most promising place in the solar system to find present-day environments suitable for life beyond Earth. \n\nEuropa: A World of Ice, With Potential for Life\n\nScientists have theorized on the origin of the water plumes possibly erupting from Jupiter's moon Europa. Recent research adds a new potential source to the mix.\n\nPotential Plumes on Europa Could Come From Water in the Crust\n\nNew lab experiments re-create the environment of Europa and find that the icy moon shines, even on its nightside. The effect is more than just a cool visual.\n\nEuropa Glows: Radiation Does a Bright Number on Jupiter's Moon\n\nThe surface of Jupiter's moon Europa features a widely varied landscape, including ridges, bands, small rounded domes and disrupted spaces that geologists call \"chaos terrain.\" Three newly reprocessed images, taken by NASA's Galileo spacecraft in the late 1990s, reveal details in diverse surface features on Europa.\n\nNewly Reprocessed Images of Europa Show 'Chaos Terrain' in Crisp Detail\n\nScientists discovered that the yellow color visible on portions of the surface of Europa is actually sodium chloride, a compound known on Earth as table salt, which is also the principal component of sea salt.\n\nTable Salt Compound Spotted on Europa\n\nA full-scale prototype antenna, which at 10 feet tall is the same height as a standard basketball hoop, is in the Experimental Test Range (ETR) at NASA's Langley Research Center in Hampton, Virginia.\n\nEuropa Clipper High Gain Antenna Undergoes Testing at Langley\n\nStudents and families can meet a Mars rover, take a virtual tour through our solar system and explore alien worlds with NASA's Jet Propulsion Laboratory at the Clippers SciFest SoCal.\n\nCatch NASA's JPL at the Clippers SciFest This Weekend\n\nNASA has decided to replace the current magnetometer on the upcoming Europa Clipper mission with a less complex instrument.",
+          "title": "Europa's Interior May Be Hot Enough to Fuel Seafloor Volcanoes \u2013 NASA's Europa Clipper",
+          "url": "https://europa.nasa.gov/news/32/europas-interior-may-be-hot-enough-to-fuel-seafloor-volcanoes/",
+          "score": 20.843653,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "yes",
+                "timestamp": 1723035037
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "The surface of Jupiter Europa"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The surface of Jupiter's moon, Europa, is made up of ice. It is covered in a thick crust of frozen water that is estimated to be between 10 to 100 kilometers thick. The surface also shows signs of past and present geological activity, such as ridges, chaos terrain, and lenticulae. These features suggest that there is heat being generated from within Europa, which is thought to be due to tidal heating caused by Jupiter's gravitational pull. Additionally, the surface of Europa is subject to bombardment by radiation from Jupiter, which can cause the ice to darken and form a reddish-brown color in some areas."
+    },
+    {
+      "speaker": "user",
+      "text": "Who funds the Clipper mission?",
+      "timestamp": 1723035139,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The Europa Clipper mission is sponsored by NASA. The total contract award amount for launch services is approximately $178 million.",
+      "timestamp": 1723035149,
+      "contexts": [
+        {
+          "document_id": "c3c65a23f89d1f39-2-2157",
+          "text": "Science | Mission \u2013 NASA's Europa Clipper\nScience | Mission \u2013 NASA's Europa Clipper\n\nNASA\n\nEuropa Clipper\n\nSkip Navigation\n\nmenu\n\nclose modal\n\nEuropa Clipper Mission\n\nScience\n\nMission\n\nMENU\n\nOverview\n\nScience\n\nTimeline\n\nThe Team\n\nOverview\n\nHistory\n\nFAQ\n\nKey Fact\n\nWhat is Europa Clipper's main science goal? \n\nEuropa Clipper\u2019s main science goal is to determine whether there are places below the surface of Jupiter\u2019s icy moon, Europa, that could support life.\n\nOverviewOverview\n\nDeep beneath the crust of Jupiter\u2019s frozen moon Europa lies a massive liquid water ocean. Exploring this ocean world with our Europa Clipper spacecraft could provide new clues in our search for life beyond Earth. Scheduled to launch in October 2024, Europa Clipper\u2019s main science goal is to determine whether there are places below the surface of Jupiter\u2019s icy moon, Europa, that could support life. Credit: NASA\n\nJupiter\u2019s moon Europa shows strong evidence for an ocean of liquid water beneath its icy crust. Beyond Earth, Europa is considered one of the most promising currently habitable environments in our solar system. \nBelow Europa\u2019s icy surface, evidence suggests there is a global ocean with more water than all of Earth\u2019s oceans combined. Europa could have all the \u201cingredients\u201d needed for life as we know it: \n\nWater: Twice as much as Earth\u2019s oceans \n\nOrganics: Essential chemical building blocks from a variety of sources\n\nEnergy: Chemical energy sources from the surface and the sea floor\n\nStability: Conditions remaining similar for 4 billion years\n\nNASA's Europa Clipper spacecraft will perform approximately 50 close flybys of the moon, gathering detailed measurements to investigate whether the moon could have conditions suitable for life. Europa Clipper is not a life detection mission \u2013 its main science goal is to determine whether there are places below Europa\u2019s surface that could support life.\n\nEuropa Up Close\n\nTake an in-depth look at Jupiter's icy moon and Europa Clipper's plans for investigation.\n\nLearn more \u203a\n\nScience ObjectivesScience Objectives\nEuropa Clipper has three main science objectives: \n\nDetermine the Thickness of Europa\u2019s Icy Shell & How the Ocean Interacts With the Surface",
+          "title": "Science | Mission \u2013 NASA's Europa Clipper",
+          "url": "https://europa.nasa.gov/mission/science/",
+          "score": 48.07562,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "no",
+                "timestamp": 1723035700
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What is the goal of NASA\u201a\u00c4\u00f4s Europa Clipper mission?\n|assistant|: The main science goal of NASA's Europa Clipper mission is to determine whether there are places below the surface of Jupiter's icy moon, Europa, that could support life. The mission's three main science objectives are to understand the nature of the ice shell and the ocean beneath it, to investigate its composition, and to characterize its geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.\n|user|: I Europa livable for humans?\n|assistant|: Based on the information provided, Europa is not considered directly livable for humans. However, it is considered one of the most promising currently habitable environments in our solar system due to the presence of a vast ocean beneath its icy crust. This ocean could potentially contain conditions suitable for life as we know it. The Europa Clipper mission is designed to investigate whether the moon could have conditions suitable for life, but it is not a life detection mission. Europa could have all the \u201cingredients\u201d needed for life as we know it:\nWater: Twice as much as Earth\u2019s oceans\nOrganics: Essential chemical building blocks from a variety of sourcesEnergy: Chemical energy sources from the surface and the sea floor\n\nStability: Conditions remaining similar for 4 billion years\n|user|: The surface of Jupiter Europa\n|assistant|: The surface of Jupiter's moon, Europa, is made up of ice. It is covered in a thick crust of frozen water that is estimated to be between 10 to 100 kilometers thick. The surface also shows signs of past and present geological activity, such as ridges, chaos terrain, and lenticulae. These features suggest that there is heat being generated from within Europa, which is thought to be due to tidal heating caused by Jupiter's gravitational pull. Additionally, the surface of Europa is subject to bombardment by radiation from Jupiter, which can cause the ice to darken and form a reddish-brown color in some areas. The surface of Jupiter's moon Europa features a widely varied landscape, including ridges, bands, small rounded domes and disrupted spaces that geologists call \"chaos terrain.\"\n|user|: Who funds the Clipper mission?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6e52d5b809f037b2-2126-4106",
+          "text": "Europa Clipper - NASA Science\nScientists predict Europa has a salty ocean beneath its icy crust that could hold the building blocks necessary to sustain life.TypeOrbiterLaunchOct. 10, 2024TargetEuropaObjectiveDetermine if Europa has conditions suitable to support lifeMission OverviewSpacecraftWhy Europa?What will Europa Clipper do?Europa Clipper\u2019s main science goal is to determine whether there are places below the surface of Jupiter\u2019s icy moon, Europa, that could support life.The mission\u2019s three main science objectives are to understand the nature of the ice shell and the ocean beneath it, along with the moon\u2019s composition and geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.Read MoreAn artist's concept of NASA\u2019s Europa Clipper spacecraft.NASA/JPL-CaltechWhat is NASA\u2019s Europa Clipper spacecraft?Europa Clipper is a robotic solar-powered spacecraft built to conduct the first detailed investigations of Jupiter's icy moon Europa.With its solar arrays deployed, Europa Clipper spans more than 100 feet (about 30 meters) \u2013 about the length of a basketball court. The main body of the spacecraft consists of its avionics vault, radiofrequency module, and propulsion module.Read MoreWorkers use a crane to lift Europa Clipper's high-gain antenna as they prepare to install it on the spacecraft on Aug. 14, 2023. NASA/JPL-CaltechWhy Europa?The search for life beyond Earth is one of NASA\u2019s primary objectives.\u00a0If humans are to truly understand our place in the universe, we must learn whether our planet is the only place where life exists. So the search is on! There is strong evidence Jupiter's moon Europa has a saltwater ocean that may be one of the best places to look for environments where life could exist beyond Earth.Read MoreThis view of Jupiter\u2019s icy moon Europa was captured by the JunoCam imager aboard NASA\u2019s Juno spacecraft during the mission\u2019s close flyby on Sept. 29, 2022.",
+          "title": "Europa Clipper - NASA Science",
+          "url": "https://science.nasa.gov/mission/europa-clipper/",
+          "score": 46.229126,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "no",
+                "timestamp": 1723035735
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What is the goal of NASA\u201a\u00c4\u00f4s Europa Clipper mission?\n|assistant|: The main science goal of NASA's Europa Clipper mission is to determine whether there are places below the surface of Jupiter's icy moon, Europa, that could support life. The mission's three main science objectives are to understand the nature of the ice shell and the ocean beneath it, to investigate its composition, and to characterize its geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.\n|user|: I Europa livable for humans?\n|assistant|: Based on the information provided, Europa is not considered directly livable for humans. However, it is considered one of the most promising currently habitable environments in our solar system due to the presence of a vast ocean beneath its icy crust. This ocean could potentially contain conditions suitable for life as we know it. The Europa Clipper mission is designed to investigate whether the moon could have conditions suitable for life, but it is not a life detection mission. Europa could have all the \u201cingredients\u201d needed for life as we know it:\nWater: Twice as much as Earth\u2019s oceans\nOrganics: Essential chemical building blocks from a variety of sourcesEnergy: Chemical energy sources from the surface and the sea floor\n\nStability: Conditions remaining similar for 4 billion years\n|user|: The surface of Jupiter Europa\n|assistant|: The surface of Jupiter's moon, Europa, is made up of ice. It is covered in a thick crust of frozen water that is estimated to be between 10 to 100 kilometers thick. The surface also shows signs of past and present geological activity, such as ridges, chaos terrain, and lenticulae. These features suggest that there is heat being generated from within Europa, which is thought to be due to tidal heating caused by Jupiter's gravitational pull. Additionally, the surface of Europa is subject to bombardment by radiation from Jupiter, which can cause the ice to darken and form a reddish-brown color in some areas. The surface of Jupiter's moon Europa features a widely varied landscape, including ridges, bands, small rounded domes and disrupted spaces that geologists call \"chaos terrain.\"\n|user|: Who funds the Clipper mission?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "b2fd7f2d1c5eeed5-6175-8273",
+          "text": "Europa Clipper High Gain Antenna Undergoes Testing at Langley \u2013 NASA's Europa Clipper\nJupiter\u2019s moon Europa and its global ocean may currently have conditions suitable for life. Scientists are studying processes on the icy surface as they prepare to explore.\n\nSurface of Jupiter's Moon Europa Churned by Small Impacts\n\nJupiter\u2019s icy moon Europa may be the most promising place in the solar system to find present-day environments suitable for life beyond Earth. \n\nEuropa: A World of Ice, With Potential for Life\n\nJupiter\u2019s moon Europa has an icy crust covering a vast, global ocean. The rocky layer underneath may be hot enough to melt, leading to undersea volcanoes.\n\nEuropa's Interior May Be Hot Enough to Fuel Seafloor Volcanoes\n\nJupiter\u2019s moon Europa may have the potential to harbor life. The spacecraft will use multiple flybys of the moon to investigate the habitability of this ocean world.\n\nNASA's Europa Clipper Builds Hardware, Moves Toward Assembly\n\nIn an unprecedented year, the Europa Clipper project continues on the path toward unprecedented science. \n\nOn the Path Towards Unprecedented Science\n\nScientists have theorized on the origin of the water plumes possibly erupting from Jupiter's moon Europa. Recent research adds a new potential source to the mix.\n\nPotential Plumes on Europa Could Come From Water in the Crust\n\nNew lab experiments re-create the environment of Europa and find that the icy moon shines, even on its nightside. The effect is more than just a cool visual.\n\nEuropa Glows: Radiation Does a Bright Number on Jupiter's Moon\n\nThe surface of Jupiter's moon Europa features a widely varied landscape, including ridges, bands, small rounded domes and disrupted spaces that geologists call \"chaos terrain.\" Three newly reprocessed images, taken by NASA's Galileo spacecraft in the late 1990s, reveal details in diverse surface features on Europa.\n\nNewly Reprocessed Images of Europa Show 'Chaos Terrain' in Crisp Detail\n\nAn icy ocean world in our solar system that could tell us more about the potential for life on other worlds is coming into focus with confirmation of the Europa Clipper mission's next phase. \n\nMission to Jupiter's Icy Moon Confirmed",
+          "title": "Europa Clipper High Gain Antenna Undergoes Testing at Langley \u2013 NASA's Europa Clipper",
+          "url": "https://europa.nasa.gov/news/23/europa-clipper-high-gain-antenna-undergoes-testing-at-langley/",
+          "score": 46.110138,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "no",
+                "timestamp": 1723035776
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What is the goal of NASA\u201a\u00c4\u00f4s Europa Clipper mission?\n|assistant|: The main science goal of NASA's Europa Clipper mission is to determine whether there are places below the surface of Jupiter's icy moon, Europa, that could support life. The mission's three main science objectives are to understand the nature of the ice shell and the ocean beneath it, to investigate its composition, and to characterize its geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.\n|user|: I Europa livable for humans?\n|assistant|: Based on the information provided, Europa is not considered directly livable for humans. However, it is considered one of the most promising currently habitable environments in our solar system due to the presence of a vast ocean beneath its icy crust. This ocean could potentially contain conditions suitable for life as we know it. The Europa Clipper mission is designed to investigate whether the moon could have conditions suitable for life, but it is not a life detection mission. Europa could have all the \u201cingredients\u201d needed for life as we know it:\nWater: Twice as much as Earth\u2019s oceans\nOrganics: Essential chemical building blocks from a variety of sourcesEnergy: Chemical energy sources from the surface and the sea floor\n\nStability: Conditions remaining similar for 4 billion years\n|user|: The surface of Jupiter Europa\n|assistant|: The surface of Jupiter's moon, Europa, is made up of ice. It is covered in a thick crust of frozen water that is estimated to be between 10 to 100 kilometers thick. The surface also shows signs of past and present geological activity, such as ridges, chaos terrain, and lenticulae. These features suggest that there is heat being generated from within Europa, which is thought to be due to tidal heating caused by Jupiter's gravitational pull. Additionally, the surface of Europa is subject to bombardment by radiation from Jupiter, which can cause the ice to darken and form a reddish-brown color in some areas. The surface of Jupiter's moon Europa features a widely varied landscape, including ridges, bands, small rounded domes and disrupted spaces that geologists call \"chaos terrain.\"\n|user|: Who funds the Clipper mission?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "155a8b7fe675d9bf-2-2209",
+          "text": "NASA Awards Launch Services Contract for Europa Clipper Mission \u2013 NASA's Europa Clipper\nNASA Awards Launch Services Contract for Europa Clipper Mission \u2013 NASA's Europa Clipper\n\nNASA\n\nEuropa Clipper\n\nSkip Navigation\n\nmenu\n\nclose modal\n\nNews\n\n| July 23, 2021\n\nNASA Awards Launch Services Contract for Europa Clipper Mission\n\nThis illustration, updated in December 2020, depicts NASA's Europa Clipper spacecraft. With an internal global ocean twice the size of Earth's oceans combined, Jupiter's moon Europa may have the potential to harbor life. The Europa Clipper orbiter will swoop around Jupiter on an elliptical path, dipping close to the moon on each flyby to collect data. Credits: NASA/JPL-Caltech\n\nNASA has selected Space Exploration Technologies Corp. (SpaceX) of Hawthorne, California, to provide launch services for Earth\u2019s first mission to conduct detailed investigations of Jupiter's moon Europa.\nThe Europa Clipper mission will launch in October 2024 on a Falcon Heavy rocket from Launch Complex 39A at NASA\u2019s Kennedy Space Center in Florida. The total contract award amount for launch services is approximately $178 million.\nEuropa Clipper will conduct a detailed survey of Europa and use a sophisticated suite of science instruments to investigate whether the icy moon has conditions suitable for life. Key mission objectives are to produce high-resolution images of Europa's surface, determine its composition, look for signs of recent or ongoing geological activity, measure the thickness of the moon\u2019s icy shell, search for subsurface lakes, and determine the depth and salinity of Europa's ocean.\nNASA\u2019s Launch Services Program at Kennedy will manage the Europa Clipper launch service. NASA's Jet Propulsion Laboratory in Southern California leads the development of the Europa Clipper mission in partnership with the Johns Hopkins Applied Physics Laboratory in Laurel, Maryland, for NASA\u2019s Science Mission Directorate in Washington. The Planetary Missions Program Office at NASA\u2019s Marshall Space Flight Center in Huntsville, Alabama, executes program management of the Europa Clipper mission.\nFor more information about the Europa Clipper mission, visit:\nhttps://www.nasa.gov/europa\n\nNews Media Contacts\nMonica Witt\nHeadquarters, Washington\n202-358-1100\nmonica.j.witt@nasa.gov",
+          "title": "NASA Awards Launch Services Contract for Europa Clipper Mission \u2013 NASA's Europa Clipper",
+          "url": "https://europa.nasa.gov/news/36/nasa-awards-launch-services-contract-for-europa-clipper-mission/",
+          "score": 16.57266,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "yes",
+                "timestamp": 1723036431
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "funding clipper mission"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The Europa Clipper mission is funded by NASA, which is a U.S. government agency responsible for civilian space exploration and aeronautics research. NASA's budget comes primarily from Congressional appropriations."
+    },
+    {
+      "speaker": "user",
+      "text": "Does NASA have an intern program?",
+      "timestamp": 1723036590,
+      "enrichments": {
+        "Question Type": [
+          "Factoid",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, NASA does offer an internship program. Interns may support a variety of business and program management work, including human resources, administration and program analysis, accounting and budgeting, communication and public relations, procurement and contracts, information technology, security, and education.",
+      "timestamp": 1723036598,
+      "contexts": [
+        {
+          "document_id": "c3c65a23f89d1f39-2-2157",
+          "text": "Science | Mission \u2013 NASA's Europa Clipper\nScience | Mission \u2013 NASA's Europa Clipper\n\nNASA\n\nEuropa Clipper\n\nSkip Navigation\n\nmenu\n\nclose modal\n\nEuropa Clipper Mission\n\nScience\n\nMission\n\nMENU\n\nOverview\n\nScience\n\nTimeline\n\nThe Team\n\nOverview\n\nHistory\n\nFAQ\n\nKey Fact\n\nWhat is Europa Clipper's main science goal? \n\nEuropa Clipper\u2019s main science goal is to determine whether there are places below the surface of Jupiter\u2019s icy moon, Europa, that could support life.\n\nOverviewOverview\n\nDeep beneath the crust of Jupiter\u2019s frozen moon Europa lies a massive liquid water ocean. Exploring this ocean world with our Europa Clipper spacecraft could provide new clues in our search for life beyond Earth. Scheduled to launch in October 2024, Europa Clipper\u2019s main science goal is to determine whether there are places below the surface of Jupiter\u2019s icy moon, Europa, that could support life. Credit: NASA\n\nJupiter\u2019s moon Europa shows strong evidence for an ocean of liquid water beneath its icy crust. Beyond Earth, Europa is considered one of the most promising currently habitable environments in our solar system. \nBelow Europa\u2019s icy surface, evidence suggests there is a global ocean with more water than all of Earth\u2019s oceans combined. Europa could have all the \u201cingredients\u201d needed for life as we know it: \n\nWater: Twice as much as Earth\u2019s oceans \n\nOrganics: Essential chemical building blocks from a variety of sources\n\nEnergy: Chemical energy sources from the surface and the sea floor\n\nStability: Conditions remaining similar for 4 billion years\n\nNASA's Europa Clipper spacecraft will perform approximately 50 close flybys of the moon, gathering detailed measurements to investigate whether the moon could have conditions suitable for life. Europa Clipper is not a life detection mission \u2013 its main science goal is to determine whether there are places below Europa\u2019s surface that could support life.\n\nEuropa Up Close\n\nTake an in-depth look at Jupiter's icy moon and Europa Clipper's plans for investigation.\n\nLearn more \u203a\n\nScience ObjectivesScience Objectives\nEuropa Clipper has three main science objectives: \n\nDetermine the Thickness of Europa\u2019s Icy Shell & How the Ocean Interacts With the Surface",
+          "title": "Science | Mission \u2013 NASA's Europa Clipper",
+          "url": "https://europa.nasa.gov/mission/science/",
+          "score": 47.200264,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "no",
+                "timestamp": 1723036835
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What is the goal of NASA\u201a\u00c4\u00f4s Europa Clipper mission?\n|assistant|: The main science goal of NASA's Europa Clipper mission is to determine whether there are places below the surface of Jupiter's icy moon, Europa, that could support life. The mission's three main science objectives are to understand the nature of the ice shell and the ocean beneath it, to investigate its composition, and to characterize its geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.\n|user|: I Europa livable for humans?\n|assistant|: Based on the information provided, Europa is not considered directly livable for humans. However, it is considered one of the most promising currently habitable environments in our solar system due to the presence of a vast ocean beneath its icy crust. This ocean could potentially contain conditions suitable for life as we know it. The Europa Clipper mission is designed to investigate whether the moon could have conditions suitable for life, but it is not a life detection mission. Europa could have all the \u201cingredients\u201d needed for life as we know it:\nWater: Twice as much as Earth\u2019s oceans\nOrganics: Essential chemical building blocks from a variety of sourcesEnergy: Chemical energy sources from the surface and the sea floor\n\nStability: Conditions remaining similar for 4 billion years\n|user|: The surface of Jupiter Europa\n|assistant|: The surface of Jupiter's moon, Europa, is made up of ice. It is covered in a thick crust of frozen water that is estimated to be between 10 to 100 kilometers thick. The surface also shows signs of past and present geological activity, such as ridges, chaos terrain, and lenticulae. These features suggest that there is heat being generated from within Europa, which is thought to be due to tidal heating caused by Jupiter's gravitational pull. Additionally, the surface of Europa is subject to bombardment by radiation from Jupiter, which can cause the ice to darken and form a reddish-brown color in some areas. The surface of Jupiter's moon Europa features a widely varied landscape, including ridges, bands, small rounded domes and disrupted spaces that geologists call \"chaos terrain.\"\n|user|: Who funds the Clipper mission?\n|assistant|: The Europa Clipper mission is funded by NASA, which is a U.S. government agency responsible for civilian space exploration and aeronautics research. NASA's budget comes primarily from Congressional appropriations. The total contract award amount for launch services is approximately $178 million.\n|user|: Does NASA have an intern program?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6e52d5b809f037b2-2126-4106",
+          "text": "Europa Clipper - NASA Science\nScientists predict Europa has a salty ocean beneath its icy crust that could hold the building blocks necessary to sustain life.TypeOrbiterLaunchOct. 10, 2024TargetEuropaObjectiveDetermine if Europa has conditions suitable to support lifeMission OverviewSpacecraftWhy Europa?What will Europa Clipper do?Europa Clipper\u2019s main science goal is to determine whether there are places below the surface of Jupiter\u2019s icy moon, Europa, that could support life.The mission\u2019s three main science objectives are to understand the nature of the ice shell and the ocean beneath it, along with the moon\u2019s composition and geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.Read MoreAn artist's concept of NASA\u2019s Europa Clipper spacecraft.NASA/JPL-CaltechWhat is NASA\u2019s Europa Clipper spacecraft?Europa Clipper is a robotic solar-powered spacecraft built to conduct the first detailed investigations of Jupiter's icy moon Europa.With its solar arrays deployed, Europa Clipper spans more than 100 feet (about 30 meters) \u2013 about the length of a basketball court. The main body of the spacecraft consists of its avionics vault, radiofrequency module, and propulsion module.Read MoreWorkers use a crane to lift Europa Clipper's high-gain antenna as they prepare to install it on the spacecraft on Aug. 14, 2023. NASA/JPL-CaltechWhy Europa?The search for life beyond Earth is one of NASA\u2019s primary objectives.\u00a0If humans are to truly understand our place in the universe, we must learn whether our planet is the only place where life exists. So the search is on! There is strong evidence Jupiter's moon Europa has a saltwater ocean that may be one of the best places to look for environments where life could exist beyond Earth.Read MoreThis view of Jupiter\u2019s icy moon Europa was captured by the JunoCam imager aboard NASA\u2019s Juno spacecraft during the mission\u2019s close flyby on Sept. 29, 2022.",
+          "title": "Europa Clipper - NASA Science",
+          "url": "https://science.nasa.gov/mission/europa-clipper/",
+          "score": 45.43264,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "no",
+                "timestamp": 1723036852
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What is the goal of NASA\u201a\u00c4\u00f4s Europa Clipper mission?\n|assistant|: The main science goal of NASA's Europa Clipper mission is to determine whether there are places below the surface of Jupiter's icy moon, Europa, that could support life. The mission's three main science objectives are to understand the nature of the ice shell and the ocean beneath it, to investigate its composition, and to characterize its geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.\n|user|: I Europa livable for humans?\n|assistant|: Based on the information provided, Europa is not considered directly livable for humans. However, it is considered one of the most promising currently habitable environments in our solar system due to the presence of a vast ocean beneath its icy crust. This ocean could potentially contain conditions suitable for life as we know it. The Europa Clipper mission is designed to investigate whether the moon could have conditions suitable for life, but it is not a life detection mission. Europa could have all the \u201cingredients\u201d needed for life as we know it:\nWater: Twice as much as Earth\u2019s oceans\nOrganics: Essential chemical building blocks from a variety of sourcesEnergy: Chemical energy sources from the surface and the sea floor\n\nStability: Conditions remaining similar for 4 billion years\n|user|: The surface of Jupiter Europa\n|assistant|: The surface of Jupiter's moon, Europa, is made up of ice. It is covered in a thick crust of frozen water that is estimated to be between 10 to 100 kilometers thick. The surface also shows signs of past and present geological activity, such as ridges, chaos terrain, and lenticulae. These features suggest that there is heat being generated from within Europa, which is thought to be due to tidal heating caused by Jupiter's gravitational pull. Additionally, the surface of Europa is subject to bombardment by radiation from Jupiter, which can cause the ice to darken and form a reddish-brown color in some areas. The surface of Jupiter's moon Europa features a widely varied landscape, including ridges, bands, small rounded domes and disrupted spaces that geologists call \"chaos terrain.\"\n|user|: Who funds the Clipper mission?\n|assistant|: The Europa Clipper mission is funded by NASA, which is a U.S. government agency responsible for civilian space exploration and aeronautics research. NASA's budget comes primarily from Congressional appropriations. The total contract award amount for launch services is approximately $178 million.\n|user|: Does NASA have an intern program?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "b2fd7f2d1c5eeed5-6175-8273",
+          "text": "Europa Clipper High Gain Antenna Undergoes Testing at Langley \u2013 NASA's Europa Clipper\nJupiter\u2019s moon Europa and its global ocean may currently have conditions suitable for life. Scientists are studying processes on the icy surface as they prepare to explore.\n\nSurface of Jupiter's Moon Europa Churned by Small Impacts\n\nJupiter\u2019s icy moon Europa may be the most promising place in the solar system to find present-day environments suitable for life beyond Earth. \n\nEuropa: A World of Ice, With Potential for Life\n\nJupiter\u2019s moon Europa has an icy crust covering a vast, global ocean. The rocky layer underneath may be hot enough to melt, leading to undersea volcanoes.\n\nEuropa's Interior May Be Hot Enough to Fuel Seafloor Volcanoes\n\nJupiter\u2019s moon Europa may have the potential to harbor life. The spacecraft will use multiple flybys of the moon to investigate the habitability of this ocean world.\n\nNASA's Europa Clipper Builds Hardware, Moves Toward Assembly\n\nIn an unprecedented year, the Europa Clipper project continues on the path toward unprecedented science. \n\nOn the Path Towards Unprecedented Science\n\nScientists have theorized on the origin of the water plumes possibly erupting from Jupiter's moon Europa. Recent research adds a new potential source to the mix.\n\nPotential Plumes on Europa Could Come From Water in the Crust\n\nNew lab experiments re-create the environment of Europa and find that the icy moon shines, even on its nightside. The effect is more than just a cool visual.\n\nEuropa Glows: Radiation Does a Bright Number on Jupiter's Moon\n\nThe surface of Jupiter's moon Europa features a widely varied landscape, including ridges, bands, small rounded domes and disrupted spaces that geologists call \"chaos terrain.\" Three newly reprocessed images, taken by NASA's Galileo spacecraft in the late 1990s, reveal details in diverse surface features on Europa.\n\nNewly Reprocessed Images of Europa Show 'Chaos Terrain' in Crisp Detail\n\nAn icy ocean world in our solar system that could tell us more about the potential for life on other worlds is coming into focus with confirmation of the Europa Clipper mission's next phase. \n\nMission to Jupiter's Icy Moon Confirmed",
+          "title": "Europa Clipper High Gain Antenna Undergoes Testing at Langley \u2013 NASA's Europa Clipper",
+          "url": "https://europa.nasa.gov/news/23/europa-clipper-high-gain-antenna-undergoes-testing-at-langley/",
+          "score": 44.82335,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "no",
+                "timestamp": 1723036923
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What is the goal of NASA\u201a\u00c4\u00f4s Europa Clipper mission?\n|assistant|: The main science goal of NASA's Europa Clipper mission is to determine whether there are places below the surface of Jupiter's icy moon, Europa, that could support life. The mission's three main science objectives are to understand the nature of the ice shell and the ocean beneath it, to investigate its composition, and to characterize its geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.\n|user|: I Europa livable for humans?\n|assistant|: Based on the information provided, Europa is not considered directly livable for humans. However, it is considered one of the most promising currently habitable environments in our solar system due to the presence of a vast ocean beneath its icy crust. This ocean could potentially contain conditions suitable for life as we know it. The Europa Clipper mission is designed to investigate whether the moon could have conditions suitable for life, but it is not a life detection mission. Europa could have all the \u201cingredients\u201d needed for life as we know it:\nWater: Twice as much as Earth\u2019s oceans\nOrganics: Essential chemical building blocks from a variety of sourcesEnergy: Chemical energy sources from the surface and the sea floor\n\nStability: Conditions remaining similar for 4 billion years\n|user|: The surface of Jupiter Europa\n|assistant|: The surface of Jupiter's moon, Europa, is made up of ice. It is covered in a thick crust of frozen water that is estimated to be between 10 to 100 kilometers thick. The surface also shows signs of past and present geological activity, such as ridges, chaos terrain, and lenticulae. These features suggest that there is heat being generated from within Europa, which is thought to be due to tidal heating caused by Jupiter's gravitational pull. Additionally, the surface of Europa is subject to bombardment by radiation from Jupiter, which can cause the ice to darken and form a reddish-brown color in some areas. The surface of Jupiter's moon Europa features a widely varied landscape, including ridges, bands, small rounded domes and disrupted spaces that geologists call \"chaos terrain.\"\n|user|: Who funds the Clipper mission?\n|assistant|: The Europa Clipper mission is funded by NASA, which is a U.S. government agency responsible for civilian space exploration and aeronautics research. NASA's budget comes primarily from Congressional appropriations. The total contract award amount for launch services is approximately $178 million.\n|user|: Does NASA have an intern program?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "3847688fbf55fe67-8963-11069",
+          "text": "NASA Internship Programs - NASA\nLaunch your career with a Pathways internship.\nNASA\u2019s work-study (co-op) program is a starting point to a career at NASA. Pathways interns gain valuable work experience and professional development. Paid federal civil servant opportunities with benefits are offered across most NASA facilities. Completion of the Pathways program may lead to a NASA job offer.\n\n\tLearn More \t\n\n \n\nFellowship\n\nNASA Fellowships allow graduate-level students to pursue research projects in response to the agency\u2019s current research priorities.\nNASA Fellowships support graduate-level projects and proposals which contribute to a NASA research opportunity. Student researchers are exposed to NASA\u2019s innovation-oriented culture and facilities. Fellows participate in prestigious conferences and a center based research experience. Fellowships support academic institutions by enhancing graduate learning and development.\n\n\tLearn More \t\n\n \n\nInternships at NASA\u2019s Jet Propulsion Laboratory\n\nDiscover exciting internships and research opportunities at the leading center for robotic exploration of the solar system.\nAn internship at NASA\u2019s Jet Propulsion Laboratory is a chance to do the impossible. Our internships put you right in the action with the scientists and engineers who\u2019ve helped make JPL the leading center for robotic exploration of the solar system. Our programs are as varied as the places we explore, with opportunities across the STEM spectrum for undergrads, graduate students, postdocs and faculty. Join us and do something out of this world.\n\n\tLearn More \t\n\n \n\nInternational Internship\n\nNASA Intern and Fellow Opportunities for International Students\nNASA International Internship (NASA I\u00b2) seeks to better prepare students to work in a global environment and on multicultural international missions. NASA and the nation benefit from a cadre of future scientists, engineers and other professionals who become familiar and experienced in multinational environments. Internship sessions are arranged in three sessions during the calendar year (spring, summer and fall). \n\n\tLearn More \t\n\n \n\nEligibility at a Glance",
+          "title": "NASA Internship Programs - NASA",
+          "url": "https://intern.nasa.gov/",
+          "score": 22.207518,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "yes",
+                "timestamp": 1723037846
+              },
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1726570113
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Intern program at NASA"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "3847688fbf55fe67-12321-14666",
+          "text": "NASA Internship Programs - NASA\nAt NASA, our engineers, mathematicians, scientists, accountants, writers, IT specialists, project managers, program analysts, and many other professionals work together to break barriers to achieve the seemingly impossible. Non-engineering interns may support a variety of business and program management work, including procurement, budgeting, accounting, information technology, and security.\n\nFrequently Asked Questions\n\n \n\nFrequently Asked Questions\n\n\tMore Frequently Asked Questions \t\n\n \n\nAre Internships Paid?\n\nThe majority of interns receive a stipend award, but there are some volunteer opportunities noted in project descriptions.\n\n \n\nIs housing my responsibility if I receive an internship?\n\nInterns are responsible for making their own housing arrangements. This includes locating their own housing options and paying for their housing. Centers may be able to offer minimal assistance by providing a list of local available housing and/or establishing a private social media group for interns to utilize for relocation planning purposes.\n\n \n\nIs a Letter of Recommendation required?\n\nThe Office of STEM Engagement does not require a letter of recommendation. \n\n \n\nWill I need a car?\n\nYour center location and housing options will determine if you need a car. At most centers, unless you find housing within walking distance, you will most likely need a car. However, there are ample public transportation options at some centers\n\n \n\nI'm not a science or engineering student. Can I still get an internship at NASA?\n\nYes! Interns may support a variety of business and program management work, including human resources, administration and program analysis, accounting and budget, communication and public relations, procurement and contracts, information technology, security, and education. No matter your academic major, you\u2019ll find that NASA is a place where you\u2019ll belong to a\u00a0supportive community\u00a0that values your background, perspective, and life experiences.\n\n \n\nMy Path to NASA\n\nAstronauts are often the face of NASA, but our workforce is made up of all kinds of professionals. We are scientists, engineers, IT specialists, human resources specialists, accountants, writers, technicians and many other kinds of people working together. No matter what your strengths are, there's a place at NASA for you!\n\n\tExplore Careers at NASA",
+          "title": "NASA Internship Programs - NASA",
+          "url": "https://intern.nasa.gov/",
+          "score": 22.039873,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "yes",
+                "timestamp": 1723037921
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Intern program at NASA"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, NASA does offer an internship program. The NASA Internships program is for high school, undergraduate, and graduate students, as well as educators, and provides students with the opportunity to work with professionals in their field of interest and gain valuable experience. You can find more information about the program and how to apply on NASA's official website."
+    },
+    {
+      "speaker": "user",
+      "text": "Does Clipper have an antennae?",
+      "timestamp": 1723038404,
+      "enrichments": {
+        "Question Type": [
+          "Factoid",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, the Europa Clipper spacecraft has an high-gain antenna. It is used for communication with Earth and sending data back to NASA. Workers were seen installing it on the spacecraft on August 14, 2023. Europa Clipper\u2019s 10-foot-diameter (3-meter-diameter) high-gain antenna (HGA) and other smaller radio antennas will be used to receive commands from Earth through NASA\u2019s Deep Space Network. ",
+      "timestamp": 1723038412,
+      "contexts": [
+        {
+          "document_id": "c3c65a23f89d1f39-2-2157",
+          "text": "Science | Mission \u2013 NASA's Europa Clipper\nScience | Mission \u2013 NASA's Europa Clipper\n\nNASA\n\nEuropa Clipper\n\nSkip Navigation\n\nmenu\n\nclose modal\n\nEuropa Clipper Mission\n\nScience\n\nMission\n\nMENU\n\nOverview\n\nScience\n\nTimeline\n\nThe Team\n\nOverview\n\nHistory\n\nFAQ\n\nKey Fact\n\nWhat is Europa Clipper's main science goal? \n\nEuropa Clipper\u2019s main science goal is to determine whether there are places below the surface of Jupiter\u2019s icy moon, Europa, that could support life.\n\nOverviewOverview\n\nDeep beneath the crust of Jupiter\u2019s frozen moon Europa lies a massive liquid water ocean. Exploring this ocean world with our Europa Clipper spacecraft could provide new clues in our search for life beyond Earth. Scheduled to launch in October 2024, Europa Clipper\u2019s main science goal is to determine whether there are places below the surface of Jupiter\u2019s icy moon, Europa, that could support life. Credit: NASA\n\nJupiter\u2019s moon Europa shows strong evidence for an ocean of liquid water beneath its icy crust. Beyond Earth, Europa is considered one of the most promising currently habitable environments in our solar system. \nBelow Europa\u2019s icy surface, evidence suggests there is a global ocean with more water than all of Earth\u2019s oceans combined. Europa could have all the \u201cingredients\u201d needed for life as we know it: \n\nWater: Twice as much as Earth\u2019s oceans \n\nOrganics: Essential chemical building blocks from a variety of sources\n\nEnergy: Chemical energy sources from the surface and the sea floor\n\nStability: Conditions remaining similar for 4 billion years\n\nNASA's Europa Clipper spacecraft will perform approximately 50 close flybys of the moon, gathering detailed measurements to investigate whether the moon could have conditions suitable for life. Europa Clipper is not a life detection mission \u2013 its main science goal is to determine whether there are places below Europa\u2019s surface that could support life.\n\nEuropa Up Close\n\nTake an in-depth look at Jupiter's icy moon and Europa Clipper's plans for investigation.\n\nLearn more \u203a\n\nScience ObjectivesScience Objectives\nEuropa Clipper has three main science objectives: \n\nDetermine the Thickness of Europa\u2019s Icy Shell & How the Ocean Interacts With the Surface",
+          "title": "Science | Mission \u2013 NASA's Europa Clipper",
+          "url": "https://europa.nasa.gov/mission/science/",
+          "score": 47.200264,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "no",
+                "timestamp": 1723039478
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What is the goal of NASA\u201a\u00c4\u00f4s Europa Clipper mission?\n|assistant|: The main science goal of NASA's Europa Clipper mission is to determine whether there are places below the surface of Jupiter's icy moon, Europa, that could support life. The mission's three main science objectives are to understand the nature of the ice shell and the ocean beneath it, to investigate its composition, and to characterize its geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.\n|user|: I Europa livable for humans?\n|assistant|: Based on the information provided, Europa is not considered directly livable for humans. However, it is considered one of the most promising currently habitable environments in our solar system due to the presence of a vast ocean beneath its icy crust. This ocean could potentially contain conditions suitable for life as we know it. The Europa Clipper mission is designed to investigate whether the moon could have conditions suitable for life, but it is not a life detection mission. Europa could have all the \u201cingredients\u201d needed for life as we know it:\nWater: Twice as much as Earth\u2019s oceans\nOrganics: Essential chemical building blocks from a variety of sourcesEnergy: Chemical energy sources from the surface and the sea floor\n\nStability: Conditions remaining similar for 4 billion years\n|user|: The surface of Jupiter Europa\n|assistant|: The surface of Jupiter's moon, Europa, is made up of ice. It is covered in a thick crust of frozen water that is estimated to be between 10 to 100 kilometers thick. The surface also shows signs of past and present geological activity, such as ridges, chaos terrain, and lenticulae. These features suggest that there is heat being generated from within Europa, which is thought to be due to tidal heating caused by Jupiter's gravitational pull. Additionally, the surface of Europa is subject to bombardment by radiation from Jupiter, which can cause the ice to darken and form a reddish-brown color in some areas. The surface of Jupiter's moon Europa features a widely varied landscape, including ridges, bands, small rounded domes and disrupted spaces that geologists call \"chaos terrain.\"\n|user|: Who funds the Clipper mission?\n|assistant|: The Europa Clipper mission is funded by NASA, which is a U.S. government agency responsible for civilian space exploration and aeronautics research. NASA's budget comes primarily from Congressional appropriations. The total contract award amount for launch services is approximately $178 million.\n|user|: Does NASA have an intern program?\n|assistant|: Yes, NASA does offer an internship program. The NASA Internships program is for high school, undergraduate, and graduate students, as well as educators, and provides students with the opportunity to work with professionals in their field of interest and gain valuable experience. You can find more information about the program and how to apply on NASA's official website. I'm not a science or engineering student. Can I still get an internship at NASA?\n\nYes! Interns may support a variety of business and program management work, including human resources, administration and program analysis, accounting and budget, communication and public relations, procurement and contracts, information technology, security, and education. No matter your academic major, you\u2019ll find that NASA is a place where you\u2019ll belong to a supportive community that values your background, perspective, and life experiences.\n|user|: Does Clipper have an antennae?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6e52d5b809f037b2-2126-4106",
+          "text": "Europa Clipper - NASA Science\nScientists predict Europa has a salty ocean beneath its icy crust that could hold the building blocks necessary to sustain life.TypeOrbiterLaunchOct. 10, 2024TargetEuropaObjectiveDetermine if Europa has conditions suitable to support lifeMission OverviewSpacecraftWhy Europa?What will Europa Clipper do?Europa Clipper\u2019s main science goal is to determine whether there are places below the surface of Jupiter\u2019s icy moon, Europa, that could support life.The mission\u2019s three main science objectives are to understand the nature of the ice shell and the ocean beneath it, along with the moon\u2019s composition and geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.Read MoreAn artist's concept of NASA\u2019s Europa Clipper spacecraft.NASA/JPL-CaltechWhat is NASA\u2019s Europa Clipper spacecraft?Europa Clipper is a robotic solar-powered spacecraft built to conduct the first detailed investigations of Jupiter's icy moon Europa.With its solar arrays deployed, Europa Clipper spans more than 100 feet (about 30 meters) \u2013 about the length of a basketball court. The main body of the spacecraft consists of its avionics vault, radiofrequency module, and propulsion module.Read MoreWorkers use a crane to lift Europa Clipper's high-gain antenna as they prepare to install it on the spacecraft on Aug. 14, 2023. NASA/JPL-CaltechWhy Europa?The search for life beyond Earth is one of NASA\u2019s primary objectives.\u00a0If humans are to truly understand our place in the universe, we must learn whether our planet is the only place where life exists. So the search is on! There is strong evidence Jupiter's moon Europa has a saltwater ocean that may be one of the best places to look for environments where life could exist beyond Earth.Read MoreThis view of Jupiter\u2019s icy moon Europa was captured by the JunoCam imager aboard NASA\u2019s Juno spacecraft during the mission\u2019s close flyby on Sept. 29, 2022.",
+          "title": "Europa Clipper - NASA Science",
+          "url": "https://science.nasa.gov/mission/europa-clipper/",
+          "score": 45.43264,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "yes",
+                "timestamp": 1723039506
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What is the goal of NASA\u201a\u00c4\u00f4s Europa Clipper mission?\n|assistant|: The main science goal of NASA's Europa Clipper mission is to determine whether there are places below the surface of Jupiter's icy moon, Europa, that could support life. The mission's three main science objectives are to understand the nature of the ice shell and the ocean beneath it, to investigate its composition, and to characterize its geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.\n|user|: I Europa livable for humans?\n|assistant|: Based on the information provided, Europa is not considered directly livable for humans. However, it is considered one of the most promising currently habitable environments in our solar system due to the presence of a vast ocean beneath its icy crust. This ocean could potentially contain conditions suitable for life as we know it. The Europa Clipper mission is designed to investigate whether the moon could have conditions suitable for life, but it is not a life detection mission. Europa could have all the \u201cingredients\u201d needed for life as we know it:\nWater: Twice as much as Earth\u2019s oceans\nOrganics: Essential chemical building blocks from a variety of sourcesEnergy: Chemical energy sources from the surface and the sea floor\n\nStability: Conditions remaining similar for 4 billion years\n|user|: The surface of Jupiter Europa\n|assistant|: The surface of Jupiter's moon, Europa, is made up of ice. It is covered in a thick crust of frozen water that is estimated to be between 10 to 100 kilometers thick. The surface also shows signs of past and present geological activity, such as ridges, chaos terrain, and lenticulae. These features suggest that there is heat being generated from within Europa, which is thought to be due to tidal heating caused by Jupiter's gravitational pull. Additionally, the surface of Europa is subject to bombardment by radiation from Jupiter, which can cause the ice to darken and form a reddish-brown color in some areas. The surface of Jupiter's moon Europa features a widely varied landscape, including ridges, bands, small rounded domes and disrupted spaces that geologists call \"chaos terrain.\"\n|user|: Who funds the Clipper mission?\n|assistant|: The Europa Clipper mission is funded by NASA, which is a U.S. government agency responsible for civilian space exploration and aeronautics research. NASA's budget comes primarily from Congressional appropriations. The total contract award amount for launch services is approximately $178 million.\n|user|: Does NASA have an intern program?\n|assistant|: Yes, NASA does offer an internship program. The NASA Internships program is for high school, undergraduate, and graduate students, as well as educators, and provides students with the opportunity to work with professionals in their field of interest and gain valuable experience. You can find more information about the program and how to apply on NASA's official website. I'm not a science or engineering student. Can I still get an internship at NASA?\n\nYes! Interns may support a variety of business and program management work, including human resources, administration and program analysis, accounting and budget, communication and public relations, procurement and contracts, information technology, security, and education. No matter your academic major, you\u2019ll find that NASA is a place where you\u2019ll belong to a supportive community that values your background, perspective, and life experiences.\n|user|: Does Clipper have an antennae?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "b2fd7f2d1c5eeed5-6175-8273",
+          "text": "Europa Clipper High Gain Antenna Undergoes Testing at Langley \u2013 NASA's Europa Clipper\nJupiter\u2019s moon Europa and its global ocean may currently have conditions suitable for life. Scientists are studying processes on the icy surface as they prepare to explore.\n\nSurface of Jupiter's Moon Europa Churned by Small Impacts\n\nJupiter\u2019s icy moon Europa may be the most promising place in the solar system to find present-day environments suitable for life beyond Earth. \n\nEuropa: A World of Ice, With Potential for Life\n\nJupiter\u2019s moon Europa has an icy crust covering a vast, global ocean. The rocky layer underneath may be hot enough to melt, leading to undersea volcanoes.\n\nEuropa's Interior May Be Hot Enough to Fuel Seafloor Volcanoes\n\nJupiter\u2019s moon Europa may have the potential to harbor life. The spacecraft will use multiple flybys of the moon to investigate the habitability of this ocean world.\n\nNASA's Europa Clipper Builds Hardware, Moves Toward Assembly\n\nIn an unprecedented year, the Europa Clipper project continues on the path toward unprecedented science. \n\nOn the Path Towards Unprecedented Science\n\nScientists have theorized on the origin of the water plumes possibly erupting from Jupiter's moon Europa. Recent research adds a new potential source to the mix.\n\nPotential Plumes on Europa Could Come From Water in the Crust\n\nNew lab experiments re-create the environment of Europa and find that the icy moon shines, even on its nightside. The effect is more than just a cool visual.\n\nEuropa Glows: Radiation Does a Bright Number on Jupiter's Moon\n\nThe surface of Jupiter's moon Europa features a widely varied landscape, including ridges, bands, small rounded domes and disrupted spaces that geologists call \"chaos terrain.\" Three newly reprocessed images, taken by NASA's Galileo spacecraft in the late 1990s, reveal details in diverse surface features on Europa.\n\nNewly Reprocessed Images of Europa Show 'Chaos Terrain' in Crisp Detail\n\nAn icy ocean world in our solar system that could tell us more about the potential for life on other worlds is coming into focus with confirmation of the Europa Clipper mission's next phase. \n\nMission to Jupiter's Icy Moon Confirmed",
+          "title": "Europa Clipper High Gain Antenna Undergoes Testing at Langley \u2013 NASA's Europa Clipper",
+          "url": "https://europa.nasa.gov/news/23/europa-clipper-high-gain-antenna-undergoes-testing-at-langley/",
+          "score": 44.82335,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "no",
+                "timestamp": 1723039573
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What is the goal of NASA\u201a\u00c4\u00f4s Europa Clipper mission?\n|assistant|: The main science goal of NASA's Europa Clipper mission is to determine whether there are places below the surface of Jupiter's icy moon, Europa, that could support life. The mission's three main science objectives are to understand the nature of the ice shell and the ocean beneath it, to investigate its composition, and to characterize its geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.\n|user|: I Europa livable for humans?\n|assistant|: Based on the information provided, Europa is not considered directly livable for humans. However, it is considered one of the most promising currently habitable environments in our solar system due to the presence of a vast ocean beneath its icy crust. This ocean could potentially contain conditions suitable for life as we know it. The Europa Clipper mission is designed to investigate whether the moon could have conditions suitable for life, but it is not a life detection mission. Europa could have all the \u201cingredients\u201d needed for life as we know it:\nWater: Twice as much as Earth\u2019s oceans\nOrganics: Essential chemical building blocks from a variety of sourcesEnergy: Chemical energy sources from the surface and the sea floor\n\nStability: Conditions remaining similar for 4 billion years\n|user|: The surface of Jupiter Europa\n|assistant|: The surface of Jupiter's moon, Europa, is made up of ice. It is covered in a thick crust of frozen water that is estimated to be between 10 to 100 kilometers thick. The surface also shows signs of past and present geological activity, such as ridges, chaos terrain, and lenticulae. These features suggest that there is heat being generated from within Europa, which is thought to be due to tidal heating caused by Jupiter's gravitational pull. Additionally, the surface of Europa is subject to bombardment by radiation from Jupiter, which can cause the ice to darken and form a reddish-brown color in some areas. The surface of Jupiter's moon Europa features a widely varied landscape, including ridges, bands, small rounded domes and disrupted spaces that geologists call \"chaos terrain.\"\n|user|: Who funds the Clipper mission?\n|assistant|: The Europa Clipper mission is funded by NASA, which is a U.S. government agency responsible for civilian space exploration and aeronautics research. NASA's budget comes primarily from Congressional appropriations. The total contract award amount for launch services is approximately $178 million.\n|user|: Does NASA have an intern program?\n|assistant|: Yes, NASA does offer an internship program. The NASA Internships program is for high school, undergraduate, and graduate students, as well as educators, and provides students with the opportunity to work with professionals in their field of interest and gain valuable experience. You can find more information about the program and how to apply on NASA's official website. I'm not a science or engineering student. Can I still get an internship at NASA?\n\nYes! Interns may support a variety of business and program management work, including human resources, administration and program analysis, accounting and budget, communication and public relations, procurement and contracts, information technology, security, and education. No matter your academic major, you\u2019ll find that NASA is a place where you\u2019ll belong to a supportive community that values your background, perspective, and life experiences.\n|user|: Does Clipper have an antennae?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "4df046b65378ddff-1594-3704",
+          "text": "Discovering Alien Oceans: Magnetism \u2013 NASA's Europa Clipper\nAn identical copy of Europa Clipper's propulsion module and electronics vault is lowered by crane in a static test tower.\r\n\nEuropa Clipper's Developmental Test Model\n\nEuropa Clipper\u2019s 28-foot (8.5-meter) magnetometer boom is unfurled at NASA\u2019s Jet Propulsion Laboratory.\r\n\nEuropa Clipper Team Deploys Magnetometer Boom\n\nThis video shows a test deployment of Europa Clipper\u2019s very high frequency (VHF) radar antenna.\r\n\nEuropa Clipper REASON VHF Radar Antenna Deployment\n\nThis color composite view combines violet, green, and infrared images of Jupiter's intriguing moon, Europa, for a view of the moon in natural color (left) and in enhanced color designed to bring ou...\n\nEuropa Global Views in Natural and Enhanced Colors\n\nWorkers at NASA\u2019s Jet Propulsion Laboratory in Southern California deploy Europa Clipper\u2019s magnetometer boom.\r\n\nWorkers Deploy the Europa Clipper Magnetometer Boom\n\nThis view of Jupiter's icy moon Europa shows a region shaped like a mitten that has a texture similar to the matrix of chaotic terrain, which is seen in medium and high resolution images of numerou...\n\n Mitten Shaped Region of Chaotic Terrain on Europa \n\nThis complex area on the side of Europa which faces away from Jupiter shows several types of features which are formed by disruptions of Europa's icy crust.\r\n\nScrambled Ice\n\nEuropa Clipper's\u00a0high-gain antenna is installed on\u00a0Aug. 14, 2023.\r\n\nPowerful Antenna Installed On Europa Clipper\n\nThis image of Europa, an icy satellite of Jupiter about the size of the Earth's Moon, was obtained from a range of 7,415 miles (11,933 kilometers) by the Galileo spacecraft during its fourth orbit ...\n\nMacula on Europa \n\nThis enhanced color image from NASa's Galileo mission shows the region surrounding the young impact crater Pwyll on Jupiter's moon Europa.\r\n\nPwyll Crater\n\nThis artist's rendering shows NASA's Europa Clipper spacecraft, which is aiming for launch readiness by 2024.\r\n\n2021 Europa Clipper Spacecraft (Artist's Concept)\n\nThis animation segment shows NASA\u2019s Europa Clipper flying by Mars during its Mars gravity assist.\u00a0\r\n\nMission Animation: Mars Gravity Assist",
+          "title": "Discovering Alien Oceans: Magnetism \u2013 NASA's Europa Clipper",
+          "url": "https://europa.nasa.gov/resources/446/discovering-alien-oceans-magnetism/",
+          "score": 10.996332,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "yes",
+                "timestamp": 1723040808
+              },
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "no",
+                "timestamp": 1726570250
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Clipper's antennae"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "154afa32a998b5ab-3117-5176",
+          "text": "Meet Europa Clipper | Spacecraft \u2013 NASA's Europa Clipper\nEuropa Clipper\u2019s propulsion module is an aluminum cylinder 10 feet (3 meters) long and 5 feet (1.5 meters) wide. It holds the spacecraft\u2019s 24 engines and nearly 6,000 pounds (2,750 kilograms) of fuel in tanks, as well as the spacecraft\u2019s helium pressurant tanks. \nVault\n\nEuropa Clipper's electronics are enclosed in a vault with walls made of 1/3-inch thick (9.2-mm) sheets of aluminum-zinc alloy to protect the electronics from Jupiter\u2019s intense radiation. These electronics include computers (or the \u201cbrains\u201d of the spacecraft), flight software, and more. The vault is bolted to the spacecraft\u2019s propulsion module and has wires to provide communications and control across the entire spacecraft.\nPower\n\nEuropa Clipper\u2019s \u201cwings\u201d - its solar arrays - span more than 100 feet (30.5 meters). Each wing is approximately 46.5 feet (14.2 meters) long and about 13.5 feet (4.1 meters) high. The huge arrays are needed to collect sunlight to power the spacecraft while it operates at Jupiter, which is more than five times as far from the Sun as Earth is.\nCommunications \n\nEuropa Clipper\u2019s 10-foot-diameter (3-meter-diameter) high-gain antenna (HGA) and other smaller radio antennas will be used to receive commands from Earth through NASA\u2019s Deep Space Network. The antennas also will send data back to engineers and scientists. Europa Clipper\u2019s antennas also will be used for gravity and radio science investigations, allowing scientists to study Europa\u2019s gravity as the moon orbits Jupiter.\nGuidance, Navigation, & Control\n\nEuropa Clipper will use sensors, cameras, and special hardware to determine and control its position in space. Europa Clipper\u2019s two stellar reference units, informally called \u201cstar trackers,\u201d are small cameras with a computer that carries a catalog of stars with known positions. \nAs the cameras observes the starry sky, the computer matches the pattern of stars in the images to its star catalog and determines the spacecraft's orientation in space. Europa Clipper will also use four reaction wheels to stay pointed in the right direction.",
+          "title": "Meet Europa Clipper | Spacecraft \u2013 NASA's Europa Clipper",
+          "url": "https://europa.nasa.gov/spacecraft",
+          "score": 14.094409,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1726570311
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Length of Clipper's antennae"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, the Europa Clipper spacecraft has an high-gain antenna. It is used for communication with Earth and sending data back to NASA. Workers were seen installing it on the spacecraft on August 14, 2023."
+    },
+    {
+      "speaker": "user",
+      "text": "What is the speed at which Clipper flies?",
+      "timestamp": 1723040910,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The propulsion subsystem of the Europa Clipper will carry fuel and oxidizer to change its velocity by about 3,600 miles per hour (5,800 kilometers per hour). While this is a significant and crucial capability, it represents only about five percent of the velocity change needed for the mission. The majority of the velocity change required to adjust trajectories once in Jupiter's orbit will come from planned gravitational flybys of Jovian moons. The propulsion subsystem can be thought of as the \"gas tank\" of the Europa Clipper.",
+      "timestamp": 1723040918,
+      "contexts": [
+        {
+          "document_id": "c3c65a23f89d1f39-2-2157",
+          "text": "Science | Mission \u2013 NASA's Europa Clipper\nScience | Mission \u2013 NASA's Europa Clipper\n\nNASA\n\nEuropa Clipper\n\nSkip Navigation\n\nmenu\n\nclose modal\n\nEuropa Clipper Mission\n\nScience\n\nMission\n\nMENU\n\nOverview\n\nScience\n\nTimeline\n\nThe Team\n\nOverview\n\nHistory\n\nFAQ\n\nKey Fact\n\nWhat is Europa Clipper's main science goal? \n\nEuropa Clipper\u2019s main science goal is to determine whether there are places below the surface of Jupiter\u2019s icy moon, Europa, that could support life.\n\nOverviewOverview\n\nDeep beneath the crust of Jupiter\u2019s frozen moon Europa lies a massive liquid water ocean. Exploring this ocean world with our Europa Clipper spacecraft could provide new clues in our search for life beyond Earth. Scheduled to launch in October 2024, Europa Clipper\u2019s main science goal is to determine whether there are places below the surface of Jupiter\u2019s icy moon, Europa, that could support life. Credit: NASA\n\nJupiter\u2019s moon Europa shows strong evidence for an ocean of liquid water beneath its icy crust. Beyond Earth, Europa is considered one of the most promising currently habitable environments in our solar system. \nBelow Europa\u2019s icy surface, evidence suggests there is a global ocean with more water than all of Earth\u2019s oceans combined. Europa could have all the \u201cingredients\u201d needed for life as we know it: \n\nWater: Twice as much as Earth\u2019s oceans \n\nOrganics: Essential chemical building blocks from a variety of sources\n\nEnergy: Chemical energy sources from the surface and the sea floor\n\nStability: Conditions remaining similar for 4 billion years\n\nNASA's Europa Clipper spacecraft will perform approximately 50 close flybys of the moon, gathering detailed measurements to investigate whether the moon could have conditions suitable for life. Europa Clipper is not a life detection mission \u2013 its main science goal is to determine whether there are places below Europa\u2019s surface that could support life.\n\nEuropa Up Close\n\nTake an in-depth look at Jupiter's icy moon and Europa Clipper's plans for investigation.\n\nLearn more \u203a\n\nScience ObjectivesScience Objectives\nEuropa Clipper has three main science objectives: \n\nDetermine the Thickness of Europa\u2019s Icy Shell & How the Ocean Interacts With the Surface",
+          "title": "Science | Mission \u2013 NASA's Europa Clipper",
+          "url": "https://europa.nasa.gov/mission/science/",
+          "score": 47.200264,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "no",
+                "timestamp": 1723041676
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What is the goal of NASA\u201a\u00c4\u00f4s Europa Clipper mission?\n|assistant|: The main science goal of NASA's Europa Clipper mission is to determine whether there are places below the surface of Jupiter's icy moon, Europa, that could support life. The mission's three main science objectives are to understand the nature of the ice shell and the ocean beneath it, to investigate its composition, and to characterize its geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.\n|user|: I Europa livable for humans?\n|assistant|: Based on the information provided, Europa is not considered directly livable for humans. However, it is considered one of the most promising currently habitable environments in our solar system due to the presence of a vast ocean beneath its icy crust. This ocean could potentially contain conditions suitable for life as we know it. The Europa Clipper mission is designed to investigate whether the moon could have conditions suitable for life, but it is not a life detection mission. Europa could have all the \u201cingredients\u201d needed for life as we know it:\nWater: Twice as much as Earth\u2019s oceans\nOrganics: Essential chemical building blocks from a variety of sourcesEnergy: Chemical energy sources from the surface and the sea floor\n\nStability: Conditions remaining similar for 4 billion years\n|user|: The surface of Jupiter Europa\n|assistant|: The surface of Jupiter's moon, Europa, is made up of ice. It is covered in a thick crust of frozen water that is estimated to be between 10 to 100 kilometers thick. The surface also shows signs of past and present geological activity, such as ridges, chaos terrain, and lenticulae. These features suggest that there is heat being generated from within Europa, which is thought to be due to tidal heating caused by Jupiter's gravitational pull. Additionally, the surface of Europa is subject to bombardment by radiation from Jupiter, which can cause the ice to darken and form a reddish-brown color in some areas. The surface of Jupiter's moon Europa features a widely varied landscape, including ridges, bands, small rounded domes and disrupted spaces that geologists call \"chaos terrain.\"\n|user|: Who funds the Clipper mission?\n|assistant|: The Europa Clipper mission is funded by NASA, which is a U.S. government agency responsible for civilian space exploration and aeronautics research. NASA's budget comes primarily from Congressional appropriations. The total contract award amount for launch services is approximately $178 million.\n|user|: Does NASA have an intern program?\n|assistant|: Yes, NASA does offer an internship program. The NASA Internships program is for high school, undergraduate, and graduate students, as well as educators, and provides students with the opportunity to work with professionals in their field of interest and gain valuable experience. You can find more information about the program and how to apply on NASA's official website. I'm not a science or engineering student. Can I still get an internship at NASA?\n\nYes! Interns may support a variety of business and program management work, including human resources, administration and program analysis, accounting and budget, communication and public relations, procurement and contracts, information technology, security, and education. No matter your academic major, you\u2019ll find that NASA is a place where you\u2019ll belong to a supportive community that values your background, perspective, and life experiences.\n|user|: Does Clipper have an antennae?\n|assistant|: Yes, the Europa Clipper spacecraft has an high-gain antenna. It is used for communication with Earth and sending data back to NASA. Workers were seen installing it on the spacecraft on August 14, 2023. Europa Clipper\u2019s 10-foot-diameter (3-meter-diameter) high-gain antenna (HGA) and other smaller radio antennas will be used to receive commands from Earth through NASA\u2019s Deep Space Network. \n|user|: What is the speed at which Clipper flies?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6e52d5b809f037b2-2126-4106",
+          "text": "Europa Clipper - NASA Science\nScientists predict Europa has a salty ocean beneath its icy crust that could hold the building blocks necessary to sustain life.TypeOrbiterLaunchOct. 10, 2024TargetEuropaObjectiveDetermine if Europa has conditions suitable to support lifeMission OverviewSpacecraftWhy Europa?What will Europa Clipper do?Europa Clipper\u2019s main science goal is to determine whether there are places below the surface of Jupiter\u2019s icy moon, Europa, that could support life.The mission\u2019s three main science objectives are to understand the nature of the ice shell and the ocean beneath it, along with the moon\u2019s composition and geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.Read MoreAn artist's concept of NASA\u2019s Europa Clipper spacecraft.NASA/JPL-CaltechWhat is NASA\u2019s Europa Clipper spacecraft?Europa Clipper is a robotic solar-powered spacecraft built to conduct the first detailed investigations of Jupiter's icy moon Europa.With its solar arrays deployed, Europa Clipper spans more than 100 feet (about 30 meters) \u2013 about the length of a basketball court. The main body of the spacecraft consists of its avionics vault, radiofrequency module, and propulsion module.Read MoreWorkers use a crane to lift Europa Clipper's high-gain antenna as they prepare to install it on the spacecraft on Aug. 14, 2023. NASA/JPL-CaltechWhy Europa?The search for life beyond Earth is one of NASA\u2019s primary objectives.\u00a0If humans are to truly understand our place in the universe, we must learn whether our planet is the only place where life exists. So the search is on! There is strong evidence Jupiter's moon Europa has a saltwater ocean that may be one of the best places to look for environments where life could exist beyond Earth.Read MoreThis view of Jupiter\u2019s icy moon Europa was captured by the JunoCam imager aboard NASA\u2019s Juno spacecraft during the mission\u2019s close flyby on Sept. 29, 2022.",
+          "title": "Europa Clipper - NASA Science",
+          "url": "https://science.nasa.gov/mission/europa-clipper/",
+          "score": 45.43264,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "no",
+                "timestamp": 1723041700
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What is the goal of NASA\u201a\u00c4\u00f4s Europa Clipper mission?\n|assistant|: The main science goal of NASA's Europa Clipper mission is to determine whether there are places below the surface of Jupiter's icy moon, Europa, that could support life. The mission's three main science objectives are to understand the nature of the ice shell and the ocean beneath it, to investigate its composition, and to characterize its geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.\n|user|: I Europa livable for humans?\n|assistant|: Based on the information provided, Europa is not considered directly livable for humans. However, it is considered one of the most promising currently habitable environments in our solar system due to the presence of a vast ocean beneath its icy crust. This ocean could potentially contain conditions suitable for life as we know it. The Europa Clipper mission is designed to investigate whether the moon could have conditions suitable for life, but it is not a life detection mission. Europa could have all the \u201cingredients\u201d needed for life as we know it:\nWater: Twice as much as Earth\u2019s oceans\nOrganics: Essential chemical building blocks from a variety of sourcesEnergy: Chemical energy sources from the surface and the sea floor\n\nStability: Conditions remaining similar for 4 billion years\n|user|: The surface of Jupiter Europa\n|assistant|: The surface of Jupiter's moon, Europa, is made up of ice. It is covered in a thick crust of frozen water that is estimated to be between 10 to 100 kilometers thick. The surface also shows signs of past and present geological activity, such as ridges, chaos terrain, and lenticulae. These features suggest that there is heat being generated from within Europa, which is thought to be due to tidal heating caused by Jupiter's gravitational pull. Additionally, the surface of Europa is subject to bombardment by radiation from Jupiter, which can cause the ice to darken and form a reddish-brown color in some areas. The surface of Jupiter's moon Europa features a widely varied landscape, including ridges, bands, small rounded domes and disrupted spaces that geologists call \"chaos terrain.\"\n|user|: Who funds the Clipper mission?\n|assistant|: The Europa Clipper mission is funded by NASA, which is a U.S. government agency responsible for civilian space exploration and aeronautics research. NASA's budget comes primarily from Congressional appropriations. The total contract award amount for launch services is approximately $178 million.\n|user|: Does NASA have an intern program?\n|assistant|: Yes, NASA does offer an internship program. The NASA Internships program is for high school, undergraduate, and graduate students, as well as educators, and provides students with the opportunity to work with professionals in their field of interest and gain valuable experience. You can find more information about the program and how to apply on NASA's official website. I'm not a science or engineering student. Can I still get an internship at NASA?\n\nYes! Interns may support a variety of business and program management work, including human resources, administration and program analysis, accounting and budget, communication and public relations, procurement and contracts, information technology, security, and education. No matter your academic major, you\u2019ll find that NASA is a place where you\u2019ll belong to a supportive community that values your background, perspective, and life experiences.\n|user|: Does Clipper have an antennae?\n|assistant|: Yes, the Europa Clipper spacecraft has an high-gain antenna. It is used for communication with Earth and sending data back to NASA. Workers were seen installing it on the spacecraft on August 14, 2023. Europa Clipper\u2019s 10-foot-diameter (3-meter-diameter) high-gain antenna (HGA) and other smaller radio antennas will be used to receive commands from Earth through NASA\u2019s Deep Space Network. \n|user|: What is the speed at which Clipper flies?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "b2fd7f2d1c5eeed5-6175-8273",
+          "text": "Europa Clipper High Gain Antenna Undergoes Testing at Langley \u2013 NASA's Europa Clipper\nJupiter\u2019s moon Europa and its global ocean may currently have conditions suitable for life. Scientists are studying processes on the icy surface as they prepare to explore.\n\nSurface of Jupiter's Moon Europa Churned by Small Impacts\n\nJupiter\u2019s icy moon Europa may be the most promising place in the solar system to find present-day environments suitable for life beyond Earth. \n\nEuropa: A World of Ice, With Potential for Life\n\nJupiter\u2019s moon Europa has an icy crust covering a vast, global ocean. The rocky layer underneath may be hot enough to melt, leading to undersea volcanoes.\n\nEuropa's Interior May Be Hot Enough to Fuel Seafloor Volcanoes\n\nJupiter\u2019s moon Europa may have the potential to harbor life. The spacecraft will use multiple flybys of the moon to investigate the habitability of this ocean world.\n\nNASA's Europa Clipper Builds Hardware, Moves Toward Assembly\n\nIn an unprecedented year, the Europa Clipper project continues on the path toward unprecedented science. \n\nOn the Path Towards Unprecedented Science\n\nScientists have theorized on the origin of the water plumes possibly erupting from Jupiter's moon Europa. Recent research adds a new potential source to the mix.\n\nPotential Plumes on Europa Could Come From Water in the Crust\n\nNew lab experiments re-create the environment of Europa and find that the icy moon shines, even on its nightside. The effect is more than just a cool visual.\n\nEuropa Glows: Radiation Does a Bright Number on Jupiter's Moon\n\nThe surface of Jupiter's moon Europa features a widely varied landscape, including ridges, bands, small rounded domes and disrupted spaces that geologists call \"chaos terrain.\" Three newly reprocessed images, taken by NASA's Galileo spacecraft in the late 1990s, reveal details in diverse surface features on Europa.\n\nNewly Reprocessed Images of Europa Show 'Chaos Terrain' in Crisp Detail\n\nAn icy ocean world in our solar system that could tell us more about the potential for life on other worlds is coming into focus with confirmation of the Europa Clipper mission's next phase. \n\nMission to Jupiter's Icy Moon Confirmed",
+          "title": "Europa Clipper High Gain Antenna Undergoes Testing at Langley \u2013 NASA's Europa Clipper",
+          "url": "https://europa.nasa.gov/news/23/europa-clipper-high-gain-antenna-undergoes-testing-at-langley/",
+          "score": 44.82335,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "no",
+                "timestamp": 1723041725
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What is the goal of NASA\u201a\u00c4\u00f4s Europa Clipper mission?\n|assistant|: The main science goal of NASA's Europa Clipper mission is to determine whether there are places below the surface of Jupiter's icy moon, Europa, that could support life. The mission's three main science objectives are to understand the nature of the ice shell and the ocean beneath it, to investigate its composition, and to characterize its geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.\n|user|: I Europa livable for humans?\n|assistant|: Based on the information provided, Europa is not considered directly livable for humans. However, it is considered one of the most promising currently habitable environments in our solar system due to the presence of a vast ocean beneath its icy crust. This ocean could potentially contain conditions suitable for life as we know it. The Europa Clipper mission is designed to investigate whether the moon could have conditions suitable for life, but it is not a life detection mission. Europa could have all the \u201cingredients\u201d needed for life as we know it:\nWater: Twice as much as Earth\u2019s oceans\nOrganics: Essential chemical building blocks from a variety of sourcesEnergy: Chemical energy sources from the surface and the sea floor\n\nStability: Conditions remaining similar for 4 billion years\n|user|: The surface of Jupiter Europa\n|assistant|: The surface of Jupiter's moon, Europa, is made up of ice. It is covered in a thick crust of frozen water that is estimated to be between 10 to 100 kilometers thick. The surface also shows signs of past and present geological activity, such as ridges, chaos terrain, and lenticulae. These features suggest that there is heat being generated from within Europa, which is thought to be due to tidal heating caused by Jupiter's gravitational pull. Additionally, the surface of Europa is subject to bombardment by radiation from Jupiter, which can cause the ice to darken and form a reddish-brown color in some areas. The surface of Jupiter's moon Europa features a widely varied landscape, including ridges, bands, small rounded domes and disrupted spaces that geologists call \"chaos terrain.\"\n|user|: Who funds the Clipper mission?\n|assistant|: The Europa Clipper mission is funded by NASA, which is a U.S. government agency responsible for civilian space exploration and aeronautics research. NASA's budget comes primarily from Congressional appropriations. The total contract award amount for launch services is approximately $178 million.\n|user|: Does NASA have an intern program?\n|assistant|: Yes, NASA does offer an internship program. The NASA Internships program is for high school, undergraduate, and graduate students, as well as educators, and provides students with the opportunity to work with professionals in their field of interest and gain valuable experience. You can find more information about the program and how to apply on NASA's official website. I'm not a science or engineering student. Can I still get an internship at NASA?\n\nYes! Interns may support a variety of business and program management work, including human resources, administration and program analysis, accounting and budget, communication and public relations, procurement and contracts, information technology, security, and education. No matter your academic major, you\u2019ll find that NASA is a place where you\u2019ll belong to a supportive community that values your background, perspective, and life experiences.\n|user|: Does Clipper have an antennae?\n|assistant|: Yes, the Europa Clipper spacecraft has an high-gain antenna. It is used for communication with Earth and sending data back to NASA. Workers were seen installing it on the spacecraft on August 14, 2023. Europa Clipper\u2019s 10-foot-diameter (3-meter-diameter) high-gain antenna (HGA) and other smaller radio antennas will be used to receive commands from Earth through NASA\u2019s Deep Space Network. \n|user|: What is the speed at which Clipper flies?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "4e653b22533e5eff-3416-5671",
+          "text": "On the Path Towards Unprecedented Science \u2013 NASA's Europa Clipper\nIt will carry fuel and oxidizer sufficient to change Europa Clipper\u2019s velocity by about 3,600 miles per hour (5,800 kilometers per hour). While this is a large amount and a critically important capability, it represents about five percent of the velocity change needed to accomplish this mission. The bulk of the velocity change necessary to adjust trajectories once in Jupiter orbit will come from gravitational flybys of Jovian moons as planned. Given the overall size of the tanks, the propulsion subsystem is designed as part of a \u201cpropulsion module\u201d that includes the solar arrays and radiation monitors.\n\nEuropa Clipper\u2019s bowl-shaped high-gain antenna faces down in this image. This radio dish will allow ground controllers to send and receive commands and data between Earth and the spacecraft in Jupiter orbit \u2014 more than one million times farther from Earth than the International Space Station orbits. Credit: NASA\n\nThe telecom subsystem is the link between Europa Clipper and Earth. It provides command reception and science and engineering data downlink. It also provides interplanetary navigation data. Through the high gain antenna (HGA), Europa Clipper will downlink on the order of several gigabytes of science data per typical Earth antenna tracking session, enough data to fill a smartphone in about a week. The HGA also serves as a sunshade when Europa Clipper is still relatively close to the Sun, while en route to the Jupiter system. With respect to its gravity science role, scientists will use the radio signals exchanged between the telecom sub-system aboard the spacecraft and NASA's Deep Space Network to detect subtle variations in the gravitational attraction between Europa and Europa Clipper. The variations reflect details of Europa\u2019s internal mass distribution, allowing us to learn about Europa\u2019s interior structure.\n\nThe Europa Clipper mission intends to answer the big question: Is Europa habitable? This question encompasses hypotheses about the nature of water, chemistry, and energy exchange at Europa, which in turn leads to these additional major questions to be answered: How deep and salty is the ocean? How thick is the ice shell? How active is the ice shell? Are there plumes, and if so, what is in the plumes?",
+          "title": "On the Path Towards Unprecedented Science \u2013 NASA's Europa Clipper",
+          "url": "https://europa.nasa.gov/news/28/on-the-path-towards-unprecedented-science/",
+          "score": 15.218266,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "yes",
+                "timestamp": 1723047888
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "velocity of Clipper"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "4e653b22533e5eff-1729-4025",
+          "text": "On the Path Towards Unprecedented Science \u2013 NASA's Europa Clipper\nShown here is an interactive rendering of the spacecraft. Fully deployed, the spacecraft will be more than 5 meters (15 feet) tall, 17 meters (50 feet) long, and will span about 30 meters (100 feet) in width \u2014 longer than a basketball court from tip to tip of its solar arrays. Credit: NASA/JPL-Caltech\n\nDownload Options\n\nThe solar panels and overall physical structure visible in the interactive model are aspects of spacecraft subsystems that comprise the flight system. The science instruments, attached directly to the spacecraft or through a boom, are referred to as the payload. Europa Clipper\u2019s antennas fall into both of these categories; some antennas provide only a spacecraft (telecom) function, other antennas provide only a science function (for the radar), and yet others perform both telecom and science (gravity and radio science) roles.\nThe Europa Clipper flight system design incorporates lessons learned from prior missions; the scientific instruments are at least partly based on interplanetary mission predecessors. Informed by those experiences, the spacecraft and its components are designed to be appropriately robust to the Europa environment. Europa Clipper\u2019s components also need to be mutually compatible with one another while being operated. Given that, the testing and performance verification is designed to reflect \u201cflying conditions\u201d as well as possible. Let\u2019s look at two subsystems whose fabrication is underway.\n\nNASA\u2019s Goddard Space Flight Center (GSFC) engineers align the upper and lower cylinders of Europa Clipper\u2019s propulsion module for a fit check. Credit: NASA/B. Lambert\n\nThe propulsion subsystem is essentially Europa Clipper\u2019s \u201cgas tank.\u201d It will carry fuel and oxidizer sufficient to change Europa Clipper\u2019s velocity by about 3,600 miles per hour (5,800 kilometers per hour). While this is a large amount and a critically important capability, it represents about five percent of the velocity change needed to accomplish this mission. The bulk of the velocity change necessary to adjust trajectories once in Jupiter orbit will come from gravitational flybys of Jovian moons as planned. Given the overall size of the tanks, the propulsion subsystem is designed as part of a \u201cpropulsion module\u201d that includes the solar arrays and radiation monitors.",
+          "title": "On the Path Towards Unprecedented Science \u2013 NASA's Europa Clipper",
+          "url": "https://europa.nasa.gov/news/28/on-the-path-towards-unprecedented-science/",
+          "score": 14.187498,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "yes",
+                "timestamp": 1723047967
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "velocity of Clipper"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The speed at which the Europa Clipper spacecraft flies will vary depending on its trajectory and distance from Jupiter. However, during its closest flybys of Europa, it is expected to reach speeds of around 15,000 to 20,000 miles per hour (6.7 to 9 kilometers per second)."
+    },
+    {
+      "speaker": "user",
+      "text": "Does Clipper fly by Europe?",
+      "timestamp": 1723048111,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, the main purpose of the Europa Clipper mission is to perform approximately 50 close flybys of Jupiter's moon Europa, gathering detailed measurements to investigate whether the moon could have conditions suitable for life.",
+      "timestamp": 1723048118,
+      "contexts": [
+        {
+          "document_id": "c3c65a23f89d1f39-2-2157",
+          "text": "Science | Mission \u2013 NASA's Europa Clipper\nScience | Mission \u2013 NASA's Europa Clipper\n\nNASA\n\nEuropa Clipper\n\nSkip Navigation\n\nmenu\n\nclose modal\n\nEuropa Clipper Mission\n\nScience\n\nMission\n\nMENU\n\nOverview\n\nScience\n\nTimeline\n\nThe Team\n\nOverview\n\nHistory\n\nFAQ\n\nKey Fact\n\nWhat is Europa Clipper's main science goal? \n\nEuropa Clipper\u2019s main science goal is to determine whether there are places below the surface of Jupiter\u2019s icy moon, Europa, that could support life.\n\nOverviewOverview\n\nDeep beneath the crust of Jupiter\u2019s frozen moon Europa lies a massive liquid water ocean. Exploring this ocean world with our Europa Clipper spacecraft could provide new clues in our search for life beyond Earth. Scheduled to launch in October 2024, Europa Clipper\u2019s main science goal is to determine whether there are places below the surface of Jupiter\u2019s icy moon, Europa, that could support life. Credit: NASA\n\nJupiter\u2019s moon Europa shows strong evidence for an ocean of liquid water beneath its icy crust. Beyond Earth, Europa is considered one of the most promising currently habitable environments in our solar system. \nBelow Europa\u2019s icy surface, evidence suggests there is a global ocean with more water than all of Earth\u2019s oceans combined. Europa could have all the \u201cingredients\u201d needed for life as we know it: \n\nWater: Twice as much as Earth\u2019s oceans \n\nOrganics: Essential chemical building blocks from a variety of sources\n\nEnergy: Chemical energy sources from the surface and the sea floor\n\nStability: Conditions remaining similar for 4 billion years\n\nNASA's Europa Clipper spacecraft will perform approximately 50 close flybys of the moon, gathering detailed measurements to investigate whether the moon could have conditions suitable for life. Europa Clipper is not a life detection mission \u2013 its main science goal is to determine whether there are places below Europa\u2019s surface that could support life.\n\nEuropa Up Close\n\nTake an in-depth look at Jupiter's icy moon and Europa Clipper's plans for investigation.\n\nLearn more \u203a\n\nScience ObjectivesScience Objectives\nEuropa Clipper has three main science objectives: \n\nDetermine the Thickness of Europa\u2019s Icy Shell & How the Ocean Interacts With the Surface",
+          "title": "Science | Mission \u2013 NASA's Europa Clipper",
+          "url": "https://europa.nasa.gov/mission/science/",
+          "score": 47.200264,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "no",
+                "timestamp": 1723048315
+              },
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1726571105
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What is the goal of NASA\u201a\u00c4\u00f4s Europa Clipper mission?\n|assistant|: The main science goal of NASA's Europa Clipper mission is to determine whether there are places below the surface of Jupiter's icy moon, Europa, that could support life. The mission's three main science objectives are to understand the nature of the ice shell and the ocean beneath it, to investigate its composition, and to characterize its geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.\n|user|: I Europa livable for humans?\n|assistant|: Based on the information provided, Europa is not considered directly livable for humans. However, it is considered one of the most promising currently habitable environments in our solar system due to the presence of a vast ocean beneath its icy crust. This ocean could potentially contain conditions suitable for life as we know it. The Europa Clipper mission is designed to investigate whether the moon could have conditions suitable for life, but it is not a life detection mission. Europa could have all the \u201cingredients\u201d needed for life as we know it:\nWater: Twice as much as Earth\u2019s oceans\nOrganics: Essential chemical building blocks from a variety of sourcesEnergy: Chemical energy sources from the surface and the sea floor\n\nStability: Conditions remaining similar for 4 billion years\n|user|: The surface of Jupiter Europa\n|assistant|: The surface of Jupiter's moon, Europa, is made up of ice. It is covered in a thick crust of frozen water that is estimated to be between 10 to 100 kilometers thick. The surface also shows signs of past and present geological activity, such as ridges, chaos terrain, and lenticulae. These features suggest that there is heat being generated from within Europa, which is thought to be due to tidal heating caused by Jupiter's gravitational pull. Additionally, the surface of Europa is subject to bombardment by radiation from Jupiter, which can cause the ice to darken and form a reddish-brown color in some areas. The surface of Jupiter's moon Europa features a widely varied landscape, including ridges, bands, small rounded domes and disrupted spaces that geologists call \"chaos terrain.\"\n|user|: Who funds the Clipper mission?\n|assistant|: The Europa Clipper mission is funded by NASA, which is a U.S. government agency responsible for civilian space exploration and aeronautics research. NASA's budget comes primarily from Congressional appropriations. The total contract award amount for launch services is approximately $178 million.\n|user|: Does NASA have an intern program?\n|assistant|: Yes, NASA does offer an internship program. The NASA Internships program is for high school, undergraduate, and graduate students, as well as educators, and provides students with the opportunity to work with professionals in their field of interest and gain valuable experience. You can find more information about the program and how to apply on NASA's official website. I'm not a science or engineering student. Can I still get an internship at NASA?\n\nYes! Interns may support a variety of business and program management work, including human resources, administration and program analysis, accounting and budget, communication and public relations, procurement and contracts, information technology, security, and education. No matter your academic major, you\u2019ll find that NASA is a place where you\u2019ll belong to a supportive community that values your background, perspective, and life experiences.\n|user|: Does Clipper have an antennae?\n|assistant|: Yes, the Europa Clipper spacecraft has an high-gain antenna. It is used for communication with Earth and sending data back to NASA. Workers were seen installing it on the spacecraft on August 14, 2023. Europa Clipper\u2019s 10-foot-diameter (3-meter-diameter) high-gain antenna (HGA) and other smaller radio antennas will be used to receive commands from Earth through NASA\u2019s Deep Space Network. \n|user|: What is the speed at which Clipper flies?\n|assistant|: The speed at which the Europa Clipper spacecraft flies will vary depending on its trajectory and distance from Jupiter. However, during its closest flybys of Europa, it is expected to reach speeds of around 15,000 to 20,000 miles per hour (6.7 to 9 kilometers per second). It will carry fuel and oxidizer sufficient to change Europa Clipper\u2019s velocity by about 3,600 miles per hour (5,800 kilometers per hour).\n|user|: Does Clipper fly by Europe?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6e52d5b809f037b2-2126-4106",
+          "text": "Europa Clipper - NASA Science\nScientists predict Europa has a salty ocean beneath its icy crust that could hold the building blocks necessary to sustain life.TypeOrbiterLaunchOct. 10, 2024TargetEuropaObjectiveDetermine if Europa has conditions suitable to support lifeMission OverviewSpacecraftWhy Europa?What will Europa Clipper do?Europa Clipper\u2019s main science goal is to determine whether there are places below the surface of Jupiter\u2019s icy moon, Europa, that could support life.The mission\u2019s three main science objectives are to understand the nature of the ice shell and the ocean beneath it, along with the moon\u2019s composition and geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.Read MoreAn artist's concept of NASA\u2019s Europa Clipper spacecraft.NASA/JPL-CaltechWhat is NASA\u2019s Europa Clipper spacecraft?Europa Clipper is a robotic solar-powered spacecraft built to conduct the first detailed investigations of Jupiter's icy moon Europa.With its solar arrays deployed, Europa Clipper spans more than 100 feet (about 30 meters) \u2013 about the length of a basketball court. The main body of the spacecraft consists of its avionics vault, radiofrequency module, and propulsion module.Read MoreWorkers use a crane to lift Europa Clipper's high-gain antenna as they prepare to install it on the spacecraft on Aug. 14, 2023. NASA/JPL-CaltechWhy Europa?The search for life beyond Earth is one of NASA\u2019s primary objectives.\u00a0If humans are to truly understand our place in the universe, we must learn whether our planet is the only place where life exists. So the search is on! There is strong evidence Jupiter's moon Europa has a saltwater ocean that may be one of the best places to look for environments where life could exist beyond Earth.Read MoreThis view of Jupiter\u2019s icy moon Europa was captured by the JunoCam imager aboard NASA\u2019s Juno spacecraft during the mission\u2019s close flyby on Sept. 29, 2022.",
+          "title": "Europa Clipper - NASA Science",
+          "url": "https://science.nasa.gov/mission/europa-clipper/",
+          "score": 45.43264,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "no",
+                "timestamp": 1723048354
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What is the goal of NASA\u201a\u00c4\u00f4s Europa Clipper mission?\n|assistant|: The main science goal of NASA's Europa Clipper mission is to determine whether there are places below the surface of Jupiter's icy moon, Europa, that could support life. The mission's three main science objectives are to understand the nature of the ice shell and the ocean beneath it, to investigate its composition, and to characterize its geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.\n|user|: I Europa livable for humans?\n|assistant|: Based on the information provided, Europa is not considered directly livable for humans. However, it is considered one of the most promising currently habitable environments in our solar system due to the presence of a vast ocean beneath its icy crust. This ocean could potentially contain conditions suitable for life as we know it. The Europa Clipper mission is designed to investigate whether the moon could have conditions suitable for life, but it is not a life detection mission. Europa could have all the \u201cingredients\u201d needed for life as we know it:\nWater: Twice as much as Earth\u2019s oceans\nOrganics: Essential chemical building blocks from a variety of sourcesEnergy: Chemical energy sources from the surface and the sea floor\n\nStability: Conditions remaining similar for 4 billion years\n|user|: The surface of Jupiter Europa\n|assistant|: The surface of Jupiter's moon, Europa, is made up of ice. It is covered in a thick crust of frozen water that is estimated to be between 10 to 100 kilometers thick. The surface also shows signs of past and present geological activity, such as ridges, chaos terrain, and lenticulae. These features suggest that there is heat being generated from within Europa, which is thought to be due to tidal heating caused by Jupiter's gravitational pull. Additionally, the surface of Europa is subject to bombardment by radiation from Jupiter, which can cause the ice to darken and form a reddish-brown color in some areas. The surface of Jupiter's moon Europa features a widely varied landscape, including ridges, bands, small rounded domes and disrupted spaces that geologists call \"chaos terrain.\"\n|user|: Who funds the Clipper mission?\n|assistant|: The Europa Clipper mission is funded by NASA, which is a U.S. government agency responsible for civilian space exploration and aeronautics research. NASA's budget comes primarily from Congressional appropriations. The total contract award amount for launch services is approximately $178 million.\n|user|: Does NASA have an intern program?\n|assistant|: Yes, NASA does offer an internship program. The NASA Internships program is for high school, undergraduate, and graduate students, as well as educators, and provides students with the opportunity to work with professionals in their field of interest and gain valuable experience. You can find more information about the program and how to apply on NASA's official website. I'm not a science or engineering student. Can I still get an internship at NASA?\n\nYes! Interns may support a variety of business and program management work, including human resources, administration and program analysis, accounting and budget, communication and public relations, procurement and contracts, information technology, security, and education. No matter your academic major, you\u2019ll find that NASA is a place where you\u2019ll belong to a supportive community that values your background, perspective, and life experiences.\n|user|: Does Clipper have an antennae?\n|assistant|: Yes, the Europa Clipper spacecraft has an high-gain antenna. It is used for communication with Earth and sending data back to NASA. Workers were seen installing it on the spacecraft on August 14, 2023. Europa Clipper\u2019s 10-foot-diameter (3-meter-diameter) high-gain antenna (HGA) and other smaller radio antennas will be used to receive commands from Earth through NASA\u2019s Deep Space Network. \n|user|: What is the speed at which Clipper flies?\n|assistant|: The speed at which the Europa Clipper spacecraft flies will vary depending on its trajectory and distance from Jupiter. However, during its closest flybys of Europa, it is expected to reach speeds of around 15,000 to 20,000 miles per hour (6.7 to 9 kilometers per second). It will carry fuel and oxidizer sufficient to change Europa Clipper\u2019s velocity by about 3,600 miles per hour (5,800 kilometers per hour).\n|user|: Does Clipper fly by Europe?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "b2fd7f2d1c5eeed5-6175-8273",
+          "text": "Europa Clipper High Gain Antenna Undergoes Testing at Langley \u2013 NASA's Europa Clipper\nJupiter\u2019s moon Europa and its global ocean may currently have conditions suitable for life. Scientists are studying processes on the icy surface as they prepare to explore.\n\nSurface of Jupiter's Moon Europa Churned by Small Impacts\n\nJupiter\u2019s icy moon Europa may be the most promising place in the solar system to find present-day environments suitable for life beyond Earth. \n\nEuropa: A World of Ice, With Potential for Life\n\nJupiter\u2019s moon Europa has an icy crust covering a vast, global ocean. The rocky layer underneath may be hot enough to melt, leading to undersea volcanoes.\n\nEuropa's Interior May Be Hot Enough to Fuel Seafloor Volcanoes\n\nJupiter\u2019s moon Europa may have the potential to harbor life. The spacecraft will use multiple flybys of the moon to investigate the habitability of this ocean world.\n\nNASA's Europa Clipper Builds Hardware, Moves Toward Assembly\n\nIn an unprecedented year, the Europa Clipper project continues on the path toward unprecedented science. \n\nOn the Path Towards Unprecedented Science\n\nScientists have theorized on the origin of the water plumes possibly erupting from Jupiter's moon Europa. Recent research adds a new potential source to the mix.\n\nPotential Plumes on Europa Could Come From Water in the Crust\n\nNew lab experiments re-create the environment of Europa and find that the icy moon shines, even on its nightside. The effect is more than just a cool visual.\n\nEuropa Glows: Radiation Does a Bright Number on Jupiter's Moon\n\nThe surface of Jupiter's moon Europa features a widely varied landscape, including ridges, bands, small rounded domes and disrupted spaces that geologists call \"chaos terrain.\" Three newly reprocessed images, taken by NASA's Galileo spacecraft in the late 1990s, reveal details in diverse surface features on Europa.\n\nNewly Reprocessed Images of Europa Show 'Chaos Terrain' in Crisp Detail\n\nAn icy ocean world in our solar system that could tell us more about the potential for life on other worlds is coming into focus with confirmation of the Europa Clipper mission's next phase. \n\nMission to Jupiter's Icy Moon Confirmed",
+          "title": "Europa Clipper High Gain Antenna Undergoes Testing at Langley \u2013 NASA's Europa Clipper",
+          "url": "https://europa.nasa.gov/news/23/europa-clipper-high-gain-antenna-undergoes-testing-at-langley/",
+          "score": 44.82335,
+          "feedback": {
+            "relevant": {
+              "53573702-4140-4812-8658-ae10a54edfc8": {
+                "value": "no",
+                "timestamp": 1723048435
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What is the goal of NASA\u201a\u00c4\u00f4s Europa Clipper mission?\n|assistant|: The main science goal of NASA's Europa Clipper mission is to determine whether there are places below the surface of Jupiter's icy moon, Europa, that could support life. The mission's three main science objectives are to understand the nature of the ice shell and the ocean beneath it, to investigate its composition, and to characterize its geology. The mission\u2019s detailed exploration of Europa will help scientists better understand the astrobiological potential for habitable worlds beyond our planet.\n|user|: I Europa livable for humans?\n|assistant|: Based on the information provided, Europa is not considered directly livable for humans. However, it is considered one of the most promising currently habitable environments in our solar system due to the presence of a vast ocean beneath its icy crust. This ocean could potentially contain conditions suitable for life as we know it. The Europa Clipper mission is designed to investigate whether the moon could have conditions suitable for life, but it is not a life detection mission. Europa could have all the \u201cingredients\u201d needed for life as we know it:\nWater: Twice as much as Earth\u2019s oceans\nOrganics: Essential chemical building blocks from a variety of sourcesEnergy: Chemical energy sources from the surface and the sea floor\n\nStability: Conditions remaining similar for 4 billion years\n|user|: The surface of Jupiter Europa\n|assistant|: The surface of Jupiter's moon, Europa, is made up of ice. It is covered in a thick crust of frozen water that is estimated to be between 10 to 100 kilometers thick. The surface also shows signs of past and present geological activity, such as ridges, chaos terrain, and lenticulae. These features suggest that there is heat being generated from within Europa, which is thought to be due to tidal heating caused by Jupiter's gravitational pull. Additionally, the surface of Europa is subject to bombardment by radiation from Jupiter, which can cause the ice to darken and form a reddish-brown color in some areas. The surface of Jupiter's moon Europa features a widely varied landscape, including ridges, bands, small rounded domes and disrupted spaces that geologists call \"chaos terrain.\"\n|user|: Who funds the Clipper mission?\n|assistant|: The Europa Clipper mission is funded by NASA, which is a U.S. government agency responsible for civilian space exploration and aeronautics research. NASA's budget comes primarily from Congressional appropriations. The total contract award amount for launch services is approximately $178 million.\n|user|: Does NASA have an intern program?\n|assistant|: Yes, NASA does offer an internship program. The NASA Internships program is for high school, undergraduate, and graduate students, as well as educators, and provides students with the opportunity to work with professionals in their field of interest and gain valuable experience. You can find more information about the program and how to apply on NASA's official website. I'm not a science or engineering student. Can I still get an internship at NASA?\n\nYes! Interns may support a variety of business and program management work, including human resources, administration and program analysis, accounting and budget, communication and public relations, procurement and contracts, information technology, security, and education. No matter your academic major, you\u2019ll find that NASA is a place where you\u2019ll belong to a supportive community that values your background, perspective, and life experiences.\n|user|: Does Clipper have an antennae?\n|assistant|: Yes, the Europa Clipper spacecraft has an high-gain antenna. It is used for communication with Earth and sending data back to NASA. Workers were seen installing it on the spacecraft on August 14, 2023. Europa Clipper\u2019s 10-foot-diameter (3-meter-diameter) high-gain antenna (HGA) and other smaller radio antennas will be used to receive commands from Earth through NASA\u2019s Deep Space Network. \n|user|: What is the speed at which Clipper flies?\n|assistant|: The speed at which the Europa Clipper spacecraft flies will vary depending on its trajectory and distance from Jupiter. However, during its closest flybys of Europa, it is expected to reach speeds of around 15,000 to 20,000 miles per hour (6.7 to 9 kilometers per second). It will carry fuel and oxidizer sufficient to change Europa Clipper\u2019s velocity by about 3,600 miles per hour (5,800 kilometers per hour).\n|user|: Does Clipper fly by Europe?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "53573702-4140-4812-8658-ae10a54edfc8",
+      "status": "created",
+      "timestamp": 1723049267
+    },
+    {
+      "author": "53573702-4140-4812-8658-ae10a54edfc8",
+      "status": "accepted",
+      "timestamp": 1724869084
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "rejected",
+      "timestamp": 1725551217
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "edited",
+      "timestamp": 1726571113
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "accepted",
+      "timestamp": 1726571462
+    }
+  ],
+  "editor": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+  "domain": "mt-rag-govt-elser-512-100-20240611",
+  "reviewer": "9dcd142c-415e-4161-a82f-c8b14bfb36ac"
+}

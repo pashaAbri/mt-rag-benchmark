@@ -1,0 +1,740 @@
+{
+  "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-ibmcloud-elser-512-100-20240502",
+      "size": "72442"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "How can I compare the metrics for different periods?",
+      "timestamp": 1723721516,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "To compare the metrics for different periods, you can use the Time period control to select the desired time frames. You can choose from predefined periods such as a single day, a week, a month, or a quarter, or create custom time periods. The data points on the graph will adjust to an appropriate measurement period for the selected time frame. For example, when viewing a graph for a day, the data is presented in hourly values, but when viewing a graph for a week, the data is shown by day. Additionally, you can use the Refresh data option to ensure the data is up-to-date.",
+      "timestamp": 1723721520,
+      "contexts": [
+        {
+          "document_id": "ibmcld_03036-7-2061",
+          "text": "\nMetrics overview \n\nThe Overview page provides a summary of the interactions between users and your assistant. You can view the amount of traffic for a given time period, as well as the intents and entities that were recognized most often in user conversations.\n\nThe Analytics page was introduced with version 1.5.0. The Analytics feature is supported only on clusters that are installed on Red Hat OpenShift 4.5 or later.\n\nUse the metrics to answer questions like:\n\n\n\n* What was the average number of conversations per week during the last month?\n* How often did customers need to go elsewhwere for support?\n* Which intents appeared most often last week?\n* Which entity values were recognized the most times during February?\n* Which days had the largest or smallest numbers of conversations in the last month?\n\n\n\nTo see metrics information, select Overview in the navigation bar.\n\n\n\n Controls \n\nYou can use the following controls to filter the information:\n\n\n\n* Time period control - Use this control to choose the period for which data is displayed. This control affects all data shown on the page: not just the number of conversations displayed in the graph, but also the statistics displayed along with the graph, and the lists of top intents and entities.\n\nThe statistics can cover a longer time period than the period for which logs of conversations are retained.\n\n![Time period control](https://cloud.ibm.com/docs-content/v1/content/a2b18c153837bce00a5b4de496e4b4ca64bbf56e/assistant-data/images/oview-time.png)\n\nYou can choose whether to view data for a single day, a week, a month, or a quarter. In each case, the data points on the graph adjust to an appropriate measurement period. For example, when viewing a graph for a day, the data is presented in hourly values, but when viewing a graph for a week, the data is shown by day. A week always runs from Sunday through Saturday.\n\nYou can create custom time periods also, such as a week that runs from Thursday to the following Wednesday, or a month that begins on any date other than the first.",
+          "url": "https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-logs-overview",
+          "score": 10.569617,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723721632
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How can I compare the metrics for different periods?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03036-1611-3443",
+          "text": "\nIn each case, the data points on the graph adjust to an appropriate measurement period. For example, when viewing a graph for a day, the data is presented in hourly values, but when viewing a graph for a week, the data is shown by day. A week always runs from Sunday through Saturday.\n\nYou can create custom time periods also, such as a week that runs from Thursday to the following Wednesday, or a month that begins on any date other than the first.\n\nThe time shown for each conversation is localized to reflect the time zone of your browser. However, API log calls are always shown in UTC time. As a result, if you choose a single day view, for example, the time shown in the visualization might differ from the timestamp specified in the log for the same conversation.\n\n![Time period control](https://cloud.ibm.com/docs-content/v1/content/a2b18c153837bce00a5b4de496e4b4ca64bbf56e/assistant-data/images/oview-time2.png)\n* Intents and Entities filters - Use either of these drop-down filters to show data for a specific intent or entity in your skill.\n\nThe intent and entities filters are populated by the intents and entities in the skill, and not what is in the data source. If you have [selected a data source](https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-logslogs-deploy-id) other than the skill, you might not see an intent or entity from your data source logs as an option in the filters, unless those intents and entities are also in the skill.\n* Refresh data: Select Refresh data to refresh the data that is used in the page metrics.\n\nThe statistics show traffic from customers who interact with your assistant; they do not include interactions from the Try it out pane.\n\n\n\n\n\n\n\n Scorecards \n\nThe scorecards give you a quick view of your metrics. Scroll to see full interactive graphs later in the page.\n\n!",
+          "url": "https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-logs-overview",
+          "score": 7.9392548,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723721629
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How can I compare the metrics for different periods?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03363-6198-7991",
+          "text": "\nThe statistics can cover a longer time period than the period for which logs of conversations are retained.\n\n![Time period control](https://cloud.ibm.com/docs-content/v1/content/417db917d18067d9dcc4cf2612564a9a87c3ddc8/assistant/images/oview-time.png)\n\nYou can choose whether to view data for a single day, a week, a month, or a quarter. In each case, the data points on the graph adjust to an appropriate measurement period. For example, when viewing a graph for a day, the data is presented in hourly values, but when viewing a graph for a week, the data is shown by day. A week always runs from Sunday through Saturday.\n\nYou can create custom time periods also, such as a week that runs from Thursday to the following Wednesday, or a month that begins on any date other than the first.\n\nThe time shown for each conversation is localized to reflect the time zone of your browser. However, API log calls are always shown in UTC time. As a result, if you choose a single day view, for example, the time shown in the visualization might differ from the timestamp specified in the log for the same conversation.\n\n![Time period control](https://cloud.ibm.com/docs-content/v1/content/417db917d18067d9dcc4cf2612564a9a87c3ddc8/assistant/images/oview-time2.png)\n* Intents and Entities filters - Use either of these drop-down filters to show data for a specific intent or entity in your skill.\n\nThe intent and entities filters are populated by the intents and entities in the skill, and not what is in the data source. If you have [selected a data source](https://cloud.ibm.com/docs/assistant?topic=assistant-logslogs-deploy-id) other than the skill, you might not see an intent or entity from your data source logs as an option in the filters, unless those intents and entities are also in the skill.",
+          "url": "https://cloud.ibm.com/docs/assistant?topic=assistant-logs-overview",
+          "score": 7.583272,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723721626
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How can I compare the metrics for different periods?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "To compare the metrics for different periods, you can use the Time period control to select the desired time frames. You can choose from predefined periods such as a single day, a week, a month, or a quarter, or create custom time periods. The data points on the graph will adjust to an appropriate measurement period for the selected time frame. For example, when viewing a graph for a day, the data is presented in hourly values, but when viewing a graph for a week, the data is shown by day. A week always runs from Sunday through Saturday. However, keep in mind that the time shown for each conversation is localized to reflect the time zone of your browser, while API log calls are always shown in UTC time. This means that there might be a difference between the time shown in the visualization and the timestamp specified in the log for the same conversation if you choose a single day view."
+    },
+    {
+      "speaker": "user",
+      "text": "some example of alerts",
+      "timestamp": 1723724373,
+      "enrichments": {
+        "Question Type": [
+          "Explanation",
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Sure, here's an example of detail alerts: - Name: Enter a name for the alert (e.g., 'High CPU Usage'). - Description: Add a description for more context (optional). - Group: Specify the alert group (or use the default group). - Severity: Set the level of criticality (e.g., 'High', 'Medium', 'Low', or 'Info'). - Metric: Configure the metric you want to monitor (e.g., 'CPU usage'). - Scope: Configure the scope (e.g., specific resources, resource groups, or cloud accounts). - Trigger: Define the condition and threshold value that must be evaluated. For instance, you can set an alert to trigger when CPU usage exceeds 80% for at least 5 minutes. - Notification Channel: Enable 1 or more notification channels to receive alert notifications. Remember to save your alert settings after configuring them. For more information, refer to the document on configuring alerts: [Configuring an alert](https://cloud.ibm.com/docs/monitoring?topic=monitoring-alert-config).",
+      "timestamp": 1723724377,
+      "contexts": [
+        {
+          "document_id": "ibmcld_09703-7-2026",
+          "text": "\nWorking with alerts and events \n\nIn the IBM Cloud Monitoring service, you can configure single alerts and multi-condition alerts to notify about problems that may require attention. When an alert is triggered, you can be notified through 1 or more notification channels. An alert definition can generate multi-channel notifications.\n\nAn alert is a notification event that you can use to warn about situations that require attention. Each alert has a severity status. This status informs you about the criticality of the information it reports on.\n\nWhen you define an alert, you must define the condition that triggers the notification, and one or more notification channels through which you want to be notified. You must also define the severity of the alert, and the type of alert. For more information about how to configure an alert, see [Configuring an alert](https://cloud.ibm.com/docs/monitoring?topic=monitoring-alert-config).\n\nBy default, severity is set to warning. You can set the severity of an alert to any of the following values: emergency, alert, critical, error, warning, notice, informational, debug*\n\nYou can define an alert on a single metric or a set of metrics to notify of events or issues that you want to monitor.\n\n\n\n* You can define a single condition alert.\n* You can define a multi-condition alert. The alert threshold is configured by using complex conditions.\n* You can define how the data is aggregated.\n* You can use boolean logic to define alerts that report on multiple metrics.\n* You get a notification when the alert condition is met.\n* You can configure multiple notification channels per alert.\n* Alerts are executed in 1 minute or less from receipt, with the option to configure the trigger wait time by hour or day.\n* For PromQL alerts only, you can optionally configure a 0 minute wait time.\n\n\n\nYou can enable predefined alerts, modify alerts, and create custom alerts in the web UI and by using the IBM Cloud Monitoring API.\n\nYou manage alerts in the Alerts view of the web UI.",
+          "url": "https://cloud.ibm.com/docs/monitoring?topic=monitoring-alerts",
+          "score": 13.601069,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723725186
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Alert in metrics"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_09685-5899-7847",
+          "text": "\nFor more information, see [Collecting metrics](https://cloud.ibm.com/docs/monitoring?topic=monitoring-about-collect-metrics).\n\n\n\n\n\n Sending metrics \n\nYou can send metrics via the public or the private endpoints by using the appropriate ingestion URL. Details can be found in the [endpoints](https://cloud.ibm.com/docs/monitoring?topic=monitoring-endpointsendpoints) section.\n\n\n\n\n\n Viewing metrics \n\nYou can monitor and manage metrics through the Monitoring Web UI. For more information, see [Viewing metrics](https://cloud.ibm.com/docs/monitoring?topic=monitoring-monitoring).\n\nNotice that there is a delay showing metric data for new time series. Data is not ready until the initial indexing of a new metric source is completed. Therefore, new sources such as clusters, platform metrics, or systems that you configure, all take some time to become visible through the Monitoring UI.\n\n\n\n\n\n Sending notifications \n\nYou can configure single alerts and multi-condition alerts to notify about problems that may require attention. When an alert is triggered, you can be notified through 1 or more notification channels. An alert definition can generate multi-channel notifications.\n\nAn alert is a notification event that you can use to warn about situations that require attention. Each alert has a severity status. This status informs you about the criticality of the information it reports on.\n\nFor example, you can set up Monitoring to send alert notifications to IBM Cloud Event Notifications.\n\n\n\n* [Sending email notifications to IBM Cloud Event Notifications](https://cloud.ibm.com/docs/monitoring?topic=monitoring-tutorial)\n* [Sending SMS notifications to IBM Cloud Event Notifications](https://cloud.ibm.com/docs/monitoring?topic=monitoring-tutorial-en-sms)\n\n\n\nFor more information, see [Working with alerts and events](https://cloud.ibm.com/docs/monitoring?topic=monitoring-alerts).\n\n\n\n\n\n Data location \n\nMetric data is hosted on the IBM Cloud.",
+          "url": "https://cloud.ibm.com/docs/monitoring?topic=monitoring-about-monitor",
+          "score": 13.22359,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723725189
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Alert in metrics"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_09794-10912-12367",
+          "text": "\nYou can define a metric alert directly from the Alerts section.\n\nComplete the following steps to define an alert on a metric:\n\n\n\n1. [Launch the monitoring UI](https://cloud.ibm.com/docs/monitoring?topic=monitoring-launch).\n2. Verify that you have a notification channel that defines how you want to be notified.\n\nYou can enabled 1 or more notification channels when you configure an alert. If you need multiple notification channels, check they are available.\n3. Navigate to the Alerts section ![Alerts module](https://cloud.ibm.com/docs-content/v1/content/220cdcbf6f4421bd7fee83fd1028048dba3f16c8/monitoring/images/alerts.png)) in the Web UI.\n4. Select Add Alert.\n\nZoom\n\n![Add alert](https://cloud.ibm.com/docs-content/v1/content/220cdcbf6f4421bd7fee83fd1028048dba3f16c8/monitoring/platform/images/sysdig-platform-7.png)\n\nAdd alert\n5. Select your desired alert type.\n\nZoom\n\n![Choose alert type](https://cloud.ibm.com/docs-content/v1/content/220cdcbf6f4421bd7fee83fd1028048dba3f16c8/monitoring/platform/images/sysdig-platform-16.png)\n\nChoose alert type\n6. Configure the alert. Set the following fields:\n\nName: Enter a name for the alert.\n\nDescription: Add a description that other users can read to get more context. This field is optional.\n\nGroup: The alert group this alert will be part of. If not specified, the alert will be part of the default group.\n\nSeverity: Set the level of criticality of the alert. Valid values are High, Medium, Low, and Info.",
+          "url": "https://cloud.ibm.com/docs/monitoring?topic=monitoring-platform_metrics_working",
+          "score": 13.104102,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723725191
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Alert in metrics"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Sure, here are some examples of alerts that you can define in the IBM Cloud Monitoring service:\n1. Single Metric Alert: You can define an alert based on a single metric, such as CPU usage, memory utilization, or network traffic. For instance, you can create an alert that notifies you when the average CPU usage on a monitored system exceeds 80% over a 5-minute period.\n2. Multi-Condition Alert: You can define an alert that is triggered based on multiple conditions. For example, you can create an alert that notifies you when both the average CPU usage and the average memory utilization on a monitored system exceed their respective thresholds (e.g., 80% and 70%) within a 5-minute period.\n3. Complex Conditions Alert: You can define an alert using complex conditions, such as a combination of boolean logic and metric comparisons. For instance, you can create an alert that notifies you when either the average CPU usage or the average memory utilization on a monitored system exceeds its threshold, but only if the other metric is below its threshold.\n4. Predefined Alerts: IBM Cloud Monitoring provides predefined alerts for common use cases, such as high disk usage, low available memory, or network connectivity issues. You can enable these alerts directly from the Alerts section in the web UI.\n5. Custom Alerts: You can create custom alerts tailored to your specific needs by defining the conditions, notification channels, and severity levels. These alerts can be created in the web UI or programmatically using the IBM Cloud Monitoring API.\nRemember that when creating an alert, you must define the condition that triggers the notification, the severity level, and the notification channels. By default, the severity level is set to 'warning', but you can change it to any of the following values: emergency, alert, critical, error, warning, notice, informational, or debug."
+    },
+    {
+      "speaker": "user",
+      "text": "weak understanding metrics",
+      "timestamp": 1723726007,
+      "enrichments": {
+        "Question Type": [
+          "Explanation",
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "A metric is a measure of something that can be quantified and tracked over time. In the context of cloud monitoring, metrics are data points that provide insights into the performance, availability, and usage of resources in your cloud environment.  In scorecards, a weak understanding is measured by counting the number of individual messages that are not classified by an intent and do not contain any known entities. Reviewing these unrecognized messages can help identify potential dialog problems and improve the system's understanding of user inputs.\n\n",
+      "timestamp": 1723726013,
+      "contexts": [
+        {
+          "document_id": "ibmcld_09700-7-1797",
+          "text": "\nConfiguring an alert by using the legacy alert editor \n\nIn the IBM Cloud Monitoring service, you can configure single alerts and multi-condition alerts to notify about problems that may require attention. When an alert is triggered, you can be notified through 1 or more notification channels. An alert definition can generate multi-channel notifications.\n\nAn alert is a notification event that you can use to warn about situations that require attention. Each alert has a severity status. This status informs you about the criticality of the information it reports on. [Learn more](https://cloud.ibm.com/docs/monitoring?topic=monitoring-alerts).\n\nComplete the following steps to configure an alert:\n\n\n\n Step 1. Select the alert type \n\nFrom the Alert section of the UI, select Add Alert. Then, choose the alert type.\n\n\n\n\n\n Step 2. Name the alert \n\nEnter a name for the alert.\n\nYou can also add a description for the alert and the name of an alert group if you want to group you alerts. If an alert group is not specified, the alert will be created in the default group.\n\n\n\n\n\n Step 3. Define the severity \n\nAdd a severity level. Valid severity values are info, low, medium, and high.\n\n\n\n\n\n Step 4. Define the metric section \n\n\n\n1. Select a metric (entity) that you want to monitor.\n2. Define the alert condition. Choose any of the following options:\n\nOption 1: Choose a metric and a single condition such as average, sum, minimum or maximum.\n\nOption 2: Choose Create multi-condition alerts. Enter the condition, for example, min(min(cpu.used.percent)) < = 50 OR max(max(cpu.used.percent)) >= 80.\n\nZoom\n\n![Multi-condition alert](https://cloud.ibm.com/docs-content/v1/content/220cdcbf6f4421bd7fee83fd1028048dba3f16c8/monitoring/monitor/images/multi-condition-alerts.png)\n\nMulti-condition alert",
+          "url": "https://cloud.ibm.com/docs/monitoring?topic=monitoring-alert-config",
+          "score": 39.6658,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1723726529
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How can I compare the metrics for different periods?\n|assistant|: To compare the metrics for different periods, you can use the Time period control to select the desired time frames. You can choose from predefined periods such as a single day, a week, a month, or a quarter, or create custom time periods. The data points on the graph will adjust to an appropriate measurement period for the selected time frame. For example, when viewing a graph for a day, the data is presented in hourly values, but when viewing a graph for a week, the data is shown by day. Additionally, you can use the Refresh data option to ensure the data is up-to-date.\n|user|: some example of alerts\n|assistant|: Sure, here's an example of detail alerts: - Name: Enter a name for the alert (e.g., 'High CPU Usage'). - Description: Add a description for more context (optional). - Group: Specify the alert group (or use the default group). - Severity: Set the level of criticality (e.g., 'High', 'Medium', 'Low', or 'Info'). - Metric: Configure the metric you want to monitor (e.g., 'CPU usage'). - Scope: Configure the scope (e.g., specific resources, resource groups, or cloud accounts). - Trigger: Define the condition and threshold value that must be evaluated. For instance, you can set an alert to trigger when CPU usage exceeds 80% for at least 5 minutes. - Notification Channel: Enable 1 or more notification channels to receive alert notifications. Remember to save your alert settings after configuring them. For more information, refer to the document on configuring alerts: [Configuring an alert](https://cloud.ibm.com/docs/monitoring?topic=monitoring-alert-config).\n|user|: weak understanding metrics"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03036-2789-4951",
+          "text": "\nIf you have [selected a data source](https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-logslogs-deploy-id) other than the skill, you might not see an intent or entity from your data source logs as an option in the filters, unless those intents and entities are also in the skill.\n* Refresh data: Select Refresh data to refresh the data that is used in the page metrics.\n\nThe statistics show traffic from customers who interact with your assistant; they do not include interactions from the Try it out pane.\n\n\n\n\n\n\n\n Scorecards \n\nThe scorecards give you a quick view of your metrics. Scroll to see full interactive graphs later in the page.\n\n![Shows the scorecards that are displayed at the start of the Analytics page](https://cloud.ibm.com/docs-content/v1/content/a2b18c153837bce00a5b4de496e4b4ca64bbf56e/assistant-data/images/scorecard.png)\n\n\n\n* Total conversations: The total number of conversations between active users and your assistant that occur during the selected time period.\n\nA single conversation consists of messages that an active user sends to your assistant, and the messages your assistant sends to the user to initiate the conversation or respond.\n\nIf your assistant starts by saying Hi, how can I help you?, and then the user closes the browser without responding, that message is included in the total conversation count.\n\nThe total conversations metric is not used for billing purposes. An exchange with a user is not considered a billable conversation until the user submits a message.\n* Avg. msg. per conversation: The total messages received during the selected time period divided by the total conversations during the selected time period, as shown in the corresponding graph.\n* Max. conversations: The maximum number of conversations for a single data point within the selected time period.\n* Weak understanding: The number of individual messages with weak understanding. These messages are not classified by an intent, and do not contain any known entities. Reviewing unrecognized messages can help you to identify potential dialog problems.\n\n\n\n\n\n\n\n Graphs and statistics \n\nDetailed graphs provide additional information.",
+          "url": "https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-logs-overview",
+          "score": 9.617644,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723726314
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "scorecards weak undersatanding"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_09685-4-1903",
+          "text": "\n--------------------\n\n\n\n Monitoring in IBM Cloud \n\nYou can use IBM Cloud\u00ae Monitoring to monitor the performance and overall system health of your organization.\n\nYou can collect metrics from a number of platforms, orchestrators, and a wide range of applications such as Prometheus, JMX, StatsD, Kubernetes, and other application stacks, that are available in the IBM Cloud, outside the IBM Cloud, or on-prem. You can also add more metrics by creating custom metrics and adding integrations.\n\nYou can monitor metrics through the Monitoring web UI, or through other platforms like Grafana.\n\nThe following figure shows the components overview for the IBM Cloud Monitoring service that is running on IBM Cloud:\n\nZoom\n\n![IBM Cloud Monitoring component overview on the IBM Cloud](https://cloud.ibm.com/docs-content/v1/content/220cdcbf6f4421bd7fee83fd1028048dba3f16c8/monitoring/images/overview.svg)\n\nFigure 1. IBM Cloud Monitoring component overview on the IBM Cloud\n\nWhen you configure a Monitoring agent, data for default metrics is automatically collected. These metrics include metadata that you can use to label, segment, and display metrics when you monitor them. You do not need additional instrumentation or configuration in your hosts to obtain metrics that are collected automatically by the agent to gain insight into what is happening in them.\n\nTo monitor your infrastructure, network, and applications with the IBM Cloud\u00ae Monitoring service, you can deploy Monitoring agents on supported hosts. The host determines the agent type that you can deploy. The agent type determines the metrics that are collected automatically for that host.\n\nTo start collecting default metrics, you must configure a Monitoring agent per environment that you want to monitor.\n\nYou can monitor hosts in IBM Cloud, on-prem, and in other clouds.\n\n\n\nTable 1. Get started working with IBM Cloud Monitoring\n\n Source Info",
+          "url": "https://cloud.ibm.com/docs/monitoring?topic=monitoring-about-monitor",
+          "score": 18.025778,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723726479
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "metrics cloud monitoring"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "A metric is a measure of something that can be quantified and tracked over time. In the context of cloud monitoring, metrics are data points that provide insights into the performance, availability, and usage of resources in your cloud environment. Examples of metrics include CPU utilization, memory consumption, network traffic, and disk I/O operations. By monitoring these metrics, you can identify trends, detect anomalies, and make informed decisions about capacity planning, cost optimization, and system maintenance.\nIn the documents provided, metrics are used in the context of setting up alerts for various conditions based on the collected data. Users can configure alerts to trigger when specific metric thresholds are met or exceeded, allowing them to proactively address potential issues before they impact their services."
+    },
+    {
+      "speaker": "user",
+      "text": "those conversations are monitored?",
+      "timestamp": 1723726953,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I don't know if conversations in Watson Assistant are monitored. However, there is a feature called \"web chat\" to detect specific types of outage errors.",
+      "timestamp": 1723726958,
+      "contexts": [
+        {
+          "document_id": "ibmcld_10757-0-955",
+          "text": "\n\n\n\n\n\n\n  IBM Cloud Monitoring \n\nYou can use monitoring to gain operational visibility into the performance and health of your applications, services, and platforms. When you set up monitoring, you can define [alerts](https://docs.sysdig.com/en/alerts.html) that notify you when an event or an issue occurs that requires your attention. You can send alerts over a variety of [supported notification channels](https://cloud.ibm.com/docs/monitoring?topic=monitoring-notifications), including IBM Cloud\u00ae Functions actions. For more information, see [Sending SMS alerts using Cloud Functions](https://cloud.ibm.com/docs/monitoring?topic=monitoring-cf_sms).\n\nIAM-secured Cloud Functions actions, as well as web actions can be used by the notification channel. For more information about setting up the Cloud Functions notification channel, see [Configure IBM Cloud Function Channel](https://docs.sysdig.com/en/configure-ibm-cloud-functions-channel.html).\n\n\n\n\n\n\n\n",
+          "url": "https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-alerts-notify",
+          "score": 12.270996,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1723727922
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "conversation monitoring"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_07904-3237-4742",
+          "text": "\nInformation system monitoring capability is achieved through a variety of tools and techniques (e.g., intrusion detection systems, intrusion prevention systems, malicious code protection software, scanning tools, audit record monitoring software, network monitoring software). Strategic locations for monitoring devices include, for example, selected perimeter locations and near server farms supporting critical applications, with such devices typically being employed at the managed interfaces associated with controls SC-7 and AC-17. Einstein network monitoring devices from the Department of Homeland Security can also be included as monitoring devices. The granularity of monitoring information collected is based on organizational monitoring objectives and the capability of information systems to support such objectives. Specific types of transactions of interest include, for example, Hyper Text Transfer Protocol (HTTP) traffic that bypasses HTTP proxies. Information system monitoring is an integral part of organizational continuous monitoring and incident response programs. Output from system monitoring serves as input to continuous monitoring and incident response programs. A network connection is any connection with a device that communicates through a network (e.g., local area network, Internet). A remote connection is any connection with a device communicating through an external network (e.g., the Internet). Local, network, and remote connections can be either wired or wireless.",
+          "url": "https://cloud.ibm.com/docs/framework-financial-services-controls?topic=framework-financial-services-controls-si-4",
+          "score": 12.319463,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1723727886
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "conversation monitoring"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16250-7169-9454",
+          "text": "\nUsing only the default transfer target to handle call failures is acceptable for low call volume scenarios but can result in large numbers of calls being directed to a customer contact center when bigger call volumes are handled by Watson Assistant. To enable this 500 error response capability for a specific Watson Assistant instance, you need to make a request to IBM.\n\nYou should plan for both full and partial service outages. A good first step is to plan for a manual failover between regions before enabling automation. This requires a complete replica of Watson Assistant in both regions, including all custom speech model training. When automation is enabled it is best to start with a strategy for detecting and failing over to the passive backup region when a complete regional outage is detected. After this is in place, a strategy can be implemented to deal with partial outages, which should cover the vast majority of failure conditions that can occur with a phone integration deployment.\n\n\n\n\n\n\n\n Web chat \n\n\n\n Monitoring \n\nWeb chat provides an onError listening feature that allows the host page to detect specific types of outage errors, in particular INITIAL_CONFIG, OPEN_CONFIG, and MESSAGE_COMMUNICATION errors.\n\nYou can find the documentation for this feature here:\n\n[https://web-chat.global.assistant.watson.cloud.ibm.com/docs.html?to=api-configuration#onerror-detail](https://web-chat.global.assistant.watson.cloud.ibm.com/docs.html?to=api-configurationonerror-detail)\n\n\n\n\n\n Failover \n\nHandling a failover for web chat is simple assuming you have set up an additional web chat integration in another region. When the failover needs to be manually triggered, make the following changes:\n\n\n\n* The embed script that contains your integration ID, region, service instance ID, and subscription ID (if applicable) needs be changed or updated to use the IDs for the new integration and region.\n* If you are using Salesforce or ZenDesk integrations for connecting to human agents, update the configuration within those systems to make sure they can communicate with the correct integration. Follow the instructions on the Live agent tab in the web chat configuration for setting up those systems. This is only needed for obtaining the conversation history for the agent.",
+          "url": "https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-admin-failover",
+          "score": 11.534278,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723727814
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "conversation monitoring"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, conversations in Watson Assistant can be monitored. The provided document mentions a feature called \"web chat\" that has an \"onError listening feature\" to detect specific types of outage errors. This suggests that there is some level of monitoring in place for web chat conversations. However, the document does not provide detailed information about the extent or nature of this monitoring. For more specific information, it would be necessary to refer to the documentation or contact IBM.\nRegarding the monitoring of metrics, the document explains how to compare metrics for different periods using the Time period control and how to configure alerts based on specific metric conditions. This implies that various metrics related to the performance, availability, and usage of resources in the cloud environment are being monitored."
+    },
+    {
+      "speaker": "user",
+      "text": "are they billed by the number of turns or per conversation?",
+      "timestamp": 1723728099,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Watson Assistant does not bill based on the number of turns or conversations. Instead, it charges based on the number of time series hours collected during a billing cycle. Time series are a unique combination of a metric name and label key-value pairs, and a data-point is the value generated for a time-series at a given point in time.  To monitor how the IBM Cloud Monitoring service is used and the costs associated to its usage, see Viewing your usage.",
+      "timestamp": 1723728103,
+      "contexts": [
+        {
+          "document_id": "ibmcld_09795-1650-3805",
+          "text": "\nIn your monthly usage charges, consumption is measured hourly and your bill breaks down into the following concepts:\n\n\n\nTable 2. Billing usage metrics\n\n Metric Description \n\n NODE_HOURS Tracks the number of agents that are running in an agent for orchestrated environments.<br><br>This does not include the agents tracked by LITE_NODE_HOURS<br><br>For example, if you have 1 agent connected continuously, that agent will be billed 720 NODE_HOURS at the end of the month. \n TIME_SERIES_HOURS Reflects the total number of custom metrics time series you are sending to IBM Cloud Monitoring during a 1 hour time window. This is an aggregation of all time series from agents and other metrics sources. Platform metrics, Prometheus remote write, metric streaming and custom metrics collected with the agent (Prometheus, JMX or StatsD) contribute to TIME_SERIES_HOURS.<br><br>Only custom metrics are counted for TIME_SERIES_HOURS. Default infrastructure metrics (such as host, container, program, or Kubernetes state) and CPU, memory, disk, and network are included in the agent price and do not contribute to TIME_SERIES_HOURS. \n LITE_NODE_HOURS Tracks the number of agents that are monitoring non-containerized infrastructures such as VMs or bare metal servers, and are using the agent for non-orchestrated environments. \n API_CALL_HOURS Represents how many calls are being made to the API per month. All instances include 1M API calls. \n CONTAINER_HOURS Represents how many containers are monitored across all hosts that are being monitored by agents. \n\n\n\nTo monitor how the IBM Cloud Monitoring service is used and the costs associated to its usage, see [Viewing your usage](https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-viewingusageviewingusage).\n\nAll metrics that start with sysdig_* and kube_ are collected automatically by an agent and are included in the agent price.\n\n\n\n\n\n Service plans \n\nThe following service plans are available when you provision an instance of the IBM Cloud Monitoring service:\n\n\n\n Lite plan \n\nYou can provision a Monitoring instance with the Lite service plan to try out the Monitoring service for free for 30 days.",
+          "url": "https://cloud.ibm.com/docs/monitoring?topic=monitoring-pricing_plans",
+          "score": 18.698126,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723728233
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "billing for IBM cloud metrics"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03729-7-2197",
+          "text": "\nHow you're charged \n\nIBM Cloud\u00ae charges vary depending on the resources that are used by a particular service, runtime, container, or support option. The resources can be the number of API calls, the number of instances, memory, or storage. In addition, tiered pricing is offered in simple, graduated, or block.\n\nIBM Cloud provides detailed [cost estimators](https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-cost) to help you plan for charges.\n\nAfter you build your resources, you can check the actual cost. In the IBM Cloud\u00ae console, go to Manage > Billing and usage, and select Usage. With an IBM Cloud billable account, you're charged for the compute, containers, and services that your organization used. You might be invited by other IBM Cloud users to participate in organizations under a different account. The usage of the apps or services that you use in the organizations that you're invited to are charged to the account that contains those organizations. You can see more information about a specific charge from each resource details page.\n\nDifferent types of charges apply depending on the features of IBM Cloud that you're using. The following table provides a high-level overview:\n\n\n\nTable 1. Charges based on features\n\n Type of Charge Description Resource Type Example \n\n Fixed Fixed-rate pricing is based on an agreed upon monthly charge. If you buy an additional bare metal server, virtual server, or storage resource after the start of the monthly billing period, the cost of the resource for the first month is prorated based on the number of days remaining in the billing period. The prorated cost is billed in a separate invoice. Services For Bare Metal Servers, there are fixed plans to choose from, and those plans are charged at a fixed monthly rate. \n Metered Usage is a unit-based pricing model in which you pay for what you consume. In this case, the number of GB hours that are consumed for runtimes and the number of IP addresses and storage that is consumed for containers. Services, Compute, and Containers For Push Notifications, any usage that is consumed over the free monthly allowance of 100,000 digital messages per month, will be charged.",
+          "url": "https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-charges",
+          "score": 18.568167,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723728212
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "billing for IBM cloud metrics"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_09686-1238-2415",
+          "text": "\nYou are billed based on the number of time series hours collected during a billing cycle.\n\n\n\n Sources of time-series \n\nFor TIME_SERIES_HOURS, there are 4 sources of custom metrics:\n\n\n\n* Custom metrics created by agents such as Prometheus, StatsD, JMX, and AppChecks.\n\n\n\n* Prometheus metrics are collected from Prometheus endpoints. By default any pod with prometheus.io/scrape: true is included.\n* StatsD metrics are collected automatically without setting up a collector.\n* JMX metrics can be collected by configuring the target and the JMX MBeans names.\n* AppChecks are small scripts run by the agent to collect metrics.\n\n\n\n* IBM Cloud platform metrics. These are metrics generated by IBM Cloud services for your service instances. This also includes usage of the default IBM Cloud Monitoring dashboards available in the IBM Cloud Monitoring console under Dashboard > Dashboard Templates > IBM.\n* Metrics sent using Prometheus remote write to IBM Cloud Monitoring through Prometheus servers.\n* Metrics forwarded to external systems using Kafka or an Event Streams topic. The sysdig_datastream_ts_usage metric returns the number of time series exported using metric streaming.",
+          "url": "https://cloud.ibm.com/docs/monitoring?topic=monitoring-about-timeseries",
+          "score": 10.894077,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723729020
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "metrics billing"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_09686-4-1633",
+          "text": "\n--------------------\n\n\n\n Time-series \n\nYou can collect metrics from a number of platforms, orchestrators, and a wide range of applications such as Prometheus, JMX, StatsD, Kubernetes, and other application stacks, that are available in the IBM Cloud\u00ae, outside the IBM Cloud, or on-prem. You can also add more metrics by creating custom metrics and adding integrations.\n\nA time-series is a series of data-points ordered by time. It is a unique combination of a metric name and label key-value pairs. For example: website_failedRequest |region='Asia', customer_ID='abc'.\n\nThe same metric name can produce multiple time-series when the metric and label values differ.\n\nFor example, the following are 4 unique time series:\n\nmetric_name{datacenter=\u201ddc-1\u201d, zone=\u201dzone1\u201d} 23\nmetric_name{datacenter=\u201ddc-2\u201d, zone=\u201dzone1\u201d} 34\nmetric_name{datacenter=\u201ddc-3\u201d, zone=\u201dzone2\u201d} 43\nmetric_name{datacenter=\u201ddc-4\u201d, zone=\u201dzone2\u201d} 23\n\nA data-point is the value generated for a time-series at a given point in time. For example: [timestamp]|website_failedRequests:20|region='Asia', customer_ID='abc'.\n\nFor example, 3K unique time-series in 10 seconds is 18K data-points per minute. Or, 3K unique time-series in a minute would be 3K data-points per minute.\n\nYou are billed based on the number of time series hours collected during a billing cycle.\n\n\n\n Sources of time-series \n\nFor TIME_SERIES_HOURS, there are 4 sources of custom metrics:\n\n\n\n* Custom metrics created by agents such as Prometheus, StatsD, JMX, and AppChecks.\n\n\n\n* Prometheus metrics are collected from Prometheus endpoints. By default any pod with prometheus.io/scrape: true is included.",
+          "url": "https://cloud.ibm.com/docs/monitoring?topic=monitoring-about-timeseries",
+          "score": 9.89626,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723729016
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "metrics billing"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Watson Assistant does not bill based on the number of turns or conversations. Instead, it charges based on the number of time series hours collected during a billing cycle. Time series are a unique combination of a metric name and label key-value pairs, and a data-point is the value generated for a time-series at a given point in time."
+    },
+    {
+      "speaker": "user",
+      "text": "filtering msg",
+      "timestamp": 1723729820,
+      "enrichments": {
+        "Question Type": [
+          "How-To",
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "You can filter messages by Search user statements, Intents, Entities, and Last n days.   Select the drop-down menu and type an intent in the input field, or choose from the populated list. You can select more than one intent, which filters the results using any of the selected intents, including Irrelevant.   Additionally, it is recommended to wait at least 30 minutes after a user's interaction with your assistant before attempting to filter for that content.",
+      "timestamp": 1723729823,
+      "contexts": [
+        {
+          "document_id": "ibmcld_03028-1501-3230",
+          "text": "\nYou can filter messages by Search user statements, Intents, Entities, and Last n days.\n\nSearch user statements - Type a word in the search bar. This searches the users' inputs, but not your assistant's replies.\n\nIntents - Select the drop-down menu and type an intent in the input field, or choose from the populated list. You can select more than one intent, which filters the results using any of the selected intents, including Irrelevant.\n\n![Intents drop-down menu](https://cloud.ibm.com/docs-content/v1/content/a2b18c153837bce00a5b4de496e4b4ca64bbf56e/assistant-data/images/intents_filter.png)\n\nEntities - Select the drop-down menu and type an entity name in the input field, or choose from the populated list. You can select more than one entity, which filters the results by any of the selected entities. If you filter by intent and entity, your results will include the messages that have both values. You can also filter for results with No entities found.\n\n![Entities drop-down menu](https://cloud.ibm.com/docs-content/v1/content/a2b18c153837bce00a5b4de496e4b4ca64bbf56e/assistant-data/images/entities_filter.png)\n\nMessages might take some time to update. Allow at least 30 minutes after a user's interaction with your assistant before attempting to filter for that content.\n\n\n\n\n\n Viewing individual messages \n\nFor any user input entry, click Open conversation to see the user input and the response made to it by the assistant within the context of the full conversation.\n\nThe time that is shown for each conversation is localized to reflect the time zone of your browser. This time might differ from the timestamp shown if you review the same conversation log via an API call; API log calls are always shown in UTC.\n\n!",
+          "url": "https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-logs",
+          "score": 18.686064,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723730311
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "filter messages by Search"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03354-1698-3275",
+          "text": "\n------------------------------------ | ------------------------------------\nEnterprise with Data Isolation | Last 90 days\nEnterprise | Last 30 days\nPremium (legacy) | Last 90 days\nPlus | Last 30 days\nTrial | Last 30 days\nLite | Last 7 days\n\n\n\n\n\n Filtering messages \n\nYou can filter messages by Search user statements, Intents, Entities, and Last n days.\n\nSearch user statements - Type a word in the search bar. This searches the users' inputs, but not your assistant's replies.\n\nIntents - Select the drop-down menu and type an intent in the input field, or choose from the populated list. You can select more than one intent, which filters the results using any of the selected intents, including Irrelevant.\n\n![Intents drop-down menu](https://cloud.ibm.com/docs-content/v1/content/417db917d18067d9dcc4cf2612564a9a87c3ddc8/assistant/images/intents_filter.png)\n\nEntities - Select the drop-down menu and type an entity name in the input field, or choose from the populated list. You can select more than one entity, which filters the results by any of the selected entities. If you filter by intent and entity, your results will include the messages that have both values. You can also filter for results with No entities found.\n\n![Entities drop-down menu](https://cloud.ibm.com/docs-content/v1/content/417db917d18067d9dcc4cf2612564a9a87c3ddc8/assistant/images/entities_filter.png)\n\n\n\n\n\n Viewing individual messages \n\nFor any user input entry, click Open conversation to see the user input and the response made to it by the assistant within the context of the full conversation.",
+          "url": "https://cloud.ibm.com/docs/assistant?topic=assistant-logs",
+          "score": 16.409042,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723730307
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "filter messages by Search"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16258-2570-3569",
+          "text": "\n[Conversation filters](https://cloud.ibm.com/docs-content/v1/content/ca9232b3702768f24bb897f48f10778fcda28718/watson-assistant/images/analytics-conversations-filters.png)\n\nIf you search for a specific session ID, enclose your search in quotation marks to ensure you receive an exact match on the full ID with its numbers and hyphen characters, for example: \"9015ab9a-2e13-4627-ae33-4179b1125cb5\".\n\n\n\n\n\n Exploring conversations in detail \n\nTo explore individual conversations in detail, you can click on any of the utterances or conversation time stamps. A panel opens showing the full back and forth between your customer and the assistant, including step interactions. The panel also provides a summary of how many requests there were, how many were recognized, whether search was initiated, and the duration of the conversation.\n\n![Conversation detail](https://cloud.ibm.com/docs-content/v1/content/ca9232b3702768f24bb897f48f10778fcda28718/watson-assistant/images/analytics-conversations-side.png)",
+          "url": "https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-analytics-conversations",
+          "score": 13.240402,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1723730304
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "filter messages by Search"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "To filter messages in Watson Assistant, you can use the following methods:\n1. Search user statements: Type a word in the search bar. This searches the users' inputs, but not your assistant's replies.\n2. Intents: Select the drop-down menu and type an intent in the input field, or choose from the populated list. You can select more than one intent, which filters the results using any of the selected intents, including Irrelevant.\n3. Entities: Select the drop-down menu and type an entity name in the input field, or choose from the populated list. You can select more than one entity, which filters the results by any of the selected entities. If you filter by intent and entity, your results will include the messages that have both values. You can also filter for results with No entities found.\nAdditionally, messages might take some time to update, and it is recommended to wait at least 30 minutes after a user's interaction with your assistant before attempting to filter for that content."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "created",
+      "timestamp": 1723730770
+    },
+    {
+      "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+      "status": "accepted",
+      "timestamp": 1725489405
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "edited",
+      "timestamp": 1726493077
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "accepted",
+      "timestamp": 1726493695
+    }
+  ],
+  "editor": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+  "domain": "mt-rag-ibmcloud-elser-512-100-20240502",
+  "reviewer": "9dcd142c-415e-4161-a82f-c8b14bfb36ac"
+}

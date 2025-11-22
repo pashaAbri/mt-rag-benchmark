@@ -1,0 +1,1537 @@
+{
+  "author": "d2b56e91-6d89-4df4-b89a-eef8d969850b",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-ibmcloud-elser-512-100-20240502",
+      "size": "72442"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "Is Dynamic secret better than Static secret?",
+      "timestamp": 1723558341,
+      "enrichments": {
+        "Question Type": [
+          "Comparative",
+          "Opinion"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.",
+      "timestamp": 1723558345,
+      "contexts": [
+        {
+          "document_id": "ibmcld_12498-8087-10171",
+          "text": "\nAnd, ultimately, it makes it a little more efficient for the management of your secrets while you're going through your DevOps operations.\n\nThank you. If you have questions, please drop us a line. If you want to see more videos like this in the future, please like and subscribe, and don't forget you can grow your skills and earn a badge with IBM Cloud Labs which, are free browser-based interactive Kubernetes labs.\n\n\n\n\n\n Working with secrets of different types \n\nSecrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a\n\ndynamic secrethas its expiration date and time enforced when its secret data is read or accessed.\n\nSecrets Manager further classifies static and dynamic secrets by their general purpose or function. For example, each secret type is identified by programmatic name, such as username_password. If you're looking to manage your secret by using the Secrets Manager API or CLI, you can use these programmatic names to run operations on secrets according to their type.\n\nReview the following table to understand the types of static and dynamic secrets that you can create and manage with the service.\n\n\n\nTable 1. Secret types in Secrets Manager\n\n Type Programmatic name Kind Description \n\n [Arbitrary secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-arbitrary-secrets) arbitrary Static Arbitrary pieces of sensitive data, including any type of structured or unstructured data, that you can use to access an application or resource. \n [IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials) iam_credentials* Dynamic A dynamically generated service ID and API key that can be used to access an IBM Cloud service that requires IAM authentication. \n [Key-value secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-key-value) kv Static Pieces of sensitive data that is structured in JSON format that you can use to access an application or resource.",
+          "url": "https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-what-is-secret",
+          "score": 15.649247,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723558503
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Dynamic secret better than Static secret?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_12493-7948-9647",
+          "text": "\nUse the following commands to add a static secret, such as a user credential or an arbitrary secret, to your Secrets Manager instance. Allowable values for SECRET_TYPE are: arbitrary,imported_cert, [kv](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-vault-manage-kv-cli), private_cert, public_cert, and username_password.\n\nCreate a secret in the default secret group.\n\nvault write [-format=FORMAT] ibmcloud/SECRET_TYPE/secrets name=NAME [description=\"DESCRIPTION\"] [username=USERNAME] [password=USERNAME] [payload=DATA] [expiration_date=EXPIRATION] [certificate=CERTIFICATE_DATA] [private_key=PRIVATE_KEY_DATA] [intermediate=INTERMEDIATE_CERTIFICATE_DATA] [ca=CA_CONFIGURATION_NAME] [dns=DNS_CONFIGURATION_NAME] [key_algorithm=KEY_ALGORITHM] [labels=LABEL,LABEL]\n\nCreate a secret in a specified secret group.\n\nvault write [-format=FORMAT] ibmcloud/SECRET_TYPE/secrets/groups/SECRET_GROUP_ID name=NAME [description=\"DESCRIPTION\"] [username=USERNAME] [password=USERNAME] [payload=DATA] [expiration_date=EXPIRATION] [certificate=CERTIFICATE_DATA] [private_key=PRIVATE_KEY_DATA] [intermediate=INTERMEDIATE_CERTIFICATE_DATA] [ca=CA_CONFIGURATION_NAME] [dns=DNS_CONFIGURATION_NAME] [key_algorithm=KEY_ALGORITHM] [labels=LABEL,LABEL]\n\n\n\n Prerequisites \n\nYou need the [Writer service role](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam) to create secrets.\n\n\n\n\n\n Command options \n\nname\n: The human-readable alias that you want to assign to the secret. Required.\n\ndescription\n: An extended description to assign to the secret.\n\nexpiration_date\n: The expiration date that you want to assign to the secret. Supported for the arbitrary and username_password secret types.",
+          "url": "https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-vault-cli",
+          "score": 13.329453,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723558528
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Dynamic secret better than Static secret?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_12717-7818-8740",
+          "text": "\nCheck whether DevSecOps Toolchain passes static code scan to identify vulnerabilities in source code CM-3(2)(0), CM-4(0), CM-4(1)(0), CM-7(1)(a), CM-7(b), RA-5(1)(0), RA-5(2)(0), RA-5(3)(0), RA-5(a), RA-5(b), RA-5(c), RA-5(d), SA-10(e), SA-15(a), SA-3(a), SA-3(d), SA-8(0), SI-10(0), SI-2(2)(0), SI-2(a), SI-2(b), SI-2(c), and SI-2(d) Rule was added \n Check whether DevSecOps Toolchain passes dynamic code scan to identify vulnerabilities in deployed artifacts CM-3(2)(0), CM-4(0), CM-4(1)(0), CM-7(1)(a), CM-7(b), RA-5(1)(0), RA-5(2)(0), RA-5(3)(0), RA-5(a), RA-5(b), RA-5(c), RA-5(d), SA-10(e), SA-15(a), SA-3(a), SA-3(d), SA-8(0), SI-10(0), SI-2(2)(0), SI-2(a), SI-2(b), SI-2(c), and SI-2(d) Rule was added \n Check whether Secrets Manager arbitrary secrets are rotated at least every # days IA-5(g) Rule was added \n Check whether Secrets Manager user credentials are rotated at least every # days IA-5(g) Rule was added",
+          "url": "https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-fs-change-log",
+          "score": 13.168503,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723558548
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Dynamic secret better than Static secret?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16729-294066-295916",
+          "text": "\nA script and tool will assist you to simulate the transmission of web server log messages from a static file to Event Streams.\n\nObject Storage Event Streams\n\n+3\n\nAnalytics Engine,Data Engine,Key Protect\n\n\n\n* 3 hours\n* 2023-05-05\n\n\n\n[Getting started with Secrets Manager](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-getting-started)Getting started with Secrets Manager\n\nThis tutorial focuses on storing and managing a username and password in IBM Cloud\u00ae Secrets Manager. With Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications. Secrets are stored in a dedicated Secrets Manager instance, built on open source HashiCorp Vault.\n\nSecrets Manager\n\n\n\n* 10 minutes\n* 2023-03-01\n\n\n\n[Access a storage bucket by using a dynamic secret](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-tutorial-access-storage-bucket)Access a storage bucket by using a dynamic secret\n\nIn this tutorial, you learn how to use IBM Cloud\u00ae Secrets Manager to create and lease an IAM credential that can be used to access a bucket in Cloud Object Storage.\n\nSecrets Manager Object Storage\n\n\n\n* 1 hour\n* 2023-05-30\n\n\n\n[Secure secrets for apps that run in your Kubernetes cluster](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-tutorial-kubernetes-secrets)Secure secrets for apps that run in your Kubernetes cluster\n\nThis tutorial is for the Classic flavor of Kubernetes Service clusters. External Secrets is also available as an OpenShift operator.\n\nSecrets Manager\n\n\n\n* 45 minutes\n* 2023-06-15\n\n\n\n[Part 2: Create a GitHub issue when your certificates are about to expire](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-tutorial-expiring-secrets-part-2)Part 2: Create a GitHub issue when your certificates are about to expire",
+          "url": "https://cloud.ibm.com/docs?tab=tutorials",
+          "score": 13.097604,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723558616
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Is Dynamic secret better than Static secret?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The document does not provide a direct comparison between dynamic and static secrets in terms of being \"better\" than one another. Instead, it explains the differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. The choice between dynamic and static secrets would depend on the specific requirements and security policies of your system."
+    },
+    {
+      "speaker": "user",
+      "text": "Which one protects more from vulnerabilities?",
+      "timestamp": 1723558700,
+      "enrichments": {
+        "Question Type": [
+          "Comparative"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Both dynamic and static secrets have their own ways of protecting against vulnerabilities. The static code scan stage runs a static code analyzer tool on the specified app repo codebases.  The Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.",
+      "timestamp": 1723558705,
+      "contexts": [
+        {
+          "document_id": "ibmcld_12498-8087-10171",
+          "text": "\nAnd, ultimately, it makes it a little more efficient for the management of your secrets while you're going through your DevOps operations.\n\nThank you. If you have questions, please drop us a line. If you want to see more videos like this in the future, please like and subscribe, and don't forget you can grow your skills and earn a badge with IBM Cloud Labs which, are free browser-based interactive Kubernetes labs.\n\n\n\n\n\n Working with secrets of different types \n\nSecrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a\n\ndynamic secrethas its expiration date and time enforced when its secret data is read or accessed.\n\nSecrets Manager further classifies static and dynamic secrets by their general purpose or function. For example, each secret type is identified by programmatic name, such as username_password. If you're looking to manage your secret by using the Secrets Manager API or CLI, you can use these programmatic names to run operations on secrets according to their type.\n\nReview the following table to understand the types of static and dynamic secrets that you can create and manage with the service.\n\n\n\nTable 1. Secret types in Secrets Manager\n\n Type Programmatic name Kind Description \n\n [Arbitrary secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-arbitrary-secrets) arbitrary Static Arbitrary pieces of sensitive data, including any type of structured or unstructured data, that you can use to access an application or resource. \n [IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials) iam_credentials* Dynamic A dynamically generated service ID and API key that can be used to access an IBM Cloud service that requires IAM authentication. \n [Key-value secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-key-value) kv Static Pieces of sensitive data that is structured in JSON format that you can use to access an application or resource.",
+          "url": "https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-what-is-secret",
+          "score": 32.54135,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723558878
+              },
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "no",
+                "timestamp": 1727124418
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_12467-1716-3849",
+          "text": "\n* When you try to modify or delete a secret while it is locked, Secrets Manager denies the request with an HTTP 412 Precondition Failed response. You see an error message similar to the following example:\n\nThe requested action can't be completed because the secret version is locked.\n\nIf you're working with\n\ndynamic secrets, such as IAM credentials, locking your secrets also means that by default, those secrets can't be read or accessed. For more information, see [Why can't I read a locked IAM credentials secret?](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-locked-iam-credentials)\n* If a locked secret reaches its expiration date, it stays in the Active state and its data remains accessible to your applications. Secrets Manager moves the secret to the Destroyed state and permanently deletes the expired secret data only after all locks on the secret are removed.\n\nSSL/TLS certificates still reach their defined expiration dates and move into a Destroyed state even if they are locked. For more information, see [Why did my locked certificate move to the Destroyed state?](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-locked-certificates)\n* If you try to rotate a secret while its current version is locked and the previous version is unlocked (or if an automatic rotation is scheduled), the request to rotate the secret is allowed. The current secret version becomes the new previous version, retaining its existing locks. A new current version is created without any locks.\n* If you try to rotate a secret while its previous version is locked (or if an automatic rotation is scheduled), your request to rotate the secret is denied. Rotation is allowed only after all locks on the previous secret version are removed.\n\n\n\n\n\n Creating locks in the UI \n\nYou can create up to 1000 locks on a secret by using the Secrets Manager UI. Each lock can be used to represent a single application or service that uses your secret.\n\nA secret is considered locked after you attach one or more locks to it. A lock can be applied only on a secret version that contains active payload, or secret data.",
+          "url": "https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-secret-locks",
+          "score": 29.514965,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723558898
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_12493-7948-9647",
+          "text": "\nUse the following commands to add a static secret, such as a user credential or an arbitrary secret, to your Secrets Manager instance. Allowable values for SECRET_TYPE are: arbitrary,imported_cert, [kv](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-vault-manage-kv-cli), private_cert, public_cert, and username_password.\n\nCreate a secret in the default secret group.\n\nvault write [-format=FORMAT] ibmcloud/SECRET_TYPE/secrets name=NAME [description=\"DESCRIPTION\"] [username=USERNAME] [password=USERNAME] [payload=DATA] [expiration_date=EXPIRATION] [certificate=CERTIFICATE_DATA] [private_key=PRIVATE_KEY_DATA] [intermediate=INTERMEDIATE_CERTIFICATE_DATA] [ca=CA_CONFIGURATION_NAME] [dns=DNS_CONFIGURATION_NAME] [key_algorithm=KEY_ALGORITHM] [labels=LABEL,LABEL]\n\nCreate a secret in a specified secret group.\n\nvault write [-format=FORMAT] ibmcloud/SECRET_TYPE/secrets/groups/SECRET_GROUP_ID name=NAME [description=\"DESCRIPTION\"] [username=USERNAME] [password=USERNAME] [payload=DATA] [expiration_date=EXPIRATION] [certificate=CERTIFICATE_DATA] [private_key=PRIVATE_KEY_DATA] [intermediate=INTERMEDIATE_CERTIFICATE_DATA] [ca=CA_CONFIGURATION_NAME] [dns=DNS_CONFIGURATION_NAME] [key_algorithm=KEY_ALGORITHM] [labels=LABEL,LABEL]\n\n\n\n Prerequisites \n\nYou need the [Writer service role](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam) to create secrets.\n\n\n\n\n\n Command options \n\nname\n: The human-readable alias that you want to assign to the secret. Required.\n\ndescription\n: An extended description to assign to the secret.\n\nexpiration_date\n: The expiration date that you want to assign to the secret. Supported for the arbitrary and username_password secret types.",
+          "url": "https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-vault-cli",
+          "score": 29.34182,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723558939
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_06843-4238-6198",
+          "text": "\nThis command returns either cc, cd, ci, or pr, depending on which pipeline is running. This way, you can reuse the setup script between pipelines if necessary.\n\n\n\n\n\n Static code scan \n\nThe static code scan stage runs a static code analyzer tool on the specified app repo codebases.\n\nCC pipeline provides the repos that are found in the inventory for the scanner.\n\nYou can use any of the following methods to add static code to your pipeline:\n\n\n\n* Provide an already running SonarQube instance name, URL, and credentials by adding the SonarQube tool to your toolchain. The static-scan task runs a scan on the specified repos.\n* Add your code to the static-scan custom stage in your .pipeline-config.yaml file for a custom implementation.\n\n\n\n\n\n\n\n Dynamic scan \n\nThe Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n\n\n\n* Add your own dynamic scan code to the dynamic-scan custom stage in your .pipeline-config.yaml file for a custom implementation.\n\n\n\nTo learn more about configuring dynamic scan by using OWASP-ZAP, see [Configuring ZAP scan for CC pipeline](https://cloud.ibm.com/docs/devsecops?topic=devsecops-zap-scanszap-scan-for-cc).\n\n\n\n\n\n Scans and checks in compliance checks \n\n\n\nTable 3. Compliance scans and checks\n\n Scan or check Description \n\n Detect secrets The [IBM Detect Secrets](https://github.com/IBM/detect-secrets) tool identifies where secrets are visible in app code. \n Code Risk Analyzer vulnerability scan Finds vulnerabilities for all of the app package dependencies, container base images, and operating system packages. Uses the Code Risk Analyzer tool. \n Code Risk Analyzer CIS check Runs configuration checks on Kubernetes deployment manifests. Uses the Code Risk Analyzer tool. \n Code Risk Analyzer Bill of Material (BOM) check The BOM for a specified repo that captures the pedigree of all of the dependencies. This BOM is collected at different granularities.",
+          "url": "https://cloud.ibm.com/docs/devsecops?topic=devsecops-devsecops-cc-pipeline",
+          "score": 16.38534,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723559199
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "static-scan test"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_06804-2648-4507",
+          "text": "\nThe static-scan task runs a scan on the specified repos.\n* If you don't have your own SonarQube instance, the pipeline creates a SonarQube instance during the pipeline run. You can access this instance after the static-scan stage successfully runs.\n* Add your own static scan code to the static-scan custom stage in your .pipeline-config.yaml file for a custom implementation.\n\n\n\n\n\n Adding SonarQube scan to your pipelines \n\nFor more information about integrating SonarQube with the continuous integration pipeline, see [Configuring SonarQube](https://cloud.ibm.com/docs/devsecops?topic=devsecops-sonarqube).\n\n\n\n\n\n\n\n Scans and checks in compliance checks \n\n\n\nTable 5. Compliance scans and checks\n\n Scan or check Description \n\n Detect secrets The [IBM Detect Secrets](https://github.com/IBM/detect-secrets) tool identifies where secrets are visible in app code. \n Code Risk Analyzer vulnerability scan Finds vulnerabilities for all of the app package dependencies, container base images, and operating system packages. Uses the Code Risk Analyzer tool. \n Code Risk Analyzer CIS check Runs configuration checks on Kubernetes deployment manifests. Uses the Code Risk Analyzer tool. \n Code Risk Analyzer Bill of Material (BOM) check The BOM for a specified repo that captures the pedigree of all of the dependencies. This BOM is collected at different granularities. For example, the BOM captures the list of base images that are used in the build, the list of packages from the base images, and the list of app packages that are installed over the base image. The BOM acts as a ground truth for the analytic results and can potentially be used to enforce policy gates. Uses the Code Risk Analyzer tool. \n Repository compliance checking Checks that branch protection settings are correct. For example, the master/main branch should always restrict the force push.",
+          "url": "https://cloud.ibm.com/docs/devsecops?topic=devsecops-cd-devsecops-ci-pipeline",
+          "score": 15.255749,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723559254
+              },
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "no",
+                "timestamp": 1727124507
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "static-scan test"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Both dynamic and static secrets have their own ways of protecting against vulnerabilities. Dynamic secrets can reduce the risk of exposure since they are automatically rotated and changed frequently. On the other hand, static secrets can provide strong protection if managed properly, with secure storage, access control, and regular auditing. It's essential to follow best practices for managing secrets, regardless of whether they are dynamic or static."
+    },
+    {
+      "speaker": "user",
+      "text": "Do they both rotate secrets?",
+      "timestamp": 1723559390,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Both dynamic and static secrets can have their expiration dates enforced, leading to the rotation of the secrets. The key difference lies in when this enforcement occurs. For static secrets, the expiration date and time are enforced at secret creation or rotation time. In contrast, for dynamic secrets, the expiration date and time are enforced when the secret data is read or accessed. When trying to rotate a secret, the request's success depends on whether the previous version is locked or not. Automatic rotation is available only for secrets that are generated by Secrets Manager. With IBM Cloud\u00ae Secrets Manager, you can design a strategy for rotating your secrets and sensitive data.",
+      "timestamp": 1723559393,
+      "contexts": [
+        {
+          "document_id": "ibmcld_12498-8087-10171",
+          "text": "\nAnd, ultimately, it makes it a little more efficient for the management of your secrets while you're going through your DevOps operations.\n\nThank you. If you have questions, please drop us a line. If you want to see more videos like this in the future, please like and subscribe, and don't forget you can grow your skills and earn a badge with IBM Cloud Labs which, are free browser-based interactive Kubernetes labs.\n\n\n\n\n\n Working with secrets of different types \n\nSecrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a\n\ndynamic secrethas its expiration date and time enforced when its secret data is read or accessed.\n\nSecrets Manager further classifies static and dynamic secrets by their general purpose or function. For example, each secret type is identified by programmatic name, such as username_password. If you're looking to manage your secret by using the Secrets Manager API or CLI, you can use these programmatic names to run operations on secrets according to their type.\n\nReview the following table to understand the types of static and dynamic secrets that you can create and manage with the service.\n\n\n\nTable 1. Secret types in Secrets Manager\n\n Type Programmatic name Kind Description \n\n [Arbitrary secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-arbitrary-secrets) arbitrary Static Arbitrary pieces of sensitive data, including any type of structured or unstructured data, that you can use to access an application or resource. \n [IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials) iam_credentials* Dynamic A dynamically generated service ID and API key that can be used to access an IBM Cloud service that requires IAM authentication. \n [Key-value secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-key-value) kv Static Pieces of sensitive data that is structured in JSON format that you can use to access an application or resource.",
+          "url": "https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-what-is-secret",
+          "score": 32.87025,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723559597
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?\n|assistant|: Both dynamic and static secrets have their own ways of protecting against vulnerabilities. Secrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a dynamic secret has its expiration date and time enforced when its secret data is read or accessed. The static code scan stage runs a static code analyzer tool on the specified app repo codebases. The static-scan task runs a scan on the specified repos. The Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n|user|: Do they both rotate secrets?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_06843-4238-6198",
+          "text": "\nThis command returns either cc, cd, ci, or pr, depending on which pipeline is running. This way, you can reuse the setup script between pipelines if necessary.\n\n\n\n\n\n Static code scan \n\nThe static code scan stage runs a static code analyzer tool on the specified app repo codebases.\n\nCC pipeline provides the repos that are found in the inventory for the scanner.\n\nYou can use any of the following methods to add static code to your pipeline:\n\n\n\n* Provide an already running SonarQube instance name, URL, and credentials by adding the SonarQube tool to your toolchain. The static-scan task runs a scan on the specified repos.\n* Add your code to the static-scan custom stage in your .pipeline-config.yaml file for a custom implementation.\n\n\n\n\n\n\n\n Dynamic scan \n\nThe Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n\n\n\n* Add your own dynamic scan code to the dynamic-scan custom stage in your .pipeline-config.yaml file for a custom implementation.\n\n\n\nTo learn more about configuring dynamic scan by using OWASP-ZAP, see [Configuring ZAP scan for CC pipeline](https://cloud.ibm.com/docs/devsecops?topic=devsecops-zap-scanszap-scan-for-cc).\n\n\n\n\n\n Scans and checks in compliance checks \n\n\n\nTable 3. Compliance scans and checks\n\n Scan or check Description \n\n Detect secrets The [IBM Detect Secrets](https://github.com/IBM/detect-secrets) tool identifies where secrets are visible in app code. \n Code Risk Analyzer vulnerability scan Finds vulnerabilities for all of the app package dependencies, container base images, and operating system packages. Uses the Code Risk Analyzer tool. \n Code Risk Analyzer CIS check Runs configuration checks on Kubernetes deployment manifests. Uses the Code Risk Analyzer tool. \n Code Risk Analyzer Bill of Material (BOM) check The BOM for a specified repo that captures the pedigree of all of the dependencies. This BOM is collected at different granularities.",
+          "url": "https://cloud.ibm.com/docs/devsecops?topic=devsecops-devsecops-cc-pipeline",
+          "score": 32.259567,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723559624
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?\n|assistant|: Both dynamic and static secrets have their own ways of protecting against vulnerabilities. Secrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a dynamic secret has its expiration date and time enforced when its secret data is read or accessed. The static code scan stage runs a static code analyzer tool on the specified app repo codebases. The static-scan task runs a scan on the specified repos. The Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n|user|: Do they both rotate secrets?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_12467-1716-3849",
+          "text": "\n* When you try to modify or delete a secret while it is locked, Secrets Manager denies the request with an HTTP 412 Precondition Failed response. You see an error message similar to the following example:\n\nThe requested action can't be completed because the secret version is locked.\n\nIf you're working with\n\ndynamic secrets, such as IAM credentials, locking your secrets also means that by default, those secrets can't be read or accessed. For more information, see [Why can't I read a locked IAM credentials secret?](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-locked-iam-credentials)\n* If a locked secret reaches its expiration date, it stays in the Active state and its data remains accessible to your applications. Secrets Manager moves the secret to the Destroyed state and permanently deletes the expired secret data only after all locks on the secret are removed.\n\nSSL/TLS certificates still reach their defined expiration dates and move into a Destroyed state even if they are locked. For more information, see [Why did my locked certificate move to the Destroyed state?](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-locked-certificates)\n* If you try to rotate a secret while its current version is locked and the previous version is unlocked (or if an automatic rotation is scheduled), the request to rotate the secret is allowed. The current secret version becomes the new previous version, retaining its existing locks. A new current version is created without any locks.\n* If you try to rotate a secret while its previous version is locked (or if an automatic rotation is scheduled), your request to rotate the secret is denied. Rotation is allowed only after all locks on the previous secret version are removed.\n\n\n\n\n\n Creating locks in the UI \n\nYou can create up to 1000 locks on a secret by using the Secrets Manager UI. Each lock can be used to represent a single application or service that uses your secret.\n\nA secret is considered locked after you attach one or more locks to it. A lock can be applied only on a secret version that contains active payload, or secret data.",
+          "url": "https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-secret-locks",
+          "score": 30.968496,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723559648
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?\n|assistant|: Both dynamic and static secrets have their own ways of protecting against vulnerabilities. Secrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a dynamic secret has its expiration date and time enforced when its secret data is read or accessed. The static code scan stage runs a static code analyzer tool on the specified app repo codebases. The static-scan task runs a scan on the specified repos. The Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n|user|: Do they both rotate secrets?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_12384-4-1975",
+          "text": "\n* UI\n* CLI\n* API\n\n\n\n\n\n\n\n Automatically rotating secrets \n\nYou can schedule automatic rotation for secrets by using IBM Cloud\u00ae Secrets Manager.\n\nWhen you rotate a secret in your service instance, you create a new version of its value. By scheduling automatic rotation of your secrets at regular intervals, you can reduce the likelihood of compromise and ensure that your credentials never expire.\n\nAutomatic rotation is available only for secrets that are generated by Secrets Manager. If the secret was imported initially, you must provide new secret data to rotate it. For more information, see [Manually rotating secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-manual-rotation).\n\n\n\n Before you begin \n\nBefore you get started, be sure that you have the required level of access. To rotate secrets, you need the [Writer service role or higher](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam).\n\n\n\n Supported secret types \n\nAutomatic rotation is supported for [private certificates](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-certificatescreate-certificates), [public certificates](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-certificatesorder-certificates), [user credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-user-credentials) and [IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials). Depending on the type of secret, automatic rotation takes place immediately on the date and time that you set, or it might need to complete a few extra steps before a new version of the secret can be created.\n\n\n\nTable 1. Describes how Secrets Manager evaluates manual rotation by secret type\n\n Type Rotation description \n\n [Private certificates](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-certificatescreate-certificates) The existing certificate value is replaced with new certificate content.",
+          "url": "https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-automatic-rotation",
+          "score": 20.618662,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723559847
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "UI\nCLI\nAPI\nAutomatically rotating secrets"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_12389-7-2298",
+          "text": "\nBest practices for rotating and locking secrets \n\nWith IBM Cloud\u00ae Secrets Manager, you can design a strategy for rotating your secrets and sensitive data. Review the following suggested guidelines for implementing best practices around your secrets management.\n\n\n\n Define your rotation strategy \n\nAs you use Secrets Manager to design your secrets management strategy, consider how often you want to rotate your secrets based on the internal guidelines for your organization. Determine ahead of time which users or service IDs require access to rotate secrets, and how those secrets can be rotated manually to avoid interruptions to your applications.\n\n\n\n1. Determine a frequency of rotation for your secrets.\n\nAfter you store a secret in Secrets Manager, you decide the frequency of its rotation. You might want to rotate secrets due to personnel turnover, process malfunction, or according to your organization's internal guidelines. Rotate your secrets regularly, for example every 90 days, to meet best practices around secrets management.\n2. Test out rotation workflows for each type of secret that you manage in Secrets Manager.\n\nThe way in which Secrets Manager evaluates a request to rotate a secret differs depending on the type of secret. For example, some secrets are replaced immediately with the data that you provide on rotation, whereas other secrets, such as public certificates, move into an extra validation step. For more information about how Secrets Manager handles rotation requests, see [Manually rotating secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-manual-rotationmanual-rotate-by-type).\n3. Establish a process for deploying the newest secret versions to your applications.\n\nUse an automated flow to obtain and deploy the latest version of your secret after it is rotated. For more information, see [Avoid application outages by locking your secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-best-practices-rotate-secretsbest-practices-lock-secrets).\n\n\n\n\n\n\n\n Set up alerts for expiring secrets \n\nConnect to the Event Notifications service so that Secrets Manager can notify you in advance when your secrets or certificates are about to expire.\n\n\n\n1. Set up alerts for your instance by enabling event notifications.",
+          "url": "https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-best-practices-rotate-secrets",
+          "score": 21.792202,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723559962
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Best practices for rotating and locking secrets"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, both dynamic and static secrets can have their expiration dates enforced, leading to the rotation of the secrets. However, the key difference lies in when this enforcement occurs. For static secrets, the expiration date and time are enforced at secret creation or rotation time. In contrast, for dynamic secrets, the expiration date and time are enforced when the secret data is read or accessed. Additionally, the document mentions that when trying to rotate a secret, the request's success depends on whether the previous version is locked or not."
+    },
+    {
+      "speaker": "user",
+      "text": "What is an IAM credential?",
+      "timestamp": 1723560224,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "IBM Cloud Identity and Access Management (IAM) service securely authenticates users and controls access to all resources consistently in the IBM Cloud Platform. An IAM (Identity and Access Management) credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf.",
+      "timestamp": 1723560228,
+      "contexts": [
+        {
+          "document_id": "ibmcld_12498-8087-10171",
+          "text": "\nAnd, ultimately, it makes it a little more efficient for the management of your secrets while you're going through your DevOps operations.\n\nThank you. If you have questions, please drop us a line. If you want to see more videos like this in the future, please like and subscribe, and don't forget you can grow your skills and earn a badge with IBM Cloud Labs which, are free browser-based interactive Kubernetes labs.\n\n\n\n\n\n Working with secrets of different types \n\nSecrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a\n\ndynamic secrethas its expiration date and time enforced when its secret data is read or accessed.\n\nSecrets Manager further classifies static and dynamic secrets by their general purpose or function. For example, each secret type is identified by programmatic name, such as username_password. If you're looking to manage your secret by using the Secrets Manager API or CLI, you can use these programmatic names to run operations on secrets according to their type.\n\nReview the following table to understand the types of static and dynamic secrets that you can create and manage with the service.\n\n\n\nTable 1. Secret types in Secrets Manager\n\n Type Programmatic name Kind Description \n\n [Arbitrary secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-arbitrary-secrets) arbitrary Static Arbitrary pieces of sensitive data, including any type of structured or unstructured data, that you can use to access an application or resource. \n [IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials) iam_credentials* Dynamic A dynamically generated service ID and API key that can be used to access an IBM Cloud service that requires IAM authentication. \n [Key-value secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-key-value) kv Static Pieces of sensitive data that is structured in JSON format that you can use to access an application or resource.",
+          "url": "https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-what-is-secret",
+          "score": 36.379887,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723561028
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?\n|assistant|: Both dynamic and static secrets have their own ways of protecting against vulnerabilities. Secrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a dynamic secret has its expiration date and time enforced when its secret data is read or accessed. The static code scan stage runs a static code analyzer tool on the specified app repo codebases. The static-scan task runs a scan on the specified repos. The Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n|user|: Do they both rotate secrets?\n|assistant|: Both dynamic and static secrets can have their expiration dates enforced, leading to the rotation of the secrets. The key difference lies in when this enforcement occurs. For static secrets, the expiration date and time are enforced at secret creation or rotation time. In contrast, for dynamic secrets, the expiration date and time are enforced when the secret data is read or accessed. When trying to rotate a secret, the request's success depends on whether the previous version is locked or not. Automatic rotation is available only for secrets that are generated by Secrets Manager. With IBM Cloud\u00ae Secrets Manager, you can design a strategy for rotating your secrets and sensitive data.\n|user|: What is an IAM credential?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_12415-1547-3664",
+          "text": "\nFor more information about creating and storing IAM credentials, see [Creating IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials).\n\n\n\n\n\n What happens when I rotate my secret? \n\nWhen a secret is rotated, a new version of its value becomes available for use. You can choose to manually add a value or automatically generate one at regular intervals by enabling automatic rotation.\n\nFor more information about secret rotation, see [Rotating secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-manual-rotation).\n\n\n\n\n\n What happens when my secret expires? \n\nIn some secret types such as arbitrary or username_password, you can set the date and time when your secret expires. When the secret reaches its expiration date, it transitions to a Destroyed state. When the transition happens, the value that is associated with the secret is no longer recoverable. The transition to the Destroyed state can take up to a couple of minutes after the secret expires, or a lock that prevented expiration is removed.\n\nFor more information about how your information is protected, see [Securing your data](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-mng-data).\n\n\n\n\n\n What are differences between the Reader and SecretsReader roles? \n\nBoth the Reader and SecretsReader roles help you to assign read-only access to Secrets Manager resources.\n\n\n\n* As a reader, you can browse a high-level view of secrets in your instance. Readers can't access the payload of a secret.\n* As a secrets reader, you can browse a high-level view of secrets, and you can access the payload of a secret. A secrets reader can't create secrets or modify the value of an existing secret.\n\n\n\n\n\n\n\n How is Secrets Manager different from Key Protect? \n\nThere are a few key differences between using Key Protect and Secrets Manager to store your sensitive data. Secrets Manager offers flexibility with the types of secrets that you can create and lease to applications and services on-demand. Whereas, Key Protect delivers on encryption keys that are rooted in FIPS 140-2 Level 3",
+          "url": "https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-faqs",
+          "score": 36.077797,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723561034
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?\n|assistant|: Both dynamic and static secrets have their own ways of protecting against vulnerabilities. Secrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a dynamic secret has its expiration date and time enforced when its secret data is read or accessed. The static code scan stage runs a static code analyzer tool on the specified app repo codebases. The static-scan task runs a scan on the specified repos. The Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n|user|: Do they both rotate secrets?\n|assistant|: Both dynamic and static secrets can have their expiration dates enforced, leading to the rotation of the secrets. The key difference lies in when this enforcement occurs. For static secrets, the expiration date and time are enforced at secret creation or rotation time. In contrast, for dynamic secrets, the expiration date and time are enforced when the secret data is read or accessed. When trying to rotate a secret, the request's success depends on whether the previous version is locked or not. Automatic rotation is available only for secrets that are generated by Secrets Manager. With IBM Cloud\u00ae Secrets Manager, you can design a strategy for rotating your secrets and sensitive data.\n|user|: What is an IAM credential?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_07578-1215486-1217535",
+          "text": "\nThere are several different strategies that you might use to approach secret groups. For more information and recommendations, see [Best practices for organizing secrets and assigning access](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-best-practices-organize-secrets).\n* What is an IAM credential?\n\nAn IAM credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. For more information about creating and storing IAM credentials, see [Creating IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials).\n* What happens when I rotate my secret?\n\nWhen a secret is rotated, a new version of its value becomes available for use. You can choose to manually add a value or automatically generate one at regular intervals by enabling automatic rotation.\n\nFor more information about secret rotation, see [Rotating secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-manual-rotation).\n* What happens when my secret expires?\n\nIn some secret types such as arbitrary or username_password, you can set the date and time when your secret expires. When the secret reaches its expiration date, it transitions to a Destroyed state. When the transition happens, the value that is associated with the secret is no longer recoverable. The transition to the Destroyed state can take up to a couple of minutes after the secret expires, or a lock that prevented expiration is removed.\n\nFor more information about how your information is protected, see [Securing your data](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-mng-data).\n* What are differences between the Reader and SecretsReader roles?\n\nBoth the Reader and SecretsReader roles help you to assign read-only access to Secrets Manager resources.\n\n\n\n* As a reader, you can browse a high-level view of secrets in your instance.",
+          "url": "https://cloud.ibm.com/docs/faqs",
+          "score": 35.81092,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723560808
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?\n|assistant|: Both dynamic and static secrets have their own ways of protecting against vulnerabilities. Secrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a dynamic secret has its expiration date and time enforced when its secret data is read or accessed. The static code scan stage runs a static code analyzer tool on the specified app repo codebases. The static-scan task runs a scan on the specified repos. The Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n|user|: Do they both rotate secrets?\n|assistant|: Both dynamic and static secrets can have their expiration dates enforced, leading to the rotation of the secrets. The key difference lies in when this enforcement occurs. For static secrets, the expiration date and time are enforced at secret creation or rotation time. In contrast, for dynamic secrets, the expiration date and time are enforced when the secret data is read or accessed. When trying to rotate a secret, the request's success depends on whether the previous version is locked or not. Automatic rotation is available only for secrets that are generated by Secrets Manager. With IBM Cloud\u00ae Secrets Manager, you can design a strategy for rotating your secrets and sensitive data.\n|user|: What is an IAM credential?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_05030-7-2082",
+          "text": "\nIAM overview \n\nIBM Cloud Identity and Access Management (IAM) service securely authenticates users and controls access to all resources consistently in the IBM Cloud Platform.\n\nFor more information, see the [IAM account overview](https://cloud.ibm.com/docs/account?topic=account-overview).\n\n\n\n Identity Management \n\nIdentity Management includes the interaction of users, services, and resources. Users are identified by their IBMid. Services are identified by their service IDs. And, resources are identified and addressed by using CRNs.\n\nThe IBM Cloud IAM Token Service is used to create, update, delete, and use API keys for users and services. Those API keys are created either with API calls or the Identity & Access section of the IBM Cloud\u00ae Platform Console. The same key can be used across services. Each user has any number of API keys to support key rotation scenarios, as well as scenarios by using different keys for different purposes to limit the exposure of a single key.\n\nFor more information, see [the IAM documentation](https://cloud.ibm.com/docs/account?topic=account-iamoverviewiamoverview).\n\n\n\n Users and API keys \n\nAPI keys can be created and used by IBM Cloud users for automation and scripting purposes. API keys can be created in the Identity and Access Management UI or by using the ibmcloud CLI.\n\n\n\n\n\n Service IDs and API keys \n\nUsers also can create Service IDs and API keys for Service IDs. A Service ID is similar to a \"functional ID\" or an \"application ID\" and is used to authenticate services, and not to represent a user.\n\nUsers create Service IDs and bind them to scopes, like a IBM Cloud Platform account, a CloudFoundry organization, or a CloudFoundry space. It is best to bind Service IDs to a IBM Cloud Platform account. This binding is done to give the Service ID a container to live in. This container also defines who can update and delete the Service ID and who can create, update, read, and delete API Keys that are associated to that Service ID. It is important to note that a Service ID is NOT related to a user.\n\n\n\n\n\n Key rotation",
+          "url": "https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-iam-overview",
+          "score": 14.935776,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723561045
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "What is an IAM credential?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03519-7-2219",
+          "text": "\nManaging access with IAM \n\nIBM Cloud\u00ae Identity and Access Management (IAM) enables you to securely authenticate users and control access to all cloud resources consistently in the IBM Cloud. Access to IBM Cloud Activity Tracker service instances for users in your account is controlled by IBM Cloud Identity and Access Management (IAM).\n\nThe access policy that you assign users in your account determines what actions a user can perform within the context of the service or specific instance that you select. The allowable actions are customized and defined by Activity Tracker Event Routing as operations that are allowed to be performed on the service. An action is mapped to an IAM platform or service role that you can assign to a user.\n\nFor more information about the steps to assign IAM access, see [Managing access to resources](https://cloud.ibm.com/docs/account?topic=account-assign-access-resources).\n\n\n\n* When you assign policies to users by using a CLI command or API call, use atracker.\n* When you assign policies to users through the UI, use Activity Tracking.\n\n\n\nTo organize a set of users and service IDs into a single entity that makes it easy for you to manage IAM permissions, use access groups. You can assign a single policy to the group instead of assigning the same access multiple times per individual user or service ID.\n\n\n\n Managing access by using access groups \n\nTo manage access or assign new access for users by using access groups, you must be the account owner, administrator, or editor on all Identity and Access enabled services in the account, or the assigned administrator or editor for the IAM Access Groups Service.\n\nChoose any of the following actions to manage access groups in the IBM Cloud:\n\n\n\n* [Creating an access group](https://cloud.ibm.com/docs/account?topic=account-groupscreate_ag).\n* [Assigning access to a group](https://cloud.ibm.com/docs/account?topic=account-groupsaccess_ag).\n\n\n\n\n\n\n\n Managing access by assigning policies directly to users \n\nTo manage access or assign new access for users by using IAM policies, you must be the account owner, administrator on all services in the account, or an administrator for the particular service or service instance.",
+          "url": "https://cloud.ibm.com/docs/atracker?topic=atracker-iam",
+          "score": 14.52054,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723561209
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "What is an IAM credential?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_13032-7-2262",
+          "text": "\nManaging access with IAM \n\nIBM Cloud\u00ae Identity and Access Management (IAM) enables you to securely authenticate users and control access to all cloud resources consistently in the IBM Cloud. Access to IBM Cloud Activity Tracker service instances for users in your account is controlled by IBM Cloud Identity and Access Management (IAM).\n\nThe access policy that you assign users in your account determines what actions a user can perform within the context of the service or specific instance that you select. The allowable actions are customized and defined by Activity Tracker as operations that are allowed to be performed on the service. An action is mapped to an IAM platform or service role that you can assign to a user.\n\nFor more information about the steps to assign IAM access, see [Managing access to resources](https://cloud.ibm.com/docs/account?topic=account-assign-access-resources).\n\n\n\n* Use logdnaat for Activity Tracker hosted event search offerings.\n* When you assign policies to users, use IBM Cloud Activity Tracker for the service name in the UI for Activity Tracker hosted event search offerings.\n\n\n\nTo organize a set of users and service IDs into a single entity that makes it easy for you to manage IAM permissions, use access groups. You can assign a single policy to the group instead of assigning the same access multiple times per individual user or service ID.\n\n\n\n Managing access by using access groups \n\nTo manage access or assign new access for users by using access groups, you must be the account owner, administrator, or editor on all Identity and Access enabled services in the account, or the assigned administrator or editor for the IAM Access Groups Service.\n\nChoose any of the following actions to manage access groups in the IBM Cloud:\n\n\n\n* [Creating an access group](https://cloud.ibm.com/docs/account?topic=account-groupscreate_ag).\n* [Assigning access to a group](https://cloud.ibm.com/docs/account?topic=account-groupsaccess_ag).\n\n\n\n\n\n\n\n Managing access by assigning policies directly to users \n\nTo manage access or assign new access for users by using IAM policies, you must be the account owner, administrator on all services in the account, or an administrator for the particular service or service instance.",
+          "url": "https://cloud.ibm.com/docs/services/activity-tracker?topic=activity-tracker-iam",
+          "score": 14.294264,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723561274
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "What is an IAM credential?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "An IAM (Identity and Access Management) credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. These credentials allow you to authenticate your identity and control your access to various IBM Cloud resources."
+    },
+    {
+      "speaker": "user",
+      "text": "Can I track my users?",
+      "timestamp": 1723561453,
+      "enrichments": {
+        "Question Type": [
+          "Factoid",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "You can use the Activity Tracker service to track how users and applications interact. The IBM Cloud Activity Tracker service records user-initiated activities that change the state of a service in IBM Cloud. You can use this service to investigate abnormal activity and critical actions and to comply with regulatory audit requirements. ",
+      "timestamp": 1723561469,
+      "contexts": [
+        {
+          "document_id": "ibmcld_12498-8087-10171",
+          "text": "\nAnd, ultimately, it makes it a little more efficient for the management of your secrets while you're going through your DevOps operations.\n\nThank you. If you have questions, please drop us a line. If you want to see more videos like this in the future, please like and subscribe, and don't forget you can grow your skills and earn a badge with IBM Cloud Labs which, are free browser-based interactive Kubernetes labs.\n\n\n\n\n\n Working with secrets of different types \n\nSecrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a\n\ndynamic secrethas its expiration date and time enforced when its secret data is read or accessed.\n\nSecrets Manager further classifies static and dynamic secrets by their general purpose or function. For example, each secret type is identified by programmatic name, such as username_password. If you're looking to manage your secret by using the Secrets Manager API or CLI, you can use these programmatic names to run operations on secrets according to their type.\n\nReview the following table to understand the types of static and dynamic secrets that you can create and manage with the service.\n\n\n\nTable 1. Secret types in Secrets Manager\n\n Type Programmatic name Kind Description \n\n [Arbitrary secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-arbitrary-secrets) arbitrary Static Arbitrary pieces of sensitive data, including any type of structured or unstructured data, that you can use to access an application or resource. \n [IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials) iam_credentials* Dynamic A dynamically generated service ID and API key that can be used to access an IBM Cloud service that requires IAM authentication. \n [Key-value secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-key-value) kv Static Pieces of sensitive data that is structured in JSON format that you can use to access an application or resource.",
+          "url": "https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-what-is-secret",
+          "score": 38.981373,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723561699
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?\n|assistant|: Both dynamic and static secrets have their own ways of protecting against vulnerabilities. Secrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a dynamic secret has its expiration date and time enforced when its secret data is read or accessed. The static code scan stage runs a static code analyzer tool on the specified app repo codebases. The static-scan task runs a scan on the specified repos. The Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n|user|: Do they both rotate secrets?\n|assistant|: Both dynamic and static secrets can have their expiration dates enforced, leading to the rotation of the secrets. The key difference lies in when this enforcement occurs. For static secrets, the expiration date and time are enforced at secret creation or rotation time. In contrast, for dynamic secrets, the expiration date and time are enforced when the secret data is read or accessed. When trying to rotate a secret, the request's success depends on whether the previous version is locked or not. Automatic rotation is available only for secrets that are generated by Secrets Manager. With IBM Cloud\u00ae Secrets Manager, you can design a strategy for rotating your secrets and sensitive data.\n|user|: What is an IAM credential?\n|assistant|: IBM Cloud Identity and Access Management (IAM) service securely authenticates users and controls access to all resources consistently in the IBM Cloud Platform. An IAM (Identity and Access Management) credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. These credentials allow you to authenticate your identity and control your access to various IBM Cloud resources.\n|user|: Can I track my users?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_07578-1215486-1217535",
+          "text": "\nThere are several different strategies that you might use to approach secret groups. For more information and recommendations, see [Best practices for organizing secrets and assigning access](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-best-practices-organize-secrets).\n* What is an IAM credential?\n\nAn IAM credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. For more information about creating and storing IAM credentials, see [Creating IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials).\n* What happens when I rotate my secret?\n\nWhen a secret is rotated, a new version of its value becomes available for use. You can choose to manually add a value or automatically generate one at regular intervals by enabling automatic rotation.\n\nFor more information about secret rotation, see [Rotating secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-manual-rotation).\n* What happens when my secret expires?\n\nIn some secret types such as arbitrary or username_password, you can set the date and time when your secret expires. When the secret reaches its expiration date, it transitions to a Destroyed state. When the transition happens, the value that is associated with the secret is no longer recoverable. The transition to the Destroyed state can take up to a couple of minutes after the secret expires, or a lock that prevented expiration is removed.\n\nFor more information about how your information is protected, see [Securing your data](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-mng-data).\n* What are differences between the Reader and SecretsReader roles?\n\nBoth the Reader and SecretsReader roles help you to assign read-only access to Secrets Manager resources.\n\n\n\n* As a reader, you can browse a high-level view of secrets in your instance.",
+          "url": "https://cloud.ibm.com/docs/faqs",
+          "score": 37.692577,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723561722
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?\n|assistant|: Both dynamic and static secrets have their own ways of protecting against vulnerabilities. Secrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a dynamic secret has its expiration date and time enforced when its secret data is read or accessed. The static code scan stage runs a static code analyzer tool on the specified app repo codebases. The static-scan task runs a scan on the specified repos. The Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n|user|: Do they both rotate secrets?\n|assistant|: Both dynamic and static secrets can have their expiration dates enforced, leading to the rotation of the secrets. The key difference lies in when this enforcement occurs. For static secrets, the expiration date and time are enforced at secret creation or rotation time. In contrast, for dynamic secrets, the expiration date and time are enforced when the secret data is read or accessed. When trying to rotate a secret, the request's success depends on whether the previous version is locked or not. Automatic rotation is available only for secrets that are generated by Secrets Manager. With IBM Cloud\u00ae Secrets Manager, you can design a strategy for rotating your secrets and sensitive data.\n|user|: What is an IAM credential?\n|assistant|: IBM Cloud Identity and Access Management (IAM) service securely authenticates users and controls access to all resources consistently in the IBM Cloud Platform. An IAM (Identity and Access Management) credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. These credentials allow you to authenticate your identity and control your access to various IBM Cloud resources.\n|user|: Can I track my users?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16727-1218119-1220168",
+          "text": "\nThere are several different strategies that you might use to approach secret groups. For more information and recommendations, see [Best practices for organizing secrets and assigning access](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-best-practices-organize-secrets).\n* What is an IAM credential?\n\nAn IAM credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. For more information about creating and storing IAM credentials, see [Creating IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials).\n* What happens when I rotate my secret?\n\nWhen a secret is rotated, a new version of its value becomes available for use. You can choose to manually add a value or automatically generate one at regular intervals by enabling automatic rotation.\n\nFor more information about secret rotation, see [Rotating secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-manual-rotation).\n* What happens when my secret expires?\n\nIn some secret types such as arbitrary or username_password, you can set the date and time when your secret expires. When the secret reaches its expiration date, it transitions to a Destroyed state. When the transition happens, the value that is associated with the secret is no longer recoverable. The transition to the Destroyed state can take up to a couple of minutes after the secret expires, or a lock that prevented expiration is removed.\n\nFor more information about how your information is protected, see [Securing your data](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-mng-data).\n* What are differences between the Reader and SecretsReader roles?\n\nBoth the Reader and SecretsReader roles help you to assign read-only access to Secrets Manager resources.\n\n\n\n* As a reader, you can browse a high-level view of secrets in your instance.",
+          "url": "https://cloud.ibm.com/docs?tab=faqs",
+          "score": 37.692577,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723561741
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?\n|assistant|: Both dynamic and static secrets have their own ways of protecting against vulnerabilities. Secrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a dynamic secret has its expiration date and time enforced when its secret data is read or accessed. The static code scan stage runs a static code analyzer tool on the specified app repo codebases. The static-scan task runs a scan on the specified repos. The Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n|user|: Do they both rotate secrets?\n|assistant|: Both dynamic and static secrets can have their expiration dates enforced, leading to the rotation of the secrets. The key difference lies in when this enforcement occurs. For static secrets, the expiration date and time are enforced at secret creation or rotation time. In contrast, for dynamic secrets, the expiration date and time are enforced when the secret data is read or accessed. When trying to rotate a secret, the request's success depends on whether the previous version is locked or not. Automatic rotation is available only for secrets that are generated by Secrets Manager. With IBM Cloud\u00ae Secrets Manager, you can design a strategy for rotating your secrets and sensitive data.\n|user|: What is an IAM credential?\n|assistant|: IBM Cloud Identity and Access Management (IAM) service securely authenticates users and controls access to all resources consistently in the IBM Cloud Platform. An IAM (Identity and Access Management) credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. These credentials allow you to authenticate your identity and control your access to various IBM Cloud resources.\n|user|: Can I track my users?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_02392-7-2321",
+          "text": "\nAuditing events for service instances \n\nAs a security officer, auditor, or manager, you can use the IBM Cloud Activity Tracker service to track how users and applications interact with the IBM Cloud services.\n\nThe IBM Cloud Activity Tracker service records user-initiated activities that change the state of a service in IBM Cloud. To get started monitoring your user's actions, see [IBM Cloud Activity Tracker](https://cloud.ibm.com/docs/services/activity-tracker?topic=activity-tracker-getting-startedgetting-started).\n\n\n\n Events for provisioning and managing service instances \n\nThe following table lists the actions that generate an event:\n\n\n\nTable 1. Actions that generate events\n\n Action Description \n\n service_name.instance.create An event is generated when you provision a service instance. \n service_name.instance.update An event is generated when you rename a service instance or when you change the service plan. \n service_name.instance.delete An event is generated when a service instance is deleted. \n service_name.instance.schedule_reclaim An event is generated when a service instance is pending_reclamation. \n service_name.instance.restore An event is generated when a service instance is restored. \n\n\n\n\n\n\n\n Events for managing aliases that are associated to a service instance \n\nAn alias is a connection between your IAM-managed service within a resource group and an application within an org or a space.\n\nThe following table lists the actions that generate an event:\n\n\n\nTable 2. Actions that generate events\n\n Action Description \n\n service_name.alias.create An event is generated when an alias for an instance is created. \n service_name.alias.update An event is generated when an alias for an instance is updated. \n service_name.alias.delete An event is generated when an alias for an instance is deleted. \n\n\n\n\n\n\n\n Events for managing service credentials that are associated to a service instance \n\nA service credential provides the necessary information to connect an application to a service instance.\n\nThe following table lists the actions that generate an event:\n\n\n\nTable 3. Actions that generate events\n\n Action Description \n\n service_name.key.create An event is generated when an API key is created for a service instance through the Service credentials section of the service instance UI.",
+          "url": "https://cloud.ibm.com/docs/activity-tracker?topic=activity-tracker-at_events_rc",
+          "score": 15.040893,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723565321
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "tracking instances"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03443-7-2321",
+          "text": "\nAuditing events for service instances \n\nAs a security officer, auditor, or manager, you can use the IBM Cloud Activity Tracker service to track how users and applications interact with the IBM Cloud services.\n\nThe IBM Cloud Activity Tracker service records user-initiated activities that change the state of a service in IBM Cloud. To get started monitoring your user's actions, see [IBM Cloud Activity Tracker](https://cloud.ibm.com/docs/services/activity-tracker?topic=activity-tracker-getting-startedgetting-started).\n\n\n\n Events for provisioning and managing service instances \n\nThe following table lists the actions that generate an event:\n\n\n\nTable 1. Actions that generate events\n\n Action Description \n\n service_name.instance.create An event is generated when you provision a service instance. \n service_name.instance.update An event is generated when you rename a service instance or when you change the service plan. \n service_name.instance.delete An event is generated when a service instance is deleted. \n service_name.instance.schedule_reclaim An event is generated when a service instance is pending_reclamation. \n service_name.instance.restore An event is generated when a service instance is restored. \n\n\n\n\n\n\n\n Events for managing aliases that are associated to a service instance \n\nAn alias is a connection between your IAM-managed service within a resource group and an application within an org or a space.\n\nThe following table lists the actions that generate an event:\n\n\n\nTable 2. Actions that generate events\n\n Action Description \n\n service_name.alias.create An event is generated when an alias for an instance is created. \n service_name.alias.update An event is generated when an alias for an instance is updated. \n service_name.alias.delete An event is generated when an alias for an instance is deleted. \n\n\n\n\n\n\n\n Events for managing service credentials that are associated to a service instance \n\nA service credential provides the necessary information to connect an application to a service instance.\n\nThe following table lists the actions that generate an event:\n\n\n\nTable 3. Actions that generate events\n\n Action Description \n\n service_name.key.create An event is generated when an API key is created for a service instance through the Service credentials section of the service instance UI.",
+          "url": "https://cloud.ibm.com/docs/atracker?topic=atracker-at_events_rc",
+          "score": 15.040893,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723564995
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "tracking instances"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_00033-4979-5757",
+          "text": "\nFor details, see [Configuring and viewing logs](https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-viewing-logs).\n\n\n\n\n\n How can I track actions performed by users on a serverless Spark instance? \n\nYou can use the Activity Tracker service to track how users and applications interact with IBM Analytics Engine in IBM Cloud\u00ae. You can use this service to investigate abnormal activity and critical actions and to comply with regulatory audit requirements. In addition, you can be alerted about actions as they happen. The events that are collected comply with the Cloud Auditing Data Federation (CADF) standard. See [Auditing events for IBM Analytics Engine serverless instances](https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-at_events-serverless).",
+          "url": "https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-faqs-serverless",
+          "score": 14.278735,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723562231
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "tracking instances"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "IBM Cloud Identity and Access Management (IAM) service allows you to securely authenticate users and control access to all resources consistently in the IBM Cloud Platform. However, tracking users' activities is not explicitly mentioned in the provided document. It mainly focuses on creating and managing IAM credentials, which consist of a service ID and an API key. These credentials are used to authenticate identities and control access to various IBM Cloud resources. If you need more information about tracking user activities, I recommend checking the documentation on the IBM Cloud IAM service or contacting IBM support."
+    },
+    {
+      "speaker": "user",
+      "text": "Are there serverless instances?",
+      "timestamp": 1723565756,
+      "enrichments": {
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Question Type": [
+          "Factoid",
+          "Summarization"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, there are serverless instances in the context of IBM Analytics Engine. The IBM Analytics Engine Standard serverless plan for Apache Spark offers a new consumption model using Apache Spark. An Analytics Engine serverless instance does not consume any resources when no workloads are running. When you submit Spark applications, Spark clusters are created in seconds and are spun down as soon as the applications finish running.",
+      "timestamp": 1723565758,
+      "contexts": [
+        {
+          "document_id": "ibmcld_12498-8087-10171",
+          "text": "\nAnd, ultimately, it makes it a little more efficient for the management of your secrets while you're going through your DevOps operations.\n\nThank you. If you have questions, please drop us a line. If you want to see more videos like this in the future, please like and subscribe, and don't forget you can grow your skills and earn a badge with IBM Cloud Labs which, are free browser-based interactive Kubernetes labs.\n\n\n\n\n\n Working with secrets of different types \n\nSecrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a\n\ndynamic secrethas its expiration date and time enforced when its secret data is read or accessed.\n\nSecrets Manager further classifies static and dynamic secrets by their general purpose or function. For example, each secret type is identified by programmatic name, such as username_password. If you're looking to manage your secret by using the Secrets Manager API or CLI, you can use these programmatic names to run operations on secrets according to their type.\n\nReview the following table to understand the types of static and dynamic secrets that you can create and manage with the service.\n\n\n\nTable 1. Secret types in Secrets Manager\n\n Type Programmatic name Kind Description \n\n [Arbitrary secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-arbitrary-secrets) arbitrary Static Arbitrary pieces of sensitive data, including any type of structured or unstructured data, that you can use to access an application or resource. \n [IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials) iam_credentials* Dynamic A dynamically generated service ID and API key that can be used to access an IBM Cloud service that requires IAM authentication. \n [Key-value secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-key-value) kv Static Pieces of sensitive data that is structured in JSON format that you can use to access an application or resource.",
+          "url": "https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-what-is-secret",
+          "score": 38.981373,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723567298
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?\n|assistant|: Both dynamic and static secrets have their own ways of protecting against vulnerabilities. Secrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a dynamic secret has its expiration date and time enforced when its secret data is read or accessed. The static code scan stage runs a static code analyzer tool on the specified app repo codebases. The static-scan task runs a scan on the specified repos. The Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n|user|: Do they both rotate secrets?\n|assistant|: Both dynamic and static secrets can have their expiration dates enforced, leading to the rotation of the secrets. The key difference lies in when this enforcement occurs. For static secrets, the expiration date and time are enforced at secret creation or rotation time. In contrast, for dynamic secrets, the expiration date and time are enforced when the secret data is read or accessed. When trying to rotate a secret, the request's success depends on whether the previous version is locked or not. Automatic rotation is available only for secrets that are generated by Secrets Manager. With IBM Cloud\u00ae Secrets Manager, you can design a strategy for rotating your secrets and sensitive data.\n|user|: What is an IAM credential?\n|assistant|: IBM Cloud Identity and Access Management (IAM) service securely authenticates users and controls access to all resources consistently in the IBM Cloud Platform. An IAM (Identity and Access Management) credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. These credentials allow you to authenticate your identity and control your access to various IBM Cloud resources.\n|user|: Can I track my users?\n|assistant|: You can use the Activity Tracker service to track how users and applications interact. The IBM Cloud Activity Tracker service records user-initiated activities that change the state of a service in IBM Cloud. You can use this service to investigate abnormal activity and critical actions and to comply with regulatory audit requirements. Tracking Instances with IBM Cloud Activity Tracker and Access Management (IAM) service allows you to securely authenticate users and control access to all resources consistently in the IBM Cloud Platform. \n|user|: Are there serverless instances?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_07578-1215486-1217535",
+          "text": "\nThere are several different strategies that you might use to approach secret groups. For more information and recommendations, see [Best practices for organizing secrets and assigning access](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-best-practices-organize-secrets).\n* What is an IAM credential?\n\nAn IAM credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. For more information about creating and storing IAM credentials, see [Creating IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials).\n* What happens when I rotate my secret?\n\nWhen a secret is rotated, a new version of its value becomes available for use. You can choose to manually add a value or automatically generate one at regular intervals by enabling automatic rotation.\n\nFor more information about secret rotation, see [Rotating secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-manual-rotation).\n* What happens when my secret expires?\n\nIn some secret types such as arbitrary or username_password, you can set the date and time when your secret expires. When the secret reaches its expiration date, it transitions to a Destroyed state. When the transition happens, the value that is associated with the secret is no longer recoverable. The transition to the Destroyed state can take up to a couple of minutes after the secret expires, or a lock that prevented expiration is removed.\n\nFor more information about how your information is protected, see [Securing your data](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-mng-data).\n* What are differences between the Reader and SecretsReader roles?\n\nBoth the Reader and SecretsReader roles help you to assign read-only access to Secrets Manager resources.\n\n\n\n* As a reader, you can browse a high-level view of secrets in your instance.",
+          "url": "https://cloud.ibm.com/docs/faqs",
+          "score": 37.692577,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723567290
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?\n|assistant|: Both dynamic and static secrets have their own ways of protecting against vulnerabilities. Secrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a dynamic secret has its expiration date and time enforced when its secret data is read or accessed. The static code scan stage runs a static code analyzer tool on the specified app repo codebases. The static-scan task runs a scan on the specified repos. The Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n|user|: Do they both rotate secrets?\n|assistant|: Both dynamic and static secrets can have their expiration dates enforced, leading to the rotation of the secrets. The key difference lies in when this enforcement occurs. For static secrets, the expiration date and time are enforced at secret creation or rotation time. In contrast, for dynamic secrets, the expiration date and time are enforced when the secret data is read or accessed. When trying to rotate a secret, the request's success depends on whether the previous version is locked or not. Automatic rotation is available only for secrets that are generated by Secrets Manager. With IBM Cloud\u00ae Secrets Manager, you can design a strategy for rotating your secrets and sensitive data.\n|user|: What is an IAM credential?\n|assistant|: IBM Cloud Identity and Access Management (IAM) service securely authenticates users and controls access to all resources consistently in the IBM Cloud Platform. An IAM (Identity and Access Management) credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. These credentials allow you to authenticate your identity and control your access to various IBM Cloud resources.\n|user|: Can I track my users?\n|assistant|: You can use the Activity Tracker service to track how users and applications interact. The IBM Cloud Activity Tracker service records user-initiated activities that change the state of a service in IBM Cloud. You can use this service to investigate abnormal activity and critical actions and to comply with regulatory audit requirements. Tracking Instances with IBM Cloud Activity Tracker and Access Management (IAM) service allows you to securely authenticate users and control access to all resources consistently in the IBM Cloud Platform. \n|user|: Are there serverless instances?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16727-1218119-1220168",
+          "text": "\nThere are several different strategies that you might use to approach secret groups. For more information and recommendations, see [Best practices for organizing secrets and assigning access](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-best-practices-organize-secrets).\n* What is an IAM credential?\n\nAn IAM credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. For more information about creating and storing IAM credentials, see [Creating IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials).\n* What happens when I rotate my secret?\n\nWhen a secret is rotated, a new version of its value becomes available for use. You can choose to manually add a value or automatically generate one at regular intervals by enabling automatic rotation.\n\nFor more information about secret rotation, see [Rotating secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-manual-rotation).\n* What happens when my secret expires?\n\nIn some secret types such as arbitrary or username_password, you can set the date and time when your secret expires. When the secret reaches its expiration date, it transitions to a Destroyed state. When the transition happens, the value that is associated with the secret is no longer recoverable. The transition to the Destroyed state can take up to a couple of minutes after the secret expires, or a lock that prevented expiration is removed.\n\nFor more information about how your information is protected, see [Securing your data](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-mng-data).\n* What are differences between the Reader and SecretsReader roles?\n\nBoth the Reader and SecretsReader roles help you to assign read-only access to Secrets Manager resources.\n\n\n\n* As a reader, you can browse a high-level view of secrets in your instance.",
+          "url": "https://cloud.ibm.com/docs?tab=faqs",
+          "score": 37.692577,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723567284
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?\n|assistant|: Both dynamic and static secrets have their own ways of protecting against vulnerabilities. Secrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a dynamic secret has its expiration date and time enforced when its secret data is read or accessed. The static code scan stage runs a static code analyzer tool on the specified app repo codebases. The static-scan task runs a scan on the specified repos. The Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n|user|: Do they both rotate secrets?\n|assistant|: Both dynamic and static secrets can have their expiration dates enforced, leading to the rotation of the secrets. The key difference lies in when this enforcement occurs. For static secrets, the expiration date and time are enforced at secret creation or rotation time. In contrast, for dynamic secrets, the expiration date and time are enforced when the secret data is read or accessed. When trying to rotate a secret, the request's success depends on whether the previous version is locked or not. Automatic rotation is available only for secrets that are generated by Secrets Manager. With IBM Cloud\u00ae Secrets Manager, you can design a strategy for rotating your secrets and sensitive data.\n|user|: What is an IAM credential?\n|assistant|: IBM Cloud Identity and Access Management (IAM) service securely authenticates users and controls access to all resources consistently in the IBM Cloud Platform. An IAM (Identity and Access Management) credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. These credentials allow you to authenticate your identity and control your access to various IBM Cloud resources.\n|user|: Can I track my users?\n|assistant|: You can use the Activity Tracker service to track how users and applications interact. The IBM Cloud Activity Tracker service records user-initiated activities that change the state of a service in IBM Cloud. You can use this service to investigate abnormal activity and critical actions and to comply with regulatory audit requirements. Tracking Instances with IBM Cloud Activity Tracker and Access Management (IAM) service allows you to securely authenticate users and control access to all resources consistently in the IBM Cloud Platform. \n|user|: Are there serverless instances?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_00096-7-2347",
+          "text": "\nExplore creating serverless instances and submitting applications using the CLI \n\nLearn how to use the IBM Analytics Engine CLI to create the services that you need to create and manage a serverless instance, and submit and monitor your Spark applications.\n\nYou create a serverless instance by selecting the IBM Analytics Engine Standard serverless plan. When a serverless instance is provisioned, an Apache Spark cluster is created, which you can customize with library packages of your choice, and is where you run your Spark applications.\n\n\n\n Objectives \n\nYou will learn how to install and set up the following services and components that you will need to use the CLI:\n\n\n\n* An IBM Cloud Object Storage instance in which your IBM Analytics Engine instance stores custom application libraries and Spark history events.\n* A Object Storage bucket for application files and data files.\n* An IBM Analytics Engine serverless instance. This instance is allocated compute and memory resources on demand whenever Spark workloads are deployed. When an application is not in running state, no computing resources are allocated to the instance. The price is based on the actual usage of resources consumed by the instance, billed on a per second basis.\n* Logging service to help you to troubleshoot issues that might occur in the IBM Analytics Engine instance and submitted application, as well as to view any output generated by your application. When you run applications with logging enabled, logs are forwarded to an IBM Log Analysis service where they are indexed, enabling full-text search through all generated messages and convenient querying based on specific fields.\n\n\n\n\n\n\n\n Before you begin \n\nTo start using the the Analytics Engine V3 CLI you need:\n\n\n\n* An IBM Cloud\u00ae account.\n* To install the IBM Cloud CLI. See [Getting started with the IBM Cloud CLI](https://cloud.ibm.com/docs/cli?topic=cli-getting-started) for the instructions to download and install the CLI.\n\n\n\nNow you can start using the Analytics Engine V3 CLI. You must follow the instructions in steps 1 and 2 to install the required services before you start with step 3 to upload and submit Spark applications. Step 4 shows you how to create a logging instance and enable logging. Step 5 shows you how to delete an Analytics Engine instance, although this step is optional.",
+          "url": "https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-using-cli",
+          "score": 25.54247,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723567318
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "What is a serverless Spark instance"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_00007-7-2159",
+          "text": "\nGetting started tutorial \n\nIBM Analytics Engine Serverless instance is allocated to compute and memory resources on demand when Spark workloads are deployed. When an application is not in running state, no computing resources are allocated to the IBM Analytics Engine instance. Pricing is based on the actual amount of resources consumed by the instance, billed on a per second basis.\n\n\n\n* [Serverless instance architecture and concepts](https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-serverless-architecture-concepts)\n* [Provisioning a serverless instance](https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-provisioning-serverless)\n\n\n\n\n\n Getting started using serverless IBM Analytics Engine instances \n\nThe IBM Analytics Engine Standard Serverless plan for Apache Spark offers the ability to spin up IBM Analytics Engine serverless instances within seconds, customize them with library packages of your choice, and run your Spark workloads.\n\nCurrently, you can create IBM Analytics Engine serverless instances only in the US South region.\n\n\n\n\n\n Before you begin \n\nTo start running Spark applications in IBM Analytics Engine, you need:\n\n\n\n* An IBM Cloud\u00ae account.\n* Instance home storage in IBM Cloud Object Storage that is referenced from the IBM Analytics Engine instance. This storage is used to store Spark History events, which are created by your applications and any custom library sets, which need to be made available to your Spark applications.\n* An IBM Analytics Engine serverless instance.\n\n\n\n\n\n\n\n Provision an instance and create a cluster \n\nTo provision an IBM Analytics Engine instance:\n\n\n\n1. Get a basic understanding of the architecture and key concepts. See [Serverless instance architecture and concepts](https://cloud.ibm.com/docs/analyticsengine?-serverless-architecture-concepts).\n2. [Provision a serverless instance](https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-provisioning-serverless)\n\n\n\n\n\n\n\n Run applications \n\nTo run Spark applications in a serverless IBM Analytics Engine instance:\n\n\n\n1. Optionally, give users access to the provisioned instance to enable collaboration.",
+          "url": "https://cloud.ibm.com/docs/AnalyticsEngine",
+          "score": 24.451962,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723567323
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "What is a serverless Spark instance"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_00060-7-1693",
+          "text": "\nRetrieving details of a serverless instance \n\nYou can retrieve information, like the instance ID (or GUID) and the provisioning state of an IBM Analytics Engine serverless instance from the instance details. You need the instance ID to use the Spark application REST API and the Livy batch APIs.\n\nYou can retrieve the details by:\n\n\n\n* [Using the IBM Cloud CLI](https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-retrieve-instance-detailsretrieve-guid-cli)\n* [Using the IBM Cloud REST API](https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-retrieve-instance-detailsretrieve-guid-api)\n\n\n\n\n\n Accessing instance details by using the IBM Cloud CLI \n\nTo get the details of an instance:\n\n\n\n1. List all of the created serverless instances:\n\n$ ibmcloud resource service-instances --service-name ibmanalyticsengine\n\nThis call retrieves the instances of type service_instance in all resource groups in all locations for your account.\n\nExample response:\n\nName Location State Type Resource Group ID\nserverless-instance us-south active service_instance 65xxxxxxxxxxxxxxxa3fd\n2. Enter the following command with the server instance name of your instance to view the instance details:\n\n$ ibmcloud resource service-instance \"Analytics Engine-xyz\"\n\nThis retrieves your instance from the resource groups under your account.\n\nExample response:\n\nName: Analytics Engine-xyz\nID:\ncrn:v1:staging:public:ibmanalyticsengine:us-south:a/XXXXX:XXXXX::\nGUID: XXXXX\nLocation: us-south\nService Name: ibmanalyticsengine\nService Plan Name: standard-serverless-spark\nResource Group Name: Default\nState: active\nType: service_instance\nSub Type:\nCreated at: 2021-01-06T07:49:12Z\nCreated by: XXXXX",
+          "url": "https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-retrieve-instance-details",
+          "score": 25.063637,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723567327
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "What is a serverless Spark instance"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16727-107922-110226",
+          "text": "\n* Port 8443 Knox\n* Port 22 SSH\n* Port 9443 Ambari\n\n\n\n* What is IBM Analytics Engine serverless?\n\nThe IBM Analytics Engine Standard serverless plan for Apache Spark offers a new consumption model using Apache Spark. An Analytics Engine serverless instance does not consume any resources when no workloads are running. When you submit Spark applications, Spark clusters are created in seconds and are spun down as soon as the applications finish running. You can develop and deploy Spark SQL, data transformation, data science, or machine learning jobs using the Spark application API.\n* What are the advantages of IBM Analytics Engine serverless instances?\n\nWith IBM Analytics Engine serverless, compute and memory resources are allocated on demand when Spark workloads are deployed. When an application is not in running state, no computing resources are allocated to the IBM Analytics Engine serverless instance. Pricing is based on the actual amount of resources consumed by the instance, billed on a per second basis.\n* Does the IBM Analytics Engine Standard serverless plan for Apache Spark support Hadoop?\n\nNo, currently, the IBM Analytics Engine Standard serverless plan for Apache Spark only supports Apache Spark.\n* Can I change the instance home storage of a serverless instance?\n\nNo, you can't. After an instance home storage is associated with an IBM Analytics Engine serverless instance, it cannot be changed because instance home contains all instance relevant data, such as the Spark events and custom libraries. Changing instance home would result in the loss of the Spark history data and custom libraries.\n* How is user management and access control managed in a serverless instance?\n\nUser management and access control of an IBM Analytics Engine serverless instance and its APIs is done through IBM Cloud\u00ae Identity and Access Management (IAM). You use IAM access policies to invite users to collaborate on your instance and grant them the necessary privileges. See [Granting permissions to users](https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-grant-permissions-serverless).\n* How do I define the size of the cluster to run my Spark application?\n\nYou can specify the size of the cluster either at the time the instance is created or when submitting Spark applications.",
+          "url": "https://cloud.ibm.com/docs?tab=faqs",
+          "score": 24.205097,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723567333
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "What is a serverless Spark instance"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "speaker": "user",
+      "text": "Explain Spark.",
+      "timestamp": 1723567823,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "A Spark runtime version comes with default runtime language version. IBM extend support for new language versions and remove the existing language version to keep the runtime free from any security vulnerabilities. Spark can be run on various platforms. There is no limit on the number of Spark applications that can be run in an IBM Analytics Engine service instance. On a Spark 3.1 or Spark 3.3 runtime, you can submit Spark applications written in the following languages: Scala 2.12, Python 3.9, and R 3.6.3. ",
+      "timestamp": 1723567827,
+      "contexts": [
+        {
+          "document_id": "ibmcld_12498-8087-10171",
+          "text": "\nAnd, ultimately, it makes it a little more efficient for the management of your secrets while you're going through your DevOps operations.\n\nThank you. If you have questions, please drop us a line. If you want to see more videos like this in the future, please like and subscribe, and don't forget you can grow your skills and earn a badge with IBM Cloud Labs which, are free browser-based interactive Kubernetes labs.\n\n\n\n\n\n Working with secrets of different types \n\nSecrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a\n\ndynamic secrethas its expiration date and time enforced when its secret data is read or accessed.\n\nSecrets Manager further classifies static and dynamic secrets by their general purpose or function. For example, each secret type is identified by programmatic name, such as username_password. If you're looking to manage your secret by using the Secrets Manager API or CLI, you can use these programmatic names to run operations on secrets according to their type.\n\nReview the following table to understand the types of static and dynamic secrets that you can create and manage with the service.\n\n\n\nTable 1. Secret types in Secrets Manager\n\n Type Programmatic name Kind Description \n\n [Arbitrary secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-arbitrary-secrets) arbitrary Static Arbitrary pieces of sensitive data, including any type of structured or unstructured data, that you can use to access an application or resource. \n [IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials) iam_credentials* Dynamic A dynamically generated service ID and API key that can be used to access an IBM Cloud service that requires IAM authentication. \n [Key-value secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-key-value) kv Static Pieces of sensitive data that is structured in JSON format that you can use to access an application or resource.",
+          "url": "https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-what-is-secret",
+          "score": 38.981373,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723567884
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?\n|assistant|: Both dynamic and static secrets have their own ways of protecting against vulnerabilities. Secrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a dynamic secret has its expiration date and time enforced when its secret data is read or accessed. The static code scan stage runs a static code analyzer tool on the specified app repo codebases. The static-scan task runs a scan on the specified repos. The Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n|user|: Do they both rotate secrets?\n|assistant|: Both dynamic and static secrets can have their expiration dates enforced, leading to the rotation of the secrets. The key difference lies in when this enforcement occurs. For static secrets, the expiration date and time are enforced at secret creation or rotation time. In contrast, for dynamic secrets, the expiration date and time are enforced when the secret data is read or accessed. When trying to rotate a secret, the request's success depends on whether the previous version is locked or not. Automatic rotation is available only for secrets that are generated by Secrets Manager. With IBM Cloud\u00ae Secrets Manager, you can design a strategy for rotating your secrets and sensitive data.\n|user|: What is an IAM credential?\n|assistant|: IBM Cloud Identity and Access Management (IAM) service securely authenticates users and controls access to all resources consistently in the IBM Cloud Platform. An IAM (Identity and Access Management) credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. These credentials allow you to authenticate your identity and control your access to various IBM Cloud resources.\n|user|: Can I track my users?\n|assistant|: You can use the Activity Tracker service to track how users and applications interact. The IBM Cloud Activity Tracker service records user-initiated activities that change the state of a service in IBM Cloud. You can use this service to investigate abnormal activity and critical actions and to comply with regulatory audit requirements. Tracking Instances with IBM Cloud Activity Tracker and Access Management (IAM) service allows you to securely authenticate users and control access to all resources consistently in the IBM Cloud Platform. \n|user|: Are there serverless instances?\n|assistant|: Yes, there are serverless instances in the context of IBM Analytics Engine. The IBM Analytics Engine Standard serverless plan for Apache Spark offers a new consumption model using Apache Spark. An Analytics Engine serverless instance does not consume any resources when no workloads are running. When you submit Spark applications, Spark clusters are created in seconds and are spun down as soon as the applications finish running.\n|user|: Explain Spark."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_07578-1215486-1217535",
+          "text": "\nThere are several different strategies that you might use to approach secret groups. For more information and recommendations, see [Best practices for organizing secrets and assigning access](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-best-practices-organize-secrets).\n* What is an IAM credential?\n\nAn IAM credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. For more information about creating and storing IAM credentials, see [Creating IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials).\n* What happens when I rotate my secret?\n\nWhen a secret is rotated, a new version of its value becomes available for use. You can choose to manually add a value or automatically generate one at regular intervals by enabling automatic rotation.\n\nFor more information about secret rotation, see [Rotating secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-manual-rotation).\n* What happens when my secret expires?\n\nIn some secret types such as arbitrary or username_password, you can set the date and time when your secret expires. When the secret reaches its expiration date, it transitions to a Destroyed state. When the transition happens, the value that is associated with the secret is no longer recoverable. The transition to the Destroyed state can take up to a couple of minutes after the secret expires, or a lock that prevented expiration is removed.\n\nFor more information about how your information is protected, see [Securing your data](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-mng-data).\n* What are differences between the Reader and SecretsReader roles?\n\nBoth the Reader and SecretsReader roles help you to assign read-only access to Secrets Manager resources.\n\n\n\n* As a reader, you can browse a high-level view of secrets in your instance.",
+          "url": "https://cloud.ibm.com/docs/faqs",
+          "score": 37.692577,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723567901
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?\n|assistant|: Both dynamic and static secrets have their own ways of protecting against vulnerabilities. Secrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a dynamic secret has its expiration date and time enforced when its secret data is read or accessed. The static code scan stage runs a static code analyzer tool on the specified app repo codebases. The static-scan task runs a scan on the specified repos. The Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n|user|: Do they both rotate secrets?\n|assistant|: Both dynamic and static secrets can have their expiration dates enforced, leading to the rotation of the secrets. The key difference lies in when this enforcement occurs. For static secrets, the expiration date and time are enforced at secret creation or rotation time. In contrast, for dynamic secrets, the expiration date and time are enforced when the secret data is read or accessed. When trying to rotate a secret, the request's success depends on whether the previous version is locked or not. Automatic rotation is available only for secrets that are generated by Secrets Manager. With IBM Cloud\u00ae Secrets Manager, you can design a strategy for rotating your secrets and sensitive data.\n|user|: What is an IAM credential?\n|assistant|: IBM Cloud Identity and Access Management (IAM) service securely authenticates users and controls access to all resources consistently in the IBM Cloud Platform. An IAM (Identity and Access Management) credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. These credentials allow you to authenticate your identity and control your access to various IBM Cloud resources.\n|user|: Can I track my users?\n|assistant|: You can use the Activity Tracker service to track how users and applications interact. The IBM Cloud Activity Tracker service records user-initiated activities that change the state of a service in IBM Cloud. You can use this service to investigate abnormal activity and critical actions and to comply with regulatory audit requirements. Tracking Instances with IBM Cloud Activity Tracker and Access Management (IAM) service allows you to securely authenticate users and control access to all resources consistently in the IBM Cloud Platform. \n|user|: Are there serverless instances?\n|assistant|: Yes, there are serverless instances in the context of IBM Analytics Engine. The IBM Analytics Engine Standard serverless plan for Apache Spark offers a new consumption model using Apache Spark. An Analytics Engine serverless instance does not consume any resources when no workloads are running. When you submit Spark applications, Spark clusters are created in seconds and are spun down as soon as the applications finish running.\n|user|: Explain Spark."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16727-1218119-1220168",
+          "text": "\nThere are several different strategies that you might use to approach secret groups. For more information and recommendations, see [Best practices for organizing secrets and assigning access](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-best-practices-organize-secrets).\n* What is an IAM credential?\n\nAn IAM credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. For more information about creating and storing IAM credentials, see [Creating IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials).\n* What happens when I rotate my secret?\n\nWhen a secret is rotated, a new version of its value becomes available for use. You can choose to manually add a value or automatically generate one at regular intervals by enabling automatic rotation.\n\nFor more information about secret rotation, see [Rotating secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-manual-rotation).\n* What happens when my secret expires?\n\nIn some secret types such as arbitrary or username_password, you can set the date and time when your secret expires. When the secret reaches its expiration date, it transitions to a Destroyed state. When the transition happens, the value that is associated with the secret is no longer recoverable. The transition to the Destroyed state can take up to a couple of minutes after the secret expires, or a lock that prevented expiration is removed.\n\nFor more information about how your information is protected, see [Securing your data](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-mng-data).\n* What are differences between the Reader and SecretsReader roles?\n\nBoth the Reader and SecretsReader roles help you to assign read-only access to Secrets Manager resources.\n\n\n\n* As a reader, you can browse a high-level view of secrets in your instance.",
+          "url": "https://cloud.ibm.com/docs?tab=faqs",
+          "score": 37.692577,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723567919
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?\n|assistant|: Both dynamic and static secrets have their own ways of protecting against vulnerabilities. Secrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a dynamic secret has its expiration date and time enforced when its secret data is read or accessed. The static code scan stage runs a static code analyzer tool on the specified app repo codebases. The static-scan task runs a scan on the specified repos. The Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n|user|: Do they both rotate secrets?\n|assistant|: Both dynamic and static secrets can have their expiration dates enforced, leading to the rotation of the secrets. The key difference lies in when this enforcement occurs. For static secrets, the expiration date and time are enforced at secret creation or rotation time. In contrast, for dynamic secrets, the expiration date and time are enforced when the secret data is read or accessed. When trying to rotate a secret, the request's success depends on whether the previous version is locked or not. Automatic rotation is available only for secrets that are generated by Secrets Manager. With IBM Cloud\u00ae Secrets Manager, you can design a strategy for rotating your secrets and sensitive data.\n|user|: What is an IAM credential?\n|assistant|: IBM Cloud Identity and Access Management (IAM) service securely authenticates users and controls access to all resources consistently in the IBM Cloud Platform. An IAM (Identity and Access Management) credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. These credentials allow you to authenticate your identity and control your access to various IBM Cloud resources.\n|user|: Can I track my users?\n|assistant|: You can use the Activity Tracker service to track how users and applications interact. The IBM Cloud Activity Tracker service records user-initiated activities that change the state of a service in IBM Cloud. You can use this service to investigate abnormal activity and critical actions and to comply with regulatory audit requirements. Tracking Instances with IBM Cloud Activity Tracker and Access Management (IAM) service allows you to securely authenticate users and control access to all resources consistently in the IBM Cloud Platform. \n|user|: Are there serverless instances?\n|assistant|: Yes, there are serverless instances in the context of IBM Analytics Engine. The IBM Analytics Engine Standard serverless plan for Apache Spark offers a new consumption model using Apache Spark. An Analytics Engine serverless instance does not consume any resources when no workloads are running. When you submit Spark applications, Spark clusters are created in seconds and are spun down as soon as the applications finish running.\n|user|: Explain Spark."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_13481-7-1988",
+          "text": "\nConnecting Apache Spark with Data Engine \n\nIBM Cloud\u00ae Data Engine catalog provides an interface that is compatible with Apache Hive metastore. This unified metadata repository enables any Big Data engine, such as Apache Spark, to use Data Engine as metastore. The same definition for tables and views can be created once and used from any connected engine. Each instance of Data Engine exports its catalog as a database called default.\n\n\n\n Catalog usage within Data Engine \n\nThe Catalog can be used in Data Engine in read and write mode. Seamless access is configured without any configuration steps needed.\n\n\n\n\n\n Connecting Apache Spark with Data Engine \n\nWhen you use the Hive metastore compatible interface, access is limited to read only operations. Thus, existing tables and views can be used, but not modified.\n\nDepending from where you want to connect to your catalog, the steps may vary.\n\n\n\n Usage within Watson Studio Notebooks \n\nWatson Studio has the compatible Hive metastore client already included. It also includes a convenience library to configure the connection to the Hive metastore. Set the required variables (CRN and apikey) and call the helper function to connect to the Hive metastore:\n\n change the CRN and the APIkey according to your instance\ncrn='yourDataengineCRN'\napikey='yourAPIkey'\n\nfrom dataengine import SparkSessionWithDataengine\n\n call the helper function to create a session builder equipped with the correct config\nsession_builder = SparkSessionWithDataengine.enableDataengine(crn, apikey, \"public\")\nspark = session_builder.appName(\"Spark DataEngine integration test\").getOrCreate()\n\nDisplay your tables and run an SQL statement:\n\nspark.sql('show tables').show(truncate=False)\n\n replace yourTable with a valid table. Do not use the sample tables as you do not have access to the data!\nspark.sql('select * from yourTable').show()\n\n\n\n\n\n Usage with IBM Analytics Engine \n\nThe Hive metastore client is also already included in IBM\u00ae Analytics Engine.",
+          "url": "https://cloud.ibm.com/docs/sql-query?topic=sql-query-hive_metastore",
+          "score": 12.970683,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723569659
+              },
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "no",
+                "timestamp": 1727124807
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "What is Spark"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_00064-3561-5813",
+          "text": "\n* There is no limit on the number of Spark applications that can be run in an IBM Analytics Engine service instance.\n\n\n\n\n\n\n\n Default Spark runtime \n\nYou can select which Spark version to use when the instance is provisioned. Currently, you can choose between Spark 3.1 and Spark 3.3. If you don't select a Spark runtime version, Spark 3.1 is taken by default.\n\nThe runtime contains only open source Spark binaries and is configured to help you to quickly get started to create and run Spark applications in the instance. In addition to the Spark binaries, the runtime also includes the geospatial, data skipping, and Parquet modular encryption libraries.\n\nOn a Spark 3.1 or Spark 3.3 runtime, you can submit Spark applications written in the following languages: Scala 2.12, Python 3.9, and R 3.6.3.\n\nNote that the language versions are upgraded periodically to keep the runtime free from any security vulnerabilities.\n\nYou can always override the Spark runtime version when you submit an application. For details on what to add to the payload, see [Passing the runtime Spark version when submitting an application](https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-spark-app-rest-apipass-spark-version).\n\n\n\n\n\n Instance home \n\nInstance home is the storage attached to the instance for instance related data only, such as custom application libraries and Spark history events. Currently, only IBM Cloud Object Storage is accepted for instance home. This instance can be an instance in your IBM Cloud\u00ae account or an instance from a different account.\n\nWhen you provision an instance using the IBM Cloud console, the IBM Cloud Object Storage instances in your IBM Cloud\u00ae account are auto discovered and displayed in a list for you to select from. If no IBM Cloud Object Storage instances are found in your account, you can use the REST APIs to update instance home after instance creation.\n\nYou can't change instance home after instance creation. You can only edit the access keys.\n\n\n\n\n\n Default Spark configuration \n\nYou can specify default Spark configurations at the instance level and let that be inherited by Spark applications created on the instance. This is an optional section that you can specify at the time of instance creation.",
+          "url": "https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-serverless-architecture-concepts",
+          "score": 16.091486,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723569589
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "is Spark an open-source"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_00071-14369-15258",
+          "text": "\nA Spark runtime version comes with default runtime language version. IBM extend support for new language versions and remove the existing language version to keep the runtime free from any security vulnerabilities. The system also provides settling time to transition your workloads when ever there is a new language versions. You can test your workload with a language version by passing an environment variable that points to the language version of the application.\n\nExample:\n\n\"application_details\": {\n\"application\": \"/opt/ibm/spark/examples/src/main/python/wordcount.py\",\n\"arguments\": [\n\"/opt/ibm/spark/examples/src/main/resources/people.txt\"\n],\n\"env\": {\n\"RUNTIME_PYTHON_ENV\": \"python310\"\n}\n}\n}\n\n\n\n\n\n Learn more \n\nWhen managing your Spark applications, follow the recommended [Best practices](https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-best-practices-serverless).",
+          "url": "https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-spark-app-rest-api",
+          "score": 14.875601,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723569615
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "is Spark an open-source"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Apache Spark is an open-source, distributed computing system used for big data processing and analytics. It provides an interface for programming entire clusters with implicit data parallelism and fault tolerance. Spark can be used with various programming languages such as Python, Scala, R, and Java. It supports a wide range of tasks, including batch processing, interactive queries, streaming, machine learning, and graph processing. Spark can be run on various platforms, including standalone, YARN, Mesos, and Kubernetes."
+    },
+    {
+      "speaker": "user",
+      "text": "Hive metastore client?",
+      "timestamp": 1723571516,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Hive Metastore - Hive metastore (HMS) is a service that stores metadata that is related to presto and other services in a backend relational database. When a new table is created, information that is related to the schema such as column names, data types, are stored in the metastore\u2019s backend database. Download the Hive-compatible client and place it in a directory of your Apache Spark cluster. The Data Engine catalog is compatible with the Hive metastore and can be used as any other external Hive metastore server.",
+      "timestamp": 1723571520,
+      "contexts": [
+        {
+          "document_id": "ibmcld_12498-8087-10171",
+          "text": "\nAnd, ultimately, it makes it a little more efficient for the management of your secrets while you're going through your DevOps operations.\n\nThank you. If you have questions, please drop us a line. If you want to see more videos like this in the future, please like and subscribe, and don't forget you can grow your skills and earn a badge with IBM Cloud Labs which, are free browser-based interactive Kubernetes labs.\n\n\n\n\n\n Working with secrets of different types \n\nSecrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a\n\ndynamic secrethas its expiration date and time enforced when its secret data is read or accessed.\n\nSecrets Manager further classifies static and dynamic secrets by their general purpose or function. For example, each secret type is identified by programmatic name, such as username_password. If you're looking to manage your secret by using the Secrets Manager API or CLI, you can use these programmatic names to run operations on secrets according to their type.\n\nReview the following table to understand the types of static and dynamic secrets that you can create and manage with the service.\n\n\n\nTable 1. Secret types in Secrets Manager\n\n Type Programmatic name Kind Description \n\n [Arbitrary secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-arbitrary-secrets) arbitrary Static Arbitrary pieces of sensitive data, including any type of structured or unstructured data, that you can use to access an application or resource. \n [IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials) iam_credentials* Dynamic A dynamically generated service ID and API key that can be used to access an IBM Cloud service that requires IAM authentication. \n [Key-value secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-key-value) kv Static Pieces of sensitive data that is structured in JSON format that you can use to access an application or resource.",
+          "url": "https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-what-is-secret",
+          "score": 38.981373,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723572075
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?\n|assistant|: Both dynamic and static secrets have their own ways of protecting against vulnerabilities. Secrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a dynamic secret has its expiration date and time enforced when its secret data is read or accessed. The static code scan stage runs a static code analyzer tool on the specified app repo codebases. The static-scan task runs a scan on the specified repos. The Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n|user|: Do they both rotate secrets?\n|assistant|: Both dynamic and static secrets can have their expiration dates enforced, leading to the rotation of the secrets. The key difference lies in when this enforcement occurs. For static secrets, the expiration date and time are enforced at secret creation or rotation time. In contrast, for dynamic secrets, the expiration date and time are enforced when the secret data is read or accessed. When trying to rotate a secret, the request's success depends on whether the previous version is locked or not. Automatic rotation is available only for secrets that are generated by Secrets Manager. With IBM Cloud\u00ae Secrets Manager, you can design a strategy for rotating your secrets and sensitive data.\n|user|: What is an IAM credential?\n|assistant|: IBM Cloud Identity and Access Management (IAM) service securely authenticates users and controls access to all resources consistently in the IBM Cloud Platform. An IAM (Identity and Access Management) credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. These credentials allow you to authenticate your identity and control your access to various IBM Cloud resources.\n|user|: Can I track my users?\n|assistant|: You can use the Activity Tracker service to track how users and applications interact. The IBM Cloud Activity Tracker service records user-initiated activities that change the state of a service in IBM Cloud. You can use this service to investigate abnormal activity and critical actions and to comply with regulatory audit requirements. Tracking Instances with IBM Cloud Activity Tracker and Access Management (IAM) service allows you to securely authenticate users and control access to all resources consistently in the IBM Cloud Platform. \n|user|: Are there serverless instances?\n|assistant|: Yes, there are serverless instances in the context of IBM Analytics Engine. The IBM Analytics Engine Standard serverless plan for Apache Spark offers a new consumption model using Apache Spark. An Analytics Engine serverless instance does not consume any resources when no workloads are running. When you submit Spark applications, Spark clusters are created in seconds and are spun down as soon as the applications finish running.\n|user|: Explain Spark.\n|assistant|: Apache Spark is an open-source, distributed computing system. There is no limit on the number of Spark applications that can be run in an IBM Analytics Engine service instance. On a Spark 3.1 or Spark 3.3 runtime, you can submit Spark applications written in the following languages: Scala 2.12, Python 3.9, and R 3.6.3. A Spark runtime version comes with default runtime language version. IBM extend support for new language versions and remove the existing language version to keep the runtime free from any security vulnerabilities. Spark can be run on various platforms.\n|user|: Hive metastore client?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_07578-1215486-1217535",
+          "text": "\nThere are several different strategies that you might use to approach secret groups. For more information and recommendations, see [Best practices for organizing secrets and assigning access](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-best-practices-organize-secrets).\n* What is an IAM credential?\n\nAn IAM credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. For more information about creating and storing IAM credentials, see [Creating IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials).\n* What happens when I rotate my secret?\n\nWhen a secret is rotated, a new version of its value becomes available for use. You can choose to manually add a value or automatically generate one at regular intervals by enabling automatic rotation.\n\nFor more information about secret rotation, see [Rotating secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-manual-rotation).\n* What happens when my secret expires?\n\nIn some secret types such as arbitrary or username_password, you can set the date and time when your secret expires. When the secret reaches its expiration date, it transitions to a Destroyed state. When the transition happens, the value that is associated with the secret is no longer recoverable. The transition to the Destroyed state can take up to a couple of minutes after the secret expires, or a lock that prevented expiration is removed.\n\nFor more information about how your information is protected, see [Securing your data](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-mng-data).\n* What are differences between the Reader and SecretsReader roles?\n\nBoth the Reader and SecretsReader roles help you to assign read-only access to Secrets Manager resources.\n\n\n\n* As a reader, you can browse a high-level view of secrets in your instance.",
+          "url": "https://cloud.ibm.com/docs/faqs",
+          "score": 37.692577,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723572091
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?\n|assistant|: Both dynamic and static secrets have their own ways of protecting against vulnerabilities. Secrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a dynamic secret has its expiration date and time enforced when its secret data is read or accessed. The static code scan stage runs a static code analyzer tool on the specified app repo codebases. The static-scan task runs a scan on the specified repos. The Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n|user|: Do they both rotate secrets?\n|assistant|: Both dynamic and static secrets can have their expiration dates enforced, leading to the rotation of the secrets. The key difference lies in when this enforcement occurs. For static secrets, the expiration date and time are enforced at secret creation or rotation time. In contrast, for dynamic secrets, the expiration date and time are enforced when the secret data is read or accessed. When trying to rotate a secret, the request's success depends on whether the previous version is locked or not. Automatic rotation is available only for secrets that are generated by Secrets Manager. With IBM Cloud\u00ae Secrets Manager, you can design a strategy for rotating your secrets and sensitive data.\n|user|: What is an IAM credential?\n|assistant|: IBM Cloud Identity and Access Management (IAM) service securely authenticates users and controls access to all resources consistently in the IBM Cloud Platform. An IAM (Identity and Access Management) credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. These credentials allow you to authenticate your identity and control your access to various IBM Cloud resources.\n|user|: Can I track my users?\n|assistant|: You can use the Activity Tracker service to track how users and applications interact. The IBM Cloud Activity Tracker service records user-initiated activities that change the state of a service in IBM Cloud. You can use this service to investigate abnormal activity and critical actions and to comply with regulatory audit requirements. Tracking Instances with IBM Cloud Activity Tracker and Access Management (IAM) service allows you to securely authenticate users and control access to all resources consistently in the IBM Cloud Platform. \n|user|: Are there serverless instances?\n|assistant|: Yes, there are serverless instances in the context of IBM Analytics Engine. The IBM Analytics Engine Standard serverless plan for Apache Spark offers a new consumption model using Apache Spark. An Analytics Engine serverless instance does not consume any resources when no workloads are running. When you submit Spark applications, Spark clusters are created in seconds and are spun down as soon as the applications finish running.\n|user|: Explain Spark.\n|assistant|: Apache Spark is an open-source, distributed computing system. There is no limit on the number of Spark applications that can be run in an IBM Analytics Engine service instance. On a Spark 3.1 or Spark 3.3 runtime, you can submit Spark applications written in the following languages: Scala 2.12, Python 3.9, and R 3.6.3. A Spark runtime version comes with default runtime language version. IBM extend support for new language versions and remove the existing language version to keep the runtime free from any security vulnerabilities. Spark can be run on various platforms.\n|user|: Hive metastore client?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16727-1218119-1220168",
+          "text": "\nThere are several different strategies that you might use to approach secret groups. For more information and recommendations, see [Best practices for organizing secrets and assigning access](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-best-practices-organize-secrets).\n* What is an IAM credential?\n\nAn IAM credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. For more information about creating and storing IAM credentials, see [Creating IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials).\n* What happens when I rotate my secret?\n\nWhen a secret is rotated, a new version of its value becomes available for use. You can choose to manually add a value or automatically generate one at regular intervals by enabling automatic rotation.\n\nFor more information about secret rotation, see [Rotating secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-manual-rotation).\n* What happens when my secret expires?\n\nIn some secret types such as arbitrary or username_password, you can set the date and time when your secret expires. When the secret reaches its expiration date, it transitions to a Destroyed state. When the transition happens, the value that is associated with the secret is no longer recoverable. The transition to the Destroyed state can take up to a couple of minutes after the secret expires, or a lock that prevented expiration is removed.\n\nFor more information about how your information is protected, see [Securing your data](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-mng-data).\n* What are differences between the Reader and SecretsReader roles?\n\nBoth the Reader and SecretsReader roles help you to assign read-only access to Secrets Manager resources.\n\n\n\n* As a reader, you can browse a high-level view of secrets in your instance.",
+          "url": "https://cloud.ibm.com/docs?tab=faqs",
+          "score": 37.692577,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723572101
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?\n|assistant|: Both dynamic and static secrets have their own ways of protecting against vulnerabilities. Secrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a dynamic secret has its expiration date and time enforced when its secret data is read or accessed. The static code scan stage runs a static code analyzer tool on the specified app repo codebases. The static-scan task runs a scan on the specified repos. The Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n|user|: Do they both rotate secrets?\n|assistant|: Both dynamic and static secrets can have their expiration dates enforced, leading to the rotation of the secrets. The key difference lies in when this enforcement occurs. For static secrets, the expiration date and time are enforced at secret creation or rotation time. In contrast, for dynamic secrets, the expiration date and time are enforced when the secret data is read or accessed. When trying to rotate a secret, the request's success depends on whether the previous version is locked or not. Automatic rotation is available only for secrets that are generated by Secrets Manager. With IBM Cloud\u00ae Secrets Manager, you can design a strategy for rotating your secrets and sensitive data.\n|user|: What is an IAM credential?\n|assistant|: IBM Cloud Identity and Access Management (IAM) service securely authenticates users and controls access to all resources consistently in the IBM Cloud Platform. An IAM (Identity and Access Management) credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. These credentials allow you to authenticate your identity and control your access to various IBM Cloud resources.\n|user|: Can I track my users?\n|assistant|: You can use the Activity Tracker service to track how users and applications interact. The IBM Cloud Activity Tracker service records user-initiated activities that change the state of a service in IBM Cloud. You can use this service to investigate abnormal activity and critical actions and to comply with regulatory audit requirements. Tracking Instances with IBM Cloud Activity Tracker and Access Management (IAM) service allows you to securely authenticate users and control access to all resources consistently in the IBM Cloud Platform. \n|user|: Are there serverless instances?\n|assistant|: Yes, there are serverless instances in the context of IBM Analytics Engine. The IBM Analytics Engine Standard serverless plan for Apache Spark offers a new consumption model using Apache Spark. An Analytics Engine serverless instance does not consume any resources when no workloads are running. When you submit Spark applications, Spark clusters are created in seconds and are spun down as soon as the applications finish running.\n|user|: Explain Spark.\n|assistant|: Apache Spark is an open-source, distributed computing system. There is no limit on the number of Spark applications that can be run in an IBM Analytics Engine service instance. On a Spark 3.1 or Spark 3.3 runtime, you can submit Spark applications written in the following languages: Scala 2.12, Python 3.9, and R 3.6.3. A Spark runtime version comes with default runtime language version. IBM extend support for new language versions and remove the existing language version to keep the runtime free from any security vulnerabilities. Spark can be run on various platforms.\n|user|: Hive metastore client?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_13481-6212-7871",
+          "text": "\nDownload the [Hive-compatible client](https://us.sql-query.cloud.ibm.com/download/catalog/hive-metastore-standalone-client-3.1.2-sqlquery-1.0.13.jar) and place it in a directory of your Apache Spark cluster that is not on the classpath. This step is necessary, as the client is loaded into an isolated classloader to avoid version conflicts. Note that in the examples the files are placed in /tmp/dataengine, when you use a different folder, adjust the example accordingly.\n\nThe client differs from the Hive version 3.1.2 release by more enhancements that add support for TLS and authentication through IBM Cloud\u00ae Identity and Access Management. For user, specify the CRN and for password a valid API key with access to your Data Engine. Find the endpoint to use in the following table.\n\n\n\nTable 1. Region endpoints\n\n Region Endpoint \n\n us-south thrift://catalog.us.dataengine.cloud.ibm.com:9083 \n eu-de thrift://catalog.eu-de.dataengine.cloud.ibm.com:9083 \n\n\n\n\n\n\n\n Convenience libraries to configure Spark \n\nWhile the Data Engine catalog is compatible with the Hive metastore and can be used as any other external Hive metastore server, an SDK is provided to minimize the steps that are needed to configure Apache Spark. The SDK simplifies connecting to the Hive metastore and IBM Cloud Object Storage buckets referenced by tables or views.\n\nIn case of using Python download both, the Scala and the Python SDK, and place them in a folder that is in the classpath of your Apache Spark cluster. When using Scala, the Scala SDK is enough.\n\n\n\n* [spark-dataengine-scala](https://us.sql-query.cloud.ibm.com/download/catalog/dataengine-spark-integration-1.4.51.jar)",
+          "url": "https://cloud.ibm.com/docs/sql-query?topic=sql-query-hive_metastore",
+          "score": 10.881356,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723573257
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Hive metestore client"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_13481-5443-6857",
+          "text": "\n.config(\"spark.hive.metastore.uris\", \"thrift://catalog.<region>.sql-query.cloud.ibm.com:9083\") \n.config(\"spark.hive.metastore.use.SSL\", \"true\") \n.config(\"spark.hive.metastore.truststore.password\", \"changeit\") \n.config(\"spark.hive.metastore.client.auth.mode\", \"PLAIN\") \n.config(\"spark.hive.metastore.client.plain.username\", '<YourDataengineCRN>') \n.config(\"spark.hive.metastore.client.plain.password\", '<YourAPIkey>') \n.config(\"spark.hive.execution.engine\", \"spark\") \n.config(\"spark.hive.stats.autogather\", \"false\") \n.config(\"spark.sql.warehouse.dir\", \"file:///tmp\") \n only spark is allowed as the default catalog\n.config(\"metastore.catalog.default\", \"spark\") \n.enableHiveSupport() \n.getOrCreate()\nShow more\n\n\n\n\n\n Apache Hive metastore version 3.1.2 compatible client \n\nDownload the [Hive-compatible client](https://us.sql-query.cloud.ibm.com/download/catalog/hive-metastore-standalone-client-3.1.2-sqlquery-1.0.13.jar) and place it in a directory of your Apache Spark cluster that is not on the classpath. This step is necessary, as the client is loaded into an isolated classloader to avoid version conflicts. Note that in the examples the files are placed in /tmp/dataengine, when you use a different folder, adjust the example accordingly.\n\nThe client differs from the Hive version 3.1.2 release by more enhancements that add support for TLS and authentication through IBM Cloud\u00ae Identity and Access Management.",
+          "url": "https://cloud.ibm.com/docs/sql-query?topic=sql-query-hive_metastore",
+          "score": 8.634926,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723573266
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Hive metestore client"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16608-0-2142",
+          "text": "\n\n\n\n\n\n\n  Learning about watsonx.data architecture and workload isolation \n\n\n\n  Architecture \n\nIBM\u00ae watsonx.data is a new open architecture that combines the elements of the data warehouse and data lake models. The best-in-class features and optimizations available on the watsonx.data, make it an optimal choice for next generation data analytics and automation.\n\nIt is a multi-tenant system that consists of two major building blocks:\n\n\n\n1.  Control plane - One control-plane cluster is created per IBM Cloud region that runs multi-tenant components such as service web console UI and API.\n2.  Data plane - One or more data-plane clusters are connected and managed by a control-plane running single-tenant customer-dedicated components within a customer-isolated instance such as a Presto engine and Hive metastore.\n\n\n\nImportant components of watsonx.data are:\n\n\n\n1.  Web console \u2013 Web console is the UI interface for watsonx.data from where customers, can perform various functional tasks. It is a multi-tenant component, which resides in the control plane.\n2.  Presto - Presto is a distributed SQL query engine, with the capability to query vast data sets located in different data sources.\n3.  Hive Metastore - Hive metastore (HMS) is a service that stores metadata that is related to presto and other services in a backend relational database. When a new table is created, information that is related to the schema such as column names, data types, are stored in the metastore\u2019s backend database.\n\n\n\n\n\n\n\n  watsonx.data workload isolation \n\nAs mentioned in the architecture section, some components of IBM\u00ae watsonx.data are multi-tenant and shared across customers in a given IBM Cloud region and some are single-tenant where they are explicitly dedicated to customers. To separate the access to infrastructure resources and data, several levels of authentication and authorization checks are in place. IAM authentication and access policies checks are performed on a service level. Role-based access control checks are performed on a resource level to allow only authorized users to perform certain operations and access to data.\n\n\n\n\n\n\n\n\n",
+          "url": "https://cloud.ibm.com/docs/watsonxdata?topic=watsonxdata-compute_isolation",
+          "score": 14.555279,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723573275
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Hive data warehousing"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The Hive metastore client is a component in the Hive data warehousing system that stores metadata about Hive tables and partitions in a relational database management system (RDBMS). This metadata includes the table schema, table location, table partitions, and other information. The Hive metastore client communicates with the RDBMS to perform CRUD (create, read, update, delete) operations on the metadata. It allows Hive to locate the data in the warehouse and enables queries to be executed efficiently."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "d2b56e91-6d89-4df4-b89a-eef8d969850b",
+      "status": "created",
+      "timestamp": 1723573383
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "accepted",
+      "timestamp": 1725554903
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "edited",
+      "timestamp": 1725627916
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "edited",
+      "timestamp": 1725627916
+    },
+    {
+      "author": "87334bc6-dd39-4565-ae2b-832e60a24b08",
+      "status": "edited",
+      "timestamp": 1727124962
+    },
+    {
+      "author": "87334bc6-dd39-4565-ae2b-832e60a24b08",
+      "status": "accepted",
+      "timestamp": 1727125185
+    }
+  ],
+  "editor": "87334bc6-dd39-4565-ae2b-832e60a24b08",
+  "domain": "mt-rag-ibmcloud-elser-512-100-20240502",
+  "reviewer": "87334bc6-dd39-4565-ae2b-832e60a24b08"
+}

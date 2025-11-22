@@ -1,0 +1,924 @@
+{
+  "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-ibmcloud-elser-512-100-20240502",
+      "size": "72442"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "Is Red Hat Virtualization the same as Red Hat OpenShift virtualization?",
+      "timestamp": 1724159133,
+      "enrichments": {
+        "Question Type": [
+          "Comparative"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "UNANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The documents do not contain any information about Red Hat Virtualization to assist in deciding about potential differences.",
+      "timestamp": 1724159136,
+      "contexts": [
+        {
+          "document_id": "ibmcld_11282-0-1290",
+          "text": "\n\n\n\n\n\n\n  Cloud native development and application modernization by using Red Hat OpenShift on Power Systems Virtual Server \n\nCloud-native applications are the applications that are born in the cloud, which means that the applications use microservice-based architecture, containers, and a corresponding container orchestration platform. Red Hat\u00ae OpenShift\u00ae is enterprise Kubernetes platform enabling IT organizations to develop applications faster, deploy them reliably, and manage them efficiently.\n\nIn addition to developing new cloud-native applications, IT organizations are modernizing older, monolithic core business applications to support the faster delivery of new function to the business.\n\nFor information on application modernization on Power Systems, see [Field Guide to Application Modernization on IBM Power Systems](https://www.ibm.com/downloads/cas/D9POQ3YR).\n\nFor information on deploying Red Hat OpenShift on Power Systems Virtual Server and tutorials to explore the platform, see [Deploying Red Hat OpenShift Container Platform 4.x on IBM Power Systems Virtual Servers](https://developer.ibm.com/series/deploy-ocp-cloud-paks-power-virtual-server/?mhsrc=ibmsearch_a&mhq=%20Deploying%20Red%20Hat%20OpenShift%20Container%20Platform%20on%20Power%20Virtual%20Servers).\n\n\n\n\n\n\n\n",
+          "url": "https://cloud.ibm.com/docs/power-iaas?topic=power-iaas-app-modernization-using-RedHat-openshift",
+          "score": 19.886282,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "no",
+                "timestamp": 1724160086
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Red Hat Virtualization the same as Red Hat OpenShift virtualization?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "No, Red Hat Virtualization and Red Hat OpenShift virtualization are not the same. Red Hat Virtualization is a traditional server virtualization management system, while Red Hat OpenShift virtualization is a virtualization solution specifically designed for container-based applications, allowing for the management and deployment of virtual machines and containers within an OpenShift cluster."
+    },
+    {
+      "speaker": "user",
+      "text": "What is Red Hat OpenShift?",
+      "timestamp": 1724160178,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Red Hat OpenShift is a Kubernetes container platform that offers a reliable environment for running enterprise workloads. It enhances the Kubernetes platform with built-in software to improve application lifecycle development, operations, and security. IBM sets up and assists in managing a cluster of worker nodes equipped with the OpenShift Container Platform container orchestration software. Red Hat OpenShift enables you to deploy your workloads consistently across hybrid cloud providers and environments.",
+      "timestamp": 1724160182,
+      "contexts": [
+        {
+          "document_id": "ibmcld_10495-9135-10569",
+          "text": "\n(https://cognitiveclass.ai/courses/docker-essentials)\n\n\n\n\n\n What is Red Hat OpenShift? \n\nRed Hat OpenShift is a Kubernetes container platform that provides a trusted environment to run enterprise workloads. It extends the Kubernetes platform with built-in software to enhance app lifecycle development, operations, and security. With Red Hat OpenShift, you can consistently deploy your workloads across hybrid cloud providers and environments. For more information about the differences between the community Kubernetes and Red Hat OpenShift cluster offerings, see the [comparison table](https://cloud.ibm.com/docs/openshift?topic=openshift-cs_ovopenshift_kubernetes).\n\n\n\n\n\n What compute host infrastructure does the service offer? \n\nYou can create clusters on Classic or IBM Cloud\u00ae Virtual Private Cloud infrastructure. You can also bring your own hosts by using Satellite.\n\nFor more information, see [Supported infrastructure providers](https://cloud.ibm.com/docs/openshift?topic=openshift-infrastructure_providers).\n\n\n\n\n\n Related resources \n\nReview how you can learn about Kubernetes concepts and the terminology.\n\n\n\n* Familiarize yourself with the product by completing the [Creating clusters tutorial](https://cloud.ibm.com/docs/openshift?topic=openshift-openshift_tutorial).\n* Learn how Kubernetes and Red Hat OpenShift on IBM Cloud work together by completing this [course](https://cognitiveclass.ai/courses/kubernetes-course).",
+          "url": "https://cloud.ibm.com/docs/openshift?topic=openshift-roks-overview",
+          "score": 21.959478,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724160585
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Red Hat Virtualization the same as Red Hat OpenShift virtualization?\n|assistant|: The documents do not contain any information about Red Hat Virtualization to assist in deciding about potential differences.\n|user|: What is Red Hat OpenShift?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_10154-7-1896",
+          "text": "\nBenefits and service offerings \n\n[Red Hat\u00ae OpenShift\u00ae on IBM Cloud\u00ae](https://www.ibm.com/products/openshift) is an IBM Cloud service, where IBM sets up and helps you manage a cluster of worker nodes that come installed with the OpenShift Container Platform container orchestration software.\n\nTo see a list of the cluster operators that are supported by default, you can run the oc get co command.\n\n\n\n Benefits of using the service \n\nWith Red Hat OpenShift on IBM Cloud, your developers have a fast and secure way to containerize and deploy enterprise workloads in Kubernetes clusters. Red Hat OpenShift clusters build on Kubernetes container orchestration that offers consistency and flexibility for your development lifecycle operations.\n\nYour Red Hat OpenShift workloads can scale across IBM\u2019s global footprint of data centers and multizone regions. At the same time, you\u2019re able to uniformly monitor, log, and secure apps. Because IBM manages the service, you can focus on innovating with high-value IBM Cloud services and middleware, such as AI and analytics. You also have access to Red Hat packaged open-source tools, including your favorite app runtimes, frameworks, databases, and more.\n\nReady to get started? Try out the [creating a Red Hat OpenShift on IBM Cloud cluster tutorial](https://cloud.ibm.com/docs/openshift?topic=openshift-openshift_tutorial).\n\nChoice of container platform provider\n: Deploy clusters with Red Hat OpenShift or community Kubernetes installed as the container platform orchestrator.\n: Choose the developer experience that fits your company, or run workloads across both Red Hat OpenShift or community Kubernetes clusters.\n: Built-in integrations from the IBM Cloud console to the Kubernetes dashboard or Red Hat OpenShift web console.\n: Single view and management experience of all your Red Hat OpenShift or community Kubernetes clusters from IBM Cloud.",
+          "url": "https://cloud.ibm.com/docs/openshift?topic=openshift-cs_ov",
+          "score": 25.84408,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724160588
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "What is Red Hat OpenShift?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Red Hat OpenShift is a Kubernetes container platform that provides a trusted environment to run enterprise workloads. It extends the Kubernetes platform with built-in software to enhance app lifecycle development, operations, and security. With Red Hat OpenShift, you can consistently deploy your workloads across hybrid cloud providers and environments. (Source: <https://cloud.ibm.com/docs/openshift?topic=openshift-cs_ovopenshift_kubernetes>)\nAdditional information can be found in the linked course: \"Kubernetes Course\" on Cognitive Class (<https://cognitiveclass.ai/courses/kubernetes-course>)."
+    },
+    {
+      "speaker": "user",
+      "text": "What benefits does it offer?",
+      "timestamp": 1724163270,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Red Hat OpenShift allows you to efficiently manage and expand your Red Hat OpenShift workloads across on-premises and off-premises clouds, creating a portable, hybrid solution that functions consistently in multi-cloud scenarios. It enhances the Kubernetes platform with integrated software designed to improve application lifecycle management, operations, and security. You can seamlessly deploy your workloads across hybrid cloud providers and environments, as the platform efficiently orchestrates containerized workloads across a cluster of nodes. Leveraging Kubernetes as the core container orchestration engine, it effectively manages the Docker container images and their lifecycle.",
+      "timestamp": 1724163274,
+      "contexts": [
+        {
+          "document_id": "ibmcld_10495-9135-10569",
+          "text": "\n(https://cognitiveclass.ai/courses/docker-essentials)\n\n\n\n\n\n What is Red Hat OpenShift? \n\nRed Hat OpenShift is a Kubernetes container platform that provides a trusted environment to run enterprise workloads. It extends the Kubernetes platform with built-in software to enhance app lifecycle development, operations, and security. With Red Hat OpenShift, you can consistently deploy your workloads across hybrid cloud providers and environments. For more information about the differences between the community Kubernetes and Red Hat OpenShift cluster offerings, see the [comparison table](https://cloud.ibm.com/docs/openshift?topic=openshift-cs_ovopenshift_kubernetes).\n\n\n\n\n\n What compute host infrastructure does the service offer? \n\nYou can create clusters on Classic or IBM Cloud\u00ae Virtual Private Cloud infrastructure. You can also bring your own hosts by using Satellite.\n\nFor more information, see [Supported infrastructure providers](https://cloud.ibm.com/docs/openshift?topic=openshift-infrastructure_providers).\n\n\n\n\n\n Related resources \n\nReview how you can learn about Kubernetes concepts and the terminology.\n\n\n\n* Familiarize yourself with the product by completing the [Creating clusters tutorial](https://cloud.ibm.com/docs/openshift?topic=openshift-openshift_tutorial).\n* Learn how Kubernetes and Red Hat OpenShift on IBM Cloud work together by completing this [course](https://cognitiveclass.ai/courses/kubernetes-course).",
+          "url": "https://cloud.ibm.com/docs/openshift?topic=openshift-roks-overview",
+          "score": 39.8354,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724163731
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Red Hat Virtualization the same as Red Hat OpenShift virtualization?\n|assistant|: The documents do not contain any information about Red Hat Virtualization to assist in deciding about potential differences.\n|user|: What is Red Hat OpenShift?\n|assistant|: Red Hat OpenShift is a Kubernetes container platform that offers a reliable environment for running enterprise workloads. It enhances the Kubernetes platform with built-in software to improve application lifecycle development, operations, and security. IBM sets up and assists in managing a cluster of worker nodes equipped with the OpenShift Container Platform container orchestration software. Red Hat OpenShift enables you to deploy your workloads consistently across hybrid cloud providers and environments.\n|user|: What benefits does it offer?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_07578-396975-399135",
+          "text": "\nWith Kubernetes, you can combine various resources such as secrets, deployments, and services to securely create and manage highly available, containerized apps.\n\nRed Hat OpenShift\n: Red Hat OpenShift on IBM Cloud is a Kubernetes-based platform that is designed especially to accelerate your containerized app delivery processes that run on a Red Hat Enterprise Linux 7 operating system. You can orchestrate and scale your existing Red Hat OpenShift workloads across on-prem and off-prem clouds for a portable, hybrid solution that works the same in multicloud scenarios. To get started, try out the [Red Hat OpenShift on IBM Cloud tutorial](https://cloud.ibm.com/docs/openshift?topic=openshift-openshift_tutorial).\n* Does the service come with a managed Red Hat OpenShift master and worker nodes?\n\nEvery cluster in Red Hat OpenShift on IBM Cloud is controlled by a dedicated Red Hat OpenShift master that is managed by IBM in an IBM-owned IBM Cloud infrastructure account. The Red Hat OpenShift master, including all the master components, compute, networking, and storage resources, is continuously monitored by IBM Site Reliability Engineers (SREs). The SREs apply the latest security standards, detect and remediate malicious activities, and work to ensure reliability and availability of Red Hat OpenShift on IBM Cloud.\n\nPeriodically, Red Hat OpenShift releases [major, minor, or patch updates](https://cloud.ibm.com/docs/containers?topic=containers-cs_versionsupdate_types). These updates can affect the Red Hat OpenShift API server version or other components in your Red Hat OpenShift master. IBM automatically updates the patch version, but you must update the master major and minor versions. For more information, see [Updating the master](https://cloud.ibm.com/docs/containers?topic=containers-updatemaster).\n\nWorker nodes in standard clusters are provisioned in to your IBM Cloud infrastructure account. The worker nodes are dedicated to your account and you are responsible to request timely updates to the worker nodes to ensure that the worker node OS and Red Hat OpenShift on IBM Cloud components apply the latest security updates and patches.",
+          "url": "https://cloud.ibm.com/docs/faqs",
+          "score": 39.74693,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724163727
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Red Hat Virtualization the same as Red Hat OpenShift virtualization?\n|assistant|: The documents do not contain any information about Red Hat Virtualization to assist in deciding about potential differences.\n|user|: What is Red Hat OpenShift?\n|assistant|: Red Hat OpenShift is a Kubernetes container platform that offers a reliable environment for running enterprise workloads. It enhances the Kubernetes platform with built-in software to improve application lifecycle development, operations, and security. IBM sets up and assists in managing a cluster of worker nodes equipped with the OpenShift Container Platform container orchestration software. Red Hat OpenShift enables you to deploy your workloads consistently across hybrid cloud providers and environments.\n|user|: What benefits does it offer?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16727-396949-399109",
+          "text": "\nWith Kubernetes, you can combine various resources such as secrets, deployments, and services to securely create and manage highly available, containerized apps.\n\nRed Hat OpenShift\n: Red Hat OpenShift on IBM Cloud is a Kubernetes-based platform that is designed especially to accelerate your containerized app delivery processes that run on a Red Hat Enterprise Linux 7 operating system. You can orchestrate and scale your existing Red Hat OpenShift workloads across on-prem and off-prem clouds for a portable, hybrid solution that works the same in multicloud scenarios. To get started, try out the [Red Hat OpenShift on IBM Cloud tutorial](https://cloud.ibm.com/docs/openshift?topic=openshift-openshift_tutorial).\n* Does the service come with a managed Red Hat OpenShift master and worker nodes?\n\nEvery cluster in Red Hat OpenShift on IBM Cloud is controlled by a dedicated Red Hat OpenShift master that is managed by IBM in an IBM-owned IBM Cloud infrastructure account. The Red Hat OpenShift master, including all the master components, compute, networking, and storage resources, is continuously monitored by IBM Site Reliability Engineers (SREs). The SREs apply the latest security standards, detect and remediate malicious activities, and work to ensure reliability and availability of Red Hat OpenShift on IBM Cloud.\n\nPeriodically, Red Hat OpenShift releases [major, minor, or patch updates](https://cloud.ibm.com/docs/containers?topic=containers-cs_versionsupdate_types). These updates can affect the Red Hat OpenShift API server version or other components in your Red Hat OpenShift master. IBM automatically updates the patch version, but you must update the master major and minor versions. For more information, see [Updating the master](https://cloud.ibm.com/docs/containers?topic=containers-updatemaster).\n\nWorker nodes in standard clusters are provisioned in to your IBM Cloud infrastructure account. The worker nodes are dedicated to your account and you are responsible to request timely updates to the worker nodes to ensure that the worker node OS and Red Hat OpenShift on IBM Cloud components apply the latest security updates and patches.",
+          "url": "https://cloud.ibm.com/docs?tab=faqs",
+          "score": 39.74693,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724163721
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Is Red Hat Virtualization the same as Red Hat OpenShift virtualization?\n|assistant|: The documents do not contain any information about Red Hat Virtualization to assist in deciding about potential differences.\n|user|: What is Red Hat OpenShift?\n|assistant|: Red Hat OpenShift is a Kubernetes container platform that offers a reliable environment for running enterprise workloads. It enhances the Kubernetes platform with built-in software to improve application lifecycle development, operations, and security. IBM sets up and assists in managing a cluster of worker nodes equipped with the OpenShift Container Platform container orchestration software. Red Hat OpenShift enables you to deploy your workloads consistently across hybrid cloud providers and environments.\n|user|: What benefits does it offer?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_14497-1215-3210",
+          "text": "\n[VMware Solutions and Red Hat OpenShift](https://cloud.ibm.com/docs-content/v1/content/5bdb37c0149145723c5437e8176651928565e722/vmwaresolutions/images/openshift-sddc.svg)\n\nFigure 1. VMware Solutions and OpenShift\n\n\n\n Red Hat OpenShift overview \n\nThe Red Hat OpenShift platform is a platform that is designed to orchestrate containerized workloads across a cluster of nodes. The platform uses Kubernetes as the core container orchestration engine, which manages the Docker container images and their lifecycle.\n\nThe operating system of the nodes is Red Hat\u00ae Enterprise Linux\u00ae CoreOS, which is the container host version of Red Hat Enterprise Linux (RHEL) and features an RHEL kernel with SELinux enabled by default. RHEL CoreOS includes kubelet, which is the Kubernetes node agent, and the CRI-O container runtime, which is optimized for Kubernetes. In Red Hat OpenShift 4.7, you must use RHEL CoreOS for all control plane machines, but you can use Red Hat Enterprise Linux (RHEL) as the operating system for compute, or worker machines. If you choose to use RHEL workers, you must perform more system maintenance than if you use RHEL CoreOS for all of the cluster machines.\n\nThe reference architecture and this build process use RHEL CoreOS. The nodes must have direct Internet access to complete the following tasks.\n\n\n\n* Access the Red Hat OpenShift Infrastructure Providers page to download the installation program.\n* Access quay.io to obtain the packages that are required to install the cluster.\n* Obtain the packages that are required to perform cluster updates.\n* Access Red Hat\u2019s software as a service page to perform subscription management.\n\n\n\nIn the reference architecture, the following components are installed and configured in the build process:\n\n\n\n* Bastion node - This RHEL VM acts as a \"jump-server\" on the overlay network to enable the build process. It is accessed by using SSH through the private network. It also hosts a webserver to help the build process of the cluster.",
+          "url": "https://cloud.ibm.com/docs/vmwaresolutions?topic=vmwaresolutions-openshift-runbook-runbook-intro",
+          "score": 23.901968,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724163707
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Red Hat OpenShift solutions"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Red Hat OpenShift provides several benefits, including:\n1. Enhanced security: It offers built-in software to improve the security of your app lifecycle development, operations, and deployment.\n2. Consistent deployment: You can deploy your workloads consistently across various hybrid cloud providers and environments.\n3. Scalability and portability: It allows you to orchestrate and scale your existing Red Hat OpenShift workloads across on-prem and off-prem clouds for a portable, hybrid solution that works the same in multicloud scenarios.\n4. Continuous monitoring: The Red Hat OpenShift master, including all the master components, compute, networking, and storage resources, is continuously monitored by IBM Site Reliability Engineers (SREs) to ensure reliability and availability.\n5. Automatic updates: IBM automatically updates the patch version of the Red Hat OpenShift master, while you can update the master major and minor versions as needed.\n6. Dedicated worker nodes: Worker nodes in standard clusters are dedicated to your account, and you are responsible for requesting timely updates to ensure the latest security updates and patches.\nTo learn more, consider trying out the Red Hat OpenShift on IBM Cloud tutorial."
+    },
+    {
+      "speaker": "user",
+      "text": "Virtualization",
+      "timestamp": 1724164251,
+      "enrichments": {
+        "Question Type": [
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "IBM Cloud\u00ae Virtualization allows you to run multiple virtual machines in a dedicated environment. These virtual machines can integrate with other physical and virtual devices on the network and are managed through the IBM Cloud\u00ae console and API. This virtualization solution is available within IBM Cloud\u00ae Classic Infrastructure. The virtual machines can be integrated with other devices on the network and managed through both the console and API. Running virtual machines on IBM Cloud's proprietary architecture and automated platform provides high stability, making it suitable for enterprise-level and smaller-scale virtualization.",
+      "timestamp": 1724164260,
+      "contexts": [
+        {
+          "document_id": "ibmcld_03647-0-472",
+          "text": "\n\n\n\n\n\n\n  Virtualization \n\nYou can use IBM Cloud\u00ae Virtualization to run multiple virtual machines in a single dedicated environment. Virtual machines that run on an IBM Cloud network can integrate with other physical and virtual devices that are on the network and are managed through both the IBM Cloud\u00ae console and API. For more information, see [Getting started with Virtualization](https://cloud.ibm.com/docs/virtualization?topic=Virtualization-getting-started).\n\n\n\n\n\n\n\n",
+          "url": "https://cloud.ibm.com/docs/bare-metal?topic=bare-metal-bm-virtualization",
+          "score": 16.6293,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724164994
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Virtualization is a process that allows for more efficient use"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_14112-7-1387",
+          "text": "\nGetting started with virtualization \n\nYou can use the virtualization solution to run multiple virtual machines in a single dedicated environment within IBM Cloud\u00ae Classic Infrastructure. Virtual machines that run on the IBM Cloud network can integrate with other physical and virtual devices on the network and can be managed through both the console and API. Running virtual machines on the IBM Cloud proprietary architecture and automated platform offers high levels of stability suitable for enterprise-level virtualization, and virtualization on a smaller scale.\n\n\n\nTable 1. Getting started with Virtualization\n\n Get started \n\n __ 1. For more information about virtualization options, see [Citrix XenServer](https://cloud.ibm.com/docs/virtualization?topic=virtualization-what-is-citrix-xenserver-), [Hyper-V](https://cloud.ibm.com/docs/virtualization?topic=virtualization-what-is-hyper-v-), [Virtuozzo](https://cloud.ibm.com/docs/virtualization?topic=virtualization-what-is-virtuozzo-), and [VMware](https://cloud.ibm.com/docs/vmware?topic=vmware-vmware-getting-started). \n __ 2. [Set up a hypervisor](https://cloud.ibm.com/docs/virtualization?topic=virtualization-setting-up-a-hypervisor). [Setting up a virtual machine Network](https://cloud.ibm.com/docs/virtualization?topic=virtualization-setting-up-a-virtual-machine-network) is an important part of this process. \n __ 3.",
+          "url": "https://cloud.ibm.com/docs/virtualization?topic=virtualization-getting-started",
+          "score": 16.80913,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724164991
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Benefits of virtualization"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Red Hat OpenShift is not the same as Red Hat Virtualization. Red Hat OpenShift is a Kubernetes container platform that provides a trusted environment to run enterprise workloads, while Red Hat Virtualization is a software-defined virtualization solution for traditional and cloud-native applications. They serve different purposes and are used in different contexts.\nRegarding the benefits of Red Hat OpenShift, it allows you to efficiently manage and expand your Red Hat OpenShift workloads across on-premises and off-premises clouds, creating a portable, hybrid solution that functions consistently in multi-cloud scenarios. It enhances the Kubernetes platform with integrated software designed to improve application lifecycle management, operations, and security. You can seamlessly deploy your workloads across hybrid cloud providers and environments, as the platform efficiently orchestrates containerized workloads across a cluster of nodes. Leveraging Kubernetes as the core container orchestration engine, it effectively manages the Docker container images and their lifecycle.\nAs for virtualization, Red Hat OpenShift supports various virtualization options, including using virtual machines as worker nodes in a cluster. However, Red Hat OpenShift itself is not a virtualization solution like Red Hat Virtualization."
+    },
+    {
+      "speaker": "user",
+      "text": "Solutions",
+      "timestamp": 1724165086,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "VMware Solutions is a set of IBM Cloud offerings that facilitate deploying and managing VMware virtualized environments. To maximize your VMware Solutions experience, you can use the user documentation, REST API documentation reference, solution architectures, and solution guides. These resources will help you seamlessly extend your existing VMware\u00ae virtualized data center into the IBM Cloud or host cloud-native applications.\nThe solution supports various use cases, including capacity expansion and contraction in the cloud as needed, migration to the cloud, disaster recovery to the cloud, and backup into the cloud. With this solution, you can establish a dedicated cloud environment for development, testing, training, lab, or production purposes. IBM Cloud\u00ae for VMware Solutions also enables fully automated and rapid deployments of VMware vCenter Server\u00ae in the IBM Cloud. These offerings complement the on-premises infrastructure and allow existing and future workloads to run in the IBM Cloud without conversion, utilizing the same tools, skills, and processes employed on-premises. For more information, refer to the Virtualization for extending virtualized private cloud documentation.",
+      "timestamp": 1724165094,
+      "contexts": [
+        {
+          "document_id": "ibmcld_14293-3-1284",
+          "text": "\nVMware Solutions docs \n\nVMware Solutions is a group of IBM Cloud offerings that provide deployment and management of VMware virtualized environments. Learn how to make the most of your VMware Solutions experience by using the user documentation, REST API documentation reference, solution architectures, and solution guides.\n\n Developer tools \n\n[API & SDK reference](https://cloud.ibm.com/docs?tab=api-docs&category=compute&subCategory=vmwaresolutions)\n\n Recommended content \n\n[Getting started with VMware Solutions Get familiar with the process of ordering an instance and some services for it.](https://cloud.ibm.com/docs/vmwaresolutions?topic=vmwaresolutions-getting-started)[Signing up for required accounts Sign up for an IBM Cloud account and an IBM Cloud infrastructure account.](https://cloud.ibm.com/docs/vmwaresolutions?topic=vmwaresolutions-signing_required_accounts)[Accessing the VMware Solutions console Review the entry points into the IBM Cloud for VMware Solutions console.](https://cloud.ibm.com/docs/vmwaresolutions?topic=vmwaresolutions-loginmethod)[Setting up your environment for your first order Ensure that your environment is ready for your order.](https://cloud.ibm.com/docs/vmwaresolutions?topic=vmwaresolutions-completing_checklist)\n\n Video library \n\n[!",
+          "url": "https://cloud.ibm.com/docs/vmwaresolutions",
+          "score": 24.372532,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724165804
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "VMware Solutions"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_14566-7-2015",
+          "text": "\nOverview of VMware Solutions \n\nThe IBM Cloud\u00ae for VMware Solutions offerings help you extend your existing VMware\u00ae virtualized datacenter into the IBM Cloud, or to house cloud native applications.\n\nThe solution supports use cases, such as capacity expansion into the cloud (and contraction when not needed), migration to the cloud, disaster recovery to the cloud, and backup into the cloud. With the solution, you can create a dedicated cloud environment for development, testing, training, lab, or production.\n\nReview this information for the design of the IBM Cloud for VMware Solutions vCenter Server, whose target workloads require high levels of availability and scalability.\n\nThis design serves as a baseline architecture that provides the foundation for other internal or vendor-specific components to be added for specific use cases.\n\nZoom\n\n![Overview of VMware on IBM Cloud](https://cloud.ibm.com/docs-content/v1/content/5bdb37c0149145723c5437e8176651928565e722/vmwaresolutions/images/vcsv4radiagrams-ra-variationsonatheme.svg)\n\nFigure 1. Overview of VMware on IBM Cloud\n\n\n\n Key benefits of VMware Solutions \n\nVMware vCenter Server\u00ae provides the fundamental building blocks, which include VMware vSphere\u00ae, vCenter Server, VMware NSX\u00ae, and shared storage options, such as vSAN\u2122. These components are needed to flexibly design a VMware software-defined data center solution that best fits your workloads.\n\nBy applying advanced automation and single-tenant bare metal infrastructure, you can quickly deploy the entire VMware environment to the IBM Cloud in hours. Then, you can access and manage the IBM-hosted environment through the native VMware clients, command-line interface (CLI), existing scripts, or other familiar vSphere API-compatible tools.\n\nPost deployment, you can add to (and remove from) VMware ESXi\u2122 servers for an instance, add and remove clusters, join additional vCenter Server instances to an existing instance, and add products and services by using the VMware Solutions console.",
+          "url": "https://cloud.ibm.com/docs/vmwaresolutions?topic=vmwaresolutions-solution_overview",
+          "score": 23.173834,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724165807
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "VMware Solutions"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_14497-7-1724",
+          "text": "\nVMware Solutions and Red Hat OpenShift overview \n\nIBM Cloud\u00ae for VMware Solutions includes fully automated, rapid deployments of VMware vCenter Server\u00ae in the IBM Cloud. These offerings complement the on-premises infrastructure and allow existing and future workloads to run in the IBM Cloud without conversion by using the same tools, skills, and processes they use on-premises. For more information, see [Virtualization for extending virtualized private cloud](https://www.ibm.com/cloud/architecture/architectures/virtualizationArchitecture).\n\nRed Hat\u00ae OpenShift\u00ae for VMware Solutions is a reference architecture and a manual build process to deploy a Red Hat OpenShift cluster 4.7 on to an existing vCenter Server instance. The components of Red Hat OpenShift cluster are deployed as virtual machines (VMs) and appliances by using NSX software-defined networking.\n\n\n\n* Reference architecture - [vCenter Server and Red Hat OpenShift architecture overview](https://cloud.ibm.com/docs/vmwaresolutions?topic=vmwaresolutions-vcs-openshift-intro)\n* Build process - The current document. The process and steps that are needed to install Red Hat OpenShift 4.7 on to an existing vCenter Server instance.\n\n\n\nZoom\n\n![VMware Solutions and Red Hat OpenShift](https://cloud.ibm.com/docs-content/v1/content/5bdb37c0149145723c5437e8176651928565e722/vmwaresolutions/images/openshift-sddc.svg)\n\nFigure 1. VMware Solutions and OpenShift\n\n\n\n Red Hat OpenShift overview \n\nThe Red Hat OpenShift platform is a platform that is designed to orchestrate containerized workloads across a cluster of nodes. The platform uses Kubernetes as the core container orchestration engine, which manages the Docker container images and their lifecycle.",
+          "url": "https://cloud.ibm.com/docs/vmwaresolutions?topic=vmwaresolutions-openshift-runbook-runbook-intro",
+          "score": 21.997774,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724165810
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "VMware Solutions"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "IBM offers various solutions, one of which is Red Hat OpenShift, a Kubernetes container platform that provides a trusted environment to run enterprise workloads. It extends the Kubernetes platform with built-in software to enhance app lifecycle development, operations, and security.\nAnother solution is IBM Cloud Virtualization, which allows you to run multiple virtual machines in a dedicated environment. These virtual machines can integrate with other physical and virtual devices on the network and are managed through the IBM Cloud console and API.\nIf you're interested in learning about these solutions, you can complete the Creating clusters tutorial for Red Hat OpenShift and take the Kubernetes course for understanding how Kubernetes and Red Hat OpenShift on IBM Cloud work together."
+    },
+    {
+      "speaker": "user",
+      "text": "How does OpenShift help?",
+      "timestamp": 1724166168,
+      "enrichments": {
+        "Question Type": [
+          "How-To",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Red Hat OpenShift on IBM Cloud is a managed offering that provides a user-friendly experience and robust security for rapid app delivery. It allows you to integrate with IBM Watson\u00ae, AI, IoT, DevOps, security, and data analytics cloud services. As a certified Kubernetes provider, Red Hat OpenShift on IBM Cloud includes intelligent scheduling, self-healing, horizontal scaling, service discovery and load balancing, automated rollouts and rollbacks, and secret and configuration management. This Kubernetes container platform offers a reliable environment for running enterprise workloads and extends the Kubernetes platform with built-in software for app lifecycle development, operations, and security. With Red Hat OpenShift, you can deploy your workloads consistently across hybrid cloud providers and environments. Developers can quickly and securely containerize and deploy enterprise workloads in Kubernetes clusters using Red Hat OpenShift on IBM Cloud. These clusters are built on Kubernetes container orchestration, providing consistency and flexibility for development lifecycle operations.",
+      "timestamp": 1724166183,
+      "contexts": [
+        {
+          "document_id": "ibmcld_10154-7-1896",
+          "text": "\nBenefits and service offerings \n\n[Red Hat\u00ae OpenShift\u00ae on IBM Cloud\u00ae](https://www.ibm.com/products/openshift) is an IBM Cloud service, where IBM sets up and helps you manage a cluster of worker nodes that come installed with the OpenShift Container Platform container orchestration software.\n\nTo see a list of the cluster operators that are supported by default, you can run the oc get co command.\n\n\n\n Benefits of using the service \n\nWith Red Hat OpenShift on IBM Cloud, your developers have a fast and secure way to containerize and deploy enterprise workloads in Kubernetes clusters. Red Hat OpenShift clusters build on Kubernetes container orchestration that offers consistency and flexibility for your development lifecycle operations.\n\nYour Red Hat OpenShift workloads can scale across IBM\u2019s global footprint of data centers and multizone regions. At the same time, you\u2019re able to uniformly monitor, log, and secure apps. Because IBM manages the service, you can focus on innovating with high-value IBM Cloud services and middleware, such as AI and analytics. You also have access to Red Hat packaged open-source tools, including your favorite app runtimes, frameworks, databases, and more.\n\nReady to get started? Try out the [creating a Red Hat OpenShift on IBM Cloud cluster tutorial](https://cloud.ibm.com/docs/openshift?topic=openshift-openshift_tutorial).\n\nChoice of container platform provider\n: Deploy clusters with Red Hat OpenShift or community Kubernetes installed as the container platform orchestrator.\n: Choose the developer experience that fits your company, or run workloads across both Red Hat OpenShift or community Kubernetes clusters.\n: Built-in integrations from the IBM Cloud console to the Kubernetes dashboard or Red Hat OpenShift web console.\n: Single view and management experience of all your Red Hat OpenShift or community Kubernetes clusters from IBM Cloud.",
+          "url": "https://cloud.ibm.com/docs/openshift?topic=openshift-cs_ov",
+          "score": 23.657854,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724166920
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Red Hat OpenShift overview"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_10214-1438-3413",
+          "text": "\nRed Hat OpenShift on IBM Cloud is a managed Red Hat OpenShift offering that delivers powerful tools, an intuitive user experience, and built-in security for rapid delivery of apps that you can bind to cloud services that are related to IBM Watson\u00ae, AI, IoT, DevOps, security, and data analytics. As a certified Kubernetes provider, Red Hat OpenShift on IBM Cloud provides intelligent scheduling, self-healing, horizontal scaling, service discovery and load balancing, automated rollouts and rollbacks, and secret and configuration management. The service also has advanced capabilities around simplified cluster management, container security and isolation policies, the ability to design your own cluster, and integrated operational tools for consistency in deployment.\n\nFor a detailed overview of capabilities and benefits, see [Benefits of using the service](https://cloud.ibm.com/docs/openshift?topic=openshift-cs_ovbenefits).\n\n\n\n\n\n What container platforms are available for my cluster? \n\nWith IBM Cloud, you can create clusters for your containerized workloads from two different container management platforms: the IBM version of community Kubernetes and Red Hat OpenShift on IBM Cloud. The container platform that you select is installed on your cluster master and worker nodes. Later, you can [update the version](https://cloud.ibm.com/docs/containers?topic=containers-updateupdate) but can't roll back to a previous version or switch to a different container platform. If you want to use multiple container platforms, create a separate cluster for each.\n\nFor more information, see [Comparison between Red Hat OpenShift and community Kubernetes clusters](https://cloud.ibm.com/docs/openshift?topic=openshift-cs_ovopenshift_kubernetes).\n\nKubernetes\n: [Kubernetes](https://kubernetes.io/) is a production-grade, open source container orchestration platform that you can use to automate, scale, and manage your containerized apps that run on an Ubuntu operating system.",
+          "url": "https://cloud.ibm.com/docs/openshift?topic=openshift-faqs",
+          "score": 23.156834,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724166916
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Red Hat OpenShift overview"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_10495-9135-10569",
+          "text": "\n(https://cognitiveclass.ai/courses/docker-essentials)\n\n\n\n\n\n What is Red Hat OpenShift? \n\nRed Hat OpenShift is a Kubernetes container platform that provides a trusted environment to run enterprise workloads. It extends the Kubernetes platform with built-in software to enhance app lifecycle development, operations, and security. With Red Hat OpenShift, you can consistently deploy your workloads across hybrid cloud providers and environments. For more information about the differences between the community Kubernetes and Red Hat OpenShift cluster offerings, see the [comparison table](https://cloud.ibm.com/docs/openshift?topic=openshift-cs_ovopenshift_kubernetes).\n\n\n\n\n\n What compute host infrastructure does the service offer? \n\nYou can create clusters on Classic or IBM Cloud\u00ae Virtual Private Cloud infrastructure. You can also bring your own hosts by using Satellite.\n\nFor more information, see [Supported infrastructure providers](https://cloud.ibm.com/docs/openshift?topic=openshift-infrastructure_providers).\n\n\n\n\n\n Related resources \n\nReview how you can learn about Kubernetes concepts and the terminology.\n\n\n\n* Familiarize yourself with the product by completing the [Creating clusters tutorial](https://cloud.ibm.com/docs/openshift?topic=openshift-openshift_tutorial).\n* Learn how Kubernetes and Red Hat OpenShift on IBM Cloud work together by completing this [course](https://cognitiveclass.ai/courses/kubernetes-course).",
+          "url": "https://cloud.ibm.com/docs/openshift?topic=openshift-roks-overview",
+          "score": 23.563107,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724166913
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Red Hat OpenShift overview"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Red Hat OpenShift is a Kubernetes-based platform that helps accelerate your containerized app delivery processes. It is designed to orchestrate and scale your existing Red Hat OpenShift workloads across on-premises and off-premises clouds, providing a portable, hybrid solution that works consistently in multicloud scenarios. The platform uses Kubernetes as its core container orchestration engine, managing the Docker container images and their lifecycle.\nIn the context of IBM Cloud, Red Hat OpenShift on IBM Cloud offers a managed Red Hat OpenShift master and worker nodes. The Red Hat OpenShift master, which controls every cluster, is managed by IBM in an IBM-owned IBM Cloud infrastructure account and continuously monitored by IBM Site Reliability Engineers. IBM automatically updates the patch version, while you must update the master major and minor versions when Red Hat OpenShift releases new updates. Worker nodes in standard clusters are dedicated to your account and provisioned in your IBM Cloud infrastructure account, requiring you to request timely updates to ensure the latest security updates and patches are applied."
+    },
+    {
+      "speaker": "user",
+      "text": "Do I need scripts? ",
+      "timestamp": 1724167458,
+      "enrichments": {
+        "Question Type": [
+          "Factoid",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes. Custom scripts are extension points in the pipeline where adopters, teams, and users can provide scripts to run custom tasks needed for their continuous integration and deployment strategies. These custom scripts control the pipeline stages. You can configure the behavior of stages, script content, and the base image that runs the scripts using a configuration file (pipeline-config.yaml). The scripts and configuration for pipeline stages are loaded from a Git repository (repo), which can be either the application (app) repo (similar to .travis.yml or Jenkinsfile) or a custom repo.\nWhen any of the custom scripts start, the complete URL of the custom script file, including the file name and the commit hash, is printed at the beginning of the pipeline logs as follows: \"The custom script can be viewed using the following link: 'https://<URL>/blob/<commit hash>/.pipeline-config.yaml'\". This improves traceability. The scripts are designed to create a new VPC and install the SAP (SAP NW 7.x release) solution and its dedicated DB SAP HANA box in one task flow. They create a Schematics workspace for you where you can view your script logs and the resources that are provisioned.",
+      "timestamp": 1724167462,
+      "contexts": [
+        {
+          "document_id": "ibmcld_11573-4755-6312",
+          "text": "\nThe scripts are designed to create a new VPC and install SAP (SAP NW 7.x release) solution together with its dedicated DB SAP HANA box in one task flow.\n\n\n\n\n\n SAP Kits \n\nFor each IBM Cloud region, IBM allocates temporary storage on a dedicated temporary Deployment server (Bastion Server) that is used for terraform environment. It is your responsibility to download the necessary SAP and DB kits to your Deployment (Bastion) Server. All file archives are decompressed by Ansible during the automatic deploying process. For more information, see the readme file in the dedicated GitHub repository.\n\n\n\n\n\n Terraform deployment \n\nThe configuration and script files are provided on the GitHub repository:\n\n\n\n* For JAVA stack : [https://github.com/IBM-Cloud/sap-netweaver-java-hana](https://github.com/IBM-Cloud/sap-netweaver-java-hana).\n* For ABAP stack : [https://github.com/IBM-Cloud/sap-netweaver-abap-hana](https://github.com/IBM-Cloud/sap-netweaver-abap-hana)\n\n\n\nFor SAP HANA stand-alone virtual server instance on IBM Cloud Virtual Private Cloud, you modify the:\n\n\n\n* The input.auto.tfvars file to customize the resources for your solution. You specify zones, resource names, SSH keys, and SAP variables.\n\n\n\nAll of the other configuration files are provided and do not need to be modified.\n\n\n\n\n\n Schematics deployment \n\nThe configuration and script files are provided on the GitHub repository:\n\n\n\n* ABAP: [https://github.com/IBM-Cloud/sap-netweaver-abap-hana/tree/main/schematics](https://github.com/IBM-Cloud/sap-netweaver-abap-hana/tree/main/schematics)",
+          "url": "https://cloud.ibm.com/docs/sap?topic=sap-create-terraform-3tier-nw-hana-vpc-ansible",
+          "score": 10.792313,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724168295
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Scripts"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_06836-7-1886",
+          "text": "\nCustom scripts \n\nCustom scripts are extension points in the pipeline where adopters, teams, and users can provide scripts to run custom tasks that are required by their continuous integration and continuous deployment strategies.\n\nCustom scripts control the pipeline stages. You can use a configuration file (pipeline-config.yaml) to configure the behavior of stages, script content, and the base image that runs the scripts. The scripts and configuration for pipeline stages are loaded from a Git repository (repo) that can either be the application (app) repo (similar to .travis.yml or Jenkinsfile) or a custom repo.\n\nWhen any of the custom scripts are started, the complete URL of the custom script file, including the file name and the commit hash, is printed at the beginning of the pipeline logs as follows: The custom script can be viewed using the following link: 'https://<source repo url>/<organization name>/<repository name>/blob/<commit hash>/.pipeline-config.yaml'. This positioning improves traceability.\n\n\n\n Stages \n\nStages in pull request, continuous integration, and continuous deployment pipelines run custom scripts.\n\n\n\n* Pull request pipeline stages: setup, test, and finish. For more information, see [Pull request pipeline](https://cloud.ibm.com/docs/devsecops?topic=devsecops-cd-devsecops-pr-pipeline).\n* Continuous integration pipeline stages: setup, peer-review, test, static-scan, containerize, sign-artifact, deploy, acceptance-test, scan-artifact, release, and finish. For more information, see [Continuous integration pipeline](https://cloud.ibm.com/docs/devsecops?topic=devsecops-cd-devsecops-ci-pipeline).\n* continuous deployment pipeline stages: setup, verify-artifact, deploy, acceptance-test, and finish. For more information, see [continuous deployment pipeline](https://cloud.ibm.com/docs/devsecops?topic=devsecops-cd-devsecops-cd-pipeline).",
+          "url": "https://cloud.ibm.com/docs/devsecops?topic=devsecops-custom-scripts",
+          "score": 10.402259,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724169358
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Scripts"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_04262-10472-11599",
+          "text": "\nThe scripts create a Schematics workspace for you where you can see your script logs and the resources that are provisioned.\n\nIf you want to further customize your resources, you select Enable configuration customization after 'Create' and then Create. The scripts create the Schematics workspace for you and show you the parameters that you can customize. After you are done customizing the parameters, you select Generate Plan then Apply plan. The Terraform scripts run and create your resources.\n\nFor more information about Schematics, see [Getting started: IBM Cloud Schematics](https://cloud.ibm.com/docs/schematics?topic=schematics-getting-started).\n\n\n\n\n\n Next steps \n\nAs the components are provisioned, you are directed to the Schematics workspace page for your deployment, where you can view the script logs.\n\nAfter the Citrix DaaS for IBM Cloud components are provisioned, you need to complete a few post-provisioning steps to get you up and running. For more information, see [Post-provisioning steps for Citrix DaaS on VPC](https://cloud.ibm.com/docs/citrix-daas?topic=citrix-daas-post-provisioning-citrix-daas-vpc).",
+          "url": "https://cloud.ibm.com/docs/citrix-daas?topic=citrix-daas-provisioning-citrix-daas-vpc",
+          "score": 9.922723,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724168233
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Scripts"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "To install Red Hat OpenShift 4.7 on to an existing vCenter Server instance, you can follow the manual build process provided in the current document. However, the document does not explicitly mention whether scripts are required for the installation process. It is recommended to carefully read and follow the instructions provided in the document to complete the installation. If scripts are necessary, they would be mentioned and explained in the document."
+    },
+    {
+      "speaker": "user",
+      "text": "What about installation?",
+      "timestamp": 1724170388,
+      "enrichments": {
+        "Question Type": [
+          "How-To",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "To download Red Hat OpenShift 4.7, follow these steps:\n1. Go to the Red Hat OpenShift Infrastructure Providers page.\n2. Download the installer.\n3. Get the Pull Secret.\n4. Download the Red Hat Enterprise Linux CoreOS (RHEL CoreOS) OVA image. You can use the following code to download the OVA:\n   For example: `curl -O https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.x/latest/rhcos-4.x.3-x86_64-vmware.x86_64.ova` (Replace https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.x/latest/rhcos-4.x.3-x86_64-vmware.x86_64.ova with the actual download link)\n5. Download the command-line tools if you want to run the commands from a desktop or outside the Bastion host.\nFor more information on installing the Red Hat OpenShift user provider infrastructure, refer to \"Installing a cluster on vSphere with user-provisioned infrastructure.",
+      "timestamp": 1724170397,
+      "contexts": [
+        {
+          "document_id": "ibmcld_14501-1523-3094",
+          "text": "\nDownloading Red Hat OpenShift 4.7 \n\nAccess the [Red Hat OpenShift Infrastructure Providers page](https://cloud.redhat.com/openshift/install/vsphere/user-provisioned).\n\n\n\n1. Download the installer.\n2. Download the Pull Secret.\n3. Download the Red Hat Enterprise Linux CoreOS (RHEL CoreOS) OVA image or download the OVA by using the following code. Replace 4.x and 4.x.3 with the current Red Hat OpenShift version, for example, 4.7. curl -O https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.x/latest/rhcos-4.x.3-x86_64-vmware.x86_64.ova\n4. Download the command-line tools if you want to run the commands from a desktop or outside Bastion host.\n\n\n\n\n\n\n\n Downloading RHEL 8.0 ISO \n\nDownload the ISO image for the bastion host.\n\n\n\n1. Go to the Red Hat [Product downloads](https://access.redhat.com/downloads) page.\n2. Click RHEL 8.x Release and select the 8.x version.\n3. Download the source ISO images.\n4. The ISO file name is rhel-8.x-x86_64-dvd.iso.\n\n\n\n\n\n\n\n Collecting vCenter Server instance details \n\nAccess the IBM Cloud environment details.\n\n\n\n1. Log in to the [IBM Cloud for VMware Solutions console](https://cloud.ibm.com/vmware).\n2. Click the IBM Cloud for VMware Solutions instance under Deployed Instances.\n3. From the Summary page, collect the vCenter and Active Directory information.\n4. Click Infrastructure and select the cluster.\n5. Under Network Interfaces, collect the Public and Private VLANs.\n\n\n\n\n\n\n\n Downloading and installing govc \n\nThe govc command is used to upload the OVF and ISO to a datastore from the jump-server or remote device.",
+          "url": "https://cloud.ibm.com/docs/vmwaresolutions?topic=vmwaresolutions-openshift-runbook-runbook-prereq-intro",
+          "score": 24.101122,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724170750
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "installing Red Hat OpenShif"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_14496-1559-3317",
+          "text": "\nFor more information about installing the Red Hat OpenShift user provider infrastructure, see [Installing a cluster on vSphere with user-provisioned infrastructure](https://docs.openshift.com/container-platform/4.7/installing/installing_vsphere/installing-vsphere.html).\n\n\n\n Creating the Red Hat OpenShift Installer yaml file \n\nUse the following table to document the parameters you need for your deployment. Examples are shown that match the deployment described in this document.\n\n\n\n* The SSH key can be copied after it is displayed by using the command: cat /root/.ssh/id_rsa.pub.\n* The pull secret collected from Red Hat\u00ae. For more information, see [Red Hat OpenShift infrastructure providers](https://cloud.redhat.com/openshift/install/vsphere/user-provisioned)(requires logging in to your Red Hat account).\n\n\n\n\n\nTable 1. File parameters for install-config.yaml\n\n Parameters Example Your deployment \n\n Base domain dallas.ibm.local \n Metadata name ocp \n vCenter Server IP address 10.208.17.2 \n Username administrator@vsphere.local \n Password s3cretPassw0rd \n vCenter Server instance data center datacenter1 \n vCenter Server instance datastore vsanDatastore \n Pull Secret \n Public SSH Key \n\n\n\nUsing the following install-config.yaml file shown in the figure, update it using your deployment details from the [previous table](https://cloud.ibm.com/docs/vmwaresolutions?topic=vmwaresolutions-openshift-runbook-runbook-install-introopenshift-runbook-runbook-install-yaml-table):\n\n\n\n1. Update the base domain name.\n2. Update the metadata name with the Red Hat OpenShift cluster name.\n3. Provide the following vCenter Server information:\n\n\n\n* vCenter IP address\n* vCenter username and password\n* Datacenter name\n* Datastore name\n\n\n\n4. Paste the Pull Secret.\n5.",
+          "url": "https://cloud.ibm.com/docs/vmwaresolutions?topic=vmwaresolutions-openshift-runbook-runbook-install-intro",
+          "score": 23.60876,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724170871
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "installing Red Hat OpenShif"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Red Hat OpenShift can be installed on an existing vCenter Server instance with the help of a reference architecture and a manual build process provided by IBM. The reference architecture, which can be found at [vCenter Server and Red Hat OpenShift architecture overview](https://cloud.ibm.com/docs/vmwaresolutions?topic=vmwaresolutions-vcs-openshift-intro), gives an overview of the architecture. The build process, which is the current document, provides the detailed steps and requirements for the installation. The components of Red Hat OpenShift cluster are deployed as virtual machines (VMs) and appliances by using NSX software-defined networking."
+    },
+    {
+      "speaker": "user",
+      "text": "Clusters",
+      "timestamp": 1724170939,
+      "enrichments": {
+        "Question Type": [
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "To Create a cluster: 1. Open the Red Hat OpenShift web console to create a cluster.\n2. Access common components.\n3. Deploy a sample app.\n4. Expose the app on a Route so that external users can access the service.\n\nRed Hat OpenShift on IBM Cloud clusters come with the same configurable project and build components as OCP clusters. You can also integrate your cluster with IBM Cloud services like Continuous Delivery. You can set up logging, monitoring, and metering tools by installing and configuring various operators. However, these solutions are not highly available unless you back them up.\n\nYour clusters feature one-click integrations with IBM Log Analysis and IBM Cloud Monitoring for enterprise-grade, persistent monitoring and logging solutions across clusters. By default, clusters are connected to remote health monitoring, which means they report health and usage data to Red Hat unless you opt out.\n\nConnected clusters allow IBM Cloud to better support customers when there are issues specific to Red Hat. Also, remote health reporting gives Red Hat insights into how clusters are impacted by product upgrades. If you prefer not to send cluster data to Red Hat, you must opt out.",
+      "timestamp": 1724170948,
+      "contexts": [
+        {
+          "document_id": "ibmcld_10154-15474-17414",
+          "text": "\nRed Hat OpenShift on IBM Cloud clusters come with all the same configurable project and build components as OCP clusters. You can also choose to integrate your cluster with IBM Cloud services like [Continuous Delivery](https://cloud.ibm.com/docs/openshift?topic=openshift-cicd). \n Cluster health You can also set up logging, monitoring, and metering tools by installing and configuring various operators. These solutions are cluster-specific and not highly available unless you back them up. Your clusters feature one-click integrations with IBM Log Analysis and IBM Cloud Monitoring for enterprise-grade, persistent monitoring and logging solutions across clusters. You can also install the logging and monitoring operators as with standard OCP, but you might have to adjust the configuration settings. For more information, see [Logging and monitoring cluster health](https://cloud.ibm.com/docs/openshift?topic=openshift-health). \n Migrating clusters You can use the cluster migrator operator to migrate clusters from one major version to another. Migration requires separate clusters; you can't update a cluster from one major version to another. Various open source tools might be used, but are not officially supported. As with standard OpenShift Container Platform, you can't update a cluster from one major version to another. If you use a third-party open source tool such as the [cluster migrator operator](https://github.com/migtools/mig-operator), the tool is not supported by IBM and might have limitations such as the migration UI being unavailable. \n Container-native virtualization You can set up [container-native virtualization add-on](https://docs.openshift.com/container-platform/4.11/virt/about-virt.html) on bare metal machines, but not on virtual machines. Container-native virtualization is not supported by IBM. If you experience issues, you are responsible for resolving the issues and any impact to your workloads.",
+          "url": "https://cloud.ibm.com/docs/openshift?topic=openshift-cs_ov",
+          "score": 24.229324,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724172291
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Red Hat OpenShif clusters"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_10392-6380-7520",
+          "text": "\n: Red Hat OpenShift on IBM Cloud clusters are connected to [remote health monitoring](https://docs.openshift.com/container-platform/4.13/support/remote_health_monitoring/about-remote-health-monitoring.html) by default. This means clusters report health and usage data to Red Hat unless you opt out. With connected clusters, IBM Cloud is better positioned to support customers when there are issues specific to Red Hat which impact them. Additionally, remote health reporting gives Red Hat insights into how clusters are impacted by product upgrades. If you do not want to send cluster data to Red Hat, you must opt out. For more information, see [Understanding remote health monitoring](https://cloud.ibm.com/docs/openshift?topic=openshift-remote-health-monitoring-opt-out).\n\n\n\n\n\n 9 June 2023 \n\nNew! OpenShift Data Foundation add-on versions 4.12.5, 4.11.11, 4.10.26, and 4.9.28.\n: For more information, see the [change log](https://cloud.ibm.com/docs/openshift?topic=openshift-odf_addon_changelog).\n\n\n\n\n\n 5 June 2023 \n\nWorker node fix packs 4.9.59_1592_openshift, 4.10.60_1571_openshift, 4.11.42_1558_openshift, and 4.12.19_1546_openshift.",
+          "url": "https://cloud.ibm.com/docs/openshift?topic=openshift-openshift-relnotes",
+          "score": 24.976322,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724172288
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Red Hat OpenShif clusters"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_10421-7-1687",
+          "text": "\nCreating Red Hat OpenShift on IBM Cloud clusters \n\nCreate a cluster with worker nodes that come installed with Red Hat OpenShift container orchestration platform.\n\n\n\n Objectives and audience \n\nThis tutorial is designed for cluster administrators who want to learn how to create a Red Hat OpenShift on IBM Cloud cluster for the first time by using the CLI. In this tutorial, you complete the following tasks.\n\n\n\n* Create a cluster.\n* Open the Red Hat OpenShift web console.\n* Access common components.\n* Deploy a sample app.\n* Expose the app on a Route so that external users can access the service.\n\n\n\nZoom\n\n![Red Hat OpenShift tutorial diagram.](https://cloud.ibm.com/docs-content/v1/content/bce0f0917a9eea684d1b4b704ac6343a1f65f446/openshift/images/roks_tutorial.png)\n\nFigure 1. Red Hat OpenShift tutorial diagram\n\n\n\n\n\n Prerequisites \n\n\n\n1. Check your permissions. If you are the account owner, you already have the required permissions to create a cluster and can continue to the next step. If you are not the account owner, ask the account owner to [set up an API key and assign you required permissions in IBM Cloud IAM](https://cloud.ibm.com/docs/openshift?topic=openshift-access_referencecluster_create_permissions).\n2. [Install the IBM Cloud CLI tools](https://cloud.ibm.com/docs/openshift?topic=openshift-cli-install).\n\n\n\n\n\n\n\n Step 1: Create a Red Hat OpenShift on IBM Cloud cluster \n\n\n\n1. Log in to your account and resource group. If you have a federated account, include the --sso option.\n\nibmcloud login [-g RESOURCE GROUP] [--sso]\n2. Run the following command to create a version 4.11 cluster in Washington, DC with 2 worker nodes that have 4 cores and 16 GB memory.",
+          "url": "https://cloud.ibm.com/docs/openshift?topic=openshift-openshift_tutorial",
+          "score": 23.905527,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724172310
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Red Hat OpenShif clusters"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Red Hat OpenShift on IBM Cloud is a managed Kubernetes container platform that provides a reliable environment for running enterprise workloads. It allows you to orchestrate and scale your existing Red Hat OpenShift workloads across on-prem and off-prem clouds for a portable, hybrid solution that works the same in multicloud scenarios. Each cluster in Red Hat OpenShift on IBM Cloud is controlled by a dedicated Red Hat OpenShift master that is managed by IBM in an IBM-owned IBM Cloud infrastructure account. Worker nodes in standard clusters are provisioned in your IBM Cloud infrastructure account, and you are responsible for requesting timely updates to ensure the latest security updates and patches are applied.\nClusters in Red Hat OpenShift on IBM Cloud offer the following benefits:\n1. A managed Red Hat OpenShift master with dedicated compute, networking, and storage resources, continuously monitored by IBM Site Reliability Engineers (SREs) for security, reliability, and availability.\n2. Automatic updates of the patch version, with the requirement for manual updates to master major and minor versions.\n3. Worker nodes dedicated to your account, with the responsibility to request timely updates to ensure the latest security updates and patches are applied.\n4. Seamless integration with IBM Watson\u00ae, AI, IoT, DevOps, security, and data analytics cloud services.\n5. Support for intelligent scheduling, self-healing, horizontal scaling, service discovery and load balancing, automated rollouts and rollbacks, and secret and configuration management.\nTo learn more about Red Hat OpenShift on IBM Cloud, consider trying out the [Red Hat OpenShift on IBM Cloud tutorial](https://cloud.ibm.com/docs/openshift?topic=openshift-openshift_tutorial)."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "created",
+      "timestamp": 1724172334
+    },
+    {
+      "author": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+      "status": "accepted",
+      "timestamp": 1725546525
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "edited",
+      "timestamp": 1726741798
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "accepted",
+      "timestamp": 1726743603
+    }
+  ],
+  "editor": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+  "domain": "mt-rag-ibmcloud-elser-512-100-20240502",
+  "reviewer": "9dcd142c-415e-4161-a82f-c8b14bfb36ac"
+}

@@ -1,0 +1,799 @@
+{
+  "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-clapnq-elser-512-100-20240503",
+      "size": "183408"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"bool\": {\n    \"must\": {\n      \"text_expansion\": {\n        \"ml.tokens\": {\n          \"model_id\": \".elser_model_1\",\n          \"model_text\": \"${QUERY}\"\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "where does the penobscot river start and end",
+      "timestamp": 1723116030,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The Penobscot River originates from four branches in various lakes in north-central Maine. It specifically begins where the West Branch meets the East Branch at Medway. The river flows into the Atlantic Ocean at Penobscot Bay, and historically served as an important trade route from the Atlantic coast to interior Maine.\n",
+      "timestamp": 1723116032,
+      "contexts": [
+        {
+          "document_id": "798401030_1092-1671-0-563",
+          "text": "Penobscot River\nIt arises from four branches in several lakes in north - central Maine , which flow generally east . After the uniting of the West Branch with the East Branch at Medway ( 45 \u00b0 36 \u2032 14 '' N 68 \u00b0 31 \u2032 52 '' W \ufeff / \ufeff 45.604 \u00b0 N 68.531 \u00b0 W \ufeff / 45.604 ; - 68.531 \ufeff ( Penobscot River source ) ) , the Penobscot flows 109 miles ( 175 km ) south , past the city of Bangor , where it becomes navigable . Also at Bangor is the tributary Kenduskeag Stream . It empties into the Atlantic Ocean in Penobscot Bay . It is home to the Penobscot people that live on Indian Island .",
+          "title": "Penobscot River",
+          "score": 19.386238,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723116229
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: where does the penobscot river start and end"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "798401030_3323-4098-0-775",
+          "text": "Penobscot River\nThe Penobscot River was an early trade corridor to interior Maine from the Atlantic coast . Ocean ships could navigate upstream to Bangor . The cities of Rockland , Belfast , Brewer and Bangor , and the towns of Rockport , Camden , Northport , Searsport , Stockton Springs , Castine , Bucksport , Frankfort , Winterport , Orrington , and Hampden developed adjacent to the Penobscot River estuary . The river upstream of Bangor became an important transportation corridor for log driving to bring wooden logs and pulpwood from interior forests to sawmills and paper mills built to use water power where the city of Howland and the towns of Veazie , Orono , Old Town , Milford , Passadumkeag , West Enfield , Lincoln , Winn , Mattawamkeag , Medway , and Millinocket developed .",
+          "title": "Penobscot River",
+          "score": 18.515118,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723116106
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: where does the penobscot river start and end"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The Penobscot River starts from four branches in several lakes in north-central Maine. More specifically, it arises from the uniting of the West Branch with the East Branch at Medway. The Penobscot River ends when it empties into the Atlantic Ocean in Penobscot Bay."
+    },
+    {
+      "speaker": "user",
+      "text": "The West branch.",
+      "timestamp": 1723116666,
+      "enrichments": {
+        "Question Type": [
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The West Branch is home to many types of fish, such as landlocked salmon and brook trout. There are many deep pools within the river due to the many slate ledges, making the river ideal for fishing from shore, although there are still areas that are good for canoe fishing. The West Branch is a world-class landlocked salmon river, while the East Branch is known for its smallmouth bass fishery. In 2008, the Atlantic Salmon Commission opened the main stem of the river to catch and release fly fishing for Atlantic salmon.",
+      "timestamp": 1723116669,
+      "contexts": [
+        {
+          "document_id": "798401030_10436-10772-0-336",
+          "text": "Penobscot River\nAngling , especially fly fishing , has always been popular on the river . The West Branch is known as a world class landlocked salmon river , while the East Branch is known for its smallmouth bass fishery . In 2008 , the Atlantic Salmon Commission opened the main stem of the river to catch and release fly fishing for Atlantic salmon .",
+          "title": "Penobscot River",
+          "score": 24.853254,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723116825
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "branches of the Penobscot river"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "798401030_10773-11534-0-761",
+          "text": "Penobscot River\nThe West Branch is home to many types of fish such as landlocked salmon and Brook Trout . There are many deep pools within the river , due to the many slate ledges , making the river ideal for fishing from shore , though there are still areas that are good for canoe fishing . The river is great for a day fishing trip , however there are a few campsites located sporadically around for people who wish to stay more than one day . With the Ripogenus Dam by Chesuncook Lake , the West Branch is able to sustain the large landlocked salmon found there , with twelve miles of heavy rapids , deep runs , large pools , and slower moving water in some sections . Baxter State Park to the north adds to the natural beauty of the area , and natural protection as well .",
+          "title": "Penobscot River",
+          "score": 24.705349,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723116830
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "branches of the Penobscot river"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The West Branch of the Penobscot River is one of the two branches that form the main Penobscot River. It is part of the Penobscot River system that originates from several lakes in north-central Maine. The West Branch specifically flows into the East Branch at Medway to form the Penobscot River. When considering both the West Branch and the South Branch, the Penobscot River system becomes 264 miles long, making it the longest entirely in the state of Maine."
+    },
+    {
+      "speaker": "user",
+      "text": "Are there any other important river systems?",
+      "timestamp": 1723116924,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, Main has the Androscoggin River, a 178-mile river located in the U.S. states of Maine and New Hampshire in northern New England. It joins the Kennebec River at Merrymeeting Bay in Maine before flowing into the Gulf of Maine on the Atlantic Ocean. The river is a popular fishing destination, offering opportunities to catch brook, rainbow, brown trout, landlocked salmon, and smallmouth bass.",
+      "timestamp": 1723116927,
+      "contexts": [
+        {
+          "document_id": "833737755_6326-6797-0-471",
+          "text": "Androscoggin River\nThe Androscoggin River is a popular fishing destination for anglers seeking brook , rainbow and brown trout , as well as landlocked salmon and smallmouth bass . The upper reaches near Errol , New Hampshire , are popular with local and visiting fly fishermen for the chance to catch landlocked salmon from a drift boat . Although the upper reaches contain some bass , the river warms as it flows into Maine , and smallmouth bass are the chief quarry in its lower reaches .",
+          "title": "Androscoggin River",
+          "score": 21.468517,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723117068
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Androscoggin River"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "833737755_1909-2654-0-735",
+          "text": "Androscoggin River\nThe Androscoggin River is a river in the U.S. states of Maine and New Hampshire , in northern New England . It is 178 miles ( 286 km ) long and joins the Kennebec River at Merrymeeting Bay in Maine before its water empties into the Gulf of Maine on the Atlantic Ocean . Its drainage basin is 3,530 square miles ( 9,100 km ) in area . The name `` Androscoggin '' comes from the Eastern Abenaki term / al\u0259ss\u00edk\u0251nt\u0259kw / or / als\u00edk\u0251nt\u0259kw / , meaning `` river of cliff rock shelters '' ( literally `` thus - deep - dwelling - river '' ) ; or perhaps from Penobscot / al\u0259sstk\u0251t\u0259kw / , meaning `` river of rock shelters '' . The Anglicization of the Abenaki term is likely an analogical contamination with the colonial governor Edmund Andros .",
+          "title": "Androscoggin River",
+          "score": 31.92232,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723117712
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Androscoggin River The Androscoggin River is a river in the U.S. states of Maine and New Hampshire"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Based on the provided document, I don't have information on any other important river systems associated with the Penobscot River. However, the Penobscot River does have a significant tributary, the Kenduskeag Stream, which empties into the Penobscot River at Bangor. Additionally, the Ripogenus Dam on the West Branch near Chesuncook Lake plays a crucial role in sustaining the large landlocked salmon population in that section of the river."
+    },
+    {
+      "speaker": "user",
+      "text": "Is this the best river for fishing in the country?",
+      "timestamp": 1723117957,
+      "enrichments": {
+        "Question Type": [
+          "Comparative",
+          "Opinion"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "\u00a0The \"best\" river for fishing depends on the specific type of fish being pursued and the angler's preferences. The Yellowstone River is considered one of the world's greatest trout streams. It is officially classed as a blue ribbon stream in Montana from the park to the confluence with the Boulder River east of Livingston and from the mouth of Rosebud Creek near Rosebud, Montana, to the North Dakota border.  The Snake River was once one of the most important rivers for the spawning of anadromous fish -- which are hatched in the headwaters of rivers, live in the ocean for most of their lives, and return to the river to spawn -- in the United States.",
+      "timestamp": 1723117960,
+      "contexts": [
+        {
+          "document_id": "859711970_14924-16135-0-1211",
+          "text": "Yellowstone River\nThe Yellowstone River is considered to be one of the greatest trout streams of the world and is officially classed as a blue ribbon stream in Montana from the park to the confluence with the Boulder River east of Livingston and from the mouth of Rosebud creek near Rosebud , Montana to the North Dakota border . The lack of dams along the river provides for excellent trout habitat from high inside Yellowstone Park , downstream through Gardiner , the Paradise Valley , Livingston , and to Big Timber , a stretch of nearly 200 miles ( 320 km ) . The Yellowstone varies in width from 74 feet ( 23 m ) to 300 feet ( 91 m ) , so fishing is normally done by boat . The most productive stretch of water is through Paradise Valley in Montana , especially near Livingston which produces brown trout , rainbow trout and native Yellowstone cutthroat trout as well as Rocky Mountain whitefish . From Billings downstream to the North Dakota border , anglers seek burbot , channel catfish , paddlefish , sauger , smallmouth bass , and walleye . The pallid sturgeon ( Scaphirhynchus albus ) , an endangered species endemic to the waters of the Missouri and lower Mississippi River basins , is also found in the Yellowstone .",
+          "title": "Yellowstone River",
+          "score": 19.39598,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723118756
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Best fishing rivers in the USA"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "800189581_52985-53794-0-809",
+          "text": "Snake River\nThe Snake River was once one of the most important rivers for the spawning of anadromous fish -- which are hatched in the headwaters of rivers , live in the ocean for most of their lives , and return to the river to spawn -- in the United States . The river supported species including chinook salmon , coho salmon , and sockeye salmon , as well as steelhead , white sturgeon , and Pacific lamprey . It is known that before the construction of dams on the river , there were three major chinook salmon runs in the Snake River ; in the spring , summer and fall , totaling about 120,000 fish , and the sockeye salmon run was about 150,000 . The historical barrier to fish migration on the Snake River was Shoshone Falls , a waterfall that occurs as the Snake River passes through the Snake River Plain . Reaches",
+          "title": "Snake River",
+          "score": 18.965261,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723118759
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Best fishing rivers in the USA"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "I don't have specific information to determine if the Penobscot River or the Androscoggin River is the best river for fishing in the entire country, as there are many excellent fishing locations across the United States. The Penobscot River is known for its landlocked salmon and smallmouth bass fisheries, while the Androscoggin River offers a variety of trout and other species. Ultimately, the \"best\" river for fishing would depend on the specific type of fish being sought and the individual preferences of the angler."
+    },
+    {
+      "speaker": "user",
+      "text": "The Snake River is the longest river in the country.",
+      "timestamp": 1723119049,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "No. The Snake River is the thirteenth longest river in the United States. The longest river is the Mississippi River, the chief river of the second-largest drainage system on the North American continent, second only to the Hudson Bay drainage system. Using the longest stream as the source, Brower's Spring in Montana, the source of the Missouri River, would give it an incredible length of 3,710 miles, making it the fourth longest river in the world after the Nile, Amazon, and Yangtze. If we use the Largest Stream measurement, the Ohio River, and by extension the Allegheny River would be the source, and the Mississippi would begin in Pennsylvania.",
+      "timestamp": 1723119053,
+      "contexts": [
+        {
+          "document_id": "818532751_1986-2845-0-859",
+          "text": "Mississippi River\nThe Mississippi River is the chief river of the second - largest drainage system on the North American continent , second only to the Hudson Bay drainage system . The stream is entirely within the United States ( although its drainage basin reaches into Canada ) , its source is in northern Minnesota and it flows generally south for 2,320 miles ( 3,730 km ) to the Mississippi River Delta in the Gulf of Mexico . With its many tributaries , the Mississippi 's watershed drains all or parts of 31 U.S. states and two Canadian provinces between the Rocky and Appalachian Mountains . The Mississippi ranks as the fourth - longest and fifteenth - largest river in the world by discharge . The river either borders or passes through the states of Minnesota , Wisconsin , Iowa , Illinois , Missouri , Kentucky , Tennessee , Arkansas , Mississippi , and Louisiana .",
+          "title": "Mississippi River",
+          "score": 20.96659,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723119092
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "The longest river int the USA"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "800189581_14866-15764-0-898",
+          "text": "Snake River\nThe Snake River is the thirteenth longest river in the United States . Its watershed is the 10th largest among North American rivers , and covers almost 108,000 square miles ( 280,000 km ) in portions of six U.S. states : Wyoming , Idaho , Nevada , Utah , Oregon , and Washington , with the largest portion in Idaho . Most of the Snake River watershed lies between the Rocky Mountains on the east and the Columbia Plateau on the northwest . The largest tributary of the Columbia River , the Snake River watershed makes up about 41 % of the entire Columbia River Basin . Its average discharge at the mouth constitutes 31 % of the Columbia 's flow at that point . Above the confluence , the Snake is slightly longer than the Columbia -- 1,078 miles ( 1,735 km ) compared to 928 miles ( 1,493 km ) -- and its drainage basin is slightly larger -- 4 % bigger than the upstream Columbia River watershed .",
+          "title": "Snake River",
+          "score": 20.516367,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723119364
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "The longest river int the USA"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "818532751_24559-25351-0-792",
+          "text": "Mississippi River\nWhen measured from it 's traditional source at Lake Itasca , the Mississippi has a length of 2,320 miles ( 3,730 km ) . However , besides names given on maps , there are at least 2 other ways to measure the length of a river . The first is the Longest stream source ( most distant source from the sea ) and the second is the largest stream source ( by water volume ) . Using the longest stream , the source would be Brower 's Spring in Montana , the source of the Missouri River . This would give it a an incredible length of 3,710 miles , making it the fourth longest river in the world after the Nile , Amazon , and Yangtze . Using the Largest Stream measurement , the Ohio River , and by extension the Allegheny river , would be the source and the Mississippi would begin in Pennsylvania .",
+          "title": "Mississippi River",
+          "score": 20.581179,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723119367
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "The longest river int the USA"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "I do not have specific information to support the claim that the Snake River is the longest river in the country. According to the provided document, the Snake River was once one of the most important rivers for the spawning of anadromous fish in the United States."
+    },
+    {
+      "speaker": "user",
+      "text": "Which is the largest river in America?",
+      "timestamp": 1723119647,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The Mississippi River is the chief river of the second-largest drainage system on the North American continent and is the longest river in the United States.",
+      "timestamp": 1723119651,
+      "contexts": [
+        {
+          "document_id": "818532751_1986-2845-0-859",
+          "text": "Mississippi River\nThe Mississippi River is the chief river of the second - largest drainage system on the North American continent , second only to the Hudson Bay drainage system . The stream is entirely within the United States ( although its drainage basin reaches into Canada ) , its source is in northern Minnesota and it flows generally south for 2,320 miles ( 3,730 km ) to the Mississippi River Delta in the Gulf of Mexico . With its many tributaries , the Mississippi 's watershed drains all or parts of 31 U.S. states and two Canadian provinces between the Rocky and Appalachian Mountains . The Mississippi ranks as the fourth - longest and fifteenth - largest river in the world by discharge . The river either borders or passes through the states of Minnesota , Wisconsin , Iowa , Illinois , Missouri , Kentucky , Tennessee , Arkansas , Mississippi , and Louisiana .",
+          "title": "Mississippi River",
+          "score": 16.541767,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723120064
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Mississippi  River"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "speaker": "user",
+      "text": "That was not my question. When I say \"America,\" I'm referring to the continent, not the United States of America.",
+      "timestamp": 1723120311,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The Amazon River is located in the America continent, also called the Americas, and is the largest river basin in the world, covering about 40% of South America with an area of approximately 7,050,000 square kilometers (2,722,020 sq mi). It flows from west to east, starting from Iquitos in Peru and continuing across Brazil to the Atlantic. The river runs mainly through Brazil and Peru and is part of the border between Colombia and Peru. With an average discharge of about 209,000 cubic meters per second (7,400,000 cu ft/s), the Amazon represents 20% of the global riverine discharge to the ocean, greater than the combined discharge of the following seven largest independent rivers.",
+      "timestamp": 1723120313,
+      "contexts": [
+        {
+          "document_id": "804788732_30958-31491-0-533",
+          "text": "Amazon River\nThe Amazon basin , the largest in the world , covers about 40 % of South America , an area of approximately 7,050,000 square kilometres ( 2,722,020 sq mi ) . It drains from west to east , from Iquitos in Peru , across Brazil to the Atlantic . It gathers its waters from 5 degrees north latitude to 20 degrees south latitude . Its most remote sources are found on the inter-Andean plateau , just a short distance from the Pacific Ocean . The locals often refer to it as `` El Jefe Negro '' , referring to an ancient god of fertility .",
+          "title": "Amazon River",
+          "score": 17.202276,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723120795
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Amazon River"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "804788732_24475-24906-0-425",
+          "text": "Amazon River\nThe Amazon proper runs mostly through Brazil and Peru , and is part of the border between Colombia and Per\u00fa . It has a series of major tributaries in Colombia , Ecuador and Peru , some of which flow into the Mara\u00f1\u00f3n and Ucayali , and others directly into the Amazon proper . These include rivers Putumayo , Caquet\u00e1 , Vaup\u00e9s , Guain\u00eda , Morona , Pastaza , Nucuray , Urituyacu , Chambira , Tigre , Nanay , Napo , and Huallaga .",
+          "title": "Amazon River",
+          "score": 17.007572,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723120797
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Amazon River"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "804788732_2371-3151-0-780",
+          "text": "Amazon River\nAt an average discharge of about 209,000 cubic metres per second ( 7,400,000 cu ft / s ; 209,000,000 L / s ; 55,000,000 USgal / s ) -- approximately 6,591 cubic kilometres per annum ( 1,581 cu mi / a ) , greater than the next seven largest independent rivers combined -- the Amazon represents 20 % of the global riverine discharge to the ocean . The Amazon basin is the largest drainage basin in the world , with an area of approximately 7,050,000 square kilometres ( 2,720,000 sq mi ) . The portion of the river 's drainage basin in Brazil alone is larger than any other river 's basin . The Amazon enters Brazil with only one - fifth of the flow it finally discharges into the Atlantic Ocean , yet already has a greater flow at this point than the discharge of any other river .",
+          "title": "Amazon River",
+          "score": 16.57795,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723120799
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Amazon River"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The largest river in North America is the Mississippi River. It's the chief river of the second-largest drainage system on the North American continent."
+    },
+    {
+      "speaker": "user",
+      "text": "Which rivers are navigable in the USA?",
+      "timestamp": 1723120959,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "There are several navigable rivers in the United States. For instance, the Penobscot River becomes navigable at the city of Bangor. Additionally, both the Mississippi River and the Missouri River are commercially navigable along their entire lengths in Missouri.",
+      "timestamp": 1723120962,
+      "contexts": [
+        {
+          "document_id": "798401030_1092-1671-0-563",
+          "text": "Penobscot River\nIt arises from four branches in several lakes in north - central Maine , which flow generally east . After the uniting of the West Branch with the East Branch at Medway ( 45 \u00b0 36 \u2032 14 '' N 68 \u00b0 31 \u2032 52 '' W \ufeff / \ufeff 45.604 \u00b0 N 68.531 \u00b0 W \ufeff / 45.604 ; - 68.531 \ufeff ( Penobscot River source ) ) , the Penobscot flows 109 miles ( 175 km ) south , past the city of Bangor , where it becomes navigable . Also at Bangor is the tributary Kenduskeag Stream . It empties into the Atlantic Ocean in Penobscot Bay . It is home to the Penobscot people that live on Indian Island .",
+          "title": "Penobscot River",
+          "score": 39.11202,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723121038
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: where does the penobscot river start and end\n|assistant|: The Penobscot River originates from four branches in various lakes in north-central Maine. It specifically begins where the West Branch meets the East Branch at Medway. The river flows into the Atlantic Ocean at Penobscot Bay, and historically served as an important trade route from the Atlantic coast to interior Maine.\n\n|user|: The West branch.\n|assistant|: The West Branch is home to many types of fish, such as landlocked salmon and brook trout. There are many deep pools within the river due to the many slate ledges, making the river ideal for fishing from shore, although there are still areas that are good for canoe fishing. The West Branch is a world-class landlocked salmon river, while the East Branch is known for its smallmouth bass fishery. In 2008, the Atlantic Salmon Commission opened the main stem of the river to catch and release fly fishing for Atlantic salmon.\n|user|: Are there any other important river systems?\n|assistant|: Yes, Main has the Androscoggin River, a 178-mile river located in the U.S. states of Maine and New Hampshire in northern New England. It joins the Kennebec River at Merrymeeting Bay in Maine before flowing into the Gulf of Maine on the Atlantic Ocean. The river is a popular fishing destination, offering opportunities to catch brook, rainbow, brown trout, landlocked salmon, and smallmouth bass.\n|user|: Is this the best river for fishing in the country?\n|assistant|: \u00a0The \"best\" river for fishing depends on the specific type of fish being pursued and the angler's preferences. The Yellowstone River is considered one of the world's greatest trout streams. It is officially classed as a blue ribbon stream in Montana from the park to the confluence with the Boulder River east of Livingston and from the mouth of Rosebud Creek near Rosebud, Montana, to the North Dakota border. Snake River The Snake River was once one of the most important rivers for the spawning of anadromous fish -- which are hatched in the headwaters of rivers, live in the ocean for most of their lives, and return to the river to spawn -- in the United States.\n|user|: The Snake River is the longest river in the country.\n|assistant|: No. The Snake River is the thirteenth longest river in the United States. The longest river is the Mississippi River, the chief river of the second-largest drainage system on the North American continent, second only to the Hudson Bay drainage system. Using the longest stream as the source, Brower's Spring in Montana, the source of the Missouri River, would give it an incredible length of 3,710 miles, making it the fourth longest river in the world after the Nile, Amazon, and Yangtze. If we use the Largest Stream measurement, the Ohio River, and by extension the Allegheny River would be the source, and the Mississippi would begin in Pennsylvania.\n|user|: Which is the largest river in America?\n|assistant|: The Mississippi River is the chief river of the second-largest drainage system on the North American continent and is the longest river in the United States.\n|user|: That was not my question. When I say \"America,\" I'm referring to the continent, not the United States of America.\n|assistant|: The Amazon River is located in the America continent, also called the Americas, and is the largest river basin in the world, covering about 40% of South America with an area of approximately 7,050,000 square kilometers (2,722,020 sq mi). It flows from west to east, starting from Iquitos in Peru and continuing across Brazil to the Atlantic. The river runs mainly through Brazil and Peru and is part of the border between Colombia and Peru. With an average discharge of about 209,000 cubic meters per second (7,400,000 cu ft/s), the Amazon represents 20% of the global riverine discharge to the ocean, greater than the combined discharge of the following seven largest independent rivers.\n|user|: Which rivers are navigable in the USA?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "836236385_48922-49253-0-331",
+          "text": "Missouri\nThe Mississippi River and Missouri River are commercially navigable over their entire lengths in Missouri . The Missouri was channelized through dredging and jettys and the Mississippi was given a series of locks and dams to avoid rocks and deepen the river . St. Louis is a major destination for barge traffic on the Mississippi .",
+          "title": "Missouri",
+          "score": 16.885382,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723121374
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Navigable rivers in the USA"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "There are several navigable rivers in the United States. One example is the Penobscot River, which becomes navigable at the city of Bangor. Another example is the Mississippi River, which is the chief river of the second-largest drainage system on the North American continent and is fully navigable along its entire length of 2,320 miles. The Missouri River, which is the longest river in the United States when measured from its source to its mouth, is also navigable for much of its length. Other navigable rivers in the United States include the Columbia River, the Ohio River, the Colorado River, and the Hudson River. These rivers are used for transportation, recreation, and commerce."
+    },
+    {
+      "speaker": "user",
+      "text": "Is the Hudson River important?",
+      "timestamp": 1723121803,
+      "enrichments": {
+        "Question Type": [
+          "Explanation",
+          "Factoid",
+          "Opinion"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, the Hudson River is considered an important river in the United States. The 315-mile-long Hudson River flows through eastern New York, serving as a boundary between New Jersey and New York. The region has experienced economic revitalization, especially in green development. Notable projects such as the High Line and the Walkway Over the Hudson, along with waterfront parks and annual festivals, contribute to the area's appeal. The Hudson River valley runs primarily from north to south down the eastern edge of New York State, cutting through a series of rock types including Triassic sandstones and redbeds in the south, and much more ancient Precambrian gneiss in the north (and east).",
+      "timestamp": 1723121808,
+      "contexts": [
+        {
+          "document_id": "814479651_1775-2512-0-737",
+          "text": "Hudson River\nThe Hudson River is a 315 - mile ( 507 km ) river that flows from north to south primarily through eastern New York in the United States . The river originates in the Adirondack Mountains of Upstate New York , flows through the Hudson Valley , and eventually drains into the Atlantic Ocean , between New York City and Jersey City . The river serves as a political boundary between the states of New Jersey and New York , and further north between New York counties . The lower half of the river is a tidal estuary occupying the Hudson Fjord , an inlet which formed during the most recent period of North American glaciation , estimated at 26,000 to 13,300 years ago . Tidal waters influence the Hudson 's flow from as far north as Troy .",
+          "title": "Hudson River",
+          "score": 14.601144,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723122539
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Hudson River and New york development"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "814479651_29614-30252-0-638",
+          "text": "Hudson River\nIn conjunction with conservation efforts , the Hudson River region has seen an economic revitalization , especially in favor of green development . In 2009 , the High Line was opened in the Chelsea neighborhood of Manhattan . This linear park has views of the river throughout its length . Also in 2009 , the original Poughkeepsie railroad bridge , since abandoned , was converted into the Walkway Over the Hudson , a pedestrian park over the river . Emblematic of the increase in green development in the region , waterfront parks in cities like Kingston , Poughkeepsie , and Beacon were built , and several festivals are held annually .",
+          "title": "Hudson River",
+          "score": 14.737058,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723122543
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Hudson River and New york development"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "855420636_2208-2769-0-561",
+          "text": "Hudson Valley\nThe Hudson River valley runs primarily north to south down the eastern edge of New York State , cutting through a series of rock types including Triassic sandstones and redbeds in the south and much more ancient Precambrian gneiss in the north ( and east ) . In the Hudson Highlands , the river enters a fjord cut during previous ice ages . To the west lie the extensive Appalachian highlands . In the Tappan Zee region , the west side of the river has high cliffs produced by an erosion - resistant diabase ; these cliffs range from 400 -- 800 feet in height .",
+          "title": "Hudson Valley",
+          "score": 17.353113,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723122546
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Hudson River and New york city"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, the Hudson River is considered an important river in the United States. It is a 315-mile (507 km) river that flows through New York and drains into the Atlantic Ocean. The Hudson River is historically, culturally, and economically significant to the region. It was named after Henry Hudson, an English explorer who explored the river in 1609. The river played a crucial role in the development of New York City and the surrounding areas, serving as a major transportation and trade route. Today, the Hudson River is a vital natural resource, providing habitats for numerous plant and animal species, and is used for recreational activities like boating, fishing, and swimming."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "created",
+      "timestamp": 1723122641
+    },
+    {
+      "author": "87334bc6-dd39-4565-ae2b-832e60a24b08",
+      "status": "accepted",
+      "timestamp": 1726024842
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "edited",
+      "timestamp": 1726583168
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "accepted",
+      "timestamp": 1726583505
+    }
+  ],
+  "editor": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+  "domain": "mt-rag-clapnq-elser-512-100-20240503",
+  "reviewer": "f6ce971c-68d2-4c26-b1c0-477dd28a5181"
+}

@@ -1,0 +1,1254 @@
+{
+  "author": "d2b56e91-6d89-4df4-b89a-eef8d969850b",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-clapnq-elser-512-100-20240503",
+      "size": "183408"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"bool\": {\n    \"must\": {\n      \"text_expansion\": {\n        \"ml.tokens\": {\n          \"model_id\": \".elser_model_1\",\n          \"model_text\": \"${QUERY}\"\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "where is bone marrow found what does it do for the body",
+      "timestamp": 1722953043,
+      "enrichments": {
+        "Question Type": [
+          "Composite",
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Bone marrow is found within the spongy or cancellous portions of bones. Human marrow produces approximately 500 billion blood cells per day. The main functional component of bone marrow includes the progenitor cells which are destined to mature into blood and lymphoid cells. These include white blood cells, red blood cells, and platelets. In humans, the red marrow of some bones is an important site for blood cell production, in order to replace existing cells that have been destroyed by the liver. ",
+      "timestamp": 1722953057,
+      "contexts": [
+        {
+          "document_id": "825171915_343-1247-0-904",
+          "text": "Bone marrow\nBone marrow is a semi-solid tissue which may be found within the spongy or cancellous portions of bones . In birds and mammals , bone marrow is the primary site of new blood cell production or hematopoiesis . It is composed of hematopoietic cells , marrow adipose tissue , and supportive stromal cells . On average , bone marrow constitutes 4 % of the total body mass of humans ; in an adult having 65 kilograms of mass ( 143 lb ) , bone marrow typically accounts for approximately 2.6 kilograms ( 5.7 lb ) . Human marrow produces approximately 500 billion blood cells per day , which join the systemic circulation via permeable vasculature sinusoids within the medullary cavity . All types of hematopoietic cells , including both myeloid and lymphoid lineages , are created in bone marrow ; however , lymphoid cells must migrate to other lymphoid organs ( e.g. thymus ) in order to complete maturation .",
+          "title": "Bone marrow",
+          "score": 18.548065,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1722953234
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: where is bone marrow found what does it do for the body"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "825171915_3242-3629-0-387",
+          "text": "Bone marrow\nAt the cellular level , the main functional component of bone marrow includes the progenitor cells which are destined to mature into blood and lymphoid cells . Marrow contains hematopoietic stem cells which give rise to the three classes of blood cells that are found in circulation : white blood cells ( leukocytes ) , red blood cells ( erythrocytes ) , and platelets ( thrombocytes ) .",
+          "title": "Bone marrow",
+          "score": 17.952015,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1722953265
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: where is bone marrow found what does it do for the body"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "837756901_3845-4469-0-624",
+          "text": "Human musculoskeletal system\nLocated in long bones are two distinctions of bone marrow ( yellow and red ) . The yellow marrow has fatty connective tissue and is found in the marrow cavity . During starvation , the body uses the fat in yellow marrow for energy . The red marrow of some bones is an important site for blood cell production , approximately 2.6 million red blood cells per second in order to replace existing cells that have been destroyed by the liver . Here all erythrocytes , platelets , and most leukocytes form in adults . From the red marrow , erythrocytes , platelets , and leukocytes migrate to the blood to do their special tasks .",
+          "title": "Human musculoskeletal system",
+          "score": 17.837753,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1722953303
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: where is bone marrow found what does it do for the body"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Bone marrow is found within the spongy or cancellous portions of bones. In birds and mammals, it is the primary site of new blood cell production or hematopoiesis. It is composed of hematopoietic cells, marrow adipose tissue, and supportive stromal cells. Human marrow produces approximately 500 billion blood cells per day, which join the systemic circulation via permeable vasculature sinusoids within the medullary cavity. The main functional component of bone marrow includes the progenitor cells which are destined to mature into blood and lymphoid cells. These include white blood cells (leukocytes), red blood cells (erythrocytes), and platelets (thrombocytes). In humans, the red marrow of some bones is an important site for blood cell production, approximately 2.6 million red blood cells per second in order to replace existing cells that have been destroyed by the liver. Erythrocytes, platelets, and leukocytes formed in the red marrow migrate to the blood to do their special tasks."
+    },
+    {
+      "speaker": "user",
+      "text": "What happens if it does not work well?",
+      "timestamp": 1722953718,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "If bone marrow does not function properly, it can lead to a decrease in the production of blood cells and blood platelets. This can be caused by various factors such as aplastic anemia, malignancies like multiple myeloma, congenital defects , autoimmune diseases, infections like tuberculosis, leukemia, or exposure to radiation or chemotherapy. Symptoms of a malfunctioning bone marrow can include fatigue, increased risk of infection, and easy bruising or bleeding. In the case of sickle cell disease, the bone marrow's attempt to compensate for the destruction of red cells is not sufficient, leading to anemia.",
+      "timestamp": 1722953721,
+      "contexts": [
+        {
+          "document_id": "825171915_343-1247-0-904",
+          "text": "Bone marrow\nBone marrow is a semi-solid tissue which may be found within the spongy or cancellous portions of bones . In birds and mammals , bone marrow is the primary site of new blood cell production or hematopoiesis . It is composed of hematopoietic cells , marrow adipose tissue , and supportive stromal cells . On average , bone marrow constitutes 4 % of the total body mass of humans ; in an adult having 65 kilograms of mass ( 143 lb ) , bone marrow typically accounts for approximately 2.6 kilograms ( 5.7 lb ) . Human marrow produces approximately 500 billion blood cells per day , which join the systemic circulation via permeable vasculature sinusoids within the medullary cavity . All types of hematopoietic cells , including both myeloid and lymphoid lineages , are created in bone marrow ; however , lymphoid cells must migrate to other lymphoid organs ( e.g. thymus ) in order to complete maturation .",
+          "title": "Bone marrow",
+          "score": 45.223686,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1722954415
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: where is bone marrow found what does it do for the body\n|assistant|: Bone marrow is found within the spongy or cancellous portions of bones. Human marrow produces approximately 500 billion blood cells per day, which join the systemic circulation via permeable vasculature sinusoids within the medullary cavity. The main functional component of bone marrow includes the progenitor cells which are destined to mature into blood and lymphoid cells. These include white blood cells (leukocytes), red blood cells (erythrocytes), and platelets (thrombocytes). In humans, the red marrow of some bones is an important site for blood cell production, approximately 2.6 million red blood cells per second in order to replace existing cells that have been destroyed by the liver. \n|user|: What happens if it does not work well?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "825171915_3242-3629-0-387",
+          "text": "Bone marrow\nAt the cellular level , the main functional component of bone marrow includes the progenitor cells which are destined to mature into blood and lymphoid cells . Marrow contains hematopoietic stem cells which give rise to the three classes of blood cells that are found in circulation : white blood cells ( leukocytes ) , red blood cells ( erythrocytes ) , and platelets ( thrombocytes ) .",
+          "title": "Bone marrow",
+          "score": 39.404736,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1722954423
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: where is bone marrow found what does it do for the body\n|assistant|: Bone marrow is found within the spongy or cancellous portions of bones. Human marrow produces approximately 500 billion blood cells per day, which join the systemic circulation via permeable vasculature sinusoids within the medullary cavity. The main functional component of bone marrow includes the progenitor cells which are destined to mature into blood and lymphoid cells. These include white blood cells (leukocytes), red blood cells (erythrocytes), and platelets (thrombocytes). In humans, the red marrow of some bones is an important site for blood cell production, approximately 2.6 million red blood cells per second in order to replace existing cells that have been destroyed by the liver. \n|user|: What happens if it does not work well?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "837756901_3845-4469-0-624",
+          "text": "Human musculoskeletal system\nLocated in long bones are two distinctions of bone marrow ( yellow and red ) . The yellow marrow has fatty connective tissue and is found in the marrow cavity . During starvation , the body uses the fat in yellow marrow for energy . The red marrow of some bones is an important site for blood cell production , approximately 2.6 million red blood cells per second in order to replace existing cells that have been destroyed by the liver . Here all erythrocytes , platelets , and most leukocytes form in adults . From the red marrow , erythrocytes , platelets , and leukocytes migrate to the blood to do their special tasks .",
+          "title": "Human musculoskeletal system",
+          "score": 38.243782,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1722954429
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: where is bone marrow found what does it do for the body\n|assistant|: Bone marrow is found within the spongy or cancellous portions of bones. Human marrow produces approximately 500 billion blood cells per day, which join the systemic circulation via permeable vasculature sinusoids within the medullary cavity. The main functional component of bone marrow includes the progenitor cells which are destined to mature into blood and lymphoid cells. These include white blood cells (leukocytes), red blood cells (erythrocytes), and platelets (thrombocytes). In humans, the red marrow of some bones is an important site for blood cell production, approximately 2.6 million red blood cells per second in order to replace existing cells that have been destroyed by the liver. \n|user|: What happens if it does not work well?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "825171915_11920-12748-0-828",
+          "text": "Bone marrow\nIn a bone marrow transplant , hematopoietic stem cells are removed from a person and infused into another person ( allogenic ) or into the same person at a later time ( autologous ) . If the donor and recipient are compatible , these infused cells will then travel to the bone marrow and initiate blood cell production . Transplantation from one person to another is conducted for the treatment of severe bone marrow diseases , such as congenital defects , autoimmune diseases or malignancies . The patient 's own marrow is first killed off with drugs or radiation , and then the new stem cells are introduced . Before radiation therapy or chemotherapy in cases of cancer , some of the patient 's hematopoietic stem cells are sometimes harvested and later infused back when the therapy is finished to restore the immune system .",
+          "title": "Bone marrow",
+          "score": 14.464953,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1722954463
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "what happens if the bone marrow does not work well"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "853377429_16511-16858-0-347",
+          "text": "Sickle cell disease\nThe actual anaemia of the illness is caused by haemolysis , the destruction of the red cells , because of their shape . Although the bone marrow attempts to compensate by creating new red cells , it does not match the rate of destruction . Healthy red blood cells typically function for 90 -- 120 days , but sickled cells only last 10 -- 20 days .",
+          "title": "Sickle cell disease",
+          "score": 13.879247,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1722954484
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "what happens if the bone marrow does not work well"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "825171915_7241-7870-0-629",
+          "text": "Bone marrow\nThe normal bone marrow architecture can be damaged or displaced by aplastic anemia , malignancies such as multiple myeloma , or infections such as tuberculosis , leading to a decrease in the production of blood cells and blood platelets . The bone marrow can also be affected by various forms of leukemia , which attacks its hematologic progenitor cells . Furthermore , exposure to radiation or chemotherapy will kill many of the rapidly dividing cells of the bone marrow , and will therefore result in a depressed immune system . Many of the symptoms of radiation poisoning are due to damage sustained by the bone marrow cells .",
+          "title": "Bone marrow",
+          "score": 16.49201,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1722954500
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "what happens if the bone marrow does not work well"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "If bone marrow does not function properly, it can lead to a decrease in the production of blood cells and blood platelets. This can be caused by various factors such as aplastic anemia, malignancies like multiple myeloma, infections like tuberculosis, leukemia, or exposure to radiation or chemotherapy. Symptoms of a malfunctioning bone marrow can include fatigue, increased risk of infection, and easy bruising or bleeding. In the case of sickle cell disease, the bone marrow's attempt to compensate for the destruction of red cells is not sufficient, leading to anemia."
+    },
+    {
+      "speaker": "user",
+      "text": "How is Sickle cell treated?",
+      "timestamp": 1722963987,
+      "enrichments": {
+        "Question Type": [
+          "How-To",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The treatment for sickle cell disease may include infection prevention with vaccination and antibiotics, high fluid intake, folic acid supplementation, pain medication, blood transfusion, and the medication hydroxycarbamide (hydroxyurea). A small percentage of people can be cured by a transplant of bone marrow cells. When treating avascular necrosis of the bone in people with sickle cell disease, the aim of treatment is to reduce or stop the pain and maintain joint mobility. Current treatment options are to rest the joint, physical therapy, pain relief medicine, joint replacement surgery, or bone grafting. High quality randomized controlled trials are needed to assess the most effective treatment option and determine if a combination of physical therapy and surgery are more effective than physical therapy alone.",
+      "timestamp": 1722964007,
+      "contexts": [
+        {
+          "document_id": "825171915_343-1247-0-904",
+          "text": "Bone marrow\nBone marrow is a semi-solid tissue which may be found within the spongy or cancellous portions of bones . In birds and mammals , bone marrow is the primary site of new blood cell production or hematopoiesis . It is composed of hematopoietic cells , marrow adipose tissue , and supportive stromal cells . On average , bone marrow constitutes 4 % of the total body mass of humans ; in an adult having 65 kilograms of mass ( 143 lb ) , bone marrow typically accounts for approximately 2.6 kilograms ( 5.7 lb ) . Human marrow produces approximately 500 billion blood cells per day , which join the systemic circulation via permeable vasculature sinusoids within the medullary cavity . All types of hematopoietic cells , including both myeloid and lymphoid lineages , are created in bone marrow ; however , lymphoid cells must migrate to other lymphoid organs ( e.g. thymus ) in order to complete maturation .",
+          "title": "Bone marrow",
+          "score": 43.755444,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1722964204
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: where is bone marrow found what does it do for the body\n|assistant|: Bone marrow is found within the spongy or cancellous portions of bones. Human marrow produces approximately 500 billion blood cells per day, which join the systemic circulation via permeable vasculature sinusoids within the medullary cavity. The main functional component of bone marrow includes the progenitor cells which are destined to mature into blood and lymphoid cells. These include white blood cells (leukocytes), red blood cells (erythrocytes), and platelets (thrombocytes). In humans, the red marrow of some bones is an important site for blood cell production, approximately 2.6 million red blood cells per second in order to replace existing cells that have been destroyed by the liver. \n|user|: What happens if it does not work well?\n|assistant|: If bone marrow does not function properly, it can lead to a decrease in the production of blood cells and blood platelets. This can be caused by various factors such as aplastic anemia, malignancies like multiple myeloma, congenital defects , autoimmune diseases, infections like tuberculosis, leukemia, or exposure to radiation or chemotherapy. Symptoms of a malfunctioning bone marrow can include fatigue, increased risk of infection, and easy bruising or bleeding. In the case of sickle cell disease, the bone marrow's attempt to compensate for the destruction of red cells is not sufficient, leading to anemia.\n|user|: How is Sickle cell treated?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "825171915_3242-3629-0-387",
+          "text": "Bone marrow\nAt the cellular level , the main functional component of bone marrow includes the progenitor cells which are destined to mature into blood and lymphoid cells . Marrow contains hematopoietic stem cells which give rise to the three classes of blood cells that are found in circulation : white blood cells ( leukocytes ) , red blood cells ( erythrocytes ) , and platelets ( thrombocytes ) .",
+          "title": "Bone marrow",
+          "score": 37.300144,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1722964216
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: where is bone marrow found what does it do for the body\n|assistant|: Bone marrow is found within the spongy or cancellous portions of bones. Human marrow produces approximately 500 billion blood cells per day, which join the systemic circulation via permeable vasculature sinusoids within the medullary cavity. The main functional component of bone marrow includes the progenitor cells which are destined to mature into blood and lymphoid cells. These include white blood cells (leukocytes), red blood cells (erythrocytes), and platelets (thrombocytes). In humans, the red marrow of some bones is an important site for blood cell production, approximately 2.6 million red blood cells per second in order to replace existing cells that have been destroyed by the liver. \n|user|: What happens if it does not work well?\n|assistant|: If bone marrow does not function properly, it can lead to a decrease in the production of blood cells and blood platelets. This can be caused by various factors such as aplastic anemia, malignancies like multiple myeloma, congenital defects , autoimmune diseases, infections like tuberculosis, leukemia, or exposure to radiation or chemotherapy. Symptoms of a malfunctioning bone marrow can include fatigue, increased risk of infection, and easy bruising or bleeding. In the case of sickle cell disease, the bone marrow's attempt to compensate for the destruction of red cells is not sufficient, leading to anemia.\n|user|: How is Sickle cell treated?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "837756901_3845-4469-0-624",
+          "text": "Human musculoskeletal system\nLocated in long bones are two distinctions of bone marrow ( yellow and red ) . The yellow marrow has fatty connective tissue and is found in the marrow cavity . During starvation , the body uses the fat in yellow marrow for energy . The red marrow of some bones is an important site for blood cell production , approximately 2.6 million red blood cells per second in order to replace existing cells that have been destroyed by the liver . Here all erythrocytes , platelets , and most leukocytes form in adults . From the red marrow , erythrocytes , platelets , and leukocytes migrate to the blood to do their special tasks .",
+          "title": "Human musculoskeletal system",
+          "score": 36.512623,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1722964234
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: where is bone marrow found what does it do for the body\n|assistant|: Bone marrow is found within the spongy or cancellous portions of bones. Human marrow produces approximately 500 billion blood cells per day, which join the systemic circulation via permeable vasculature sinusoids within the medullary cavity. The main functional component of bone marrow includes the progenitor cells which are destined to mature into blood and lymphoid cells. These include white blood cells (leukocytes), red blood cells (erythrocytes), and platelets (thrombocytes). In humans, the red marrow of some bones is an important site for blood cell production, approximately 2.6 million red blood cells per second in order to replace existing cells that have been destroyed by the liver. \n|user|: What happens if it does not work well?\n|assistant|: If bone marrow does not function properly, it can lead to a decrease in the production of blood cells and blood platelets. This can be caused by various factors such as aplastic anemia, malignancies like multiple myeloma, congenital defects , autoimmune diseases, infections like tuberculosis, leukemia, or exposure to radiation or chemotherapy. Symptoms of a malfunctioning bone marrow can include fatigue, increased risk of infection, and easy bruising or bleeding. In the case of sickle cell disease, the bone marrow's attempt to compensate for the destruction of red cells is not sufficient, leading to anemia.\n|user|: How is Sickle cell treated?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "853377429_2317-2677-0-360",
+          "text": "Sickle cell disease\nThe care of people with sickle cell disease may include infection prevention with vaccination and antibiotics , high fluid intake , folic acid supplementation and pain medication . Other measures may include blood transfusion and the medication hydroxycarbamide ( hydroxyurea ) . A small percentage of people can be cured by a transplant of bone marrow cells .",
+          "title": "Sickle cell disease",
+          "score": 22.880234,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1722965297
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Sickle cell treatment"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "853377429_23150-23662-0-512",
+          "text": "Sickle cell disease\nWhen treating avascular necrosis of the bone in people with sickle cell disease , the aim of treatment is to reduce or stop the pain and maintain joint mobility . Current treatment options are to rest the joint , physical therapy , pain relief medicine , joint replacement surgery , or bone grafting . High quality randomized controlled trials are needed to assess the most effective treatment option and determine if a combination of physical therapy and surgery are more effective than physical therapy alone .",
+          "title": "Sickle cell disease",
+          "score": 21.585873,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1722965315
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Sickle cell treatment"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "speaker": "user",
+      "text": "Will it kill me?",
+      "timestamp": 1722965993,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "A small percentage of people can be cured by a transplant of bone marrow cells. Life expectancy for people with sickle cell disease in the developed world is 40 to 60 years. About 90 % of people survive to age 20, and close to 50 % survive beyond age 50, and many people with the condition live well into adulthood with proper medical care. The disease can be life-threatening, but with appropriate treatment and management, the prognosis can be improved. ",
+      "timestamp": 1722965997,
+      "contexts": [
+        {
+          "document_id": "825171915_343-1247-0-904",
+          "text": "Bone marrow\nBone marrow is a semi-solid tissue which may be found within the spongy or cancellous portions of bones . In birds and mammals , bone marrow is the primary site of new blood cell production or hematopoiesis . It is composed of hematopoietic cells , marrow adipose tissue , and supportive stromal cells . On average , bone marrow constitutes 4 % of the total body mass of humans ; in an adult having 65 kilograms of mass ( 143 lb ) , bone marrow typically accounts for approximately 2.6 kilograms ( 5.7 lb ) . Human marrow produces approximately 500 billion blood cells per day , which join the systemic circulation via permeable vasculature sinusoids within the medullary cavity . All types of hematopoietic cells , including both myeloid and lymphoid lineages , are created in bone marrow ; however , lymphoid cells must migrate to other lymphoid organs ( e.g. thymus ) in order to complete maturation .",
+          "title": "Bone marrow",
+          "score": 42.60717,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1722966029
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: where is bone marrow found what does it do for the body\n|assistant|: Bone marrow is found within the spongy or cancellous portions of bones. Human marrow produces approximately 500 billion blood cells per day, which join the systemic circulation via permeable vasculature sinusoids within the medullary cavity. The main functional component of bone marrow includes the progenitor cells which are destined to mature into blood and lymphoid cells. These include white blood cells (leukocytes), red blood cells (erythrocytes), and platelets (thrombocytes). In humans, the red marrow of some bones is an important site for blood cell production, approximately 2.6 million red blood cells per second in order to replace existing cells that have been destroyed by the liver. \n|user|: What happens if it does not work well?\n|assistant|: If bone marrow does not function properly, it can lead to a decrease in the production of blood cells and blood platelets. This can be caused by various factors such as aplastic anemia, malignancies like multiple myeloma, congenital defects , autoimmune diseases, infections like tuberculosis, leukemia, or exposure to radiation or chemotherapy. Symptoms of a malfunctioning bone marrow can include fatigue, increased risk of infection, and easy bruising or bleeding. In the case of sickle cell disease, the bone marrow's attempt to compensate for the destruction of red cells is not sufficient, leading to anemia.\n|user|: How is Sickle cell treated?\n|assistant|: The treatment for sickle cell disease may include infection prevention with vaccination and antibiotics, high fluid intake, folic acid supplementation, pain medication, blood transfusion, and the medication hydroxycarbamide (hydroxyurea). A small percentage of people can be cured by a transplant of bone marrow cells. When treating avascular necrosis of the bone in people with sickle cell disease, the aim of treatment is to reduce or stop the pain and maintain joint mobility. Current treatment options are to rest the joint, physical therapy, pain relief medicine, joint replacement surgery, or bone grafting. High quality randomized controlled trials are needed to assess the most effective treatment option and determine if a combination of physical therapy and surgery are more effective than physical therapy alone.\n|user|: Will it kill me?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "825171915_3242-3629-0-387",
+          "text": "Bone marrow\nAt the cellular level , the main functional component of bone marrow includes the progenitor cells which are destined to mature into blood and lymphoid cells . Marrow contains hematopoietic stem cells which give rise to the three classes of blood cells that are found in circulation : white blood cells ( leukocytes ) , red blood cells ( erythrocytes ) , and platelets ( thrombocytes ) .",
+          "title": "Bone marrow",
+          "score": 34.50742,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1722966040
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: where is bone marrow found what does it do for the body\n|assistant|: Bone marrow is found within the spongy or cancellous portions of bones. Human marrow produces approximately 500 billion blood cells per day, which join the systemic circulation via permeable vasculature sinusoids within the medullary cavity. The main functional component of bone marrow includes the progenitor cells which are destined to mature into blood and lymphoid cells. These include white blood cells (leukocytes), red blood cells (erythrocytes), and platelets (thrombocytes). In humans, the red marrow of some bones is an important site for blood cell production, approximately 2.6 million red blood cells per second in order to replace existing cells that have been destroyed by the liver. \n|user|: What happens if it does not work well?\n|assistant|: If bone marrow does not function properly, it can lead to a decrease in the production of blood cells and blood platelets. This can be caused by various factors such as aplastic anemia, malignancies like multiple myeloma, congenital defects , autoimmune diseases, infections like tuberculosis, leukemia, or exposure to radiation or chemotherapy. Symptoms of a malfunctioning bone marrow can include fatigue, increased risk of infection, and easy bruising or bleeding. In the case of sickle cell disease, the bone marrow's attempt to compensate for the destruction of red cells is not sufficient, leading to anemia.\n|user|: How is Sickle cell treated?\n|assistant|: The treatment for sickle cell disease may include infection prevention with vaccination and antibiotics, high fluid intake, folic acid supplementation, pain medication, blood transfusion, and the medication hydroxycarbamide (hydroxyurea). A small percentage of people can be cured by a transplant of bone marrow cells. When treating avascular necrosis of the bone in people with sickle cell disease, the aim of treatment is to reduce or stop the pain and maintain joint mobility. Current treatment options are to rest the joint, physical therapy, pain relief medicine, joint replacement surgery, or bone grafting. High quality randomized controlled trials are needed to assess the most effective treatment option and determine if a combination of physical therapy and surgery are more effective than physical therapy alone.\n|user|: Will it kill me?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "837756901_3845-4469-0-624",
+          "text": "Human musculoskeletal system\nLocated in long bones are two distinctions of bone marrow ( yellow and red ) . The yellow marrow has fatty connective tissue and is found in the marrow cavity . During starvation , the body uses the fat in yellow marrow for energy . The red marrow of some bones is an important site for blood cell production , approximately 2.6 million red blood cells per second in order to replace existing cells that have been destroyed by the liver . Here all erythrocytes , platelets , and most leukocytes form in adults . From the red marrow , erythrocytes , platelets , and leukocytes migrate to the blood to do their special tasks .",
+          "title": "Human musculoskeletal system",
+          "score": 34.503864,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1722966054
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: where is bone marrow found what does it do for the body\n|assistant|: Bone marrow is found within the spongy or cancellous portions of bones. Human marrow produces approximately 500 billion blood cells per day, which join the systemic circulation via permeable vasculature sinusoids within the medullary cavity. The main functional component of bone marrow includes the progenitor cells which are destined to mature into blood and lymphoid cells. These include white blood cells (leukocytes), red blood cells (erythrocytes), and platelets (thrombocytes). In humans, the red marrow of some bones is an important site for blood cell production, approximately 2.6 million red blood cells per second in order to replace existing cells that have been destroyed by the liver. \n|user|: What happens if it does not work well?\n|assistant|: If bone marrow does not function properly, it can lead to a decrease in the production of blood cells and blood platelets. This can be caused by various factors such as aplastic anemia, malignancies like multiple myeloma, congenital defects , autoimmune diseases, infections like tuberculosis, leukemia, or exposure to radiation or chemotherapy. Symptoms of a malfunctioning bone marrow can include fatigue, increased risk of infection, and easy bruising or bleeding. In the case of sickle cell disease, the bone marrow's attempt to compensate for the destruction of red cells is not sufficient, leading to anemia.\n|user|: How is Sickle cell treated?\n|assistant|: The treatment for sickle cell disease may include infection prevention with vaccination and antibiotics, high fluid intake, folic acid supplementation, pain medication, blood transfusion, and the medication hydroxycarbamide (hydroxyurea). A small percentage of people can be cured by a transplant of bone marrow cells. When treating avascular necrosis of the bone in people with sickle cell disease, the aim of treatment is to reduce or stop the pain and maintain joint mobility. Current treatment options are to rest the joint, physical therapy, pain relief medicine, joint replacement surgery, or bone grafting. High quality randomized controlled trials are needed to assess the most effective treatment option and determine if a combination of physical therapy and surgery are more effective than physical therapy alone.\n|user|: Will it kill me?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "853377429_2317-2677-0-360",
+          "text": "Sickle cell disease\nThe care of people with sickle cell disease may include infection prevention with vaccination and antibiotics , high fluid intake , folic acid supplementation and pain medication . Other measures may include blood transfusion and the medication hydroxycarbamide ( hydroxyurea ) . A small percentage of people can be cured by a transplant of bone marrow cells .",
+          "title": "Sickle cell disease",
+          "score": 17.290026,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1722966530
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Will it kill me (Sickle cell)? "
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "853377429_23953-24295-0-342",
+          "text": "Sickle cell disease\nAbout 90 % of people survive to age 20 , and close to 50 % survive beyond age 50 . In 2001 , according to one study performed in Jamaica , the estimated mean survival for people with sickle cell was 53 years old for men and 58 years old for women with homozygous SCD . The specific life expectancy in much of the developing world is unknown .",
+          "title": "Sickle cell disease",
+          "score": 16.277311,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1722966542
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Will it kill me (Sickle cell)? "
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "853377429_977-1692-0-715",
+          "text": "Sickle cell disease\nSickle cell disease ( SCD ) is a group of blood disorders typically inherited from a person 's parents . The most common type is known as sickle cell anaemia ( SCA ) . It results in an abnormality in the oxygen - carrying protein haemoglobin found in red blood cells . This leads to a rigid , sickle - like shape under certain circumstances . Problems in sickle cell disease typically begin around 5 to 6 months of age . A number of health problems may develop , such as attacks of pain ( `` sickle cell crisis '' ) , anemia , swelling in the hands and feet , bacterial infections and stroke . Long - term pain may develop as people get older . The average life expectancy in the developed world is 40 to 60 years .",
+          "title": "Sickle cell disease",
+          "score": 21.919777,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1722966563
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "life expectancy with Sickle cell)? "
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "853377429_52-976-0-924",
+          "text": "Sickle cell disease\nSickle cell disease Synonyms Sickle cell disorder Figure ( A ) shows normal red blood cells flowing freely through veins . The inset shows a cross section of a normal red blood cell with normal haemoglobin . Figure ( B ) shows abnormal , sickled red blood cells sticking at the branching point in a vein . The inset image shows a cross-section of a sickle cell with long polymerized sickle haemoglobin ( HbS ) strands stretching and distorting the cell shape . Specialty Hematology Symptoms Attacks of pain , anemia , swelling in the hands and feet , bacterial infections , stroke Complications Chronic pain Usual onset 5 -- 6 months of age Causes Genetic Diagnostic method Blood test Treatment Vaccination , antibiotics , high fluid intake , folic acid supplementation . pain medication , blood transfusions Prognosis Life expectancy 40 -- 60 years ( developed world ) Frequency 4.4 million ( 2015 ) Deaths 114,800 ( 2015 )",
+          "title": "Sickle cell disease",
+          "score": 20.431303,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1722966578
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "life expectancy with Sickle cell)? "
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "I don't have specific information about your personal health situation to make a definitive statement. However, it's important to note that the life expectancy for people with sickle cell disease in the developed world is 40 to 60 years, and many people with the condition live well into adulthood with proper medical care. The disease can lead to various complications, some of which can be life-threatening, but with appropriate treatment and management, the prognosis can be improved. Always consult with a healthcare professional for accurate information."
+    },
+    {
+      "speaker": "user",
+      "text": "How about transplant?",
+      "timestamp": 1722967329,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "A bone marrow transplant is a potential cure for sickle cell disease, although it is difficult to obtain a suitable donor due to the specific HLA typing necessary. Ideally, a close relative would donate the bone marrow. Risks associated with the procedure are a 7% mortality rate and the possibility of graft versus host disease. In phase 1 clinical trials for adults with severe sickle cell disease, the safety and initial evidence for efficacy have been assessed, no randomized controlled trials have been reported as of 2016. It is important to note that while a bone marrow transplant can potentially cure sickle cell disease, it is not a guaranteed solution and carries significant risks. ",
+      "timestamp": 1722967354,
+      "contexts": [
+        {
+          "document_id": "825171915_343-1247-0-904",
+          "text": "Bone marrow\nBone marrow is a semi-solid tissue which may be found within the spongy or cancellous portions of bones . In birds and mammals , bone marrow is the primary site of new blood cell production or hematopoiesis . It is composed of hematopoietic cells , marrow adipose tissue , and supportive stromal cells . On average , bone marrow constitutes 4 % of the total body mass of humans ; in an adult having 65 kilograms of mass ( 143 lb ) , bone marrow typically accounts for approximately 2.6 kilograms ( 5.7 lb ) . Human marrow produces approximately 500 billion blood cells per day , which join the systemic circulation via permeable vasculature sinusoids within the medullary cavity . All types of hematopoietic cells , including both myeloid and lymphoid lineages , are created in bone marrow ; however , lymphoid cells must migrate to other lymphoid organs ( e.g. thymus ) in order to complete maturation .",
+          "title": "Bone marrow",
+          "score": 42.50191,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1722967721
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: where is bone marrow found what does it do for the body\n|assistant|: Bone marrow is found within the spongy or cancellous portions of bones. Human marrow produces approximately 500 billion blood cells per day, which join the systemic circulation via permeable vasculature sinusoids within the medullary cavity. The main functional component of bone marrow includes the progenitor cells which are destined to mature into blood and lymphoid cells. These include white blood cells (leukocytes), red blood cells (erythrocytes), and platelets (thrombocytes). In humans, the red marrow of some bones is an important site for blood cell production, approximately 2.6 million red blood cells per second in order to replace existing cells that have been destroyed by the liver. \n|user|: What happens if it does not work well?\n|assistant|: If bone marrow does not function properly, it can lead to a decrease in the production of blood cells and blood platelets. This can be caused by various factors such as aplastic anemia, malignancies like multiple myeloma, congenital defects , autoimmune diseases, infections like tuberculosis, leukemia, or exposure to radiation or chemotherapy. Symptoms of a malfunctioning bone marrow can include fatigue, increased risk of infection, and easy bruising or bleeding. In the case of sickle cell disease, the bone marrow's attempt to compensate for the destruction of red cells is not sufficient, leading to anemia.\n|user|: How is Sickle cell treated?\n|assistant|: The treatment for sickle cell disease may include infection prevention with vaccination and antibiotics, high fluid intake, folic acid supplementation, pain medication, blood transfusion, and the medication hydroxycarbamide (hydroxyurea). A small percentage of people can be cured by a transplant of bone marrow cells. When treating avascular necrosis of the bone in people with sickle cell disease, the aim of treatment is to reduce or stop the pain and maintain joint mobility. Current treatment options are to rest the joint, physical therapy, pain relief medicine, joint replacement surgery, or bone grafting. High quality randomized controlled trials are needed to assess the most effective treatment option and determine if a combination of physical therapy and surgery are more effective than physical therapy alone.\n|user|: Will it kill me?\n|assistant|: A small percentage of people can be cured by a transplant of bone marrow cells. Life expectancy for people with sickle cell disease in the developed world is 40 to 60 years. About 90 % of people survive to age 20, and close to 50 % survive beyond age 50, and many people with the condition live well into adulthood with proper medical care. The disease can be life-threatening, but with appropriate treatment and management, the prognosis can be improved. \n|user|: How about transplant?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "825171915_3242-3629-0-387",
+          "text": "Bone marrow\nAt the cellular level , the main functional component of bone marrow includes the progenitor cells which are destined to mature into blood and lymphoid cells . Marrow contains hematopoietic stem cells which give rise to the three classes of blood cells that are found in circulation : white blood cells ( leukocytes ) , red blood cells ( erythrocytes ) , and platelets ( thrombocytes ) .",
+          "title": "Bone marrow",
+          "score": 34.37082,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1722967726
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: where is bone marrow found what does it do for the body\n|assistant|: Bone marrow is found within the spongy or cancellous portions of bones. Human marrow produces approximately 500 billion blood cells per day, which join the systemic circulation via permeable vasculature sinusoids within the medullary cavity. The main functional component of bone marrow includes the progenitor cells which are destined to mature into blood and lymphoid cells. These include white blood cells (leukocytes), red blood cells (erythrocytes), and platelets (thrombocytes). In humans, the red marrow of some bones is an important site for blood cell production, approximately 2.6 million red blood cells per second in order to replace existing cells that have been destroyed by the liver. \n|user|: What happens if it does not work well?\n|assistant|: If bone marrow does not function properly, it can lead to a decrease in the production of blood cells and blood platelets. This can be caused by various factors such as aplastic anemia, malignancies like multiple myeloma, congenital defects , autoimmune diseases, infections like tuberculosis, leukemia, or exposure to radiation or chemotherapy. Symptoms of a malfunctioning bone marrow can include fatigue, increased risk of infection, and easy bruising or bleeding. In the case of sickle cell disease, the bone marrow's attempt to compensate for the destruction of red cells is not sufficient, leading to anemia.\n|user|: How is Sickle cell treated?\n|assistant|: The treatment for sickle cell disease may include infection prevention with vaccination and antibiotics, high fluid intake, folic acid supplementation, pain medication, blood transfusion, and the medication hydroxycarbamide (hydroxyurea). A small percentage of people can be cured by a transplant of bone marrow cells. When treating avascular necrosis of the bone in people with sickle cell disease, the aim of treatment is to reduce or stop the pain and maintain joint mobility. Current treatment options are to rest the joint, physical therapy, pain relief medicine, joint replacement surgery, or bone grafting. High quality randomized controlled trials are needed to assess the most effective treatment option and determine if a combination of physical therapy and surgery are more effective than physical therapy alone.\n|user|: Will it kill me?\n|assistant|: A small percentage of people can be cured by a transplant of bone marrow cells. Life expectancy for people with sickle cell disease in the developed world is 40 to 60 years. About 90 % of people survive to age 20, and close to 50 % survive beyond age 50, and many people with the condition live well into adulthood with proper medical care. The disease can be life-threatening, but with appropriate treatment and management, the prognosis can be improved. \n|user|: How about transplant?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "837756901_3845-4469-0-624",
+          "text": "Human musculoskeletal system\nLocated in long bones are two distinctions of bone marrow ( yellow and red ) . The yellow marrow has fatty connective tissue and is found in the marrow cavity . During starvation , the body uses the fat in yellow marrow for energy . The red marrow of some bones is an important site for blood cell production , approximately 2.6 million red blood cells per second in order to replace existing cells that have been destroyed by the liver . Here all erythrocytes , platelets , and most leukocytes form in adults . From the red marrow , erythrocytes , platelets , and leukocytes migrate to the blood to do their special tasks .",
+          "title": "Human musculoskeletal system",
+          "score": 34.21105,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1722967731
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: where is bone marrow found what does it do for the body\n|assistant|: Bone marrow is found within the spongy or cancellous portions of bones. Human marrow produces approximately 500 billion blood cells per day, which join the systemic circulation via permeable vasculature sinusoids within the medullary cavity. The main functional component of bone marrow includes the progenitor cells which are destined to mature into blood and lymphoid cells. These include white blood cells (leukocytes), red blood cells (erythrocytes), and platelets (thrombocytes). In humans, the red marrow of some bones is an important site for blood cell production, approximately 2.6 million red blood cells per second in order to replace existing cells that have been destroyed by the liver. \n|user|: What happens if it does not work well?\n|assistant|: If bone marrow does not function properly, it can lead to a decrease in the production of blood cells and blood platelets. This can be caused by various factors such as aplastic anemia, malignancies like multiple myeloma, congenital defects , autoimmune diseases, infections like tuberculosis, leukemia, or exposure to radiation or chemotherapy. Symptoms of a malfunctioning bone marrow can include fatigue, increased risk of infection, and easy bruising or bleeding. In the case of sickle cell disease, the bone marrow's attempt to compensate for the destruction of red cells is not sufficient, leading to anemia.\n|user|: How is Sickle cell treated?\n|assistant|: The treatment for sickle cell disease may include infection prevention with vaccination and antibiotics, high fluid intake, folic acid supplementation, pain medication, blood transfusion, and the medication hydroxycarbamide (hydroxyurea). A small percentage of people can be cured by a transplant of bone marrow cells. When treating avascular necrosis of the bone in people with sickle cell disease, the aim of treatment is to reduce or stop the pain and maintain joint mobility. Current treatment options are to rest the joint, physical therapy, pain relief medicine, joint replacement surgery, or bone grafting. High quality randomized controlled trials are needed to assess the most effective treatment option and determine if a combination of physical therapy and surgery are more effective than physical therapy alone.\n|user|: Will it kill me?\n|assistant|: A small percentage of people can be cured by a transplant of bone marrow cells. Life expectancy for people with sickle cell disease in the developed world is 40 to 60 years. About 90 % of people survive to age 20, and close to 50 % survive beyond age 50, and many people with the condition live well into adulthood with proper medical care. The disease can be life-threatening, but with appropriate treatment and management, the prognosis can be improved. \n|user|: How about transplant?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "853377429_22796-23121-0-325",
+          "text": "Sickle cell disease\nBone marrow transplants have proven effective in children . Bone marrow transplants are the only known cure for SCD . However , bone marrow transplants are difficult to obtain because of the specific HLA typing necessary . Ideally , a close relative ( allogeneic ) would donate the bone marrow necessary for transplantation .",
+          "title": "Sickle cell disease",
+          "score": 19.477247,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1722967744
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Bone marrow transplant for Sickle cell)? "
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "853377429_37780-38219-0-439",
+          "text": "Sickle cell disease\nPhase 1 clinical trials of gene therapy for sickle cell disease in humans were started in 2014 . The clinical trials will assess the safety and initial evidence for efficacy of an autologous transplant of lentiviral vector - modified bone marrow for adults with severe sickle cell disease . As of 2016 , however , no randomized controlled trials have been reported . A case report for the first person treated was published in March 2017 .",
+          "title": "Sickle cell disease",
+          "score": 18.797108,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1722967749
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Bone marrow transplant for Sickle cell)? "
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "853377429_36903-37132-0-229",
+          "text": "Sickle cell disease\nWhile umbilical cord blood transplant can potentially cure the condition , a suitable donor is available in only 10 % of people . About 7 % of people also die as a result of the procedure and graft versus host disease may occur .",
+          "title": "Sickle cell disease",
+          "score": 15.802327,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1722967759
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Bone marrow transplant for Sickle cell)? "
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "A bone marrow transplant is a potential cure for sickle cell disease, although it is difficult to obtain a suitable donor due to the specific HLA typing necessary. Ideally, a close relative would donate the bone marrow. However, there are risks associated with the procedure, such as a 7% mortality rate and the possibility of graft versus host disease.\nIn phase 1 clinical trials, gene therapy using a lentiviral vector-modified autologous transplant has been explored as a treatment option for adults with severe sickle cell disease. While the safety and initial evidence for efficacy have been assessed, no randomized controlled trials have been reported as of 2016.\nIt is important to note that while a bone marrow transplant can potentially cure sickle cell disease, it is not a guaranteed solution and carries significant risks. Therefore, it is crucial to consider all treatment options and discuss them thoroughly with healthcare providers."
+    },
+    {
+      "speaker": "user",
+      "text": "Is Huntington's disease also inherited?",
+      "timestamp": 1722969390,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, Huntington's disease is an inherited disorder from one's parents. It is caused by an autosomal dominant mutation in the Huntingtin gene, which results in an abnormal protein that gradually damages cells in the brain. If a person inherits the mutated gene from an affected parent, they will typically develop the disease. The probability of inheriting the mutant allele and being affected with the disorder is 50% for each offspring of an affected individual, regardless of sex.",
+      "timestamp": 1722969392,
+      "contexts": [
+        {
+          "document_id": "825171915_343-1247-0-904",
+          "text": "Bone marrow\nBone marrow is a semi-solid tissue which may be found within the spongy or cancellous portions of bones . In birds and mammals , bone marrow is the primary site of new blood cell production or hematopoiesis . It is composed of hematopoietic cells , marrow adipose tissue , and supportive stromal cells . On average , bone marrow constitutes 4 % of the total body mass of humans ; in an adult having 65 kilograms of mass ( 143 lb ) , bone marrow typically accounts for approximately 2.6 kilograms ( 5.7 lb ) . Human marrow produces approximately 500 billion blood cells per day , which join the systemic circulation via permeable vasculature sinusoids within the medullary cavity . All types of hematopoietic cells , including both myeloid and lymphoid lineages , are created in bone marrow ; however , lymphoid cells must migrate to other lymphoid organs ( e.g. thymus ) in order to complete maturation .",
+          "title": "Bone marrow",
+          "score": 42.50191,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1722969511
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: where is bone marrow found what does it do for the body\n|assistant|: Bone marrow is found within the spongy or cancellous portions of bones. Human marrow produces approximately 500 billion blood cells per day, which join the systemic circulation via permeable vasculature sinusoids within the medullary cavity. The main functional component of bone marrow includes the progenitor cells which are destined to mature into blood and lymphoid cells. These include white blood cells (leukocytes), red blood cells (erythrocytes), and platelets (thrombocytes). In humans, the red marrow of some bones is an important site for blood cell production, approximately 2.6 million red blood cells per second in order to replace existing cells that have been destroyed by the liver. \n|user|: What happens if it does not work well?\n|assistant|: If bone marrow does not function properly, it can lead to a decrease in the production of blood cells and blood platelets. This can be caused by various factors such as aplastic anemia, malignancies like multiple myeloma, congenital defects , autoimmune diseases, infections like tuberculosis, leukemia, or exposure to radiation or chemotherapy. Symptoms of a malfunctioning bone marrow can include fatigue, increased risk of infection, and easy bruising or bleeding. In the case of sickle cell disease, the bone marrow's attempt to compensate for the destruction of red cells is not sufficient, leading to anemia.\n|user|: How is Sickle cell treated?\n|assistant|: The treatment for sickle cell disease may include infection prevention with vaccination and antibiotics, high fluid intake, folic acid supplementation, pain medication, blood transfusion, and the medication hydroxycarbamide (hydroxyurea). A small percentage of people can be cured by a transplant of bone marrow cells. When treating avascular necrosis of the bone in people with sickle cell disease, the aim of treatment is to reduce or stop the pain and maintain joint mobility. Current treatment options are to rest the joint, physical therapy, pain relief medicine, joint replacement surgery, or bone grafting. High quality randomized controlled trials are needed to assess the most effective treatment option and determine if a combination of physical therapy and surgery are more effective than physical therapy alone.\n|user|: Will it kill me?\n|assistant|: A small percentage of people can be cured by a transplant of bone marrow cells. Life expectancy for people with sickle cell disease in the developed world is 40 to 60 years. About 90 % of people survive to age 20, and close to 50 % survive beyond age 50, and many people with the condition live well into adulthood with proper medical care. The disease can be life-threatening, but with appropriate treatment and management, the prognosis can be improved. \n|user|: How about transplant?\n|assistant|: A bone marrow transplant is a potential cure for sickle cell disease, although it is difficult to obtain a suitable donor due to the specific HLA typing necessary. Ideally, a close relative would donate the bone marrow. Risks associated with the procedure are a 7% mortality rate and the possibility of graft versus host disease. In phase 1 clinical trials for adults with severe sickle cell disease, the safety and initial evidence for efficacy have been assessed, no randomized controlled trials have been reported as of 2016. It is important to note that while a bone marrow transplant can potentially cure sickle cell disease, it is not a guaranteed solution and carries significant risks. \n|user|: Is Huntington's disease also inherited?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "825171915_3242-3629-0-387",
+          "text": "Bone marrow\nAt the cellular level , the main functional component of bone marrow includes the progenitor cells which are destined to mature into blood and lymphoid cells . Marrow contains hematopoietic stem cells which give rise to the three classes of blood cells that are found in circulation : white blood cells ( leukocytes ) , red blood cells ( erythrocytes ) , and platelets ( thrombocytes ) .",
+          "title": "Bone marrow",
+          "score": 34.37082,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1722969516
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: where is bone marrow found what does it do for the body\n|assistant|: Bone marrow is found within the spongy or cancellous portions of bones. Human marrow produces approximately 500 billion blood cells per day, which join the systemic circulation via permeable vasculature sinusoids within the medullary cavity. The main functional component of bone marrow includes the progenitor cells which are destined to mature into blood and lymphoid cells. These include white blood cells (leukocytes), red blood cells (erythrocytes), and platelets (thrombocytes). In humans, the red marrow of some bones is an important site for blood cell production, approximately 2.6 million red blood cells per second in order to replace existing cells that have been destroyed by the liver. \n|user|: What happens if it does not work well?\n|assistant|: If bone marrow does not function properly, it can lead to a decrease in the production of blood cells and blood platelets. This can be caused by various factors such as aplastic anemia, malignancies like multiple myeloma, congenital defects , autoimmune diseases, infections like tuberculosis, leukemia, or exposure to radiation or chemotherapy. Symptoms of a malfunctioning bone marrow can include fatigue, increased risk of infection, and easy bruising or bleeding. In the case of sickle cell disease, the bone marrow's attempt to compensate for the destruction of red cells is not sufficient, leading to anemia.\n|user|: How is Sickle cell treated?\n|assistant|: The treatment for sickle cell disease may include infection prevention with vaccination and antibiotics, high fluid intake, folic acid supplementation, pain medication, blood transfusion, and the medication hydroxycarbamide (hydroxyurea). A small percentage of people can be cured by a transplant of bone marrow cells. When treating avascular necrosis of the bone in people with sickle cell disease, the aim of treatment is to reduce or stop the pain and maintain joint mobility. Current treatment options are to rest the joint, physical therapy, pain relief medicine, joint replacement surgery, or bone grafting. High quality randomized controlled trials are needed to assess the most effective treatment option and determine if a combination of physical therapy and surgery are more effective than physical therapy alone.\n|user|: Will it kill me?\n|assistant|: A small percentage of people can be cured by a transplant of bone marrow cells. Life expectancy for people with sickle cell disease in the developed world is 40 to 60 years. About 90 % of people survive to age 20, and close to 50 % survive beyond age 50, and many people with the condition live well into adulthood with proper medical care. The disease can be life-threatening, but with appropriate treatment and management, the prognosis can be improved. \n|user|: How about transplant?\n|assistant|: A bone marrow transplant is a potential cure for sickle cell disease, although it is difficult to obtain a suitable donor due to the specific HLA typing necessary. Ideally, a close relative would donate the bone marrow. Risks associated with the procedure are a 7% mortality rate and the possibility of graft versus host disease. In phase 1 clinical trials for adults with severe sickle cell disease, the safety and initial evidence for efficacy have been assessed, no randomized controlled trials have been reported as of 2016. It is important to note that while a bone marrow transplant can potentially cure sickle cell disease, it is not a guaranteed solution and carries significant risks. \n|user|: Is Huntington's disease also inherited?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "837756901_3845-4469-0-624",
+          "text": "Human musculoskeletal system\nLocated in long bones are two distinctions of bone marrow ( yellow and red ) . The yellow marrow has fatty connective tissue and is found in the marrow cavity . During starvation , the body uses the fat in yellow marrow for energy . The red marrow of some bones is an important site for blood cell production , approximately 2.6 million red blood cells per second in order to replace existing cells that have been destroyed by the liver . Here all erythrocytes , platelets , and most leukocytes form in adults . From the red marrow , erythrocytes , platelets , and leukocytes migrate to the blood to do their special tasks .",
+          "title": "Human musculoskeletal system",
+          "score": 34.21105,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1722969521
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: where is bone marrow found what does it do for the body\n|assistant|: Bone marrow is found within the spongy or cancellous portions of bones. Human marrow produces approximately 500 billion blood cells per day, which join the systemic circulation via permeable vasculature sinusoids within the medullary cavity. The main functional component of bone marrow includes the progenitor cells which are destined to mature into blood and lymphoid cells. These include white blood cells (leukocytes), red blood cells (erythrocytes), and platelets (thrombocytes). In humans, the red marrow of some bones is an important site for blood cell production, approximately 2.6 million red blood cells per second in order to replace existing cells that have been destroyed by the liver. \n|user|: What happens if it does not work well?\n|assistant|: If bone marrow does not function properly, it can lead to a decrease in the production of blood cells and blood platelets. This can be caused by various factors such as aplastic anemia, malignancies like multiple myeloma, congenital defects , autoimmune diseases, infections like tuberculosis, leukemia, or exposure to radiation or chemotherapy. Symptoms of a malfunctioning bone marrow can include fatigue, increased risk of infection, and easy bruising or bleeding. In the case of sickle cell disease, the bone marrow's attempt to compensate for the destruction of red cells is not sufficient, leading to anemia.\n|user|: How is Sickle cell treated?\n|assistant|: The treatment for sickle cell disease may include infection prevention with vaccination and antibiotics, high fluid intake, folic acid supplementation, pain medication, blood transfusion, and the medication hydroxycarbamide (hydroxyurea). A small percentage of people can be cured by a transplant of bone marrow cells. When treating avascular necrosis of the bone in people with sickle cell disease, the aim of treatment is to reduce or stop the pain and maintain joint mobility. Current treatment options are to rest the joint, physical therapy, pain relief medicine, joint replacement surgery, or bone grafting. High quality randomized controlled trials are needed to assess the most effective treatment option and determine if a combination of physical therapy and surgery are more effective than physical therapy alone.\n|user|: Will it kill me?\n|assistant|: A small percentage of people can be cured by a transplant of bone marrow cells. Life expectancy for people with sickle cell disease in the developed world is 40 to 60 years. About 90 % of people survive to age 20, and close to 50 % survive beyond age 50, and many people with the condition live well into adulthood with proper medical care. The disease can be life-threatening, but with appropriate treatment and management, the prognosis can be improved. \n|user|: How about transplant?\n|assistant|: A bone marrow transplant is a potential cure for sickle cell disease, although it is difficult to obtain a suitable donor due to the specific HLA typing necessary. Ideally, a close relative would donate the bone marrow. Risks associated with the procedure are a 7% mortality rate and the possibility of graft versus host disease. In phase 1 clinical trials for adults with severe sickle cell disease, the safety and initial evidence for efficacy have been assessed, no randomized controlled trials have been reported as of 2016. It is important to note that while a bone marrow transplant can potentially cure sickle cell disease, it is not a guaranteed solution and carries significant risks. \n|user|: Is Huntington's disease also inherited?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "834242094_1823-2875-0-1052",
+          "text": "Huntington's disease\nHD is typically inherited from a person 's parents , although up to 10 % of cases are due to a new mutation . The disease is caused by an autosomal dominant mutation in either of an individual 's two copies of a gene called Huntingtin . This means a child of an affected person typically has a 50 % chance of inheriting the disease . The Huntingtin gene provides the genetic information for a protein that is also called `` huntingtin '' . Expansion of CAG ( cytosine - adenine - guanine ) triplet repeats in the gene coding for the Huntingtin protein results in an abnormal protein , which gradually damages cells in the brain , through mechanisms that are not fully understood . Diagnosis is by genetic testing , which can be carried out at any time , regardless of whether or not symptoms are present . This fact raises several ethical debates : the age at which an individual is considered mature enough to choose testing ; whether parents have the right to have their children tested ; and managing confidentiality and disclosure of test results .",
+          "title": "Huntington's disease",
+          "score": 23.043488,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1722969527
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Is Huntington's disease also inherited?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "834242094_12806-13371-0-565",
+          "text": "Huntington's disease\nHuntington 's disease has autosomal dominant inheritance , meaning that an affected individual typically inherits one copy of the gene with an expanded trinucleotide repeat ( the mutant allele ) from an affected parent . Since penetrance of the mutation is very high , those who have a mutated copy of the gene will have the disease . In this type of inheritance pattern , each offspring of an affected individual has a 50 % risk of inheriting the mutant allele and therefore being affected with the disorder ( see figure ) . This probability is sex - independent .",
+          "title": "Huntington's disease",
+          "score": 22.438961,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1722969531
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Is Huntington's disease also inherited?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "834242094_880-1822-0-942",
+          "text": "Huntington's disease\nHuntington 's disease ( HD ) , also known as Huntington 's chorea , is an inherited disorder that results in death of brain cells . The earliest symptoms are often subtle problems with mood or mental abilities . A general lack of coordination and an unsteady gait often follow . As the disease advances , uncoordinated , jerky body movements become more apparent . Physical abilities gradually worsen until coordinated movement becomes difficult and the person is unable to talk . Mental abilities generally decline into dementia . The specific symptoms vary somewhat between people . Symptoms usually begin between 30 and 50 years of age , but can start at any age . The disease may develop earlier in life in each successive generation . About eight percent of cases start before the age of 20 years and typically present with symptoms more similar to Parkinson 's disease . People with HD often underestimate the degree of their problems .",
+          "title": "Huntington's disease",
+          "score": 22.099236,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1722969537
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Is Huntington's disease also inherited?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, Huntington's disease is an inherited disorder. It is caused by an autosomal dominant mutation in the Huntingtin gene, which results in an abnormal protein that gradually damages cells in the brain. If a person inherits the mutated gene from an affected parent, they will typically develop the disease. The probability of inheriting the mutant allele and being affected with the disorder is 50% for each offspring of an affected individual, regardless of sex."
+    },
+    {
+      "speaker": "user",
+      "text": "Any cures for it?",
+      "timestamp": 1722970566,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "There is no cure for Huntington's disease. The best evidence for treatment of the movement problems is with tetrabenazine, and treatments can relieve some symptoms and in some improve quality of life. Several clinical trials of new experimental treatments are underway and planned in Huntington's disease. Carefully managed multidisciplinary caregiving becomes increasingly necessary as the disease progresses.",
+      "timestamp": 1722970569,
+      "contexts": [
+        {
+          "document_id": "825171915_343-1247-0-904",
+          "text": "Bone marrow\nBone marrow is a semi-solid tissue which may be found within the spongy or cancellous portions of bones . In birds and mammals , bone marrow is the primary site of new blood cell production or hematopoiesis . It is composed of hematopoietic cells , marrow adipose tissue , and supportive stromal cells . On average , bone marrow constitutes 4 % of the total body mass of humans ; in an adult having 65 kilograms of mass ( 143 lb ) , bone marrow typically accounts for approximately 2.6 kilograms ( 5.7 lb ) . Human marrow produces approximately 500 billion blood cells per day , which join the systemic circulation via permeable vasculature sinusoids within the medullary cavity . All types of hematopoietic cells , including both myeloid and lymphoid lineages , are created in bone marrow ; however , lymphoid cells must migrate to other lymphoid organs ( e.g. thymus ) in order to complete maturation .",
+          "title": "Bone marrow",
+          "score": 42.50191,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1722970584
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: where is bone marrow found what does it do for the body\n|assistant|: Bone marrow is found within the spongy or cancellous portions of bones. Human marrow produces approximately 500 billion blood cells per day, which join the systemic circulation via permeable vasculature sinusoids within the medullary cavity. The main functional component of bone marrow includes the progenitor cells which are destined to mature into blood and lymphoid cells. These include white blood cells (leukocytes), red blood cells (erythrocytes), and platelets (thrombocytes). In humans, the red marrow of some bones is an important site for blood cell production, approximately 2.6 million red blood cells per second in order to replace existing cells that have been destroyed by the liver. \n|user|: What happens if it does not work well?\n|assistant|: If bone marrow does not function properly, it can lead to a decrease in the production of blood cells and blood platelets. This can be caused by various factors such as aplastic anemia, malignancies like multiple myeloma, congenital defects , autoimmune diseases, infections like tuberculosis, leukemia, or exposure to radiation or chemotherapy. Symptoms of a malfunctioning bone marrow can include fatigue, increased risk of infection, and easy bruising or bleeding. In the case of sickle cell disease, the bone marrow's attempt to compensate for the destruction of red cells is not sufficient, leading to anemia.\n|user|: How is Sickle cell treated?\n|assistant|: The treatment for sickle cell disease may include infection prevention with vaccination and antibiotics, high fluid intake, folic acid supplementation, pain medication, blood transfusion, and the medication hydroxycarbamide (hydroxyurea). A small percentage of people can be cured by a transplant of bone marrow cells. When treating avascular necrosis of the bone in people with sickle cell disease, the aim of treatment is to reduce or stop the pain and maintain joint mobility. Current treatment options are to rest the joint, physical therapy, pain relief medicine, joint replacement surgery, or bone grafting. High quality randomized controlled trials are needed to assess the most effective treatment option and determine if a combination of physical therapy and surgery are more effective than physical therapy alone.\n|user|: Will it kill me?\n|assistant|: A small percentage of people can be cured by a transplant of bone marrow cells. Life expectancy for people with sickle cell disease in the developed world is 40 to 60 years. About 90 % of people survive to age 20, and close to 50 % survive beyond age 50, and many people with the condition live well into adulthood with proper medical care. The disease can be life-threatening, but with appropriate treatment and management, the prognosis can be improved. \n|user|: How about transplant?\n|assistant|: A bone marrow transplant is a potential cure for sickle cell disease, although it is difficult to obtain a suitable donor due to the specific HLA typing necessary. Ideally, a close relative would donate the bone marrow. Risks associated with the procedure are a 7% mortality rate and the possibility of graft versus host disease. In phase 1 clinical trials for adults with severe sickle cell disease, the safety and initial evidence for efficacy have been assessed, no randomized controlled trials have been reported as of 2016. It is important to note that while a bone marrow transplant can potentially cure sickle cell disease, it is not a guaranteed solution and carries significant risks. \n|user|: Is Huntington's disease also inherited?\n|assistant|: Yes, Huntington's disease is an inherited disorder from one's parents. It is caused by an autosomal dominant mutation in the Huntingtin gene, which results in an abnormal protein that gradually damages cells in the brain. If a person inherits the mutated gene from an affected parent, they will typically develop the disease. The probability of inheriting the mutant allele and being affected with the disorder is 50% for each offspring of an affected individual, regardless of sex.\n|user|: Any cures for it?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "825171915_3242-3629-0-387",
+          "text": "Bone marrow\nAt the cellular level , the main functional component of bone marrow includes the progenitor cells which are destined to mature into blood and lymphoid cells . Marrow contains hematopoietic stem cells which give rise to the three classes of blood cells that are found in circulation : white blood cells ( leukocytes ) , red blood cells ( erythrocytes ) , and platelets ( thrombocytes ) .",
+          "title": "Bone marrow",
+          "score": 34.37082,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1722970590
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: where is bone marrow found what does it do for the body\n|assistant|: Bone marrow is found within the spongy or cancellous portions of bones. Human marrow produces approximately 500 billion blood cells per day, which join the systemic circulation via permeable vasculature sinusoids within the medullary cavity. The main functional component of bone marrow includes the progenitor cells which are destined to mature into blood and lymphoid cells. These include white blood cells (leukocytes), red blood cells (erythrocytes), and platelets (thrombocytes). In humans, the red marrow of some bones is an important site for blood cell production, approximately 2.6 million red blood cells per second in order to replace existing cells that have been destroyed by the liver. \n|user|: What happens if it does not work well?\n|assistant|: If bone marrow does not function properly, it can lead to a decrease in the production of blood cells and blood platelets. This can be caused by various factors such as aplastic anemia, malignancies like multiple myeloma, congenital defects , autoimmune diseases, infections like tuberculosis, leukemia, or exposure to radiation or chemotherapy. Symptoms of a malfunctioning bone marrow can include fatigue, increased risk of infection, and easy bruising or bleeding. In the case of sickle cell disease, the bone marrow's attempt to compensate for the destruction of red cells is not sufficient, leading to anemia.\n|user|: How is Sickle cell treated?\n|assistant|: The treatment for sickle cell disease may include infection prevention with vaccination and antibiotics, high fluid intake, folic acid supplementation, pain medication, blood transfusion, and the medication hydroxycarbamide (hydroxyurea). A small percentage of people can be cured by a transplant of bone marrow cells. When treating avascular necrosis of the bone in people with sickle cell disease, the aim of treatment is to reduce or stop the pain and maintain joint mobility. Current treatment options are to rest the joint, physical therapy, pain relief medicine, joint replacement surgery, or bone grafting. High quality randomized controlled trials are needed to assess the most effective treatment option and determine if a combination of physical therapy and surgery are more effective than physical therapy alone.\n|user|: Will it kill me?\n|assistant|: A small percentage of people can be cured by a transplant of bone marrow cells. Life expectancy for people with sickle cell disease in the developed world is 40 to 60 years. About 90 % of people survive to age 20, and close to 50 % survive beyond age 50, and many people with the condition live well into adulthood with proper medical care. The disease can be life-threatening, but with appropriate treatment and management, the prognosis can be improved. \n|user|: How about transplant?\n|assistant|: A bone marrow transplant is a potential cure for sickle cell disease, although it is difficult to obtain a suitable donor due to the specific HLA typing necessary. Ideally, a close relative would donate the bone marrow. Risks associated with the procedure are a 7% mortality rate and the possibility of graft versus host disease. In phase 1 clinical trials for adults with severe sickle cell disease, the safety and initial evidence for efficacy have been assessed, no randomized controlled trials have been reported as of 2016. It is important to note that while a bone marrow transplant can potentially cure sickle cell disease, it is not a guaranteed solution and carries significant risks. \n|user|: Is Huntington's disease also inherited?\n|assistant|: Yes, Huntington's disease is an inherited disorder from one's parents. It is caused by an autosomal dominant mutation in the Huntingtin gene, which results in an abnormal protein that gradually damages cells in the brain. If a person inherits the mutated gene from an affected parent, they will typically develop the disease. The probability of inheriting the mutant allele and being affected with the disorder is 50% for each offspring of an affected individual, regardless of sex.\n|user|: Any cures for it?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "837756901_3845-4469-0-624",
+          "text": "Human musculoskeletal system\nLocated in long bones are two distinctions of bone marrow ( yellow and red ) . The yellow marrow has fatty connective tissue and is found in the marrow cavity . During starvation , the body uses the fat in yellow marrow for energy . The red marrow of some bones is an important site for blood cell production , approximately 2.6 million red blood cells per second in order to replace existing cells that have been destroyed by the liver . Here all erythrocytes , platelets , and most leukocytes form in adults . From the red marrow , erythrocytes , platelets , and leukocytes migrate to the blood to do their special tasks .",
+          "title": "Human musculoskeletal system",
+          "score": 34.21105,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1722970595
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: where is bone marrow found what does it do for the body\n|assistant|: Bone marrow is found within the spongy or cancellous portions of bones. Human marrow produces approximately 500 billion blood cells per day, which join the systemic circulation via permeable vasculature sinusoids within the medullary cavity. The main functional component of bone marrow includes the progenitor cells which are destined to mature into blood and lymphoid cells. These include white blood cells (leukocytes), red blood cells (erythrocytes), and platelets (thrombocytes). In humans, the red marrow of some bones is an important site for blood cell production, approximately 2.6 million red blood cells per second in order to replace existing cells that have been destroyed by the liver. \n|user|: What happens if it does not work well?\n|assistant|: If bone marrow does not function properly, it can lead to a decrease in the production of blood cells and blood platelets. This can be caused by various factors such as aplastic anemia, malignancies like multiple myeloma, congenital defects , autoimmune diseases, infections like tuberculosis, leukemia, or exposure to radiation or chemotherapy. Symptoms of a malfunctioning bone marrow can include fatigue, increased risk of infection, and easy bruising or bleeding. In the case of sickle cell disease, the bone marrow's attempt to compensate for the destruction of red cells is not sufficient, leading to anemia.\n|user|: How is Sickle cell treated?\n|assistant|: The treatment for sickle cell disease may include infection prevention with vaccination and antibiotics, high fluid intake, folic acid supplementation, pain medication, blood transfusion, and the medication hydroxycarbamide (hydroxyurea). A small percentage of people can be cured by a transplant of bone marrow cells. When treating avascular necrosis of the bone in people with sickle cell disease, the aim of treatment is to reduce or stop the pain and maintain joint mobility. Current treatment options are to rest the joint, physical therapy, pain relief medicine, joint replacement surgery, or bone grafting. High quality randomized controlled trials are needed to assess the most effective treatment option and determine if a combination of physical therapy and surgery are more effective than physical therapy alone.\n|user|: Will it kill me?\n|assistant|: A small percentage of people can be cured by a transplant of bone marrow cells. Life expectancy for people with sickle cell disease in the developed world is 40 to 60 years. About 90 % of people survive to age 20, and close to 50 % survive beyond age 50, and many people with the condition live well into adulthood with proper medical care. The disease can be life-threatening, but with appropriate treatment and management, the prognosis can be improved. \n|user|: How about transplant?\n|assistant|: A bone marrow transplant is a potential cure for sickle cell disease, although it is difficult to obtain a suitable donor due to the specific HLA typing necessary. Ideally, a close relative would donate the bone marrow. Risks associated with the procedure are a 7% mortality rate and the possibility of graft versus host disease. In phase 1 clinical trials for adults with severe sickle cell disease, the safety and initial evidence for efficacy have been assessed, no randomized controlled trials have been reported as of 2016. It is important to note that while a bone marrow transplant can potentially cure sickle cell disease, it is not a guaranteed solution and carries significant risks. \n|user|: Is Huntington's disease also inherited?\n|assistant|: Yes, Huntington's disease is an inherited disorder from one's parents. It is caused by an autosomal dominant mutation in the Huntingtin gene, which results in an abnormal protein that gradually damages cells in the brain. If a person inherits the mutated gene from an affected parent, they will typically develop the disease. The probability of inheriting the mutant allele and being affected with the disorder is 50% for each offspring of an affected individual, regardless of sex.\n|user|: Any cures for it?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "834242094_2876-3559-0-683",
+          "text": "Huntington's disease\nThere is no cure for HD . Full - time care is required in the later stages of the disease . Treatments can relieve some symptoms and in some improve quality of life . The best evidence for treatment of the movement problems is with tetrabenazine . HD affects about 4 to 15 in 100,000 people of European descent . It is rare among Japanese , while the occurrence rate in Africa is unknown . The disease affects men and women equally . Complications such as pneumonia , heart disease , and physical injury from falls reduce life expectancy . Suicide is the cause of death in about 9 % of cases . Death typically occurs fifteen to twenty years from when the disease was first detected .",
+          "title": "Huntington's disease",
+          "score": 21.001621,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1722970742
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "any cures for  Huntington's disease "
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "834242094_32538-33463-0-925",
+          "text": "Huntington's disease\nThere is no cure for HD , but there are treatments available to reduce the severity of some of its symptoms . For many of these treatments , evidence to confirm their effectiveness in treating symptoms of HD specifically are incomplete . As the disease progresses the ability to care for oneself declines , and carefully managed multidisciplinary caregiving becomes increasingly necessary . Although there have been relatively few studies of exercises and therapies that help rehabilitate cognitive symptoms of HD , there is some evidence for the usefulness of physical therapy , occupational therapy , and speech therapy . An association between caffeine intake and earlier age of onset in Huntington 's disease has been found but , since this finding was based on retrospective questionnaire data rather than a blinded , randomized trial or case - control study , this work is a poor basis for guiding lifestyle decisions .",
+          "title": "Huntington's disease",
+          "score": 20.44678,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1722970746
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "any cures for  Huntington's disease "
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "834242094_56618-56724-0-106",
+          "text": "Huntington's disease\nSeveral clinical trials of new experimental treatments are underway and planned in Huntington 's disease .",
+          "title": "Huntington's disease",
+          "score": 17.793484,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1722970751
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "any cures for  Huntington's disease "
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Currently, there is no cure for Huntington's disease. The best evidence for treatment of the movement problems is with tetrabenazine, and treatments can relieve some symptoms and in some improve quality of life. Several clinical trials of new experimental treatments are underway and planned in Huntington's disease. However, carefully managed multidisciplinary caregiving becomes increasingly necessary as the disease progresses."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "d2b56e91-6d89-4df4-b89a-eef8d969850b",
+      "status": "created",
+      "timestamp": 1722970943
+    },
+    {
+      "author": "d2b56e91-6d89-4df4-b89a-eef8d969850b",
+      "status": "edited",
+      "timestamp": 1724881181
+    },
+    {
+      "author": "d2b56e91-6d89-4df4-b89a-eef8d969850b",
+      "status": "edited",
+      "timestamp": 1724881181
+    },
+    {
+      "author": "d2b56e91-6d89-4df4-b89a-eef8d969850b",
+      "status": "accepted",
+      "timestamp": 1725978989
+    },
+    {
+      "author": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+      "status": "edited",
+      "timestamp": 1726747053
+    },
+    {
+      "author": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+      "status": "accepted",
+      "timestamp": 1726747169
+    }
+  ],
+  "editor": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+  "domain": "mt-rag-clapnq-elser-512-100-20240503",
+  "reviewer": "868c6e58-57c1-48ee-8c67-832dbedcac18"
+}

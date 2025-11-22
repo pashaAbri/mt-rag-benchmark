@@ -1,0 +1,1040 @@
+{
+  "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-fiqa-beir-elser-512-100-20240501",
+      "size": "61022"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "Do common stocks and preferred stocks have any differences in terms of percentage of the company per unit they represent?",
+      "timestamp": 1724154891,
+      "enrichments": {
+        "Question Type": [
+          "Comparative"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, common stocks and preferred stocks have differences in terms of what they represent per unit. Common stocks typically represent ownership in a company and usually come with voting rights. On the other hand, preferred stocks usually do not come with voting rights but offer more consistent dividends and have a higher claim on assets and earnings than common stocks in case of liquidation. However, neither common nor preferred stocks necessarily represent a specific percentage of the company per unit, as the value of each share can vary based on factors such as the company's performance and market conditions.",
+      "timestamp": 1724154895,
+      "contexts": [
+        {
+          "document_id": "272784-0-597",
+          "text": "\nPreferred stocks are, err... Preferred. The whole point of preferred stocks is that they have some preference over other classes of stocks (there may be more than 2, by the way). It can be more voting rights, more dividends or priority on dividends' distribution (common with VC investments), or priority on liquidations (in bankruptcy, preferred stock holders are ranked higher than common). Many times initial or critical investments are made on preferred terms, and the stocks are converted to common when certain thresholds are met. Obviously all these benefits require a premium on the price.",
+          "score": 20.24828,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724155817
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Do common stocks and preferred stocks have any differences in terms of percentage of the company per unit they represent?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "236482-0-850",
+          "text": "\n\"In most cases, the other classes of shares are preferred stock (example, JPM-F). Preferred stock usually pays higher dividends and shareholders get preferential treatment in the event that the company goes under. (Preferred shareholders are behind bondholders in line, but ahead of common stock holders) In other cases, different classes of shares have different voting rights or pricing. Examples include Berkshire Hathaway B shares. In the case of Berkshire Hathaway B shares, the stock has 1/500th of the rights and 1/10,000th of the voting rights of an \"\"A\"\" share.  You need to be cautious about investing in anything other than common stock -- make sure that you understand what you are getting into. This is not to say that other share classes are 'bad' -- just that many preferred stocks are thinly traded and are difficult to buy and sell.\"",
+          "score": 20.044474,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724155814
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Do common stocks and preferred stocks have any differences in terms of percentage of the company per unit they represent?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "251713-0-809",
+          "text": "\nA company can issue different kinds of shares. For example, some kinds of shares may get preference in dividends or payment in event of (company) bankruptcy. Preferred shares are an example of this. A company might have several kinds of preferred shares and a 'common stock'. Here is a good explanation. See too the Wikipedia article about preferred stock. Toronto-Dominion Bank (TD) is an example of a company that has fourteen different preferred share issues, each with its own listing on the Toronto Stock Exchange (TSE) and symbol. TD has one kind of common stock, which is also listed on the TSE. However, TD common equity trades much more actively than the preferred shares. Remember that preferred stock is a different security type than common stock e.g. common has voting rights, preferred does not.",
+          "score": 19.500679,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724155811
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Do common stocks and preferred stocks have any differences in terms of percentage of the company per unit they represent?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "speaker": "user",
+      "text": "where to purchase those?",
+      "timestamp": 1724156244,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": " Preferred stocks are traded on the market, similar to common stocks. You can buy them using a brokerage account. ",
+      "timestamp": 1724156249,
+      "contexts": [
+        {
+          "document_id": "251713-0-809",
+          "text": "\nA company can issue different kinds of shares. For example, some kinds of shares may get preference in dividends or payment in event of (company) bankruptcy. Preferred shares are an example of this. A company might have several kinds of preferred shares and a 'common stock'. Here is a good explanation. See too the Wikipedia article about preferred stock. Toronto-Dominion Bank (TD) is an example of a company that has fourteen different preferred share issues, each with its own listing on the Toronto Stock Exchange (TSE) and symbol. TD has one kind of common stock, which is also listed on the TSE. However, TD common equity trades much more actively than the preferred shares. Remember that preferred stock is a different security type than common stock e.g. common has voting rights, preferred does not.",
+          "score": 29.06246,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724157226
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Do common stocks and preferred stocks have any differences in terms of percentage of the company per unit they represent?\n|assistant|: Yes, common stocks and preferred stocks have differences in terms of what they represent per unit. Common stocks typically represent ownership in a company and usually come with voting rights. On the other hand, preferred stocks usually do not come with voting rights but offer more consistent dividends and have a higher claim on assets and earnings than common stocks in case of liquidation. However, neither common nor preferred stocks necessarily represent a specific percentage of the company per unit, as the value of each share can vary based on factors such as the company's performance and market conditions.\n|user|: where to purchase those?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "405791-0-2113",
+          "text": "\n\"I seem not to be able to comment on the first answer due to reputation, so I'll aim to enhanced the first answer which is generally good but with these caveats: 1) Dividends are not \"\"guaranteed\"\" to preferred shareholders.  Rather, preferred shareholders are normally in line ahead (i.e. in preference to or \"\"preferred\"\") of common shareholders in terms of dividend payment.  This is an extremely important distinction, because unlike investments that we generally consider \"\"guaranteed\"\" such as CDs (known as GICs in Canada), a company's board can suspend the dividend at anytime for long periods of time without significant repercussions -- whereas a missed payment to a bank or secured bondholder can often push a company into bankruptcy very quickly. 2) Due to point 1), it is extremely important to know the \"\"convenants\"\" or rules sorrounding both the preferred shares you are buying and the other more senior creditors of that issuing company (i.e. taxes (almost always come first), banks loans, leases, bonds etc.).  It is also important to know if a particular preferred share has \"\"cumulative\"\" dividends.  You generally only want to buy preferred's that have \"\"cumulative\"\" dividends, since that means that anytime the company misses a payment, they must pay those dividends first before any other dividends at the same or lower priority in the future. 3) Unlike a common stock, your upside on a preferred stock is relatively fixed: you get a fixed share of the company's profit and that's it, whereas a common shareholder gets everything that's left over after interest and preferred dividends are paid. So if the company does really well you will theoretically do much better with common stock over time. For the above reasons, it is generally advisable to think of preferred shares as being more similar to really risky bonds in the same company, rather than similar to common stock.   Of course, if you are an advanced investor there are a lot more variables in play such as tax considerations and whether the preferred have special options attached to them such conversion into common shares.\"",
+          "score": 22.346767,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1724157466
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "how to buy common and prefered stock"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "725-0-452",
+          "text": "\nPreferred stock is traded on the market, so you can just buy it like any other. The symbol for a preferred stock is the ticker symbol followed by a dash and a letter for each class of preferred stock. Examples: Generally speaking, you should buy Preferred stock with the intention of holding onto it for at least a  couple of years. Often preferred shares are lightly traded and have wide spreads that made it difficult to make money in the short term.",
+          "score": 22.164995,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724157231
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "how to buy common and prefered stock"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "\nPreferred stocks are traded on the market, similar to common stocks. You can buy them using a brokerage account. When purchasing preferred stocks, you need to look for the ticker symbol followed by a dash and a letter for each class of preferred stock. For example, if the ticker symbol for a company is \"XYZ,\" the preferred stock might be listed as \"XYZ-A\" or \"XYZ-B.\" It is generally recommended to buy preferred stocks with the intention of holding onto them for at least a couple of years, as they can be lightly traded and have wide spreads that might make it difficult to make money in the short term."
+    },
+    {
+      "speaker": "user",
+      "text": "Tax-wise, how does it work?",
+      "timestamp": 1724161997,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Purchasing stock doesn't affect your immediate taxes, however, selling stock has tax effects; if you sell the stocks for a profit, you will have a capital gain, which is subject to capital gains tax. If you sell them for a loss, you can use that to offset other capital gains or potentially deduct a certain amount from your taxable income.  It would be beneficial to consult with a tax professional or financial advisor to understand the tax implications better. Regarding the \"zero dividend preference shares,\" they are designed to deliver gains as capital gains rather than income. This feature can be useful for tax efficiency, especially when making use of the annual capital gains tax allowance. However, these types of shares may have gone out of fashion due to a scandal around the year 2000.",
+      "timestamp": 1724162006,
+      "contexts": [
+        {
+          "document_id": "189028-0-251",
+          "text": "\nPurchasing stock doesn't affect your immediate taxes any more than purchasing anything else, unless you purchase it through a traditional 401k or some other pre-tax vehicle. Selling stock has tax effects; that's when you have a gain or loss to report.",
+          "score": 19.642622,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724162509
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "tax for stock"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "259341-0-516",
+          "text": "\n\"Some investment trusts have \"\"zero dividend preference shares\"\" which deliver all their gains as capital gains rather than income, even if the trust was investing in income yielding stocks. They've rather gone out of fashion after a scandal some years ago (~2000).  Good 2014 article on them here includes the quote  \"\"Because profits from zero dividend preference shares are taxed as   capital gains, they can be used tax efficiently if you are smart about   how you use your annual capital gains tax allowance.\"\"\"",
+          "score": 17.486135,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724162512
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "tax for preferred stock"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "412965-0-776",
+          "text": "\nAlthough the market  discussion by other answers is correct, the  tax structure of many developed nations (I am familiar with Canada in particular) offers a preferred tax rate for dividend income compared to taxable gains. Consequently, if your portfolio is large enough to make transaction fees a very small percentage rate, this is a viable investment strategy.  However, as the preferred tax rate for dividends typically will catch up to that for capital gains at some cut-off point, there is a natural limit on how much income can be favourably obtained in this way.  If you believe your portfolio might be large enough to benefit from this investment strategy, talk to a qualified investment advisor, broker, or tax consultant for the specifics for your tax jurisdiction.",
+          "score": 17.79541,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724162515
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "tax for preferred stock"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "\nThe initial purchase of common or preferred stocks does not have significant tax implications. However, selling the stocks can result in taxable events. If you sell the stocks for a profit, you will have a capital gain, which is subject to capital gains tax. If you sell them for a loss, you can use that to offset other capital gains or potentially deduct a certain amount from your taxable income. The specifics can depend on your tax jurisdiction and the duration you held the stocks. For instance, in some countries like Canada, dividend income from stocks can have a preferred tax rate compared to taxable gains. It would be beneficial to consult with a tax professional or financial advisor to understand the tax implications better.\nRegarding the \"zero dividend preference shares\" mentioned in one of the documents, they are designed to deliver gains as capital gains rather than income. This feature can be useful for tax efficiency, especially when making use of the annual capital gains tax allowance. However, these types of shares may have gone out of fashion due to a scandal around the year 2000."
+    },
+    {
+      "speaker": "user",
+      "text": "designate into a trust ",
+      "timestamp": 1724164696,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Designating stocks into a trust can have different tax and legal implications depending on the type of trust and the jurisdiction. Generally, the trust becomes the owner of the assets, and any income generated by the stocks would be reported under the trust's tax identification number.  Interest in Possession Trusts and Income Tax Trustees are responsible for declaring and paying Income Tax on income received by the trust. The tax rate depends on the type of income, for example, in the 2014 to 2015 tax year, UK dividends are taxed at the dividend ordinary rate of 10%. ",
+      "timestamp": 1724164701,
+      "contexts": [
+        {
+          "document_id": "31182-0-1521",
+          "text": "\nA trust is a financial arrangement to put aside money over a period of time (typically years), for a specific purpose to benefit someone. Two purposes of trusts are 1) providing for retirement and 2) providing for a child or minor. There are three parties to a trust: 1) A grantor, the person who establishes and funds a trust. 2) A beneficiary, a person who receives the benefits. 3) a trustee, someone who acts in a fiduciary capacity between the grantor and beneficiary. No one person can be all three parties. A single person can be two of out those three parties. A RETIREMENT trust is something like an IRA (individual retirement account). Here, a person can be both the grantor (contributor) to the IRA, and the beneficiary (a withdrawer after retirement). But you need a bank or a broker to act as a fiduciary, and to handle the reporting to the IRS (Internal Revenue Service). Pension plans have employers as grantors, employees as beneficiaries, and (usually) a third party as trustee. A MINORS' trust can be established under a Gift to the Minors' Act, or other trust mechanisms, such as a Generation Skipping Trust. Here, a parent may be both grantor and trustee (although usually a third party is a trustee). A sum of money is put aside over a period of years for the benefit of a minor, for a college education, or for the minor's attaining a certain age: a minimum of 18, sometimes 21, possibly 25 or even older, depending on when the grantor feels that the minor is responsible enough to handle the money.",
+          "score": 15.959918,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724165375
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "designate your investment into a trust fund"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "291214-0-693",
+          "text": "\nI'm answering your second and third point. For first point it depends on case by case basis from which organization you are opening your trust. Trust Account are of different type: To earn interest you account should be of below type. Interest in possession trusts and Income Tax Trustees are responsible for declaring and paying Income Tax on income received by the trust. They do this on a Trust and Estate Tax Return each year. There are different rates depending on the type of income - as shown below. Type of income     Income Tax rate 2014 to 2015 tax year Rent, trading and savings     20% (basic rate) UK dividends (such as income from stocks and shares)  10% (dividend ordinary rate)",
+          "score": 13.525023,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724165314
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "designate your investment into a trust fund"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "539752-0-1632",
+          "text": "\n\"I am not a lawyer, and I am assuming trusts in the UK work similar to the way they work in the US... A trust is a legally recognized entity that can act in business transactions much the same way as a person would (own real property, a business, insurance, investments, etc.). The short answer is the trust is the owner of the property. The trust is established by a Grantor who \"\"funds\"\" the trust by transferring ownership of items from him or herself (or itself, if another trust or business entity like a corporation) to the trust.  A Trustee is appointed (usually by the Grantor) to manage the trust according to the conditions and terms specified in the trust. A Trustee would be failing in their responsibility (their fiduciary duty) if they do not act in accordance with the purposes of the trust. (Some trusts are written better than others, and there may or may not be room for broad interpretation of the purposes of the trust.)   The trust is established to provide some benefit to the Beneficiary. The beneficiary can be anyone or anything, including another trust. In the US, a living trust is commonly used as an estate planning tool, where the Grantor, Trustee, and Beneficiary are the same person(s). At some point, due to health or other reasons, a new trustee can be appointed. Since the trust is a separate entity from the grantor and trustee, and it owns the assets, it can survive the death of the grantor, which makes it an attractive way to avoid having to probate the entire estate. A good living trust will have instructions for the Trustee on what to do with the assets upon the death of the Grantor(s).\"",
+          "score": 13.710062,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724165322
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "designate your investment into a trust fund"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Designating stocks into a trust can have different tax and legal implications depending on the type of trust and the jurisdiction. Generally, the trust becomes the owner of the assets, and any income generated by the stocks would be reported under the trust's tax identification number. It is essential to consult with a legal or financial professional to understand the specific rules and regulations in your area.\nIn the context of the document you provided, Interest in Possession Trusts and Income Tax Trustees are responsible for declaring and paying Income Tax on income received by the trust. They do this on a Trust and Estate Tax Return each year. The tax rate depends on the type of income, such as rent, trading, savings, or UK dividends.\nFor example, in the 2014 to 2015 tax year, rent, trading, and savings income is taxed at the basic rate of 20%, while UK dividends are taxed at the dividend ordinary rate of 10%. Keep in mind that tax laws and rates may have changed since then, so it's crucial to consult with a tax professional for up-to-date information."
+    },
+    {
+      "speaker": "user",
+      "text": "I'm in US, give me a rate here",
+      "timestamp": 1724165493,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "In the US, short-term capital gains and ordinary dividends are presently taxed at the same rates. The Bush tax cuts reduced the dividend tax rate from 28% to 15-20% but in 2011 budget resolution included an increase in the top tax rate on dividends to 39.6%.    At the individual level, depending on the State, most people are taxed at the regular income rate typically 25-33%.",
+      "timestamp": 1724165497,
+      "contexts": [
+        {
+          "document_id": "200485-0-495",
+          "text": "\n\"Future tax increases on dividends are likely. The Wall Street Journal says. \"\"The millions of Americans who receive dividend income ... need to begin adjusting their investment strategy accordingly.\"\" (ref) \"\"Last week the Senate Budget Committee   passed a fiscal 2011 budget resolution   that includes an increase in the top   tax rate on dividends to 39.6% from   the current 15%\u2014a 164% increase.\"\" ...   \"\"You can expect fewer businesses   either to offer or increase dividend   payouts.\"\"\"",
+          "score": 23.9133,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724167198
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "tax rate for dividend in US"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "408983-0-1418",
+          "text": "\nThere are many reasons, which other answers have already discussed. I want to emphasize and elaborate on just one of the reasons, which is that it avoids double taxation, especially on corporate earnings.  Generally, for corporations, its earnings are already taxed at around 40% (for the US - including State income taxes). When dividends are distributed out, it is taxed again at the individual level. The effect is the same when equity is sold and the distribution is captured as a capital gain. (I believe this is why the dividend and capital gain rates are the same in the US.) For a simplistic example, say there is a C Corporation with a single owner. The company earns $1,000,000 before income taxes. It pays 400,000 in taxes, and has retained earnings of $600,000. To get the money out, the owner can either distribute a dividend to herself, or sell her stake to another person. Either choice leads to $600,000 getting taxed at another 20%~30% or so at the individual level (depending on the State). If we calculate the effective rate, it is above 50%! Many people invest in stock, including mutual funds, and the dividends and capital gains are taxed at lower rates. Individual tax returns that contain no wage income often have very low average tax rates for this reason. However, the investments themselves are continuously paying out their own taxes, or accruing taxes in the form of future tax liability.",
+          "score": 23.643566,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724167195
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "tax rate for dividend in US"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "139405-0-523",
+          "text": "\nWell, you could probably say that the modern tax &amp; regulatory system is the main cause.  ...for instance, in 2001-02, the Bush tax cuts reduced the dividend tax rate from 28% to 15-20%, which is pretty substantial, at least, if you pay yourself that way from owning a company.  So, as he said, if dividend tax rates are low, then well, people will pay themselves more dividends.  Of course, there are many other factors, such as deregulation &amp; anti-trust, etc., but the dividend &amp; capital gains is a big factor.",
+          "score": 22.044735,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724167193
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "tax rate for dividend in US"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "170318-1532-3545",
+          "text": "\nDividend income is taxable as part of your income right away, however taxes on capital gains only happen when you sell the asset in question, and also has a lower tax rate. If you buy and hold Berkshire Hatheway, you will not have to pay taxes on the gains you get until you decide to sell the shares, and even then the tax rate will be lower. If you are investing for retirement, this is great, since your income from other sources will be lower, so you can afford to be taxed then. In many jurisdictions, income from capital gains is subject to a different tax rate than the rest of your income, for example in the US for most people with money to invest it's either 15% or 20%, which will be lower than normal income tax would be (since most people with money to invest would be making enough to be in a higher bracket). Say, for example, your income now is within the 25% bracket. Any dividend you get will be taxed at that rate, so let's say that the dividend is about 2% and the growth of the stock is about 4%. So, your effective growth rate after taxation is 5.5% -- you lose 0.5% from the 25% tax on the dividend. If, instead, you had stock with the same growth but no dividend it would grow at a rate of 6%. If you never withdrew the money, after 20 years, $1 in the dividend stock would be worth ~$2.92 (1.055^20), whereas $1 in the non-dividend stock would be worth ~$3.21 (1.06^20). You're talking about a difference of 30 cents per dollar invested, which doesn't seem huge but multiply it by 100,000 and you've got yourself enough money to renovate your house purely out of money that would have gone to the government instead. The advantage here is if you are saving up for retirement, when you retire you won't have much income so the tax on the gains (even ignoring the capital gains effect above) will definitely be less then when you were working, however if you had a dividend stock you would have been paying taxes on the dividend, at a higher rate, throughout the lifetime of the investment.",
+          "score": 21.961065,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724167189
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "tax rate for dividend in US"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "295082-0-582",
+          "text": "\nDividends indicate that a business is making more profit than it can effectively invest into expansion or needs to regulate cash-flow. This generally indicates that the business is well established and has stabilized in a dominant market position. This can be contrasted against businesses that: Dividends are also given preferential tax treatment. Specifically, if I buy a stock and sell it 30 days later, I will be taxed on the capital gains at the regular income rate (typically 25-33%), but the dividends would be taxed at the lower long-term capital gains rate (typically 15%).",
+          "score": 21.842636,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724167182
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "tax rate for ordinary dividends"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "478291-0-1228",
+          "text": "\n\"In the US, dividends are presently taxed at the same rates as capital gains, however selling stock could lead to less tax owed for the same amount of cash raised, because you are getting a return of basis or can elect to engage in a \"\"loss harvesting\"\" strategy.  So to reply to the title question specifically, there are more tax \"\"benefits\"\" to selling stock to raise income versus receiving dividends.  You have precise control of the realization of gains.    However, the reason dividends (or dividend funds) are used for retirement income is for matching cash flow to expenses and preventing a liquidity crunch.  One feature of retirement is that you're not working to earn a salary, yet you still have daily living expenses.   Dividends are stable and more predictable than capital gains, and generate cash generally quarterly.  While companies can reduce or suspend their dividend, you can generally budget for your portfolio to put a reliable amount of cash in your pocket on schedule.  If you rely on selling shares quarterly for retirement living expenses, what would you have done (or how much of the total position would you have needed to sell) in order to eat during a decline in the market such as in 2007-2008?\"",
+          "score": 22.674408,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724167167
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "US tax on dividends"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "In the United States, for the tax year 2"
+    },
+    {
+      "speaker": "user",
+      "text": "anything on loss?",
+      "timestamp": 1724170127,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, there are provisions for losses in stock trading. If you have incurred a loss, you can take advantage of it through tax loss harvesting. This involves selling the stock at a loss and then buying it back after a 30-day waiting period. The loss can be used to offset other capital gains or potentially deduct a certain amount from your taxable income. It's important to note that there are rules and limitations to this strategy, such as the wash sale rule, which prohibits repurchasing the same or a substantially identical security within 30 days before or after the sale. ",
+      "timestamp": 1724170131,
+      "contexts": [
+        {
+          "document_id": "536610-0-1752",
+          "text": "\n\"The wash sale rule only applies when the sale in question is at a loss. So the rule does not apply at all to your cases 3, 4, 7, 8, 11, 12, 15, and 16, which all start with a gain. You get a capital gain at the first sale and then a separately computed gain / loss at the second sale, depending on the case, BUT any gain or loss in the IRA is not a taxable event due to the usual tax-advantaged rules for the IRA. The wash sale does not apply to \"\"first\"\" sales in your IRA because there is no taxable gain or loss in that case. That means that you wouldn't be seeking a deduction anyway, and there is nothing to get rolled into the repurchase. This means that the rule does not apply to 1-8. For 5-8, where the second sale is in your brokerage account, you have a \"\"usual\"\" capital gain / loss as if the sale in the IRA didn't happen. (For 1-4, again, the second sale is in the IRA, so that sale is not taxable.) What's left are 9-10 (Brokerage -> IRA) and 13-14 (Brokerage -> Brokerage). The easier two are 13-14. In this case, you cannot take a capital loss deduction for the first sale at a loss. The loss gets added to the basis of the repurchase instead. When you ultimately close the position with the second sale, then you compute your gain or loss based on the modified basis. Note that this means you need to be careful about what you mean by \"\"gain\"\" or \"\"loss\"\" at the second sale, because you need to be careful about when you account for the basis adjustment due to the wash sale. Example 1: All buys and sells are in your brokerage account. You buy initially at $10 and sell at $8, creating a $2 loss. But you buy again within the wash sale window at $9 and sell that at $12. You get no deduction after the first sale because it's wash.",
+          "score": 23.775024,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724170401
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "wash sale rule"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "596518-0-1424",
+          "text": "\nI was not able to find any authority for the opinion you suggest. Wash sale rules should, IMHO, apply. According to the regulations, you attribute the newly purchased shares to the oldest sold shares for the purposes of the calculation of the disallowed loss and cost basis. (c) Where the amount of stock or securities acquired within the 61-day period is less than the amount of stock or securities sold or   otherwise disposed of, then the particular shares of stock or   securities the loss from the sale or other disposition of which is not   deductible shall be those with which the stock or securities acquired   are matched in accordance with the following rule: The stock or   securities acquired will be matched in accordance with the order of   their acquisition (beginning with the earliest acquisition) with an   equal number of the shares of stock or securities sold or otherwise   disposed of. You can resort to the claim that you have not, in fact, entered into the contract within 30 days, but when you gave the instructions to reinvest dividends. I don't know if such a claim will hold, but to me it sounds reasonable. This is similar to the rules re short sales (in (g) there). In this case, wash sale rules will not apply (unless you instructed to reinvest dividends within the 30 days prior to the sale). But I'd ask a tax professional if such a claim would hold, talk to a EA/CPA licensed in your state.",
+          "score": 23.37936,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724170404
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "wash sale rule"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "12351-0-1034",
+          "text": "\nI wrote a detailed article on Tax Loss Harvesting to show the impact on returns.  For my example, I showed a person in the 15% bracket. In years with no loss, they trade to capture gains at 0% long term rate, thus bumping their basis up. In years with losses, they tax harvest for a 15% effective 'rebate' on that loss.  I showed how for the lost decade 2000-2009, a buy and hold would have returned -1% CAGR, but the tax loss harvester would have gained 1% (just 1% for the decade, not CAGR), ending the decade with no loss.  As one's portfolio grows, the math changes. You can only take $3000 capital loss against ordinary income, and my example relies on the difference between taking a gain for free but using a loss to offset income. Note, the higher earner would take gains at 15%, but losses at 25%, but only for the relatively small portfolio. The benefit for them is to use loss harvesting to offset gains, less so for ordinary income.  As the other answer state, Wealthfront can aid you to do this with no math on your part.",
+          "score": 23.864433,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724170407
+              },
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "no",
+                "timestamp": 1726575484
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "tax loss harvesting"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "61518-0-1478",
+          "text": "\n\"Your assertion that you will not be selling anything is at odds with the idea that you will be doing tax loss harvesting.  Tax loss harvesting always involves some selling (you sell stocks that have fallen in price and lock in the capital losses, which gives you a break on your taxes).  If you absolutely prohibit your advisor from selling, then you will not be able to do tax loss harvesting (in that case, why are you using an advisor at all?). Tax loss harvesting has nothing to do with your horizon nor the active/passive difference, really. As a practical matter, a good tax loss harvesting plan involves mechanically selling losers and immediately putting the money in another stock with more-or-less similar risk so your portfolio doesn't change much.  In this way you get a stable portfolio that performs just like a static portfolio but gives you a tax benefit each year.  The IRS officially prohibits this practice via the \"\"wash sale rule\"\" that says you can't buy a substantially identical asset within a short period of time.  However, though two stocks have similar risk, they are not generally substantially similar in a legal sense, so the IRS can't really beat you in court and they don't try.  Basically you can't just buy the same stock again. The roboadvisor is advertising that they will perform this service, keeping your portfolio pretty much static in terms of risk, in such a way that your tax benefit is maximized and you don't run afoul of the IRS.\"",
+          "score": 22.724405,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724170409
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "tax loss harvesting"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "217781-0-1081",
+          "text": "\nThe harvested losses are capital losses.  See this IRS page: Generally, realized capital losses are first offset against realized capital gains.  Any excess losses can be deducted against ordinary income up to $3,000 ($1,500 if married filing separately) on line 13 of Form 1040.  Losses in excess of this limit can be carried forward to later years to reduce capital gains or ordinary income until the balance of these losses is used up. This means that your harvested losses can be used to offset ordinary income --- up to $3000 in a single year, and with extra losses carried forward to future years.  It is pretty close to a free lunch, provided that you have some losses somewhere in your portfolio. This free lunch is available to anyone, but for a human, it can be quite a chore to decide when to sell what, keep track of the losses, and avoid the wash sale rules.  The advantage of robo-advisors is that they eat that kind of bookkeeping for breakfast, so they can take advantage of tax loss harvesting opportunities that would be too cumbersome for a human to bother with.",
+          "score": 21.741354,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724170412
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "tax loss harvesting"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, there are provisions for losses in stock trading. If you sell stocks for a loss, you can use that to offset other capital gains or potentially deduct a certain amount from your taxable income. This is known as capital loss harvesting. However, there are limits to how much loss you can deduct in a year. It's important to note that these rules can be complex and may change, so it's recommended to consult with a tax professional or financial advisor for advice tailored to your specific situation."
+    },
+    {
+      "speaker": "user",
+      "text": " FIFO or LIFO?",
+      "timestamp": 1724171203,
+      "enrichments": {
+        "Question Type": [
+          "Comparative",
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The choice between the First-In-First-Out (FIFO) and Last-In-First-Out (LIFO) methods for determining which shares are sold first when you sell shares of a stock you own can have different tax implications. Under the FIFO method, the oldest shares are considered sold first and pay lower capital gains tax rate instead of the short term marginal rate.  Under the LIFO method, the most recently acquired shares are sold first.    If you're selling at loss and have other short term gains, you would probably be better selling LIFO, so that the loss could offset other short term gains that you might have.  The default is FIFO.",
+      "timestamp": 1724171206,
+      "contexts": [
+        {
+          "document_id": "414636-0-566",
+          "text": "\nIn the US you specify explicitly what stocks you're selling. Brokers now are required to keep track of cost basis and report it to the IRS on the 1099-B, so you have to tell the broker which position it is that you're closing. Usually, the default is FIFO (i.e.: when you sell, you're assumed to be closing the oldest position), but you can change it if you want. In the US you cannot average costs basis of stocks (you can for mutual funds), so you either do FIFO, LIFO (last position closed first), or specify the specific positions when you submit the sale order.",
+          "score": 12.900972,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724172617
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "FIFO or LIFO"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "366560-0-954",
+          "text": "\nYour question is missing too much to be answered directly. Instead - here are some points to consider. Short term gains taxed at your marginal rates, whereas long term gains have preferable capital gains rates (up to 20% tax rate, instead of your marginal rate). So if you're selling at gain, you might want to consider to sell FIFO and pay lower capital gains tax rate instead of the short term marginal rate. If you're selling at loss and have other short term gains, you would probably be better selling LIFO, so that the loss could offset other short term gains that you might have.  If you're selling at loss and don't have short term gains to offset, you can still offset your long term gains with short term losses, but the tax benefit will be lower. In this case - FIFO might be a better choice again. If you're selling at loss, beware of the wash sale rules, as you might not be able to deduct the loss if you buy/sell within too short a window.",
+          "score": 12.668712,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724172614
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "FIFO or LIFO"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "456749-0-500",
+          "text": "\nThe default is FIFO: first in - first out. Unless you specifically instruct the brokerage otherwise, they'll report that the lot you've sold is of Jan 5, 2011. Note, that before 2011, they didn't have to report the cost basis to the IRS, and it would be up to you to calculate the cost basis at tax time, but that has been changed in 2011 and you need to make sure you've instructed the brokerage which lot exactly you're selling. I'm assuming you're in the US, in other places laws may be different.",
+          "score": 10.7447,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724172611
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "FIFO or LIFO"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The method used to determine which shares are sold first when you sell shares of a stock you own, either the First-In-First-Out (FIFO) method or the Last-In-First-Out (LIFO) method, is generally up to you. However, the default method is FIFO. These methods can have different tax implications, so it would be beneficial to consult with a tax professional or financial advisor to understand which method is best for your situation."
+    },
+    {
+      "speaker": "user",
+      "text": "That's a complicated book keeping!",
+      "timestamp": 1724173401,
+      "enrichments": {
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Question Type": [
+          "Opinion"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, the choice between FIFO and LIFO can indeed complicate the bookkeeping process.  If you instruct your broker to sell shares purchased in specific lots, they can do that.  Brokers now are required to keep track of cost basis and report it to the IRS on the 1099-B.  Also, business bookkeeping services may help you in all aspect of managing your accounts and financial data within the accounting software such as QuickBooks, MYOB, and Peachtree.",
+      "timestamp": 1724173407,
+      "contexts": [
+        {
+          "document_id": "388819-0-411",
+          "text": "\nThat's up to you. If you instruct your broker to sell shares purchased in specific lots, they can do that -- but doing so requires that you and/or they track specific fractional lots forever afterwards so you know what is still there to be sold. FIFO simplifies the bookkeeping. And I am not convinced selecting specific lots makes much difference; the government gets its share of your profits sooner or later.",
+          "score": 12.727978,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724174033
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "FIFO or LIFO bookkeeping"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "414636-0-566",
+          "text": "\nIn the US you specify explicitly what stocks you're selling. Brokers now are required to keep track of cost basis and report it to the IRS on the 1099-B, so you have to tell the broker which position it is that you're closing. Usually, the default is FIFO (i.e.: when you sell, you're assumed to be closing the oldest position), but you can change it if you want. In the US you cannot average costs basis of stocks (you can for mutual funds), so you either do FIFO, LIFO (last position closed first), or specify the specific positions when you submit the sale order.",
+          "score": 12.325516,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724174030
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "FIFO or LIFO bookkeeping"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "329774-0-458",
+          "text": "\nBusiness bookkeeping services helps small businesses in all aspect of managing their accounts and financial data within the accounting software. We have expertise in following accounting software QuickBooks, MYOB, and Peachtree. We have also used other small business accounting software like Great  plain, Simply Accounting, etc. Using this software we can produce various reports, graphs, and other analysis documents to help you in your bookkeeping tasks.",
+          "score": 10.497042,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1724174026
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "FIFO or LIFO bookkeeping"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, the choice between FIFO and LIFO can indeed complicate the bookkeeping process. FIFO assumes that the first shares acquired are the first ones sold, while LIFO assumes that the most recent shares are sold first. The choice can impact the amount of capital gains tax you pay. It's recommended to consult with a tax professional or financial advisor to understand which method is more beneficial for your specific situation."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "created",
+      "timestamp": 1724174311
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "accepted",
+      "timestamp": 1725542134
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "edited",
+      "timestamp": 1726576159
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "accepted",
+      "timestamp": 1726576403
+    }
+  ],
+  "editor": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+  "domain": "mt-rag-fiqa-beir-elser-512-100-20240501",
+  "reviewer": "9dcd142c-415e-4161-a82f-c8b14bfb36ac"
+}

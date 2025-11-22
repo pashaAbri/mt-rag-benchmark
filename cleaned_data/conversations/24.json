@@ -1,0 +1,505 @@
+{
+  "author": "8163b85d-d338-4ed1-8ebf-cd065ac3dc12",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-fiqa-beir-elser-512-100-20240501",
+      "size": "61022"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "collections": {
+        "regex": "mt-rag*"
+      },
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "Pay off car loan entirely or leave $1 until the end of the loan period?",
+      "timestamp": 1726252407,
+      "enrichments": {
+        "Question Type": [
+          "Comparative",
+          "Opinion"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The decision between these two options may depend on your financial situation and your goals regarding your credit score and debt. If your goal is to improve your credit score, you might consider paying it on a monthly basis to benefit from positive effects of no late payments and long term accounts. If your goal is to minimize interest payments, you might consider paying off the loan entirely. Additionally, if you got a very low APR for your car loan, then you might want to consider investing instead of loan payment because you could earn more than the interest you pay.",
+      "timestamp": 1726252417,
+      "contexts": [
+        {
+          "document_id": "51873-0-862",
+          "text": "\nI used to work for Ally Auto (formerly known as GMAC) and I'd advise not to pay off the account unless you need to free up some debt in your credit report since until the account is paid off it will show that you owe your financial institution the original loan amount. The reason why I am saying not to pay-off the account is because good/bad payments are sent to the credit bureau 30 days after the due date of the payment, and if you want to increase your credit score then its best to pay it on a monthly basis, the negative side to this is you will pay more interest by doing this.  If ever you decide to leave $1.00 in loan, I am pretty much sure that the financial institution will absorb the remaining balance and consider the account paid off.  What exactly is your goal here? Do you plan to increase your credit score? Do you need to free up some debt?",
+          "score": 18.128109,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1726253712
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Pay off car loan entirely or leave $1 until the end of the loan period?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "495595-0-690",
+          "text": "\nIf your payment schedule would have you pay the car off after 11 months then you might be best served by leaving a small final payment for July.  The loan will appear on your credit for 7 years but the bump to your score will be reduced more after 2 years if you pay it off in less than 12 months.   If you would have several payment left after you have the ability to pay it off then just pay it off.  The reduction is not severe or worth the price of interest unless you have <1%. Unused credit has an attrition factor.  If you continue to use your credit in a healthy way (>0 <20% balance, no late payments, long term accounts) then you should not even realize much of a negative change.",
+          "score": 17.910872,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1726253716
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Pay off car loan entirely or leave $1 until the end of the loan period?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "230970-0-514",
+          "text": "\nGenerally, I would say that you should pay it off if you have the money available. Why pay interest if you have the money? That is, of course, if your money can earn you more than the interest you pay (which can happen if you got a very low APR for your car loan, but then you probably have excellent credit already and shouldn't care about the history of the loan on your report). Re the 7 years vs 2 years - to the best of my knowledge its not true, it will stay 7 years even if its closed during the first year.",
+          "score": 17.618202,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1726253966
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Pay off car loan entirely or leave $1 until the end of the loan period?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The documents provide different perspectives on this matter. One document suggests leaving a small final payment of $1 until the end of the loan period, as this may positively affect your credit score. However, another document advises paying off the loan entirely if you have the funds available, as there is no point in paying interest if you have the money. This second document also mentions that the loan will still appear on your credit report for 7 years even if it's paid off early. The decision between these two options may depend on your financial situation and your goals regarding your credit score and debt. If your goal is to improve your credit score, you might consider leaving a small final payment. If your goal is to minimize interest payments, you might consider paying off the loan entirely."
+    },
+    {
+      "speaker": "user",
+      "text": "what factors pay major impact on the credit score?",
+      "timestamp": 1726254166,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The five factors that have a major impact on your FICO credit score are:\n1. Payment history: Late payments can negatively affect your score, while on-time payments can improve it.\n2. Credit utilization: This refers to how much of your available credit you are currently using. Lower is better, but having 0% usage is not ideal either. Aiming for 10% or less is a good goal.\n3. Credit history: This is based on the average age of all your accounts, including credit cards and loans. Older accounts are generally better for your score.\n4. Credit mix: Having a diverse mix of credit types (e.g., credit cards, mortgages, auto loans) can positively impact your score.\n5. New credit: Applying for new credit can result in a temporary decrease in your score due to the credit inquiries made during the application process. These inquiries remain on your report for two years.\nIt is important to note that errors and fraud can also impact your credit score, so regularly reviewing your credit reports from the three major credit bureaus (Experian, Equifax, and TransUnion) is recommended.",
+      "timestamp": 1726254184,
+      "contexts": [
+        {
+          "document_id": "114303-0-2100",
+          "text": "\nwhat you aim to do is a great idea and it will work in your favor for a number of reasons. First, paying down your loan early will save you lots in interest, no brainer. Second, keeping the account open will improve your credit score by 1) increases the number of installment trade lines you have open, 2)adds to your positive payment history and 3) varies your credit mix. If your paid your car off you will see a DROP in your credit score because now you have one less trade line. To address other issues as far as credit scoring, it does not matter(much) for your score if you have a $1000 car loan or a $100,000 car loan. what matters is whether or not you pay on time, and what your balance is compared to the original loan amount. So the quicker you pay DOWN the loans or mortgages the better. Pay them down, not off! As far how the extra payments will report, one of two things will happen. Either they will report every month paid as agreed (most likely), or they wont report anything for a few years until your next payment is due(unlikely, this wont hurt you but wont help you either). Someone posted they would lower the amount you paid every month on your report and thus lower your score. This is not true. even if they reported you paid $1/ month the scoring calculations do not care. All they care is whether or not you're on time, and in your case you would be months AHEAD of time(even though your report cant reflect this fact either) HOWEVER, if you are applying for a mortgage the lower monthly payment WOULD affect you in the sense that now you qualify for a BIGGER loan because now your debt to income ratio has improved. People will argue to just pay it off and be debt free, however being debt free does NOT help your credit. And being that you own a home and a car you see the benefits of good credit. You can have a million dollars in the bank but you will be denied a loan if you have NO or bad credit. Nothing wrong with living on cash, I've done it for years, but good luck trying to rent a car, or getting the best insurance rates, and ANYTHING in life with poor credit.",
+          "score": 28.114264,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1726512924
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Pay off car loan entirely or leave $1 until the end of the loan period?\n|assistant|: The decision between these two options may depend on your financial situation and your goals regarding your credit score and debt. If your goal is to improve your credit score, you might consider paying it on a monthly basis to benefit from positive effects of no late payments and long term accounts. If your goal is to minimize interest payments, you might consider paying off the loan entirely. Additionally, if you got a very low APR for your car loan, then you might want to consider investing instead of loan payment because you could earn more than the interest you pay.\n|user|: what factors pay major impact on the credit score?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "495595-0-690",
+          "text": "\nIf your payment schedule would have you pay the car off after 11 months then you might be best served by leaving a small final payment for July.  The loan will appear on your credit for 7 years but the bump to your score will be reduced more after 2 years if you pay it off in less than 12 months.   If you would have several payment left after you have the ability to pay it off then just pay it off.  The reduction is not severe or worth the price of interest unless you have <1%. Unused credit has an attrition factor.  If you continue to use your credit in a healthy way (>0 <20% balance, no late payments, long term accounts) then you should not even realize much of a negative change.",
+          "score": 26.569078,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1726512931
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Pay off car loan entirely or leave $1 until the end of the loan period?\n|assistant|: The decision between these two options may depend on your financial situation and your goals regarding your credit score and debt. If your goal is to improve your credit score, you might consider paying it on a monthly basis to benefit from positive effects of no late payments and long term accounts. If your goal is to minimize interest payments, you might consider paying off the loan entirely. Additionally, if you got a very low APR for your car loan, then you might want to consider investing instead of loan payment because you could earn more than the interest you pay.\n|user|: what factors pay major impact on the credit score?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "520205-0-2117",
+          "text": "\nPatience is the key here, I hate to say! There are five factors to FICO credit scores:  Payment history is adversely affected by late payments - so always pay on time, otherwise your report will be haunted for seven years! \ud83d\udc7b Credit utilization has to do with how much of your available credit is currently in use - lower is better, but 0% isn't good either because they want to see that you're using credit. 10% or less is a good goal, and try to keep any single card balance to 30% or less when its statement close date rolls around. Credit history is based on the average age of all of your accounts, cards or otherwise, the older the better. Don't close either of your other cards (because that would cause your average account age to fall), and make sure to use the store card at least occasionally, because lenders sometimes decide to close unused lines of credit. Credit mix has to do with the different types of credit you hold and is why your bank's website suggested taking out a loan. It also has to do with the number of accounts overall; I've never found a satisfactory answer for what the sweet spot is, but I suspect it's in the 6-12 range? You wouldn't want to get several new ones at the same time because... New credit is affected by the credit inquiries (hard pulls) that occur when you apply for new cards or loans. Inquiries stay on your report for two years before falling off. This is almost certainly where your score dropped. You also mentioned not knowing if some hospital bills are still affecting your score. You'll want to review your credit reports and find out, plus checking your credit reports regularly is a really great habit to get into because errors (and fraud) can and do happen. There are three credit reporting agencies: Experian, Equifax, and TransUnion, and you'll want to review all three. You can get one free report from each of them every year: https://www.usa.gov/credit-reports It can take a couple of months for a new credit account to show up on your credit report, so your score should recover and go even higher once that happens. Sit tight, as annoying as that is!",
+          "score": 15.589933,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1726512363
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "credit card factors"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "speaker": "user",
+      "text": "What do you mean by FICO score? I just check my credit score via credit karma. Is that the same? ",
+      "timestamp": 1726514864,
+      "enrichments": {
+        "Question Type": [
+          "Comparative",
+          "Composite",
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The FICO score is a type of credit score developed by the Fair Isaac Corporation. It is widely used by lenders to determine the creditworthiness of potential borrowers. Credit Karma, on the other hand, provides users with free access to their credit scores, which are typically based on the VantageScore model, developed by the three major credit bureaus (Experian, Equifax, and TransUnion). While FICO and VantageScore models have some similarities, they are not the same and may produce slightly different credit scores. Therefore, the credit score you see on Credit Karma might not be exactly the same as your FICO score. However, it can still provide you with a general idea of your credit standing.",
+      "timestamp": 1726514873,
+      "contexts": [
+        {
+          "document_id": "564436-0-1153",
+          "text": "\nI think the biggest reason is price; it's a lot cheaper now than it was to offer these.  That's because for the most part, when you get a credit score for free, you're not getting a true FICO score.  You're getting instead a VantageScore. VantageScore was created by the three credit bureaus, and as such they can offer it without paying Fair Isaac a licensing fee.  That makes it a lot cheaper to offer, and while it's not absolutely identical to FICO (or more accurately to any of the FICO provided scores) it's close enough for most peoples' purpose. And of course undoubtedly Fair Isaac has some price pressure on their side now that Vantage is big enough that many people see them as fungible.  As such they've had to make it easier, or they'd lose business - no longer being a monopolist. The other relevant piece here is that probably in many of these cases they're really just offering you what Experian would give you directly - so it's just a cross-marketing thing (where Experian, or perhaps another bureau, gets access to you as a customer so they can up-sell you ID theft insurance and whatnot, while the bank gets to offer the free score).",
+          "score": 10.129829,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1726515226
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Fair Isaac Corporation"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "132743-0-2056",
+          "text": "\n\"The major bureaus use the Fair Isaac scoring model, for the most part. Here's an excerpt from a web site (Versions of the FICO scoring model) to explain: One of the first things a newcomer to this board learns is the difference between FICO and FAKO scores. FAKO refers to the non-FICO scores offered by various companies. FAKO scores have little value since few of them are used by lenders and they do not match closely to FICO scores. But even when you stick with FICO scores, confusion can ensue because FICO scores have many different editions, versions, and variations. On a single day, a consumer could theoretically have dozens of different FICO scores, depending on which version and credit agency is used to produce the score. This post provides a summary of the various FICO versions. Please offer any corrections or updates, and they will be edited in. The FICO scoring model with its familiar range of 300 to 850 was first introduced in 1989. Since then, FICO has released five major revisions: 1995, 1998, 2004, 2008, and 2014. Each \"\"edition\"\" uses a different formula and produces a different score. When a new FICO edition is released, many lenders continue using an older version for years before \"\"upgrading.\"\" The 1995 revision is no longer in common use, but later editions are still used by lenders. Most FICO editions are commonly known by the year of introduction: FICO 98, FICO 04, and FICO 08 (although FICO now calls it FICO Score 8, without the zero). The most recent edition is FICO Score 9 introduced in 2014. As of 2014, FICO Score 8 is the most commonly used. However, most mortgage lenders use FICO 04 for Equifax and Transunion, and FICO 98 for Experian. In addition to the \"\"classic\"\" version, FICO offers \"\"Industry Option\"\" versions customized for auto loans, credit cards, installment loans, personal finance loans, and insurance. These have a score range of 250 to 900, so the scores are not fully comparable with \"\"classic\"\" versions. As of 2015, Auto and Bankcard scores are available from myFICO as described here.",
+          "score": 9.964819,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1726515229
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Fair Isaac Corporation"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "368484-0-831",
+          "text": "\n\"It appears that you already know this, but FICO credit scores (as controlled by Fair Isaac Corporation) are the real official credit scores, and FICO takes a cut on their production no matter which of the 3 major credit bureaus calculates the official score (all using slightly different methods). Be careful when obtaining a score for making a big decision that it is a FICO score, because relatively few lenders will lend based on a non-FICO score. That said, some non-FICO scores are easy to obtain and can be roughly translated to an approximation of your score. Barclays US/ Juniper Bank credit cards offer a free Transunion \"\"TransRisk\"\"(TM) score. The TransRisk score is a 900 point scale, while the FICO score is an 850 point scale. This is a simple ratio and you can calculate your approximate FICO score by the formula:\"",
+          "score": 9.052569,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1726515231
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Fair Isaac Corporation"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Thank you for your question. The FICO score is a type of credit score developed by the Fair Isaac Corporation. It is widely used by lenders to determine the creditworthiness of potential borrowers. Credit Karma, on the other hand, provides users with free access to their credit scores, which are typically based on the VantageScore model, developed by the three major credit bureaus (Experian, Equifax, and TransUnion). While FICO and VantageScore models have some similarities, they are not the same and may produce slightly different credit scores. Therefore, the credit score you see on Credit Karma might not be exactly the same as your FICO score. However, it can still provide you with a general idea of your credit standing."
+    },
+    {
+      "speaker": "user",
+      "text": "how is that calculated?",
+      "timestamp": 1726515379,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Like FICO, Vantagescore is based on a proprietary formula that is not publicly available. Though there are mentions of excessively large credit card limits impacting the credit score negatively in the case of VantageScore, on the theory that the person could run up a high credit card debt quickly.",
+      "timestamp": 1726515392,
+      "contexts": [
+        {
+          "document_id": "188406-0-584",
+          "text": "\nCredit scoring has changed since the time of this question (July 2017) and it is now possible that having a high available credit balance can negatively affect your credit score. ... VantageScore will now mark a borrower negatively for having   excessively large credit card limits, on the theory that the person   could run up a high credit card debt quickly. Those who have prime   credit scores may be hurt the most, since they are most likely to have   multiple cards open. But those who like to play the credit card   rewards program points game could be affected as well. source",
+          "score": 14.488382,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1726519807
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "credit karam vantage score"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "54322-0-2320",
+          "text": "\nFirst, you need to be aware that the credit score reported by Mint is Equifax Credit Score. Equifax Credit Score, like FICO, Vantagescore, and others, is based on a proprietary formula that is not publicly available.  Every score is calculated with a different formula, and can vary from each other widely.  Lenders almost exclusively only use FICO scores, so the score number you have is likely different than the score lenders will use. Second, understand that the advice you see from places like Mint and Credit Karma will almost always tell you that you don't have enough credit card accounts.  The reason for this is that they make their money by referring customers to credit card applications.  They have a financial interest in telling you that you need more credit cards. Finally, realize that credit score is just a number, and is only useful for a limited number of things.  Higher is better to a point, and after that, you get no benefit from increasing your score.   My advice to you is this: Don't stress out about your credit score, especially a free score reported by Credit Karma or Mint.  If you really have a desire to find out your score, you can pay FICO to get your actual score, but it's not cheap.  You can also sometimes get your FICO score by applying for a loan and asking the lender.  I last saw my FICO scores (there were three, one from each credit bureau) when I applied for a mortgage a couple of years ago, and the mortgage rep gave them to me for free.  But honestly, knowing your score doesn't do much for you, as the best way to increase it is to simply make your payments on time and wait. Don't give in to bad conventional advice from places that are funded by the financial services industry.  The thing that makes your credit score go up is a long history of paying your bills on time.  Despite what you commonly read about credit scores, I'm not convinced that you can radically boost your scores by having lots of open credit card accounts.  At the time I applied for my last mortgage, I only had 2 open credit cards (still true), and the oldest open account was about 1.5 years old.  The average of my 3 scores was just over 800.  But I've been paying my bills on time for at least 20 years now.  Only get credit cards that you actually want, and close the ones you don't want.",
+          "score": 11.762344,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1726519810
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "credit karam vantage score"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "A credit score, such as the FICO score, is calculated using a proprietary formula that takes into account various factors related to an individual's credit history. The exact formula is not publicly disclosed, but the five main factors that typically influence a FICO score are:\n1. Payment history: Late payments can negatively affect your score, while on-time payments can improve it.\n2. Credit utilization: This refers to how much of your available credit you are currently using. Lower is better, but having 0% usage is not ideal either. Aiming for 10% or less is a good goal.\n3. Credit history: This is based on the average age of all your accounts, including credit cards and loans. Older accounts are generally better for your score.\n4. Credit mix: Having a diverse mix of credit types (e.g., credit cards, mortgages, auto loans) can positively impact your score.\n5. New credit: Applying for new credit can result in a temporary decrease in your score due to the credit inquiries made during the application process. These inquiries remain on your report for two years.\nIt is important to note that errors and fraud can also impact your credit score, so regularly reviewing your credit reports from the three major credit bureaus (Experian, Equifax, and TransUnion) is recommended."
+    },
+    {
+      "speaker": "user",
+      "text": "How can I get my FICO score then?",
+      "timestamp": 1726519973,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "You can obtain your FICO score from the three major credit bureau (Equifax, Experian, and TransUnion) via paying a nominal fee through their official website. Remember that each credit bureau may provide a slightly different FICO score, so averaging the three scores should give you a good idea of your creditworthiness. Be cautious of websites offering free credit scores, as they may not be reliable or secure for entering sensitive personal information.",
+      "timestamp": 1726519980,
+      "contexts": [
+        {
+          "document_id": "66963-0-1507",
+          "text": "\nAssuming you are asking about a credit score in the United States, the following applies. To find out your FICO score, navigate to AnnualCreditReport, the official site to help consumers receive their credit report from each of the three organizations providing these scores - Equifax, Experian, and TransUnion.  You are - in many states - entitled to a free copy of your credit report from each of these organizations annually.   This copy of your credit report will not contain your credit score from that organization.  It will, however, contain information that goes into your credit score - the lines of credits on file, any delinquencies reported, etc. If you decide you would like to pay for your credit score from each bureau, you will have the option to receive this information while getting your credit report, but you will have to pay a nominal fee for it.  Remember that each of the 3 bureaus gives you a different score.  Averaging your 3 scores should give you a good idea of your FICO score.  Note that your report is far more important than your score - once you know that, you know if you're in a good place or not. These other questions are so close that they might even be considered duplicates, and provide other suggestions for how to check your score. As a warning, don't trust the many ads out there saying you can get your score for free.  Only AnnualCreditReport is considered a safe place for entering the very personal information required to get a score.  The FTC backs this up.",
+          "score": 19.066074,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1726520616
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "free FICO score"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "You can obtain your FICO score through the official website, AnnualCreditReport, which provides consumers with a free copy of their credit report from each of the three major credit bureaus (Equifax, Experian, and TransUnion) annually. However, the free report does not include your credit score. To get your FICO score, you will need to pay a nominal fee when requesting your credit report. Remember that each credit bureau may provide a slightly different FICO score, so averaging the three scores should give you a good idea of your creditworthiness. Be cautious of websites offering free credit scores, as they may not be reliable or secure for entering sensitive personal information."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "8163b85d-d338-4ed1-8ebf-cd065ac3dc12",
+      "status": "created",
+      "timestamp": 1726521103
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "edited",
+      "timestamp": 1726840128
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "accepted",
+      "timestamp": 1726840561
+    }
+  ],
+  "editor": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+  "domain": "mt-rag-fiqa-beir-elser-512-100-20240501",
+  "reviewer": "f6ce971c-68d2-4c26-b1c0-477dd28a5181"
+}

@@ -1,0 +1,818 @@
+{
+  "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-govt-elser-512-100-20240611",
+      "size": "49607"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "When was the Costa-Hawkins Rental Housing Act enacted in California?",
+      "timestamp": 1724055208,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The Costa-Hawkins Rental Housing Act was passed in California in 1995. Rent control cannot be applied to any newly built housing completed on or after February 1, 1995.",
+      "timestamp": 1724055210,
+      "contexts": [
+        {
+          "document_id": "1aacb62724d27d6f-1676-3870",
+          "text": "Local rent control laws. [Ballot]\nSeveral California cities\u2014including Los Angeles, San Francisco, and San Jose\u2014and some unincorporated communities have laws that limit how much landlords can increase rents for housing from one year to the next. These laws often are called rent control. About one-quarter of Californians live in communities with rent control. Local rent boards carry out rent control. These boards are paid for with fees on landlords.\nCourt Rulings Limit Local Rent Control.\u00a0Courts have ruled that rent control laws must allow landlords to receive a \u201cfair rate of return.\u201d This means that landlords must be allowed to increase rents enough to receive some profit each year.\nState Law Limits Local Rent Control.\u00a0A state law, known as the\u00a0Costa-Hawkins Rental Housing Act\u00a0(Costa-Hawkins), limits local rent control laws. Costa-Hawkins creates three main limitations. First, rent control cannot apply to any single-family homes. Second, rent control cannot apply to any newly built housing completed on or after February 1, 1995. Third, rent control laws cannot tell landlords what they can charge a new renter when first moving in.\nState Law Limits Rent Increases.\u00a0In addition to any local rent control laws in place as allowed by Costa-Hawkins, a more recent state law also limits rent increases for most rental housing in California. Landlords cannot increase rent by more than 5\u00a0percent plus inflation in a year, or 10\u00a0percent, whichever is lower. This applies to most housing that is more than 15 years old. This law lasts until January 1, 2030.\nState and Local Government Tax Revenues.\u00a0Three taxes are the largest sources of tax revenue for the state and local governments in California\u2014personal income tax, property tax, and sales tax. The state collects a personal income tax on income\u2014including rent received by landlords\u2014earned within the state. Local governments levy property taxes on property owners based on the value of their property. The state and local governments collect sales taxes on the retail sale of goods.\nProposal\nRepeals Costa-Hawkins. The measure repeals the limits on local rent control laws in Costa-Hawkins. Under the measure, cities and counties can regulate rents for any housing.",
+          "title": "Local rent control laws. [Ballot]",
+          "url": "https://lao.ca.gov/BallotAnalysis/Initiative/2022-008",
+          "score": 15.529904,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724056019
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: When was the Costa-Hawkins Rental Housing Act enacted in California?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "1aacb62724d27d6f-7074-9083",
+          "text": "Local rent control laws. [Ballot]\nThis would reduce expenses they can claim to lower their income tax payments (such as mortgage interest, property taxes, and depreciation). This would increase their income tax payments. The overall effect on state income tax revenue is not clear.\n\nOverall, the measure likely would reduce state and local revenues over time. The largest effect would be on property taxes. The amount of revenue loss would depend on many factors, most importantly how communities respond to this measure. For example, if communities that already have rent control expand their rules to include newer homes and single-family homes, revenue losses could be in the high tens of millions of dollars per year. If many communities create new rent control rules, revenue losses could be larger. If few communities make changes, revenue losses would be more limited and dependent on the scope of rent control laws that automatically expanded in response to the repeal of Costa-Hawkins.\nIncreased Local Government Costs.\u00a0If cities or counties create new rent control laws or expand existing ones, local rent boards would have increased costs. For communities where rent control laws expand automatically, costs also could increase. Depending on local government choices, these costs could\u00a0range from very little to tens of millions of dollars per year. These costs likely would be paid by fees on owners of rental housing.\nSummary of Fiscal Effects. We estimate that this measure would have the following major fiscal effect:\n\nOverall, a potential reduction in state and local revenues in the high tens of millions of dollars per year over time. Depending on actions by local communities, revenue losses could be less or more.\n\nSubscribe\r\n | California State Legislature \r\n | Online Voter Registration\r\n | Privacy Policy\r\n | Accessibility\n\nLegislative Analyst's Office | The California Legislature's Nonpartisan Fiscal and Policy Advisor\r\n \r\n 925 L Street, Suite 1000 Sacramento, CA 95814 | (916) 445-4656 | information [at] lao.ca.gov",
+          "title": "Local rent control laws. [Ballot]",
+          "url": "https://lao.ca.gov/BallotAnalysis/Initiative/2022-008",
+          "score": 14.248686,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724056029
+              },
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1726594405
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Costa-Hawkins Rental Housing Act (Costa-Hawkins"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The Costa-Hawkins Rental Housing Act was enacted in California in 1995. This is stated in the document, which mentions that rent control cannot apply to any newly built housing completed on or after February 1, 199"
+    },
+    {
+      "speaker": "user",
+      "text": "Is there a housing problem in California?",
+      "timestamp": 1724056472,
+      "enrichments": {
+        "Question Type": [
+          "Factoid",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes. In recent years, California housing costs have risen rapidly, particularly in terms of home purchase prices. The monthly fees for a newly purchased home are now about $2,500 higher than they were just a few years ago. The annual income required to qualify for a typical home is around $235,000\u2014more than twice the median household income of about $85,000. To qualify for a more affordable \"bottom-tier\" home, the annual income needed is over 50% higher than the median income. The California Housing Finance Agency (CHFA) originally offered a first-time home buyer program limited to low-income households, but due to few households in this income bracket being able to purchase homes, the program has been expanded to include moderate-income households. As of September 2000, home buyers in 22 counties had received funding from the state.",
+      "timestamp": 1724056479,
+      "contexts": [
+        {
+          "document_id": "808b11da3d77018d-9330-11594",
+          "text": "2001 Budget Analysis: California Housing Finance Agency (2260)\nAfter some experience with the programs, CHFA identified a number of problems and proposed a series of statutory changes to increase their use. These changes were incorporated into\r\nChapter 127, effective beginning July 1, 2000. For the sales price limit program, very few homes in California were being constructed for less than the original purchase price limit of $110,000.\r\nTherefore, the limit was raised to $130,000 and is now adjusted annually for changes in statewide home sales prices. The first-time home buyer program was originally limited to households of\r\nlow-income. Few households of this income level, however, are in the position of purchasing homes. Thus, this program was expanded to include moderate-income households.\n\nAs of September 2000, home buyers in 22 counties had received funding from the state. Four counties\u2014Fresno, Kern, Riverside, and Tulare\u2014represent more than 60 percent of the\r\nsingle-family programs' expenditures. The concentration of applicants in the Central Valley should not be particularly surprising, given that this area is one of California's fastest growing housing\r\nmarkets and often relies on the use of developer fees to finance new school construction.\nMultifamily Program. Likewise, the multifamily housing program has had limited success in funding applicants. From its allocation of $32.5 million so far, seven projects have been funded for\r\na total of $1.1 million, and another 34 projects have been approved with expected expenditures of $3.7 million. Due to the complexities of multifamily affordable housing financing and\r\nconstruction, the program takes a particularly long time to move from initial application to finished construction\u2014typically a minimum of one year.\nConcerns About the Programs \nOur review of these housing assistance programs indicates a number of concerns with their operation, which we discuss below.\nLack of Applications Threatens Viability of Programs. Without a dramatic expansion in home buyer and multifamily developer interest in the programs, the programs will continue to be an\r\nineffective effort to increase housing affordability. So far, CHFA has limited its marketing efforts primarily to the real estate industry, such as lenders, brokers, and real estate agents. The",
+          "title": "2001 Budget Analysis: California Housing Finance Agency (2260)",
+          "url": "https://lao.ca.gov/analysis_2001/general_govt/gen_20_2260_CA_Housing_Fin_Agency_anl01.htm",
+          "score": 15.433416,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724057026
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "California Housing problem"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "80d0fc64f4a7f66a-4440-6468",
+          "text": "California's Economy and Taxes\nOverall, withholding is running 1 percent above the Governor's Budget projections and about 5 percent higher than last year.\u00a0\n\nChas Alamo\n\nCalifornia Housing Affordability Tracker (April 2024)\u2003April 30, 2024\n\nOur post provides an updated snapshot of housing affordability in California. Over the last few years, we have seen a rapid increase in California housing costs, led by the dramatic increase in the costs of purchasing a home.\u00a0Monthly costs for a newly purchased home are about $2,500 higher than they were just a few years ago.\u00a0Annual income needed to qualify for a typical home is about\u00a0$235,000\u2014over 2\u00a0times higher than median household income (about $85,000). Further, the annual income needed to qualify for a more affordable \"bottom-tier\" home is over 50 percent higher than the median income.\u00a0\n\nBrian Uhler\n\nU.S. Retail Sales Update: March 2024\u2003April 15, 2024\n\nU.S. retail sales have grown 0.8 percent over the last 3 months and 4 percent over the last 12 months.\u00a0Retail sales growth has outpaced inflation over the last 12 months, but not over the last 3 months.\n\nSeth Kerstein\n\nU.S. Retail Sales Update: February 2024\u2003March 14, 2024\n\nU.S. retail sales have dropped 0.4 percent over the last 3 months and grown 1.5 percent over the last 12 months. The 12-month growth rate was below the rate of inflation.\u00a0\n\nSeth Kerstein\n\nAnnual Revision Shows State Added Few Jobs Last Year\u2003March 13, 2024\n\nEach year, the U.S. Bureau of Labor Statistics revises the state's jobs number to match actual payroll records from businesses. The latest revision lowered its count of California jobs by 1.5 percent. The corrected data show that the state added just 50,000 jobs between September 2022 and September 2023, while preliminary monthly reports had showed the labor market growing by more than 300,000 jobs.\u00a0\n\nChas Alamo\n\nThe 2024-25 Budget: Property Tax Postponement Program\u2003February 29, 2024\n\nThe Governor proposes to\u00a0use\u00a0$7.5 million General Fund on a one-time basis to support the Property Tax Postponement (PTP) program.",
+          "title": "California's Economy and Taxes",
+          "url": "https://lao.ca.gov/LAOEconTax",
+          "score": 15.240524,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724057029
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "California Housing problem"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, there is a housing problem in California. The high demand for housing and the limited supply have led to increased housing prices and rents, making it difficult for many residents to afford housing. Some cities and unincorporated communities have implemented rent control laws to address this issue, which limit how much landlords can increase rents for housing from one year to the next. However, courts have ruled that rent control laws must allow landlords to receive a fair rate of return, meaning they must be allowed to increase rents enough to receive some profit each year. Additionally, the Costa-Hawkins Rental Housing Act limits local rent control laws by prohibiting rent control on single-family homes, newly built housing completed on or after February 1, 1995, and telling landlords what they can charge a new renter when first moving in. A more recent state law also limits rent increases for most rental housing in California to 5% plus inflation in a year or 10%, whichever is lower."
+    },
+    {
+      "speaker": "user",
+      "text": "Renters",
+      "timestamp": 1724057745,
+      "enrichments": {
+        "Question Type": [
+          "Keyword",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Rental housing in California is more expensive compared to other states, with renters typically paying 50 percent more for housing. In some parts of the state, rent costs are more than double the national average. The high rent in California is due to the housing shortage, which results in fierce competition for housing, driving up rent prices. As per the rent control law, the value of rental housing would decrease because potential landlords would only be willing to pay as much for these properties. Consequently, some renters would pay less, while landlords would receive less rental income. Additionally, fewer renters would move as frequently due to rent increases. The impact of these effects would vary depending on the number of communities passing new rent control laws and the specific type and scope of rent control being adopted.",
+      "timestamp": 1724057752,
+      "contexts": [
+        {
+          "document_id": "1aacb62724d27d6f-2-2133",
+          "text": "Local rent control laws. [Ballot]\nLocal rent control laws. [Ballot]\n\n\u00a0Translate\r\n \nSkip to main content\n\nTranslate Our Website\n\nThis Google\u2122 translation feature provided on the Legislative Analyst's Office (LAO) website is for informational purposes only.\n\nThe LAO is unable to guarantee the accuracy of this translation and is therefore not liable for any inaccurate information resulting from the translation application tool.\n\nChoose your language:\n\n\u00d7\n\nToggle navigation\n\nHome\n\nPolicy Areas\n\nCapital Outlay, Infrastructure\nCriminal Justice\nEconomy and Taxes\nEducation\nEnvironment and Natural Resources\nHealth and Human Services\nLocal Government\nState Budget Condition\nTransportation\nOther Government Areas\n\nPublications\nThe Budget\nPropositions and Initiatives\nStaff\nCareers\nAbout Us\n\n \nSearch\n\nBallot Pages\n\nInitiative Fiscal Analyses (pre-ballot) \nProposition Analyses\nBallot Measures by Type: 1974 to Present\nBallot Bonds\nSummary of General Obligation Bonds\u2014Election Results 1986 to Present (Excel File)\nRelated LAO Publications\n\nAll Initiatives\nA.G. File No. 2022-008\nFebruary 10, 2023\n\u00a0\n\u00a0PDF Version\n\nPursuant to Elections Code Section 9005, we have reviewed the proposed statutory Justice for Renters Act initiative ( A.G. File No. 22-0008).\nBackground\nRental Housing Is Expensive in California.\u00a0Renters in California typically pay 50\u00a0percent more for housing than renters in other states. In some parts of the state, rent costs are more than double the national average. Rent is high in California because the state does not have enough housing for everyone who wants to live here. People who want to live here must compete for housing, which increases rents.\nSeveral Cities Have Rent Control Laws.\u00a0Several California cities\u2014including Los Angeles, San Francisco, and San Jose\u2014and some unincorporated communities have laws that limit how much landlords can increase rents for housing from one year to the next. These laws often are called rent control. About one-quarter of Californians live in communities with rent control. Local rent boards carry out rent control. These boards are paid for with fees on landlords.\nCourt Rulings Limit Local Rent Control.",
+          "title": "Local rent control laws. [Ballot]",
+          "url": "https://lao.ca.gov/BallotAnalysis/Initiative/2022-008",
+          "score": 18.578686,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724059159
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "laws protecting renters"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "1aacb62724d27d6f-5211-7561",
+          "text": "Local rent control laws. [Ballot]\nThe value of rental housing would decline because potential landlords would not want to pay as much for these properties.\nSome renters would spend less on rent and some landlords would receive less rental income.\nSome renters would move less often. For example, fewer renters would move because their rents increase.\n\nThe size of these effects would depend on how many communities pass new laws (or have existing rent control laws that could immediately become effective), and the type and scope of rent control adopted. If many localities enacted rent regulation that significantly limited rents, other economic effects locally and statewide (such as impacts on housing construction) could occur.\nChanges in State and Local Revenues.\u00a0The measure\u2019s economic effects would affect property tax, sales tax, and income tax revenues. The largest and most likely impacts are:\n\nLess Property Taxes Paid by Landlords.\u00a0A decline in the value of rental properties would lead to a decrease in property tax payments made by owners of those properties over time. These property tax losses would be partially offset by higher property tax payments resulting from the sales of rental housing. This is because property sales often cause property tax bills to reset at a higher level. Revenue losses from lower property values would be larger than revenue gains from increased sales. Because of this, the measure would reduce overall property tax payments over time.\nMore Sales Taxes Paid by Renters.\u00a0Renters who pay less in rent would use some of their savings to buy taxable goods.\nChange in Income Taxes Paid by Landlords.\u00a0Landlords\u2019 income tax payments would change in several ways, both up and down.\u00a0Some landlords would receive less rental income. This would reduce their income tax payments. On the other hand, over time, landlords would pay less to buy rental properties. This would reduce expenses they can claim to lower their income tax payments (such as mortgage interest, property taxes, and depreciation). This would increase their income tax payments. The overall effect on state income tax revenue is not clear.\n\nOverall, the measure likely would reduce state and local revenues over time. The largest effect would be on property taxes. The amount of revenue loss would depend on many factors, most importantly how communities respond to this measure.",
+          "title": "Local rent control laws. [Ballot]",
+          "url": "https://lao.ca.gov/BallotAnalysis/Initiative/2022-008",
+          "score": 17.468601,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724059162
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "laws protecting renters"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The document discusses issues related to housing in California, including both home buyers and renters. For renters, several California cities and unincorporated communities have laws that limit how much landlords can increase rents for housing from one year to the next. These laws, often called rent control, apply to about one-quarter of Californians. However, courts have ruled that rent control laws must allow landlords to receive a \"fair rate of return,\" meaning that landlords must be allowed to increase rents enough to receive some profit each year. Additionally, a state law called the Costa-Hawkins Rental Housing Act limits local rent control laws by preventing rent control from applying to single-family homes, newly built housing completed on or after February 1, 1995, and by prohibiting rent control laws from telling landlords what they can charge a new renter when first moving in. A more recent state law also limits rent increases for most rental housing in California, with landlords not being able to increase rent by more than 5% plus inflation in a year, or 10%, whichever is lower."
+    },
+    {
+      "speaker": "user",
+      "text": "Is there help available for veterans?",
+      "timestamp": 1724058822,
+      "enrichments": {
+        "Question Type": [
+          "Explanation",
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes. VA housing assistance is available to help Veterans, service members, and their surviving spouses purchase a home or refinance a loan. Additionally, benefits and services are offered to assist in building, improving, or maintaining current homes. The Supportive Services for Veteran Families (SSVF) provides case management and supportive services for very low-income Veterans to prevent the loss of their homes, find a more suitable housing situation, or rapidly re-house homeless Veterans and their families.",
+      "timestamp": 1724058830,
+      "contexts": [
+        {
+          "document_id": "bd5445dea1a88ea6-2-2062",
+          "text": "VA Housing Assistance | Veterans Affairs\nVA Housing Assistance | Veterans Affairs\n\nSkip to Content\n\nAn official website of the United States government\n\nHere\u2019s how you know\n\nThe .gov means it\u2019s official.\n\n Federal government websites often end in .gov or .mil. Before sharing sensitive information, make sure you're on a federal government site.\n \n\nThe site is secure.\n The https:// ensures that you're connecting to the official website and that any information you provide is encrypted and sent securely.\n \n\nTalk to the Veterans Crisis Line now\n\nWe\u2019re calling on mortgage servicers to pause foreclosures of VA-backed home loans through May 31, 2024. During this pause, we\u2019ll work with servicers to find ways to help Veterans and survivors stay in their homes.\nLearn more about how to get help to avoid foreclosure\n\nHome\n \n\n Housing assistance\n \n\nVA housing assistance\n\nVA housing assistance can help Veterans, service members, and their surviving spouses to buy a home or refinance a loan. We also offer benefits and services to help you build, improve, or keep your current home. Find out how to apply for and manage the Veterans housing assistance benefits you\u2019ve earned.\n\n How do I get help if I'm homeless or at risk of becoming homeless?\n \n\n We may be able to help\n \nWe offer many programs and services that may help\u2014including free health care and, in some cases, free limited dental care. We can also help you connect with resources in your community, like homeless shelters or faith-based organizations.Find the support you need:Call the National Call Center for Homeless Veterans at 877-424-3838 for help 24 hours a day, 7 days a week. You\u2019ll talk privately with a trained VA counselor for free.Contact your nearest VA medical center and ask to talk with the VA social worker. If you're a female Veteran, ask for the Women Veterans Program Manager.Find the nearest VA medical centerTalk with someone right now:If you're a Veteran in crisis or concerned about one, connect with our caring, qualified Veterans Crisis Line responders for confidential help. Many of them are Veterans themselves.",
+          "title": "VA Housing Assistance | Veterans Affairs",
+          "url": "https://www.va.gov/housing-assistance",
+          "score": 16.0714,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724059150
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "housing for veterans"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "8587387a2738e543-7568-9907",
+          "text": "VA Programs For Homeless Veterans - VA Homeless Programs\nHUD-VASH General Information\nHUD Public and Indian Housing\n\nSupportive Services for Veteran Families (SSVF)\nFor very low-income Veterans, SSVF provides case management and supportive services to prevent the imminent loss of a Veteran\u2019s home or identify a new, more suitable housing situation for the individual and his or her family; or to rapidly re-house Veterans and their families who are homeless and might remain homeless without this assistance.\nHow It Works\nThrough referrals and direct outreach, nonprofit agencies and community cooperatives use SSVF funding to quickly house Veterans and their families who are homeless and keep others from slipping into homelessness by providing time-limited supportive services that promote housing stability. Case management includes help securing VA and other benefits such as educational aid and financial planning. SSVF is available in all 50 states, the District of Columbia, Guam, Puerto Rico and the U.S. Virgin Islands.\nMore Information\n\nSupportive Services for Veteran Families (SSVF)\n\nHomeless Providers Grant and Per Diem (GPD) Program\nState, local and tribal governments and nonprofits receive capital grants and per diem payments to develop and operate transitional housing and/or service centers for Veterans who are homeless.\nHow It Works\nVA funds over 12,000 beds for eligible Veterans. Grantees work closely with an assigned liaison from the local VAMC. The VA GPD liaison monitors the services the grantees offer to Veterans and provides direct assistance to them. Grantees also collaborate with community-based organizations to connect Veterans with employment, housing and additional social services to promote housing stability. The maximum stay in this housing is up to 24 months, with the goal of moving Veterans into permanent housing.\u00a0\nMore Information\n\nGrant and Per Diem (GPD)\n\nDomiciliary Care for Homeless Veterans (DCHV) Program\nThis program encompasses residential care for sheltered and unsheltered Veterans with multiple challenges, illnesses or rehabilitative care needs. DCHV provides a structured setting to foster Veterans\u2019 independence and mutual support.\nHow It Works\nEither on VAMC grounds or in the community, participating Veterans receive interdisciplinary clinical care that includes medical, psychiatric, vocational, educational or social services.",
+          "title": "VA Programs For Homeless Veterans - VA Homeless Programs",
+          "url": "https://www.va.gov/HOMELESS/for_homeless_veterans.asp",
+          "score": 17.22468,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724059147
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "housing for veterans"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, there is help available for veterans in California. The California Department of Veterans Affairs (CalVet) offers various programs and services to support veterans, including home loans, education benefits, and employment assistance. The CalVet Home Loan program helps veterans purchase a home with a competitive, low-interest loan. The California Veterans Education Training Scholarship (CalVET) provides educational assistance to eligible veterans, their dependents, and survivors. The CalVet Veterans' Homes offer long-term care for veterans. Additionally, the California Employment Development Department (EDD) provides employment services to veterans, such as job training, career counseling, and job placement assistance."
+    },
+    {
+      "speaker": "user",
+      "text": "Do people who receive welfare also receive housing?",
+      "timestamp": 1724060087,
+      "enrichments": {
+        "Question Type": [
+          "Factoid",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes. The California Department of Housing and Community Development (HCD) funds counties to help current and former foster youth aged 18-24 find and access housing. Counties can use some of these funds to support the necessary case management activities for youth receiving Foster Youth to Independence (FYI) or Family Unification Program (FUP) vouchers. The FYI/FUP vouchers offer a 36-month rental subsidy through the housing authority and supportive services provided or arranged by the county child welfare agency. Section 8 of the Housing Choice Voucher Program is also available for very low-income families, older people, and people with disabilities. These vouchers allow recipients to find their housing as long as it meets the program's requirements.",
+      "timestamp": 1724060092,
+      "contexts": [
+        {
+          "document_id": "e323a2ac64517f0f-8268-9554",
+          "text": "Section 8 Housing - housing_selfhelp\nCalifornia Tenant\u2019s Guide\u2014Learn about the rights and responsibilities of tenants and landlords in California, including evictions, security deposits, landlord obligations, and more.\nFair Housing Act\u2014Learn more about the law, your rights, and how to file a complaint about housing.\nHousing Choice Vouchers Fact Sheet\u2014Find out about housing choice vouchers. They are available for very low-income families, the elderly, and the disabled. Vouchers allow you to find your own housing, as long as the housing meets the requirements of the program.\nFile a complaint with HUD on Form 903\u2014Use this form if you believe you were discriminated against related to housing\u2014a violation of the Fair Housing Act. For example, if you were denied housing because of your race, or denied a mortgage loan because of your religion, or turned down for an apartment because you have children.\nApartment search\u2014This page on the HUD website helps you search for a low-rent apartment in your state.\n\n \u5e7f\u4e1c\u8bdd\u548c\u666e\u901a\u8bdd - Chinese\n\n\u4ee5\u4e0b\u89c6\u9891\u4e3a\u6c49\u8bed\u666e\u901a\u8bdd\u548c\u7ca4\u8bed\u3002\u8d44\u6e90\u94fe\u63a5\u548c\u89c6\u9891\u6587\u7a3f\u4e3a\u7b80\u4f53\u4e2d\u6587\u3002 \u00a0\n\u8bf7\u5728\u672c\u5730\u7684\u6cd5\u5f8b\u56fe\u4e66\u5ba4\u5bfb\u6c42\u5e2e\u52a9\u548c\u4e86\u89e3\u8be6\u60c5\uff0c\u8bf7\u89c1www.publiclawlibrary.org/law-libraries/\u3002\n\n\u7b2c\u4e00\u90e8\u5206\uff1a\u524d\u8a00 - \u5e7f\u4e1c\u8bdd, \u666e\u901a\u8bdd\n\u89c2\u770b\u672c\u89c6\u9891\uff0c\u83b7\u53d6\u5173\u4e8e\u672c\u7cfb\u5217\u5176\u4ed6\u89c6\u9891\u7684\u4ecb\u7ecd\u3002\n\u9605\u8bfb\u672c\u89c6\u9891\u6587\u7a3f\u3002\n\u7b2c\u4e8c\u90e8\u5206\uff1a\u8865\u8d34\u4f4f\u623f\u7684\u6982\u8ff0 - \u5e7f\u4e1c\u8bdd, \u666e\u901a\u8bdd\n\u672c\u89c6\u9891\u5411\u60a8\u63d0\u4f9b\u8865\u8d34\u4f4f\u623f\u7684\u57fa\u672c\u60c5\u51b5\uff0c\u544a\u8bc9\u60a8\u6cd5\u5f8b\u3001\u516c\u5171\u4f4f\u623f\u9009\u62e9\uff0c\u4ee5\u53ca\u4f4f\u623f\u63f4\u52a9\u7c7b\u578b\u793a\u4f8b\u3002\n\u9605\u8bfb\u672c\u89c6\u9891\u6587\u7a3f\u3002\n\u7b2c\u4e09\u90e8\u5206\uff1a\u8feb\u8fc1\u548c\u7ec8\u6b62 - \u5e7f\u4e1c\u8bdd, \u666e\u901a\u8bdd\n\u6709\u65f6\u516c\u5171\u4f4f\u623f\u79df\u5ba2\u9762\u4e34\u4e86\u516c\u5171\u4f4f\u623f\u8ba1\u5212\u8feb\u8fc1\u6216\u7ec8\u6b62\u3002\u89c2\u770b\u672c\u89c6\u9891\uff0c\u8be6\u7ec6\u4e86\u89e3\u8fd9\u4e24\u79cd\u60c5\u51b5\u3002\u00a0\n\u9605\u8bfb\u672c\u89c6\u9891\u6587\u7a3f\u3002",
+          "title": "Section 8 Housing - housing_selfhelp",
+          "url": "https://www.courts.ca.gov/section8.htm",
+          "score": 16.26815,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724061402
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Section 8 Housing Choice Voucher Program"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "d35c478aa00b6b87-18475-20593",
+          "text": "The 2024-25 Budget: Child Welfare\nCounties may use some of these dollars to fund federally required case management activities for youth receiving Foster Youth to Independence (FYI)/Family Unification Program (FUP) vouchers. FYI/FUP vouchers provide a 36\u2011month rental subsidy (through the voucher provided by the housing authority), paired with supportive services provided or secured through the county child welfare agency.\n\nStatus: Housing Navigators funded as part of 2019\u201120 budget and expanded to become HNMP in 2022\u201123.\n\nGeneral Fund allocations: $13.7 million annually\n\nCounties: 51 counties have been allocated funding in 2023.\n\nExpenditures: Unknown. Grantees have multiple years to expend funding.\n\nTotal youth served in 2023: Unknown how many total youth are served by HNMP. Stakeholders estimate more than 1,300 youth were recipients of federal housing funding through FYI and FUP voucher programs as of November 2023.\n\nOverview of Administration\u2019s Proposal for Permanent CCR Rates Structure\nBackground on CCR Rates. As part of implementing CCR, the state developed a new foster care maintenance payment rates structure to replace the previous age-based and group home rates structure. Under CCR, foster care rates must be based on the assessed level of need of individual youth (\u201clevel of care\u201d), with youth requiring higher levels of behavioral health supports and other more therapeutic and intensive services receiving higher rates. Since 2017, the state has been implementing interim level of care (LOC) rates for resource families, Short-Term Residential Therapeutic Programs (STRTPs), Foster Family Agencies (FFAs), Intensive Services Foster Care (ISFC), and other specialized models of foster care. Statute specifies that the interim rates will expire December 31, 2024 and that the permanent, ongoing LOC rates structure will be established by January 1, 2025. In working toward meeting this statutory requirement, alongside the 2024-25 Governor\u2019s budget, DSS has shared an initial concept paper outlining a new proposed framework for the permanent rates structure.\nCurrent Rates Structure Relies on Level of Care Protocol (LOCP).",
+          "title": "The 2024-25 Budget: Child Welfare",
+          "url": "https://lao.ca.gov/Publications/Report/4855",
+          "score": 12.8862705,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724063331
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "housing for welfare"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "\nIn California, some housing programs are available for individuals receiving welfare. The California Department of Housing and Community Development (HCD) administers various rental housing and homeownership programs to assist low-income households. One such program is the California Housing Finance Agency (CalHFA), which offers several loan products to help first-time homebuyers with low to moderate incomes. Additionally, the Section 8 Housing Choice Voucher Program, funded by the U.S. Department of Housing and Urban Development (HUD), helps eligible low-income families, the elderly, and persons with disabilities afford safe and sanitary housing. Participants typically pay around 30% of their income for rent, and the voucher covers the rest. However, waiting lists for these programs can be long due to high demand."
+    },
+    {
+      "speaker": "user",
+      "text": "Is there any assistance available for property taxes for homeowners?",
+      "timestamp": 1724062736,
+      "enrichments": {
+        "Question Type": [
+          "Explanation",
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, the Postponement (PTP) Program offers loans to low-income homeowners to help them pay property taxes. The program, run by the State Controller\u2019s Office (SCO), provides loans to low-income seniors, individuals who are blind, or disabled homeowners so they can cover their property taxes and remain in their homes. Homeowners repay the loans plus interest later, usually when the house is sold or transferred. A modified version of the program was reinstated in 2014. All loan repayments go through the newly established Senior Citizens and Disabled Citizens Property Tax Postponement Fund (PTP Fund).",
+      "timestamp": 1724062740,
+      "contexts": [
+        {
+          "document_id": "487954401c8e1a27-2-2102",
+          "text": "The 2024-25 Budget: Property Tax Postponement Program [EconTax Blog]\nThe 2024-25 Budget: Property Tax Postponement Program [EconTax Blog]\n\nTranslate Our Website\n\nThis Google\u2122 translation feature provided on the Legislative Analyst's Office (LAO) website is for informational purposes only.\nThe LAO is unable to guarantee the accuracy of this translation and is therefore not liable for any inaccurate information resulting from the translation application tool.\n\nChoose your language:\n\n\u00d7\n\nSkip to main content\n\nPolicy Areas\n\nCapital Outlay, Infrastructure\nCriminal Justice\nEconomy and Taxes\nEducation\nEnvironment and Natural Resources\nHealth and Human Services\nLocal Government\nState Budget Condition\nTransportation\nOther Government Areas\n\nPublications\nThe Budget\nPropositions and Initiatives\nStaff\nCareers\nAbout Us\n\n \nSearch\n \n\n\r\n \u00a0\r\n \n\nAll Articles\n\nTweet\n\nThe 2024-25 Budget: Property Tax Postponement Program\nFebruary 29, 2024\n\nRoss Brown\n\nBackground\nProperty Tax Postponement (PTP) Program Provides Loans to Certain Low-Income Homeowners to Pay Property Taxes. The PTP program, operated by the State Controller\u2019s Office (SCO), provides loans to low-income seniors, blind, or disabled homeowners to pay their property taxes and stay in their homes. Homeowners then repay the loans plus interest at a later date\u2014often when the home is sold or transferred. The PTP program has seen some significant changes over the last 15 years, including:\n\nProgram Suspension in 2009. In response to statewide budget challenges, the program was suspended from 2009 to 2014, during which time it no longer accepted applications or made property tax payments to counties.\nNew Structure for Reinstated Program in 2014. A modified version of the program was reinstated in 2014. \u00a0First, all loan repayments go through the newly established the Senior Citizens and Disabled Citizens Property Tax Postponement Fund (PTP Fund) and the money is used to make annual property payments to counties and support program administrative costs. The intent of this change was to make the program self-funded. That is, program costs are paid for with loan repayments without general taxpayer support.",
+          "title": "The 2024-25 Budget: Property Tax Postponement Program [EconTax Blog]",
+          "url": "https://lao.ca.gov/LAOEconTax/Article/Detail/800",
+          "score": 22.117805,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724063317
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Property Tax Postponement (PTP) program"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "487954401c8e1a27-1591-3702",
+          "text": "The 2024-25 Budget: Property Tax Postponement Program [EconTax Blog]\nNew Structure for Reinstated Program in 2014. A modified version of the program was reinstated in 2014. \u00a0First, all loan repayments go through the newly established the Senior Citizens and Disabled Citizens Property Tax Postponement Fund (PTP Fund) and the money is used to make annual property payments to counties and support program administrative costs. The intent of this change was to make the program self-funded. That is, program costs are paid for with loan repayments without general taxpayer support. (Previously, all program revenues and expenditures would go through the General Fund.) Second, the state also established a $15 million cap on the PTP fund balance. When the fund balance exceeds this threshold\u2014as it did from 2017-2018 through 2019-2020 by a total of $7.9 million\u2014those funds are transferred to the General Fund. Third, in order to qualify, homeowners must have at least 40 percent equity in the home.\nReduced Interest Rates and Raised Income Eligibility Threshold in 2019.\u00a0 The Legislature modified the program in 2019, including reducing interest rates on the loans (7 percent to 5 percent), raising income eligibility thresholds ($35,000 per year to $45,000 per year and growing with inflation), and expanding the program to include manufactured homes.\n\nProposal\nBudget Proposes $7.5 Million General Fund Transfer to the PTP Fund. The Governor\u2019s budget would provide the Department of Finance authority to transfer $7.5 million from the General Fund to the PTP Fund to ensure there are adequate resources available to cover costs in 2024-25. (This transfer is located in budget item 9100-111-0001.) Program expenditures ($9 million) are expected to exceed revenues ($5.4 million) in 2024-25 and the fund balance is insufficient to ensure adequate resources to provide loans in the budget year.\nAssessment\nStructural Deficit in PTP Fund Puts Ongoing Cost Pressure on General Fund. As shown in the figure below, expenditures have exceeded revenues over the last few years, with the gap growing in recent years. This imbalance is expected to continue for at least the next few years.",
+          "title": "The 2024-25 Budget: Property Tax Postponement Program [EconTax Blog]",
+          "url": "https://lao.ca.gov/LAOEconTax/Article/Detail/800",
+          "score": 21.585215,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724063314
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Property Tax Postponement (PTP) program"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, there is assistance available for property taxes for homeowners in California. One such program is the Property Tax Postponement (PTP) program, which allows eligible homeowners to postpone payment of property taxes on their primary residence. To be eligible, homeowners must be seniors (62 or older), blind, or disabled, and have an annual income of $45,000 or less. The program is administered by the California State Controller's Office. Additionally, some local counties and cities may offer property tax relief programs for homeowners who meet certain criteria. It's recommended to check with local government offices for more information on available programs."
+    },
+    {
+      "speaker": "user",
+      "text": "Discrimination",
+      "timestamp": 1724064193,
+      "enrichments": {
+        "Question Type": [
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The Department of Fair Employment and Housing (DFEH) is responsible for enforcing laws that promote equal opportunity in housing, employment, and public accommodations, as well as protecting citizens from hate violence. Specifically, DFEH enforces the state's main equal opportunity law, the Fair Employment and Housing Act, and ensures prompt resolution of complaints. The department also works to promote sustainable and equitable access to affordable housing.",
+      "timestamp": 1724064198,
+      "contexts": [
+        {
+          "document_id": "54dd6bd0ed7797a2-0-2522",
+          "text": "2001 Budget Analysis: Dept of Fair Employment and Housing\n\n\n2001 Budget Analysis: Dept of Fair Employment and Housing\n\nLegislative Analyst's Office\nAnalysis of the 2001-02 Budget Bill\n  \n\nDepartment of Fair Employment and Housing (1700) \nThe Department of Fair Employment and Housing (DFEH) enforces laws that promote equal opportunity in housing, employment, and public accommodations, and that protect citizens from\r\nhate violence. Specifically, DFEH has responsibility for enforcing the state's main equal opportunity law, the Fair Employment and Housing Act, and resolving complaints in a timely manner.\nThe budget proposes expenditures of $22.4 million ($18.3 million from the General Fund and $4.1 million federal funds) for support of the department in 2001-02. This represents an increase\r\nof $363,000 (1.6 percent) over estimated current-year expenditures.\nInsufficient Justification of Increased Funding \nWe recommend the Legislature delete a total of $151,000 and two positions because the department has not provided workload information for the requested positions.\r\n(Delete $151,000 in Item 1700-001-0001.)\nNo Workload Data for Restrictive Covenant Program. The budget includes $151,000 from the General Fund for two positions to administer a new restrictive covenant identification\r\nservice, as authorized by Chapter 291, Statutes of 1999 (AB 1493, Nakano). Restrictive covenants under this program are those that limit property ownership based on race, color, religion,\r\nsex, familial status, marital status, disability, national origin, and ancestry, and violate the state's fair housing laws. Under this program, the department, upon request by property owners, reviews\r\nproperty deeds to determine if they contain racially restrictive covenants. According to the department, caseload tracking and processing will need to be developed for this activity. However,\r\nthe department has provided no workload data indicating the number of requests expected under the program or the amount of time it will take to process the requests. Until the department\r\nbegins administering the program, it is not clear that additional staff or resources are required. We recommend the department implement the program using existing resources during the budget\r\nyear and evaluate the workload during that time. If sufficient workload develops, a future request for staff and resources may be justified. Consequently, we recommend the Legislature delete\r\n$151,000 and two positions in Item 1700-001-0001.\n\nReturn to General Government Table of Contents,\r\n2001-02 Budget Analysis\n\n",
+          "title": "2001 Budget Analysis: Dept of Fair Employment and Housing",
+          "url": "https://lao.ca.gov/analysis_2001/general_govt/gen_12_1700_Dept_Fair_Empl_Housing_anl01.htm",
+          "score": 10.694533,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724065078
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Fair Employment and Housing Act (FEHA"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "d3d0f0437252769a-2024-4043",
+          "text": "\r\n\t\r\n \r\n \r\n Equal Employment Opportunity / No FEAR Act\r\n \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n | Federal Housing Finance Agency\r\n \r\n\nWe Want to Hear From YouSubmit comments and provide input on FHFA Rules\u00a0Open for Comment\u00a0by clicking on Rulemaking and Federal Register.\u200b\n\nConservatorship\n\nHistory of Fannie Mae & Freddie Mac Conservatorships \nSenior Preferred Stock Purchase Agreements \n\nConservatorship of Fannie Mae \n and Freddie Mac\u200b\u200bAs conservator, FHFA is focused on ensuring that each Enterprise builds capital and improves its safety and soundness. \n\nConservatorship \u200bPerformance Goals\u200b1.\u00a0\u00a0\u200b\u200b\u200b \n Op\u200b\u200berate the bu\u200b\u200bsines\u200bs in a safe a\u200bnd sound manner.\u200b2.\u200b\u00a0\u00a0\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200bProm\u200bote su\u200b\u200bstainable and equitable access to affordable housing.\u200b\n2024 Scorecard\u200b\u200b\u200b\u200b\n\nData & Tools\n\nData\nDeveloper\nTools\nReports\nFHFA Stats Blog\n\nDownloadable Data \u200b& Data Reports\u200b\u200bFHFA experts provide reliable data, including all states, about activity in the U.S. mortgage market through its House Price Index, Refinance Report, Foreclosure Prevention Report, and Performance Report.\u200b \n\nHouse Price Index Rele\u200base Dates\u200b\u200b\u200b\nSee HPI Release Dates for\u200b 2023 and 2024\u200b\u200b\u200b\n\nPolicy, Programs & Research\n\nPolicy\nPrograms\nMeet the Experts\nResearch\n\n\u200bSource: FHFA\u200b\u200bFHFA economists and policy experts provide reliable research and policy analysis about critical topics impacting the nation\u2019s housing finance sector.\u00a0Meet the experts...\u200b\n\n\u00a0\n\nMortgage Translations\n\nMortgage Translations Home\nSearch or Browse Documents\nGlossaries\nCOVID-19 Resources\nBorrower Education Materials\nInterpretive Services\nLanguage Translation Disclosure\nLearn More\nContact Us\n\n\u00a0\nMortgage Translations\n\n\u00a0\u00a0\nGlossaries\n \u00a0\nCOVID-19 Resources\u200b\n\n\r\n \r\n \r\n Equal Employment Opportunity / No FEAR Act\r\n \r\n \n\nLeadership & Organization\n\nReports & Plans\n\nCareers\n\nDo Business With Us\n\nDiversity, Equity, and Inclusion\n\nEqual Employment Opportunity / No FEAR Act\n\nFOIA & Privacy\n\nInformation Quality\n\nBudget, Finances, and Performance\n\nOmbudsman\n\nWorkforce Ombuds\n\nFHFA Policies\n\nContact Us\n\nHome / \nAbout FHFA / \nFHFA Policies / \nEqual Employment Opportunity / No FEAR Act\n\nOFFICE OF\u00a0EQUAL Opportunity AND FAIRNESS\u00a0(OEOF)",
+          "title": "\r\n\t\r\n \r\n \r\n Equal Employment Opportunity / No FEAR Act\r\n \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n | Federal Housing Finance Agency\r\n \r\n",
+          "url": "https://www.fhfa.gov/AboutUs/Policies/Pages/Equal-Employment-Opportunity.aspx",
+          "score": 12.359834,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724065072
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "FHFA"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Discrimination in housing is illegal in California. The Fair Employment and Housing Act (FEHA) makes it unlawful for anyone to discriminate against a person because of his or her race, color, religion, sex, gender identity, gender expression, sexual orientation, marital status, national origin, ancestry, familial status, source of income, disability, or genetic information in the sale, rental, or advertising of housing. If you believe you have experienced housing discrimination, you can file a complaint with the Department of Fair Employment and Housing (DFEH)."
+    },
+    {
+      "speaker": "user",
+      "text": "What about the homeless?",
+      "timestamp": 1724065978,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The primary program in the state for funding homeless shelter services is the Emergency Housing and Assistance Program (EHAP) run by the department. They fund the ongoing services of homeless shelters and forgive some loans  for the construction, rehabilitation, or acquisition of shelter facilities.  The Governor\u2019s Homelessness Plan includes eligible uses such as rapid rehousing, operating subsidies for existing supportive housing units, street outreach, service coordination, and permanent housing. Allocations to local entities are generally based on the local entity\u2019s share of the homeless population.\n",
+      "timestamp": 1724065985,
+      "contexts": [
+        {
+          "document_id": "3120ebe0fe3a911e-21121-22892",
+          "text": "The 2022-23 Budget: The Governor\u2019s Homelessness Plan\nEligible uses include rapid rehousing, operating subsidies for existing supportive housing units, street outreach, service coordination, and permanent housing. Allocations to local entities generally are based on the local entity\u2019s share of the homeless population. \nBudget\u2011related legislation has modified\u00a0some HHAPP program features over time. Most significantly, the program has evolved to encourage coordination among local entities to address homelessness in their region and require local action plans that will facilitate assessing program performance and conducting oversight. Figure\u00a05 provides an overview of each round of authorized HHAPP funding. (The state also provided $500\u00a0million in flexible homelessness aid to large cities [populations over 330,000] and CoCs on a one\u2011time basis in 2018\u201119 through the Homeless Emergency Aid Program [HEAP].) \n\nFigure 5\nOverview of The Homeless Housing, Assistance and Prevention Program (HHAPP)\n(In Millions)\n\n2019\u201120 HHAPP Round 1\n\n2020\u201121 HHAPP Round 2 \n\n2021\u201122 HHAPP Round 3\n\n2022\u201123a HHAPP Round 4\n\nGrant Funding \n\nCitiesb\n\n$285 \n\n$130 \n\n$336 \n\n$336 \n\nCounties\n\n175 \n\n80 \n\n224 \n\n224 \n\nCoCs\n\n190 \n\n90 \n\n240 \n\n240 \n\nTribal Governments \n\n\u2014 \n\n\u2014 \n\n20 \n\n20 \n\nBonusc\n\n\u2014 \n\n\u2014\n\n180 \n\n180 \n\nTotals\n\n$650\n\n$300\n\n$1,000\n\n$1,000\n\nYouth Set Aside\n\n8 percent of allocation. \n\n8 percent of allocation.\n\n10 percent of allocation.\n\n10 percent of allocation.\n\nFund Disbursement\n\nDisbursed spring 2020.\n\nDisbursed fall 2021.\n\nAnticipated initial disbursement spring 2022.\n\nAnticipated initial disbursement spring 2023.\n\nStatus \n\nRecipients managing allocated funds per program requirements and developing annual reports, as needed.\n\nRecipients managing allocated funds per program requirements and developing annual reports, as needed.",
+          "title": "The 2022-23 Budget: The Governor\u2019s Homelessness Plan",
+          "url": "https://lao.ca.gov/Publications/Report/4521",
+          "score": 11.254302,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724066265
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "homeless"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "63c2e813d6aa4efc-9307-11423",
+          "text": "2001 Budget Analysis: Housing and Community Development (2240)\n$1.4 million in ongoing funds for planning grants.\n\nHomeless Programs \nThe state's primary program for the funding of homeless shelter services is the department's Emergency Housing and Assistance\r\nProgram (EHAP). The 2000-01 budget contained $39 million for two components of EHAP:\n\nOperating Grants. $14 million of the funds are available to fund the ongoing services of homeless shelters. This level of funding\r\nis again proposed for 2001-02.\nCapital Loans. Forgivable loans totaling $25 million are available for the construction, rehabilitation, or acquisition of shelter\r\nfacilities.\n\nOther Programs \nCode Enforcement Incentives. Two new programs\u2014designed to improve local enforcement of building codes\u2014were created by\r\nChapter 664, Statutes of 2000 (AB 1382, Lowenthal), and appropriated $5 million in one-time funds. The department has received\r\nabout $30 million in applications for the two programs.\n\nCode Enforcement Incentive Program. This program ($2.75 million) provides three-year grants to local jurisdictions to\r\nincrease staffing for local code enforcement activities. The maximum grant amount is $1 million, and local matching funds must\r\nincrease over the life of the grant.\n Community Code Enforcement Pilot Program. This program ($2.25 million), with a maximum grant amount of $450,000,\r\nemphasizes improving cooperation between code enforcement officials and prosecution agencies, health departments, housing\r\nagencies, and schools.\n\nInterregional Partnership Pilot Program. This program, funded at $5 million, will provide grants to assist local governments\r\nundertaking interregional planning for housing and employment issues, with a particular emphasis on improving geographic mapping.\nChild Care Facilities. The budget appropriated $16 million for the Child Care Facilities Financing Program. The funds can be\r\nused for either direct loans or loan guarantees for child care facility purchases, expansions, or renovations. In the 2000-01 Analysis,\r\nwe reported that the program was having administrative difficulties in distributing $7 million in funds appropriated in the 1997-98\r\nbudget.",
+          "title": "2001 Budget Analysis: Housing and Community Development (2240)",
+          "url": "https://lao.ca.gov/analysis_2001/general_govt/gen_19_2240_HCD_anl01.htm",
+          "score": 12.7107935,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724066262
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "homeless"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "In California, there are various programs and services aimed at helping the homeless. The California Interagency Council on Homelessness (ICH) is a cabinet-level body that coordinates the state's efforts to address homelessness. The ICH develops and oversees the implementation of the state's strategic plan to prevent and end homelessness. Additionally, the state has several programs that provide emergency shelter, transitional housing, and permanent supportive housing for homeless individuals and families. The California Department of Housing and Community Development (HCD) also provides funding to local governments and nonprofit organizations for homelessness programs. Furthermore, there are various local initiatives and nonprofit organizations throughout the state that offer services to the homeless, such as job training, healthcare, and counseling."
+    },
+    {
+      "speaker": "user",
+      "text": "So, they have solved the problem.",
+      "timestamp": 1724066397,
+      "enrichments": {
+        "Question Type": [
+          "Opinion"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The state has taken on a larger role in funding and supporting local governments' efforts to address homelessness as the crisis has worsened.  Despite their efforts, a clear solution to the homeless problem is still elusive.",
+      "timestamp": 1724066400,
+      "contexts": [
+        {
+          "document_id": "3120ebe0fe3a911e-21121-22892",
+          "text": "The 2022-23 Budget: The Governor\u2019s Homelessness Plan\nEligible uses include rapid rehousing, operating subsidies for existing supportive housing units, street outreach, service coordination, and permanent housing. Allocations to local entities generally are based on the local entity\u2019s share of the homeless population. \nBudget\u2011related legislation has modified\u00a0some HHAPP program features over time. Most significantly, the program has evolved to encourage coordination among local entities to address homelessness in their region and require local action plans that will facilitate assessing program performance and conducting oversight. Figure\u00a05 provides an overview of each round of authorized HHAPP funding. (The state also provided $500\u00a0million in flexible homelessness aid to large cities [populations over 330,000] and CoCs on a one\u2011time basis in 2018\u201119 through the Homeless Emergency Aid Program [HEAP].) \n\nFigure 5\nOverview of The Homeless Housing, Assistance and Prevention Program (HHAPP)\n(In Millions)\n\n2019\u201120 HHAPP Round 1\n\n2020\u201121 HHAPP Round 2 \n\n2021\u201122 HHAPP Round 3\n\n2022\u201123a HHAPP Round 4\n\nGrant Funding \n\nCitiesb\n\n$285 \n\n$130 \n\n$336 \n\n$336 \n\nCounties\n\n175 \n\n80 \n\n224 \n\n224 \n\nCoCs\n\n190 \n\n90 \n\n240 \n\n240 \n\nTribal Governments \n\n\u2014 \n\n\u2014 \n\n20 \n\n20 \n\nBonusc\n\n\u2014 \n\n\u2014\n\n180 \n\n180 \n\nTotals\n\n$650\n\n$300\n\n$1,000\n\n$1,000\n\nYouth Set Aside\n\n8 percent of allocation. \n\n8 percent of allocation.\n\n10 percent of allocation.\n\n10 percent of allocation.\n\nFund Disbursement\n\nDisbursed spring 2020.\n\nDisbursed fall 2021.\n\nAnticipated initial disbursement spring 2022.\n\nAnticipated initial disbursement spring 2023.\n\nStatus \n\nRecipients managing allocated funds per program requirements and developing annual reports, as needed.\n\nRecipients managing allocated funds per program requirements and developing annual reports, as needed.",
+          "title": "The 2022-23 Budget: The Governor\u2019s Homelessness Plan",
+          "url": "https://lao.ca.gov/Publications/Report/4521",
+          "score": 21.698536,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724066951
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "The Governor\u2019s Homelessness Plan"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "3120ebe0fe3a911e-1681-4200",
+          "text": "The 2022-23 Budget: The Governor\u2019s Homelessness Plan\nShifting State\u2011Local Relationship. Historically, local entities have provided most of the homelessness assistance in their jurisdiction, relying in part on federal and state funding. As the homelessness crisis has become more acute, the state has taken a larger role in funding and supporting local governments\u2019 efforts to address homelessness. The state has increased its role in addressing homelessness by\u00a0providing significant, albeit one\u2011time and temporary, funding towards infrastructure and flexible aid to local governments in recent years. \nUpdate on Key Recent Homelessness State Spending. Recent budget actions reflect the increased role of the state in addressing homelessness. The state budget provided a total of $7.2\u00a0billion ($3.3\u00a0billion General Fund) in 2021\u201122 to about 30 homelessness\u2011related programs across various state departments. We provide implementation updates for several of the major, recent homelessness augmentations. \nHomelessness Package Proposes to Focuses on Near\u2011Team Needs. The Governor\u2019s 2022\u201123 budget proposes $2\u00a0billion one\u2011time General Fund over two years that is intended to address near\u2011term homelessness needs while previously authorized funds for long\u2011term housing solutions are implemented: $1.5 billion for behavioral health \u201cbridge\u201d housing and $500 million for the Encampment Resolution Grants\u00a0Program. \nDevote Attention to Overseeing Recent Augmentations. We suggest the Legislature dedicate the early part of the budget process to overseeing the implementation of last year\u2019s significant homelessness augmentations. Prior to authorizing increased funding for the activities proposed in the 2022\u201123 budget, ensuring that the homelessness efforts authorized in prior budgets are operating effectively, adequately supported, and can be maintained over time will be important. \nConsider Long\u2011Term Plan for Ongoing Homelessness Efforts. Addressing this crisis requires a complex combination of services and infrastructure. As more information about recent state efforts becomes available, we suggest the Legislature assess which types of interventions appear most effective. This information could help guide the state\u2019s long\u2011term fiscal and policy role in addressing homelessness. \nFor Any Authorized Funds, Set Clear Expectations and Establish Metrics to Assess Performance. Setting clear expectations through statute and establishing reporting requirements to facilitate oversight over the state\u2019s progress towards addressing homelessness will be critical. \n\nBackground",
+          "title": "The 2022-23 Budget: The Governor\u2019s Homelessness Plan",
+          "url": "https://lao.ca.gov/Publications/Report/4521",
+          "score": 20.748075,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1724066954
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "The Governor\u2019s Homelessness Plan"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "I don't have specific information on whether the problem of homelessness has been completely solved in California. The Emergency Housing and Assistance Program (EHAP) and the Governor\u2019s Homelessness Plan have been implemented to provide funding for homeless shelter services and to encourage coordination among local entities to address homelessness. However, the issue of homelessness is complex and may require ongoing efforts and resources to fully address it."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "created",
+      "timestamp": 1724067014
+    },
+    {
+      "author": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+      "status": "accepted",
+      "timestamp": 1725531422
+    },
+    {
+      "author": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+      "status": "edited",
+      "timestamp": 1725622070
+    },
+    {
+      "author": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+      "status": "edited",
+      "timestamp": 1725622070
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "edited",
+      "timestamp": 1726662364
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "accepted",
+      "timestamp": 1726662480
+    }
+  ],
+  "editor": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+  "domain": "mt-rag-govt-elser-512-100-20240611",
+  "reviewer": "f6ce971c-68d2-4c26-b1c0-477dd28a5181"
+}

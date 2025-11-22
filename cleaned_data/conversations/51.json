@@ -1,0 +1,900 @@
+{
+  "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-fiqa-beir-elser-512-100-20240501",
+      "size": "61022"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "Alternative means of salary for my employees",
+      "timestamp": 1723548848,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "There are different ways to consider salary compensation besides the traditional gross salary. Total compensation includes salary and bonuses, as well as the cost or value of employer-paid healthcare, retirement, company cars, expense accounts, stock options, and other valuable goods or services. Additionally, the total employee cost is generally double the gross cash compensation (salary + bonuses) and includes employer-paid payroll taxes and practical costs like the cost of your computer, cubicle or office furniture, and the portion of utility costs that keep you well-lit, clean and comfortable. It's also important to consider the cost of living in the area where your employees live, as this can significantly impact the actual value of their salaries. For example, $100k in California may not go as far as $100k in other parts of the U.S. Finally, it's worth noting that salary pay does not directly translate to hourly wages, as salaried employees are compensated for a week of work, which may require more or less than 40 hours.",
+      "timestamp": 1723548854,
+      "contexts": [
+        {
+          "document_id": "280081-0-1578",
+          "text": "\n\"In the U.S., virtually all salaries are expressed as \"\"gross salaries\"\", which are before the taxes that the individual must pay on their income. The numbers shown in the links are almost certainly gross salary figures. However, the \"\"gross salary\"\" is not the entire \"\"total compensation\"\" number, which is the total value of all compensation and benefits that the employee receives for his work. Total compensation includes not only salary and bonuses, but the cost or value of any employer-paid healthcare, retirement, company car, expense account, stock options, and other valuable goods or services. That's still not the total amount of money the company has to pay to have you; there are employer-paid payroll taxes totaling 6.2% of your gross salary, plus practical costs like the cost of your computer, cubicle or office furniture, and the portion of utility costs that keep you well-lit, clean and comfortable. This complete number is called \"\"total employee cost\"\", and the general rule of thumb is that it's double your gross cash compensation (salary + bonuses). Lastly, $100k in California isn't worth as much, in real terms, as $100k in other parts of the U.S. The cost of living in California, especially in Silicon Valley where the majority of the people who make six figures by being C++ programmers are located, is ridiculously expensive. There are other tech hubs in the U.S., like DFW, Austin TX, Atlanta GA, St Louis MO, Raleigh NC, etc where people earn less, but also spend less to live and so can use more of their salary in a \"\"discretionary\"\" manner.\"",
+          "score": 11.956882,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723549439
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Alternative means of salary for my employees"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "582308-0-367",
+          "text": "\nSalary pay does not compute to hourly wages. As a salary employee you aren't being paid for hours worked, you are being paid for a week of work. Sometimes that requires more time other times less. You could just as well divide your salary by the amount of overtime you work and each week you work 40 hours say that you are being over paid or paid for time not worked.",
+          "score": 11.7897835,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723549435
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Alternative means of salary for my employees"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Based on the documents provided, there are different ways to think about employee compensation beyond the traditional \"gross salary\" or \"net salary\" model. One alternative is to consider the \"total compensation\" package, which includes not only salary and bonuses but also the cost or value of any employer-paid healthcare, retirement, company car, expense account, stock options, and other valuable goods or services. Additionally, there's the \"total employee cost,\" which is the complete number of what the company has to pay to have you, including employer-paid payroll taxes, costs of equipment, and utilities. Lastly, it's important to consider the cost of living in the area where your employees live and work, as this can significantly impact the real value of their salaries. For instance, $100k in California may not go as far as $100k in other parts of the U.S. \nAs for the concept of salary pay not computing to hourly wages, the document reiterates that as a salary employee, one is being paid for a week of work, which may require more or less time depending on the demands of the job. It suggests that dividing the salary by the number of hours worked could lead to the conclusion that one is being overpaid or paid for time not worked."
+    },
+    {
+      "speaker": "user",
+      "text": "Do employers need to report their employee's salaries and withhold money for income tax purposes?",
+      "timestamp": 1723549695,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes. In many countries, employers are required to report their employee's salaries and withhold a portion for income tax, which is commonly known as \"pay as you earn,\" \"withholding taxes,\" or taxing \"at the source.\" Your employer uses the W4 form in the USA to determine how much to withhold from your wages. If you leave everything at default, your salary is your only taxable income, and you only benefit from default deductions. Your employer will calculate your tax withholding based on this information. When you start a new job, your employer will typically ask you to fill out a tax form such as the W-4 Employee's Withholding Allowance Certificate so they can withhold the correct federal income tax from your wages. If your employer doesn't do this, you are responsible for calculating and filing your income taxes, especially if you are self-employed, an independent contractor, or paid under the table. If your employer is reputable, they will provide you with additional information, usually in February. You must file your taxes correctly before the IRS tax deadline, generally April 15th for most people. Do I have to worry about money in my bank account? Unless you have a significant amount in your bank savings account earning interest, you won't have to pay any sort of tax on money in your bank account. If you do earn enough taxable interest, the bank will send you the proper forms to file your taxes.",
+      "timestamp": 1723549700,
+      "contexts": [
+        {
+          "document_id": "245451-0-792",
+          "text": "\nMany countries have employers report their employees' salaries and withhold some money for income tax purposes (it's called \u201cpay as you earn\u201d, \u201cwithholding taxes\u201d or taxing \u201cat the source\u201d). Often the system is designed in such a way that most people actually pay too much and can get money back at the end of the year. In that case, the salary you receive can certainly be considered a \u201cnet salary\u201d. Depending on the tax system, individuals might need to file a separate tax returns to report any other income (investments, rents, whatever) or benefit from tax incentives but it can also be optional. If you live in such a country and your situation is simple enough that there are no applicable deductibles, you might simply choose to forgo it and let your employer take care of everything.",
+          "score": 28.028236,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723550288
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Do employers need to report their employee's salaries and withhold money for income tax purposes?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "597053-0-714",
+          "text": "\nYes. W4 determines how much your employer will withhold from your wages. Leaving everything at default would mean that your salary is your only taxable income, and you only take default deductions. Your employee will calculate your tax withholding based on that. But, if your salary is >200k, I assume that you have other income (investment/capital gains, interest on your bank account), which you will have to pay taxes on. You're probably going to have some deductible expenses (business/partnership expenses, mortgage interest, donations, college funds etc) as well. So it is very likely, unless you're really not smart about money, that you have more to do with your taxes than just the employers' withholding.",
+          "score": 22.959251,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723550285
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Do employers need to report their employee's salaries and withhold money for income tax purposes?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "462036-6404-8453",
+          "text": "\nWhen you begin working, an employer will usually have you fill out a tax form such as a W-4 Employee's Withholding Allowance Certificate so that your employer can withhold the correct federal income tax from your wages. If they don't, then it is your responsibility to calculate and file your own income taxes (if you are self-employed, an independent contractor or paid under the table). If your employer is reputable, they will send you additional information (generally in February) you need to properly file your taxes prior to April 15th (the IRS tax deadline for most people). This additional information will likely be some variation of a W-2 Wage and Tax Statement or possibly a Form 1099-MISC. Do I have to worry about money in my bank account? Unless you have a significant amount in your bank savings account earning interest (see \"\"Should I save for the future?\"\" below), you won't have to pay any sort of tax on money in your bank account. If you do earn enough taxable interest, the bank will send you the proper forms to file your taxes. How do I file taxes? While it won't apply till next year, you will likely be able to fill out a Form 1040EZ Income Tax Return for Single and Joint Filers With No Dependents, as long as you don't have any kids in the meantime. ;-) You will either mail in the paper form (available at your local IRS office, post office, public library, etc.) or file electronically. There will be a lot of information on how to do this when the time comes, so don't worry about details just yet. Assuming your all paid up on your taxes (very likely unless you get a good paying job and take a lot of deductions throughout the year on your W-4), you'll probably get money back from the IRS when you file your tax return. As I mentioned above, if you have a bank account, you can opt to have your refund money returned electronically and get it much sooner than if you didn't have a bank account (again, possibly saving you literal months of waiting). Should I save for my future? If so, how much? Any good articles?",
+          "score": 28.223597,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723550282
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "When you begin working, an employer will usually have you fill out a tax form such as a W-4"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, employers are responsible for reporting their employee's wages, including salaries, on Form W-2. However, employer contributions to retirement plans are not deducted from the employee's gross wages (box 1) on the W-2. Only elective deferrals, such as 401(k) contributions, should be withheld from an employee's wages for income tax purposes. Employers are also responsible for withholding income tax from their employee's wages based on the information provided by the employee on their W-4 form."
+    },
+    {
+      "speaker": "user",
+      "text": "In that case, could you please explain why I still have to pay income tax?",
+      "timestamp": 1723550804,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "In the U.S., most salaries are expressed as \"gross salaries\" before individual taxes are deducted. You must report all income from work, regardless of whether you save, spend, or keep it aside. This includes income from non-tax-advantaged accounts, as well as any gains or losses and dividends received. Gains and losses are realized when you actually sell, and is the difference between the price you bought for, and the price you sold for. Gains are taxed at the capital gains rate, either short-term or long-term depending on how long you owned the stock",
+      "timestamp": 1723550810,
+      "contexts": [
+        {
+          "document_id": "280081-0-1578",
+          "text": "\n\"In the U.S., virtually all salaries are expressed as \"\"gross salaries\"\", which are before the taxes that the individual must pay on their income. The numbers shown in the links are almost certainly gross salary figures. However, the \"\"gross salary\"\" is not the entire \"\"total compensation\"\" number, which is the total value of all compensation and benefits that the employee receives for his work. Total compensation includes not only salary and bonuses, but the cost or value of any employer-paid healthcare, retirement, company car, expense account, stock options, and other valuable goods or services. That's still not the total amount of money the company has to pay to have you; there are employer-paid payroll taxes totaling 6.2% of your gross salary, plus practical costs like the cost of your computer, cubicle or office furniture, and the portion of utility costs that keep you well-lit, clean and comfortable. This complete number is called \"\"total employee cost\"\", and the general rule of thumb is that it's double your gross cash compensation (salary + bonuses). Lastly, $100k in California isn't worth as much, in real terms, as $100k in other parts of the U.S. The cost of living in California, especially in Silicon Valley where the majority of the people who make six figures by being C++ programmers are located, is ridiculously expensive. There are other tech hubs in the U.S., like DFW, Austin TX, Atlanta GA, St Louis MO, Raleigh NC, etc where people earn less, but also spend less to live and so can use more of their salary in a \"\"discretionary\"\" manner.\"",
+          "score": 35.519287,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723551830
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Alternative means of salary for my employees\n|assistant|: According to the documents, there are different ways to consider salary compensation besides the traditional gross salary. Total compensation includes salary and bonuses, as well as the cost or value of employer-paid healthcare, retirement, company cars, expense accounts, stock options, and other valuable goods or services. Additionally, the total employee cost is generally double the gross cash compensation (salary + bonuses) and includes employer-paid payroll taxes and practical costs like equipment and utilities. It's also important to consider the cost of living in the area where your employees live, as this can significantly impact the actual value of their salaries. For example, $100k in California may not go as far as $100k in other parts of the U.S. Finally, it's worth noting that salary pay does not directly translate to hourly wages, as salaried employees are compensated for a week of work, which may require more or less than 40 hours.\n|user|: Do employers need to report their employee's salaries and withhold money for income tax purposes?\n|assistant|: Yes. In many countries, employers are required to report their employee's salaries and withhold a portion for income tax, which is commonly known as \"pay as you earn,\" \"withholding taxes,\" or taxing \"at the source.\" Your employer uses the W4 form in the USA to determine how much to withhold from your wages. If you leave everything at default, your salary is your only taxable income, and you only benefit from default deductions. Your employer will calculate your tax withholding based on this information. When you start a new job, your employer will typically ask you to fill out a tax form such as the W-4 Employee's Withholding Allowance Certificate so they can withhold the correct federal income tax from your wages. If your employer doesn't do this, you are responsible for calculating and filing your income taxes, especially if you are self-employed, an independent contractor, or paid under the table. If your employer is reputable, they will provide you with additional information, usually in February. You must file your taxes correctly before the IRS tax deadline, generally April 15th for most people.\n|user|: In that case, could you please explain why I still have to pay income tax?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "41509-0-965",
+          "text": "\nYou need to report the income from any work as income, regardless of if you invest it, spend it, or put it in your mattress (ignoring tax advantaged accounts like 401ks).  You then also need to report any realized gains or losses from non-tax advantaged accounts, as well as any dividends received.  Gains and losses are realized when you actually sell, and is the difference between the price you bought for, and the price you sold for.  Gains are taxed at the capital gains rate, either short-term or long-term depending on how long you owned the stock.   The tax system is complex, and these are just the general rules.  There are lots of complications and special situations, some things are different depending on how much you make, etc.  The IRS has all of the forms and rules online.  You might also consider having a professional do you taxes the first time, just to ensure that they are done correctly.  You can then use that as an example in future years.",
+          "score": 21.812428,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723551819
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "You need to report the income from any work as income, regardless of if you invest it"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Even though your employer withholds taxes from your wages, this might not cover all the taxes you owe. The withheld taxes are based on your income and the deductions you claim on your W-4 form. If you have additional sources of income, such as investment income or self-employment income, you may owe taxes on that income as well. Similarly, if you have deductible expenses that reduce your taxable income, you may be entitled to a refund when you file your taxes. Therefore, it's essential to ensure that your W-4 form accurately reflects your tax situation to avoid owing taxes or overpaying them. If you find that you owe taxes despite your employer's withholding, you may need to adjust your W-4 form or make estimated tax payments throughout the year to avoid penalties and interest charges."
+    },
+    {
+      "speaker": "user",
+      "text": "Deductions",
+      "timestamp": 1723552400,
+      "enrichments": {
+        "Question Type": [
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The number of allowances you can claim is calculated by dividing your total deductions by the personal exemptions for the tax year. In 2015, the standard deduction for a married couple filing jointly is $12,600, and each person gets a personal exemption of $4,000. If your deductions exceed the standard deduction, you can subtract property taxes from your income. For example, if your income is $95,000, after taking into account the standard deduction of $12,600 and $8,000 in exemptions, your taxable income would be just under $10,000, unless you have additional undisclosed income. The most common tax credit for most people is student loan interest. If you pay $500 in student loan interest, that sum is subtracted from your tax bill.",
+      "timestamp": 1723552407,
+      "contexts": [
+        {
+          "document_id": "478388-0-530",
+          "text": "\nYou have a standard deduction of $12,600 (Married filing joint, MFJ) plus $8000 in exemptions. A total of $20,600 off the top. In other words, just under $10,000 taxable unless you have other income you haven't disclosed. For MFJ, you are at the 10% bracket up to $18,450 in taxable income.  I would withdraw just enough to 'top off' the 10% bracket each year, whether or not you send it to pay down the card. You don't disclose the rate, but if you are able take a low interest loan to get to a sub 5% interest rate, I'd do that.",
+          "score": 16.141764,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723552903
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Deductions from the income tax"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "555102-0-912",
+          "text": "\n\"Allowances are calculated as your total deductions divided by the tax year's personal exemptions. As mentioned above it is a multiplier. For 2015 the standard deduction for a married couple filing jointly is $12,600 and each of you gets 1 personal exemption ($4,000 in 2015). That's a total of $12,600 + 2*($4,000) or $20,600. Divide this by the personal exemption and you get roughly 5 allowances. Now say your employer offers health insurance and a 401(k) plan. Your total health insurance (or \"\"cafeteria\"\" contributions) are $2,000 for the year, and your total 401(k) plan contributions are $6,000 for the year. This would give an additional $2,000 + $6,000 = $8,000 divided by $4,000 = 2 allowances. Thus you would file with 7 allowances. Note that tax credits are not included in the allowance calculation. That is because they do not affect your taxable income but rather directly reduce your taxes due.\"",
+          "score": 16.68354,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723552906
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Deductions from the income tax"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "599015-0-504",
+          "text": "\nIf your deductions are higher than the standard deduction, you will be able to subtract property taxes from your income. In your example, that means that taxes are computed based on $95,000. In 2011, the standard deduction varies between $5,800 (single filer) and $11,600 (married filing jointly). Tax credits are subtracted from your tax obligation. The most common tax credit for most people is student loan interest. If you pay $500 in student loan interest, that sum is subtracted from your tax bill.",
+          "score": 15.499683,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723552909
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Deductions from the income tax"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "204187-0-408",
+          "text": "\nThe taxes that are deducted from you paycheck are estimated from the expected annual income you receive from the employer. In the same way, the employer will deduct from that expected annual income the tax deductions you would get for the number of dependents you specify. Hence your net income will be lower, your annual tax obligation also, which can than be calculated down to the period of your paycheck.",
+          "score": 15.549044,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723552912
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Deductions from the income tax"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Deductions are reductions in the amount of income subject to tax. They can be subtracted from your adjusted gross income (AGI) to reduce your taxable income. Common deductions include business or partnership expenses, mortgage interest, donations, and college funds. If your salary is greater than $200,000, you may have additional deductible expenses related to investment/capital gains or interest on your bank account. It's important to note that these deductions may not be fully reflected in your employer's withholding calculations, so you may need to pay additional taxes or claim additional deductions when you file your tax return."
+    },
+    {
+      "speaker": "user",
+      "text": "What about FICA?",
+      "timestamp": 1723554954,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "In the United States, nearly all workers must pay Social Security and Medicare taxes, also known as payroll taxes or FICA. It's important to understand that these taxes are not savings plans, and the money you pay is not explicitly allocated to an account in your name. Instead, it funds the benefits received by current retirees and beneficiaries. When you retire, your benefits will be financed by the contributions of the still-employed workers paying these taxes. It's worth noting that FICA taxes are separate from federal and state income taxes, and as a sole proprietor, you are responsible for both types of taxes. Furthermore, there's a distinction between FICA taxes when you are an employee and when you are self-employed. Typically, FICA taxes are divided equally between the employer and the employee, with each paying half. However, if you are self-employed, you are responsible for paying both halves. This is commonly known as the self-employment tax. You may be receiving benefits, but you are also still working, so you still have to pay the tax.",
+      "timestamp": 1723554958,
+      "contexts": [
+        {
+          "document_id": "252843-0-1938",
+          "text": "\nFICA taxes are separate from federal and state income taxes. As a sole proprietor you owe all of those.  Additionally, there is a difference with FICA when you are employed vs. self employed.  Typically FICA taxes are actually split between the employer and the employee, so you pay half, they pay half. But when you're self employed, you pay both halves. This is what is commonly referred to as the self employment tax. If you are both employed and self employed as I am, your employer pays their portion of FICA on the income you earn there, and you pay both halves on the income you earn in your business. Edit: As @JoeTaxpayer added in his comment, you can specify an extra amount to be withheld from your pay when you fill out your W-4 form. This is separate from the calculation of how much to withhold based on dependents and such; see line 6 on the linked form. This could allow you to avoid making quarterly estimated payments for your self-employment income. I think this is much easier when your side income is predictable. Personally, I find it easier to come up with a percentage I must keep aside from my side income (for me this is about 35%), and then I immediately set that aside when I get paid. I make my quarterly estimated payments out of that money set aside.  My side income can vary quite a bit though; if I could predict it better I would probably do the extra withholding. Yes, you need to pay taxes for FICA and federal income tax.  I can't say exactly how much you should withhold though. If you have predictable deductions and such, it could be lower than you expect. I'm not a tax professional, and when it comes doing business taxes I go to someone who is. You don't have to do that, but I'm not comfortable offering any detailed advice on how you should proceed there. I mentioned what I do personally as an illustration of how I handle withholding, but I can't say that that's what someone else should do.",
+          "score": 12.276782,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723555206
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "FICA"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "259881-0-582",
+          "text": "\nThis is something that many people misunderstand. Nearly everyone who works in the U.S. is required to pay Social Security and Medicare taxes (sometimes called payroll taxes or FICA).  These are not a savings plan, and the money you pay is not going into an account with your name on it.  This money is used to pay for the benefits of the current retirees/beneficiaries.  When you retire, the benefits you get will be paid for by the workers that are still working and paying that tax. You may be receiving benefits, but you are also still working, so you still have to pay the tax.",
+          "score": 11.253688,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723555202
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "FICA"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "FICA, or the Federal Insurance Contributions Act, refers to the taxes that fund Social Security and Medicare in the United States. Both employees and employers contribute to FICA. The employee's contribution is withheld from their wages, while the employer matches this amount. As of 2021, the Social Security tax rate is 6.2% for both employers and employees, and the Medicare tax rate is 1.45% for both employers and employees. There is also a 0.9% Medicare surtax for high-income earners. These taxes are automatically withheld from most paychecks, and your employer is responsible for remitting them to the government."
+    },
+    {
+      "speaker": "user",
+      "text": "Is personal income tax the same as corporate tax?",
+      "timestamp": 1723556266,
+      "enrichments": {
+        "Question Type": [
+          "Comparative"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "No, corporations are taxed on their profits. Multinational corporations can report their earnings in any country where they operate, irrespective of where the actual sale occurs. It's difficult to pinpoint precisely where a company 'made its money.' Consequently, the US does not attempt to do so; instead, we tax them on their worldwide earnings, minus taxes paid in other countries.",
+      "timestamp": 1723556269,
+      "contexts": [
+        {
+          "document_id": "419488-0-370",
+          "text": "\nCorporations are taxed on their profits.  Multinational corporations can report their profits in any country they have operations, regardless of where they made the sale.  In other words, it's impossible to nail down exactly where a company 'made it's money'.  So the US doesn't try, we just tax them on earnings everywhere, minus taxes paid elsewhere.  edit for clarity",
+          "score": 14.727195,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723557181
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Corporate taxes"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "471700-0-458",
+          "text": "\nIf corporations are people, why do persons have to pay tax on their revenues (personal income) while corporations only pay tax on their profits (operating income).   If corporations are people, then everyone should pay taxes the same way - either on their revenues, or their profits. We shouldn't be discriminating.   Boy, if a person could only pay taxes on their profits (savings), instead of their revenues (personal income), it'd be a whole new ballgame.",
+          "score": 14.3099165,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723557177
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Corporate taxes"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "No, personal income tax and corporate tax are not the same. Personal income tax is a tax on the income earned by individuals, while corporate tax is a tax on the profits earned by corporations. The rates, rules, and regulations for each type of tax are different."
+    },
+    {
+      "speaker": "user",
+      "text": "Investments?",
+      "timestamp": 1723557432,
+      "enrichments": {
+        "Question Type": [
+          "Explanation",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "If you receive dividends on an investment, those are taxed. When you exchange investments for cash, you will have to pay tax on that, disregarding capital losses, capital loss carryovers, AGI thresholds, and other special rules. For most investments, you get taxed on any gain in value in the investment or dividends paid by that investment. Usually, you don't take the tax hit until you sell the investment and realize the gain, with some exceptions for mutual funds. For bonds, CDs, and other cash-type investments, you have to pay taxes in the year they pay out the interest or dividend.\n1) You can put money (up to a certain limit) in a traditional IRA and can subtract that amount from your income for tax calculation for the year you invest it. However, you are going to pay taxes on it when you take the money out at retirement. It really just delays the taxes.\n2) If you put the money in a Roth IRA, you don't get a tax break now, but you don't have to pay any taxes on the money or the gains when you take it out at retirement.\n3) The gains from some mutual funds can be tax exempt, but that just saves you from paying tax on the increase in value.\n4) Don't fall for scams that try to use insurance policies as investments to avoid taxes. The fees are enormous, which usually makes them a rip-off.",
+      "timestamp": 1723557439,
+      "contexts": [
+        {
+          "document_id": "321114-0-59",
+          "text": "\nIf you receive dividends on an investment, those are taxed.",
+          "score": 18.878447,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723557953
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "taxes on investments"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "315105-0-1161",
+          "text": "\nNot exactly. There are a few ways to manage your taxes with investments. 1) For most investments you get taxed on any gain in value in the investment or dividends paid by that investment. Most investments (with some exceptions for mutual funds) you don't take the tax hit until you sell the investment and realize the gain. For bonds, cds, and other cash type investments you have to pay taxes in the year they pay out the interest or dividend. 2) You can put money (up to a certain limit) in a traditional IRA and can subtract that amount from your income for tax calculation for the year you invest it. However, you are going to pay taxes on it when you take the money out at retirement. It really just delays the taxes. 3) If you put the money in a Roth IRA, you don't get a tax break now, but you don't have to pay any taxes on the money or the gains when you take it out at retirement. 4) The gains from some mutual funds can be tax exempt, but that just saves you from paying tax on the increase in value.  5) Don't fall for scams that try to use insurance policies as investments to avoid taxes. The fees are ginormous, which usually makes them a ripoff.",
+          "score": 18.825537,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723557950
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "taxes on investments"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "443354-0-393",
+          "text": "\nYes (most likely). If you are exchanging investments for cash, you will have to pay tax on that - disregarding capital losses, capital loss carryovers, AGI thresholds, and other special rules (which there is no indication of in your question). You will have to calculate the gain on Schedule D, and report that as income on your 1040. This is the case whether you buy different or same stocks.",
+          "score": 18.795572,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723557969
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "taxes on investments"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The document discusses the concept of total compensation, which includes not only salary and bonuses but also the cost or value of employer-paid healthcare, retirement, company cars, expense accounts, stock options, and other valuable goods or services. Additionally, the total employee cost is generally double the gross cash compensation (salary + bonuses) and includes employer-paid payroll taxes and practical costs like equipment and utilities.\nHowever, the document does not provide specific information on alternative means of salary for employees beyond the concept of total compensation.\nTherefore, I do not have specific information on alternative means of salary for employees beyond what was already mentioned."
+    },
+    {
+      "speaker": "user",
+      "text": "Are they the same all over the USA?",
+      "timestamp": 1723558337,
+      "enrichments": {
+        "Question Type": [
+          "Factoid",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "No. Personal income tax rates and rules differ from state to state in the USA. Seven U.S. states currently don't have an income tax: Alaska, Florida, Nevada, South Dakota, Texas, Washington, and Wyoming; some only tax income derived in the state, and some tax worldwide income (like New York or California), similarly to the Federal income taxes. However, suppose you're living abroad (i.e., you're a citizen or resident of a foreign country and live there). In that case, you're not considered a resident by most states (check with your state for specific definitions) for most, if not all, the time of your residency abroad. In such a case, you don't pay state taxes; you only pay federal taxes.  You have to remember that foreign income exclusion doesn't apply to the income from your 401k, so you pay the taxes as if you're in the US.",
+      "timestamp": 1723558342,
+      "contexts": [
+        {
+          "document_id": "285472-0-495",
+          "text": "\n\"&gt; Seven U.S. states currently don't have an income tax: Alaska, Florida, Nevada, South Dakota, Texas, Washington and Wyoming.   So to be clear, you were talking about just income tax in your original comment? Or do those states have no other forms of tax whatsoever? I am still confused because you just said \"\"state tax\"\" in your original comment and did not specify a specific type of taxation like \"\"income tax\"\" or \"\"property tax\"\" or \"\"business tax\"\" or \"\"sales tax\"\" within the state.\"",
+          "score": 16.013964,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723558791
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Tax is the same in all the USA?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "457455-0-1285",
+          "text": "\nIt essentially works the same. Some states don't have any income taxes at all (like Florida or Wyoming), some only tax income derived in the state, and some tax worldwide income (like New York or California), similarly to the Federal income taxes. However, if you're living abroad (i.e.: you're a citizen or resident of a foreign country and you live there), you're not considered resident by most of the states (check with your state for specific definitions) for most, if not all, the time of your residency abroad. In such case - you don't pay state taxes, only Federal. You have to remember that foreign income exclusion doesn't apply to the income from your 401k, so you pay the taxes as if you're in the US. You can not use foreign taxes credit as well (but depending on the tax treaty with the country you're moving to, your 401k income might not be taxable there). In some cases you may end up with double taxation: US will tax your 401k income as you're a US citizen and the income is derived from the US sources, and the foreign country will tax the income based on its own laws. This is not a tax advice, and this answer was not intended or written to be used, and it cannot be used by any taxpayer, for the purpose of avoiding penalties that may be imposed on the taxpayer.",
+          "score": 14.566386,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723558788
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Tax is the same in all the USA?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The personal income tax rates and rules can vary from state to state within the USA. Some states, like Texas and Florida, do not have a personal income tax at all, while others, like California and New York, have higher income tax rates. Additionally, some states offer tax breaks or deductions for certain types of income or expenses, while others do not. Therefore, it's essential to check the specific tax laws and regulations in the state where you live or earn income. However, the federal income tax rates and rules apply equally to all states."
+    },
+    {
+      "speaker": "user",
+      "text": "If I lose my job",
+      "timestamp": 1723559194,
+      "enrichments": {
+        "Question Type": [
+          "Non-Question"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "If you lose your job, it depends on the circumstances under which you lost your job. Unemployment insurance provides a temporary safety net to workers who lose their jobs by replacing a portion of their salary for specific periods. Each state administers its unemployment insurance program, so the rules may vary from state to state. You must have lost your job through no fault of your own to receive unemployment insurance payments. You are not eligible for unemployment insurance benefits if you quit your job or lost it because of poor performance or another justifiable reason. To receive unemployment benefits, you must be registered with an employment agency, actively seeking work, and willing to accept work should it be offered. Your payment will be a percentage of what you made in your previous job, generally between 20 percent and 50 percent, depending on your state. ",
+      "timestamp": 1723559197,
+      "contexts": [
+        {
+          "document_id": "307120-0-2515",
+          "text": "\n\"Unemployment insurance provides a temporary safety net to workers who lose their jobs by replacing a portion of their salary for certain periods. Each state administers its own unemployment insurance program so some rules may vary from state to state. To receive unemployment insurance payments, you must have lost your job through no fault of your own. If you quit your job or lost it because of poor performance or another justifiable reason, you are not eligible for unemployment insurance benefits. State unemployment insurance programs require claimants to have worked sufficiently before they can claim benefits. As soon as you apply for unemployment insurance, an agency with the state in which you live will verify that you were a victim of a layoff by contacting your previous employer and making sure you lost your job due to lack of work and not an action within your control. After the state verifies you were indeed the victim of a layoff, your weekly payment is calculated. Your payment will be a percentage of what you made in your previous job, generally between 20 percent and 50 percent, depending on your state. Unemployment insurance replaces only a portion of your previous pay because it is intended to pay only for the essentials of living such as food and utilities until you find new employment. Before you begin receiving benefits, you must complete a waiting period of typically one or two weeks. If you find a new job during this period, you will not be eligible for unemployment benefits, even if the job does not pay you as much as your previous job. After the waiting period, you will begin to receive your weekly payments. Employers pay for unemployment insurance through payroll taxes. So, while employees' work and earnings history are important to funding their unemployment benefits, the money does not come from their pay. Employer unemployment insurance contributions depend on several factors, including how many former employees have received benefits. Employers pay taxes on an employee's base wages, which vary by state. California, for example taxes employers on the first $7,000 of an employee's annual earnings, while neighboring Oregon taxes up to $32,000 of wages. Employers must set aside funds each payroll period and then report taxes and pay their states quarterly. States have several categories of tax rates they charge employers. New businesses and those first adding employees pay the \"\"new rate,\"\" which is typically lower and geared toward small businesses.",
+          "score": 17.436743,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723559729
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "if I lose my job benefits. "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "481896-0-530",
+          "text": "\nUnemployment is meant for people who were laid off, not terminated.  Also, the employee who claimed unemployment did so even after they had worked for another company for several months between working for me and making the claim.  If I actually laid someone off I would be the first to personally help them fill out paperwork for unemployment benefits.  If those benefits go to those who shouldn't receive them it hurts everyone.  That 3% increase in unemployment insurance is 3% that isn't going into paying my actual employees.",
+          "score": 14.29239,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723559724
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "unemployment benefits. "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "229134-0-1498",
+          "text": "\n\"To receive unemployment benefits, you must be registered with an employment agency and be actively seeking work, and be willing to accept work should it be offered to you. As a full-time Cornell University student, as you describe yourself, this does not seem a likely scenario. Also, you need to have established a state of residence. It is not clear to me that you have done so, given your travel between the South Pacific, Ithaca, New York, North Carolina etc. You should check with your local state unemployment office in New York State, or perhaps North Carolina, although I don't know if you satisfy residency requirements in either state. They will be able to confirm however. Are your parents claiming you as a dependent on their federal income taxes? If so, I do not believe that you will be able to file for unemployment benefits, regardless of your student status at Cornell University.  One more issue to consider: Have you filed tax returns for the income you received from your television production work? I am uncertain of the amount, as you said that you worked for two 4-month intervals making $10,000. That implies $20,000 of earnings over two years. Yet your bullet point number 7 states that you made \"\"10 grand each of the four months\"\". If that means that you made $10,000 per month for four months, then you earned $40,000 per summer, for a total of $80,000 for two summer's worth of work. I don't think unemployment benefits are intended for individuals in your situation.\"",
+          "score": 12.970038,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723559716
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "unemployment benefits. "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "If you lose your job, you may be eligible for unemployment benefits, which vary by state. You can apply for these benefits through your state's unemployment office. You may also want to consider temporary or part-time work, freelancing, or starting your own business. If you receive a severance package, this may affect your unemployment benefits, so it's important to check with your state's unemployment office. Additionally, losing your job may qualify you for a hardship distribution from your retirement account, but this should be a last resort due to the potential tax implications."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "created",
+      "timestamp": 1723559799
+    },
+    {
+      "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+      "status": "accepted",
+      "timestamp": 1725585923
+    },
+    {
+      "author": "53573702-4140-4812-8658-ae10a54edfc8",
+      "status": "edited",
+      "timestamp": 1726670683
+    },
+    {
+      "author": "53573702-4140-4812-8658-ae10a54edfc8",
+      "status": "accepted",
+      "timestamp": 1726670776
+    }
+  ],
+  "editor": "53573702-4140-4812-8658-ae10a54edfc8",
+  "domain": "mt-rag-fiqa-beir-elser-512-100-20240501",
+  "reviewer": "53573702-4140-4812-8658-ae10a54edfc8"
+}

@@ -1,0 +1,820 @@
+{
+  "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-govt-elser-512-100-20240611",
+      "size": "49607"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "collections": {
+        "regex": "mt-rag*"
+      },
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "How many fatalities each year are caused by collisions between motorcycles and other vehicles in New York?",
+      "timestamp": 1725364558,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "UNANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I do not have specific information on the number of fatalities each year caused by collisions between motorcycles and other vehicles in New York. ",
+      "timestamp": 1725364566,
+      "contexts": [
+        {
+          "document_id": "21ab6c12926e35e3-2-1988",
+          "text": "Motorcycle Safety | Governor's Traffic Safety Committee\nMotorcycle Safety | Governor's Traffic Safety Committee\n\n Skip to main content\n \n\nTranslate\n\nEnglish\n\nEspa\u00f1ol\n\n\u4e2d\u6587\n\n\u7e41\u9ad4\u4e2d\u6587\n\n\u0420\u0443\u0441\u0441\u043a\u0438\u0439\n\n\u05d9\u05d9\u05d3\u05d9\u05e9\n\n\u09ac\u09be\u0982\u09b2\u09be\n\n\ud55c\uad6d\uc5b4\n\nKrey\u00f2l Ayisyen\n\nItaliano\n\n\u0627\u0644\u0639\u0631\u0628\u064a\u0629\n\nPolski\n\nFran\u00e7ais\n\n\u0627\u0631\u062f\u0648\n\n \n\n Your browser does not support iFrames\n \n\nNavigation Menu Toggle\n\n Governor's Traffic Safety Committee\n\nSafety TopicsGrants Training & EventsLaw EnforcementResourcesAbout\n\n \n\nMotorcycle Safety & Awareness\n\nProtecting the most vulnerable road users.\n\nTOP\nMotorcycle Safety\n\nSHARE\n\nShare by Email\n\nShare by Facebook\n\nShare by Twitter\n\n \nCreating Safety & Awareness in New York State\n\nMotorcycle riding is more popular in New York than ever. There are more than 750,000 licensed motorcyclists and that number continues to grow with each passing year. For many people, motorcycling is a fun sport as well as an energy-efficient means of transportation. However, motorcycling can be dangerous. It requires skill, concentration and reasonable precautions.\nMotorcyclists are about 28 times more likely to die in a crash than people in passenger cars. Motorcyclists continue to be overrepresented in traffic-related fatalities; Despite representing only 3% of all registered motor vehicles, motorcyclists account for 14% of all traffic-related fatalities (National Highway Traffic Safety Administration, 2018).\n\nTaking Action\nEfforts to Improve Motorcycle Safety\n\nMotorcycle Safety Program\nThe Department of Motor Vehicles established a rider-funded motorcycle safety program as required by legislation signed in 1997. The program provides accessible and affordable rider education throughout NYS, in an effort\u00a0to create awareness and reduce motorcyclist injuries and fatalities.\n\nMotorcycle Helmet Law\nNew York was the first state in the nation to adopt a universal motorcycle helmet law. This law, effective as of January 1, 1967, requires any person operating or riding a motorcycle to wear a Department of Transportation (DOT)-approved helmet.\u00a0\n\nMotorcycle Safety Awareness Month",
+          "title": "Motorcycle Safety | Governor's Traffic Safety Committee",
+          "url": "https://trafficsafety.ny.gov/motorcycle-safety",
+          "score": 14.497077,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "no",
+                "timestamp": 1725364593
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How many fatalities each year are caused by collisions between motorcycles and other vehicles in New York?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "I do not have specific information on the number of fatalities each year caused by collisions between motorcycles and other vehicles in New York. The provided document contains motorcycle safety data, but it does not break down the statistics by cause of accidents or geographical location."
+    },
+    {
+      "speaker": "user",
+      "text": "What are the regulations for motorcycle driving?",
+      "timestamp": 1725364774,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "New York was the first state in the nation to introduce a universal motorcycle helmet law. This law, which took effect on January 1, 1967, requires anyone operating or riding a motorcycle to wear a Department of Transportation (DOT)-approved helmet.  It's important to be a responsible driver by ensuring your vehicle is in safe operating condition and that all of your safety equipment is properly adjusted. It is crucial to observe and obey all traffic laws, signs, and signals. Avoid being distracted by cell phones and other activities while driving. It's important to drive sober and never drive impaired by alcohol or drugs.",
+      "timestamp": 1725364784,
+      "contexts": [
+        {
+          "document_id": "21ab6c12926e35e3-2-1988",
+          "text": "Motorcycle Safety | Governor's Traffic Safety Committee\nMotorcycle Safety | Governor's Traffic Safety Committee\n\n Skip to main content\n \n\nTranslate\n\nEnglish\n\nEspa\u00f1ol\n\n\u4e2d\u6587\n\n\u7e41\u9ad4\u4e2d\u6587\n\n\u0420\u0443\u0441\u0441\u043a\u0438\u0439\n\n\u05d9\u05d9\u05d3\u05d9\u05e9\n\n\u09ac\u09be\u0982\u09b2\u09be\n\n\ud55c\uad6d\uc5b4\n\nKrey\u00f2l Ayisyen\n\nItaliano\n\n\u0627\u0644\u0639\u0631\u0628\u064a\u0629\n\nPolski\n\nFran\u00e7ais\n\n\u0627\u0631\u062f\u0648\n\n \n\n Your browser does not support iFrames\n \n\nNavigation Menu Toggle\n\n Governor's Traffic Safety Committee\n\nSafety TopicsGrants Training & EventsLaw EnforcementResourcesAbout\n\n \n\nMotorcycle Safety & Awareness\n\nProtecting the most vulnerable road users.\n\nTOP\nMotorcycle Safety\n\nSHARE\n\nShare by Email\n\nShare by Facebook\n\nShare by Twitter\n\n \nCreating Safety & Awareness in New York State\n\nMotorcycle riding is more popular in New York than ever. There are more than 750,000 licensed motorcyclists and that number continues to grow with each passing year. For many people, motorcycling is a fun sport as well as an energy-efficient means of transportation. However, motorcycling can be dangerous. It requires skill, concentration and reasonable precautions.\nMotorcyclists are about 28 times more likely to die in a crash than people in passenger cars. Motorcyclists continue to be overrepresented in traffic-related fatalities; Despite representing only 3% of all registered motor vehicles, motorcyclists account for 14% of all traffic-related fatalities (National Highway Traffic Safety Administration, 2018).\n\nTaking Action\nEfforts to Improve Motorcycle Safety\n\nMotorcycle Safety Program\nThe Department of Motor Vehicles established a rider-funded motorcycle safety program as required by legislation signed in 1997. The program provides accessible and affordable rider education throughout NYS, in an effort\u00a0to create awareness and reduce motorcyclist injuries and fatalities.\n\nMotorcycle Helmet Law\nNew York was the first state in the nation to adopt a universal motorcycle helmet law. This law, effective as of January 1, 1967, requires any person operating or riding a motorcycle to wear a Department of Transportation (DOT)-approved helmet.\u00a0\n\nMotorcycle Safety Awareness Month",
+          "title": "Motorcycle Safety | Governor's Traffic Safety Committee",
+          "url": "https://trafficsafety.ny.gov/motorcycle-safety",
+          "score": 16.325808,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725364955
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How many fatalities each year are caused by collisions between motorcycles and other vehicles in New York?\n|assistant|: I do not have specific information on the number of fatalities each year caused by collisions between motorcycles and other vehicles in New York. \n|user|: What are the regulations for motorcycle driving?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "21ab6c12926e35e3-1395-3346",
+          "text": "Motorcycle Safety | Governor's Traffic Safety Committee\nThe Department of Motor Vehicles established a rider-funded motorcycle safety program as required by legislation signed in 1997. The program provides accessible and affordable rider education throughout NYS, in an effort\u00a0to create awareness and reduce motorcyclist injuries and fatalities.\n\nMotorcycle Helmet Law\nNew York was the first state in the nation to adopt a universal motorcycle helmet law. This law, effective as of January 1, 1967, requires any person operating or riding a motorcycle to wear a Department of Transportation (DOT)-approved helmet.\u00a0\n\nMotorcycle Safety Awareness Month\nThe month of May has been proclaimed as \"Motorcycle Safety Awareness Month.\" During the month of May, the Governor's Traffic Safety Committee (GTSC) highlights important safety messages via press releases, public service announcements and social media posts.\n\nOngoing Efforts\n\n \n\n Stay Informed\n \n\n Motorcycle Safety Resources\n \n\ncard image\n\n Tips for Motorcyclists and Motorists\n\n Learn the steps you can take to be safe on and around motorcycles.\n\nTips for MotorcyclistsTips for Other Motorists\n\nLEARN MORE\n\n\t \tMotorcycle Educational Materials\n\nFind materials and resources to educate yourself and others about motorcycle safety.\n\nSearch Materials\n\n \nContact Information\nMotorcycle Safety Program Inquiries\nAlyssa RethHighway Safety Program RepresentativeGovernor's Traffic Safety CommitteeNew York State Department of Motor Vehicles6 Empire State Plaza, Room 410BAlbany, NY 12228518-474-5111\n\n Governor's Traffic Safety Committee\n\nAccessibility\n\nContact\n\nDisclaimer \n\nFreedom of Information Law (FOIL)\n\nLanguage Access\n\nPartners\n\nPressroom\n\nPrivacy Policy\n\nSite Map\n\nCONNECT WITH US\nFACEBOOKINSTAGRAMLINKEDINTWITTERYOUTUBE\n\n Your browser does not support iFrames\n \n\nTranslation Services\nThis page is available in other languages\n\nTranslate\n\nEnglish\n\nEspa\u00f1ol\n\n\u4e2d\u6587\n\n\u7e41\u9ad4\u4e2d\u6587\n\n\u0420\u0443\u0441\u0441\u043a\u0438\u0439\n\n\u05d9\u05d9\u05d3\u05d9\u05e9\n\n\u09ac\u09be\u0982\u09b2\u09be\n\n\ud55c\uad6d\uc5b4\n\nKrey\u00f2l Ayisyen\n\nItaliano\n\n\u0627\u0644\u0639\u0631\u0628\u064a\u0629\n\nPolski\n\nFran\u00e7ais\n\n\u0627\u0631\u062f\u0648",
+          "title": "Motorcycle Safety | Governor's Traffic Safety Committee",
+          "url": "https://trafficsafety.ny.gov/motorcycle-safety",
+          "score": 13.643148,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725364958
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How many fatalities each year are caused by collisions between motorcycles and other vehicles in New York?\n|assistant|: I do not have specific information on the number of fatalities each year caused by collisions between motorcycles and other vehicles in New York. \n|user|: What are the regulations for motorcycle driving?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "06a755105ab16765-3121-4166",
+          "text": "Tips for Motorcyclists and Motorists | Governor's Traffic Safety Committee\nThey have a smaller frontal area and may be hard to see.\nBe a responsible driver. Ensure your vehicle is in safe operating condition and that all of your safety equipment is properly adjusted. Observe and obey all traffic laws, signs, and signals.\nStay focused on the road and your surroundings. Never drive distracted. Don't let cell phones and other activities distract you from your core mission \u2014 driving safely!\nDrive sober. Never drive impaired by alcohol or drugs and discourage others from doing so. Impaired driving is an indiscriminate killer with no demographic barriers!\n\n Governor's Traffic Safety Committee\n\nAccessibility\n\nContact\n\nDisclaimer \n\nFreedom of Information Law (FOIL)\n\nLanguage Access\n\nPartners\n\nPressroom\n\nPrivacy Policy\n\nSite Map\n\nCONNECT WITH US\nFACEBOOKINSTAGRAMLINKEDINTWITTERYOUTUBE\n\n Your browser does not support iFrames\n \n\nTranslation Services\nThis page is available in other languages\n\nTranslate\n\nEnglish\n\nEspa\u00f1ol\n\n\u4e2d\u6587\n\n\u7e41\u9ad4\u4e2d\u6587\n\n\u0420\u0443\u0441\u0441\u043a\u0438\u0439\n\n\u05d9\u05d9\u05d3\u05d9\u05e9\n\n\u09ac\u09be\u0982\u09b2\u09be\n\n\ud55c\uad6d\uc5b4\n\nKrey\u00f2l Ayisyen\n\nItaliano\n\n\u0627\u0644\u0639\u0631\u0628\u064a\u0629\n\nPolski\n\nFran\u00e7ais\n\n\u0627\u0631\u062f\u0648",
+          "title": "Tips for Motorcyclists and Motorists | Governor's Traffic Safety Committee",
+          "url": "https://trafficsafety.ny.gov/tips-motorcyclists-and-motorists",
+          "score": 15.416826,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725365738
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "What is impaired driving?  "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Based on the provided document, the regulations for motorcycle driving in New York include the requirement of any person operating or riding a motorcycle to wear a Department of Transportation (DOT)-approved helmet, as stated in the universal motorcycle helmet law. Additionally, the Department of Motor Vehicles has established a rider-funded motorcycle safety program to provide accessible and affordable rider education throughout the state, aimed at creating awareness and reducing motorcyclist injuries and fatalities."
+    },
+    {
+      "speaker": "user",
+      "text": "Tipsy",
+      "timestamp": 1725365892,
+      "enrichments": {
+        "Question Type": [
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "For more than three decades, New York has been a\u00a0leader in reducing crashes, fatalities and injuries resulting from alcohol and drug impaired driving.  However, I do not have information specific to the 'tipsy' state of alcohol violation. ",
+      "timestamp": 1725365908,
+      "contexts": [
+        {
+          "document_id": "52a0eb5b1cb38d66-1531-3243",
+          "text": "Impaired Driving | Governor's Traffic Safety Committee\nAdvanced law enforcement training across New York state.\n\nDRE / ARIDE Training\n\ncard image\n\n DRE Program Resources\n\n Contact information for DRE Officers and Agency Coordinators, as well as login for the DRE Data Management System.\n\nDRE Agency CoordinatorsDRE Data Management LoginNYS DRE Officers\n\nDRE Program Resources\n\nCannabis & Driving\n\nWhat You Need to Know\n\nEmpowering Communities\nSTOP-DWI Program\nSTOP-DWI is a statewide alcohol and highway safety program that enables counties to coordinate efforts to reduce alcohol and drug-related crashes.\n\nCoordinator Portal\n\nProgram Info & High Visibility Engagement Campaign Dates\n\nCoordinator Contact Page\n\nAdditional Resources\n\nEducational Materials\nFind materials and resources to educate yourself and others about impaired driving.\n\nSearch Materials\n\nTips and Information\nEveryone can play a role in deterring impaired driving. Know the signs, educate yourself, and become involved.\n\nFind out more\n\n \nContact Information\nImpaired Driving Program Inquiries\nRen\u00e9e Borden \nNew York State Drug Recognition Expert (DRE) Statewide Coordinator\nState of New York Governor's Traffic Safety Committee\nNew York State Department of Motor Vehicles\n6 Empire State Plaza, Room 410B\nAlbany, NY 12228\n518-474-5111\n\n Governor's Traffic Safety Committee\n\nAccessibility\n\nContact\n\nDisclaimer \n\nFreedom of Information Law (FOIL)\n\nLanguage Access\n\nPartners\n\nPressroom\n\nPrivacy Policy\n\nSite Map\n\nCONNECT WITH US\nFACEBOOKINSTAGRAMLINKEDINTWITTERYOUTUBE\n\n Your browser does not support iFrames\n \n\nTranslation Services\nThis page is available in other languages\n\nTranslate\n\nEnglish\n\nEspa\u00f1ol\n\n\u4e2d\u6587\n\n\u7e41\u9ad4\u4e2d\u6587\n\n\u0420\u0443\u0441\u0441\u043a\u0438\u0439\n\n\u05d9\u05d9\u05d3\u05d9\u05e9\n\n\u09ac\u09be\u0982\u09b2\u09be\n\n\ud55c\uad6d\uc5b4\n\nKrey\u00f2l Ayisyen\n\nItaliano\n\n\u0627\u0644\u0639\u0631\u0628\u064a\u0629\n\nPolski\n\nFran\u00e7ais\n\n\u0627\u0631\u062f\u0648",
+          "title": "Impaired Driving | Governor's Traffic Safety Committee",
+          "url": "https://trafficsafety.ny.gov/impaired-driving",
+          "score": 14.736151,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725366686
+              },
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1726844746
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "What is impaired driving?  "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "52a0eb5b1cb38d66-2-1935",
+          "text": "Impaired Driving | Governor's Traffic Safety Committee\nImpaired Driving | Governor's Traffic Safety Committee\n\n Skip to main content\n \n\nTranslate\n\nEnglish\n\nEspa\u00f1ol\n\n\u4e2d\u6587\n\n\u7e41\u9ad4\u4e2d\u6587\n\n\u0420\u0443\u0441\u0441\u043a\u0438\u0439\n\n\u05d9\u05d9\u05d3\u05d9\u05e9\n\n\u09ac\u09be\u0982\u09b2\u09be\n\n\ud55c\uad6d\uc5b4\n\nKrey\u00f2l Ayisyen\n\nItaliano\n\n\u0627\u0644\u0639\u0631\u0628\u064a\u0629\n\nPolski\n\nFran\u00e7ais\n\n\u0627\u0631\u062f\u0648\n\n \n\n Your browser does not support iFrames\n \n\nNavigation Menu Toggle\n\n Governor's Traffic Safety Committee\n\nSafety TopicsGrants Training & EventsLaw EnforcementResourcesAbout\n\nImpaired Driving\n\nResources and Training to Reduce Impaired Driving\n\n \nCreating Safety & Awareness in New York State\n\nFor more than three decades, New York has been a\u00a0leader in reducing crashes, fatalities and injuries resulting from alcohol and drug impaired driving. At the core of the state\u2019s well-established comprehensive system for addressing impaired driving is a set of strict laws which are supported by effective enforcement, prosecution, adjudication, and offender programs.\nThe Governor\u2019s Traffic Safety Committee (GTSC) plays the central role in the promotion and coordination of multiple components of New York\u2019s Impaired Driving Program. The funds and other resources GTSC invests to reduce impaired driving are complemented by a number of other federal, state, local and private sector activities.\u00a0\n\n \n\n Taking Action\n \n\n Impaired Driving Resources\n \n\ncard image\n\n Efforts to Reduce Impaired Driving\n\n NYS has a comprehensive system for addressing impaired driving, which is supported by a variety of programs.\n\nDetecting Drug ImpairmentARIDE InformationDRE Information\n\nEfforts to Reduce Impaired Driving\n\n DRE / ARIDE Training\n\n Advanced law enforcement training across New York state.\n\nDRE / ARIDE Training\n\ncard image\n\n DRE Program Resources\n\n Contact information for DRE Officers and Agency Coordinators, as well as login for the DRE Data Management System.\n\nDRE Agency CoordinatorsDRE Data Management LoginNYS DRE Officers\n\nDRE Program Resources\n\nCannabis & Driving\n\nWhat You Need to Know\n\nEmpowering Communities\nSTOP-DWI Program",
+          "title": "Impaired Driving | Governor's Traffic Safety Committee",
+          "url": "https://trafficsafety.ny.gov/impaired-driving",
+          "score": 14.442265,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725366684
+              },
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1726844749
+              },
+              "8908d11f-01bd-4e38-8f46-3584f19f879b": {
+                "value": "yes",
+                "timestamp": 1726856787
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "What is impaired driving?  "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "It seems like you're asking for a continuation of the previous topic related to safe driving practices. Here are some tips for motorcyclists and motorists:\nTips for Motorcyclists:\n1. Protect your melon! Always wear a DOT-approved helmet and eye protection. \"Novelty Helmets\" are not approved and offer little protection to the rider in a crash. In fact, they are illegal to wear on New York roadways.\n2. Always wear high-quality riding gear designed to protect the rider during a fall. This includes over-the-ankle boots, full-finger gloves with padding, in addition to jackets and pants with armor protection at impact points.\n3. Be conspicuous. Wear high visibility vests, garments with reflector features, and accessories to boost your visibility to other drivers.\n4. Maintain your motorcycle properly. Ensure all of your lights and horn are working and both mirrors are adjusted. Make sure your tires are properly inflated and have legal tread depth. Remember, motorcycles maintain a smaller tire contact patch on the roadway when compared to other vehicles. Good traction is a key component to safe handling and braking in normal and adverse situations.\n5. Maintain a high level of awareness. Scan the roadway constantly for dangers and ride alert. If you are tired, take a break and re-energize to boost your concentration.\n6. Drive sober. Never ride impaired by alcohol or drugs and discourage other riders from making a bad choice.\nTips for Other Motorists:\n1. Share the road. Motorcycles are vehicles with the same rights and privileges as any other vehicle on the roadway.\n2. Always check your blind spots before changing lanes. Motorcycles are much smaller than other vehicles and can easily go unnoticed.\n3. Allow extra space when following a motorcycle. Motorcycles can stop more quickly than other vehicles, so it's essential to maintain a safe following distance.\n4. Use your signals. Signaling your intentions can help prevent crashes and keep everyone on the road safe.\n5. Stay focused on the road and your surroundings. Avoid distractions such as cell phones and other activities that can take your attention away from driving.\n6. Drive sober. Never drive impaired by alcohol"
+    },
+    {
+      "speaker": "user",
+      "text": "What is OTS?",
+      "timestamp": 1725368929,
+      "enrichments": {
+        "Question Type": [
+          "Explanation",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The OTS plays a key role in making California roadways safe by collaborating with around 300 state and local agencies to effectively utilize federal grant program funds. The OTS also works closely with traffic safety partners to monitor successful programs, promote collaboration, develop new countermeasures, and explore emerging trends. In addition to funding various programs through these grants, the OTS team is dedicated to promoting traffic safety through public awareness campaigns aimed at educating the public about safe driving habits. The OTS proudly represents California as a leader in traffic safety efforts at the local, state, and national levels.\n\n",
+      "timestamp": 1725368932,
+      "contexts": [
+        {
+          "document_id": "c81b067e5e353f25-1651-3993",
+          "text": "About OTS | Office of Traffic Safety\nOur success depends on strong partnerships. We work with approximately 300 state and local agencies to make the most effective use of federal grant program funds. Additionally, we coordinate with traffic safety partners to track successful programs, encourage collaboration, develop new countermeasures, and explore emerging trends. In addition to the many programs funded through these grants, the OTS team is committed to sharing the message of traffic safety. We accomplish this through public awareness campaigns that educate the public on safe driving habits. Our team proudly represents California as a leader in traffic safety efforts at the local, state, and national levels.\u00a0\n\u00a0\n\nVision\nEveryone traveling on California roadways will go safely.\n\nMission \nEffectively administer traffic safety grants that deliver innovative programs and eliminate traffic fatalities and injuries on California roadways.\n\nCore Values\n\nSERVICE\nWe take pride in our service and how we treat our partners and stakeholders.\n\u00a0\n\nRESPECT\nWe value differing opinions and act with integrity and responsiveness in all of our interactions.\n\u00a0\n\nINNOVATION\nWe welcome and actively seek new ideas to improve traffic safety and our services.\n\u00a0\n\nPASSION\nWe are enthusiastic about our mission to save lives and keep travelers safe on California\u2019s roads.\n\u00a0\n\nProgram Areas\n\nThe Office of Traffic Safety has identified the following ten priority areas of concentration for grant funding:\n\nAlcohol-Impaired Driving\nDistracted Driving\nDrug-Impaired Driving\nOccupant Protection\nPedestrian and Bicycle Safety\nTraffic Records and\u00a0Roadway Safety\nEmergency Medical Services\nPolice Traffic Services\nMotorcycle Safety\nPublic Awareness and Education\n\nHistory\nBy 1966, motor vehicle traffic crashes nationally claimed nearly 51,000 lives a year, or 26 deaths for every 100,000 Americans. Recognizing the need to reduce the carnage on the nation\u2019s roads, Congress passed the National Highway Safety Act, which provides for federal traffic safety funds to states.\nIn 1967, the California Traffic Safety Program (TSP) was enacted by the Legislature to provide authority for the State to implement the requirements of the national legislation. Subsequently, the Governor delegated authority to administer the TSP to the Secretary of the Business, Transportation and Housing (BT&H) Agency.",
+          "title": "About OTS | Office of Traffic Safety",
+          "url": "https://www.ots.ca.gov/ots-and-traffic-safety/about-ots/",
+          "score": 13.376091,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725369588
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "What is OTS?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "c81b067e5e353f25-2-2215",
+          "text": "About OTS | Office of Traffic Safety\nAbout OTS | Office of Traffic Safety\n\n \n\nSkip to Main Content\n\nCA.gov\n\nShare via Facebook\n\nShare via Instagram\n\nShare via Twitter\n\nShare via YouTube\n\n\tADA Certification\t\n\n\tContact OTS\t\n\n Settings\n\t\n\nDefault\n\nHigh Contrast\n\nReset\n\nIncrease Font Size\nFont Increase\n\nDecrease Font Size\nFont Decrease\n\nDyslexic font\n\n\u00d7\n\nSearch\n\nMenu\n\nAbout OTS\n\n\t\n\tAbout OTS\n\t\n\n\t\n\tOTS\u00a0Equity\u00a0Statement\u00a0\n\t\n\n\t\n\tOTS Strategic Plan\n\t\n\n\t\n\tContact OTS\n\t\n\n\t\n\tOpportunities\n\t\n\nGrants\n\n\t\n\tGrants\n\t\n\n\t\n\tGEMS - Apply for a Grant\n\t\n\n\t\n\tGrant Program Resources\n\t\n\n\t\n\t2023 OTS Grant Highlights\n\t\n\n\t\n\t2022 OTS Grant Highlights\n\t\n\nNewsroom\n\n\t\n\tNewsroom\n\t\n\n\t\n\tPress Releases\n\t\n\n\t\n\tCampaigns\n\t\n\n\t\n\tVictim\u2019s Stories\n\t\n\n\t\n\tOTS Tracks Newsletters\n\t\n\n\t\n\tOTS Logos\n\t\n\nPublications\n\nTraffic Safety Data\n\n\t\n\tTraffic Safety Data\n\t\n\n\t\n\tOTS Crash Rankings\n\t\n\n\t\n\tOther Traffic Resources\n\t\n\nSafe System Approach\n\nGo Safely\n\n Search\n\nCustom Google Search\n\nSubmit\n\nClose Search\n\nAbout the OTS\nThe OTS takes a leadership role in efforts to make California roadways safe for everyone using the transportation system. Through thoughtful, forward-thinking, and data-driven selection of grants to local and state agencies, the OTS strives to reach our goal where everyone will go safely on California roads. Through grant funding made available to California by the National Highway Traffic Safety Administration (NHTSA), the OTS funds more than $100 million dollars annually in innovative, evidence-based education and enforcement programs and technologies designed to improve road safety. The OTS evaluates all potential programs to make sure California addresses current and future traffic safety needs. Our success depends on strong partnerships. We work with approximately 300 state and local agencies to make the most effective use of federal grant program funds. Additionally, we coordinate with traffic safety partners to track successful programs, encourage collaboration, develop new countermeasures, and explore emerging trends. In addition to the many programs funded through these grants, the OTS team is committed to sharing the message of traffic safety. We accomplish this through public awareness campaigns that educate the public on safe driving habits.",
+          "title": "About OTS | Office of Traffic Safety",
+          "url": "https://www.ots.ca.gov/ots-and-traffic-safety/about-ots/",
+          "score": 12.745037,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725369591
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "What is OTS?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "c81b067e5e353f25-3369-5492",
+          "text": "About OTS | Office of Traffic Safety\nBy 1966, motor vehicle traffic crashes nationally claimed nearly 51,000 lives a year, or 26 deaths for every 100,000 Americans. Recognizing the need to reduce the carnage on the nation\u2019s roads, Congress passed the National Highway Safety Act, which provides for federal traffic safety funds to states.\nIn 1967, the California Traffic Safety Program (TSP) was enacted by the Legislature to provide authority for the State to implement the requirements of the national legislation. Subsequently, the Governor delegated authority to administer the TSP to the Secretary of the Business, Transportation and Housing (BT&H) Agency. In turn, the Office of Traffic Safety (OTS) was created in the BT&H Agency to administer the TSP under the direction of the Governor\u2019s Highway Safety Representative.\nSince that time, the work and influence of OTS has grown and spread. In the early days, funding, expertise, and results were scarce. Over the years, OTS staff became skilled professionals, programs expanded, and local authorities embraced the traffic safety message. Interest grew, priorities areas were established, and traffic deaths and injuries began to fall.\nEach year a Highway Safety Plan (HSP) is developed to reflect current needs as well as detailing the planned use of federal funds. The HSP identifies problems, specific performance measures, proposed solutions, time frames and fiscal information on continuing and planned new grants which are designed to mitigate traffic safety problems. OTS\u2019 role in this cycle has proven invaluable as it provides a vital link among Federal, State and local functions.\nOTS became the national leader in innovative programs to save lives on its roadways. It has established results driven best-practices and encouraged new strategies. While the state\u2019s population continues to grow, traffic deaths and injuries are falling.\n\nLegislative Bill Establishing the Office of Traffic Safety\n\n\u00a0\n\u00a0 \u00a0 \n\u00a0\n\u00a0\n\u00a0\n\n \n\n \n \n \n \n\nBack to Top\n\nContact OTS\n\nConditions of Use\n\nPrivacy Policy\n\nSite Map\n\nFacebook\n\nInstagram\n\nX\n\nYouTube\n\nCopyright \u00a9 State of California\nPowered by: CAWeb Publishing Service",
+          "title": "About OTS | Office of Traffic Safety",
+          "url": "https://www.ots.ca.gov/ots-and-traffic-safety/about-ots/",
+          "score": 12.573167,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725369594
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "What is OTS?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Based on the documents provided, there is no specific information about an organization, abbreviation, or concept called OTS."
+    },
+    {
+      "speaker": "user",
+      "text": "Speed limit",
+      "timestamp": 1725370294,
+      "enrichments": {
+        "Question Type": [
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The law sets certain prima facie limits, including a speed limit of 25 MPH in business and residential districts, a speed limit of 15 MPH in alleys, at blind intersections, and blind railroad crossings, and a part-time speed limit of 25 MPH in school zones when children are going to and from school. Signs only sometimes indicate these speed limits, so all California motorists must be aware of these 10, 20, and 30-mile-per-hour speed laws. Local authorities can establish intermediate speed limits between 25 and 55 miles per hour based on traffic engineering surveys, which evaluate roadway conditions, accident records, and the prevailing speed of prudent drivers. ",
+      "timestamp": 1725370300,
+      "contexts": [
+        {
+          "document_id": "4acbb81f4f18c9a2-162350-164643",
+          "text": "FAQs \u2022 San Bruno, CA \u2022 CivicEngage\nCertain prima facie limits are established by law and include the 25 MPH limit in business and residential districts, the 15 MPH limit in alleys, at blind intersections and blind railroad crossings and a part-time 25 MPH limit in school zones when children are going to and from school. These speeds are not always posted but all California motorists are required to know these 10, 20, and 30 mile per hour speed laws.Intermediate speed limits between 25 and 55 miles per hour may be established by local authorities on the basis of traffic engineering surveys. These surveys include an analysis of roadway conditions, accident records, and the prevailing speed, or 85th percentile, of prudent drivers. If speed limit signs are posted for a lower limit than is considered reasonable, many drivers will simply ignore the signs. At the same time, other drivers will stay within the posted limits. This generally increases the conflicts between faster and slower drivers, reduces the gaps in traffic through which crossings could be made safely and increases the difficulty for pedestrians to judge the speed, of approaching vehicles. Studies have shown that where uniformity of speed is not maintained, accidents generally increase. \n\n2.\nWhat flood zone is my property in?\n\nThe entire City is a C Zone (no floods). No A or B Zones:Community Panel Number: 060326BDated: 3-30-81If you need a letter for your insurance company, call Administration and Engineering at 650-616-7065. \n\n3.\nDoes somebody have to be Injured before a traffic signal will be installed?\n\nTraffic signals don't always prevent accidents. They are not always an asset to traffic control. In some instances, total accidents and severe injuries increased after signals were installed. Usually, in such instances, right angle collisions were reduced by the traffic signals, but the total number of collisions, especially the rear-end type, increased.There are times when the installation of signals results in an increase in the number of pedestrian accidents. Many pedestrians feel secure with a painted crosswalk and a red light between them and an approaching vehicle. The motorist, on the other hand, is not always so quick to recognize these \"barriers.\"When can a traffic signal be an asset instead of a liability to safety?",
+          "title": "FAQs \u2022 San Bruno, CA \u2022 CivicEngage",
+          "url": "https://www.sanbruno.ca.gov/FAQ.aspx",
+          "score": 17.928465,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725370952
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "speed limit "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "4acbb81f4f18c9a2-160728-163052",
+          "text": "FAQs \u2022 San Bruno, CA \u2022 CivicEngage\nThe 2023-24 Operating and Capital Improvement Program budget, adopted by the San Bruno City Council in June 2023, includes the following projects in the five-year plan for infrastructure improvements:Acappella Well Project (Commodore Park Well Replacement)Water Main Improvement and Replacement ProgramPressure Regulator Station Improvement & Replacement ProgramWater Pump Station Improvement and Replacement ProgramWater Tank Improvement and Replacement ProgramWell Rehabilitation ProgramWater Quality Well System Upgrades & Sweeney Ridge Tank Chlorine Generator InstallationSee the full budget on the Finance webpage. \n\n\u25bc\r\nPublic Works\t\n\nShow All Answers\n\n1.\nWhen will a lower speed limit be posted on my street?\n\nA common belief is that posting a speed limit will influence drivers to drive at that speed. The facts indicate otherwise. Research conducted in many parts of this country over a span of several decades has shown that drivers are influenced more by the appearance of the highway itself and the prevailing traffic conditions than by the posted speed limit. California's Basic Speed Law requires that:\"No person shall drive a vehicle upon a highway at a speed greater than is responsible or prudent having due regard for weather, visibility, the traffic on, and the surface and width of the highway, and in no event at a speed which endangers the safety of persons or property.\"Under California law, the maximum speed limit for any passenger vehicle is now 65 miles per hour (MPH). All other speed limits are called prima facie limits, which \"on the face of it\" are safe and prudent under normal conditions. Certain prima facie limits are established by law and include the 25 MPH limit in business and residential districts, the 15 MPH limit in alleys, at blind intersections and blind railroad crossings and a part-time 25 MPH limit in school zones when children are going to and from school. These speeds are not always posted but all California motorists are required to know these 10, 20, and 30 mile per hour speed laws.Intermediate speed limits between 25 and 55 miles per hour may be established by local authorities on the basis of traffic engineering surveys. These surveys include an analysis of roadway conditions, accident records, and the prevailing speed, or 85th percentile, of prudent drivers.",
+          "title": "FAQs \u2022 San Bruno, CA \u2022 CivicEngage",
+          "url": "https://www.sanbruno.ca.gov/FAQ.aspx",
+          "score": 16.752674,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725370948
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "speed limit "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "In New York, the maximum speed limit is generally 55 miles per hour, but it can vary depending on the type of road and area. For instance, in urban areas, the speed limit is typically lower, while on rural interstate highways, it can go up to 65 miles per hour. It's essential to always check the posted speed limit signs and adjust your speed accordingly to ensure safety and avoid fines."
+    },
+    {
+      "speaker": "user",
+      "text": "What about bicycles?",
+      "timestamp": 1725371380,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "In California, there are over 4,000 freeways, with approximately 1,000 miles open to bicyclists, mostly in rural areas with no alternate routes. According to California Vehicle Code Section 21960, Caltrans and local agencies have the authority to prohibit bicyclists from traveling on freeways under their jurisdiction, and they are required to post signs stating the prohibition. Currently, there are no signs permitting bicyclists on freeways. When bicyclists legally travel on a freeway, they may be directed off at the next off-ramp by a sign that says \"Bicycles Must Exit.\"  The CHP has created a Bicycle Safety Course which holds valuable information related to bicycle safety and maintenance.",
+      "timestamp": 1725371385,
+      "contexts": [
+        {
+          "document_id": "fbc472c2e4c7193d-20991-22985",
+          "text": "FAQs | Caltrans\ntraditional red-amber-green signalization typical of \n local street intersections, rather than the red-green \n lights more common on on-ramp meters. Connector ramp \n meters were put in place at four interchanges along \n Interstate 105: At the San Diego (405) Freeway, the \n Harbor (110) Freeway, the Long Beach (710) Freeway and \n the San Gabriel River (605) Freeway. Flashing overhead \n warning signs alert motorists that the meters are ahead \n as they make the transition from one freeway to another. \n Sensors embedded in the pavement are linked to computers, \n which will adjust the meters automatically to optimize \n the movement of traffic through the interchange. Motorists \n come to appreciate the value of ramp meters when they \n don't work -- on the few occasions when they have been \n shut off due to malfunction or maintenance, allowing \n cars to enter the freeway at random, freeway traffic \n can backup for miles.\n \n\nCan I ride my bicycle on the freeway?\n\nOf the more than 4,000 miles of freeways \n in California, about 1,000 miles are open to bicyclists. \n These open sections are usually in rural areas where \n there is no alternate route. California \n Vehicle Code Section 21960 says Caltrans and local \n agencies may prohibit bicyclists from traveling on freeways \n under their jurisdiction and that they must erect signs \n stating the prohibition. There are no signs permitting \n bicyclists on freeways. When a bicyclist is legally \n traveling on a freeway, he/she may be directed off the \n freeway at the next off-ramp by a sign that says \"Bicycles \n Must Exit.\" The freeway will be posted at the next on-ramp \n with a sign that says \"Bicycles Prohibited.\" \n\nHow do highways and bridges get named after people?\n\nOnly the California State Legislature \n can officially name a state highway. This is done in \n the form of a \"Concurrent Resolution (CR),\" which can \n be introduced by either the Assembly (ACR) or by the \n Senate (SCR). The resolution will appear in the statutes",
+          "title": "FAQs | Caltrans",
+          "url": "https://dot.ca.gov/programs/public-affairs/faqs",
+          "score": 11.261979,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725371984
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Bicycles laws"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "7368836d9f221e37-2279-4651",
+          "text": "\r\n\t\r\n \r\n \r\n Vulnerable Road Users\r\n \r\n \r\n\nClick on the link to take the E-Bike training under the \u201cElectric Bicycle Training and Safety\u201d title.\u00a0\n\nBicycle and Pedestrian Safety is a Shared Responsibility.\u00a0Share the road. \u00a0 As more Californians choose walking and bicycling as primary modes of transportation, creating a safer highway environment for all roadway users is increasingly important. We all share the responsibility to make sure California roads are safe for everyone. This is achieved by following the rules of the road, watching out for others, and using courtesy while on the road. The California Highway Patrol uses a comprehensive statewide approach to promote and enforce safe pedestrian, bicyclist, and motorist behavior, ensuring we all share the road safely. \u00a0Traffic Safety For Bicyclists\u00a0\n\n\u200b\nSMART Cycling from \r\n Penguin Pro on \r\n Vimeo.\u00a0\n\n\u200bLearn how to properly fit a bicycle helmet.\n\n\r\n\t\u00a0\u00a0\n\nTraffic Safety for Pedestrians\u00a0\n\nDo you really need to look left-right-and left again when crossing the street? \r\nYes! This video tells you why.\r\n\n\u00a0\n\nHere\u2019s an entertaining video for all road users. \r\n \n\n\r\n\t\u00a0\u00a0\n\nLearn more about road safety on these websites:\n \u00a0\n\nCalifornia\u2019s Department of Motor Vehicles webpage on pedestrian safety External link \n\nVisit this interactive site to learn how to prevent injuries External link \n\nThis site has great information on biking and walking safely External link \n\nKids learn about pedestrian safety in these fun animation videos External link \n\u00a0Bicycle Safety External link\n\n External link \n\n\u200bThe California Pedestrian and Bicyclist Enforcement and Education Project\u00a0The CHP implements a traffic safety grant funded by the Office of Traffic Safety, through the National Highway Traffic Safety Administration, to reduce pedestrian and bicyclist collisions and victims. The project includes both enhanced enforcement and a public education and awareness campaign focusing on traffic safety, which includes motorist behavior when driving in the presence of pedestrians and bicyclists. The program provides comprehensive traffic educational events, \u201crodeos,\u201d community informational sessions and collaboration, distributes bicycle helmets and other safety equipment, educational materials, and training for CHP personnel. \u00a0Bicycle Safety CourseThe CHP has created a Bicycle Safety Course which holds valuable information related to bicycle safety and maintenance.",
+          "title": "\r\n\t\r\n \r\n \r\n Vulnerable Road Users\r\n \r\n \r\n",
+          "url": "https://www.chp.ca.gov/Programs-Services/Services-Information/Bike-and-Ped-Safety",
+          "score": 10.6711235,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725371991
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Bicycles laws"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "In New York, bicyclists have certain rights and responsibilities on the road, similar to motor vehicle drivers. They must follow the rules of the road, including stopping at red lights and stop signs, signaling turns, and yielding the right-of-way when necessary. Bicyclists must also ride in the same direction as traffic and use bike lanes where available. Motorists are required to give bicyclists at least three feet of space when passing. However, there are no specific speed limit laws for bicycles in New York. Bicycle riders should maintain a safe speed and adjust their speed to match the road conditions and surrounding traffic."
+    },
+    {
+      "speaker": "user",
+      "text": "Are the laws the same for pedestrians?",
+      "timestamp": 1725372266,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "No, they are not. The pedestrian signal, when activated, provides time for the pedestrian to enter the street on the steady \"Walk\" and to finish crossing the street on the flashing \"Don't Walk\" signal. The pedestrian signal is normally activated by a push-button that tells the signal controller that there is a pedestrian who wishes to cross the street.\nDrivers and pedestrians must work together to demonstrate safe road behaviors, helping protect themselves and those around them. To ensure safety, pedestrians should make themselves visible by wearing bright-colored clothes and carrying a flashlight when walking at night. They should avoid dangerous behaviors, such as jaywalking, staying sober, and making eye contact with drivers. Pedestrians should also refrain from using their phones while walking, as talking and texting can distract them from paying attention to their surroundings.\nBefore crossing a street, pedestrians should look before stepping, cross streets at marked crosswalks or intersections, obey traffic signals, and watch for turning vehicles. It's important to look left-right-left before crossing a street.",
+      "timestamp": 1725372277,
+      "contexts": [
+        {
+          "document_id": "845b222382bcf88c-1657-3885",
+          "text": "Pedestrian Safety | Office of Traffic Safety\nThe problem is reaching crisis proportions:\n\n2018: 893 pedestrians were killed on California roadways, a 26% increase from 2014.\n2018: More than 14,000 pedestrians injured.\nPedestrian deaths rose 26% percent between 2014 and 2018.\nNearly 7,500 pedestrians have died in California between 2009 and 2018.\nCalifornia\u2019s pedestrian fatality rate is almost 25% higher than the national average.\nNo state has more pedestrian deaths on its roadways than California.\n\nIt\u2019s a two-way street. Drivers and pedestrians must work together to demonstrate safe behaviors on the road, helping to protect themselves and those around them.\n\nSafety tips for pedestrians:\n\nMake yourself visible: wear bright colored clothes and carry a flashlight if you are walking at night.\nAvoid dangerous behaviors: always walk on the sidewalk (no jaywalking), stay sober and make eye contact with drivers \u2013 don\u2019t assume the driver can see you.\nStay off your phones, talking and especially texting distracts you from paying attention to your surroundings.\nLook before you step: cross streets at marked crosswalks/intersections, obey traffic signals and watch for turning vehicles.\nLook left-right-left before crossing a street.\n\nSafety tips for drivers:\n\nDon\u2019t speed, follow the speed limit and never use your phone; always be cautious of your surroundings.\nNever drive under the influence of alcohol and/or drugs.\nLook out for pedestrians, especially in hard-to-see conditions such as at night or in bad weather.\nPedestrians have the right of way at any crosswalk or intersection, so yield and be prepared to stop.\nStop at the crosswalk stop line to give drivers in other lanes an opportunity to see and yield to pedestrians too.\nBe cautious when backing up \u2013 pedestrians, especially young children, can move across your path.\n\nRelated Resources:\n\nFor safety tips on how to be a pedestrian; Pedestrian and Bicycle Information Center \nFor helpful tips to keep your children safe as a pedestrian: Safe Kids \nFor additional safety tips, research and statistics on pedestrians: NHTSA \nTo learn about the dangers of being a pedestrian and who is at risk: Centers for Disease Control and Prevention \nLearn how to get your child to school safely: Safe routes to school",
+          "title": "Pedestrian Safety | Office of Traffic Safety",
+          "url": "https://www.ots.ca.gov/media-and-research/campaigns/pedestrian-safety/",
+          "score": 18.0369,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725372653
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "pedestrian laws"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "eaa68fd7df3d25c9-1291-3282",
+          "text": "FAQs \u2022 Traffic\nThe pedestrian signal, when activated, provides time for the pedestrian to enter the street on the steady \"Walk\" and to finish crossing the street on the flashing \"Don't Walk\" signal. The pedestrian signal is normally activated by a push-button that tells the signal controller that there is a pedestrian who wishes to cross the street.\t\n\n4.\nHow much will this citation cost? \n\r\nThe court sets all fines and will inform you by mail regarding the amount owed, or will do so in court on your court date. \t\n\n5.\nMay I attend traffic school to take care of this citation? \n\r\nDMV allows drivers to attend court-approved traffic school once every 18 months, and drivers must pay all the applicable fines and fees for their citations, plus the additional amount for the school itself.However, by attending traffic school the violation will not be added to your record.\t\n\n6.\nMay I pay my traffic citation by mail? \n\r\nYes. The court will mail out a notice but does not guarantee its delivery. If you receive a notice in the mail, you may pay the fine via mail. Otherwise, you need to appear in court on the date and time listed on the citation.\t\n\n7.\nMay I contest this citation? \n\r\nYes. Appear in court on the date and time listed on your citation, and explain to the judge that you wish to contest the citation.\t\n\n8.\nWhat if the court does not send me a letter after I get a traffic citation? \n\r\nIf you don't get a letter, you must appear in court. The court date, time and location will be indicated on the bottom of your citation.\t\n\n9.\nWhat is red light running?\n\r\nA violation occurs when a motorist deliberately enters an intersection after the signal light has turned red. Motorists who are already in an intersection when the signal changes to red - while waiting to turn, for example - are not red light running.\t\n\n10.\nIs red light running a serious problem?\n\r\nDrivers who run red lights are responsible for an estimated 260,000 crashes in the U.S. each year, killing over 800 people each year.",
+          "title": "FAQs \u2022 Traffic",
+          "url": "https://auburn.ca.gov/faq.aspx?TID=17",
+          "score": 16.705797,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725372650
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "pedestrian laws"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "7f70fac6349f44d3-11072-13167",
+          "text": "FAQs \u2022 Auburn, CA \u2022 CivicEngage\nA pedestrian signal allows a safer way for pedestrians to cross the street at signalized intersections. The pedestrian signal, when activated, provides time for the pedestrian to enter the street on the steady \"Walk\" and to finish crossing the street on the flashing \"Don't Walk\" signal. The pedestrian signal is normally activated by a push-button that tells the signal controller that there is a pedestrian who wishes to cross the street.\t\n\n4.\nHow much will this citation cost? \n\r\nThe court sets all fines and will inform you by mail regarding the amount owed, or will do so in court on your court date. \t\n\n5.\nMay I attend traffic school to take care of this citation? \n\r\nDMV allows drivers to attend court-approved traffic school once every 18 months, and drivers must pay all the applicable fines and fees for their citations, plus the additional amount for the school itself.However, by attending traffic school the violation will not be added to your record.\t\n\n6.\nMay I pay my traffic citation by mail? \n\r\nYes. The court will mail out a notice but does not guarantee its delivery. If you receive a notice in the mail, you may pay the fine via mail. Otherwise, you need to appear in court on the date and time listed on the citation.\t\n\n7.\nMay I contest this citation? \n\r\nYes. Appear in court on the date and time listed on your citation, and explain to the judge that you wish to contest the citation.\t\n\n8.\nWhat if the court does not send me a letter after I get a traffic citation? \n\r\nIf you don't get a letter, you must appear in court. The court date, time and location will be indicated on the bottom of your citation.\t\n\n9.\nWhat is red light running?\n\r\nA violation occurs when a motorist deliberately enters an intersection after the signal light has turned red. Motorists who are already in an intersection when the signal changes to red - while waiting to turn, for example - are not red light running.\t\n\n10.\nIs red light running a serious problem?\n\r\nDrivers who run red lights are responsible for an estimated 260,000 crashes in the U.S. each year, killing over 800 people each year.",
+          "title": "FAQs \u2022 Auburn, CA \u2022 CivicEngage",
+          "url": "https://auburn.ca.gov/faq.aspx",
+          "score": 18.668724,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725372741
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "pedestrian fines"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The laws for pedestrians are not identical to those for motorcycles, but they are designed to ensure safety for pedestrians. In New York, pedestrians must use crosswalks when they exist and are necessary to cross streets. They should also obey traffic signals and signs. Pedestrians must yield the right-of-way to vehicles when crossing outside of marked crosswalks or unmarked crosswalks at intersections. Pedestrians are also required to use sidewalks when available and should walk on the left side of crosswalks or intersections facing oncoming traffic if there are no sidewalks."
+    },
+    {
+      "speaker": "user",
+      "text": "Fines and penalties",
+      "timestamp": 1725372865,
+      "enrichments": {
+        "Question Type": [
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Fines can be increased under Vehicle Code 42009 for offenses committed in a highway construction or maintenance area and under Vehicle Code 40210 for violations in a Safety Enhancement-Double Fine Zone. Higher fines apply for violations in a school zone, a business district, a senior center zone, or railroad crossing. A $40 court security fee is added for each infraction, misdemeanor, or felony conviction under Penal Code Section 1465.8, effective June 27, 2014. An assessment of $30 for each misdemeanor or felony and $35 for each infraction, added for each conviction under Government Code 70373, effective January 1, 2009. Furthermore, a 20% State Surcharge is imposed on the base bail or base fine amount, effective September 20, 2002. ",
+      "timestamp": 1725372873,
+      "contexts": [
+        {
+          "document_id": "c4917d0863ef0f86-15531-17243",
+          "text": "Traffic | Superior Court of California | County of Alameda\nIn addition, fines can be further enhanced pursuant to Vehicle Code 42009 for committing an offense while driving in a highway construction or maintenance area and pursuant to Vehicle Code 40210 for violations committed in a Safety Enhancement-Double Fine Zone. There are special violations with higher fines for violations committed in a school zone, a business district, a senior center zone, or at a railroad crossing.\nThe table below lists examples of the total bail amount due for a traffic fine. These amounts do not include any additional assessments due to priors or points on a driving record. If Traffic School is allowed, there is an additional $57.00 added to the total fine due.\u00a0\nViolation\nBase Fine\nPenalty Assessment\nNight Court fee\nDMV Fee\n20% Criminal Surcharge\nCourt Security Fee\nTotal Fine Due\nVC 12814.6 Failure to obey license provisions.\n$35.00\n$104.00\n$1.00\n$10.00\n$7.00\n$40.00\n$197.00\nVC 14600(A) Failure to notify DMV of address change within 10 days.\n\tNote:\u00a0The fine may be reduced with valid proof of correction.\n$35.00\n$104.00\n$1.00\n$10.00\n$7.00\n$40.00\n$197.00\nWhat is a Penalty Assessment?\nPenalty Assessment is an amount which is added to all fines and for bail for infractions and low grade misdemeanor offenses. It is charged pursuant to Government Code Section 76000 and Penal Code Section 1464 of the State of California and is subject to change by the Legislature. Click here to view the current penalty assessment amount.\u00a0\nUniform Bail Schedule\nBail Refunds(PDF)\n1. How do I get my bail money back?\nWe will mail the bail refund to the depositor (the person who deposited the money with the Court). Refunds are generated electronically and mailed out.\n2. How long will it take?",
+          "title": "Traffic | Superior Court of California | County of Alameda",
+          "url": "https://www.alameda.courts.ca.gov/divisions/traffic",
+          "score": 13.932776,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725374120
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "fines"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "03f1862ce242a633-21052-22805",
+          "text": "Traffic | Superior Court of California | County of Tuolumne\nThe current penalty assessment (effective June 10, 2010), is $26 for each $10, or portion of $10 of fine or bail, as set by the California State Legislature.\u00a0 The $26 Penalty Assessment is charged pursuant to Penal Code Section 1469 and Government Code Sections 76000, 70372, 76104.6, 76104.7 and 76000.5.\nIn addition to the penalty assessments:\nEffective June 27, 2014, a $40 court security fee will be added for each infraction, misdemeanor, or felony violation resulting in a conviction pursuant to Penal Code Section 1465.8.\nEffective January 1, 2009, an assessment in the amount of $30 for each misdemeanor or felony, and $35 for each infraction, will be added for each conviction pursuant to Government Code 70373.\nEffective September 20, 2002 there is a 20% State Surcharge imposed on the base bail or base fine amount.\u00a0 This 20% may not be used to calculate the Penalty Assessment per each $10 of fine.\nThese penalties are also included in the calculation for traffic school.\nExample fine amount for vehicle code: Where the money goes:\n\nBase fine amount\n\n$20\n\nCourt automation, court fund, city fund\n\nPenalty Assessment\n\n$20\n\nState penalty fund (PC1469)\n\n$14\n\nCounty penalty fund (76000)\n\n$10\n\nState court facilities construction fund (GC70372)\n\n$10\n\nDNA Identification fund (GC76104.6 & 76104.7)\n\n$4\n\nCounty emergency medical services (GC76000.5)\n\nState Surcharge 20%\n\n$4\n\nState general fund (PC1465.7)\n\nCourt Security Fee\n\n$40\n\nTo fund security in the trial courts (PC1465.8)\n\nConviction Assessment Fee\n\n$35\n\nTo fund building/maintaining trial courts (GC70373(a)(1))\n\nTotal Fine:\n\n$157\n\nTraffic School\nThe traffic school calculation is based on the Base Fine + Penalty Assessment + State Surcharge + Conviction Assessment + Administrative Fee.",
+          "title": "Traffic | Superior Court of California | County of Tuolumne",
+          "url": "https://www.tuolumne.courts.ca.gov/divisions/traffic",
+          "score": 13.508438,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725374116
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "fines"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "dfcbbce648ec1599-1460-3406",
+          "text": "Commercial Motor Vehicle Safety | Governor's Traffic Safety Committee\nEffective September 3, 2020 new fines and penalties for commercial vehicles on parkways and over height vehicles go into effect. \nPenalties for commercial vehicles on parkways are broken down by weight class: less than 10,000 pounds; between 10,000 pounds and 26,000 pounds; and over 26,000 pounds. The maximum fines and penalties are as follows:\nLess than 10,000 pounds:\u00a0\nFirst violation - $250 and/or 15 days in jail\nSecond violation within 18 months - $500 and/or 45 days in jail\nThird or subsequent violation within 18 months - $750 and/or 90 days in jail\nBetween 10,000 and 26,000 pounds:\u00a0\nFirst violation - $350 and/or 15 days in jail\nSecond violation within 18 months - $700 and/or 45 days in jail\nThird or subsequent violation within 18 months - $1,000 and/or 90 days\nOver 26,000 pounds:\u00a0\nFirst violation - $700 and/or 15 days in jail\nSecond violation within 18 months - $1,500 and/or 45 days in jail\nThird or subsequent violation within 18 months - $2,000 and/or 90 days in jail\nNew fines and penalties for\u00a0over height\u00a0vehicles are as follows:\nFirst offense - $1,000 and/or 30 days in jail\nSecond or subsequent offense - $2,000 and/or 60 days in jail\nView Tips\n\n \n\n Stay Informed\n \n\n Safety Information and Resources\n \n\ncard image\n\n Efforts to Improve Commercial Motor Vehicle Safety\n\n Initiatives and enforcement efforts to reduce the number of crashes involving commercial motor vehicles.\n\nImprove Commercial Motor Vehicle Safety\n\ncard image\n\n Tips for Commercial Motor Vehicle (CMV) Drivers and Passenger ...\n\n Find tips to improve safety driving and sharing the roads with commercial motor vehicles.\n\nTips for CMV Drivers and Passenger Cars\n\n\t \tCommercial Motor Vehicle Educational Material and Resources\n\nGet the materials and resources you need to spread the word about sharing the road safely with large\u00a0trucks and buses.\n\nEducational Material and Resources\n\n \nContact Information\nCommercial Motor Vehicle Safety Program Inquiries",
+          "title": "Commercial Motor Vehicle Safety | Governor's Traffic Safety Committee",
+          "url": "https://trafficsafety.ny.gov/commercial-motor-vehicle-safety",
+          "score": 13.181435,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725374126
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "fines"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "In New York, the consequences for Driving While Intoxicated (DWI) are outlined in Article 31 of the Vehicle & Traffic Law. Various sections within Article 31 describe the offenses, sanctions, and procedures related to a violation. New York Penal Law Section 125 also describes crimes and sanctions related to drunk drivers who cause a crash in which someone is killed or injured. The specific fines and penalties for a DWI violation can vary depending on the circumstances, such as whether it is a first offense or a repeat offense, and whether there was property damage or injury. However, it is important to note that DWI convictions in New York can result in significant fines, jail time, and suspension or revocation of driving privileges."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "created",
+      "timestamp": 1725374172
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "edited",
+      "timestamp": 1726846410
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "accepted",
+      "timestamp": 1726846592
+    },
+    {
+      "author": "8908d11f-01bd-4e38-8f46-3584f19f879b",
+      "status": "accepted",
+      "timestamp": 1726856787
+    }
+  ],
+  "editor": "8908d11f-01bd-4e38-8f46-3584f19f879b",
+  "domain": "mt-rag-govt-elser-512-100-20240611",
+  "reviewer": "f6ce971c-68d2-4c26-b1c0-477dd28a5181"
+}

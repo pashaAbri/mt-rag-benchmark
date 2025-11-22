@@ -1,0 +1,775 @@
+{
+  "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-ibmcloud-elser-512-100-20240502",
+      "size": "72442"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"bool\": {\n    \"must\": {\n      \"text_expansion\": {\n        \"ml.tokens\": {\n          \"model_id\": \".elser_model_1\",\n          \"model_text\": \"${QUERY}\"\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "Is it worth having a web chat widget on my website?",
+      "timestamp": 1723252684,
+      "enrichments": {
+        "Question Type": [
+          "Factoid",
+          "Opinion"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, it is worth having a web chat widget on your website. The web chat integration can help your customers with common questions and tasks; it can understand customer messages in any of the languages that are supported by the service, and it engages your users when they need help, answering their questions quickly and efficiently, and providing fallback options so there is always a path to a solution. It is also customizable, secure, and supports a wide range of desktop and mobile browsers. Building a custom user interface for these functionalities would require significant time and effort, which could be better spent on building a high-quality assistant. Additionally, the web chat widget is easy for you to deploy and easy for customers to use.",
+      "timestamp": 1723252689,
+      "contexts": [
+        {
+          "document_id": "ibmcld_02855-7-2041",
+          "text": "\nIntegrating the web chat with your website \n\nAdd your assistant to your company website as a web chat widget that can help your customers with common questions and tasks.\n\nWhen you create a web chat integration, code is generated that calls a script that is written in JavaScript. The script instantiates a unique instance of your assistant. You can then copy and paste the HTML script element into any page or pages on your website where you want users to be able to ask your assistant for help.\n\n\n\n Create a web chat instance to add to your website \n\nTo add the assistant to a web page on your company website, complete the following steps:\n\n\n\n1. From the Assistants page, click to open the assistant tile that you want to deploy to your site.\n2. From the Integrations section, click the Web chat tile.\n3. Optional: Change the web chat integration name from Web chat to something more descriptive.\n4. Click Create to create a web chat instance.\n5. Optional: Customize the style of the chat window. You can make the following changes:\n\n\n\n* Public assistant name. Name by which the assistant is known to users. This name is displayed in the header of the chat window. The name can be up to 18 characters in length.\n* Primary color. Sets the color of the web chat header.\n\nClick the white dot to open a color switcher where you can choose a color. The color is saved as an HTML color code, such as FF33FC for pink and 329A1D for green. Alternatively, you can add an HTML color code directly to the field to set the color.\n* Secondary color: Sets the color of the user input message bubble.\n* Accent color. Sets the color of interactive elements, including:\n\n\n\n* Chat launcher button that is embedded in your web page\n* Send button associated with the input text field\n* Input text field border when in focus\n* Marker that shows the start of the assistant\u2019s response\n* Border of a button after it is clicked\n* Border of the drop-down list field as the user chooses an option\n* Typing indicator that is shown to repesent a pause response",
+          "url": "https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-deploy-web-chat",
+          "score": 17.383947,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723252824
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: Is it worth having a web chat widget on my website?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16374-0-2178",
+          "text": "\n\n\n\n\n\n\n  Supporting global audiences \n\nYou can build an assistant that understands customer messages in any of the languages that are supported by the service. The responses from your assistant are defined by you and can be written in any language you want.\n\nHowever, some of the phrases that are displayed in the web chat widget are part of the web chat itself and do not come from the assistant. By default, these hardcoded phrases are specified in English, but you can apply a different language by adding lines to the embedded web chat script.\n\nThe hardcoded phrases used by the web chat widget are specified in language pack files. The web chat provides language packs that contain translations of each English-language phrase that is used by the web chat. You can instruct the web chat to use one of these other languages files by using the instance.updateLanguagePack() method.\n\nLikewise, the web chat applies an American English locale to content that is added by the web chat unless you specify something else. The locale setting affects how values such as dates and times are formatted.\n\nTo configure the web chat for customers outside the US, follow these steps:\n\n\n\n1.  To apply the appropriate syntax to dates and times and to use a translation of the English-language phrases, set the locale. Use the instance.updateLocale() method.\n\nFor example, if you apply the Spanish locale (es), the web chat uses Spanish-language phrases that are listed in the es.json file, and uses the DD-MM-YYYY format for dates instead of MM-DD-YYYY.\n\nThe locale you specify for the web chat does not impact the syntax of dates and times that are returned by the underlying skill.\n2.  To change only the language of the hardcoded English phrases, use the instance.updateLanguagePack() method.\n\nFor more information, see [Instance methods](https://web-chat.global.assistant.watson.cloud.ibm.com/docs.html?to=api-instance-methodslanguages).\n3.  To change the text direction of the page from right to left, use the direction method. For more information, see [Configuration](https://web-chat.global.assistant.watson.cloud.ibm.com/docs.html?to=api-configurationconfigurationobject).\n\n\n\n\n\n\n\n\n\n",
+          "url": "https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-web-chat-develop-global",
+          "score": 16.28198,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723254678
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "web chat widget benefit"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16384-7-2422",
+          "text": "\nWeb chat overview \n\nYou can use the web chat integration to deploy your assistant on your website or embed it as a WebView in your mobile app. The web chat integration provides an easy-to-use chatbot interface that can integrate seamlessly with your site, without requiring the time and effort that would be required to build your own custom user interface.\n\nThe web chat can help your customers start the conversation with common questions or tasks; it can display multimedia and interactive elements such as forms, and it can transfer customers to human agents for more help. A developer can customize the web chat to add even more capabilities.\n\n\n\n Why use the web chat? \n\nBuilding a custom user interface requires spending time and effort solving typical UI problems. For example, you need to design the layout and styling, keep up with browser changes, manage scrolling behavior, validate input, and comply with accessibility requirements. The time you spend building and maintaining a custom UI is better spent building a high-quality assistant instead.\n\nThe web chat widget uses cutting-edge functionality from IBM Design and Research to engage your users when they need help, answer their questions quickly and efficiently, and provide fallback options so there is always a path to a solution. The web chat is easy for you to deploy and easy for customers to use, it is secure, and it supports a wide range of desktop and mobile browsers.\n\nThe web chat is also customizable, which means that you can take advantage of the web chat functionality while still maintaining consistency with your website style and branding, adding custom UI elements, and integrating with external systems (such as live agent tools or CRM systems).\n\n\n\n\n\n What you can do with the web chat \n\nYou can quickly deploy the web chat to your website (or even to a local test page) and see how it works. You can also use the web chat integration settings in the Watson Assistant user interface to configure the web chat for your website and your customers.\n\nIf you are a developer, you can further customize and extend the web chat by writing code and using the web chat API. You can also use a WebView with a JavaScript bridge to add the web chat to your mobile app.\n\nThe following documentation topics provide more information about the capabilities of the web chat integration, how to configure and deploy it, and how to customize it.",
+          "url": "https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-web-chat-overview",
+          "score": 16.582935,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723254682
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "web chat widget benefit"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, it is worth having a web chat widget on your website. The web chat integration provides several benefits, such as engaging your users when they need help, answering their questions quickly and efficiently, and providing fallback options so there is always a path to a solution. It is also customizable, secure, and supports a wide range of desktop and mobile browsers. Building a custom user interface for these functionalities would require significant time and effort, which could be better spent on building a high-quality assistant. Additionally, the web chat widget is easy for you to deploy and easy for customers to use."
+    },
+    {
+      "speaker": "user",
+      "text": "how to add web chat widget?",
+      "timestamp": 1723254983,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "From the Assistants page, click to open the assistant tile that you want to deploy to your site. From the Integrations section, click the Web chat tile and click Open. The Open web chat window opens. In the Environment field, select the environment you want the web chat widget to connect to. Click Confirm. All you need to do is embed a generated script element in your HTML source.",
+      "timestamp": 1723254991,
+      "contexts": [
+        {
+          "document_id": "ibmcld_02855-7-2041",
+          "text": "\nIntegrating the web chat with your website \n\nAdd your assistant to your company website as a web chat widget that can help your customers with common questions and tasks.\n\nWhen you create a web chat integration, code is generated that calls a script that is written in JavaScript. The script instantiates a unique instance of your assistant. You can then copy and paste the HTML script element into any page or pages on your website where you want users to be able to ask your assistant for help.\n\n\n\n Create a web chat instance to add to your website \n\nTo add the assistant to a web page on your company website, complete the following steps:\n\n\n\n1. From the Assistants page, click to open the assistant tile that you want to deploy to your site.\n2. From the Integrations section, click the Web chat tile.\n3. Optional: Change the web chat integration name from Web chat to something more descriptive.\n4. Click Create to create a web chat instance.\n5. Optional: Customize the style of the chat window. You can make the following changes:\n\n\n\n* Public assistant name. Name by which the assistant is known to users. This name is displayed in the header of the chat window. The name can be up to 18 characters in length.\n* Primary color. Sets the color of the web chat header.\n\nClick the white dot to open a color switcher where you can choose a color. The color is saved as an HTML color code, such as FF33FC for pink and 329A1D for green. Alternatively, you can add an HTML color code directly to the field to set the color.\n* Secondary color: Sets the color of the user input message bubble.\n* Accent color. Sets the color of interactive elements, including:\n\n\n\n* Chat launcher button that is embedded in your web page\n* Send button associated with the input text field\n* Input text field border when in focus\n* Marker that shows the start of the assistant\u2019s response\n* Border of a button after it is clicked\n* Border of the drop-down list field as the user chooses an option\n* Typing indicator that is shown to repesent a pause response",
+          "url": "https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-deploy-web-chat",
+          "score": 30.16438,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723255047
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: Is it worth having a web chat widget on my website?\n|assistant|: Yes, it is worth having a web chat widget on your website. The web chat integration can help your customers with common questions and tasks; it can understand customer messages in any of the languages that are supported by the service, and it engages your users when they need help, answering their questions quickly and efficiently, and providing fallback options so there is always a path to a solution. It is also customizable, secure, and supports a wide range of desktop and mobile browsers. Building a custom user interface for these functionalities would require significant time and effort, which could be better spent on building a high-quality assistant. Additionally, the web chat widget is easy for you to deploy and easy for customers to use.\n|user|: how to add web chat widget?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16295-7-1721",
+          "text": "\nEmbedding the web chat on your page \n\nTo add the web chat widget to your website, all you need to do is embed a generated script element in your HTML source.\n\nThe web chat integration is automatically included for every assistant, and is configured separately for each environment.\n\nTo add the web chat to your website, follow these steps:\n\n\n\n1. On the ![Integrations icon](https://cloud.ibm.com/docs-content/v1/content/ca9232b3702768f24bb897f48f10778fcda28718/watson-assistant/images/integrations-icon.png)Integrations page, find the Web chat tile and click click Open. The Open web chat window opens.\n2. In the Environment field, select the environment you want the web chat widget to connect to. Click Confirm.\n\nThe Web chat page opens, showing the settings for the web chat integration in the selected environment.\n\nThe preview pane shows what the web chat will look like when it is embedded in a web page. If you see a message that starts with, There is an error, you probably haven't added any actions to your assistant yet. After you add an action, you can test the conversation from the preview pane.\n3. Click the Embed tab.\n\nA code snippet is generated based on the web chat configuration. You (or a web developer) will add this code snippet to the web page where you want the web chat to appear.\n\nThis code snippet contains an HTML script element. The script calls JavaScript code that is hosted on an IBM site and creates an instance of a widget that communicates with the assistant.\n4. Click the ![Copy icon](https://cloud.ibm.com/docs-content/v1/content/ca9232b3702768f24bb897f48f10778fcda28718/watson-assistant/images/copy-icon.png)Copy to clipboard icon to copy the embed script to the clipboard.\n5.",
+          "url": "https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-deploy-web-chat",
+          "score": 16.929607,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723255119
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "web chat widget benefit"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "To add a web chat widget to your website, first create a web chat instance for your assistant. You can do this by going to the Assistants page, opening the assistant tile you want to deploy, and clicking on the Web chat tile in the Integrations section. Then, customize the style of the chat window if desired, and click Create. After that, go to the Integrations page, find the Web chat tile, and click Open. Select the environment you want the web chat widget to connect to, and click Confirm. The Web chat page will open, showing the settings for the web chat integration in the selected environment. Click the Embed tab to generate a code snippet, which you or a web developer can add to the web page where you want the web chat to appear. Finally, click the Copy to clipboard icon to copy the embed script to the clipboard."
+    },
+    {
+      "speaker": "user",
+      "text": "Can I extend the web chat? if so, how can I do that?",
+      "timestamp": 1723255640,
+      "enrichments": {
+        "Question Type": [
+          "Composite"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, extend the web chat. If you are a developer, you can extend the capabilities of the web chat by using the Watson Assistant web chat toolkit on GitHub. You can also you can further customize and extend the web chat by writing code and using the web chat API.",
+      "timestamp": 1723255644,
+      "contexts": [
+        {
+          "document_id": "ibmcld_02855-13982-15842",
+          "text": "\nFor more information about rich response types, see [Rich responses](https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-dialog-overviewdialog-overview-multimedia).\n\n\n\n\n\n Extending the web chat \n\nA developer can extend the capabilities of the web chat by using the Watson Assistant web chat toolkit on [GitHub](https://web-chat.global.assistant.watson.cloud.ibm.com/docs.html).\n\nIf you choose to use the provided methods, you implement them by editing the code snippet that was generated earlier. You then embed the updated code snippet into your web page.\n\nHere are some common tasks you might want to perform:\n\n\n\n* [Setting and passing context variable values](https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-deploy-web-chatdeploy-web-chat-set-context%7D)\n* [Adding user identity information (if you don't enable security)](https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-deploy-web-chatdeploy-web-chat-userid)\n\n\n\n\n\n Setting and passing context variable values \n\nA context variable is a variable that you can use to pass information to your assistant before a conversation starts. It can also collect information during a conversation, and reference it later in the same conversation. For example, you might want to ask for the customer's name and then address the person by name later on.\n\nThe following script preserves the context of the conversation. In addition, it adds an $ismember context variable and sets it to true.\n\nThe name that is specified for the skill (main skill) is a hardcoded name that is used to refer to any skill that you create from the product user interface. You do not need to edit your skill name.\n\n<script>\nfunction preSendhandler(event) {\nevent.data.context.skills['main skill'].user_defined.ismember = true;\n}\nwindow.watsonAssistantChatOptions = {\nintegrationID: \"YOUR_INTEGRATION_ID\",",
+          "url": "https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-deploy-web-chat",
+          "score": 15.595901,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723255951
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Extending the web chat"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16384-1889-3334",
+          "text": "\nYou can also use the web chat integration settings in the Watson Assistant user interface to configure the web chat for your website and your customers.\n\nIf you are a developer, you can further customize and extend the web chat by writing code and using the web chat API. You can also use a WebView with a JavaScript bridge to add the web chat to your mobile app.\n\nThe following documentation topics provide more information about the capabilities of the web chat integration, how to configure and deploy it, and how to customize it.\n\n\n\n* [How the web chat works](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-web-chat-architecture): Overview of web chat capabilities and architecture\n* [Embedding the web chat on your page](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-deploy-web-chat): How to embed the web chat widget on your website\n* [Web chat setup](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-web-chat-config): How to configure the web chat using the integration settings\n* [Web chat development](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-web-chat-config): How to customize and extend the web chat by writing code\n* [Adding contact center support](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-deploy-web-chat-haa): How to integrate the web chat with a contact center platform so you can connect your customers to human agents",
+          "url": "https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-web-chat-overview",
+          "score": 14.476466,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723255953
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Extending the web chat"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16384-7-2422",
+          "text": "\nWeb chat overview \n\nYou can use the web chat integration to deploy your assistant on your website or embed it as a WebView in your mobile app. The web chat integration provides an easy-to-use chatbot interface that can integrate seamlessly with your site, without requiring the time and effort that would be required to build your own custom user interface.\n\nThe web chat can help your customers start the conversation with common questions or tasks; it can display multimedia and interactive elements such as forms, and it can transfer customers to human agents for more help. A developer can customize the web chat to add even more capabilities.\n\n\n\n Why use the web chat? \n\nBuilding a custom user interface requires spending time and effort solving typical UI problems. For example, you need to design the layout and styling, keep up with browser changes, manage scrolling behavior, validate input, and comply with accessibility requirements. The time you spend building and maintaining a custom UI is better spent building a high-quality assistant instead.\n\nThe web chat widget uses cutting-edge functionality from IBM Design and Research to engage your users when they need help, answer their questions quickly and efficiently, and provide fallback options so there is always a path to a solution. The web chat is easy for you to deploy and easy for customers to use, it is secure, and it supports a wide range of desktop and mobile browsers.\n\nThe web chat is also customizable, which means that you can take advantage of the web chat functionality while still maintaining consistency with your website style and branding, adding custom UI elements, and integrating with external systems (such as live agent tools or CRM systems).\n\n\n\n\n\n What you can do with the web chat \n\nYou can quickly deploy the web chat to your website (or even to a local test page) and see how it works. You can also use the web chat integration settings in the Watson Assistant user interface to configure the web chat for your website and your customers.\n\nIf you are a developer, you can further customize and extend the web chat by writing code and using the web chat API. You can also use a WebView with a JavaScript bridge to add the web chat to your mobile app.\n\nThe following documentation topics provide more information about the capabilities of the web chat integration, how to configure and deploy it, and how to customize it.",
+          "url": "https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-web-chat-overview",
+          "score": 13.268912,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723255954
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Extending the web chat"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, you can extend the capabilities of the web chat by using the Watson Assistant web chat toolkit on GitHub. If you choose to use the provided methods, you implement them by editing the code snippet that was generated earlier and then embed the updated code snippet into your web page. Some common tasks you might want to perform include setting and passing context variable values, and adding user identity information if you don't enable security. Additionally, you can further customize and extend the web chat by writing code and using the web chat API, or use a WebView with a JavaScript bridge to add the web chat to your mobile app."
+    },
+    {
+      "speaker": "user",
+      "text": "Is web chat secure enough for me to pass some sesitive data?",
+      "timestamp": 1723256153,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "When you enable web chat security, all messages received by the web chat integration that are not accompanied by a properly signed JSON Web Token (JWT) will be rejected. JWTs are digitally signed using a private encryption key that only you have, ensuring that each message originates with your website. You can also use the public key provided by IBM to add an additional level of encryption for passing sensitive data from the web chat. This private context variable will be available for use by the dialog but not by anything else.",
+      "timestamp": 1723256157,
+      "contexts": [
+        {
+          "document_id": "ibmcld_16385-7-2272",
+          "text": "\nOverview: Securing the web chat \n\nIf you enable security, you can configure the web chat to authenticate users, protect private data, and restrict access to your assistant.\n\nAll messages that are sent between the web chat and the assistant are encrypted using Transport Layer Security (TLS), which protects sensitive data as it travels through the network. However, there are still potential security exposures that you might need to protect against. By enabling the web chat security feature and updating your website code appropriately, you can add the following protections:\n\n\n\n* You can prevent unauthorized websites from sending messages to your assistant, even if they copy your web chat embed script. (The unique identifiers in the embed script, such as the integration ID and service instance ID, are visible to anyone who has access to your website.)\n* You can securely authenticate customers in order to control access to features of your assistant that require authorization.\n* You can encrypt sensistive data so that customers cannot see it, while still allowing your assistant to access it.\n\n\n\nWeb chat security uses JSON Web Tokens (JWTs), which are data objects that are sent with each message from your website to the Watson Assistant service. Because a JWT is digitally signed using a private encryption key that only you have, it ensures that each message originates with your website. The JWT payload can also be used to securely authenticate users and carry encrypted private data.\n\nFor detailed information about JSON Web Tokens, see the [JWT specification](https://tools.ietf.org/html/rfc7519)).\n\nEnabling web chat security involves making the following customizations:\n\n\n\n* Implementing web application server code that generates a JWT signed with your private encryption key\n* Customizing the web chat configuration to provide the generated JWT\n* Enabling security in the web chat security settings\n\nAfter you enable web chat security, any message received by the web chat integration that is not accompanied by a properly signed JWT will be rejected.\n\n\n\nFor detailed information about how to complete these steps, see [Enabling web chat security](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-web-chat-security-enable).",
+          "url": "https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-web-chat-security",
+          "score": 16.305052,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723256347
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Enable security"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_02855-27616-29462",
+          "text": "\nreturn new Promise(function(resolve, reject) {\n// And then pass the new JWT into the callback and the service will resume processing messages.\nevent.identityToken = 'YOUR NEW JWT';\nresolve();\n});\n}});\ninstance.render();\n}\n};\nsetTimeout(function(){\nconst t=document.createElement('script');\nt.src=\"https://web-chat.global.assistant.watson.appdomain.cloud/loadWatsonAssistantChat.js\";\ndocument.head.appendChild(t);\n});\n</script>\nShow more\n\n\n\n\n\n\n\n Passing sensitive data \n\nYou can optionally copy the public key that is provided by IBM, and use it to add an additional level of encryption to support passing sensitive data from the web chat.\n\nUse this method to send sensitive information in messages that come from your website, such as a information about a customer's loyalty level, a user ID, or security tokens to use in webhooks that you call from your dialog. Information that is passed to your assistant in this way is stored in a private variable in your assistant. Private variables cannot be seen by customers and are never sent back to the web chat.\n\nFor example, you might start a business process for a VIP customer that is different from the process you start for less important customers. You likely do not want non-VIPs to know that they are categorized as such. But you must pass this informataion to your dialog because it changes the route of the conversation. You can pass the customer MVP status as an encrypted variable. This private context variable will be available for use by the dialog, but not by anything else.\n\n\n\n1. From the web chat configuration page, copy the public key from the IBM provided public key field.\n2. From your website, write a function that signs a JSON Web Token.\n\nFor example, the following NodeJS code snippet shows a function that accepts a userID and payload content and sends it to the web chat.",
+          "url": "https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-deploy-web-chat",
+          "score": 13.724722,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723256349
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Passing sensitive data"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, the web chat can be secure enough for passing sensitive data, given certain customizations. When you enable web chat security, all messages received by the web chat integration that are not accompanied by a properly signed JSON Web Token (JWT) will be rejected. JWTs are digitally signed using a private encryption key that only you have, ensuring that each message originates with your website. You can also use the public key provided by IBM to add an additional level of encryption for passing sensitive data from the web chat. This private context variable will be available for use by the dialog but not by anything else. For detailed instructions on how to enable web chat security, refer to the documentation on \"Enabling web chat security\" (<https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-web-chat-security-enable>)."
+    },
+    {
+      "speaker": "user",
+      "text": "I do not like the look of my web chat and how it opens and closes...",
+      "timestamp": 1723256657,
+      "enrichments": {
+        "Question Type": [
+          "Non-Question"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "You can customize the look and behavior of your web chat. From the Style tab of the web chat configuration page, you can change the color of the launcher icon and the text font. You can choose to use a different base Carbon Design theme as well. If you want to make more advanced customizations, you can change the launcher icon used to open the web chat widget and how it opens and closes. For example, you can launch the web chat from a different button or process on your website, open it in a different location or size, hide the launcher icon entirely, or hide the close button. ",
+      "timestamp": 1723256663,
+      "contexts": [
+        {
+          "document_id": "ibmcld_03080-7-1901",
+          "text": "\nApplying advanced customizations \n\nTailor the web chat to match your website and brand, and to behave in ways that meet your business needs.\n\n\n\n API overview \n\nThe following APIs are available:\n\n\n\n* Configuration object: When the embedded web chat widget starts, a configuration object named watsonAssistantChatOptions is used to define the widget. By editing the configuration object, you can customize the appearance and behavior of the web chat before it is rendered.\n* Runtime methods: Use the instance methods to perform tasks before a conversation between the assistant and your customer begins or after it ends.\n* Events: Your website can listen for these events, and then take custom actions.\n\n\n\nA developer can use these APIs to customize the web chat in the following ways:\n\n\n\n* [Change how the web chat opens and closes](https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-web-chat-configweb-chat-config-open-close)\n* [Change the conversation](https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-web-chat-configweb-chat-config-convo)\n* [Change the look of the web chat](https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-web-chat-configweb-chat-config-look)\n\n\n\n\n\n\n\n Change how the web chat opens and closes \n\nYou can change the color of the launcher icon from the Style tab of the web chat configuration page. If you want to make more advanced customizations, you can make the following types of changes:\n\n\n\n* Change the launcher icon that is used to open the web chat widget. For a tutorial the shows you how, see [Using a custom launcher](https://web-chat.global.assistant.watson.cloud.ibm.com/docs.html?to=tutorials-launcher).\n* Change how the web chat widget opens. For example, you might want to launch the web chat from some other button or process that exists on your website, or maybe open it in a different location, or at a different size.",
+          "url": "https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-web-chat-config",
+          "score": 18.90278,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723256799
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Change how the web chat opens and closes"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03421-2813-4727",
+          "text": "\nIf you use more than one integration type, focus on defining an engaging conversation in the underlying skill. The same skill is used for all integrations. To customize the conversation for the web chat only, you can take the following actions:\n\n\n\n* Update the text of a message before it is sent or after it is received, such as to hide personally-identifiable information.\n* Pass contextual information, such as the customer's name, from the web chat to the underlying skill. For examples of how to complete common tasks, see [Passing values](https://cloud.ibm.com/docs/assistant?topic=assistant-web-chat-configweb-chat-config-context).\n* Change the language that is used by the web chat. For more information, see [Global audience support](https://cloud.ibm.com/docs/assistant?topic=assistant-web-chat-basicsweb-chat-basics-global).\n* Render your own custom response types inside the web chat widget, including responses that incorporate code from your website at run time. For a tutorial that shows you how, see [Creating a custom response](https://web-chat.global.assistant.watson.cloud.ibm.com/docs.html?to=tutorials-user-defined-response).\n* Use React portals to render your custom response type as part of your application. For a tutorial that shows you how, see [Custom responses with React](https://web-chat.global.assistant.watson.cloud.ibm.com/docs.html?to=tutorials-react-portals).\n\n\n\n\n\n\n\n Change the look of the web chat \n\nYou can make simple changes to the color of things like the text font and web chat header from the Style tab of the web chat configuration page. To make more extensive style changes, you can set the CSS style color theme to a different theme or specify your own theme.\n\n\n\n* You can choose to use a different base Carbon Design theme. The supported base themes are color themes that are defined by [IBM Carbon Design](https://www.carbondesignsystem.com/guidelines/color/usage/).",
+          "url": "https://cloud.ibm.com/docs/assistant?topic=assistant-web-chat-config",
+          "score": 17.97188,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723256800
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Change the look of the web chat"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03421-1518-3290",
+          "text": "\nIf you want to make more advanced customizations, you can make the following types of changes:\n\n\n\n* Change the launcher icon that is used to open the web chat widget. For a tutorial the shows you how, see [Using a custom launcher](https://web-chat.global.assistant.watson.cloud.ibm.com/docs.html?to=tutorials-launcher).\n* Change how the web chat widget opens. For example, you might want to launch the web chat from some other button or process that exists on your website, or maybe open it in a different location, or at a different size. For a tutorial that shows you how, see [Render to a custom element](https://web-chat.global.assistant.watson.cloud.ibm.com/docs.html?to=tutorials-example-element).\n* Hide the launcher icon entirely and automatically start the web widget in open state, at its full length. For more information, see the [openChatByDefault method](https://web-chat.global.assistant.watson.cloud.ibm.com/docs.html?to=api-configurationconfigurationobject).\n* Hide the close button so users cannnot close the web chat widget. For more information, see the [hideCloseButton method](https://web-chat.global.assistant.watson.cloud.ibm.com/docs.html?to=api-configurationconfigurationobject).\n\n\n\n\n\n\n\n Change the conversation \n\nThe core of the conversation is defined in your skill. If you use more than one integration type, focus on defining an engaging conversation in the underlying skill. The same skill is used for all integrations. To customize the conversation for the web chat only, you can take the following actions:\n\n\n\n* Update the text of a message before it is sent or after it is received, such as to hide personally-identifiable information.\n* Pass contextual information, such as the customer's name, from the web chat to the underlying skill.",
+          "url": "https://cloud.ibm.com/docs/assistant?topic=assistant-web-chat-config",
+          "score": 10.566257,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723256971
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Hide the close button"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "You can customize the look and behavior of your web chat in several ways. From the Style tab of the web chat configuration page, you can change the color of the launcher icon and the text font. If you want to make more advanced customizations, you can change the launcher icon used to open the web chat widget and how it opens and closes. For example, you can launch the web chat from a different button or process on your website, open it in a different location or size, hide the launcher icon entirely, or hide the close button. For a tutorial on how to make these changes, see [Using a custom launcher](https://web-chat.global.assistant.watson.cloud.ibm.com/docs.html?to=tutorials-launcher) and [Render to a custom element](https://web-chat.global.assistant.watson.cloud.ibm.com/docs.html?to=tutorials-example-element)."
+    },
+    {
+      "speaker": "user",
+      "text": "i am having hard time finding web chat whenever I was trying to use",
+      "timestamp": 1723257188,
+      "enrichments": {
+        "Question Type": [
+          "Troubleshooting"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "From the Home screen tab, turn the home screen feature On. You can add a greeting that is engaging and invites the user to interact with your assistant. If you are a developer, you can customize the home screen further. A Get started heading is displayed before the list of conversation starter messages. A developer can change the heading text by replacing the homeScreen_conversationStarterLabel in the web chat language strings file.",
+      "timestamp": 1723257193,
+      "contexts": [
+        {
+          "document_id": "ibmcld_03166-14421-16009",
+          "text": "\nIf your assistant has multiple skills attached to it, the dialog skill orchestrates the incoming messages. If you want an action that you created to respond to a conversation starter message, make sure your dialog is set up to call the action. For more information, see [Calling an actions skill from a dialog](https://cloud.ibm.com/docs/assistant?topic=assistant-dialog-call-action).\n\nAll three conversation starters are required.\n\n\n\nA developer can customize the home screen even more:\n\n\n\n* A Get started heading is displayed before the list of conversation starter messages. A developer can change the heading text by replacing the homeScreen_conversationStarterLabel in the web chat language strings file. For more information, see the [instance.updateLanguagePack() method](https://web-chat.global.assistant.watson.cloud.ibm.com/docs.html?to=api-instance-methodsupdatelanguagepack) documentation.\n* You can use the web chat API to add other elements to the home screen page. For more information, see the [instance.writeableElements() method](https://web-chat.global.assistant.watson.cloud.ibm.com/docs.html?to=api-instance-methodswriteableelements) documentation.\n* For information about CSS helper classes that you can use to change the home screen style, see the [prebuilt templates](https://web-chat.global.assistant.watson.cloud.ibm.com/docs.html?to=api-renderhtml) documentation.\n\n\n\n\n\n\n\n Showing more suggestions \n\nSuggestions give your customers a way to try something else when the current exchange with the assistant isn't delivering what they expect. A question mark icon !",
+          "url": "https://cloud.ibm.com/docs/assistant?topic=assistant-deploy-web-chat",
+          "score": 17.453758,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723257408
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "A Get started heading is displayed before the list of conversation starter messages"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_02855-8124-9934",
+          "text": "\n[An example of the home screen](https://cloud.ibm.com/docs-content/v1/content/a2b18c153837bce00a5b4de496e4b4ca64bbf56e/assistant-data/images/home-screen.png)\n\n\n\n1. From the Home screen tab, turn the home screen feature On.\n2. Add a greeting that is engaging and invites the user to interact with your assistant.\n\nA greeting is required and replaces the greeting that is specified in the welcome node of the dialog.\n3. Add three conversation starter messages.\n\nThese messages are displayed in the web chat as examples of the types of questions that customers can ask. Customers can click one of them to submit it to the assistant.\n\nYou must test each message that you add as a conversation starter. Use only questions that the assistant understands and knows how to answer well.\n\nAll three conversation starters are required.\n\n\n\nA developer can customize the home screen even more:\n\n\n\n* A Get started heading is displayed before the list of conversation starter messages. You can change the heading text by replacing the homeScreen_conversationStarterLabel in the web chat language strings file. For more information, see the [instance.updateLanguagePack() method](https://web-chat.global.assistant.watson.cloud.ibm.com/docs.html?to=api-instance-methodsupdatelanguagepack) documentation.\n* You can use the web chat API to add other elements to the home screen page. For more information, see the [instance.writeableElements() method](https://web-chat.global.assistant.watson.cloud.ibm.com/docs.html?to=api-instance-methodswriteableelements) documentation.\n* For information about CSS helper classes that you can use to change the home screen style, see the [prebuilt templates](https://web-chat.global.assistant.watson.cloud.ibm.com/docs.html?to=api-renderhtml) documentation.\n\n\n\n\n\n\n\n Showing more suggestions !",
+          "url": "https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-deploy-web-chat",
+          "score": 13.516652,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723257477
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "From the Home screen tab, turn the home screen feature"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "If you're having a hard time finding the web chat, you can customize its appearance and behavior to make it more noticeable. For instance, you can change the color of the launcher icon and the text font, use a different base Carbon Design theme, or even launch the web chat from a different button or process on your website. These customizations can help you make the web chat more visible and accessible to your users."
+    },
+    {
+      "speaker": "user",
+      "text": "Add user identity information",
+      "timestamp": 1723257828,
+      "enrichments": {
+        "Question Type": [
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "If you do not enable security, and you want to perform tasks where you need to know the user who submitted the input, then you must pass the user ID to the web chat integration. If you do enable security, you set the user ID in the JSON Web Token instead. You should choose a non-human-identifiable ID. For example, do not use a person's email address as the user_id.",
+      "timestamp": 1723257833,
+      "contexts": [
+        {
+          "document_id": "ibmcld_03080-9575-11239",
+          "text": "\nIf you do enable security, you set the user ID in the JSON Web Token instead. For more information, see [Authenticating users](https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-deploy-web-chatdeploy-web-chat-security-authenticate).\n\nChoose a non-human-identifiable ID. For example, do not use a person's email address as the user_id.\n\nUser information is used in the following ways:\n\n\n\n* User-based service plans use the user_id associated with user input for billing purposes.\n\n\n\n\n\n* The ability to delete any data created by someone who requests to be forgotten requires that a customer_id be associated with the user input. When a user_id is defined, the product can reuse it to pass a customer_id parameter.\n\nBecause the user_id value that you submit is included in the customer_id value that is added to the X-Watson-Metadata header in each message request, the user_id syntax must meet the requirements for header fields as defined in [RFC 7230](https://tools.ietf.org/html/rfc7230section-3.2).\n\n\n\nTo support these user-based capabilities, add the [updateUserID() method](https://web-chat.global.assistant.watson.cloud.ibm.com/docs.html?to=api-instance-methodsupdateuserid) in the code snippet before you paste it into your web page.\n\nIn the following example, the user ID L12345 is added to the script.\n\n<script>\nwindow.watsonAssistantChatOptions = {\nintegrationID: 'YOUR_INTEGRATION_ID',\nregion: 'YOUR_REGION',\nserviceInstanceID: 'YOUR_SERVICE_INSTANCE',\ncloudPrivateHostURL: 'YOUR_HOST_URL',\nonLoad: function(instance) {\ninstance.updateUserID('L12345');\ninstance.render();\n}\n};\nsetTimeout(function(){\nconst t=document.createElement('script');",
+          "url": "https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-web-chat-config",
+          "score": 26.188951,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723257997
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "If you do enable security, you set the user ID in the JSON"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03421-9438-11232",
+          "text": "\nIf you do not enable security, and you want to perform tasks where you need to know the user who submitted the input, then you must pass the user ID to the web chat integration.\n\nIf you do enable security, you set the user ID in the JSON Web Token instead. For more information, see [Authenticating users](https://cloud.ibm.com/docs/assistant?topic=assistant-web-chat-securityweb-chat-security-authenticate).\n\nChoose a non-human-identifiable ID. For example, do not use a person's email address as the user_id.\n\nUser information is used in the following ways:\n\n\n\n* User-based service plans use the user_id associated with user input for billing purposes. See [User-based plans](https://cloud.ibm.com/docs/assistant?topic=assistant-admin-managing-planadmin-managing-plan-user-based).\n* The ability to delete any data created by someone who requests to be forgotten requires that a customer_id be associated with the user input. When a user_id is defined, the product can reuse it to pass a customer_id parameter. See [Labeling and deleting data](https://cloud.ibm.com/docs/assistant?topic=assistant-information-securityinformation-security-gdpr-wa).\n\nBecause the user_id value that you submit is included in the customer_id value that is added to the X-Watson-Metadata header in each message request, the user_id syntax must meet the requirements for header fields as defined in [RFC 7230](https://tools.ietf.org/html/rfc7230section-3.2).\n\n\n\nTo support these user-based capabilities, add the [updateUserID() method](https://web-chat.global.assistant.watson.cloud.ibm.com/docs.html?to=api-instance-methodsupdateuserid) in the code snippet before you paste it into your web page.\n\nIn the following example, the user ID L12345 is added to the script.\n\n<script>\nwindow.watsonAssistantChatOptions = {",
+          "url": "https://cloud.ibm.com/docs/assistant?topic=assistant-web-chat-config",
+          "score": 20.081984,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723258016
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "then you must pass the user ID to the web chat integration."
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "To add user identity information to the web chat, you should include a user ID in the script when embedding the web chat widget on your website. If you have enabled security, the user ID should be set in the JSON Web Token instead. It is recommended to choose a non-human-identifiable ID and avoid using a person's email address as the user\\_id. The user\\_id value is used for billing purposes in user-based service plans and for deleting data created by users who request to be forgotten. The syntax of the user\\_id value must meet the requirements for header fields as defined in RFC 7230. To support user-based capabilities, you should add the `updateUserID()` method in the code snippet before pasting it into your web page."
+    },
+    {
+      "speaker": "user",
+      "text": "how does web chat work?",
+      "timestamp": 1723258170,
+      "enrichments": {
+        "Question Type": [
+          "How-To",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The web chat provides a convenient chatbot interface that you can add to your website without writing any code. After adding the web chat script to your website, a launcher icon appears in the bottom right corner. When a customer clicks the launcher, the web chat window opens, displaying a greeting and suggested conversation starters. The customer can click a conversation starter or type a message to begin the conversation. The appearance and behavior of the web chat can be configured and customized to match your website style and branding. The web chat uses the Watson Assistant v2 stateful API to communicate with the assistant and supports a variety of devices and platforms. The web chat integration undergoes tests and scans on a regular basis to find and address potential security issues",
+      "timestamp": 1723258175,
+      "contexts": [
+        {
+          "document_id": "ibmcld_16365-7-1700",
+          "text": "\nHow the web chat works \n\nThe web chat provides an easy-to-use chatbot interface that you can add to your website without writing any code.\n\nAfter you add the web chat script to your website, your customers will see a launcher icon that they can click to open the chat window and start a conversation with the assistant. The appearance of the launcher icon adapts to desktop and mobile browsers.\n\n![web chat launcher in desktop browser](https://cloud.ibm.com/docs-content/v1/content/ca9232b3702768f24bb897f48f10778fcda28718/watson-assistant/images/web-chat-desktop-highlighted.png)\n\nWhen a customer clicks the launcher, the web chat window opens, initially displaying the home screen. The home screen displays a greeting and an optional set of suggested conversation starters for common questions and problems. The customer can either click a conversation starter or type a message in the input field to start the conversation with the assistant.\n\n![web chat example home screen](https://cloud.ibm.com/docs-content/v1/content/ca9232b3702768f24bb897f48f10778fcda28718/watson-assistant/images/web-chat-home-screen-lendyr.png)\n\nThe appearance and behavior of the launcher icon, the home screen, and most other aspects of the web chat can be configured and customized to match your website style and branding. For more information, see [Configuring the web chat](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-web-chat-config).\n\n\n\n Launcher appearance and behavior \n\nThe web chat launcher welcomes and engages customers so they know where to find help if they need it. By default, the web chat launcher appears in a small initial state as a circle in the bottom right corner:\n\n!",
+          "url": "https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-web-chat-architecture",
+          "score": 14.31707,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723258255
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "web chat"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16365-8408-10508",
+          "text": "\nThe code snippet that creates the web chat widget includes a configuration object, which you can modify to change the appearance and behavior of the web chat. The configuration object also specifies details that enable the web chat to connect to your assistant. If you are comfortable writing JavaScript code, you can customize the web chat by modifying the code snippet and using the web chat API.\n\nThe web chat uses the Watson Assistant v2 stateful API to communicate with the assistant. By default, the session ends and the conversation ends after 5 minutes of inactivity. This means that if a user stops interacting with the assistant, after 5 minutes, any context variable values that were set during the previous conversation are set to null or back to their initial values. You can change the inactivity timeout setting in the assistant settings (if allowed by your plan).\n\n\n\n Browser support \n\nThe web chat supports a variety of devices and platforms. As a general rule, if the last two versions of a browser account for more than 1% of all desktop or mobile traffic, the web chat supports that browser.\n\nThe following list specifies the minimum required browser software for the web chat (including the two most recent versions, except as noted):\n\n\n\n* Google Chrome\n* Apple Safari\n* Mobile Safari\n* Chrome for Android\n* Microsoft Edge (Chromium and non-Chromium)\n* Mozilla Firefox\n* Firefox ESR (most recent ESR only)\n* Opera\n* Samsung Mobile Browser\n* UC Browser for Android\n* Mobile Firefox\n\n\n\nFor optimal results when rendering the web chat on mobile devices, the <head> element of your web page must include the following metadata element:\n\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n\n\n\n\n\n Accessibility \n\nIBM strives to provide products with usable access for everyone, regardless of age or ability.\n\nThe web chat integration complies with the [Web Content Accessibility 2.1 Level AA](https://www.w3.org/WAI/standards-guidelines/wcag/new-in-21/) standard. It is tested with both screen readers and automated tools on a continual basis.\n\n\n\n\n\n Language support",
+          "url": "https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-web-chat-architecture",
+          "score": 13.263212,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723258260
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "web chat"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03422-14609-15163",
+          "text": "\ninstance.render();\n}\n};\n\n\n\n\n\n\n\n Security measures \n\nThe web chat integration undergoes tests and scans on a regular basis to find and address potential security issues, such as cross-site scripting (XSS) vulnerabilities.\n\nBe sure to run your own security reviews to see how the web chat fits in with your current website structure and policies. The web chat is hosted on your site and can inherit any vulnerabilities that your site has. Only serve content over HTTPS, use Content Security Policy (CSP), and implement other basic web security precautions.",
+          "url": "https://cloud.ibm.com/docs/assistant?topic=assistant-web-chat-security",
+          "score": 12.593429,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723258261
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "web chat"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The web chat provides a convenient chatbot interface that you can add to your website without writing any code. After adding the web chat script to your website, a launcher icon appears in the bottom right corner. When a customer clicks the launcher, the web chat window opens, displaying a greeting and suggested conversation starters. The customer can click a conversation starter or type a message to begin the conversation. The appearance and behavior of the web chat can be configured and customized to match your website style and branding. The web chat uses the Watson Assistant v2 stateful API to communicate with the assistant and supports a variety of devices and platforms."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+      "status": "created",
+      "timestamp": 1723258294
+    },
+    {
+      "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+      "status": "accepted",
+      "timestamp": 1724866375
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "accepted",
+      "timestamp": 1725580632
+    },
+    {
+      "author": "d2b56e91-6d89-4df4-b89a-eef8d969850b",
+      "status": "accepted",
+      "timestamp": 1726704220
+    }
+  ],
+  "editor": null,
+  "domain": "mt-rag-ibmcloud-elser-512-100-20240502",
+  "reviewer": "d2b56e91-6d89-4df4-b89a-eef8d969850b"
+}

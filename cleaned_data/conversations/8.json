@@ -1,0 +1,743 @@
+{
+  "author": "8163b85d-d338-4ed1-8ebf-cd065ac3dc12",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-ibmcloud-elser-512-100-20240502",
+      "size": "72442"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "google/flan-t5-xl",
+    "name": "flan-t5-xl-3b",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "does IBM offer document databases?",
+      "timestamp": 1724856842,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, IBM offers [IBM Cloudant](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-documents) which stores JSON objects.",
+      "timestamp": 1724856843,
+      "contexts": [
+        {
+          "document_id": "ibmcld_00474-7885-8455",
+          "text": "\nSummary \n\nToday, we combined two IBM Cloud services to optimize cost and user experience: IBM Cloudant as a document store and query engine and Databases for Redis as a content cache. Cached documents can be retrieved more quickly and more cheaply, but the tradeoff is that your application might be showing old data to your users for a time.\n\nIf you followed this tutorial, you must deprovision your resources to stop incurring charges. You can deprovision from the terraform directory on your terminal by typing the following command, terraform destroy --auto-approve.",
+          "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-combine-ibm-services",
+          "score": 18.44473,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1724868041
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: does IBM offer document databases?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_00513-7-2197",
+          "text": "\nDatabase overview \n\nIBM\u00ae Cloudant\u00ae for IBM Cloud\u00ae databases contain JSON objects. These JSON objects are called [documents](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-documentsdocuments).\n\nAll documents must be contained in a database. For more information, see [partitioned databases](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-databasespartitioned-databases-database).\n\nThe [Grouping related documents together in IBM Cloudant](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-grouping-related-documents-together-in-ibm-cloudantgrouping-related-documents-together-in-ibm-cloudant) guide provides an example of how documents for an e-commerce application might be used within an IBM Cloudant database.\n\n\n\n Partitioned databases \n\nIBM Cloudant supports two types of databases:\n\n\n\n* Partitioned\n* Nonpartitioned\n\n\n\nA partitioned database offers significant query performance and cost advantages but requires you to specify a logical partitioning of your data. The partitioning is specified as part of each document's ID. A partitioned database provides both global and partition queries. Partition queries target queries at a single, given document partition, meaning they need to process less data to return results. Therefore, partition queries offer significant performance advantages, and also often provide cost advantages over global queries. Global queries target the entire database, which leads to extra complexity, slower performance, and increased cost, but offers results that draw from all data.\n\nAlternatively, a nonpartitioned database might be created. This type of database can be less complex to work with since no partitioning scheme needs to be defined, but you can create only global secondary indexes.\n\nIBM Cloudant strongly encourages you to use a partitioned database for best long-term database performance where the data model allows for logical partitioning of documents.\n\nThe partitioning type of a database is set at database creation time. When you create a database, use the partitioned query string parameter to set whether the database is partitioned. The default for partitioned is false, maintaining compatibility with an earlier version.",
+          "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-databases",
+          "score": 18.216822,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1724857361
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: does IBM offer document databases?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_06317-3-1479",
+          "text": "\nIBM Cloud\u00ae Databases for DataStax docs \n\nIBM Cloud\u00ae Databases for DataStax is a scale-out NoSQL database built on Apache Cassandra, designed for high-availability and workload flexibility.\n\n Developer tools \n\n[API & SDK reference](https://cloud.ibm.com/apidocs/cloud-databases-api/cloud-databases-api-v5introduction)[CLI reference](https://cloud.ibm.com/docs/databases-cli-plugin)[Terraform reference](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/database)\n\n Recommended content \n\n[Deprecation of IBM Cloud\u00ae Databases for DataStax IBM Cloud\u00ae Databases for DataStax is deprecated and no longer supported as of 30 June 2024.](https://cloud.ibm.com/docs/databases-for-cassandra?topic=databases-for-cassandra-deprecation)[Setting the Admin Password The Databases for DataStax service is provisioned with an admin user. You must set the admin password before you use it to connect.](https://cloud.ibm.com/docs/databases-for-cassandra?topic=databases-for-cassandra-admin-password&interface=cli)[Creating and managing users, roles, and privileges IBM Cloud\u00ae Databases for DataStax uses a system of roles to manage database permissions. Roles are used to give a single user or a group of users a set of privileges.](https://cloud.ibm.com/docs/databases-for-cassandra?topic=databases-for-cassandra-user-management&interface=cli)\n\n Learn more \n\n[IBM Developer<br><br>Visit IBM Developer for technical articles, code patterns, tutorials, and more.<br><br>!",
+          "url": "https://cloud.ibm.com/docs/databases-for-cassandra",
+          "score": 18.014393,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "no",
+                "timestamp": 1724857709
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: does IBM offer document databases?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, IBM offers [IBM Cloudant](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-documentsdocuments)."
+    },
+    {
+      "speaker": "user",
+      "text": "So it can store any random JSON object or I need to specify fields in advances?",
+      "timestamp": 1724857810,
+      "enrichments": {
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Question Type": [
+          "Composite",
+          "Factoid"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, IBM Cloudant can store any JSON object subject to some caveats listed below\n1. All documents must have two fields:\n    * A unique _id field. The _id field is detailed in the next section.\n    * A _rev field. The _rev field is a revision identifier, and is essential to the IBM Cloudant replication protocol.\n2. Field names that begin with the underscore character (_) are reserved in IBM Cloudant. This rule means that you can't normally have your own field names that begin with an underscore. For example, the field example would be accepted, but the field _example would result in a doc_validation error message.\n",
+      "timestamp": 1724857812,
+      "contexts": [
+        {
+          "document_id": "ibmcld_00526-7-1750",
+          "text": "\nOverview \n\nDocuments are [JSON objects](https://en.wikipedia.org/wiki/JSONData_types.2C_syntax_and_example). Documents are also containers for your data, and are the basis of the IBM\u00ae Cloudant\u00ae for IBM Cloud\u00ae database.\n\nIf you're using an [IBM Cloudant service on IBM Cloud\u00ae](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-publicibm-cloud-public), documents are limited to a maximum size of 1 MB. Exceeding this limit causes a [413 error](https://cloud.ibm.com/apidocs/cloudantlist-of-http-codes).\n\nIBM Cloudant uses an [eventually consistent](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-cap-theoremcap-theorem) model for data. If you use the eventually consistent model, it's possible, under some conditions, to retrieve older document content. For example, older content is retrieved when your application writes or updates a document that is followed immediately by a read of the same document.\n\nIn other words, your application would see the document content as it was before the write or update occurred. For more information about this model, see the topic on [Consistency](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-cap-theoremcap-theorem).\n\n\n\n Document fields \n\nAll documents must have two fields:\n\n\n\n* A unique _id field. The _id field is detailed in the next section.\n* A _rev field. The _rev field is a revision identifier, and is [essential to the IBM Cloudant replication protocol](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-document-versioning-and-mvccdocument-versioning-and-mvcc).\n\n\n\nIn addition to these two mandatory fields, documents can generally contain any other content that can be described by using JSON, subject to some caveats detailed in the following sections.\n\n\n\n Document IDs",
+          "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-documents",
+          "score": 31.14378,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1724858280
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: does IBM offer document databases?\n|assistant|: Yes, IBM offers [IBM Cloudant](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-documents) which stores JSON objects.\n|user|: So it can store any random JSON object or I need to specify fields in advances?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_00526-2924-4511",
+          "text": "\nField name restrictions \n\nField names that begin with the underscore character (_) are reserved in IBM Cloudant. This rule means that you can't normally have your own field names that begin with an underscore. For example, the field example would be accepted, but the field _example would result in a doc_validation error message.\n\nSee an example of a JSON document that attempts to create a field with an underscore prefix:\n\n{\n\"_top_level_field_name\": \"some data\"\n}\n\nSee an error message that is returned when you attempt to create a field with an underscore prefix:\n\n{\n\"error\": \"doc_validation\",\n\"reason\": \"Bad special document member: _top_level_field_name\"\n}\n\nHowever, if the field name is for an object that is nested within the document, you can use an underscore prefix for the field name.\n\nSee an example of a JSON document that attempts to create a field with an underscore prefix, nested within an object:\n\n{\n\"another_top_level_field_name\": \"some data\",\n\"another_field\": {\n\"_lower_level_field_name\": \"some more data\"\n}\n}\n\nSee an example success message (abbreviated) returned when a nested field with an underscore prefix is created:\n\n{\n\"ok\": true,\n\"id\": \"2\",\n\"rev\": \"1-9ce...8d4\"\n}\n\n\n\n\n\n\n\n Quorum - writing and reading data \n\nIn a distributed system, it's possible that a request might take some time to complete. A \"quorum\" mechanism is used to help determine when a request, such as a write or read, completes successfully.\n\nFor more information about quorum settings and their implications on dedicated IBM Cloudant systems, contact IBM Cloudant support.\n\n\n\n\n\n Time to live",
+          "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-documents",
+          "score": 20.475416,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1724858283
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "cloudant field name restrictions"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, IBM Cloudant can store any JSON object."
+    },
+    {
+      "speaker": "user",
+      "text": "What if I want to store an image or pdf with a document? ",
+      "timestamp": 1724859702,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "IBM Cloudant has support for storing attachments alongside documents, a long-standing feature it inherits from CouchDB. So you can easily add an image or PDF as an attachment to your document but you must consider a few things before you use attachments in IBM Cloudant today, especially if you\u2019re looking at larger assets.\n\n1. IBM Cloudant is expensive as a block store.\n2. IBM Cloudant\u2019s internal implementation is not efficient in handling large amounts of binary data. So, slow and expensive. IBM Cloudant is acceptable for small assets and occasional use. As a rule, if you need to store binary data alongside IBM Cloudant documents, it\u2019s better to use a separate solution more suited for this purpose. You need store only the attachment metadata in the IBM Cloudant document.",
+      "timestamp": 1724859707,
+      "contexts": [
+        {
+          "document_id": "ibmcld_00510-7123-9213",
+          "text": "\nIBM Cloudant has support for storing attachments alongside documents, a long-standing feature it inherits from CouchDB. If you use IBM Cloudant as a backend for a web application, you can also store small icons and other static assets such as CSS and JavaScript files with the data.\n\nYou must consider a few things before you use attachments in IBM Cloudant today, especially if you\u2019re looking at larger assets such as images and videos:\n\n\n\n1. IBM Cloudant is expensive as a block store.\n2. IBM Cloudant\u2019s internal implementation is not efficient in handling large amounts of binary data.\n\n\n\nSo, slow and expensive.\n\nIBM Cloudant is acceptable for small assets and occasional use. As a rule, if you need to store binary data alongside IBM Cloudant documents, it\u2019s better to use a separate solution more suited for this purpose. You need store only the attachment metadata in the IBM Cloudant document. Yes, that means you need to write some extra code to upload the attachment to a suitable block store of your choice. Verify that it succeeded before you store the token or URL to the attachment in the IBM Cloudant document.\n\nYour databases are smaller, cheaper, faster, and easier to replicate. For more information, see the following websites:\n\n\n\n* IBM Cloudant docs on [attachments](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-how-to-use-attachments)\n* Detaching IBM Cloudant attachments to [Object Storage](https://medium.com/codait/detaching-cloudant-attachments-to-object-storage-with-serverless-functions-99b8c3c77925)\n\n\n\n\n\n\n\n Fewer databases are better than many \n\nIf you can, limit the number of databases per IBM Cloudant account to 500 or fewer. While this particular number is not magic (IBM Cloudant can safely handle more), several use cases exist that are adversely affected by large numbers of databases in an account.\n\nThe replicator scheduler has a limited number of simultaneous replication jobs that it is prepared to run. As the number of databases grows, the replication latency is likely to increase if you try to replicate everything contained in an account.",
+          "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-data-modeling",
+          "score": 17.237463,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1724859734
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "attachments in cloudant"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "You need to store only the attachment metadata in the IBM Cloudant document. Yes, that means you need to write some extra code to upload the attachment to a suitable block store of your choice. Verify that it succeeded before you store the token or URL to the attachment in the IBM Cloudant document."
+    },
+    {
+      "speaker": "user",
+      "text": "Is there a limit on the file size? ",
+      "timestamp": 1724865619,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, documents are limited to a maximum size of 1 MB. Exceeding this limit causes a [413 error](https://cloud.ibm.com/apidocs/cloudantlist-of-http-codes).",
+      "timestamp": 1724865623,
+      "contexts": [
+        {
+          "document_id": "ibmcld_00526-7-1750",
+          "text": "\nOverview \n\nDocuments are [JSON objects](https://en.wikipedia.org/wiki/JSONData_types.2C_syntax_and_example). Documents are also containers for your data, and are the basis of the IBM\u00ae Cloudant\u00ae for IBM Cloud\u00ae database.\n\nIf you're using an [IBM Cloudant service on IBM Cloud\u00ae](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-publicibm-cloud-public), documents are limited to a maximum size of 1 MB. Exceeding this limit causes a [413 error](https://cloud.ibm.com/apidocs/cloudantlist-of-http-codes).\n\nIBM Cloudant uses an [eventually consistent](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-cap-theoremcap-theorem) model for data. If you use the eventually consistent model, it's possible, under some conditions, to retrieve older document content. For example, older content is retrieved when your application writes or updates a document that is followed immediately by a read of the same document.\n\nIn other words, your application would see the document content as it was before the write or update occurred. For more information about this model, see the topic on [Consistency](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-cap-theoremcap-theorem).\n\n\n\n Document fields \n\nAll documents must have two fields:\n\n\n\n* A unique _id field. The _id field is detailed in the next section.\n* A _rev field. The _rev field is a revision identifier, and is [essential to the IBM Cloudant replication protocol](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-document-versioning-and-mvccdocument-versioning-and-mvcc).\n\n\n\nIn addition to these two mandatory fields, documents can generally contain any other content that can be described by using JSON, subject to some caveats detailed in the following sections.\n\n\n\n Document IDs",
+          "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-documents",
+          "score": 41.15375,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1724867561
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: does IBM offer document databases?\n|assistant|: Yes, IBM offers [IBM Cloudant](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-documents) which stores JSON objects.\n|user|: So it can store any random JSON object or I need to specify fields in advances?\n|assistant|: Yes, IBM Cloudant can store any JSON object subject to some caveats listed below\n1. All documents must have two fields:\n    * A unique _id field. The _id field is detailed in the next section.\n    * A _rev field. The _rev field is a revision identifier, and is essential to the IBM Cloudant replication protocol.\n2. Field names that begin with the underscore character (_) are reserved in IBM Cloudant. This rule means that you can't normally have your own field names that begin with an underscore. For example, the field example would be accepted, but the field _example would result in a doc_validation error message.\n\n|user|: What if I want to store an image or pdf with a document? \n|assistant|: IBM Cloudant has support for storing attachments alongside documents, a long-standing feature it inherits from CouchDB. So you can easily add an image or PDF as an attachment to your document but you must consider a few things before you use attachments in IBM Cloudant today, especially if you\u2019re looking at larger assets.\n\n1. IBM Cloudant is expensive as a block store.\n2. IBM Cloudant\u2019s internal implementation is not efficient in handling large amounts of binary data. So, slow and expensive. IBM Cloudant is acceptable for small assets and occasional use. As a rule, if you need to store binary data alongside IBM Cloudant documents, it\u2019s better to use a separate solution more suited for this purpose. You need store only the attachment metadata in the IBM Cloudant document.\n|user|: Is there a limit on the file size? "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "speaker": "user",
+      "text": "Not documents, I was asking for attachments?",
+      "timestamp": 1724865981,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I am sorry I couldn't find any explicit limits on attachment size but as stated earlier IBM Cloudant isn't best suited for handling large amounts of binary data. Thus it\u2019s better to use a separate solution more suited for this purpose and only store the attachment metadata in the IBM Cloudant document.",
+      "timestamp": 1724865987,
+      "contexts": [
+        {
+          "document_id": "ibmcld_00510-7123-9213",
+          "text": "\nIBM Cloudant has support for storing attachments alongside documents, a long-standing feature it inherits from CouchDB. If you use IBM Cloudant as a backend for a web application, you can also store small icons and other static assets such as CSS and JavaScript files with the data.\n\nYou must consider a few things before you use attachments in IBM Cloudant today, especially if you\u2019re looking at larger assets such as images and videos:\n\n\n\n1. IBM Cloudant is expensive as a block store.\n2. IBM Cloudant\u2019s internal implementation is not efficient in handling large amounts of binary data.\n\n\n\nSo, slow and expensive.\n\nIBM Cloudant is acceptable for small assets and occasional use. As a rule, if you need to store binary data alongside IBM Cloudant documents, it\u2019s better to use a separate solution more suited for this purpose. You need store only the attachment metadata in the IBM Cloudant document. Yes, that means you need to write some extra code to upload the attachment to a suitable block store of your choice. Verify that it succeeded before you store the token or URL to the attachment in the IBM Cloudant document.\n\nYour databases are smaller, cheaper, faster, and easier to replicate. For more information, see the following websites:\n\n\n\n* IBM Cloudant docs on [attachments](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-how-to-use-attachments)\n* Detaching IBM Cloudant attachments to [Object Storage](https://medium.com/codait/detaching-cloudant-attachments-to-object-storage-with-serverless-functions-99b8c3c77925)\n\n\n\n\n\n\n\n Fewer databases are better than many \n\nIf you can, limit the number of databases per IBM Cloudant account to 500 or fewer. While this particular number is not magic (IBM Cloudant can safely handle more), several use cases exist that are adversely affected by large numbers of databases in an account.\n\nThe replicator scheduler has a limited number of simultaneous replication jobs that it is prepared to run. As the number of databases grows, the replication latency is likely to increase if you try to replicate everything contained in an account.",
+          "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-data-modeling",
+          "score": 45.349213,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1724866360
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: does IBM offer document databases?\n|assistant|: Yes, IBM offers [IBM Cloudant](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-documents) which stores JSON objects.\n|user|: So it can store any random JSON object or I need to specify fields in advances?\n|assistant|: Yes, IBM Cloudant can store any JSON object subject to some caveats listed below\n1. All documents must have two fields:\n    * A unique _id field. The _id field is detailed in the next section.\n    * A _rev field. The _rev field is a revision identifier, and is essential to the IBM Cloudant replication protocol.\n2. Field names that begin with the underscore character (_) are reserved in IBM Cloudant. This rule means that you can't normally have your own field names that begin with an underscore. For example, the field example would be accepted, but the field _example would result in a doc_validation error message.\n\n|user|: What if I want to store an image or pdf with a document? \n|assistant|: IBM Cloudant has support for storing attachments alongside documents, a long-standing feature it inherits from CouchDB. So you can easily add an image or PDF as an attachment to your document but you must consider a few things before you use attachments in IBM Cloudant today, especially if you\u2019re looking at larger assets.\n\n1. IBM Cloudant is expensive as a block store.\n2. IBM Cloudant\u2019s internal implementation is not efficient in handling large amounts of binary data. So, slow and expensive. IBM Cloudant is acceptable for small assets and occasional use. As a rule, if you need to store binary data alongside IBM Cloudant documents, it\u2019s better to use a separate solution more suited for this purpose. You need store only the attachment metadata in the IBM Cloudant document.\n|user|: Is there a limit on the file size? \n|assistant|: Yes, documents are limited to a maximum size of 1 MB. Exceeding this limit causes a [413 error](https://cloud.ibm.com/apidocs/cloudantlist-of-http-codes).\n|user|: Not documents, I was asking for attachments?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "assistant: IBM Cloudant has support for storing attachments alongside documents, a long-standing feature it inherits from CouchDB. So you can easily add an image or PDF as an attachment to your document but you must consider a few things before you use attachments in IBM Cloudant today, especially if you\u2019re looking at larger assets. 1. IBM Cloudant is expensive as a block store. 2. IBM Cloudant\u2019s internal implementation is not efficient in handling large amounts of binary data. So, slow and expensive. IBM Cloudant is acceptable for small assets and occasional use. As a rule, if you need to store binary data alongside IBM Cloudant documents, it\u2019s better to use a separate solution more suited for this purpose. You need store only the attachment metadata in the IBM Cloudant document."
+    },
+    {
+      "speaker": "user",
+      "text": "Ok. How do I get started? I just look through cloud catelog for IBM Cloudant? ",
+      "timestamp": 1724866448,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "It's quite easy to get setup with IBM Cloudant instance. Let me walk you through it.\n\n1. Log in to your IBM Cloud account, and click Create resource. \n\n2. Type Cloudant in the Search bar and click to open it. \n\n3. Select an offering and an environment. \n\n4. Type an instance name. \n\n5. Select your plan. \n\n6. To create the service, click Create:\nAfter you click Create, the system displays a message to say that the instance is being provisioned, which returns you to the Resource list. From the Resource list, you see that the status for your instance is, Provision in progress. \n\n7. After you create an instance, the status changes to Active.  ",
+      "timestamp": 1724866456,
+      "contexts": [
+        {
+          "document_id": "ibmcld_00547-7-1654",
+          "text": "\nGetting started with IBM Cloudant \n\nThe IBM\u00ae Cloudant\u00ae for IBM Cloud\u00ae Getting started tutorial demonstrates how to use the IBM Cloud\u00ae dashboard to create an IBM Cloudant service instance and obtain service credentials to connect to it. Finally, it guides you through the creation of a simple, locally hosted web application that uses your IBM Cloudant database.\n\n\n\n Objectives \n\n\n\n* Create a service instance.\n* Create an IBM Cloudant service credential.\n\n\n\n\n\n\n\n Step 1: Creating a service instance \n\n\n\n1. Log in to your IBM Cloud account, and click Create resource.\n\nZoom\n\n![IBM Cloud Dashboard, which includes Build tile, Monitor your resources tile, Create and deploy an application tile, API Connect tile, Integrate Watson with anything tile, and Watson starter kits tile.](https://cloud.ibm.com/docs-content/v1/content/522c6f62358b063f921283400a601c3f9bc66f08/Cloudant//tutorials/images/img0001.png)\n\nFigure 1. IBM Cloud Dashboard\n\nThe IBM Cloud Dashboard can be found at: [https://cloud.ibm.com/](https://cloud.ibm.com/). After you authenticate with your username and password, you're presented with the IBM Cloud Dashboard.\n2. Type Cloudant in the Search bar and click to open it.\n3. Select an offering and an environment.\n4. Type an instance name.\n\nZoom\n\n![Create the IBM Cloudant service name and credentials.](https://cloud.ibm.com/docs-content/v1/content/522c6f62358b063f921283400a601c3f9bc66f08/Cloudant/tutorials/images/img0005b.png)\n\nFigure 2. IBM Cloudant service name and credentials\n\n(In this example, the instance name is Cloudant-o7.) Verify that the resource group and authentication methods are correct. Add a tag if you like.",
+          "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-getting-started-with-cloudant",
+          "score": 18.283669,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1724867012
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "getting started with IBM Cloudant"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "assistant: IBM Cloudant is available in the [IBM Cloud](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-documents) and the [IBM Cloudant](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-documents) cloud catelog."
+    },
+    {
+      "speaker": "user",
+      "text": "What are difference between lite and standard plan?",
+      "timestamp": 1724942853,
+      "enrichments": {
+        "Question Type": [
+          "Comparative"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The Lite plan is free but has a fixed amount of throughput capacity. The paid Standard plan offers configurable provisioned throughput capacity and data storage pricing that scales as your application requirements change.  \n\nHere are the couple of specific differences\n- In the case of a Lite plan,  provisioned throughput capacity is fixed at 20 reads per second, 10 writes per second, and 5 global queries per second, and data storage is capped at 1 GB. A Standard plan starts with a provisioned throughput capacity of 100 reads per second, 50 writes per second, and 5 global queries per second with 20 GB of data storage with an easy way to increase them in small increments.  \n- You're limited to one IBM Cloudant Lite plan instance per IBM Cloud account.",
+      "timestamp": 1724942855,
+      "contexts": [
+        {
+          "document_id": "ibmcld_12904-7-1919",
+          "text": "\nPlans and provisioning \n\nIBM\u00ae Cloudant\u00ae for IBM Cloud\u00ae Standard is IBM Cloudant's most feature-rich offering, receiving updates and new features first. Pricing is based on provisioned throughput capacity that is allocated and data storage that is used, making it suitable for any required load.\n\nThe free [Lite plan](https://cloud.ibm.com/docs/services/Cloudant?topic=Cloudant-ibm-cloud-publiclite-plan) includes a fixed amount of throughput capacity and data for development and evaluation purposes. The paid [Standard plan](https://cloud.ibm.com/docs/services/Cloudant?topic=Cloudant-ibm-cloud-publicstandard-plan) offers configurable provisioned throughput capacity and data storage pricing that scales as your application requirements change. An optional [Dedicated Hardware plan](https://cloud.ibm.com/docs/services/Cloudant?topic=Cloudant-ibm-cloud-publicdedicated-hardware-plan) is also available for an extra monthly fee to run one or more of your Standard plan instances on a dedicated hardware environment. The dedicated hardware environment is for your sole use. If a Dedicated Hardware plan instance is provisioned within a US location, you can optionally select a [HIPAA](https://en.wikipedia.org/wiki/Health_Insurance_Portability_and_Accountability_Act) -compliant configuration.\n\n\n\n Plans \n\nYou can select which plan to use when you [provision your IBM Cloudant service instance](https://cloud.ibm.com/docs/services/Cloudant?topic=Cloudant-ibm-cloud-publicprovisioning-a-cloudant-nosql-db-instance-on-ibm-cloud). The available plans include Lite and Standard. When you select a plan, Capacity displays, and the Cost estimator shows the monthly charge for the selected plan. By default, the [Lite plan](https://cloud.ibm.com/docs/services/Cloudant?topic=Cloudant-ibm-cloud-publiclite-plan) is selected.\n\n\n\n Lite plan \n\nThe Lite plan is free, and is designed for development and evaluation purposes.",
+          "url": "https://cloud.ibm.com/docs/services/Cloudant?topic=Cloudant-ibm-cloud-public",
+          "score": 19.978657,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1724943892
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "cloudant lite plan"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_00558-1499-3456",
+          "text": "\nThe available plans include Lite and Standard. When you select a plan, Capacity displays, and the Cost estimator shows the monthly charge for the selected plan. By default, the [Lite plan](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-publiclite-plan) is selected.\n\n\n\n Lite plan \n\nThe Lite plan is free, and is designed for development and evaluation purposes. All of IBM Cloudant's functions are included, but Lite plan instances have a fixed amount of provisioned throughput capacity and data storage. The provisioned throughput capacity is fixed at 20 reads per second, 10 writes per second, and 5 global queries per second, and data storage is capped at 1 GB.\n\nStorage usage is checked daily. If you exceed your 1-GB storage limit, requests to the IBM Cloudant instance receive a 402 status code with the following error message, Account exceeded its data usage quota. An upgrade to a paid plan is required. A banner also appears on the IBM Cloudant Dashboard. You can still read and delete data. However, to write new data, you have two options. First, you can upgrade to a paid [Standard plan](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-publicstandard-plan), which removes the write limitation immediately. Alternatively, you can delete data so that your total storage falls under the 1-GB limit and wait until the next daily storage check runs for your instance to allow writes again.\n\nIf you want to store more than one GB of data, or be able to scale provisioned throughput capacity, move to the [Standard plan](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-publicstandard-plan).\n\nYou're limited to one IBM Cloudant Lite plan instance per IBM Cloud account. If you already have one Lite plan instance, you can't create a second Lite plan instance, or change a Standard plan instance to a Lite plan. If you try, you see the following message. You can have only one instance of a Lite plan per service.",
+          "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-public",
+          "score": 18.773941,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1724943887
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "cloudant lite plan"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_00558-2925-4840",
+          "text": "\nIf you want to store more than one GB of data, or be able to scale provisioned throughput capacity, move to the [Standard plan](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-publicstandard-plan).\n\nYou're limited to one IBM Cloudant Lite plan instance per IBM Cloud account. If you already have one Lite plan instance, you can't create a second Lite plan instance, or change a Standard plan instance to a Lite plan. If you try, you see the following message. You can have only one instance of a Lite plan per service. To create a new instance, either delete your existing Lite plan instance or select a paid plan.\n\n\n\n\n\n Standard plan \n\nThe IBM Cloudant Standard plan is available to all paid IBM Cloud\u00ae accounts, either as pay-as-you-go or subscription, and scales to meet the needs of your application. The Standard plan is priced based on two factors: the provisioned throughput capacity that is allocated, and the amount of data that is stored in the instance.\n\nPricing is pro-rated hourly with a starting provisioned throughput capacity of 100 reads per second, 50 writes per second, and 5 global queries per second. This rate is equal to a starting cost of USD $0.105 per hour. You can toggle the provisioned throughput capacity up or down by using the user interface or API. Toggle in increments of 100 reads per second, 50 writes per second, and 5 global queries per second. Costs are calculated for the provisioned throughput capacity that is allocated and not on the metered volume of requests. The Standard plan includes 20 GB of data storage. If you store more than 20 GB, you're charged a defined cost per GB per hour.\n\nRefer to the IBM Cloud Pricing Calculator in the dashboard for pricing at different capacities and currencies, and the [pricing](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-pricingpricing) information for examples to estimate costs.\n\n\n\n\n\n Dedicated Hardware plan",
+          "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-public",
+          "score": 20.238014,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1724943889
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "100 reads per second, 50 writes per second, and 5 global queries per second. "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "assistant: The Lite plan is free, and is designed for development and evaluation purposes. The paid [Standard plan](https://cloud.ibm.com/docs/services/Cloudant?topic=Cloudant-ibm-cloud-publicstandard-plan) offers configurable provisioned throughput capacity and data storage pricing that scales as your application requirements change."
+    },
+    {
+      "speaker": "user",
+      "text": "So does that mean if I am just exploring things for now, I should stick to to Lite plan? ",
+      "timestamp": 1724943992,
+      "enrichments": {
+        "Question Type": [
+          "Opinion"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "As long as you don't require more that 1 GB of data storage and comfortable with a fixed throughput capacity of 20 reads per second, 10 writes per second, and 5 global queries per second, you can start with a Lite plan. Additionally, if you change you mind later, you can always upgrade from a Lite to Standard plan.",
+      "timestamp": 1724943997,
+      "contexts": [
+        {
+          "document_id": "ibmcld_12904-7-1919",
+          "text": "\nPlans and provisioning \n\nIBM\u00ae Cloudant\u00ae for IBM Cloud\u00ae Standard is IBM Cloudant's most feature-rich offering, receiving updates and new features first. Pricing is based on provisioned throughput capacity that is allocated and data storage that is used, making it suitable for any required load.\n\nThe free [Lite plan](https://cloud.ibm.com/docs/services/Cloudant?topic=Cloudant-ibm-cloud-publiclite-plan) includes a fixed amount of throughput capacity and data for development and evaluation purposes. The paid [Standard plan](https://cloud.ibm.com/docs/services/Cloudant?topic=Cloudant-ibm-cloud-publicstandard-plan) offers configurable provisioned throughput capacity and data storage pricing that scales as your application requirements change. An optional [Dedicated Hardware plan](https://cloud.ibm.com/docs/services/Cloudant?topic=Cloudant-ibm-cloud-publicdedicated-hardware-plan) is also available for an extra monthly fee to run one or more of your Standard plan instances on a dedicated hardware environment. The dedicated hardware environment is for your sole use. If a Dedicated Hardware plan instance is provisioned within a US location, you can optionally select a [HIPAA](https://en.wikipedia.org/wiki/Health_Insurance_Portability_and_Accountability_Act) -compliant configuration.\n\n\n\n Plans \n\nYou can select which plan to use when you [provision your IBM Cloudant service instance](https://cloud.ibm.com/docs/services/Cloudant?topic=Cloudant-ibm-cloud-publicprovisioning-a-cloudant-nosql-db-instance-on-ibm-cloud). The available plans include Lite and Standard. When you select a plan, Capacity displays, and the Cost estimator shows the monthly charge for the selected plan. By default, the [Lite plan](https://cloud.ibm.com/docs/services/Cloudant?topic=Cloudant-ibm-cloud-publiclite-plan) is selected.\n\n\n\n Lite plan \n\nThe Lite plan is free, and is designed for development and evaluation purposes.",
+          "url": "https://cloud.ibm.com/docs/services/Cloudant?topic=Cloudant-ibm-cloud-public",
+          "score": 20.62644,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1724944075
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "IBM cloudant plans"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_00558-1499-3456",
+          "text": "\nThe available plans include Lite and Standard. When you select a plan, Capacity displays, and the Cost estimator shows the monthly charge for the selected plan. By default, the [Lite plan](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-publiclite-plan) is selected.\n\n\n\n Lite plan \n\nThe Lite plan is free, and is designed for development and evaluation purposes. All of IBM Cloudant's functions are included, but Lite plan instances have a fixed amount of provisioned throughput capacity and data storage. The provisioned throughput capacity is fixed at 20 reads per second, 10 writes per second, and 5 global queries per second, and data storage is capped at 1 GB.\n\nStorage usage is checked daily. If you exceed your 1-GB storage limit, requests to the IBM Cloudant instance receive a 402 status code with the following error message, Account exceeded its data usage quota. An upgrade to a paid plan is required. A banner also appears on the IBM Cloudant Dashboard. You can still read and delete data. However, to write new data, you have two options. First, you can upgrade to a paid [Standard plan](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-publicstandard-plan), which removes the write limitation immediately. Alternatively, you can delete data so that your total storage falls under the 1-GB limit and wait until the next daily storage check runs for your instance to allow writes again.\n\nIf you want to store more than one GB of data, or be able to scale provisioned throughput capacity, move to the [Standard plan](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-publicstandard-plan).\n\nYou're limited to one IBM Cloudant Lite plan instance per IBM Cloud account. If you already have one Lite plan instance, you can't create a second Lite plan instance, or change a Standard plan instance to a Lite plan. If you try, you see the following message. You can have only one instance of a Lite plan per service.",
+          "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-public",
+          "score": 19.95373,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1724944146
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "The available plans include Lite and Standard. When you select a plan, Capacity displays,"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_12904-2979-4903",
+          "text": "\nIf you want to store more than one GB of data, or be able to scale provisioned throughput capacity, move to the [Standard plan](https://cloud.ibm.com/docs/services/Cloudant?topic=Cloudant-ibm-cloud-publicstandard-plan).\n\nYou're limited to one IBM Cloudant Lite plan instance per IBM Cloud account. If you already have one Lite plan instance, you can't create a second Lite plan instance, or change a Standard plan instance to a Lite plan. If you try, you see the following message. You can have only one instance of a Lite plan per service. To create a new instance, either delete your existing Lite plan instance or select a paid plan.\n\n\n\n\n\n Standard plan \n\nThe IBM Cloudant Standard plan is available to all paid IBM Cloud\u00ae accounts, either as pay-as-you-go or subscription, and scales to meet the needs of your application. The Standard plan is priced based on two factors: the provisioned throughput capacity that is allocated, and the amount of data that is stored in the instance.\n\nPricing is pro-rated hourly with a starting provisioned throughput capacity of 100 reads per second, 50 writes per second, and 5 global queries per second. This rate is equal to a starting cost of USD $0.105 per hour. You can toggle the provisioned throughput capacity up or down by using the user interface or API. Toggle in increments of 100 reads per second, 50 writes per second, and 5 global queries per second. Costs are calculated for the provisioned throughput capacity that is allocated and not on the metered volume of requests. The Standard plan includes 20 GB of data storage. If you store more than 20 GB, you're charged a defined cost per GB per hour.\n\nRefer to the IBM Cloud Pricing Calculator in the dashboard for pricing at different capacities and currencies, and the [pricing](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-pricingpricing) information for examples to estimate costs.\n\n\n\n\n\n Dedicated Hardware plan",
+          "url": "https://cloud.ibm.com/docs/services/Cloudant?topic=Cloudant-ibm-cloud-public",
+          "score": 21.095123,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1724944148
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "If you want to store more than one GB of data, or be able to scale provisioned"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "assistant: The Lite plan is free but has a fixed amount of throughput capacity. The paid Standard plan offers configurable provisioned throughput capacity and data storage pricing that scales as your application requirements change. Here are the couple of specific differences - In the case of a Lite plan, provisioned throughput capacity is fixed at 20 reads per second, 10 writes per second, and 5 global queries per second, and data storage is capped at 1 GB. A Standard plan starts with a provisioned throughput capacity of 100 reads per second, 50 writes per second, and 5 global queries per second with 20 GB of data storage with an easy way to increase them in small increments. - You're limited to one IBM Cloudant Lite plan instance per IBM Cloud account."
+    },
+    {
+      "speaker": "user",
+      "text": "Great! One last thing, where can I find python SDK for pushing and fetching data? ",
+      "timestamp": 1724944429,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The IBM Cloudant SDK for Python is available at https://pypi.org/project/ibmcloudant/.",
+      "timestamp": 1724944431,
+      "contexts": [
+        {
+          "document_id": "ibmcld_00462-1307-2903",
+          "text": "\nThe IBM Cloudant SDK for Python library is the official IBM Cloudant library for Python.\n\nInstall the [IBM Cloudant SDK for Python](https://pypi.org/project/ibmcloudant/) library by running pip or easy_install as shown in the following examples:\n\npip install --upgrade \"ibmcloudant>=0.0.27\"\n\nor\n\neasy_install --upgrade \"ibmcloudant>=0.0.27\"\n\nFor more information, see the [python.org](https://www.python.org/about/) website.\n\n\n\n Library for Python \n\n\n\n* [IBM Cloudant SDK for Python](https://github.com/IBM/cloudant-python-sdk)\n\n\n\n\n\n\n\n\n\n Go \n\nThe IBM Cloudant SDK for Go library is the official IBM Cloudant library for Go.\n\nInstall the [IBM Cloudant SDK for Go](https://pkg.go.dev/mod/github.com/IBM/cloudant-go-sdk) library by running the following command:\n\ngo get -u github.com/IBM/cloudant-go-sdk/cloudantv1\n\n\n\n Library for Go \n\n\n\n* [IBM Cloudant SDK for Go](https://github.com/ibm/cloudant-go-sdk)\n\n\n\n\n\n\n\n\n\n Useful tools \n\nYou can use the following tools with IBM Cloudant.\n\n\n\n Supported tools \n\nSupported tools are maintained and supported by IBM Cloudant.\n\n\n\n couchbackup \n\nA tool that you use from the command line to back up an IBM Cloudant or CouchDB database to a text file.\n\nTo install couchbackup, run the following command by using npm:\n\nnpm install -g @cloudant/couchbackup\n\nFor more information, see [couchbackup](https://github.com/cloudant/couchbackup).\n\n\n\n\n\n\n\n Unsupported tools \n\nUnsupported tools are not maintained or supported by IBM Cloudant.\n\n\n\n cURL \n\nA tool that you use from the command line to transfer data.\n\nFor more information, see [curl](https://curl.haxx.se/).",
+          "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-client-libraries",
+          "score": 17.944122,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1724944924
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "IBM Cloudant python"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_00462-7-1647",
+          "text": "\nClient libraries \n\nClient libraries are the tools that you use to develop your own applications to work with IBM\u00ae Cloudant\u00ae for IBM Cloud\u00ae databases.\n\nThe following client libraries are formally supported by IBM Cloudant: Java\u2122, Node.js, Python, and Go.\n\nA supported library is one where you can contact IBM Cloudant if you come across a specific, reproducible problem in the current version of the library.\n\n\n\n Java \n\nThe IBM Cloudant SDK for Java\u2122 is the official IBM Cloudant library for Java\u2122.\n\nTo install the IBM Cloudant SDK for the Java\u2122 library, see [Installation](https://github.com/ibm/cloudant-java-sdkinstallation) about installing the library by adding it as a dependency to your Maven or Gradle builds. You can also see details and examples of how to use the library in the guide.\n\n\n\n Library for Java \n\n\n\n* [IBM Cloudant SDK for Java\u2122](https://github.com/ibm/cloudant-java-sdk)\n\n\n\n\n\n\n\n\n\n Node.js \n\nThe IBM Cloudant SDK for the Node.js library is the official IBM Cloudant library for Node.js.\n\nInstall the [IBM Cloudant SDK for Node.js](https://www.npmjs.com/package/@ibm-cloud/cloudant) library by running the following command:\n\nnpm install @ibm-cloud/cloudant\n\n\n\n Library for Node.js \n\n\n\n* [IBM Cloudant SDK for Node.js](https://github.com/ibm/cloudant-node-sdk)\n\n\n\n\n\n\n\n\n\n Python \n\nThe IBM Cloudant SDK for Python library is the official IBM Cloudant library for Python.\n\nInstall the [IBM Cloudant SDK for Python](https://pypi.org/project/ibmcloudant/) library by running pip or easy_install as shown in the following examples:\n\npip install --upgrade \"ibmcloudant>=0.0.27\"\n\nor\n\neasy_install --upgrade \"ibmcloudant>=0.0.27\"",
+          "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-client-libraries",
+          "score": 17.766787,
+          "feedback": {
+            "relevant": {
+              "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+                "value": "yes",
+                "timestamp": 1724944921
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "IBM Cloudant python SDK"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "assistant: The IBM Cloudant SDK for Python is available at https://pypi.org/project/ibmcloudant/."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "8163b85d-d338-4ed1-8ebf-cd065ac3dc12",
+      "status": "created",
+      "timestamp": 1724945101
+    },
+    {
+      "author": "d2b56e91-6d89-4df4-b89a-eef8d969850b",
+      "status": "accepted",
+      "timestamp": 1726684541
+    }
+  ],
+  "editor": null,
+  "domain": "mt-rag-ibmcloud-elser-512-100-20240502",
+  "reviewer": "d2b56e91-6d89-4df4-b89a-eef8d969850b"
+}

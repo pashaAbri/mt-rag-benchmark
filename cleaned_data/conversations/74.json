@@ -1,0 +1,809 @@
+{
+  "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-ibmcloud-elser-512-100-20240502",
+      "size": "72442"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "collections": {
+        "regex": "mt-rag*"
+      },
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "Are the Lite pricing plans available with all account types in IBM Cloud",
+      "timestamp": 1725353556,
+      "enrichments": {
+        "Question Type": [
+          "Explanation",
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, Lite pricing plans are available with all account types in IBM Cloud. You can have one instance of a Lite plan for each service. For more information about Lite accounts, you can refer to the Account types documentation.",
+      "timestamp": 1725353559,
+      "contexts": [
+        {
+          "document_id": "ibmcld_01660-8584-10307",
+          "text": "\nLite pricing plans are available with all account types. You can have one instance of a Lite plan for each service. For more information about Lite accounts, see [Account types](https://cloud.ibm.com/docs/account?topic=account-accountsliteaccount).\n\n\n\n\n\n How many apps can I build? \n\nThere's no limit to the number of apps you can build in a Pay-As-You-Go or Subscription account.\n\nIf you created a Lite account before 12 August 2021, you can build and deploy apps with 256 MB of instantaneous runtime memory. To get 512 MB of free instantaneous runtime memory, upgrade to a Pay-As-You-Go or Subscription account and pay only for what you use over that limit.\n\n\n\n\n\n What happens when my Lite plan instance reaches the monthly quota? \n\nReaching any quota limit for Lite plan instances suspends the service for that month. Quota limits are per org, not instance. New instances that you create in the same org reflect any usage from previous instances. The quota limits reset on the first of every month.\n\nYou can check your usage by going to Manage > Billing and usage in the IBM Cloud console, and selecting Usage. For more information, see [Viewing your usage](https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-viewingusage).\n\n\n\n\n\n How many resource groups, orgs, or spaces can I create? \n\nIf you have a Pay-As-You-Go or Subscription account, there's no limit to the number of resource groups, orgs, or spaces that you can create. However, if you have a Lite account, you're limited to one org and one resource group.\n\n\n\n\n\n Can I change which notifications I receive? \n\nYes, you can update your email preferences for receiving notifications from the Email preferences page in the console. Click the Avatar icon !",
+          "url": "https://cloud.ibm.com/docs/account?topic=account-accountfaqs",
+          "score": 21.12707,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725353756
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Are the Lite pricing plans available with all account types in IBM Cloud"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_07578-1076793-1078629",
+          "text": "\n* What's a Lite pricing plan for services?\n\nA Lite plan is a free quota-based service plan. You can use a service's Lite plan to build an app without incurring any charges. A Lite plan might be offered on a monthly cycle that is renewed each month or on a one-off usage basis. Lite pricing plans are available with all account types. You can have one instance of a Lite plan for each service. For more information about Lite accounts, see [Account types](https://cloud.ibm.com/docs/account?topic=account-accountsliteaccount).\n* How many apps can I build?\n\nThere's no limit to the number of apps you can build in a Pay-As-You-Go or Subscription account.\n\nIf you created a Lite account before 12 August 2021, you can build and deploy apps with 256 MB of instantaneous runtime memory. To get 512 MB of free instantaneous runtime memory, upgrade to a Pay-As-You-Go or Subscription account and pay only for what you use over that limit.\n* What happens when my Lite plan instance reaches the monthly quota?\n\nReaching any quota limit for Lite plan instances suspends the service for that month. Quota limits are per org, not instance. New instances that you create in the same org reflect any usage from previous instances. The quota limits reset on the first of every month.\n\nYou can check your usage by going to Manage > Billing and usage in the IBM Cloud console, and selecting Usage. For more information, see [Viewing your usage](https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-viewingusage).\n* How many resource groups, orgs, or spaces can I create?\n\nIf you have a Pay-As-You-Go or Subscription account, there's no limit to the number of resource groups, orgs, or spaces that you can create. However, if you have a Lite account, you're limited to one org and one resource group.\n* Can I change which notifications I receive?",
+          "url": "https://cloud.ibm.com/docs/faqs",
+          "score": 20.867868,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725353760
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Are the Lite pricing plans available with all account types in IBM Cloud"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "speaker": "user",
+      "text": "What is it?",
+      "timestamp": 1725353767,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The Lite plan is a free service plan with usage quotas. You can use the Lite plan to develop an app without any charges. The plan may be renewed monthly or used as a one-time offer. Lite pricing plans are accessible for all account types, and you can have one instance of a Lite plan for each service.",
+      "timestamp": 1725353776,
+      "contexts": [
+        {
+          "document_id": "ibmcld_07578-1076793-1078629",
+          "text": "\n* What's a Lite pricing plan for services?\n\nA Lite plan is a free quota-based service plan. You can use a service's Lite plan to build an app without incurring any charges. A Lite plan might be offered on a monthly cycle that is renewed each month or on a one-off usage basis. Lite pricing plans are available with all account types. You can have one instance of a Lite plan for each service. For more information about Lite accounts, see [Account types](https://cloud.ibm.com/docs/account?topic=account-accountsliteaccount).\n* How many apps can I build?\n\nThere's no limit to the number of apps you can build in a Pay-As-You-Go or Subscription account.\n\nIf you created a Lite account before 12 August 2021, you can build and deploy apps with 256 MB of instantaneous runtime memory. To get 512 MB of free instantaneous runtime memory, upgrade to a Pay-As-You-Go or Subscription account and pay only for what you use over that limit.\n* What happens when my Lite plan instance reaches the monthly quota?\n\nReaching any quota limit for Lite plan instances suspends the service for that month. Quota limits are per org, not instance. New instances that you create in the same org reflect any usage from previous instances. The quota limits reset on the first of every month.\n\nYou can check your usage by going to Manage > Billing and usage in the IBM Cloud console, and selecting Usage. For more information, see [Viewing your usage](https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-viewingusage).\n* How many resource groups, orgs, or spaces can I create?\n\nIf you have a Pay-As-You-Go or Subscription account, there's no limit to the number of resource groups, orgs, or spaces that you can create. However, if you have a Lite account, you're limited to one org and one resource group.\n* Can I change which notifications I receive?",
+          "url": "https://cloud.ibm.com/docs/faqs",
+          "score": 23.679508,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725353968
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Are the Lite pricing plans available with all account types in IBM Cloud\n|assistant|: Yes, Lite pricing plans are available with all account types in IBM Cloud. You can have one instance of a Lite plan for each service. For more information about Lite accounts, you can refer to the Account types documentation.\n|user|: What is it?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16727-1079289-1081125",
+          "text": "\n* What's a Lite pricing plan for services?\n\nA Lite plan is a free quota-based service plan. You can use a service's Lite plan to build an app without incurring any charges. A Lite plan might be offered on a monthly cycle that is renewed each month or on a one-off usage basis. Lite pricing plans are available with all account types. You can have one instance of a Lite plan for each service. For more information about Lite accounts, see [Account types](https://cloud.ibm.com/docs/account?topic=account-accountsliteaccount).\n* How many apps can I build?\n\nThere's no limit to the number of apps you can build in a Pay-As-You-Go or Subscription account.\n\nIf you created a Lite account before 12 August 2021, you can build and deploy apps with 256 MB of instantaneous runtime memory. To get 512 MB of free instantaneous runtime memory, upgrade to a Pay-As-You-Go or Subscription account and pay only for what you use over that limit.\n* What happens when my Lite plan instance reaches the monthly quota?\n\nReaching any quota limit for Lite plan instances suspends the service for that month. Quota limits are per org, not instance. New instances that you create in the same org reflect any usage from previous instances. The quota limits reset on the first of every month.\n\nYou can check your usage by going to Manage > Billing and usage in the IBM Cloud console, and selecting Usage. For more information, see [Viewing your usage](https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-viewingusage).\n* How many resource groups, orgs, or spaces can I create?\n\nIf you have a Pay-As-You-Go or Subscription account, there's no limit to the number of resource groups, orgs, or spaces that you can create. However, if you have a Lite account, you're limited to one org and one resource group.\n* Can I change which notifications I receive?",
+          "url": "https://cloud.ibm.com/docs?tab=faqs",
+          "score": 23.679508,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725353965
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Are the Lite pricing plans available with all account types in IBM Cloud\n|assistant|: Yes, Lite pricing plans are available with all account types in IBM Cloud. You can have one instance of a Lite plan for each service. For more information about Lite accounts, you can refer to the Account types documentation.\n|user|: What is it?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "A Lite plan is a free quota-based service plan offered by IBM Cloud. It allows you to build an app without incurring any charges. Lite plans can be offered on a monthly cycle that is renewed each month or on a one-off usage basis. They are available with all account types, and you can have one instance of a Lite plan for each service. For more information about Lite accounts, you can refer to the Account types documentation.\nIf you have a Lite account created before 12th August 2021, you can build and deploy apps with 256 MB of instantaneous runtime memory. To get 512 MB of free instantaneous runtime memory, you can upgrade to a Pay-As-You-Go or Subscription account and pay only for what you use over that limit.\nPlease note that reaching any quota limit for Lite plan instances will suspend the service for that month. Quota limits are per organization (org), not per instance. New instances that you create in the same org will reflect any usage from previous instances. The quota limits reset on the first of every month. You can check your usage by going to Manage > Billing and usage in the IBM Cloud console, and selecting Usage. For more information, see [Viewing your usage](https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-viewingusage).\nIf you have a Pay-As-You-Go or Subscription account, there's no limit to the number of resource groups, organizations (orgs), or spaces that you can create. However, if you have a Lite account, you're limited to one org and one resource group.\nYou can also change which notifications you receive by updating your email preferences on the Email preferences page in the console. Click the Avatar icon to access this page."
+    },
+    {
+      "speaker": "user",
+      "text": "What is an account?",
+      "timestamp": 1725354416,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Your IBM Cloud account consists of various interconnected components and systems for managing resources, users, and access. Understanding how these components are linked and how access functions will help you set up your account effectively. An IBM Cloud account is necessary for provisioning and managing IBM Cloud services that are part of the IBM Cloud for Financial Services reference architectures. In addition to outlining the high-level steps to follow, we will also describe some best practices for setting up your account that will assist you in meeting the requirements of the IBM Cloud Framework for Financial Services. We will also provide the most relevant control requirements.",
+      "timestamp": 1725354421,
+      "contexts": [
+        {
+          "document_id": "ibmcld_02152-7-1996",
+          "text": "\nWhat's in an account? \n\nYour IBM Cloud\u00ae account includes many interacting components and systems for resource, user, and access management. Concepts like how certain components are connected or how access works help you in understanding how to set up your account.\n\nThe following diagram contains two main concepts for the components in the account hierarchy that are important to understand. The use of the solid lines and the dotted lines help illustrate that some components are contained within others, for example, users are added to access groups. However, some components interact with others for providing access instead of membership. For example, users are given access to resource groups but are not members of a resource group the same way they are for access groups.\n\nZoom\n\n![A diagram that shows the components in an account, including services, users, and the subcomponents of each.](https://cloud.ibm.com/docs-content/v1/content/4d8c6eec891cff72b666dc24bd3211810c77fb42/account/images/account_diagram.svg)\n\nFigure 1. A diagram that shows the components in an account, including services, users, and the subcomponents of each.\n\nUsers\n: Users are invited to the account and given access to the resources in the account.\n\nService IDs\n: A service ID identifies a service or application similar to how a user ID identifies a user. You can use a service ID that you create to enable an application outside of IBM Cloud access to your services. You can assign specific access policies to the service ID that restrict permissions for using specific services, or even combine permissions for accessing different services. Since service IDs are not tied to a specific user, if a user happens to leave an organization and is deleted from the account, the service ID remains, ensuring that your application or service stays up and running. For more information, see [Creating and working with service IDs](https://cloud.ibm.com/docs/account?topic=account-serviceids).\n\nTrusted profiles",
+          "url": "https://cloud.ibm.com/docs/account?topic=account-overview",
+          "score": 20.804615,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725354520
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "open an account in IBM Cloud"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_07965-7-2098",
+          "text": "\nIBM Cloud account setup \n\nAn [IBM Cloud account](https://cloud.ibm.com/docs/account?topic=account-overview) is needed to provision and manage IBM Cloud services that make up the reference architectures of the IBM Cloud for Financial Services. Along with the high-level steps to follow, we describe some of the best practices for account setup that will help you satisfy the requirements of the IBM Cloud Framework for Financial Services. In addition, the most relevant [control requirements](https://cloud.ibm.com/docs/framework-financial-services?topic=framework-financial-services-aboutframework-control-requirements) are provided.\n\n\n\n1. Create an IBM Cloud account. For more information, see [Create your account](https://cloud.ibm.com/docs/account?topic=account-account-getting-startedaccount-gs-create).\n\nIt is highly recommended that you use a functional ID that is owned by your company rather than an employee's personal ID. A functional ID is a company-owned email address (such as ibm-cloud-admin@domain.com) used to represent a functional user. This allows for uninterrupted administrative access by the account owner as employees leave the company or are reassigned to other projects.\n\nThe following table shows the controls that are most related to this step.\n\n\n\nTable 1. Related controls in IBM Cloud Framework for Financial Services for account creation\n\n Family Control \n\n Access Control (AC) [AC-2 Account Management](https://cloud.ibm.com/docs/framework-financial-services-controls?topic=framework-financial-services-controls-ac-2) \n\n\n\n2. Set up the Activity Tracker Event Routing service as described in [Audit logging for IBM Cloud events](https://cloud.ibm.com/docs/framework-financial-services?topic=framework-financial-services-shared-logging-audit). This enables IBM Cloud platform events to be recorded for auditing purposes. Setting this up early in the process is important so that all platform events that occur during the rest of these steps are available in the audit logs.\n\nThe following table shows the controls that are most related to this step.\n\n\n\nTable 2.",
+          "url": "https://cloud.ibm.com/docs/framework-financial-services?topic=framework-financial-services-shared-account-setup",
+          "score": 20.083204,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725355697
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "open an account in IBM Cloud"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "In the context of IBM Cloud, an account refers to a user's access point to IBM Cloud services. It provides a centralized management system for resources, billing, and user management. There are different types of accounts, including Lite, Pay-As-You-Go, and Subscription accounts, each with its own set of features and benefits."
+    },
+    {
+      "speaker": "user",
+      "text": "How can I create one?",
+      "timestamp": 1725355738,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "To sign up for an IBM Cloud account, you can use an existing IBMid or create a new one. Simply go to the IBM Cloud login page and click on \"Create an IBM Cloud account.\" Then, enter your IBMid email address. If you don't have an existing IBMid, an ID will be created based on the email you enter. Complete the remaining fields with your information.\nYou will be prompted to provide your credit card information to verify your identity and secure your account. It's important to note that you can try out IBM Cloud for free and only pay for the billable services that you choose to use, with no long-term contracts or commitments. After filling out the information, click \"Create account\" and then confirm your account by clicking the link in the confirmation email sent to your provided email address.\nFinally, you can see the \"Account types\" section to compare and choose an account type that suits your needs.",
+      "timestamp": 1725355743,
+      "contexts": [
+        {
+          "document_id": "ibmcld_01623-1601-3527",
+          "text": "\nGo to the [IBM Cloud login page](https://cloud.ibm.com/), and click Create an IBM Cloud account.\n2. Enter your IBMid email address. If you don't have an existing IBMid, an ID is created based on the email that you enter.\n3. Complete the remaining fields with your information.\n\nYou are prompted for your credit card information to verify your identity and secure your account. You can [try out IBM Cloud for free](https://cloud.ibm.com/docs/overview?topic=overview-tutorial-try-for-free) and pay only for the billable services that you choose to use, with no long-term contracts or commitments.\n4. Click Create account.\n5. Confirm your account by clicking the link in the confirmation email that's sent to your provided email address.\n\n\n\nSee [Account types](https://cloud.ibm.com/docs/account?topic=account-accounts) to compare and choose an account type.\n\n\n\n\n\n Personal use availability \n\n\n\n\n\n Personal use availability \n\nThe following table shows the countries where personal use of our platform that is not related to business, trade, craft, or professional purposes are not supported\n\nAfrica\n\nAsia\n\nEurope\n\n\n\nTable 2. Countries in Africa that are not supported\n\n Country \n\n Algeria \n Cameroon \n Canary Islands \n Egypt \n Ghana \n Ivory Coast \n Kenya \n Mauritania \n Nigeria \n Seychelles \n Tanzania \n Uganda \n\n\n\nIBM\u00ae Norway and IBM\u00ae Switzerland are able to contract with local customers to offer personal use accounts.\n\nTo work with a local Business Partner, go to the [IBM Business Partner Directory](https://www.ibm.com/partnerworld/bpdirectory/). Customers are not required to have a VAT ID to work with a local Business Partner.\n\n\n\n\n\n Using a federated ID \n\nA federated ID is an ID within a company's domain that is registered with IBM so that the domain and user credentials can be used to access IBM web applications. You can sign up for IBM Cloud with a federated ID only if your company is already registered with IBM.",
+          "url": "https://cloud.ibm.com/docs/account?topic=account-account-getting-started",
+          "score": 20.420065,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725356623
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "open an account in IBM Cloud"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_07578-306636-308961",
+          "text": "\nYou can sign up for an IBM Cloud account by using an existing IBMid or by creating a new IBMid.\n* IBM Cloud infrastructure account. This account is used to log in to the IBM Cloud infrastructure customer portal that provides some additional function to manage infrastructure products and services. You can get an IBM Cloud infrastructure account by upgrading your IBM Cloud account to a billable account, or by linking your existing IBM Cloud infrastructure account with your IBM Cloud account. The IBM Cloud infrastructure account that you are using must meet certain requirements. For more information, see [Signing up for required accounts](https://cloud.ibm.com/docs/vmwaresolutions?topic=vmwaresolutions-signing_required_accounts).\n\n\n\n* How do I associate my IBM Cloud infrastructure credentials with the VMware Solutions console?\n\nWhen you order your instance for the first time, follow the instructions on the Settings page in the console. These instructions help you locate and copy the IBM Cloud infrastructure username and API key from the IBM Cloud infrastructure customer portal. The IBM Cloud infrastructure credentials are stored in the IBM Cloud for VMware Solutions console after the first order. Future orders automatically use the stored credentials.\n* How do I connect my on-premises environment to VMware Shared?\n\nEach virtual data center has an Edge Services Gateway (ESG) which provides network connectivity to the virtual data center. On-premises connectivity to the customer virtual data center can be accomplished in the following ways:\n\n\n\n* IPsec tunnel over the internet to the ESG\n* SSL VPN tunnel over the internet to the ESG\n* Direct internet access through the ESG to the VMs by using NAT or load balancing\n\n\n\nAlong with the internet access methods, you can use IBM Cloud service endpoints to access your virtual data centers from other IBM Cloud accounts. This way, you can use DirectLink or other on-premises environments to access your IBM Cloud account network options. Then, from your cloud account, you can connect into your virtual data centers by using the Cloud Service Endpoint method.\n* How are my VMware virtual platform consumptions billed?\n\nAll costs for the physical and virtual infrastructure and the licenses that result from the instance are charged to your IBM Cloud account.",
+          "url": "https://cloud.ibm.com/docs/faqs",
+          "score": 20.044344,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725356626
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "open an account in IBM Cloud"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16727-306610-308935",
+          "text": "\nYou can sign up for an IBM Cloud account by using an existing IBMid or by creating a new IBMid.\n* IBM Cloud infrastructure account. This account is used to log in to the IBM Cloud infrastructure customer portal that provides some additional function to manage infrastructure products and services. You can get an IBM Cloud infrastructure account by upgrading your IBM Cloud account to a billable account, or by linking your existing IBM Cloud infrastructure account with your IBM Cloud account. The IBM Cloud infrastructure account that you are using must meet certain requirements. For more information, see [Signing up for required accounts](https://cloud.ibm.com/docs/vmwaresolutions?topic=vmwaresolutions-signing_required_accounts).\n\n\n\n* How do I associate my IBM Cloud infrastructure credentials with the VMware Solutions console?\n\nWhen you order your instance for the first time, follow the instructions on the Settings page in the console. These instructions help you locate and copy the IBM Cloud infrastructure username and API key from the IBM Cloud infrastructure customer portal. The IBM Cloud infrastructure credentials are stored in the IBM Cloud for VMware Solutions console after the first order. Future orders automatically use the stored credentials.\n* How do I connect my on-premises environment to VMware Shared?\n\nEach virtual data center has an Edge Services Gateway (ESG) which provides network connectivity to the virtual data center. On-premises connectivity to the customer virtual data center can be accomplished in the following ways:\n\n\n\n* IPsec tunnel over the internet to the ESG\n* SSL VPN tunnel over the internet to the ESG\n* Direct internet access through the ESG to the VMs by using NAT or load balancing\n\n\n\nAlong with the internet access methods, you can use IBM Cloud service endpoints to access your virtual data centers from other IBM Cloud accounts. This way, you can use DirectLink or other on-premises environments to access your IBM Cloud account network options. Then, from your cloud account, you can connect into your virtual data centers by using the Cloud Service Endpoint method.\n* How are my VMware virtual platform consumptions billed?\n\nAll costs for the physical and virtual infrastructure and the licenses that result from the instance are charged to your IBM Cloud account.",
+          "url": "https://cloud.ibm.com/docs?tab=faqs",
+          "score": 20.044344,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725356629
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "open an account in IBM Cloud"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "To create an IBM Cloud account, follow these steps:\n1. Go to the IBM Cloud website and click on the \"Create an IBM Cloud account\" button.\n2. Fill out the registration form with your email address, password, country, and IBM ID (if you already have one).\n3. Read and accept the terms of use and privacy policy.\n4. Choose the account type: Lite or Pay-As-You-Go. The Lite account is free and has usage quotas, while the Pay-As-You-Go account requires a credit card and charges you for the services you use.\n5. Complete the verification process by clicking on the link sent to your email address.\nOnce you have completed these steps, you will have created your IBM Cloud account and can start using its services. If you chose the Lite account, remember that you are limited to one org and one resource group."
+    },
+    {
+      "speaker": "user",
+      "text": "How many megabytes can I use each month?",
+      "timestamp": 1725356722,
+      "enrichments": {
+        "Question Type": [
+          "Explanation",
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "If you signed up for a Lite account before 12 August 2021, you can use a limited number of free buildpacks and Cloud Foundry apps with up to 256 MB of free instantaneous runtime memory per month. If you created a Lite account before 25 October 2021, your account doesn't expire, and you can access IBM Cloud services for free with select Lite plans, which are marked with a Lite tag in the catalog. To access all Free plans, you can upgrade to a Pay-As-You-Go account by adding your credit card information.",
+      "timestamp": 1725356725,
+      "contexts": [
+        {
+          "document_id": "ibmcld_01705-13208-15001",
+          "text": "\nIf you created a Lite account before 25 October 2021, your account doesn't expire and you can work in IBM Cloud for free by accessing services with select Lite plans, which are displayed with a Lite tag ![Lite tag](https://cloud.ibm.com/docs-content/v1/content/4d8c6eec891cff72b666dc24bd3211810c77fb42/icons/Lite.svg) in the catalog. To gain access to all Free plans, you can go ahead and [upgrade to a Pay-As-You-Go account](https://cloud.ibm.com/docs/account?topic=account-accountfaqschangeacct) by adding your credit card information.\n\nStarting 25 October 2021, all new accounts are created as Pay-As-You-Go based on an update to our account registration process. As part of this update, you're asked to provide credit card information for identity verification. You have full access to the catalog, including all Free and Lite plans, and you get a $200 credit that you can apply in your first 30 days. You pay only for billable services that you use, with no long-term contracts or commitments.\n\nLite accounts have access to a single resource group that's created for you with the name Default. All of your service's instances are automatically added to this resource group. You can update the name of this resource group at any time. See [Renaming a resource group](https://cloud.ibm.com/docs/account?topic=account-rgsrename_rgs) for the detailed steps.\n\n\n\n What's available in a lite account? \n\nCheck out the following list of key features that are available in a Lite account:\n\n\n\n* The account is free - no credit card required.\n* The account never expires.\n* You receive email notifications about your account status and quota limits.\n* You can create one instance of any service in the [IBM Cloud catalog](https://cloud.ibm.com/catalog/?search=label:lite%20lite) that has a Lite plan.",
+          "url": "https://cloud.ibm.com/docs/account?topic=account-accounts",
+          "score": 33.065865,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725358011
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Are the Lite pricing plans available with all account types in IBM Cloud\n|assistant|: Yes, Lite pricing plans are available with all account types in IBM Cloud. You can have one instance of a Lite plan for each service. For more information about Lite accounts, you can refer to the Account types documentation.\n|user|: What is it?\n|assistant|: The Lite plan is a free service plan with usage quotas. You can use the Lite plan to develop an app without any charges. The plan may be renewed monthly or used as a one-time offer. Lite pricing plans are accessible for all account types, and you can have one instance of a Lite plan for each service.\n|user|: What is an account?\n|assistant|: Your IBM Cloud account consists of various interconnected components and systems for managing resources, users, and access. Understanding how these components are linked and how access functions will help you set up your account effectively. An IBM Cloud account is necessary for provisioning and managing IBM Cloud services that are part of the IBM Cloud for Financial Services reference architectures. In addition to outlining the high-level steps to follow, we will also describe some best practices for setting up your account that will assist you in meeting the requirements of the IBM Cloud Framework for Financial Services. We will also provide the most relevant control requirements.\n|user|: How can I create one?\n|assistant|: To sign up for an IBM Cloud account, you can use an existing IBMid or create a new one. Simply go to the IBM Cloud login page and click on \"Create an IBM Cloud account.\" Then, enter your IBMid email address. If you don't have an existing IBMid, an ID will be created based on the email you enter. Complete the remaining fields with your information.\nYou will be prompted to provide your credit card information to verify your identity and secure your account. It's important to note that you can try out IBM Cloud for free and only pay for the billable services that you choose to use, with no long-term contracts or commitments. After filling out the information, click \"Create account\" and then confirm your account by clicking the link in the confirmation email sent to your provided email address.\nFinally, you can see the \"Account types\" section to compare and choose an account type that suits your needs.\n|user|: How many megabytes can I use each month?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_01705-14609-15453",
+          "text": "\nCheck out the following list of key features that are available in a Lite account:\n\n\n\n* The account is free - no credit card required.\n* The account never expires.\n* You receive email notifications about your account status and quota limits.\n* You can create one instance of any service in the [IBM Cloud catalog](https://cloud.ibm.com/catalog/?search=label:lite%20lite) that has a Lite plan.\n* After 10 days of no development activity, your apps go to sleep. You can wake up your apps by continuing to work on them.\n* After 30 days of no development activity, your service instances with Lite plans are deleted\n\n\n\nOnly Lite accounts created before 12 August 2021 can use 186 GBH of free buildpacks and Cloud Foundry apps with up to 256 MB of free instantaneous runtime memory per month. The use of one org in one IBM Cloud region is supported.",
+          "url": "https://cloud.ibm.com/docs/account?topic=account-accounts",
+          "score": 32.904602,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725358008
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Are the Lite pricing plans available with all account types in IBM Cloud\n|assistant|: Yes, Lite pricing plans are available with all account types in IBM Cloud. You can have one instance of a Lite plan for each service. For more information about Lite accounts, you can refer to the Account types documentation.\n|user|: What is it?\n|assistant|: The Lite plan is a free service plan with usage quotas. You can use the Lite plan to develop an app without any charges. The plan may be renewed monthly or used as a one-time offer. Lite pricing plans are accessible for all account types, and you can have one instance of a Lite plan for each service.\n|user|: What is an account?\n|assistant|: Your IBM Cloud account consists of various interconnected components and systems for managing resources, users, and access. Understanding how these components are linked and how access functions will help you set up your account effectively. An IBM Cloud account is necessary for provisioning and managing IBM Cloud services that are part of the IBM Cloud for Financial Services reference architectures. In addition to outlining the high-level steps to follow, we will also describe some best practices for setting up your account that will assist you in meeting the requirements of the IBM Cloud Framework for Financial Services. We will also provide the most relevant control requirements.\n|user|: How can I create one?\n|assistant|: To sign up for an IBM Cloud account, you can use an existing IBMid or create a new one. Simply go to the IBM Cloud login page and click on \"Create an IBM Cloud account.\" Then, enter your IBMid email address. If you don't have an existing IBMid, an ID will be created based on the email you enter. Complete the remaining fields with your information.\nYou will be prompted to provide your credit card information to verify your identity and secure your account. It's important to note that you can try out IBM Cloud for free and only pay for the billable services that you choose to use, with no long-term contracts or commitments. After filling out the information, click \"Create account\" and then confirm your account by clicking the link in the confirmation email sent to your provided email address.\nFinally, you can see the \"Account types\" section to compare and choose an account type that suits your needs.\n|user|: How many megabytes can I use each month?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "If you have a Lite account created before 12 August 2"
+    },
+    {
+      "speaker": "user",
+      "text": "Do I need to purchase it with other products?",
+      "timestamp": 1725358079,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "UNANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The documents do not provide an answer to the question. ",
+      "timestamp": 1725358083,
+      "contexts": [
+        {
+          "document_id": "ibmcld_01705-14609-15453",
+          "text": "\nCheck out the following list of key features that are available in a Lite account:\n\n\n\n* The account is free - no credit card required.\n* The account never expires.\n* You receive email notifications about your account status and quota limits.\n* You can create one instance of any service in the [IBM Cloud catalog](https://cloud.ibm.com/catalog/?search=label:lite%20lite) that has a Lite plan.\n* After 10 days of no development activity, your apps go to sleep. You can wake up your apps by continuing to work on them.\n* After 30 days of no development activity, your service instances with Lite plans are deleted\n\n\n\nOnly Lite accounts created before 12 August 2021 can use 186 GBH of free buildpacks and Cloud Foundry apps with up to 256 MB of free instantaneous runtime memory per month. The use of one org in one IBM Cloud region is supported.",
+          "url": "https://cloud.ibm.com/docs/account?topic=account-accounts",
+          "score": 32.75269,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "no",
+                "timestamp": 1725358586
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Are the Lite pricing plans available with all account types in IBM Cloud\n|assistant|: Yes, Lite pricing plans are available with all account types in IBM Cloud. You can have one instance of a Lite plan for each service. For more information about Lite accounts, you can refer to the Account types documentation.\n|user|: What is it?\n|assistant|: The Lite plan is a free service plan with usage quotas. You can use the Lite plan to develop an app without any charges. The plan may be renewed monthly or used as a one-time offer. Lite pricing plans are accessible for all account types, and you can have one instance of a Lite plan for each service.\n|user|: What is an account?\n|assistant|: Your IBM Cloud account consists of various interconnected components and systems for managing resources, users, and access. Understanding how these components are linked and how access functions will help you set up your account effectively. An IBM Cloud account is necessary for provisioning and managing IBM Cloud services that are part of the IBM Cloud for Financial Services reference architectures. In addition to outlining the high-level steps to follow, we will also describe some best practices for setting up your account that will assist you in meeting the requirements of the IBM Cloud Framework for Financial Services. We will also provide the most relevant control requirements.\n|user|: How can I create one?\n|assistant|: To sign up for an IBM Cloud account, you can use an existing IBMid or create a new one. Simply go to the IBM Cloud login page and click on \"Create an IBM Cloud account.\" Then, enter your IBMid email address. If you don't have an existing IBMid, an ID will be created based on the email you enter. Complete the remaining fields with your information.\nYou will be prompted to provide your credit card information to verify your identity and secure your account. It's important to note that you can try out IBM Cloud for free and only pay for the billable services that you choose to use, with no long-term contracts or commitments. After filling out the information, click \"Create account\" and then confirm your account by clicking the link in the confirmation email sent to your provided email address.\nFinally, you can see the \"Account types\" section to compare and choose an account type that suits your needs.\n|user|: How many megabytes can I use each month?\n|assistant|: If you signed up for a Lite account before 12 August 2021, you can use a limited number of free buildpacks and Cloud Foundry apps with up to 256 MB of free instantaneous runtime memory per month. If you created a Lite account before 25 October 2021, your account doesn't expire, and you can access IBM Cloud services for free with select Lite plans, which are marked with a Lite tag in the catalog. To access all Free plans, you can upgrade to a Pay-As-You-Go account by adding your credit card information.\n|user|: Do I need to purchase it with other products?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "No, the Lite pricing plans are available with all account types and do not need to be purchased with other products. They can be used for each service individually."
+    },
+    {
+      "speaker": "user",
+      "text": "How many types does it offer?",
+      "timestamp": 1725358761,
+      "enrichments": {
+        "Question Type": [
+          "Explanation",
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "When you sign up with IBM Cloud\u00ae, you will be given a Pay-As-You-Go account. While you need to provide your credit card details for security and identity verification, you can still enjoy using IBM Cloud for free by choosing products from the catalog that have Free and Lite pricing plans. Another account option is the Subscription account, which offers many of the same features as the Pay-As-You-Go account, along with discounts for platform services and consistent billing through subscriptions. Educational institutions may want to provide IBM Cloud accounts to their students so they can gain practical skills by working on projects that utilize IBM Cloud services. For these institutions, such as traditional universities or online learning platforms, it is possible to group accounts by department or subject area and create accounts for each course.\nWithin each account, students can create resources to develop their projects and collaborate with their peers in the same account. The university will have a comprehensive view of the costs associated with each department and course.",
+      "timestamp": 1725358765,
+      "contexts": [
+        {
+          "document_id": "ibmcld_01705-7-1620",
+          "text": "\nAccount types \n\nWhen you register with IBM Cloud\u00ae, you are set up with a Pay-As-You-Go account. Even though you provide your credit card information for account security and identity verification purposes, you can still use IBM Cloud for free by selecting products in the catalog that offer Free and Lite pricing plans. Another account type, called a Subscription account, is also available. With a Subscription account, you get many of the same features of a Pay-As-You-Go account, plus discounts for platform services and support with a more consistent billing structure that uses subscriptions.\n\n\n\n Comparing accounts \n\nThe following table provides a comparison of Trial, Pay-As-You-Go, and Subscription accounts. For more details about each account, see the sections that follow.\n\n\n\nTable 1. Comparison of IBM Cloud accounts\nThis table has row and column headers. The row headers identify the feature. The column headers identify the account type. To understand which features apply to the account types, navigate to the row, and find the feature that you're interested in.\n\n Trial Pay-As-You-Go Subscription \n\n [Free community buildpacks](https://cloud.ibm.com/docs/cloud-foundry-public?topic=cloud-foundry-public-available_buildpacks) 186 GBH 186 GBH 186 GBH \n Access to [Lite service plans](https://cloud.ibm.com/catalog/?search=label:lite) ![Feature available](https://cloud.ibm.com/docs-content/v1/content/4d8c6eec891cff72b666dc24bd3211810c77fb42/icons/icon_enabled.svg) ![Feature available](https://cloud.ibm.com/docs-content/v1/content/4d8c6eec891cff72b666dc24bd3211810c77fb42/icons/icon_enabled.svg) !",
+          "url": "https://cloud.ibm.com/docs/account?topic=account-accounts",
+          "score": 18.761095,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725359428
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "types of IBM accounts"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_12623-13439-14474",
+          "text": "\nEducational institutions might want to provide IBM Cloud accounts to their students so that they can learn valuable skills through hands-on projects that use IBM Cloud services. For these institutions, such as traditional universities or online learning platforms, you can group accounts by department or subject area, then create accounts for each course.\n\nWithin each account, students can create resources to build their projects and collaborate with other students in the account. The university has a complete view of the costs of each department and course.\n\nZoom\n\n![A three-tier enterprise that models how a university can organize their accounts. For example, account groups are named for each department: Data Science, Computer Science, and Computer Engineering. Each account group contains individual accounts for each class, such as DS101 and DS102.](https://cloud.ibm.com/docs-content/v1/content/d4595e5202a9a27767cf034e81b038cdf772e0d5/secure-enterprise/images/enterprise-edu.svg)\n\nFigure 6. An enterprise for a university",
+          "url": "https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-what-is-enterprise&interface=ui",
+          "score": 15.640516,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725359426
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "types of IBM accounts"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The Lite plan is a single type of pricing plan that offers a free service with usage quotas. It allows you to develop an app without any charges and is available with all account types in IBM Cloud. Each service can have one instance of a Lite plan."
+    },
+    {
+      "speaker": "user",
+      "text": "Enterprise",
+      "timestamp": 1725360150,
+      "enrichments": {
+        "Question Type": [
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "When using IBM Cloud, businesses and organizations can utilize the Enterprise account type, which is specifically tailored for their needs. Enterprises provide a centralized way to manage billing and resource usage across multiple accounts. Within an enterprise, a multitiered hierarchy of accounts can be created, with billing and payments managed at the enterprise level. To establish an enterprise, one must be the account owner or hold the Administrator role on the Billing account management service.\nIt's important to note that creating an enterprise from an account and importing existing accounts cannot be undone. It's crucial to carefully plan the enterprise structure to align with your organization's requirements.",
+      "timestamp": 1725360155,
+      "contexts": [
+        {
+          "document_id": "ibmcld_12623-7-2328",
+          "text": "\nWhat is an enterprise? \n\nIBM Cloud\u00ae\n\nenterprisesprovide a way to centrally manage billing and resource usage across multiple accounts. Within an enterprise, you create a multitiered hierarchy of accounts, with billing and payments for all accounts managed at the enterprise level.\n\nWhen compared to using multiple stand-alone accounts, enterprises offer the following key benefits:\n\n\n\n* Centralized account management: View your entire enterprise hierarchy at a glance, without needing to switch accounts. You can add existing accounts or create new accounts directly within the enterprise.\n* Consolidated subscription billing: Track your subscriptions and credit spending for all accounts from a single view. Your subscription credit is pooled and shared among accounts in the enterprise.\n* Top-down usage reporting: From your enterprise account, you can view usage of all accounts in your enterprise, which is organized by account group.\n\n\n\n\n\n Watch and learn \n\n\n\n* Video transcript\n\nYour IBM Cloud account is your home for collaboration in the cloud. As you scale up your workloads, you might find that you're managing multiple IBM Cloud accounts. For example, your company might have many teams, each with one or more of their own accounts for development, testing, and production environments. Or, you might isolate certain workloads in separate accounts to meet security or compliance guidelines. As the number of accounts grows, it can become more difficult to track resource usage and associated costs.\n\nIBM Cloud enterprises offer a simpler way to centrally manage billing and usage across multiple accounts. Within an enterprise, you can create a multi-tiered hierarchy of accounts by adding new or existing accounts and nesting them in account groups. How you structure your enterprise is up to you. For example, for a large organization, you might organize your accounts by geography, or by department. You can choose the structure that best fits how you want to track your usage. If your teams change, no problem - you can move accounts within the enterprise as needed.\n\nConsolidated billing simplifies invoicing and payment within your enterprise. Usage costs are deducted from a subscription credit pool that's shared between all accounts, so you can add and manage subscription credit from a single place.",
+          "url": "https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-what-is-enterprise&interface=ui",
+          "score": 11.247027,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725360756
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "enterprise"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_12559-1521-3753",
+          "text": "\nTo create an enterprise, you must be the account owner or have the Administrator role on the Billing account management service.\n\nCreating an enterprise from an account and importing existing accounts cannot be undone. This tutorial is provided as an example of the steps you can follow to set up an enterprise by department, but you should carefully plan your enterprise structure around your organization's needs.\n\n\n\n\n\n Step 1: Create the enterprise \n\nEnterprises are created from an existing Subscription account. When you create the enterprise, the account is added to the enterprise hierarchy. Billing transitions to being managed by the enterprise, but its users and resources remain the same and are completely unaffected. For a complete description of account impacts, see [Creating an enterprise](https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-create-enterprise).\n\n\n\n1. In the IBM Cloud\u00ae console, go to Manage > Enterprise, and click Create.\n2. Enter the name of your company, such as Example Corp, to identify your enterprise.\n3. Enter your company's domain, such as examplecorp.com.\n4. Review the information about the impact to your account, and select I understand the impact to my account. Then, click Create. The account is now permanently part of the enterprise and can't be removed.\n\n\n\nAfter your enterprise is created, you are directed to the enterprise dashboard. From here, you can view the enterprise details, accounts, users, and billing information. Go to the Accounts page to view your enterprise structure, where you see the following accounts:\n\n\n\n* An enterprise account with the same name as your enterprise. This account is used for enterprise management.\n* The account that you created the enterprise from. Users can continue working with resources in the account unaffected.\n\n\n\n\n\n\n\n Step 2: Create an enterprise structure with account groups \n\nUse account groups to [organize related accounts](https://cloud.ibm.com/docs/account?topic=account-enterprise-organize). The second and third tier of the Example Corp. enterprise hierarchy contain the Marketing, Development, Sales, Design, and Engineering account groups. Complete the following steps to create the account groups:\n\n\n\n1.",
+          "url": "https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-enterprise-tutorial&interface=ui",
+          "score": 10.749787,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725360752
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "enterprise"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "IBM Cloud offers an Enterprise account type, which is designed for businesses and organizations. This account type provides centralized management and governance features, allowing organizations to manage multiple users, resources, and accounts under a single parent account. The Enterprise account also offers features such as cost management, custom roles, and policy-based controls to ensure compliance with organizational standards and regulations. Additionally, IBM provides dedicated support and consulting services for Enterprise customers to help them optimize their cloud infrastructure and applications. For more information about IBM Cloud Enterprise accounts, you can refer to the IBM Cloud documentation or contact IBM sales."
+    },
+    {
+      "speaker": "user",
+      "text": "Support",
+      "timestamp": 1725361016,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The level of support assigned to an IBM Cloud enterprise defaults to the highest support plan within the enterprise. All child accounts within the enterprise also default to the highest support plan. There is a single invoice for all usage within the enterprise, making it easier to understand costs. Additionally, there is a single place to manage payment methods, allowing you to update once for all accounts.\nEnterprises provide top-down usage reporting, allowing you to track the costs of resource usage from all accounts in the enterprise. At the enterprise level, you can navigate within the enterprise structure to see the estimated usage costs within each account or account group. At the account level, enterprise users can view costs for each type of resource or service in the account.\nEnterprise administrators can provide granular access to users, enabling them to view usage only for certain account groups or accounts.\nYou can track resource and support costs from accounts in your IBM Cloud\u00ae enterprise by viewing their usage. The accounts and account groups that you can view usage for depend on your assigned access.",
+      "timestamp": 1725361021,
+      "contexts": [
+        {
+          "document_id": "ibmcld_12623-6811-8811",
+          "text": "\n* A single invoice for all usage within the enterprise, so understanding costs is easier\n* A single place to manage payment methods, so you can update once for all accounts\n\n\n\nLearn more in [Centrally manage billing and usage with enterprises](https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-enterprise).\n\n\n\n\n\n Enterprise support \n\nThe level of support that is assigned to an IBM Cloud enterprise defaults to the highest support plan within the enterprise. All child accounts within the enterprise also default to the highest support plan. For more information about the support experience, see [Basic, Advanced, and Premium Support plans](https://cloud.ibm.com/docs/get-support?topic=get-support-support-planssupport_level_enterprise).\n\n\n\n\n\n Resource management \n\nResources and services within an enterprise function the same as in stand-alone accounts. Each account in an enterprise can contain resources in resource groups. Account groups can't contain resources. For more information, see [Managing resources](https://cloud.ibm.com/docs/account?topic=account-manage_resource).\n\nZoom\n\n![A diagram that shows that resources are contained in accounts in the enterprise.](https://cloud.ibm.com/docs-content/v1/content/d4595e5202a9a27767cf034e81b038cdf772e0d5/secure-enterprise/images/enterprise-resources.svg)\n\nFigure 3. Resources in an enterprise\n\nAs with all accounts, resources are tied to the resource group and account in which they're created, so they can't be moved between accounts in the enterprise. However, the enterprise's flexible account structure means you can move resources within the enterprise by moving the accounts that contain them.\n\n\n\n\n\n Top-down usage reporting \n\nFrom the enterprise account, you can view resource usage from all accounts in the enterprise. Starting at the enterprise level, you see estimated usage costs that are broken down by account and account groups. You can navigate down within the enterprise structure to see the costs within each level.",
+          "url": "https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-what-is-enterprise&interface=ui",
+          "score": 11.0316305,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725362329
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "enterprise support"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03749-8477-10695",
+          "text": "\nFor more information about managing your platform and support subscriptions, see [Managing subscriptions](https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-subscriptions).\n\n\n\n\n\n\n\n Usage reporting \n\nEnterprises provide top-down usage reporting so that you can track the costs of resource usage from all accounts in the enterprise. Starting at the enterprise level, you can navigate within the enterprise structure to see the estimated usage costs within each account or account group. At the account level, enterprise users can view costs for each type of resource or service in the account.\n\nEnterprise administrators can provide granular access to users so that they can view usage only for certain account groups or accounts. For example, say that your enterprise has account groups for each department, and each department has account groups for each team.\n\n\n\n* You give your financial officer access to view the entire enterprise so that they can track and recover costs for each department.\n* You give each department lead access to view usage for everything in their department's account group.\n* You give each team lead access to view only the accounts in their team's account group.\n\n\n\nBecause access in the enterprise is separate from access in each account, enterprise users can't automatically manage resources within the child accounts. Similarly, users in each account can continue to view their past and current usage from the Usage page regardless of whether they have enterprise access.\n\nYou can view usage from the Usage page in the console, from the CLI, or from the Enterprise Usage Reports API. For more information, see [Viewing usage in an enterprise](https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-enterprise-usage).\n\n\n\n\n\n Invoicing and payments \n\nUsage in the enterprise is invoiced through the enterprise account. As with all billable accounts, usage is invoiced monthly, and the invoice is due on the billing date for your account. During each billing cycle, a single invoice with the usage costs from all accounts is made available in the enterprise account. The invoice contains costs for all platform and infrastructure usage as a single-line item in your invoice.",
+          "url": "https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-enterprise&interface=ui",
+          "score": 10.10182,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725362331
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "enterprise support"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_12561-4-2339",
+          "text": "\n* UI\n* CLI\n* API\n\n\n\n\n\n\n\n Viewing usage in an enterprise \n\nYou can track resource and support costs from accounts in your IBM Cloud\u00ae enterprise by viewing their usage. The accounts and account groups that you can view usage for depend on your assigned access.\n\nIBM Cloud enterprises enable you to centrally manage multiple IBM Cloud accounts. As an enterprise user, you can keep an eye on resource usage and the associated costs for any account in the enterprise. See [What is an enterprise?](https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-what-is-enterprise) for more information.\n\n\n\n Required access for viewing enterprise usage \n\nIn an enterprise, access to usage information is controlled by the Enterprise service. To view usage information, users must be invited to the enterprise account and have the Usage Reports Viewer, Editor, or Administrator role on the Enterprise service. The Usage Reports Viewer role provides access only to viewing usage reports, while the Editor and Administrator roles enable additional enterprise management actions. In keeping with security best practices, assign the least amount of access that is needed for the user to complete their task. For more information, see [Enterprise actions and roles](https://cloud.ibm.com/docs/account?topic=account-account-servicesenterprise-account-management).\n\nYou can give users granular access so that they can view usage for a certain account or account group. For example, say that your enterprise has account groups for each department, and each department has account groups for each team. You can scope the access so that each enterprise user can see only the information that is needed to fulfill their job role.\n\n\n\n* Your financial officer needs to view usage for the entire enterprise so that they can track and recover costs for each department, but they don't need to create accounts or account groups. Assign them the Usage Reports Viewer role for the enterprise.\n* Each department lead needs to view usage for their department, and they also need to create and manage accounts and account groups for their teams. Assign each department lead the Editor role for their department's account group.\n* Each team lead needs to view their team's usage, but you want them to get department approval to add new accounts to their team.",
+          "url": "https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-enterprise-usage",
+          "score": 9.926088,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1725362323
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "enterprise support"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "IBM Cloud offers various levels of support depending on your account type. For Lite accounts, community support is available through online forums and resources. Upgrading to a Pay-As-You-Go or Subscription account provides additional support options, such as technical support through the IBM Cloud Support Center. For Enterprise accounts, dedicated support and account management services are available. More information about support offerings can be found in the IBM Cloud documentation."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "created",
+      "timestamp": 1725362357
+    },
+    {
+      "author": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+      "status": "edited",
+      "timestamp": 1726585021
+    },
+    {
+      "author": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+      "status": "accepted",
+      "timestamp": 1726585432
+    }
+  ],
+  "editor": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+  "domain": "mt-rag-ibmcloud-elser-512-100-20240502",
+  "reviewer": "868c6e58-57c1-48ee-8c67-832dbedcac18"
+}

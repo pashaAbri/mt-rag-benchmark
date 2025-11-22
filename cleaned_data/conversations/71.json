@@ -1,0 +1,1316 @@
+{
+  "author": "d2b56e91-6d89-4df4-b89a-eef8d969850b",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-ibmcloud-elser-512-100-20240502",
+      "size": "72442"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "How do I build my client application using dialogue nodes?",
+      "timestamp": 1724793546,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "To build your client application using dialog nodes, you need to follow these steps: create a simple conversation with two intents; the dialog uses intents to identify the purpose of the user's input regardless of the precise wording used, and then responds in the way you specify. The client application sends a message containing user input and the user input triggers a dialog node.",
+      "timestamp": 1724793553,
+      "contexts": [
+        {
+          "document_id": "ibmcld_02998-8791-9815",
+          "text": "\nYou created a simple conversation with two intents and a dialog to recognize them.\n\n\n\n\n\n\n\n Next steps \n\nThis tutorial is built around a simple example. For a real application, you need to define some more interesting intents, some entities, and a more complex dialog that uses them both. When you have a polished version of the assistant, you can make API calls to it from your client application.\n\n\n\n* Complete follow-on tutorials that build more advanced dialogs:\n\n\n\n* Add standard nodes with the [Building a complex dialog](https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-tutorial) tutorial.\n* Learn about slots with the [Adding a node with slots](https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-tutorial-slots) tutorial.\n\n\n\n* Check out more [sample apps](https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-sample-apps) to get ideas.\n\n\n\nWhen you're ready to deploy your assistant, see [Deploying](https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-deploy-custom-app).",
+          "url": "https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-getting-started",
+          "score": 13.860925,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724796488
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do I build my client application using dialogue nodes?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_02882-7-2075",
+          "text": "\nBuilding a conversational flow \n\nThe dialog defines what your assistant says in response to customers.\n\n\n\n Creating a dialog \n\nTo create a dialog, complete the following steps:\n\n\n\n1. Click the Dialog tab, and then click Create dialog.\n\nWhen you open the dialog editor for the first time, the following nodes are created for you:\n\n\n\n* Welcome: The first node. It contains a greeting that is displayed to your users when they first engage with your assistant. You can edit the greeting.\n\n\n\nThis node is not triggered in dialog flows that are initiated by users. For example, dialogs that are deployed in environments such as messaging channels where customers start the conversation do not process nodes with the welcome special condition.\n\n\n\n* Anything else: The final node. It contains phrases that are used to reply to users when their input is not recognized. You can replace the responses that are provided or add more responses with a similar meaning to add variety to the conversation. You can also choose whether you want your assistant to return each response that is defined in turn or return them in random order.\n\n\n\n2. To add more nodes to the dialog tree, click the More![More icon](https://cloud.ibm.com/docs-content/v1/content/a2b18c153837bce00a5b4de496e4b4ca64bbf56e/assistant-data/images/kabob.png) icon on the Welcome node, and then select Add node below.\n3. In the If assistant recognizes field, enter a condition that, when met, triggers your assistant to process the node.\n\nTo start off, you typically want to add an intent as the condition. For example, if you add open_account here, it means that you want the response that you will specify in this node to be returned to the user if the user input indicates that the user wants to open an account.\n\nAs you begin to define a condition, a box is displayed that shows you your options. You can enter one of the following characters, and then pick a value from the list of options that is displayed.\n\n\n\nCondition builder syntax\n\n Character Lists defined values for these artifact types \n\n `#` intents",
+          "url": "https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-dialog-overview",
+          "score": 13.19065,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724795283
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do I build my client application using dialogue nodes?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_03184-1586-3749",
+          "text": "\nIt is the responsibility of the client application to carry out the requested action, store the result in the context, and send it back to the dialog with the next message.\n\nYou might call a client application to do the following types of things:\n\n\n\n* Validate information that you collected from the user.\n* Do calculations or string manipulations on user input that are too complex for supported SpEL expression methods to handle.\n* Get data from another application or service.\n\n\n\nThe following diagram illustrates how client actions work, using the example of an action to get a weather forecast.\n\n![Shows someone asking for a weather forecast and the dialog sending a request to a client app, which sends it to the external service and returns the result](https://cloud.ibm.com/docs-content/v1/content/417db917d18067d9dcc4cf2612564a9a87c3ddc8/assistant/images/forecast.png)\n\nThe flow of requests and responses follows this pattern:\n\n\n\n1. The client application sends a message containing user input that asks for a weather forecast (using the message or message_stateless method).\n2. The user input triggers a dialog node conditioned on a #weather intent. In its response to the client, this node specifies the get_weather client action, which is a name that the client application recognizes. (This is in addition to any text response, such as Checking the weather forecast....)\n3. When it receives this response, the client application recognizes that the get_weather action is being requested. It calls an external web service (/weather) to get the actual forecast information, passing any specified parameters (such as the user's location). The client application then stores the returned information in context variable specified in the action request ($weather_forecast).\n4. The client application sends another message to the service, including the updated context that contains the weather forecast information. From the dialog's perspective, this message is effectively the next round of user input, although the actual input text is blank.\n5. A child node of the #weather node is triggered by the presence of the $weather_forecast context variable.",
+          "url": "https://cloud.ibm.com/docs/assistant?topic=assistant-dialog-actions-client",
+          "score": 13.128878,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724795213
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do I build my client application using dialogue nodes?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_02998-7662-9256",
+          "text": "\n[An ending node was added to the dialog also.](https://cloud.ibm.com/docs-content/v1/content/a2b18c153837bce00a5b4de496e4b4ca64bbf56e/assistant-data/images/gs-ending-node-added.png)\n\n\n\n\n\n Testing intent recognition \n\nYou built a simple dialog to recognize and respond to both greeting and ending inputs. Let's see how well it works.\n\n\n\n1. Click the ![Try it](https://cloud.ibm.com/docs-content/v1/content/a2b18c153837bce00a5b4de496e4b4ca64bbf56e/assistant-data/images/try-it.png) icon to open the Try it out pane. There's that reassuring welcome message.\n2. In the text field, type Hello and press Enter. The output indicates that the General_Greetings intent was recognized, and the appropriate response (Good day to you.) is displayed.\n3. Try the following input:\n\n\n\n* bye\n* howdy\n* see ya\n* good morning\n* sayonara\n\n\n\n\n\nWatson can recognize your intents even when your input doesn't exactly match the examples that you included. The dialog uses intents to identify the purpose of the user's input regardless of the precise wording used, and then responds in the way you specify.\n\n\n\n\n\n Result of building a dialog \n\nThat's it. You created a simple conversation with two intents and a dialog to recognize them.\n\n\n\n\n\n\n\n Next steps \n\nThis tutorial is built around a simple example. For a real application, you need to define some more interesting intents, some entities, and a more complex dialog that uses them both. When you have a polished version of the assistant, you can make API calls to it from your client application.\n\n\n\n* Complete follow-on tutorials that build more advanced dialogs:",
+          "url": "https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-getting-started",
+          "score": 13.600131,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724796514
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "How do I build my client application using dialogue nodes?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "To build your client application using dialog nodes, you need to follow these steps:\n1. Define a dialog: Click the Dialog tab and then click Create dialog. The dialog editor will create a Welcome node and an Anything else node for you.\n2. Add nodes: Click the More![More icon](https://cloud.ibm.com/docs-content/v1/content/a2b18c153837bce00a5b4de496e4b4ca64bbf56e/assistant-data/images/kabob.png) icon on the Welcome node and then select Add node below.\n3. Set conditions: In the If assistant recognizes field, enter a condition that, when met, triggers your assistant to process the node. You can add an intent as the condition. For example, if you add open\\_account, it means that you want the response that you will specify in this node to be returned to the user if the user input indicates that the user wants to open an account.\n4. Implement client actions: Client applications can be called to validate information, do calculations or string manipulations, or get data from another application or service. When a dialog node specifies a client action, the client application recognizes that action and carries out the corresponding task.\n5. Pass context: After the client application has carried out the requested action, it stores the result in the context and sends it back to the dialog with the next message.\nThe following diagram illustrates how client actions work, using the example of an action to get a weather forecast:\n![Shows someone asking for a weather forecast and the dialog sending a request to a client app, which sends it to the external service and returns the result](https://cloud.ibm.com/docs-content/v1/content/417db917d18067d9dcc4cf2612564a9a87c3ddc8/assistant/images/forecast.png)\nThe flow of requests and responses follows this pattern:\n1. The client application sends a message containing user input that asks for a weather forecast.\n2. The user input triggers a dialog node conditioned on a #weather intent. In its response to the client, this node specifies the get\\_weather client action"
+    },
+    {
+      "speaker": "user",
+      "text": "what are worker nodes?",
+      "timestamp": 1724800386,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Worker nodes carry the deployments and services that make up your app. Virtual machines that your cluster manages are instances that are called worker nodes. Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. ",
+      "timestamp": 1724800389,
+      "contexts": [
+        {
+          "document_id": "ibmcld_02882-7-2075",
+          "text": "\nBuilding a conversational flow \n\nThe dialog defines what your assistant says in response to customers.\n\n\n\n Creating a dialog \n\nTo create a dialog, complete the following steps:\n\n\n\n1. Click the Dialog tab, and then click Create dialog.\n\nWhen you open the dialog editor for the first time, the following nodes are created for you:\n\n\n\n* Welcome: The first node. It contains a greeting that is displayed to your users when they first engage with your assistant. You can edit the greeting.\n\n\n\nThis node is not triggered in dialog flows that are initiated by users. For example, dialogs that are deployed in environments such as messaging channels where customers start the conversation do not process nodes with the welcome special condition.\n\n\n\n* Anything else: The final node. It contains phrases that are used to reply to users when their input is not recognized. You can replace the responses that are provided or add more responses with a similar meaning to add variety to the conversation. You can also choose whether you want your assistant to return each response that is defined in turn or return them in random order.\n\n\n\n2. To add more nodes to the dialog tree, click the More![More icon](https://cloud.ibm.com/docs-content/v1/content/a2b18c153837bce00a5b4de496e4b4ca64bbf56e/assistant-data/images/kabob.png) icon on the Welcome node, and then select Add node below.\n3. In the If assistant recognizes field, enter a condition that, when met, triggers your assistant to process the node.\n\nTo start off, you typically want to add an intent as the condition. For example, if you add open_account here, it means that you want the response that you will specify in this node to be returned to the user if the user input indicates that the user wants to open an account.\n\nAs you begin to define a condition, a box is displayed that shows you your options. You can enter one of the following characters, and then pick a value from the list of options that is displayed.\n\n\n\nCondition builder syntax\n\n Character Lists defined values for these artifact types \n\n `#` intents",
+          "url": "https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-dialog-overview",
+          "score": 30.031942,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724800522
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do I build my client application using dialogue nodes?\n|assistant|: To build your client application using dialog nodes, you need to follow these steps: create a simple conversation with two intents; the dialog uses intents to identify the purpose of the user's input regardless of the precise wording used, and then responds in the way you specify. The client application sends a message containing user input and the user input triggers a dialog node.\n|user|: what are worker nodes?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_02952-1632-3754",
+          "text": "\nCreate an intent that can recognize when a customer asks to speak to someone. After defining the intent, you can add a root-level dialog node that conditions on the intent. As the dialog node response, add a Connect to human agent response type. At run time, if the user asks to speak to someone, this node is triggered and a transfer is initiated on the user's behalf.\n* When the conversation broaches a topic that is sensitive in nature, you can start a transfer.\n\nFor example, an insurance company might want questions about bereavement benefits always to be handled by a person. Or, if a customer wants to close an account, you might want to transfer the conversation to a respresentative who is authorized to offer incentives to keep the customer's business.\n* When the assistant repeatedly fails to understand a customer's request. Instead of asking the customer to retry or rephrase the question over and over, your assistant can offer to transfer the customer to a human agent.\n\n\n\nTo design a dialog that can transfer the conversation, complete the following steps:\n\n\n\n1. Add an intent to your skill that can recognize a user's request to speak to a human.\n\nYou can create your own intent or add the prebuilt intent named General_Connect_to_Agent that is provided with the General content catalog.\n2. Add a root node to your dialog that conditions on the intent you created in the previous step. Choose Connect to human agent as the response type.\n\nFor more information, see [Adding a Connect to human agent response type](https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-dialog-overviewdialog-overview-add-connect-to-human-agent).\n3. Add meaningful names to the dialog nodes in your dialog.\n\nWhen a conversation is transferred to an agent, the name of the most-recently processed dialog node is sent with it. To ensure that a useful summary is provided to service desk agents when a conversation is transferred to them, add short dialog node names that reflect the node's purpose. For example, Find a store.\n\nSome older skills specify the purpose of the node in the external node name field instead.",
+          "url": "https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-dialog-support",
+          "score": 29.058376,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724800488
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do I build my client application using dialogue nodes?\n|assistant|: To build your client application using dialog nodes, you need to follow these steps: create a simple conversation with two intents; the dialog uses intents to identify the purpose of the user's input regardless of the precise wording used, and then responds in the way you specify. The client application sends a message containing user input and the user input triggers a dialog node.\n|user|: what are worker nodes?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_02998-8791-9815",
+          "text": "\nYou created a simple conversation with two intents and a dialog to recognize them.\n\n\n\n\n\n\n\n Next steps \n\nThis tutorial is built around a simple example. For a real application, you need to define some more interesting intents, some entities, and a more complex dialog that uses them both. When you have a polished version of the assistant, you can make API calls to it from your client application.\n\n\n\n* Complete follow-on tutorials that build more advanced dialogs:\n\n\n\n* Add standard nodes with the [Building a complex dialog](https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-tutorial) tutorial.\n* Learn about slots with the [Adding a node with slots](https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-tutorial-slots) tutorial.\n\n\n\n* Check out more [sample apps](https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-sample-apps) to get ideas.\n\n\n\nWhen you're ready to deploy your assistant, see [Deploying](https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-deploy-custom-app).",
+          "url": "https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-getting-started",
+          "score": 28.2212,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724800515
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do I build my client application using dialogue nodes?\n|assistant|: To build your client application using dialog nodes, you need to follow these steps: create a simple conversation with two intents; the dialog uses intents to identify the purpose of the user's input regardless of the precise wording used, and then responds in the way you specify. The client application sends a message containing user input and the user input triggers a dialog node.\n|user|: what are worker nodes?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_10510-17837-19983",
+          "text": "\nWorker nodes carry the deployments and services that make up your app. When you host workloads in the public cloud, you want to ensure that your app is protected from being accessed, changed, or monitored by an unauthorized user or software.\n\n\n\n Who owns the worker node and am I responsible to secure it? \n\nThe ownership of a worker node depends on the type of cluster that you create and the infrastructure provider that you choose.\n\n\n\n* Classic clusters: Worker nodes are provisioned in to your IBM Cloud account. The worker nodes are dedicated to you and you are responsible to request timely updates to the worker nodes to ensure that the worker node OS and IBM Cloud Kubernetes Service components apply the latest security updates and patches.\n* VPC clusters: Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. You can't access your worker nodes by using the VPC dashboard. However, you can manage your worker nodes by using the IBM Cloud Kubernetes Service console, CLI, or API. The virtual machines that make up your worker nodes are dedicated to you and you are responsible to request timely updates so that your worker node OS and IBM Cloud Kubernetes Service components apply the latest security updates and patches.\n\n\n\nFor more information, see [Your responsibilities by using Red Hat OpenShift on IBM Cloud](https://cloud.ibm.com/docs/openshift?topic=openshift-responsibilities_iks).\n\nUse the ibmcloud oc worker update[command](https://cloud.ibm.com/docs/openshift?topic=openshift-kubernetes-service-clics_worker_update) regularly (such as monthly) to deploy updates and security patches to the operating system and to update the Red Hat OpenShift version that your worker nodes run. When updates are available, you are notified when you view information about the master and worker nodes in the IBM Cloud console or CLI, such as with the ibmcloud oc clusters ls or ibmcloud oc workers ls --cluster <cluster_name> commands. Worker node updates are provided by IBM as a full worker node image that includes the latest security patches.",
+          "url": "https://cloud.ibm.com/docs/openshift?topic=openshift-security",
+          "score": 24.482761,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724800777
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "what are worker nodes"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_06079-10297-12436",
+          "text": "\nWorker node With IBM Cloud Kubernetes Service, the virtual machines that your cluster manages are instances that are called worker nodes. These worker nodes virtual machines and all the worker node components are dedicated to you only and are not shared with other IBM customers. However, the underlying hardware is shared with other IBM customers. For more information, see [Virtual machines](https://cloud.ibm.com/docs/containers?topic=containers-planning_worker_nodesvm). You manage the worker nodes through the automation tools that are provided by IBM Cloud Kubernetes Service, such as the API, CLI, or console. Unlike classic clusters, you don't see VPC compute worker nodes in your infrastructure portal or separate infrastructure bill, but instead manage all maintenance and billing activity for the worker nodes from IBM Cloud Kubernetes Service. Worker nodes include the same [components](https://cloud.ibm.com/docs/containers?topic=containers-service-archworker-components) as described in the Classic architecture. Community Kubernetes worker nodes run on Ubuntu 18.04 x86_64, 16.04 x86_64 (deprecated). \n Cluster networking Your worker nodes are created in a VPC subnet in the zone that you specify. By default, the public and private cloud service endpoints for your cluster are enabled. Communication between the master and worker nodes is over the private network. Authenticated external users can communicate with the master over the public network, such as to run kubectl commands. You can optionally set up your cluster to communicate with on-prem services by setting up a VPC VPN on the private network. \n App networking You can create a Kubernetes LoadBalancer service for your apps in the cluster, which automatically provisions a VPC load balancer in your VPC outside the cluster. The load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes. For more information, see [Exposing apps with VPC load balancers](https://cloud.ibm.com/docs/containers?topic=containers-vpc-lbaas). Calico is used as the cluster networking policy fabric.",
+          "url": "https://cloud.ibm.com/docs/containers?topic=containers-service-arch",
+          "score": 24.33156,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724800783
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "what are worker nodes"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_06063-18145-20200",
+          "text": "\n* VPC clusters: Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. You can't access your worker nodes by using the VPC dashboard. However, you can manage your worker nodes by using the IBM Cloud Kubernetes Service console, CLI, or API. The virtual machines that make up your worker nodes are dedicated to you and you are responsible to request timely updates so that your worker node OS and IBM Cloud Kubernetes Service components apply the latest security updates and patches.\n\n\n\nFor more information, see [Your responsibilities by using IBM Cloud Kubernetes Service](https://cloud.ibm.com/docs/containers?topic=containers-responsibilities_iks).\n\nUse the ibmcloud ks worker update[command](https://cloud.ibm.com/docs/containers?topic=containers-kubernetes-service-clics_worker_update) regularly (such as monthly) to deploy updates and security patches to the operating system and to update the Kubernetes version that your worker nodes run. When updates are available, you are notified when you view information about the master and worker nodes in the IBM Cloud console or CLI, such as with the ibmcloud ks clusters ls or ibmcloud ks workers ls --cluster <cluster_name> commands. Worker node updates are provided by IBM as a full worker node image that includes the latest security patches. To apply the updates, the worker node must be reimaged and reloaded with the new image. Keys for the root user are automatically rotated when the worker node is reloaded.\n\n\n\n\n\n How does my worker node setup look? \n\nThe following image shows the components that are set up for every worker node to protect your worker node from malicious attacks.\n\nThe image does not include components that ensure secure end-to-end communication to and from the worker node. For more information, see [network security](https://cloud.ibm.com/docs/containers?topic=containers-securitynetwork).\n\nZoom\n\n![Worker node setup in IBM Cloud Kubernetes Service excluding network security.]",
+          "url": "https://cloud.ibm.com/docs/containers?topic=containers-security",
+          "score": 23.986591,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724800789
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "what are worker nodes"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "I do not have specific information about \"worker nodes\" in the context of building a conversational flow with client applications. However, in the context of IBM Watson Assistant, there are no nodes called \"worker nodes\". There are different types of nodes such as dialog nodes, intent nodes, and entity nodes. If you could provide more context or clarify what you mean by \"worker nodes\", I would be happy to try and help further."
+    },
+    {
+      "speaker": "user",
+      "text": "what are VPC clusters?",
+      "timestamp": 1724801680,
+      "enrichments": {
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Question Type": [
+          "Factoid"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "With IBM Cloud Kubernetes Service, you can create a standard cluster in a Virtual Private Cloud (VPC). A VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.",
+      "timestamp": 1724801684,
+      "contexts": [
+        {
+          "document_id": "ibmcld_06063-18145-20200",
+          "text": "\n* VPC clusters: Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. You can't access your worker nodes by using the VPC dashboard. However, you can manage your worker nodes by using the IBM Cloud Kubernetes Service console, CLI, or API. The virtual machines that make up your worker nodes are dedicated to you and you are responsible to request timely updates so that your worker node OS and IBM Cloud Kubernetes Service components apply the latest security updates and patches.\n\n\n\nFor more information, see [Your responsibilities by using IBM Cloud Kubernetes Service](https://cloud.ibm.com/docs/containers?topic=containers-responsibilities_iks).\n\nUse the ibmcloud ks worker update[command](https://cloud.ibm.com/docs/containers?topic=containers-kubernetes-service-clics_worker_update) regularly (such as monthly) to deploy updates and security patches to the operating system and to update the Kubernetes version that your worker nodes run. When updates are available, you are notified when you view information about the master and worker nodes in the IBM Cloud console or CLI, such as with the ibmcloud ks clusters ls or ibmcloud ks workers ls --cluster <cluster_name> commands. Worker node updates are provided by IBM as a full worker node image that includes the latest security patches. To apply the updates, the worker node must be reimaged and reloaded with the new image. Keys for the root user are automatically rotated when the worker node is reloaded.\n\n\n\n\n\n How does my worker node setup look? \n\nThe following image shows the components that are set up for every worker node to protect your worker node from malicious attacks.\n\nThe image does not include components that ensure secure end-to-end communication to and from the worker node. For more information, see [network security](https://cloud.ibm.com/docs/containers?topic=containers-securitynetwork).\n\nZoom\n\n![Worker node setup in IBM Cloud Kubernetes Service excluding network security.]",
+          "url": "https://cloud.ibm.com/docs/containers?topic=containers-security",
+          "score": 36.877136,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724868248
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do I build my client application using dialogue nodes?\n|assistant|: To build your client application using dialog nodes, you need to follow these steps: create a simple conversation with two intents; the dialog uses intents to identify the purpose of the user's input regardless of the precise wording used, and then responds in the way you specify. The client application sends a message containing user input and the user input triggers a dialog node.\n|user|: what are worker nodes?\n|assistant|: Worker nodes carry the deployments and services that make up your app. Virtual machines that your cluster manages are instances that are called worker nodes. Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. \n|user|: what are VPC clusters?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_10510-17837-19983",
+          "text": "\nWorker nodes carry the deployments and services that make up your app. When you host workloads in the public cloud, you want to ensure that your app is protected from being accessed, changed, or monitored by an unauthorized user or software.\n\n\n\n Who owns the worker node and am I responsible to secure it? \n\nThe ownership of a worker node depends on the type of cluster that you create and the infrastructure provider that you choose.\n\n\n\n* Classic clusters: Worker nodes are provisioned in to your IBM Cloud account. The worker nodes are dedicated to you and you are responsible to request timely updates to the worker nodes to ensure that the worker node OS and IBM Cloud Kubernetes Service components apply the latest security updates and patches.\n* VPC clusters: Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. You can't access your worker nodes by using the VPC dashboard. However, you can manage your worker nodes by using the IBM Cloud Kubernetes Service console, CLI, or API. The virtual machines that make up your worker nodes are dedicated to you and you are responsible to request timely updates so that your worker node OS and IBM Cloud Kubernetes Service components apply the latest security updates and patches.\n\n\n\nFor more information, see [Your responsibilities by using Red Hat OpenShift on IBM Cloud](https://cloud.ibm.com/docs/openshift?topic=openshift-responsibilities_iks).\n\nUse the ibmcloud oc worker update[command](https://cloud.ibm.com/docs/openshift?topic=openshift-kubernetes-service-clics_worker_update) regularly (such as monthly) to deploy updates and security patches to the operating system and to update the Red Hat OpenShift version that your worker nodes run. When updates are available, you are notified when you view information about the master and worker nodes in the IBM Cloud console or CLI, such as with the ibmcloud oc clusters ls or ibmcloud oc workers ls --cluster <cluster_name> commands. Worker node updates are provided by IBM as a full worker node image that includes the latest security patches.",
+          "url": "https://cloud.ibm.com/docs/openshift?topic=openshift-security",
+          "score": 34.74528,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724801738
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do I build my client application using dialogue nodes?\n|assistant|: To build your client application using dialog nodes, you need to follow these steps: create a simple conversation with two intents; the dialog uses intents to identify the purpose of the user's input regardless of the precise wording used, and then responds in the way you specify. The client application sends a message containing user input and the user input triggers a dialog node.\n|user|: what are worker nodes?\n|assistant|: Worker nodes carry the deployments and services that make up your app. Virtual machines that your cluster manages are instances that are called worker nodes. Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. \n|user|: what are VPC clusters?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_06079-10297-12436",
+          "text": "\nWorker node With IBM Cloud Kubernetes Service, the virtual machines that your cluster manages are instances that are called worker nodes. These worker nodes virtual machines and all the worker node components are dedicated to you only and are not shared with other IBM customers. However, the underlying hardware is shared with other IBM customers. For more information, see [Virtual machines](https://cloud.ibm.com/docs/containers?topic=containers-planning_worker_nodesvm). You manage the worker nodes through the automation tools that are provided by IBM Cloud Kubernetes Service, such as the API, CLI, or console. Unlike classic clusters, you don't see VPC compute worker nodes in your infrastructure portal or separate infrastructure bill, but instead manage all maintenance and billing activity for the worker nodes from IBM Cloud Kubernetes Service. Worker nodes include the same [components](https://cloud.ibm.com/docs/containers?topic=containers-service-archworker-components) as described in the Classic architecture. Community Kubernetes worker nodes run on Ubuntu 18.04 x86_64, 16.04 x86_64 (deprecated). \n Cluster networking Your worker nodes are created in a VPC subnet in the zone that you specify. By default, the public and private cloud service endpoints for your cluster are enabled. Communication between the master and worker nodes is over the private network. Authenticated external users can communicate with the master over the public network, such as to run kubectl commands. You can optionally set up your cluster to communicate with on-prem services by setting up a VPC VPN on the private network. \n App networking You can create a Kubernetes LoadBalancer service for your apps in the cluster, which automatically provisions a VPC load balancer in your VPC outside the cluster. The load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes. For more information, see [Exposing apps with VPC load balancers](https://cloud.ibm.com/docs/containers?topic=containers-vpc-lbaas). Calico is used as the cluster networking policy fabric.",
+          "url": "https://cloud.ibm.com/docs/containers?topic=containers-service-arch",
+          "score": 33.701077,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724801755
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do I build my client application using dialogue nodes?\n|assistant|: To build your client application using dialog nodes, you need to follow these steps: create a simple conversation with two intents; the dialog uses intents to identify the purpose of the user's input regardless of the precise wording used, and then responds in the way you specify. The client application sends a message containing user input and the user input triggers a dialog node.\n|user|: what are worker nodes?\n|assistant|: Worker nodes carry the deployments and services that make up your app. Virtual machines that your cluster manages are instances that are called worker nodes. Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. \n|user|: what are VPC clusters?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_05851-2919-4667",
+          "text": "\nWith IBM Cloud Kubernetes Service, you can create a standard cluster in a [Virtual Private Cloud (VPC)](https://cloud.ibm.com/docs/vpc?topic=vpc-getting-started). A VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.\n\nBefore you can create a VPC cluster, you must have a VPC and at least one VPC subnet that you provision by using the IBM Cloud console, CLI, or API. You manage these resources in the VPC dashboard directly. When you create your cluster, worker nodes are automatically provisioned as [Virtual Servers for VPC](https://cloud.ibm.com/docs/vpc?topic=vpc-about-advanced-virtual-servers) instances and you can view and manage these instances in IBM Cloud Kubernetes Service only.\n\nTo add persistent storage to your VPC cluster, you can use the [Block Storage for VPC add-on](https://cloud.ibm.com/docs/containers?topic=containers-vpc-block). The add-on sets up pre-defined Kubernetes storage classes, the storage provider, and the storage driver in your cluster so that you can provision Block Storage for VPC by using Kubernetes persistent volume claims (PVCs).\n\nTo secure your cluster network traffic, you can modify the default security group for your worker nodes. For more information, see [Security in your IBM Cloud VPC](https://cloud.ibm.com/docs/vpc?topic=vpc-security-in-your-vpc).\n\nTo connect to a different VPC or to an on-prem data center, use the [VPN for VPC](https://cloud.ibm.com/docs/vpc?topic=vpc-vpn-onprem-example) service.\n\n\n\n\n\n\n\n Kubernetes community and open source integrations \n\nBecause you own the standard clusters that you create in IBM Cloud Kubernetes Service, you can choose to install third-party solutions to add extra capabilities to your cluster.",
+          "url": "https://cloud.ibm.com/docs/containers?topic=containers-ibm-3rd-party-integrations",
+          "score": 22.686525,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724802895
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "what are VPC clusters"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_06294-7-1823",
+          "text": "\nCreating a cluster in your Virtual Private Cloud (VPC) \n\nCreate an IBM Cloud\u00ae Kubernetes Service cluster in your Virtual Private Cloud (VPC).\n\nWith IBM Cloud Kubernetes Service clusters on VPC, you can create your cluster in the next generation of the IBM Cloud platform, in your [Virtual Private Cloud](https://cloud.ibm.com/docs/vpc?topic=vpc-about-vpc). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. VPC uses the next version of IBM Cloud Kubernetes Service [infrastructure providers](https://cloud.ibm.com/docs/containers?topic=containers-infrastructure_providersinfrastructure_providers), with a select group of v2 API, CLI, and console functionality. You can create only standard clusters for VPC.\n\n\n\n Objectives \n\nIn the tutorial lessons, you create an IBM Cloud Kubernetes Service cluster in a Virtual Private Cloud (VPC). Then, you deploy an app and expose the app publicly by using a load balancer.\n\n\n\n\n\n Audience \n\nThis tutorial is for administrators who are creating a cluster in IBM Cloud Kubernetes Service in VPC for the first time.\n\n\n\n\n\n Prerequisites \n\nComplete the following prerequisite steps to set up permissions and the command-line environment.\n\nPermissions\n: If you are the account owner, you already have the required permissions to create a cluster and can continue to the next step. Otherwise, ask the account owner to [set up the API key and assign you the minimum user permissions in IBM Cloud IAM](https://cloud.ibm.com/docs/openshift?topic=openshift-access_referencecluster_create_permissions).\n\nCommand-line tools\n: For quick access to your resources from the command line, try the [IBM Cloud Shell](https://cloud.ibm.com/shell). Otherwise, set up your local command-line environment by completing the following steps.\n\n\n\n1.",
+          "url": "https://cloud.ibm.com/docs/containers?topic=containers-vpc_ks_tutorial",
+          "score": 23.591606,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724802890
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "what are VPC clusters"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16098-7-1823",
+          "text": "\nCreating a cluster in your Virtual Private Cloud (VPC) \n\nCreate an IBM Cloud\u00ae Kubernetes Service cluster in your Virtual Private Cloud (VPC).\n\nWith IBM Cloud Kubernetes Service clusters on VPC, you can create your cluster in the next generation of the IBM Cloud platform, in your [Virtual Private Cloud](https://cloud.ibm.com/docs/vpc?topic=vpc-about-vpc). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. VPC uses the next version of IBM Cloud Kubernetes Service [infrastructure providers](https://cloud.ibm.com/docs/containers?topic=containers-infrastructure_providersinfrastructure_providers), with a select group of v2 API, CLI, and console functionality. You can create only standard clusters for VPC.\n\n\n\n Objectives \n\nIn the tutorial lessons, you create an IBM Cloud Kubernetes Service cluster in a Virtual Private Cloud (VPC). Then, you deploy an app and expose the app publicly by using a load balancer.\n\n\n\n\n\n Audience \n\nThis tutorial is for administrators who are creating a cluster in IBM Cloud Kubernetes Service in VPC for the first time.\n\n\n\n\n\n Prerequisites \n\nComplete the following prerequisite steps to set up permissions and the command-line environment.\n\nPermissions\n: If you are the account owner, you already have the required permissions to create a cluster and can continue to the next step. Otherwise, ask the account owner to [set up the API key and assign you the minimum user permissions in IBM Cloud IAM](https://cloud.ibm.com/docs/openshift?topic=openshift-access_referencecluster_create_permissions).\n\nCommand-line tools\n: For quick access to your resources from the command line, try the [IBM Cloud Shell](https://cloud.ibm.com/shell). Otherwise, set up your local command-line environment by completing the following steps.\n\n\n\n1.",
+          "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-vpc_ks_tutorial",
+          "score": 23.591606,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724802923
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "what are VPC clusters"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "VPC clusters are a type of cluster in the IBM Cloud Kubernetes Service where worker nodes are provisioned in an IBM Cloud account owned by IBM. This allows for monitoring of malicious activities and applying of security updates. You can't access your worker nodes using the VPC dashboard, but you can manage them using the IBM Cloud Kubernetes Service console, CLI, or API. The virtual machines that make up your worker nodes are dedicated to you, and you are responsible for requesting timely updates so that your worker node OS and IBM Cloud Kubernetes Service components apply the latest security updates and patches."
+    },
+    {
+      "speaker": "user",
+      "text": "How to create a cluster.",
+      "timestamp": 1724803851,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "To create a cluster, you need to set up your account and then decide on the setup of your cluster. It is recommended that you have those things in mind when create a cluster. You also need to have a least two servers running Windows  2019 and SQL 2010 to  cluster, A Bastion host with external also is necessary and  as well have deployed active directory.",
+      "timestamp": 1724803877,
+      "contexts": [
+        {
+          "document_id": "ibmcld_06063-18145-20200",
+          "text": "\n* VPC clusters: Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. You can't access your worker nodes by using the VPC dashboard. However, you can manage your worker nodes by using the IBM Cloud Kubernetes Service console, CLI, or API. The virtual machines that make up your worker nodes are dedicated to you and you are responsible to request timely updates so that your worker node OS and IBM Cloud Kubernetes Service components apply the latest security updates and patches.\n\n\n\nFor more information, see [Your responsibilities by using IBM Cloud Kubernetes Service](https://cloud.ibm.com/docs/containers?topic=containers-responsibilities_iks).\n\nUse the ibmcloud ks worker update[command](https://cloud.ibm.com/docs/containers?topic=containers-kubernetes-service-clics_worker_update) regularly (such as monthly) to deploy updates and security patches to the operating system and to update the Kubernetes version that your worker nodes run. When updates are available, you are notified when you view information about the master and worker nodes in the IBM Cloud console or CLI, such as with the ibmcloud ks clusters ls or ibmcloud ks workers ls --cluster <cluster_name> commands. Worker node updates are provided by IBM as a full worker node image that includes the latest security patches. To apply the updates, the worker node must be reimaged and reloaded with the new image. Keys for the root user are automatically rotated when the worker node is reloaded.\n\n\n\n\n\n How does my worker node setup look? \n\nThe following image shows the components that are set up for every worker node to protect your worker node from malicious attacks.\n\nThe image does not include components that ensure secure end-to-end communication to and from the worker node. For more information, see [network security](https://cloud.ibm.com/docs/containers?topic=containers-securitynetwork).\n\nZoom\n\n![Worker node setup in IBM Cloud Kubernetes Service excluding network security.]",
+          "url": "https://cloud.ibm.com/docs/containers?topic=containers-security",
+          "score": 41.64789,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724803939
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do I build my client application using dialogue nodes?\n|assistant|: To build your client application using dialog nodes, you need to follow these steps: create a simple conversation with two intents; the dialog uses intents to identify the purpose of the user's input regardless of the precise wording used, and then responds in the way you specify. The client application sends a message containing user input and the user input triggers a dialog node.\n|user|: what are worker nodes?\n|assistant|: Worker nodes carry the deployments and services that make up your app. Virtual machines that your cluster manages are instances that are called worker nodes. Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. \n|user|: what are VPC clusters?\n|assistant|: With IBM Cloud Kubernetes Service, you can create a standard cluster in a Virtual Private Cloud (VPC). A VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.\n|user|: How to create a cluster."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_06079-10297-12436",
+          "text": "\nWorker node With IBM Cloud Kubernetes Service, the virtual machines that your cluster manages are instances that are called worker nodes. These worker nodes virtual machines and all the worker node components are dedicated to you only and are not shared with other IBM customers. However, the underlying hardware is shared with other IBM customers. For more information, see [Virtual machines](https://cloud.ibm.com/docs/containers?topic=containers-planning_worker_nodesvm). You manage the worker nodes through the automation tools that are provided by IBM Cloud Kubernetes Service, such as the API, CLI, or console. Unlike classic clusters, you don't see VPC compute worker nodes in your infrastructure portal or separate infrastructure bill, but instead manage all maintenance and billing activity for the worker nodes from IBM Cloud Kubernetes Service. Worker nodes include the same [components](https://cloud.ibm.com/docs/containers?topic=containers-service-archworker-components) as described in the Classic architecture. Community Kubernetes worker nodes run on Ubuntu 18.04 x86_64, 16.04 x86_64 (deprecated). \n Cluster networking Your worker nodes are created in a VPC subnet in the zone that you specify. By default, the public and private cloud service endpoints for your cluster are enabled. Communication between the master and worker nodes is over the private network. Authenticated external users can communicate with the master over the public network, such as to run kubectl commands. You can optionally set up your cluster to communicate with on-prem services by setting up a VPC VPN on the private network. \n App networking You can create a Kubernetes LoadBalancer service for your apps in the cluster, which automatically provisions a VPC load balancer in your VPC outside the cluster. The load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes. For more information, see [Exposing apps with VPC load balancers](https://cloud.ibm.com/docs/containers?topic=containers-vpc-lbaas). Calico is used as the cluster networking policy fabric.",
+          "url": "https://cloud.ibm.com/docs/containers?topic=containers-service-arch",
+          "score": 40.97502,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724803967
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do I build my client application using dialogue nodes?\n|assistant|: To build your client application using dialog nodes, you need to follow these steps: create a simple conversation with two intents; the dialog uses intents to identify the purpose of the user's input regardless of the precise wording used, and then responds in the way you specify. The client application sends a message containing user input and the user input triggers a dialog node.\n|user|: what are worker nodes?\n|assistant|: Worker nodes carry the deployments and services that make up your app. Virtual machines that your cluster manages are instances that are called worker nodes. Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. \n|user|: what are VPC clusters?\n|assistant|: With IBM Cloud Kubernetes Service, you can create a standard cluster in a Virtual Private Cloud (VPC). A VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.\n|user|: How to create a cluster."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_05858-7-2171",
+          "text": "\nSupported infrastructure providers \n\nWith IBM Cloud\u00ae Kubernetes Service, you can create a cluster from the following infrastructure providers. All the worker nodes in a cluster must be from the same provider. Originally, IBM Cloud Kubernetes Service provisioned your worker nodes in a single provider, classic infrastructure.\n\nVirtual Private Cloud\n\n: Create your cluster on the next generation of IBM Cloud infrastructure virtual servers in your own Virtual Private Cloud (VPC).\n\nClassic infrastructure\n\n: Create your cluster on a classic compute, networking, and storage environment in IBM Cloud infrastructure.\n\n\n\n Virtual Private Cloud (VPC) \n\nVirtual Private Cloud\n\n\n\nTable 1. VPC infrastructure overview.\n\n Component Description \n\n Compute and worker node resources Worker nodes are created as virtual machines by using either shared infrastructure or dedicated hosts. Unlike classic clusters, VPC cluster worker nodes on shared hardware don't appear in your infrastructure portal or a separate infrastructure bill. Instead, you manage all maintenance and billing activity for the worker nodes through IBM Cloud Kubernetes Service. Your worker node instances are connected to certain VPC instances that do reside in your infrastructure account, such as the VPC subnet or storage volumes. For dedicated hosts, the dedicated host price covers the vCPU, memory, and any instance storage to be used by any workers placed on the host. For dedicated hosts, the dedicated host price covers the vCPU, memory, and any [instance storage](https://cloud.ibm.com/docs/vpc?topic=vpc-instance-storage) to be used by any workers placed on the host. Note that all Intel\u00ae x86-64 servers have Hyper-Threading enabled by default. For more information, see [Intel Hyper-Threading Technology](https://cloud.ibm.com/docs/vpc?topic=vpc-profilesvpc-intel-hyper-threading). \n Security Clusters on shared hardware run in an isolated environment in the public cloud. Clusters on dedicated hosts do not run in a shared environment, instead only your clusters are present on your hosts. Network access control lists protect the subnets that provide the floating IPs for your worker nodes.",
+          "url": "https://cloud.ibm.com/docs/containers?topic=containers-infrastructure_providers",
+          "score": 40.59716,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724856571
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do I build my client application using dialogue nodes?\n|assistant|: To build your client application using dialog nodes, you need to follow these steps: create a simple conversation with two intents; the dialog uses intents to identify the purpose of the user's input regardless of the precise wording used, and then responds in the way you specify. The client application sends a message containing user input and the user input triggers a dialog node.\n|user|: what are worker nodes?\n|assistant|: Worker nodes carry the deployments and services that make up your app. Virtual machines that your cluster manages are instances that are called worker nodes. Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. \n|user|: what are VPC clusters?\n|assistant|: With IBM Cloud Kubernetes Service, you can create a standard cluster in a Virtual Private Cloud (VPC). A VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.\n|user|: How to create a cluster."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_10096-5554-7309",
+          "text": "\nLooking for a fast way to create a cluster from the UI? Try out [Automating cluster creation with IBM Cloud Schematics templates](https://cloud.ibm.com/docs/openshift?topic=openshift-templates).\n\n\n\n\n\n Deciding on your cluster setup \n\nAfter you set up your account to create clusters, decide on the setup for your cluster. You must make these decisions every time that you create a cluster. Review the following decision tree image for more information, such as comparisons of Kubernetes and Red Hat OpenShift, and VPC and classic infrastructure.\n\n\n\n\n\n Next steps \n\nWhen the cluster is up and running, you can check out the following cluster administration tasks:\n\n\n\n* If you created the cluster in a multizone capable zone, [spread worker nodes by adding a zone to your cluster](https://cloud.ibm.com/docs/openshift?topic=openshift-add_workers).\n* [Deploy an app in your cluster.](https://cloud.ibm.com/docs/containers?topic=containers-deploy_appapp_cli)\n* [Set up your own private registry in IBM Cloud to store and share Docker images with other users.](https://cloud.ibm.com/docs/Registry?topic=Registry-getting-started)\n* [Set up the cluster autoscaler](https://cloud.ibm.com/docs/openshift?topic=openshift-cluster-scaling-classic-vpc) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.\n* Control who can create pods in your cluster with [pod security policies](https://cloud.ibm.com/docs/containers?topic=containers-psp).\n\n\n\nThen, you can check out the following network configuration steps for your cluster setup:\n\n\n\n* Classic clusters:\n\n\n\n* Isolate networking workloads to edge worker nodes [in classic clusters without a gateway](https://cloud.ibm.com/docs/openshift?topic=openshift-edge).",
+          "url": "https://cloud.ibm.com/docs/openshift?topic=openshift-clusters",
+          "score": 18.852121,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724855386
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "How to create a cluster"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_09655-7-1917",
+          "text": "\nCreate a cluster \n\nThis section steps through the build tasks needed to create the Windows Server Failover Cluster (WSFC) and the availability group.\n\nThis guide assumes that you:\n\n\n\n* Have at least two servers running Windows 2019 and SQL Server 2019 to cluster.\n* Have a bastion host with external Internet access.\n* Have deployed active directory.\n\n\n\n\n\n Install the Failover Clustering feature \n\n\n\n1. RDP to the first SQL server using a user from the SQL Admins group account and open a PowerShell session.\n2. Add the SQL Admins group to the local Remote Management Users group so users in this group, can execute remote commands.\n3. Allow inbound TCP port 5022 into the server as this port is used for availability group traffic. Install the Failover Clustering feature and then restart the server:\n\n$domainnb = \"<NB_Domain>\"\n$group = $domainnb + \"SQLAdmins\"\nAdd-LocalGroupMember -Group \"Remote Management Users\" -Member $group\nNew-NetFirewallRule -DisplayName 'SQL-AG-Inbound' -Profile Domain -Direction Inbound -Action Allow -Protocol TCP -LocalPort 5022\nInstall-WindowsFeature \u2013Name Failover-Clustering \u2013IncludeManagementTools\nRestart-Computer -Force\n4. Repeat for the second SQL server.\n\n\n\n\n\n\n\n Create a WSFC and enable SQL Always On \n\n\n\n1. RDP to the first SQL server using a user from the SQL Admins group account and open a PowerShell session.\n2. Run a cluster validation test. Ignore any \"one pair of network interfaces\" warnings, as this is normal for this deployment.\n3. If there are no errors them create a WSFC cluster with a name of wsfc01 which includes the two SQL servers <hostname1> and <hostname2>. The -ManagementPointNetworkType Distributed option uses the node IP address of the virtual server which means that secondary IP addressing on the interface is not required. This option creates a Distributed Network Name (DNN), which routes traffic to the appropriate clustered resource.\n4.",
+          "url": "https://cloud.ibm.com/docs/microsoft?topic=microsoft-mssql-cluster",
+          "score": 18.454504,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724855397
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "How to create a cluster."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "To create a cluster in IBM Cloud Kubernetes Service, you can follow these general steps:\n1. Log in to your IBM Cloud account.\n2. Navigate to the Kubernetes Service page.\n3. Click on \"Create a cluster\" button.\n4. Select the infrastructure provider for your cluster. You can choose between Virtual Private Cloud (VPC) or classic infrastructure.\n5. Configure the cluster settings according to your needs, such as the number of worker nodes, worker node flavor, and VPC subnet.\n6. Review your cluster configuration and click on \"Create cluster\" button.\nPlease note that the exact steps might vary based on the infrastructure provider and the specific version of IBM Cloud Kubernetes Service."
+    },
+    {
+      "speaker": "user",
+      "text": "How much do the IBM Cloud Schematics templates cost?",
+      "timestamp": 1724857749,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": " Getting started tutorial incurs costs. You must have an IBM Cloud Pay-As-You-Go or Subscription account to proceed. IBM Cloud Schematics Workspaces are provided to you at no cost. However, when you decide to apply your Terraform template in IBM Cloud by clicking Apply plan from the workspace details page or running the IBM cloud schematics apply command, you are charged for the IBM Cloud resources that are described in your Terraform template.",
+      "timestamp": 1724857754,
+      "contexts": [
+        {
+          "document_id": "ibmcld_12170-1498-3591",
+          "text": "\nVPC VPC provides you the security of a private cloud environment with the dynamic scalability of a public cloud. \n zones You must have one VPC subnet for each zone in your cluster. The available zones depend on the metro location that you created in the VPC. \n subnet VPC subnets is used to provide private IP addresses for your worker nodes and load balancer services in your cluster. You cannot change the number of IP addresses that a VPC subnet has. \n master node Controls and manages a set of worker nodes (workloads runtime) and resembles a cluster in Kubernetes. \n cluster A cluster contains a control plane and one or more compute machines, or nodes. Nodes run the applications and workloads. \n worker node Add the zone to your worker pool. When you add a zone to a worker pool, the worker nodes that are defined in your worker pool are provisioned in the zone and considered for future workload scheduling. \n\n\n\nYou can add worker nodes and pool to your VPC cluster by using a ibm_container_vpc_worker_pool provider resource.\n\nThe costs are incurred based on your resource usage. For more information about the VPC pricing, see [VPC pricing](https://www.ibm.com/cloud/virtual-servers/pricing).\n\n\n\n\n\n Objectives \n\nIn this tutorial, you will do the following:\n\n\n\n* Learn how to use an IBM-provided Terraform template to create a Virtual Private Cloud (VPC) and provision an IBM Cloud Kubernetes Service cluster that runs on Virtual Servers for VPC.\n* Create an IBM Cloud Object Storage service instance and bind the service to your IBM Cloud Kubernetes Service cluster.\n* Explore how to create an IBM Cloud Schematics Workspace.\n* Create a Terraform execution plan and apply your Terraform template in IBM Cloud.\n* Review the IBM Cloud\u00ae resources that you create.\n\n\n\n\n\n\n\n Time required \n\n1 hour\n\n\n\n\n\n Audience \n\nThis tutorial is intended for developers and system administrators who want to learn how to use Terraform templates to create and manage cloud infrastructure services by using IBM Cloud Schematics.\n\n\n\n\n\n Prerequisites \n\nBefore you begin, complete the following prerequisites.",
+          "url": "https://cloud.ibm.com/docs/schematics?topic=schematics-provisioning-terraform-template",
+          "score": 40.08086,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724859641
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do I build my client application using dialogue nodes?\n|assistant|: To build your client application using dialog nodes, you need to follow these steps: create a simple conversation with two intents; the dialog uses intents to identify the purpose of the user's input regardless of the precise wording used, and then responds in the way you specify. The client application sends a message containing user input and the user input triggers a dialog node.\n|user|: what are worker nodes?\n|assistant|: Worker nodes carry the deployments and services that make up your app. Virtual machines that your cluster manages are instances that are called worker nodes. Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. \n|user|: what are VPC clusters?\n|assistant|: With IBM Cloud Kubernetes Service, you can create a standard cluster in a Virtual Private Cloud (VPC). A VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.\n|user|: How to create a cluster.\n|assistant|: To create a cluster, this section steps through the build tasks needed to create the Windows Server Failover Cluster (WSFC) and the availability group. This guide assumes that you: Have at least two servers running Windows 2019 and SQL Server 2019 to cluster. Have a bastion host with external Internet access. Have deployed active directory.                                                                          Or you can:                                                                                      Try out Automating cluster creation with IBM Cloud Schematics templates.  \n|user|: How much do the IBM Cloud Schematics templates cost?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_06007-21661-23758",
+          "text": "\nIf your app workload requires other IBM Cloud services, your worker nodes can automatically, securely communicate with IBM Cloud services that support private cloud service endpoints over the private VPC network.\n\n\n\n\n\n External communication to apps that run on worker nodes \n\nAfter you test your app, you can expose it to the internet by creating a public Kubernetes LoadBalancer service or using the default public Ingress application load balancers (ALBs). The VPC load balancer that is automatically created in your VPC outside of your cluster when you use one of these services routes traffic to your app. You can improve the security of your cluster and control public network traffic to your apps by replacing the kube-<vpc-id> security group, which is automatically applied to the VPC ALB, with a security group that you create and manage. When applied to ALBs, security groups control which inbound traffic is permitted to your cluster through the ALB.\n\nReady to get started with a cluster for this scenario? After you plan your [high availability](https://cloud.ibm.com/docs/containers?topic=containers-ha_clusters) and [worker node](https://cloud.ibm.com/docs/containers?topic=containers-planning_worker_nodes) setups, see [Creating VPC clusters](https://cloud.ibm.com/docs/containers?topic=containers-clusters).\n\n\n\n\n\n\n\n Scenario: Run internet-facing app workloads in a VPC cluster with limited public egress \n\nIn this scenario, you run workloads in a VPC cluster that are accessible to requests from the Internet. Public access is controlled so that end users can access your apps while unwanted public requests to your apps are denied. However, you might need to also provide limited public egress from your worker nodes to a public endpoint, and want to ensure that this public egress is controlled and isolated in your cluster. For example, you might need your app pods to access an IBM Cloud service that does not support private cloud service endpoints, and must be accessed over the public network.\n\nZoom\n\n![Network setup for a cluster that allows limited, secure public access.]",
+          "url": "https://cloud.ibm.com/docs/containers?topic=containers-plan_vpc_basics",
+          "score": 39.7617,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724859674
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do I build my client application using dialogue nodes?\n|assistant|: To build your client application using dialog nodes, you need to follow these steps: create a simple conversation with two intents; the dialog uses intents to identify the purpose of the user's input regardless of the precise wording used, and then responds in the way you specify. The client application sends a message containing user input and the user input triggers a dialog node.\n|user|: what are worker nodes?\n|assistant|: Worker nodes carry the deployments and services that make up your app. Virtual machines that your cluster manages are instances that are called worker nodes. Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. \n|user|: what are VPC clusters?\n|assistant|: With IBM Cloud Kubernetes Service, you can create a standard cluster in a Virtual Private Cloud (VPC). A VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.\n|user|: How to create a cluster.\n|assistant|: To create a cluster, this section steps through the build tasks needed to create the Windows Server Failover Cluster (WSFC) and the availability group. This guide assumes that you: Have at least two servers running Windows 2019 and SQL Server 2019 to cluster. Have a bastion host with external Internet access. Have deployed active directory.                                                                          Or you can:                                                                                      Try out Automating cluster creation with IBM Cloud Schematics templates.  \n|user|: How much do the IBM Cloud Schematics templates cost?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_06063-18145-20200",
+          "text": "\n* VPC clusters: Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. You can't access your worker nodes by using the VPC dashboard. However, you can manage your worker nodes by using the IBM Cloud Kubernetes Service console, CLI, or API. The virtual machines that make up your worker nodes are dedicated to you and you are responsible to request timely updates so that your worker node OS and IBM Cloud Kubernetes Service components apply the latest security updates and patches.\n\n\n\nFor more information, see [Your responsibilities by using IBM Cloud Kubernetes Service](https://cloud.ibm.com/docs/containers?topic=containers-responsibilities_iks).\n\nUse the ibmcloud ks worker update[command](https://cloud.ibm.com/docs/containers?topic=containers-kubernetes-service-clics_worker_update) regularly (such as monthly) to deploy updates and security patches to the operating system and to update the Kubernetes version that your worker nodes run. When updates are available, you are notified when you view information about the master and worker nodes in the IBM Cloud console or CLI, such as with the ibmcloud ks clusters ls or ibmcloud ks workers ls --cluster <cluster_name> commands. Worker node updates are provided by IBM as a full worker node image that includes the latest security patches. To apply the updates, the worker node must be reimaged and reloaded with the new image. Keys for the root user are automatically rotated when the worker node is reloaded.\n\n\n\n\n\n How does my worker node setup look? \n\nThe following image shows the components that are set up for every worker node to protect your worker node from malicious attacks.\n\nThe image does not include components that ensure secure end-to-end communication to and from the worker node. For more information, see [network security](https://cloud.ibm.com/docs/containers?topic=containers-securitynetwork).\n\nZoom\n\n![Worker node setup in IBM Cloud Kubernetes Service excluding network security.]",
+          "url": "https://cloud.ibm.com/docs/containers?topic=containers-security",
+          "score": 39.604954,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724859825
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do I build my client application using dialogue nodes?\n|assistant|: To build your client application using dialog nodes, you need to follow these steps: create a simple conversation with two intents; the dialog uses intents to identify the purpose of the user's input regardless of the precise wording used, and then responds in the way you specify. The client application sends a message containing user input and the user input triggers a dialog node.\n|user|: what are worker nodes?\n|assistant|: Worker nodes carry the deployments and services that make up your app. Virtual machines that your cluster manages are instances that are called worker nodes. Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. \n|user|: what are VPC clusters?\n|assistant|: With IBM Cloud Kubernetes Service, you can create a standard cluster in a Virtual Private Cloud (VPC). A VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.\n|user|: How to create a cluster.\n|assistant|: To create a cluster, this section steps through the build tasks needed to create the Windows Server Failover Cluster (WSFC) and the availability group. This guide assumes that you: Have at least two servers running Windows 2019 and SQL Server 2019 to cluster. Have a bastion host with external Internet access. Have deployed active directory.                                                                          Or you can:                                                                                      Try out Automating cluster creation with IBM Cloud Schematics templates.  \n|user|: How much do the IBM Cloud Schematics templates cost?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_12098-7-1814",
+          "text": "\nSoftware deployment in IBM Cloud Schematics \n\nTry out one of the IBM\u00ae provided software templates to quickly spin up a classic Virtual Server Instance (VSI), and automatically configure the instance to connect to an IBM Cloud\u00ae Databases for PostgreSQL instance.\n\nWith IBM Cloud Schematics, you can choose from a wide variety of [software and infrastructure templates](https://cloud.ibm.com/catalogsoftware) that you can use to set up IBM Cloud services, and to install IBM and Third party software. The templates are applied by using the built-in Terraform, Ansible, Helm, CloudPak, and Operator capabilities in Schematics.\n\nAs part of this getting started tutorial, you create a Schematics Workspaces that points to the [VSI database](https://cloud.ibm.com/catalogabout) template. Then, you run this template and watch Schematics provision your VSI and your IBM Cloud Databases for PostgreSQL instance. IBM Cloud Databases for PostgreSQL is a fully managed database offering in IBM Cloud that supports storing of non-relational and relational data types. For more information about this offering, see [What is PostgreSQL?](https://www.ibm.com/cloud/databases-for-postgresql).\n\nThis getting started tutorial incurs costs. You must have an [IBM Cloud Pay-As-You-Go or Subscription](https://cloud.ibm.com/registration) account to proceed. Make sure that you review pricing information for [classic VSIs](https://cloud.ibm.com/gen1/infrastructure/provision/vs) and [PostgreSQL](https://cloud.ibm.com/databases/databases-for-postgresql/create).\n\n\n\n Before you begin \n\nBefore you can use this template, you must complete the following tasks.\n\n\n\n* Make sure that you have the permissions to [create classic virtual servers](https://cloud.ibm.com/docs/virtual-servers?topic=virtual-servers-managing-device-access).",
+          "url": "https://cloud.ibm.com/docs/schematics?topic=schematics-get-started-software",
+          "score": 16.374655,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724860209
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "How much do the IBM Cloud Schematics templates cost?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16727-623510-625767",
+          "text": "\nIBM Cloud Schematics provides powerful tools to automate your cloud infrastructure provisioning and management process, the configuration and operation of your cloud resources, and the deployment of your app workloads.\n\nTo do so, Schematics uses open source projects, such as Terraform, Ansible, Red Hat OpenShift, Operators, and Helm, and delivers these capabilities to you as a managed service. Rather than installing each open source project on your system, and learn the API or CLI. You can declare the tasks that you want to run in IBM Cloud and watch Schematics run these tasks for you.\n\nFor more information about how Schematics Works, see [About IBM Cloud Schematics](https://cloud.ibm.com/docs/schematics?topic=schematics-learn-about-schematics).\n* What is Infrastructure as Code?\n\nInfrastructure as Code (IaC) helps you codify your cloud environment so that you can automate the provisioning and management of your resources in the cloud. Rather than manually provisioning and configuring infrastructure resources or by using scripts to adjust your cloud environment, you use a high-level scripting language to specify your resource and its configuration. Then, you use tools like Terraform to provision the resource in the cloud by using its API. Your infrastructure code is treated the same way as your app code so that you can apply DevOps core practices such as version control, testing, and continuous monitoring.\n* What am I charged for when I use Schematics?\n\nIBM Cloud Schematics Workspaces are provided to you at no cost. However, when you decide to apply your Terraform template in IBM Cloud by clicking Apply plan from the workspace details page or running the ibmcloud schematics apply command, you are charged for the IBM Cloud resources that are described in your Terraform template. Review available service plans and pricing information for each resource that you are about to create. Some services come with a limit per IBM Cloud account. If you are about to reach the service limit for your account, the resource is not provisioned until you increase the service quota, or remove existing services first.\n\nThe Schematics ibmcloud terraform command usage displays warning and deprecation message as Alias Terraform are deprecated.",
+          "url": "https://cloud.ibm.com/docs?tab=faqs",
+          "score": 16.012836,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724860622
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "How much do the IBM Cloud Schematics templates cost?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_07578-623552-625809",
+          "text": "\nIBM Cloud Schematics provides powerful tools to automate your cloud infrastructure provisioning and management process, the configuration and operation of your cloud resources, and the deployment of your app workloads.\n\nTo do so, Schematics uses open source projects, such as Terraform, Ansible, Red Hat OpenShift, Operators, and Helm, and delivers these capabilities to you as a managed service. Rather than installing each open source project on your system, and learn the API or CLI. You can declare the tasks that you want to run in IBM Cloud and watch Schematics run these tasks for you.\n\nFor more information about how Schematics Works, see [About IBM Cloud Schematics](https://cloud.ibm.com/docs/schematics?topic=schematics-learn-about-schematics).\n* What is Infrastructure as Code?\n\nInfrastructure as Code (IaC) helps you codify your cloud environment so that you can automate the provisioning and management of your resources in the cloud. Rather than manually provisioning and configuring infrastructure resources or by using scripts to adjust your cloud environment, you use a high-level scripting language to specify your resource and its configuration. Then, you use tools like Terraform to provision the resource in the cloud by using its API. Your infrastructure code is treated the same way as your app code so that you can apply DevOps core practices such as version control, testing, and continuous monitoring.\n* What am I charged for when I use Schematics?\n\nIBM Cloud Schematics Workspaces are provided to you at no cost. However, when you decide to apply your Terraform template in IBM Cloud by clicking Apply plan from the workspace details page or running the ibmcloud schematics apply command, you are charged for the IBM Cloud resources that are described in your Terraform template. Review available service plans and pricing information for each resource that you are about to create. Some services come with a limit per IBM Cloud account. If you are about to reach the service limit for your account, the resource is not provisioned until you increase the service quota, or remove existing services first.\n\nThe Schematics ibmcloud terraform command usage displays warning and deprecation message as Alias Terraform are deprecated.",
+          "url": "https://cloud.ibm.com/docs/faqs",
+          "score": 16.012836,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724860615
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "How much do the IBM Cloud Schematics templates cost?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The costs for using IBM Cloud Schematics templates are based on your resource usage. For detailed pricing information, please refer to the VPC pricing page on the IBM Cloud website."
+    },
+    {
+      "speaker": "user",
+      "text": "And what is the charge for VPC?",
+      "timestamp": 1724861514,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Pay for only what you use, no minimum VPC hourly package is required, which makes it very inexpensive to get started.  IBM Blockchain Platform introduces a new hourly pricing model that is based on virtual processor core (VPC) allocation. This simplified model is based on the amount of CPU (or VPC) that your IBM Blockchain Platform nodes are allocated on an hourly basis, at a flat rate of $0.29 USD/VPC-hour.",
+      "timestamp": 1724861525,
+      "contexts": [
+        {
+          "document_id": "ibmcld_12170-1498-3591",
+          "text": "\nVPC VPC provides you the security of a private cloud environment with the dynamic scalability of a public cloud. \n zones You must have one VPC subnet for each zone in your cluster. The available zones depend on the metro location that you created in the VPC. \n subnet VPC subnets is used to provide private IP addresses for your worker nodes and load balancer services in your cluster. You cannot change the number of IP addresses that a VPC subnet has. \n master node Controls and manages a set of worker nodes (workloads runtime) and resembles a cluster in Kubernetes. \n cluster A cluster contains a control plane and one or more compute machines, or nodes. Nodes run the applications and workloads. \n worker node Add the zone to your worker pool. When you add a zone to a worker pool, the worker nodes that are defined in your worker pool are provisioned in the zone and considered for future workload scheduling. \n\n\n\nYou can add worker nodes and pool to your VPC cluster by using a ibm_container_vpc_worker_pool provider resource.\n\nThe costs are incurred based on your resource usage. For more information about the VPC pricing, see [VPC pricing](https://www.ibm.com/cloud/virtual-servers/pricing).\n\n\n\n\n\n Objectives \n\nIn this tutorial, you will do the following:\n\n\n\n* Learn how to use an IBM-provided Terraform template to create a Virtual Private Cloud (VPC) and provision an IBM Cloud Kubernetes Service cluster that runs on Virtual Servers for VPC.\n* Create an IBM Cloud Object Storage service instance and bind the service to your IBM Cloud Kubernetes Service cluster.\n* Explore how to create an IBM Cloud Schematics Workspace.\n* Create a Terraform execution plan and apply your Terraform template in IBM Cloud.\n* Review the IBM Cloud\u00ae resources that you create.\n\n\n\n\n\n\n\n Time required \n\n1 hour\n\n\n\n\n\n Audience \n\nThis tutorial is intended for developers and system administrators who want to learn how to use Terraform templates to create and manage cloud infrastructure services by using IBM Cloud Schematics.\n\n\n\n\n\n Prerequisites \n\nBefore you begin, complete the following prerequisites.",
+          "url": "https://cloud.ibm.com/docs/schematics?topic=schematics-provisioning-terraform-template",
+          "score": 45.50136,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724861584
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do I build my client application using dialogue nodes?\n|assistant|: To build your client application using dialog nodes, you need to follow these steps: create a simple conversation with two intents; the dialog uses intents to identify the purpose of the user's input regardless of the precise wording used, and then responds in the way you specify. The client application sends a message containing user input and the user input triggers a dialog node.\n|user|: what are worker nodes?\n|assistant|: Worker nodes carry the deployments and services that make up your app. Virtual machines that your cluster manages are instances that are called worker nodes. Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. \n|user|: what are VPC clusters?\n|assistant|: With IBM Cloud Kubernetes Service, you can create a standard cluster in a Virtual Private Cloud (VPC). A VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.\n|user|: How to create a cluster.\n|assistant|: To create a cluster, this section steps through the build tasks needed to create the Windows Server Failover Cluster (WSFC) and the availability group. This guide assumes that you: Have at least two servers running Windows 2019 and SQL Server 2019 to cluster. Have a bastion host with external Internet access. Have deployed active directory.                                                                          Or you can:                                                                                      Try out Automating cluster creation with IBM Cloud Schematics templates.  \n|user|: How much do the IBM Cloud Schematics templates cost?\n|assistant|: This getting started tutorial incurs costs. You must have an IBM Cloud Pay-As-You-Go or Subscription account to proceed. IBM Cloud Schematics Workspaces are provided to you at no cost. However, when you decide to apply your Terraform template in IBM Cloud by clicking Apply plan from the workspace details page or running the IBM cloud schematics apply command, you are charged for the IBM Cloud resources that are described in your Terraform template.\n|user|: And what is the charge for VPC?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_10577-1371-3233",
+          "text": "\nFor more details, review the [workspace in IBM Cloud Schematics](https://cloud.ibm.com/schematics/workspaces) if you created the cluster from the UI. Or, if you created the cluster from the CLI, review the [IBM Cloud Provider Plug-in for Terraform template](https://github.com/terraform-ibm-modules/terraform-ibm-cluster/tree/master/examples/secure-roks-cluster).\n\nThe following resources are provisioned by default, but you can customize some resources, for example worker node flavor.\n\n\n\n* 1 Virtual Private Cloud (VPC) instance with the following details:\n\n\n\n* 3 subnets, 1 per zone.\n* 1 security group with pre-configured rules.\n\n\n\n* 1 Red Hat OpenShift on IBM Cloud cluster with the following features:\n\n\n\n* 9 worker nodes of flavor type bx2.16x64 with 16 vCPUs and 64 GB of memory that are evenly spread across the 3 zones in your VPC.\n* 1 default worker pool with 3 worker nodes per zone across 3 zones.\n\n\n\n* 1 IBM Cloud Log Analysis instance to enable logging from the cluster.\n* 1 IBM Cloud Activity Tracker instance to enable audit logs from the cluster, such as when a user creates a call against the Red Hat OpenShift on IBM Cloud API.\n* 1 IBM Cloud Monitoring instance to enable metrics such as node usage from the cluster.\n* 1 IBM Key Protect instance and customer root key (CRK) to encrypt the cluster master, including Kubernetes secrets in the cluster.\n* 1 IBM Cloud Object Storage instance and bucket to back up certain [cluster data](https://cloud.ibm.com/docs/containers?topic=containers-service-archibm-data). You can optionally select your own instance.\n\n\n\n\n\n\n\n Creating a secure cluster by using a template from the UI \n\nWith the secure cluster template, you can create a cluster from the UI with IBM Cloud Schematics that already includes certain security integrations such as encryption, logging, and monitoring enabled by default.\n\n\n\n1.",
+          "url": "https://cloud.ibm.com/docs/openshift?topic=openshift-templates",
+          "score": 44.776897,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724862285
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do I build my client application using dialogue nodes?\n|assistant|: To build your client application using dialog nodes, you need to follow these steps: create a simple conversation with two intents; the dialog uses intents to identify the purpose of the user's input regardless of the precise wording used, and then responds in the way you specify. The client application sends a message containing user input and the user input triggers a dialog node.\n|user|: what are worker nodes?\n|assistant|: Worker nodes carry the deployments and services that make up your app. Virtual machines that your cluster manages are instances that are called worker nodes. Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. \n|user|: what are VPC clusters?\n|assistant|: With IBM Cloud Kubernetes Service, you can create a standard cluster in a Virtual Private Cloud (VPC). A VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.\n|user|: How to create a cluster.\n|assistant|: To create a cluster, this section steps through the build tasks needed to create the Windows Server Failover Cluster (WSFC) and the availability group. This guide assumes that you: Have at least two servers running Windows 2019 and SQL Server 2019 to cluster. Have a bastion host with external Internet access. Have deployed active directory.                                                                          Or you can:                                                                                      Try out Automating cluster creation with IBM Cloud Schematics templates.  \n|user|: How much do the IBM Cloud Schematics templates cost?\n|assistant|: This getting started tutorial incurs costs. You must have an IBM Cloud Pay-As-You-Go or Subscription account to proceed. IBM Cloud Schematics Workspaces are provided to you at no cost. However, when you decide to apply your Terraform template in IBM Cloud by clicking Apply plan from the workspace details page or running the IBM cloud schematics apply command, you are charged for the IBM Cloud resources that are described in your Terraform template.\n|user|: And what is the charge for VPC?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_12170-7-1951",
+          "text": "\nCreating an IBM Cloud Kubernetes Service cluster on VPC infrastructure \n\nUse one of the IBM\u00ae provided templates to create an IBM Cloud\u00ae Kubernetes Service cluster in a Virtual Private Cloud (VPC). Then, you bind the cluster to an IBM Cloud\u00ae Object Storage service instance.\n\n\n\n Description \n\nIn this tutorial, you use the IBM\u00ae provided [vpc-gen2-cluster Terraform template](https://github.com/IBM-Cloud/terraform-provider-ibm/tree/master/examples/ibm-cluster/vpc-gen2-cluster) to create a Virtual Private Cloud (VPC) and to provision an IBM Cloud Kubernetes Service cluster on Virtual Servers for VPC. Then, you add the service credentials of an IBM Cloud Object Storage service instance as a Kubernetes secret in your cluster. You can change the default values in this template to spread your cluster across multiple subnets and zones. However, the steps in this tutorial use the default values that are provided in the template.\n\nThe following image shows the cloud architecture components that you provision as part of this tutorial.\n\nZoom\n\n![Provisioning Terraform templates by using IBM Cloud Schematics](https://cloud.ibm.com/docs-content/v1/content/ba89e173287b28d1453d2a327d8a1f74ae2f1662/schematics/images/vpcgen2cluster.png)\n\nProvisioning Terraform templates by using IBM Cloud Schematics\n\n\n\nCloud architecture components\n\n Component Description \n\n Region Region increases the availability of cluster's master node and its nodes by replicating across multiple zones of a region. \n VPC VPC provides you the security of a private cloud environment with the dynamic scalability of a public cloud. \n zones You must have one VPC subnet for each zone in your cluster. The available zones depend on the metro location that you created in the VPC. \n subnet VPC subnets is used to provide private IP addresses for your worker nodes and load balancer services in your cluster. You cannot change the number of IP addresses that a VPC subnet has.",
+          "url": "https://cloud.ibm.com/docs/schematics?topic=schematics-provisioning-terraform-template",
+          "score": 42.82063,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724862331
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do I build my client application using dialogue nodes?\n|assistant|: To build your client application using dialog nodes, you need to follow these steps: create a simple conversation with two intents; the dialog uses intents to identify the purpose of the user's input regardless of the precise wording used, and then responds in the way you specify. The client application sends a message containing user input and the user input triggers a dialog node.\n|user|: what are worker nodes?\n|assistant|: Worker nodes carry the deployments and services that make up your app. Virtual machines that your cluster manages are instances that are called worker nodes. Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. \n|user|: what are VPC clusters?\n|assistant|: With IBM Cloud Kubernetes Service, you can create a standard cluster in a Virtual Private Cloud (VPC). A VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.\n|user|: How to create a cluster.\n|assistant|: To create a cluster, this section steps through the build tasks needed to create the Windows Server Failover Cluster (WSFC) and the availability group. This guide assumes that you: Have at least two servers running Windows 2019 and SQL Server 2019 to cluster. Have a bastion host with external Internet access. Have deployed active directory.                                                                          Or you can:                                                                                      Try out Automating cluster creation with IBM Cloud Schematics templates.  \n|user|: How much do the IBM Cloud Schematics templates cost?\n|assistant|: This getting started tutorial incurs costs. You must have an IBM Cloud Pay-As-You-Go or Subscription account to proceed. IBM Cloud Schematics Workspaces are provided to you at no cost. However, when you decide to apply your Terraform template in IBM Cloud by clicking Apply plan from the workspace details page or running the IBM cloud schematics apply command, you are charged for the IBM Cloud resources that are described in your Terraform template.\n|user|: And what is the charge for VPC?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_04031-1609-3779",
+          "text": "\nFor IBM Blockchain Platform cost estimation purposes, 1 VPC = 1 CPU = 1 vCPU = 1 Core. The term \"VPC\" is also used to refer to a type of infrastructure on IBM Cloud and is unrelated to this topic.\n\nFor a total cost estimate, remember that your blockchain network consists of an Kubernetes cluster on IBM Cloud that contains IBM Blockchain Platform components and uses storage of your choice. Your Kubernetes cluster on IBM Cloud and the storage that you choose incur separate charges. You will not be charged for the cluster that the Operational Tooling instance, also known as the console, is running on. See the [Architecture reference](https://cloud.ibm.com/docs/blockchain?topic=blockchain-ibp-console-overviewibp-console-overview-architecture) topic for an illustration. More details on how to calculate charges are described below.\n\n\n\n Benefits of the new pricing model \n\n\n\n* No membership fees: Freedom from membership fees means that you can invest directly in your blockchain components.\n* Estimation clarity: A simple hourly pricing model makes cost estimation clear and easy by using the cost estimator tool that is available in the IBM Cloud dashboard.\n* No minimum fee required: Pay for only what you use, no minimum VPC hourly package is required, which makes it very inexpensive to get started.\n* Scalability of compute: You have the option to scale your compute up during peak usage periods or down to a minute fraction of capacity for when the compute is not needed to minimize expense.\n\n\n\nIn summary, these features remove the complexity of accounting for membership limitations or purchasing compute ahead of your needs.\n\n\n\n\n\n Find out how to preview the platform free for 30 days \n\nYou can preview the IBM Blockchain Platform at no charge for 30 days when you link your IBM Blockchain Platform service instance to an IBM Cloud Kubernetes free cluster.\n\nLimitations of the free preview\n\n\n\n* Performance will be limited by throughput, storage, and functionality. Read more about the [limitations of free clusters](https://cloud.ibm.com/docs/containers?topic=containers-cs_ovcluster_types).\n* IBM Cloud will delete your Kubernetes cluster after 30 days.",
+          "url": "https://cloud.ibm.com/docs/blockchain?topic=blockchain-ibp-saas-pricing",
+          "score": 19.138262,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724863442
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "How much do VPC cost?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_04031-7-2093",
+          "text": "\nPricing for IBM Blockchain Platform for IBM Cloud \n\nATTENTION!! IBM Blockchain Platform SaaS Edition is being replaced by IBM Support for Hyperledger Fabric!! IBM Blockchain Platform SaaS Edition will no longer be supported after July 31, 2023. Customers have been directed to migrate their networks by July 31, 2023. After this date, IBM Blockchain Platform SaaS networks that are not migrated to IBM Support for Hyperledger Fabric will be at risk for potential security vulnerabilities. A migration tool is provided from your console, and the disruption to your network is minimal. See [Migrating to IBM Support for Hyperledger Fabric](https://cloud.ibm.com/docs/blockchain?topic=blockchain-migrating-to-hlf-support) for details.\n\nThis guide helps you understand the pricing model for IBM\u00ae Blockchain Platform for IBM Cloud, and how much you will pay when you develop and grow your blockchain network of peers, ordering nodes, and Certificate Authorities components, which are based on Hyperledger Fabric v2.2.10.\n\n\n\n Pricing model \n\nIBM Blockchain Platform introduces a new hourly pricing model that is based on virtual processor core (VPC) allocation. This simplified model is based on the amount of CPU (or VPC) that your IBM Blockchain Platform nodes are allocated on an hourly basis, at a flat rate of $0.29 USD/VPC-hour.\n\nA VPC is a unit of measurement that is used to determine the licensing cost of IBM products. It is based on the number of virtual cores (vCPUs) that are available to the product. A vCPU is a virtual core that is assigned to a virtual machine or a physical processor core. For IBM Blockchain Platform cost estimation purposes, 1 VPC = 1 CPU = 1 vCPU = 1 Core. The term \"VPC\" is also used to refer to a type of infrastructure on IBM Cloud and is unrelated to this topic.\n\nFor a total cost estimate, remember that your blockchain network consists of an Kubernetes cluster on IBM Cloud that contains IBM Blockchain Platform components and uses storage of your choice. Your Kubernetes cluster on IBM Cloud and the storage that you choose incur separate charges.",
+          "url": "https://cloud.ibm.com/docs/blockchain?topic=blockchain-ibp-saas-pricing",
+          "score": 18.227947,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724865379
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "How much do VPC cost?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The costs for Virtual Private Cloud (VPC) are based on your resource usage. For detailed pricing information, please refer to the VPC pricing page on the IBM Cloud website."
+    },
+    {
+      "speaker": "user",
+      "text": "Is storage included in the VPC price?",
+      "timestamp": 1724866352,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "No, storage is not included in the VPC price. Storage is a separate service and has its own pricing. Cost for Block Storage for VPC is calculated based on GB capacity that is stored per month. Some storage solutions, such as file and block storage offer hourly and monthly rates that you can choose from. A simple hourly pricing model makes cost estimation clear and easy by using the cost estimator tool that is available in the IBM Cloud dashboard. ",
+      "timestamp": 1724866358,
+      "contexts": [
+        {
+          "document_id": "ibmcld_12170-1498-3591",
+          "text": "\nVPC VPC provides you the security of a private cloud environment with the dynamic scalability of a public cloud. \n zones You must have one VPC subnet for each zone in your cluster. The available zones depend on the metro location that you created in the VPC. \n subnet VPC subnets is used to provide private IP addresses for your worker nodes and load balancer services in your cluster. You cannot change the number of IP addresses that a VPC subnet has. \n master node Controls and manages a set of worker nodes (workloads runtime) and resembles a cluster in Kubernetes. \n cluster A cluster contains a control plane and one or more compute machines, or nodes. Nodes run the applications and workloads. \n worker node Add the zone to your worker pool. When you add a zone to a worker pool, the worker nodes that are defined in your worker pool are provisioned in the zone and considered for future workload scheduling. \n\n\n\nYou can add worker nodes and pool to your VPC cluster by using a ibm_container_vpc_worker_pool provider resource.\n\nThe costs are incurred based on your resource usage. For more information about the VPC pricing, see [VPC pricing](https://www.ibm.com/cloud/virtual-servers/pricing).\n\n\n\n\n\n Objectives \n\nIn this tutorial, you will do the following:\n\n\n\n* Learn how to use an IBM-provided Terraform template to create a Virtual Private Cloud (VPC) and provision an IBM Cloud Kubernetes Service cluster that runs on Virtual Servers for VPC.\n* Create an IBM Cloud Object Storage service instance and bind the service to your IBM Cloud Kubernetes Service cluster.\n* Explore how to create an IBM Cloud Schematics Workspace.\n* Create a Terraform execution plan and apply your Terraform template in IBM Cloud.\n* Review the IBM Cloud\u00ae resources that you create.\n\n\n\n\n\n\n\n Time required \n\n1 hour\n\n\n\n\n\n Audience \n\nThis tutorial is intended for developers and system administrators who want to learn how to use Terraform templates to create and manage cloud infrastructure services by using IBM Cloud Schematics.\n\n\n\n\n\n Prerequisites \n\nBefore you begin, complete the following prerequisites.",
+          "url": "https://cloud.ibm.com/docs/schematics?topic=schematics-provisioning-terraform-template",
+          "score": 44.792973,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724866890
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do I build my client application using dialogue nodes?\n|assistant|: To build your client application using dialog nodes, you need to follow these steps: create a simple conversation with two intents; the dialog uses intents to identify the purpose of the user's input regardless of the precise wording used, and then responds in the way you specify. The client application sends a message containing user input and the user input triggers a dialog node.\n|user|: what are worker nodes?\n|assistant|: Worker nodes carry the deployments and services that make up your app. Virtual machines that your cluster manages are instances that are called worker nodes. Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. \n|user|: what are VPC clusters?\n|assistant|: With IBM Cloud Kubernetes Service, you can create a standard cluster in a Virtual Private Cloud (VPC). A VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.\n|user|: How to create a cluster.\n|assistant|: To create a cluster, this section steps through the build tasks needed to create the Windows Server Failover Cluster (WSFC) and the availability group. This guide assumes that you: Have at least two servers running Windows 2019 and SQL Server 2019 to cluster. Have a bastion host with external Internet access. Have deployed active directory.                                                                          Or you can:                                                                                      Try out Automating cluster creation with IBM Cloud Schematics templates.  \n|user|: How much do the IBM Cloud Schematics templates cost?\n|assistant|: This getting started tutorial incurs costs. You must have an IBM Cloud Pay-As-You-Go or Subscription account to proceed. IBM Cloud Schematics Workspaces are provided to you at no cost. However, when you decide to apply your Terraform template in IBM Cloud by clicking Apply plan from the workspace details page or running the IBM cloud schematics apply command, you are charged for the IBM Cloud resources that are described in your Terraform template.\n|user|: And what is the charge for VPC?\n|assistant|: Pay for only what you use, no minimum VPC hourly package is required, which makes it very inexpensive to get started.  IBM Blockchain Platform introduces a new hourly pricing model that is based on virtual processor core (VPC) allocation. This simplified model is based on the amount of CPU (or VPC) that your IBM Blockchain Platform nodes are allocated on an hourly basis, at a flat rate of $0.29 USD/VPC-hour.\n|user|: Is storage included in the VPC price?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_10577-1371-3233",
+          "text": "\nFor more details, review the [workspace in IBM Cloud Schematics](https://cloud.ibm.com/schematics/workspaces) if you created the cluster from the UI. Or, if you created the cluster from the CLI, review the [IBM Cloud Provider Plug-in for Terraform template](https://github.com/terraform-ibm-modules/terraform-ibm-cluster/tree/master/examples/secure-roks-cluster).\n\nThe following resources are provisioned by default, but you can customize some resources, for example worker node flavor.\n\n\n\n* 1 Virtual Private Cloud (VPC) instance with the following details:\n\n\n\n* 3 subnets, 1 per zone.\n* 1 security group with pre-configured rules.\n\n\n\n* 1 Red Hat OpenShift on IBM Cloud cluster with the following features:\n\n\n\n* 9 worker nodes of flavor type bx2.16x64 with 16 vCPUs and 64 GB of memory that are evenly spread across the 3 zones in your VPC.\n* 1 default worker pool with 3 worker nodes per zone across 3 zones.\n\n\n\n* 1 IBM Cloud Log Analysis instance to enable logging from the cluster.\n* 1 IBM Cloud Activity Tracker instance to enable audit logs from the cluster, such as when a user creates a call against the Red Hat OpenShift on IBM Cloud API.\n* 1 IBM Cloud Monitoring instance to enable metrics such as node usage from the cluster.\n* 1 IBM Key Protect instance and customer root key (CRK) to encrypt the cluster master, including Kubernetes secrets in the cluster.\n* 1 IBM Cloud Object Storage instance and bucket to back up certain [cluster data](https://cloud.ibm.com/docs/containers?topic=containers-service-archibm-data). You can optionally select your own instance.\n\n\n\n\n\n\n\n Creating a secure cluster by using a template from the UI \n\nWith the secure cluster template, you can create a cluster from the UI with IBM Cloud Schematics that already includes certain security integrations such as encryption, logging, and monitoring enabled by default.\n\n\n\n1.",
+          "url": "https://cloud.ibm.com/docs/openshift?topic=openshift-templates",
+          "score": 43.40217,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724866759
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do I build my client application using dialogue nodes?\n|assistant|: To build your client application using dialog nodes, you need to follow these steps: create a simple conversation with two intents; the dialog uses intents to identify the purpose of the user's input regardless of the precise wording used, and then responds in the way you specify. The client application sends a message containing user input and the user input triggers a dialog node.\n|user|: what are worker nodes?\n|assistant|: Worker nodes carry the deployments and services that make up your app. Virtual machines that your cluster manages are instances that are called worker nodes. Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. \n|user|: what are VPC clusters?\n|assistant|: With IBM Cloud Kubernetes Service, you can create a standard cluster in a Virtual Private Cloud (VPC). A VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.\n|user|: How to create a cluster.\n|assistant|: To create a cluster, this section steps through the build tasks needed to create the Windows Server Failover Cluster (WSFC) and the availability group. This guide assumes that you: Have at least two servers running Windows 2019 and SQL Server 2019 to cluster. Have a bastion host with external Internet access. Have deployed active directory.                                                                          Or you can:                                                                                      Try out Automating cluster creation with IBM Cloud Schematics templates.  \n|user|: How much do the IBM Cloud Schematics templates cost?\n|assistant|: This getting started tutorial incurs costs. You must have an IBM Cloud Pay-As-You-Go or Subscription account to proceed. IBM Cloud Schematics Workspaces are provided to you at no cost. However, when you decide to apply your Terraform template in IBM Cloud by clicking Apply plan from the workspace details page or running the IBM cloud schematics apply command, you are charged for the IBM Cloud resources that are described in your Terraform template.\n|user|: And what is the charge for VPC?\n|assistant|: Pay for only what you use, no minimum VPC hourly package is required, which makes it very inexpensive to get started.  IBM Blockchain Platform introduces a new hourly pricing model that is based on virtual processor core (VPC) allocation. This simplified model is based on the amount of CPU (or VPC) that your IBM Blockchain Platform nodes are allocated on an hourly basis, at a flat rate of $0.29 USD/VPC-hour.\n|user|: Is storage included in the VPC price?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_12170-7-1951",
+          "text": "\nCreating an IBM Cloud Kubernetes Service cluster on VPC infrastructure \n\nUse one of the IBM\u00ae provided templates to create an IBM Cloud\u00ae Kubernetes Service cluster in a Virtual Private Cloud (VPC). Then, you bind the cluster to an IBM Cloud\u00ae Object Storage service instance.\n\n\n\n Description \n\nIn this tutorial, you use the IBM\u00ae provided [vpc-gen2-cluster Terraform template](https://github.com/IBM-Cloud/terraform-provider-ibm/tree/master/examples/ibm-cluster/vpc-gen2-cluster) to create a Virtual Private Cloud (VPC) and to provision an IBM Cloud Kubernetes Service cluster on Virtual Servers for VPC. Then, you add the service credentials of an IBM Cloud Object Storage service instance as a Kubernetes secret in your cluster. You can change the default values in this template to spread your cluster across multiple subnets and zones. However, the steps in this tutorial use the default values that are provided in the template.\n\nThe following image shows the cloud architecture components that you provision as part of this tutorial.\n\nZoom\n\n![Provisioning Terraform templates by using IBM Cloud Schematics](https://cloud.ibm.com/docs-content/v1/content/ba89e173287b28d1453d2a327d8a1f74ae2f1662/schematics/images/vpcgen2cluster.png)\n\nProvisioning Terraform templates by using IBM Cloud Schematics\n\n\n\nCloud architecture components\n\n Component Description \n\n Region Region increases the availability of cluster's master node and its nodes by replicating across multiple zones of a region. \n VPC VPC provides you the security of a private cloud environment with the dynamic scalability of a public cloud. \n zones You must have one VPC subnet for each zone in your cluster. The available zones depend on the metro location that you created in the VPC. \n subnet VPC subnets is used to provide private IP addresses for your worker nodes and load balancer services in your cluster. You cannot change the number of IP addresses that a VPC subnet has.",
+          "url": "https://cloud.ibm.com/docs/schematics?topic=schematics-provisioning-terraform-template",
+          "score": 41.870335,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1724866856
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: How do I build my client application using dialogue nodes?\n|assistant|: To build your client application using dialog nodes, you need to follow these steps: create a simple conversation with two intents; the dialog uses intents to identify the purpose of the user's input regardless of the precise wording used, and then responds in the way you specify. The client application sends a message containing user input and the user input triggers a dialog node.\n|user|: what are worker nodes?\n|assistant|: Worker nodes carry the deployments and services that make up your app. Virtual machines that your cluster manages are instances that are called worker nodes. Worker nodes are provisioned in to an IBM Cloud account that is owned by IBM to enable monitoring of malicious activities and apply security updates. \n|user|: what are VPC clusters?\n|assistant|: With IBM Cloud Kubernetes Service, you can create a standard cluster in a Virtual Private Cloud (VPC). A VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.\n|user|: How to create a cluster.\n|assistant|: To create a cluster, this section steps through the build tasks needed to create the Windows Server Failover Cluster (WSFC) and the availability group. This guide assumes that you: Have at least two servers running Windows 2019 and SQL Server 2019 to cluster. Have a bastion host with external Internet access. Have deployed active directory.                                                                          Or you can:                                                                                      Try out Automating cluster creation with IBM Cloud Schematics templates.  \n|user|: How much do the IBM Cloud Schematics templates cost?\n|assistant|: This getting started tutorial incurs costs. You must have an IBM Cloud Pay-As-You-Go or Subscription account to proceed. IBM Cloud Schematics Workspaces are provided to you at no cost. However, when you decide to apply your Terraform template in IBM Cloud by clicking Apply plan from the workspace details page or running the IBM cloud schematics apply command, you are charged for the IBM Cloud resources that are described in your Terraform template.\n|user|: And what is the charge for VPC?\n|assistant|: Pay for only what you use, no minimum VPC hourly package is required, which makes it very inexpensive to get started.  IBM Blockchain Platform introduces a new hourly pricing model that is based on virtual processor core (VPC) allocation. This simplified model is based on the amount of CPU (or VPC) that your IBM Blockchain Platform nodes are allocated on an hourly basis, at a flat rate of $0.29 USD/VPC-hour.\n|user|: Is storage included in the VPC price?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_04031-1609-3779",
+          "text": "\nFor IBM Blockchain Platform cost estimation purposes, 1 VPC = 1 CPU = 1 vCPU = 1 Core. The term \"VPC\" is also used to refer to a type of infrastructure on IBM Cloud and is unrelated to this topic.\n\nFor a total cost estimate, remember that your blockchain network consists of an Kubernetes cluster on IBM Cloud that contains IBM Blockchain Platform components and uses storage of your choice. Your Kubernetes cluster on IBM Cloud and the storage that you choose incur separate charges. You will not be charged for the cluster that the Operational Tooling instance, also known as the console, is running on. See the [Architecture reference](https://cloud.ibm.com/docs/blockchain?topic=blockchain-ibp-console-overviewibp-console-overview-architecture) topic for an illustration. More details on how to calculate charges are described below.\n\n\n\n Benefits of the new pricing model \n\n\n\n* No membership fees: Freedom from membership fees means that you can invest directly in your blockchain components.\n* Estimation clarity: A simple hourly pricing model makes cost estimation clear and easy by using the cost estimator tool that is available in the IBM Cloud dashboard.\n* No minimum fee required: Pay for only what you use, no minimum VPC hourly package is required, which makes it very inexpensive to get started.\n* Scalability of compute: You have the option to scale your compute up during peak usage periods or down to a minute fraction of capacity for when the compute is not needed to minimize expense.\n\n\n\nIn summary, these features remove the complexity of accounting for membership limitations or purchasing compute ahead of your needs.\n\n\n\n\n\n Find out how to preview the platform free for 30 days \n\nYou can preview the IBM Blockchain Platform at no charge for 30 days when you link your IBM Blockchain Platform service instance to an IBM Cloud Kubernetes free cluster.\n\nLimitations of the free preview\n\n\n\n* Performance will be limited by throughput, storage, and functionality. Read more about the [limitations of free clusters](https://cloud.ibm.com/docs/containers?topic=containers-cs_ovcluster_types).\n* IBM Cloud will delete your Kubernetes cluster after 30 days.",
+          "url": "https://cloud.ibm.com/docs/blockchain?topic=blockchain-ibp-saas-pricing",
+          "score": 20.504559,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724867486
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Is storage included in VPC cost?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_05666-7536-9272",
+          "text": "\n* VPC clusters: A Load Balancer for VPC is automatically created in your VPC for your cluster. For cost information, see [Pricing for Load Balancer for VPC](https://cloud.ibm.com/vpc-ext/provision/vs).\n\n\n\n\n\n\n\n Storage \n\nWhen you provision storage, you can choose the storage type and storage class that is correct for your use case. Charges vary depending on the type of storage, the location, and the specs of the storage instance. Some storage solutions, such as file and block storage offer hourly and monthly rates that you can choose from.\n\nTo choose the correct storage solution, see [Planning highly available persistent storage](https://cloud.ibm.com/docs/containers?topic=containers-storage-plan). For more information, see:\n\n\n\n* [File Storage for Classic](https://www.ibm.com/products/file-storage)\n* [Block Storage for Classic](https://www.ibm.com/products/block-storage)\n* [File Storage for VPC](https://www.ibm.com/products/file-storage)\n* [Block Storage for VPC](https://www.ibm.com/products/block-storage)\n* [IBM Cloud Object Storage](https://www.ibm.com/cloud/object-storage)\n* [Portworx Enterprise pricing](https://cloud.ibm.com/catalog/services/portworx-enterprise)\n\n\n\n\n\n\n\n IBM Cloud services \n\nEach service that you integrate with your cluster has its own pricing model. Review each product documentation and use the IBM Cloud console to [estimate costs](https://cloud.ibm.com/docs/billing-usage?topic=billing-usage-costcost).\n\n\n\n\n\n Operators and other third-party integrations \n\nOperators and other [third-party integrations](https://cloud.ibm.com/docs/containers?topic=containers-supported_integrations) are a convenient way to add services to your cluster from community, third-party, your own, or other providers.",
+          "url": "https://cloud.ibm.com/docs/containers?topic=containers-costs",
+          "score": 19.420315,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724867492
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Is storage included in VPC cost?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16727-881995-883891",
+          "text": "\nYou can also [create stand-alone volumes](https://cloud.ibm.com/docs/vpc?topic=vpc-creating-block-storagecreate-standalone-vol) and later attach them to your instances.\n* How many instances can share a provisioned Block Storage for VPC volume?\n\n How many instances can share a provisioned Block Storage for VPC volume? \n\nA Block Storage for VPC volume can be attached to only one instance at a time. Instances cannot share a volume.\n* How many Block Storage for VPC secondary data volumes can be attached to an instance?\n\n How many Block Storage for VPC secondary data volumes can be attached to an instance? \n\nYou can create 12 Block Storage for VPC data volumes per instance, plus the boot volume.\n* How am I charged for usage?\n\n How am I charged for usage? \n\nCost for Block Storage for VPC is calculated based on GB capacity that is stored per month, unless the duration is less than one month. The volume exists on the account until you delete the volume or you reach the end of a billing cycle, whichever comes first.\n\nPricing is also affected when you [expand volume capacity](https://cloud.ibm.com/docs/vpc?topic=vpc-expanding-block-storage-volumes) or [adjust IOPS](https://cloud.ibm.com/docs/vpc?topic=vpc-adjusting-volume-iops) by specifying a different IOPS profile. For example, expanding volume capacity increases costs, and changing an IOPS profile from a 5-IOPS/GB tier to a 3-IOPS/GB tier decreases the monthly and hourly rate. Billing for an updated volume is automatically updated to add the prorated difference of the new price to the current billing cycle. The new full amount is then billed in the next billing cycle.\n\nPricing for Block Storage for VPC volumes is also set by region. For more information, see [Pricing](https://www.ibm.com/cloud/vpc/pricing).\n* Are there limits on the number of volumes I can create?\n\n Are there limits on the number of volumes I can create?",
+          "url": "https://cloud.ibm.com/docs?tab=faqs",
+          "score": 19.35722,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724867497
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Is storage included in VPC cost?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_07578-882118-884014",
+          "text": "\nYou can also [create stand-alone volumes](https://cloud.ibm.com/docs/vpc?topic=vpc-creating-block-storagecreate-standalone-vol) and later attach them to your instances.\n* How many instances can share a provisioned Block Storage for VPC volume?\n\n How many instances can share a provisioned Block Storage for VPC volume? \n\nA Block Storage for VPC volume can be attached to only one instance at a time. Instances cannot share a volume.\n* How many Block Storage for VPC secondary data volumes can be attached to an instance?\n\n How many Block Storage for VPC secondary data volumes can be attached to an instance? \n\nYou can create 12 Block Storage for VPC data volumes per instance, plus the boot volume.\n* How am I charged for usage?\n\n How am I charged for usage? \n\nCost for Block Storage for VPC is calculated based on GB capacity that is stored per month, unless the duration is less than one month. The volume exists on the account until you delete the volume or you reach the end of a billing cycle, whichever comes first.\n\nPricing is also affected when you [expand volume capacity](https://cloud.ibm.com/docs/vpc?topic=vpc-expanding-block-storage-volumes) or [adjust IOPS](https://cloud.ibm.com/docs/vpc?topic=vpc-adjusting-volume-iops) by specifying a different IOPS profile. For example, expanding volume capacity increases costs, and changing an IOPS profile from a 5-IOPS/GB tier to a 3-IOPS/GB tier decreases the monthly and hourly rate. Billing for an updated volume is automatically updated to add the prorated difference of the new price to the current billing cycle. The new full amount is then billed in the next billing cycle.\n\nPricing for Block Storage for VPC volumes is also set by region. For more information, see [Pricing](https://www.ibm.com/cloud/vpc/pricing).\n* Are there limits on the number of volumes I can create?\n\n Are there limits on the number of volumes I can create?",
+          "url": "https://cloud.ibm.com/docs/faqs",
+          "score": 19.35722,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1724867502
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Is storage included in VPC cost?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "No, storage is not included in the VPC price. Storage is a separate service and has its own pricing. You can find more information about VPC pricing, including storage costs, on the IBM Cloud website."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "d2b56e91-6d89-4df4-b89a-eef8d969850b",
+      "status": "created",
+      "timestamp": 1724868248
+    },
+    {
+      "author": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+      "status": "edited",
+      "timestamp": 1726578581
+    },
+    {
+      "author": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+      "status": "accepted",
+      "timestamp": 1726578722
+    }
+  ],
+  "editor": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+  "domain": "mt-rag-ibmcloud-elser-512-100-20240502",
+  "reviewer": "868c6e58-57c1-48ee-8c67-832dbedcac18"
+}

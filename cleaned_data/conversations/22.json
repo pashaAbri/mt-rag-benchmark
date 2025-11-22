@@ -1,0 +1,457 @@
+{
+  "author": "085be9e4-6fe3-4f6c-b438-ad7805e64241",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-fiqa-beir-elser-512-100-20240501",
+      "size": "61022"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "collections": {
+        "regex": "mt-rag*"
+      },
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "F-1 student investing in foreign markets",
+      "timestamp": 1726252534,
+      "enrichments": {
+        "Question Type": [
+          "Keyword"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "It is legal for an F-1 student to trade stocks and have an account with both US and non-US based brokerage firms. However, if you are considered a non-resident alien for tax purposes, which is typical for F-1 students, you would need to file Form 1040NR and account for any profit made on dividends/capital gain when doing your US taxes. It's important to note that a software package provided by your university for doing taxes might not be adequate for this, so you may need to seek additional resources.",
+      "timestamp": 1726252538,
+      "contexts": [
+        {
+          "document_id": "78632-0-574",
+          "text": "\nAs an F1 student, I have been investing (and occasionally buying and selling within few weeks) for several years, and I have never had problems (of course I report to IRS gains/losses every year at tax time). On the other hand, the officer in charge of foreign students at my school advised me to not run ads on a website and make a profit. So, it seems to me that investing is perfectly legit for a F1 student, as it's not considered a business activity. That's obviously my personal understanding, you may want to speak with an immigration attorney to be on the safe side.",
+          "score": 13.342667,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "yes",
+                "timestamp": 1726254190
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: F-1 student investing in foreign markets"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "308048-0-417",
+          "text": "\nIt is absolutely legal. While studying on a F-1 you would typically be considered a non-resident alien for tax purposes. You can trade stocks, just like any other foreigner having an account with a US- or non-US based brokerage firm. Make sure to account for profit made on dividends/capital gain when doing your US taxes. A software package provided by your university for doing taxes might not be adequate for this.",
+          "score": 12.26949,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "yes",
+                "timestamp": 1726254192
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: F-1 student investing in foreign markets"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "382295-0-281",
+          "text": "\nSince you were a nonresident alien student on F-1 visa then you will be considered engaged in a trade or business in the USA. You must file Form 1040NR.  Here is the detailed instruction by IRS - http://www.irs.gov/Individuals/International-Taxpayers/Taxation-of-Nonresident-Aliens",
+          "score": 10.668946,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "yes",
+                "timestamp": 1726254195
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: F-1 student investing in foreign markets"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "412226-0-1503",
+          "text": "\nThere are no legal reasons preventing you from trading as a F-1 visa holder, as noted in this Money.SE answer. Per this article, here are the things you need to set up an account: What do I need to have for doing Stock trading as F1 student ? Typically, most of the stock brokerage firms require Social Security   Number (SSN) for stock trading. The reason is that, for your capital   gains, it is required  by IRS for tax purposes. If you work on campus,   then you would already get SSN as part of the job application   process\u2026Typically, once you get the on-campus job or work   authorization using CPT or OPT , you use that offer letter and take   all your current documents like Passport, I-20, I-94 and apply for SSN   at Social Security Administration(SSA) Office, check full details at   SSA Website . SSN is typically used to report job wages by employer   for tax purposes or check eligibility of benefits to IRS/Government. I do NOT have SSN, Can I still do stock trading as F1 student ? While many stock brokerage firms require SSN, you are not out of luck,   if you do not have one\u2026you will have to apply for an ITIN Number (   Individual Taxpayer Identification Number )  and can use the same when   applying for stock brokerage account.  While some of the firms accept   ITIN number, it totally depends on the stock brokering firm and you   need to check with the one that you are interested in. The key thing is that you'll need either a SSN or ITIN to open a US-based brokerage account.",
+          "score": 13.312364,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "yes",
+                "timestamp": 1726254197
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "f1 student foreign market"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Based on the documents provided, it is legal for an F-1 student to invest in both US and non-US markets. However, if you are considered a non-resident alien for tax purposes, you will need to report any profits made on dividends or capital gains when doing your US taxes. To set up a stock trading account, you would typically need a Social Security Number (SSN) or an Individual Taxpayer Identification Number (ITIN). If you don't have a SSN, you can apply for an ITIN and use it when applying for a stock brokerage account. Please note that while some firms accept ITIN, it depends on the specific brokerage firm."
+    },
+    {
+      "speaker": "user",
+      "text": "Can I not use the 1040NR-EZ?",
+      "timestamp": 1726261318,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Forms 1040NR and 1040NR-EZ are both for non-resident aliens. However, I do not have information on when you can use one over the other.",
+      "timestamp": 1726261326,
+      "contexts": [
+        {
+          "document_id": "506755-0-1746",
+          "text": "\n\"1040 or 1040NR depends on whether you are a resident alien or nonresident alien -- 1040/1040A/1040EZ for resident aliens, and 1040NR/1040NR-EZ for nonresident aliens. Determining whether you are a resident is somewhat complex, and there is not enough information in your question to determine it. Publication 519 is the guide for taxes for aliens. (It hasn't been updated for 2014 yet, so mentally shift all the years in the publication up by one year when you read it.) Since you don't have a green card, whether you are a resident is determined by the Substantial Presence Test. The test says that if (the number of days you were in the U.S. in 2014) + 1/3 of (the number of days you were in the U.S. in 2013) + 1/6 of (the number of days you were in the U.S. in 2012) >= 183 days (half a year), then you are a resident alien for 2014. However, there are exceptions to the test. Days that you are an \"\"exempt individual\"\" are not counted toward the Substantial Presence Test. And \"\"exempt individuals\"\" include international students, trainees, teachers, etc. However, there are exceptions to the exceptions. Students are not \"\"exempt individuals\"\" for a year if they have been exempt individuals for any part of 5 previous calendar years. (Different exceptions apply for teachers and trainees.) So whether you are an \"\"exempt individual\"\" for one year inductively depends on whether you have been an \"\"exempt individual\"\" in previous years. Long story short, if before you came to the U.S. as an F-1 student, you haven't been in the U.S. on F-1 or J-1 status, then you will be a nonresident alien for the first 5 calendar years (calendar year = year with a number, not 365 days) that you've been on F-1. We will assume this is the case below.",
+          "score": 31.877209,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "yes",
+                "timestamp": 1726261675
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: F-1 student investing in foreign markets\n|assistant|: It is legal for an F-1 student to trade stocks and have an account with both US and non-US based brokerage firms. However, if you are considered a non-resident alien for tax purposes, which is typical for F-1 students, you would need to file Form 1040NR and account for any profit made on dividends/capital gain when doing your US taxes. It's important to note that a software package provided by your university for doing taxes might not be adequate for this, so you may need to seek additional resources.\n|user|: Can I not use the 1040NR-EZ?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Based on the information provided, it seems that you would not be able to use Form 1040NR-EZ. This form is for nonresident aliens who had no dependents, earned only certain types of income, and did not claim any deductions or credits other than the standard deduction. If you have profits from investing in foreign markets, you would likely need to itemize these deductions, which is not possible with Form 1040NR-EZ. Therefore, you would most likely need to use the regular Form 1040NR. However, I would recommend consulting the instructions for these forms or a tax professional to ensure you are filing correctly."
+    },
+    {
+      "speaker": "user",
+      "text": "OK",
+      "timestamp": 1726262350,
+      "enrichments": {
+        "Question Type": [
+          "Non-Question"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "CONVERSATIONAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Is there anything else I can help you with?",
+      "timestamp": 1726262354,
+      "contexts": [
+        {
+          "document_id": "308048-0-417",
+          "text": "\nIt is absolutely legal. While studying on a F-1 you would typically be considered a non-resident alien for tax purposes. You can trade stocks, just like any other foreigner having an account with a US- or non-US based brokerage firm. Make sure to account for profit made on dividends/capital gain when doing your US taxes. A software package provided by your university for doing taxes might not be adequate for this.",
+          "score": 46.627884,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "no",
+                "timestamp": 1726262374
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: F-1 student investing in foreign markets\n|assistant|: It is legal for an F-1 student to trade stocks and have an account with both US and non-US based brokerage firms. However, if you are considered a non-resident alien for tax purposes, which is typical for F-1 students, you would need to file Form 1040NR and account for any profit made on dividends/capital gain when doing your US taxes. It's important to note that a software package provided by your university for doing taxes might not be adequate for this, so you may need to seek additional resources.\n|user|: Can I not use the 1040NR-EZ?\n|assistant|: Forms 1040NR and 1040NR-EZ are both for non-resident aliens. However, I do not have information on when you can use one over the other.\n|user|: OK"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "382295-0-281",
+          "text": "\nSince you were a nonresident alien student on F-1 visa then you will be considered engaged in a trade or business in the USA. You must file Form 1040NR.  Here is the detailed instruction by IRS - http://www.irs.gov/Individuals/International-Taxpayers/Taxation-of-Nonresident-Aliens",
+          "score": 38.063904,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "no",
+                "timestamp": 1726262376
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: F-1 student investing in foreign markets\n|assistant|: It is legal for an F-1 student to trade stocks and have an account with both US and non-US based brokerage firms. However, if you are considered a non-resident alien for tax purposes, which is typical for F-1 students, you would need to file Form 1040NR and account for any profit made on dividends/capital gain when doing your US taxes. It's important to note that a software package provided by your university for doing taxes might not be adequate for this, so you may need to seek additional resources.\n|user|: Can I not use the 1040NR-EZ?\n|assistant|: Forms 1040NR and 1040NR-EZ are both for non-resident aliens. However, I do not have information on when you can use one over the other.\n|user|: OK"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "506755-0-1746",
+          "text": "\n\"1040 or 1040NR depends on whether you are a resident alien or nonresident alien -- 1040/1040A/1040EZ for resident aliens, and 1040NR/1040NR-EZ for nonresident aliens. Determining whether you are a resident is somewhat complex, and there is not enough information in your question to determine it. Publication 519 is the guide for taxes for aliens. (It hasn't been updated for 2014 yet, so mentally shift all the years in the publication up by one year when you read it.) Since you don't have a green card, whether you are a resident is determined by the Substantial Presence Test. The test says that if (the number of days you were in the U.S. in 2014) + 1/3 of (the number of days you were in the U.S. in 2013) + 1/6 of (the number of days you were in the U.S. in 2012) >= 183 days (half a year), then you are a resident alien for 2014. However, there are exceptions to the test. Days that you are an \"\"exempt individual\"\" are not counted toward the Substantial Presence Test. And \"\"exempt individuals\"\" include international students, trainees, teachers, etc. However, there are exceptions to the exceptions. Students are not \"\"exempt individuals\"\" for a year if they have been exempt individuals for any part of 5 previous calendar years. (Different exceptions apply for teachers and trainees.) So whether you are an \"\"exempt individual\"\" for one year inductively depends on whether you have been an \"\"exempt individual\"\" in previous years. Long story short, if before you came to the U.S. as an F-1 student, you haven't been in the U.S. on F-1 or J-1 status, then you will be a nonresident alien for the first 5 calendar years (calendar year = year with a number, not 365 days) that you've been on F-1. We will assume this is the case below.",
+          "score": 32.273167,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "no",
+                "timestamp": 1726262379
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: F-1 student investing in foreign markets\n|assistant|: It is legal for an F-1 student to trade stocks and have an account with both US and non-US based brokerage firms. However, if you are considered a non-resident alien for tax purposes, which is typical for F-1 students, you would need to file Form 1040NR and account for any profit made on dividends/capital gain when doing your US taxes. It's important to note that a software package provided by your university for doing taxes might not be adequate for this, so you may need to seek additional resources.\n|user|: Can I not use the 1040NR-EZ?\n|assistant|: Forms 1040NR and 1040NR-EZ are both for non-resident aliens. However, I do not have information on when you can use one over the other.\n|user|: OK"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "I do not have specific information on whether an F-1 student should use Form 1040NR or 1040NR-EZ for their tax filing. I recommend checking the instructions provided by the IRS or consulting with a tax professional to determine which form is appropriate for your situation."
+    },
+    {
+      "speaker": "user",
+      "text": "Are there any downsides of investing in foreign markets?",
+      "timestamp": 1726262461,
+      "enrichments": {
+        "Question Type": [
+          "Factoid",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, there are several downsides to investing in foreign markets. One of the main risks is exchange rate risk, which occurs when there is a currency movement that makes your investment worth less, regardless of the stock's performance. This can be mitigated using exchange rate swaps. Another risk is political risk, which includes potential issues such as a country deciding to seize foreign nationals' assets or applying sanctions that make it difficult to get your money back. Additionally, there may be a lack of understanding of foreign countries' laws, tax codes, and customs related to investments, and it can be challenging to stay informed about company-specific issues in foreign countries. As an individual investor, it may not be feasible to dedicate the necessary time to monitor international relations and the foreign country's news. Furthermore, foreign stocks may be thinly traded on your local stock market, making it harder to buy and sell, and you may be late to the game if there is a sudden change in the share price in the original country. Lastly, for foreign stocks, news and intraday price moves often happen while you're asleep, making it challenging to respond promptly.",
+      "timestamp": 1726262470,
+      "contexts": [
+        {
+          "document_id": "179073-0-2073",
+          "text": "\nForeign stocks have two extra sources of risk attached to them; exchange rate and political.  Exchange rate risk is obvious; if I buy a stock in a foreign currency and there is a currency movement that makes that investment worth less I lose money no matter what the stock does. This can be offset using exchange rate swaps. (This is ceteris paribus, of course; changes in exchange rate can give a comparative advantage to international and exporting companies that will improve the fundamentals and so increase the price of the stock relative to a local firm. The economics of the firms in particular are not explored in this answer as it would get too complicated and long if I did.) Political risk relates not only to the problems surrounding international politics such as a country deciding that foreign nationals may no longer own shares in their national industries or deciding to seize foreign nationals' assets as happens in some areas. Your home country may also decide to apply sanctions to the country in which you are invested thus making it impossible to get your money back even though the foreign country will allow you to redeem them or sell. Diplomatic relations and trade agreements tend to be difficult. There are further problems in lack of understanding of foreign countries' laws, tax code, customs etc. relating to investments and the necessity to find legal representation in a country you may never have visited if there are issues. There is also a hidden risk in that, as an individual investor, you are not likely to be reading the local financial news for that country regularly enough to spot company specific issues arising. By the time these issues get into international media its far too late as all of the local investors have sold out of their positions already. The risks are probably no different if you have the time to monitor international relations and the foreign country's news, and have FX swaps in place to counteract FX risk as the funds and investment banks do but as an individual investor the time required is not feasible.",
+          "score": 19.270533,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "yes",
+                "timestamp": 1726263513
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "foreign market exposure to currency risk"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "268022-0-247",
+          "text": "\nOne risk not mentioned is that foreign stock might be thinly traded on your local stock market, so you will find it harder to buy and sell, and you will be late to the game if there is some sudden change in the share price in the original country.",
+          "score": 21.518377,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "yes",
+                "timestamp": 1726263516
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "foreign market risks"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "418083-0-194",
+          "text": "\nIf you intend to be responsive to news and intraday price moves, for foreign stocks these will often happen while you're asleep (e.g. the Tokyo Stock Exchange opens at roughly midnight UK time).",
+          "score": 18.006344,
+          "feedback": {
+            "relevant": {
+              "085be9e4-6fe3-4f6c-b438-ad7805e64241": {
+                "value": "yes",
+                "timestamp": 1726263518
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "foreign market time"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "085be9e4-6fe3-4f6c-b438-ad7805e64241",
+      "status": "created",
+      "timestamp": 1726263611
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "rejected",
+      "timestamp": 1726834612
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "edited",
+      "timestamp": 1726835254
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "accepted",
+      "timestamp": 1726835632
+    }
+  ],
+  "editor": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+  "domain": "mt-rag-fiqa-beir-elser-512-100-20240501",
+  "reviewer": "f6ce971c-68d2-4c26-b1c0-477dd28a5181"
+}

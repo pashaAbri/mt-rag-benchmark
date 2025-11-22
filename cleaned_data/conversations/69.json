@@ -1,0 +1,1267 @@
+{
+  "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-govt-elser-512-100-20240611",
+      "size": "49607"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "collections": {
+        "regex": "mt-rag*"
+      },
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "If I include a scoring system, how should I total the points?",
+      "timestamp": 1725026046,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "You have the flexibility to determine how points are totaled in your game's scoring system. You could, for example, increase the score by one or more points for each sample tube collected. However, it does not provide specific details on how to total the points. Therefore, you can choose a method that best fits your game design.",
+      "timestamp": 1725026050,
+      "contexts": [
+        {
+          "document_id": "6e97640495151e68-4584-6689",
+          "text": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu\nMake the sample tube sprites reappear when players click the green flag to restart the game.\n\n+ Expand image\n\n4. Add a countdown timer NASA\u2019s missions to Mars and other destinations have a planned life expectancy. Some missions, including every Mars rover to date, have been extended and operated beyond their planned mission life expectancy, while others experience problems that shorten their mission. You can create a timer that counts down to the end of the mission and ends the game. Your timer should not be so short that the game is unplayable or unwinnable, but it should not be so long that there is no challenge to playing the game. As a bonus, you can create code to extend or shorten the planned mission time.\nTasks\n\nCreate a timer that counts from a set time down to zero. Hint: Create a Time variable that you can program to change. (See example image.)\nMake gameplay stop when the timer reaches zero.\nMake a \u201cMission Over\u201d message appear when the timer reaches zero.\nMake the timer start over when a player clicks the green flag to restart the game.\nBonus: Develop code that will increase or decrease the amount of time on the timer by one or two seconds at random.\n\n+ Expand image\n\n5. Add a scoring system Rover missions on Mars don\u2019t have a scoring system. But the science they collect is valuable, and some discoveries may be more exciting, interesting, or important than others. To determine how well players are doing while playing your game, you can develop a scoring system that includes points earned for collecting sample tubes. How points are totaled is up to you. You could also program your game to reduce point totals in certain scenarios (see Step 6, for example).\nTasks\n\nDevelop code to create a scoring system.\nIncrease the score by one or more points for each sample tube collected.\n\n+ Expand image\n\n6. Add hazards Space travel and other worlds are fraught with hazards. From steep slopes and deep sand to sharp rocks and high radiation, there are countless ways a mission can be delayed or end unexpectedly. Program your game to include hazards that players need to avoid.",
+          "title": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu",
+          "url": "https://www.jpl.nasa.gov/edu/learn/project/code-a-mars-sample-collection-video-game/",
+          "score": 7.352094,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725026526
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: If I include a scoring system, how should I total the points?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "c225494fb67307fa-322497-324517",
+          "text": "Bill Text - AB-132 Postsecondary education trailer bill.\n(E)\u00a0Each community college district shall be granted one point for each student who successfully completes nine or more career technical education units, based on the three-year rolling average for this metric calculated pursuant to clause (ii) of subparagraph (A).(F)\u00a0Each community college district shall be granted one point for each student who obtains a regional living wage within one year of community college completion, based on the three-year rolling average for this metric calculated pursuant to clause (ii) of\n\tsubparagraph (A).(2)\u00a0(A)\u00a0(i)\u00a0Each community college district shall also be granted additional points for an equity component of the student success allocation. The marginal funding per point for the equity component of the student success allocation revenue shall be as follows:(I)\u00a0For the 2018\u201319 fiscal year, one hundred eleven dollars ($111).(II)\u00a0For the 2019\u201320 fiscal year, one hundred forty-one dollars ($141).(III)\u00a0Commencing with the 2020\u201321 fiscal year, the rate specified in subclause (II) adjusted for changes in the cost-of-living adjustment and other base adjustments in subsequent annual budget acts.(ii)\u00a0(I)\u00a0Commencing with the 2019\u201320 fiscal year, to calculate the equity component of the student success allocation for each community college district, the chancellor\u2019s office shall calculate a three-year rolling average for each metric described in this paragraph. To compute the three-year average for each metric, the chancellor\u2019s office shall compute the sum of data for that metric from the prior year, the year prior to the prior year, and the year prior to the year prior to the prior year, and divide the sum by three.(II)\u00a0For the calculation of the three-year rolling average for the equity component of the student success allocation for the 2020\u201321 fiscal year, data from the 2018\u201319 fiscal year, for purposes of subparagraphs (B) and (C), may be used in place of data from the 2019\u201320 fiscal year.(B)\u00a0Each community college district shall receive points for a student",
+          "title": "Bill Text - AB-132 Postsecondary education trailer bill.",
+          "url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202120220AB132",
+          "score": 7.104416,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1725026529
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: If I include a scoring system, how should I total the points?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6e97640495151e68-6174-8304",
+          "text": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu\nYou could also program your game to reduce point totals in certain scenarios (see Step 6, for example).\nTasks\n\nDevelop code to create a scoring system.\nIncrease the score by one or more points for each sample tube collected.\n\n+ Expand image\n\n6. Add hazards Space travel and other worlds are fraught with hazards. From steep slopes and deep sand to sharp rocks and high radiation, there are countless ways a mission can be delayed or end unexpectedly. Program your game to include hazards that players need to avoid. Look for dark areas in your backdrop image. These shadowed regions are often steep slopes that a rover could get stuck on.\nTasks\n\nDevelop code that identifies hazardous locations on the backdrop image.\nAdd in undesirable outcomes that occur when the rover reaches hazardous locations. (For example, the game could stop, time might be taken away, points might go down, etc.)\nMake a \u201cHazard\u201d message appear when players encounter a hazard.\nMake some hazards hidden and some visible.\nBonus: Make a hidden hazard that changes location each time the game is restarted.\n\n+ Expand image\n\n7. Add landing code Every Mars rover has to first land on the Red Planet before it can start exploring. You can specify a landing site by creating scripts that place the rover at a certain location at the beginning of the game.Tasks Create code that puts the rover in a specific location at the beginning of the game. Bonus: Modify your landing code to make the rover land in a random location on the backdrop image or in a random location within a smaller section of the backdrop image.About the image: This animated image is a clip from a video taken by the Perseverance rover mission as the rover was being lowered onto the surface of Mars. \u203a Full video and caption\n\n8. Take it farther Now that you\u2019ve created your game, let others play it and suggest improvements! Also, check out this Mars rover game from NASA for more inspiration.\n \n\nRelated TagsCodingProgrammingMars RoverGamespace travelDesign Your Spacecraftsample returnperseveranceperseverencemars 2020Sample Handlingmars sample returnMarsMissionsRoversJump ToMaterials1.",
+          "title": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu",
+          "url": "https://www.jpl.nasa.gov/edu/learn/project/code-a-mars-sample-collection-video-game/",
+          "score": 7.0085797,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725026532
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: If I include a scoring system, how should I total the points?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The document suggests that you have the flexibility to determine how points are totaled in your game's scoring system. You could, for example, increase the score by one or more points for each sample tube collected. However, it does not provide specific details on how to total the points. Therefore, you can choose a method that best fits your game design."
+    },
+    {
+      "speaker": "user",
+      "text": "any sample setting?",
+      "timestamp": 1725026543,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I don't have a specific sample setting for the Mars Sample Collection Video Game. However, you are encouraged to carefully study the backdrop images and identify interesting areas to place sample tubes. You should develop a scoring system by creating code that increases the score by one or more points for each sample tube collected.",
+      "timestamp": 1725026549,
+      "contexts": [
+        {
+          "document_id": "6e97640495151e68-4584-6689",
+          "text": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu\nMake the sample tube sprites reappear when players click the green flag to restart the game.\n\n+ Expand image\n\n4. Add a countdown timer NASA\u2019s missions to Mars and other destinations have a planned life expectancy. Some missions, including every Mars rover to date, have been extended and operated beyond their planned mission life expectancy, while others experience problems that shorten their mission. You can create a timer that counts down to the end of the mission and ends the game. Your timer should not be so short that the game is unplayable or unwinnable, but it should not be so long that there is no challenge to playing the game. As a bonus, you can create code to extend or shorten the planned mission time.\nTasks\n\nCreate a timer that counts from a set time down to zero. Hint: Create a Time variable that you can program to change. (See example image.)\nMake gameplay stop when the timer reaches zero.\nMake a \u201cMission Over\u201d message appear when the timer reaches zero.\nMake the timer start over when a player clicks the green flag to restart the game.\nBonus: Develop code that will increase or decrease the amount of time on the timer by one or two seconds at random.\n\n+ Expand image\n\n5. Add a scoring system Rover missions on Mars don\u2019t have a scoring system. But the science they collect is valuable, and some discoveries may be more exciting, interesting, or important than others. To determine how well players are doing while playing your game, you can develop a scoring system that includes points earned for collecting sample tubes. How points are totaled is up to you. You could also program your game to reduce point totals in certain scenarios (see Step 6, for example).\nTasks\n\nDevelop code to create a scoring system.\nIncrease the score by one or more points for each sample tube collected.\n\n+ Expand image\n\n6. Add hazards Space travel and other worlds are fraught with hazards. From steep slopes and deep sand to sharp rocks and high radiation, there are countless ways a mission can be delayed or end unexpectedly. Program your game to include hazards that players need to avoid.",
+          "title": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu",
+          "url": "https://www.jpl.nasa.gov/edu/learn/project/code-a-mars-sample-collection-video-game/",
+          "score": 15.320932,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725028877
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: If I include a scoring system, how should I total the points?\n|assistant|: You have the flexibility to determine how points are totaled in your game's scoring system. You could, for example, increase the score by one or more points for each sample tube collected. However, it does not provide specific details on how to total the points. Therefore, you can choose a method that best fits your game design.\n|user|: any sample setting?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6e97640495151e68-6174-8304",
+          "text": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu\nYou could also program your game to reduce point totals in certain scenarios (see Step 6, for example).\nTasks\n\nDevelop code to create a scoring system.\nIncrease the score by one or more points for each sample tube collected.\n\n+ Expand image\n\n6. Add hazards Space travel and other worlds are fraught with hazards. From steep slopes and deep sand to sharp rocks and high radiation, there are countless ways a mission can be delayed or end unexpectedly. Program your game to include hazards that players need to avoid. Look for dark areas in your backdrop image. These shadowed regions are often steep slopes that a rover could get stuck on.\nTasks\n\nDevelop code that identifies hazardous locations on the backdrop image.\nAdd in undesirable outcomes that occur when the rover reaches hazardous locations. (For example, the game could stop, time might be taken away, points might go down, etc.)\nMake a \u201cHazard\u201d message appear when players encounter a hazard.\nMake some hazards hidden and some visible.\nBonus: Make a hidden hazard that changes location each time the game is restarted.\n\n+ Expand image\n\n7. Add landing code Every Mars rover has to first land on the Red Planet before it can start exploring. You can specify a landing site by creating scripts that place the rover at a certain location at the beginning of the game.Tasks Create code that puts the rover in a specific location at the beginning of the game. Bonus: Modify your landing code to make the rover land in a random location on the backdrop image or in a random location within a smaller section of the backdrop image.About the image: This animated image is a clip from a video taken by the Perseverance rover mission as the rover was being lowered onto the surface of Mars. \u203a Full video and caption\n\n8. Take it farther Now that you\u2019ve created your game, let others play it and suggest improvements! Also, check out this Mars rover game from NASA for more inspiration.\n \n\nRelated TagsCodingProgrammingMars RoverGamespace travelDesign Your Spacecraftsample returnperseveranceperseverencemars 2020Sample Handlingmars sample returnMarsMissionsRoversJump ToMaterials1.",
+          "title": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu",
+          "url": "https://www.jpl.nasa.gov/edu/learn/project/code-a-mars-sample-collection-video-game/",
+          "score": 12.788691,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725028872
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: If I include a scoring system, how should I total the points?\n|assistant|: You have the flexibility to determine how points are totaled in your game's scoring system. You could, for example, increase the score by one or more points for each sample tube collected. However, it does not provide specific details on how to total the points. Therefore, you can choose a method that best fits your game design.\n|user|: any sample setting?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6e97640495151e68-3007-5072",
+          "text": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu\nRovers on Mars aren\u2019t controlled with joysticks or keyboards. But in the future, astronauts in orbit around Mars or on the surface of the planet could use remote controls to drive rovers. Your game can use keys on the keyboard to make the rover drive.\nTasks\n\nMake the rover move up, down, left, and right on the screen using four different keys on the keyboard. Hint: See if a block in the Events section will help. (See example image.)\nSpecify how far the rover will move each time one of those keys is pressed. Select a distance that makes the rover movement appear smooth when the key is pressed and held. Hint: See if a block in the Motion section will help. (See example image.) \nMake the rover rotate so it points in the direction of travel.\nBonus: Make the rover move diagonally using keys other than the keys already assigned.\n\n+ Expand image\n\n3. Add sample tubes for collection Sample tubes contain valuable rock samples collected by the Perseverance Mars rover and left behind for a fetch rover to collect. You should add sample collection tubes to your game to provide destinations for your rover. By studying the backdrop images closely, you can identify areas that look interesting and place sample tubes in those spots.\nTasks\n\nAdd three or more sample tube sprites to visit during gameplay by placing the downloaded sample tube sprites to the backdrop by selecting Upload sprite the same way you did in Step 1.\nMake the sample tube sprites disappear when they are visited by the rover. Hint: See if a block in the Control section will help. (See example image.) \nMake the sample tube sprites reappear when players click the green flag to restart the game.\n\n+ Expand image\n\n4. Add a countdown timer NASA\u2019s missions to Mars and other destinations have a planned life expectancy. Some missions, including every Mars rover to date, have been extended and operated beyond their planned mission life expectancy, while others experience problems that shorten their mission. You can create a timer that counts down to the end of the mission and ends the game.",
+          "title": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu",
+          "url": "https://www.jpl.nasa.gov/edu/learn/project/code-a-mars-sample-collection-video-game/",
+          "score": 10.729982,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725028906
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Code Mars scoring points"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Based on the document, there is no specific sample setting provided. However, for the Mars Sample Collection Video Game, you are encouraged to study the backdrop images closely and identify areas that look interesting to place sample tubes in those spots."
+    },
+    {
+      "speaker": "user",
+      "text": "How to make the game interesting ",
+      "timestamp": 1725028970,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "To make the game more interesting, you can consider adding various features such as: 1.  Increase the complexity of the terrain or add more hazards from steep slopes and deep sand to sharp rocks and high radiation, there are countless ways a mission can be delayed or end unexpectedly.  2. Specify a landing site by creating scripts that place the rover at a certain location at the beginning of the game.  3.  Let others play it and suggest improvements.",
+      "timestamp": 1725028977,
+      "contexts": [
+        {
+          "document_id": "6e97640495151e68-4584-6689",
+          "text": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu\nMake the sample tube sprites reappear when players click the green flag to restart the game.\n\n+ Expand image\n\n4. Add a countdown timer NASA\u2019s missions to Mars and other destinations have a planned life expectancy. Some missions, including every Mars rover to date, have been extended and operated beyond their planned mission life expectancy, while others experience problems that shorten their mission. You can create a timer that counts down to the end of the mission and ends the game. Your timer should not be so short that the game is unplayable or unwinnable, but it should not be so long that there is no challenge to playing the game. As a bonus, you can create code to extend or shorten the planned mission time.\nTasks\n\nCreate a timer that counts from a set time down to zero. Hint: Create a Time variable that you can program to change. (See example image.)\nMake gameplay stop when the timer reaches zero.\nMake a \u201cMission Over\u201d message appear when the timer reaches zero.\nMake the timer start over when a player clicks the green flag to restart the game.\nBonus: Develop code that will increase or decrease the amount of time on the timer by one or two seconds at random.\n\n+ Expand image\n\n5. Add a scoring system Rover missions on Mars don\u2019t have a scoring system. But the science they collect is valuable, and some discoveries may be more exciting, interesting, or important than others. To determine how well players are doing while playing your game, you can develop a scoring system that includes points earned for collecting sample tubes. How points are totaled is up to you. You could also program your game to reduce point totals in certain scenarios (see Step 6, for example).\nTasks\n\nDevelop code to create a scoring system.\nIncrease the score by one or more points for each sample tube collected.\n\n+ Expand image\n\n6. Add hazards Space travel and other worlds are fraught with hazards. From steep slopes and deep sand to sharp rocks and high radiation, there are countless ways a mission can be delayed or end unexpectedly. Program your game to include hazards that players need to avoid.",
+          "title": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu",
+          "url": "https://www.jpl.nasa.gov/edu/learn/project/code-a-mars-sample-collection-video-game/",
+          "score": 29.835424,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725029952
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: If I include a scoring system, how should I total the points?\n|assistant|: You have the flexibility to determine how points are totaled in your game's scoring system. You could, for example, increase the score by one or more points for each sample tube collected. However, it does not provide specific details on how to total the points. Therefore, you can choose a method that best fits your game design.\n|user|: any sample setting?\n|assistant|: There is no specific sample setting provided. However, for the Mars Sample Collection Video Game, you are encouraged to study the backdrop images closely and identify areas that look interesting to place sample tubes in those spots.  Develop code to create a scoring system. Increase the score by one or more points for each sample tube collected.\n|user|: How to make the game interesting "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6e97640495151e68-6174-8304",
+          "text": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu\nYou could also program your game to reduce point totals in certain scenarios (see Step 6, for example).\nTasks\n\nDevelop code to create a scoring system.\nIncrease the score by one or more points for each sample tube collected.\n\n+ Expand image\n\n6. Add hazards Space travel and other worlds are fraught with hazards. From steep slopes and deep sand to sharp rocks and high radiation, there are countless ways a mission can be delayed or end unexpectedly. Program your game to include hazards that players need to avoid. Look for dark areas in your backdrop image. These shadowed regions are often steep slopes that a rover could get stuck on.\nTasks\n\nDevelop code that identifies hazardous locations on the backdrop image.\nAdd in undesirable outcomes that occur when the rover reaches hazardous locations. (For example, the game could stop, time might be taken away, points might go down, etc.)\nMake a \u201cHazard\u201d message appear when players encounter a hazard.\nMake some hazards hidden and some visible.\nBonus: Make a hidden hazard that changes location each time the game is restarted.\n\n+ Expand image\n\n7. Add landing code Every Mars rover has to first land on the Red Planet before it can start exploring. You can specify a landing site by creating scripts that place the rover at a certain location at the beginning of the game.Tasks Create code that puts the rover in a specific location at the beginning of the game. Bonus: Modify your landing code to make the rover land in a random location on the backdrop image or in a random location within a smaller section of the backdrop image.About the image: This animated image is a clip from a video taken by the Perseverance rover mission as the rover was being lowered onto the surface of Mars. \u203a Full video and caption\n\n8. Take it farther Now that you\u2019ve created your game, let others play it and suggest improvements! Also, check out this Mars rover game from NASA for more inspiration.\n \n\nRelated TagsCodingProgrammingMars RoverGamespace travelDesign Your Spacecraftsample returnperseveranceperseverencemars 2020Sample Handlingmars sample returnMarsMissionsRoversJump ToMaterials1.",
+          "title": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu",
+          "url": "https://www.jpl.nasa.gov/edu/learn/project/code-a-mars-sample-collection-video-game/",
+          "score": 27.60498,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725029893
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: If I include a scoring system, how should I total the points?\n|assistant|: You have the flexibility to determine how points are totaled in your game's scoring system. You could, for example, increase the score by one or more points for each sample tube collected. However, it does not provide specific details on how to total the points. Therefore, you can choose a method that best fits your game design.\n|user|: any sample setting?\n|assistant|: There is no specific sample setting provided. However, for the Mars Sample Collection Video Game, you are encouraged to study the backdrop images closely and identify areas that look interesting to place sample tubes in those spots.  Develop code to create a scoring system. Increase the score by one or more points for each sample tube collected.\n|user|: How to make the game interesting "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6e97640495151e68-7915-9570",
+          "text": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu\n\u203a Full video and caption\n\n8. Take it farther Now that you\u2019ve created your game, let others play it and suggest improvements! Also, check out this Mars rover game from NASA for more inspiration.\n \n\nRelated TagsCodingProgrammingMars RoverGamespace travelDesign Your Spacecraftsample returnperseveranceperseverencemars 2020Sample Handlingmars sample returnMarsMissionsRoversJump ToMaterials1. Get set up2. Make the rover drive3. Add sample tubes for collection4. Add a countdown timer5. Add a scoring system6. Add hazards7. Add landing code8. Take it farther \n\nGet the Newsletter\n\nFollow JPL Education\n\nAll\n\n about\n \n\nDirector's Message\n\nExecutive Council\n\nHistory\n\nAnnual Reports\n\nContact Us\n\nOpportunities\n\n missions\n \n\nCurrent\n\nPast\n\nFuture\n\nProposed\n\nAll\n\n galleries\n \n\nJPL Space Images\n\nInfographics\n\nPhotojournal\n\nNASA Images\n\nMobile Apps\n\n education\n \n\nIntern\n\nLearn\n\nTeach\n\nNews\n\nEvents\n\nShare\n\n NASA OSTEM \n\n news\n \n\nLatest News\n\nPress Kits\n\nFact Sheets\n\nMedia Room\n\n public events\n\nOverview\n\nTours\n\nLecture Series\n\nOpen House\n\nSpeakers Bureau\n\nTeam Competitions\n\n Our Sites\n \n\nAsteroid Watch\n\nCassini - Mission to Saturn\n\nEarth / Global Climate Change\n\nPlanetquest / Exoplanets\n\nJuno - Mission to Jupiter\n\nMars Exploration\n\nMars Science Laboratory / Curiosity\n\nRosetta - Understanding Comets\n\nScience and Technology\n\nSolar System Exploration\n\nEyes on the Solar System\n\nEyes on the Earth\n\nEyes on Exoplanets\n\nSpitzer Space Telescope\n\n Follow JPL\n \n\nNewsletter\n\nFacebook\n\nTwitter\n\nYouTube\n\nFlickr\n\nInstagram\n\niTunes\n\nUStream\n\nRSS\n\nBlog\n\nMobile\n\nAll Social Media\n\n NASA\n \n\nNASA Education\n\nNASA Water Cleanup\n\nFOIA\n\nNASA\n\n |\n \nCaltech\n\n |\n \nPrivacy\n\n |",
+          "title": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu",
+          "url": "https://www.jpl.nasa.gov/edu/learn/project/code-a-mars-sample-collection-video-game/",
+          "score": 18.446865,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725029896
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Develop code that identifies hazardous location Mars Sample Collection Video Game"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "To make the game more interesting, you can consider adding various features such as:\n1. Adding different levels of difficulty: As the player progresses in the game, you can increase the complexity of the terrain or add more hazards.\n2. Incorporating a storyline or a mission objective: Giving the player a clear goal or a narrative to follow can make the game more engaging.\n3. Adding sound effects and background music: These can enhance the overall gaming experience and make it more immersive.\n4. Implementing a leaderboard or achievements system: This can encourage competition among players and increase their motivation to improve their scores.\n5. Creating visually appealing graphics and animations: High-quality visuals can make the game more attractive and enjoyable to play.\nRemember, the key to making a game interesting is to keep the player engaged and motivated to continue playing."
+    },
+    {
+      "speaker": "user",
+      "text": "sprite the sprite of bevarage?",
+      "timestamp": 1725031002,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "It seems like there might be a typo in your question.  A Mars fetch rover sprite is a sample collection tube.  ",
+      "timestamp": 1725031006,
+      "contexts": [
+        {
+          "document_id": "6e97640495151e68-6174-8304",
+          "text": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu\nYou could also program your game to reduce point totals in certain scenarios (see Step 6, for example).\nTasks\n\nDevelop code to create a scoring system.\nIncrease the score by one or more points for each sample tube collected.\n\n+ Expand image\n\n6. Add hazards Space travel and other worlds are fraught with hazards. From steep slopes and deep sand to sharp rocks and high radiation, there are countless ways a mission can be delayed or end unexpectedly. Program your game to include hazards that players need to avoid. Look for dark areas in your backdrop image. These shadowed regions are often steep slopes that a rover could get stuck on.\nTasks\n\nDevelop code that identifies hazardous locations on the backdrop image.\nAdd in undesirable outcomes that occur when the rover reaches hazardous locations. (For example, the game could stop, time might be taken away, points might go down, etc.)\nMake a \u201cHazard\u201d message appear when players encounter a hazard.\nMake some hazards hidden and some visible.\nBonus: Make a hidden hazard that changes location each time the game is restarted.\n\n+ Expand image\n\n7. Add landing code Every Mars rover has to first land on the Red Planet before it can start exploring. You can specify a landing site by creating scripts that place the rover at a certain location at the beginning of the game.Tasks Create code that puts the rover in a specific location at the beginning of the game. Bonus: Modify your landing code to make the rover land in a random location on the backdrop image or in a random location within a smaller section of the backdrop image.About the image: This animated image is a clip from a video taken by the Perseverance rover mission as the rover was being lowered onto the surface of Mars. \u203a Full video and caption\n\n8. Take it farther Now that you\u2019ve created your game, let others play it and suggest improvements! Also, check out this Mars rover game from NASA for more inspiration.\n \n\nRelated TagsCodingProgrammingMars RoverGamespace travelDesign Your Spacecraftsample returnperseveranceperseverencemars 2020Sample Handlingmars sample returnMarsMissionsRoversJump ToMaterials1.",
+          "title": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu",
+          "url": "https://www.jpl.nasa.gov/edu/learn/project/code-a-mars-sample-collection-video-game/",
+          "score": 39.746426,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1725033797
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: If I include a scoring system, how should I total the points?\n|assistant|: You have the flexibility to determine how points are totaled in your game's scoring system. You could, for example, increase the score by one or more points for each sample tube collected. However, it does not provide specific details on how to total the points. Therefore, you can choose a method that best fits your game design.\n|user|: any sample setting?\n|assistant|: There is no specific sample setting provided. However, for the Mars Sample Collection Video Game, you are encouraged to study the backdrop images closely and identify areas that look interesting to place sample tubes in those spots.  Develop code to create a scoring system. Increase the score by one or more points for each sample tube collected.\n|user|: How to make the game interesting \n|assistant|: To make the game more interesting, you can consider adding various features such as: 1.  Increase the complexity of the terrain or add more hazards from steep slopes and deep sand to sharp rocks and high radiation, there are countless ways a mission can be delayed or end unexpectedly.  2. Specify a landing site by creating scripts that place the rover at a certain location at the beginning of the game.  3.  Let others play it and suggest improvements.\n|user|: sprite the sprite of bevarage?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6e97640495151e68-4584-6689",
+          "text": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu\nMake the sample tube sprites reappear when players click the green flag to restart the game.\n\n+ Expand image\n\n4. Add a countdown timer NASA\u2019s missions to Mars and other destinations have a planned life expectancy. Some missions, including every Mars rover to date, have been extended and operated beyond their planned mission life expectancy, while others experience problems that shorten their mission. You can create a timer that counts down to the end of the mission and ends the game. Your timer should not be so short that the game is unplayable or unwinnable, but it should not be so long that there is no challenge to playing the game. As a bonus, you can create code to extend or shorten the planned mission time.\nTasks\n\nCreate a timer that counts from a set time down to zero. Hint: Create a Time variable that you can program to change. (See example image.)\nMake gameplay stop when the timer reaches zero.\nMake a \u201cMission Over\u201d message appear when the timer reaches zero.\nMake the timer start over when a player clicks the green flag to restart the game.\nBonus: Develop code that will increase or decrease the amount of time on the timer by one or two seconds at random.\n\n+ Expand image\n\n5. Add a scoring system Rover missions on Mars don\u2019t have a scoring system. But the science they collect is valuable, and some discoveries may be more exciting, interesting, or important than others. To determine how well players are doing while playing your game, you can develop a scoring system that includes points earned for collecting sample tubes. How points are totaled is up to you. You could also program your game to reduce point totals in certain scenarios (see Step 6, for example).\nTasks\n\nDevelop code to create a scoring system.\nIncrease the score by one or more points for each sample tube collected.\n\n+ Expand image\n\n6. Add hazards Space travel and other worlds are fraught with hazards. From steep slopes and deep sand to sharp rocks and high radiation, there are countless ways a mission can be delayed or end unexpectedly. Program your game to include hazards that players need to avoid.",
+          "title": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu",
+          "url": "https://www.jpl.nasa.gov/edu/learn/project/code-a-mars-sample-collection-video-game/",
+          "score": 39.337887,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1725033795
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: If I include a scoring system, how should I total the points?\n|assistant|: You have the flexibility to determine how points are totaled in your game's scoring system. You could, for example, increase the score by one or more points for each sample tube collected. However, it does not provide specific details on how to total the points. Therefore, you can choose a method that best fits your game design.\n|user|: any sample setting?\n|assistant|: There is no specific sample setting provided. However, for the Mars Sample Collection Video Game, you are encouraged to study the backdrop images closely and identify areas that look interesting to place sample tubes in those spots.  Develop code to create a scoring system. Increase the score by one or more points for each sample tube collected.\n|user|: How to make the game interesting \n|assistant|: To make the game more interesting, you can consider adding various features such as: 1.  Increase the complexity of the terrain or add more hazards from steep slopes and deep sand to sharp rocks and high radiation, there are countless ways a mission can be delayed or end unexpectedly.  2. Specify a landing site by creating scripts that place the rover at a certain location at the beginning of the game.  3.  Let others play it and suggest improvements.\n|user|: sprite the sprite of bevarage?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6e97640495151e68-3-1866",
+          "text": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu\nStudent Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu\n\nSkip Navigation\n\nJPL\u00a0Education\nIntern\nLearn\nTeach\nNews\nEvents\nShare\n\n\tNASA OSTEM \n\nmenu and search\n\nACTIVITIESCode a Mars Sample Collection Video Game \n\nJump To\n\nMaterials1. Get set up2. Make the rover drive3. Add sample tubes for collection4. Add a countdown timer5. Add a scoring system6. Add hazards7. Add landing code8. Take it farther \n\nJPL\u00a0Education\nclose menu\n\nintern\n\nabout\napply\nresources\n\nlearn\n\nactivities\ntoolkit\ncontests\nLearning Space\n\nteach\n\nactivities\nresources\nworkshops\nprograms\nTeachable Moments\n\nnews\n\nevents\n\nshare\n\n\tNASA OSTEM \n\nStay Connected\n\n\t Explore Rocks Using Core Sampling\n\t\n\n\t Make a Scale Solar System\n\t\n\n \n\nproject\n\nCode a Mars Sample Collection Video Game\n\nGo to Educator GuideNASA sends rovers to Mars to collect data and carry out scientific studies. The Perseverance Mars rover is designed to take that data collection one step further by gathering rock cores in sample tubes and leaving them on the surface for a future \"fetch rover\" to collect. The fetch rover would collect the samples and bring them to a Mars ascent vehicle \u2013 a rocket that would carry the samples from the surface to orbit around Mars \u2013 for eventual return to Earth.In this project, you will use Scratch, a visual programming language, to create a video game that simulates the way NASA collects samples on Mars! \n\nMaterials Computer with internet accessFree Scratch accountMars fetch rover sprite \u2013\u00a0Download PNGMars sample collection tube sprite \u2013\u00a0Download PNG Jezero crater surface images \u2013\u00a0Download ZIP\n\n1. Get set up Download the Jezero Crater surface images, the Mars sample collection tube image, and Mars fetch rover sprite image, and save them to a computer. Unzip the surface images zip file into a new folder. On the Scratch website, click Create to begin a new project.",
+          "title": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu",
+          "url": "https://www.jpl.nasa.gov/edu/learn/project/code-a-mars-sample-collection-video-game/",
+          "score": 32.984043,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725033786
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: If I include a scoring system, how should I total the points?\n|assistant|: You have the flexibility to determine how points are totaled in your game's scoring system. You could, for example, increase the score by one or more points for each sample tube collected. However, it does not provide specific details on how to total the points. Therefore, you can choose a method that best fits your game design.\n|user|: any sample setting?\n|assistant|: There is no specific sample setting provided. However, for the Mars Sample Collection Video Game, you are encouraged to study the backdrop images closely and identify areas that look interesting to place sample tubes in those spots.  Develop code to create a scoring system. Increase the score by one or more points for each sample tube collected.\n|user|: How to make the game interesting \n|assistant|: To make the game more interesting, you can consider adding various features such as: 1.  Increase the complexity of the terrain or add more hazards from steep slopes and deep sand to sharp rocks and high radiation, there are countless ways a mission can be delayed or end unexpectedly.  2. Specify a landing site by creating scripts that place the rover at a certain location at the beginning of the game.  3.  Let others play it and suggest improvements.\n|user|: sprite the sprite of bevarage?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6e97640495151e68-1401-3422",
+          "text": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu\nMaterials Computer with internet accessFree Scratch accountMars fetch rover sprite \u2013\u00a0Download PNGMars sample collection tube sprite \u2013\u00a0Download PNG Jezero crater surface images \u2013\u00a0Download ZIP\n\n1. Get set up Download the Jezero Crater surface images, the Mars sample collection tube image, and Mars fetch rover sprite image, and save them to a computer. Unzip the surface images zip file into a new folder. On the Scratch website, click Create to begin a new project. (Sign in or create an account if you want to save your work so you can revisit or redesign your game in the future.) Create a new backdrop by moving the mouse over Choose a Backdrop in the Stage window and selecting Upload Backdrop. Pick the Jezero Crater surface image of your choice. The Stage area of the screen should now display your selected backdrop image. (See example image.) Create a new sprite by moving the mouse over Choose a sprite in the Sprite window and selecting Upload sprite. Choose the Mars fetch rover sprite image. There should now be a rover placed over your backdrop image along with the original cat sprite. (See example image.) Delete the existing cat sprite by clicking on it in the Sprites window and clicking the \u201cx\u201d in the corner. With the rover sprite selected, you\u2019re ready to create the code that manages the game and controls the rover!+ Expand image\n\n2. Make the rover drive NASA explores Mars with orbiters that travel around the planet, stationary landers on the ground, and rovers that can travel many miles on the surface. For rovers to visit more than one place on Mars, they must be able to drive. Rovers on Mars aren\u2019t controlled with joysticks or keyboards. But in the future, astronauts in orbit around Mars or on the surface of the planet could use remote controls to drive rovers. Your game can use keys on the keyboard to make the rover drive.\nTasks\n\nMake the rover move up, down, left, and right on the screen using four different keys on the keyboard. Hint: See if a block in the Events section will help.",
+          "title": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu",
+          "url": "https://www.jpl.nasa.gov/edu/learn/project/code-a-mars-sample-collection-video-game/",
+          "score": 11.190066,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725033784
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "rover sprite"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6e97640495151e68-3007-5072",
+          "text": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu\nRovers on Mars aren\u2019t controlled with joysticks or keyboards. But in the future, astronauts in orbit around Mars or on the surface of the planet could use remote controls to drive rovers. Your game can use keys on the keyboard to make the rover drive.\nTasks\n\nMake the rover move up, down, left, and right on the screen using four different keys on the keyboard. Hint: See if a block in the Events section will help. (See example image.)\nSpecify how far the rover will move each time one of those keys is pressed. Select a distance that makes the rover movement appear smooth when the key is pressed and held. Hint: See if a block in the Motion section will help. (See example image.) \nMake the rover rotate so it points in the direction of travel.\nBonus: Make the rover move diagonally using keys other than the keys already assigned.\n\n+ Expand image\n\n3. Add sample tubes for collection Sample tubes contain valuable rock samples collected by the Perseverance Mars rover and left behind for a fetch rover to collect. You should add sample collection tubes to your game to provide destinations for your rover. By studying the backdrop images closely, you can identify areas that look interesting and place sample tubes in those spots.\nTasks\n\nAdd three or more sample tube sprites to visit during gameplay by placing the downloaded sample tube sprites to the backdrop by selecting Upload sprite the same way you did in Step 1.\nMake the sample tube sprites disappear when they are visited by the rover. Hint: See if a block in the Control section will help. (See example image.) \nMake the sample tube sprites reappear when players click the green flag to restart the game.\n\n+ Expand image\n\n4. Add a countdown timer NASA\u2019s missions to Mars and other destinations have a planned life expectancy. Some missions, including every Mars rover to date, have been extended and operated beyond their planned mission life expectancy, while others experience problems that shorten their mission. You can create a timer that counts down to the end of the mission and ends the game.",
+          "title": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu",
+          "url": "https://www.jpl.nasa.gov/edu/learn/project/code-a-mars-sample-collection-video-game/",
+          "score": 10.236351,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725033781
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "rover sprite"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "79594f3dadc4e72c-1435-2562",
+          "text": "The Mars Rovers | NASA Space Place \u2013 NASA Science for Kids\nOther spacecraft, called landers, provide photos and information from their landing spots on the surface of Mars.\nRovers have wheels and specialize in moving around. They land on the surface of Mars and drive around to different spots.\nRovers help scientists in their quest to understand what different parts of the planet are made of. Mars is made up of lots of different types of rocks, and each rock is made up of a mixture of chemicals. A rover can drive around to different areas, studying the different chemicals in each rock. These chemicals can tell scientists something about the environments that changed that rock over time.\n\n \tarticle last updated March 23, 2021\n \n\nIf you liked this, you may like:\n\nThe Mars Rovers: Perseverance\n\nThe Mars Rovers: Curiosity\n\nThe Mars Rovers: Spirit and Opportunity\n\n\t Games\t \n\n\t Crafts\t \n\n\t Activities\t \n\n\t Videos\t \n\n\t Glossary\t \n\n\t Mystery\t \n\nAbout Us\nPrivacy Policy\nImage Use\nAccessibility\n\nContact NASA Space Place\n\n Last Updated: May 6th, 2024 \n\n \n\nMore\nLess\n\nBy Subject\n\nSpace\nSun\nEarth\nSolar System\nPeople & Technology\nParents & Educators\n\nBy Type\n\nExplore\nDo\nPlay\n\nMore\nLess",
+          "title": "The Mars Rovers | NASA Space Place \u2013 NASA Science for Kids",
+          "url": "https://spaceplace.nasa.gov/mars-rovers/en/",
+          "score": 9.297706,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1725033778
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "rover sprite"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "It seems like there might be a typo in your question. If you're asking about using a beverage sprite in your game, it's important to note that the document provides specific sprites to use: a Mars fetch rover sprite and a Mars sample collection tube sprite. If you want to add a beverage sprite, you would need to create or find one yourself. However, it might not fit the theme of the Mars Sample Collection Video Game."
+    },
+    {
+      "speaker": "user",
+      "text": "Of course I knew it!  just teasing, sorry.  How to scripts sprite?",
+      "timestamp": 1725032768,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "To script the sprite, create a new sprite by moving the mouse over Choose a sprite in the Sprite window and selecting Upload sprite. Choose the Mars fetch rover sprite image.  Then, you can use the available blocks in Scratch to create scripts that control the sprite's behavior. For example, make the sample tube sprites disappear when they are visited by the rover, or  reappear when players click the green flag to restart the game.  Use motion blocks to make the sprite move, turn, or change costumes. You can also use control blocks to add loops, conditionals, or variables to your scripts.",
+      "timestamp": 1725032777,
+      "contexts": [
+        {
+          "document_id": "6e97640495151e68-4584-6689",
+          "text": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu\nMake the sample tube sprites reappear when players click the green flag to restart the game.\n\n+ Expand image\n\n4. Add a countdown timer NASA\u2019s missions to Mars and other destinations have a planned life expectancy. Some missions, including every Mars rover to date, have been extended and operated beyond their planned mission life expectancy, while others experience problems that shorten their mission. You can create a timer that counts down to the end of the mission and ends the game. Your timer should not be so short that the game is unplayable or unwinnable, but it should not be so long that there is no challenge to playing the game. As a bonus, you can create code to extend or shorten the planned mission time.\nTasks\n\nCreate a timer that counts from a set time down to zero. Hint: Create a Time variable that you can program to change. (See example image.)\nMake gameplay stop when the timer reaches zero.\nMake a \u201cMission Over\u201d message appear when the timer reaches zero.\nMake the timer start over when a player clicks the green flag to restart the game.\nBonus: Develop code that will increase or decrease the amount of time on the timer by one or two seconds at random.\n\n+ Expand image\n\n5. Add a scoring system Rover missions on Mars don\u2019t have a scoring system. But the science they collect is valuable, and some discoveries may be more exciting, interesting, or important than others. To determine how well players are doing while playing your game, you can develop a scoring system that includes points earned for collecting sample tubes. How points are totaled is up to you. You could also program your game to reduce point totals in certain scenarios (see Step 6, for example).\nTasks\n\nDevelop code to create a scoring system.\nIncrease the score by one or more points for each sample tube collected.\n\n+ Expand image\n\n6. Add hazards Space travel and other worlds are fraught with hazards. From steep slopes and deep sand to sharp rocks and high radiation, there are countless ways a mission can be delayed or end unexpectedly. Program your game to include hazards that players need to avoid.",
+          "title": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu",
+          "url": "https://www.jpl.nasa.gov/edu/learn/project/code-a-mars-sample-collection-video-game/",
+          "score": 41.0847,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725033413
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: If I include a scoring system, how should I total the points?\n|assistant|: You have the flexibility to determine how points are totaled in your game's scoring system. You could, for example, increase the score by one or more points for each sample tube collected. However, it does not provide specific details on how to total the points. Therefore, you can choose a method that best fits your game design.\n|user|: any sample setting?\n|assistant|: There is no specific sample setting provided. However, for the Mars Sample Collection Video Game, you are encouraged to study the backdrop images closely and identify areas that look interesting to place sample tubes in those spots.  Develop code to create a scoring system. Increase the score by one or more points for each sample tube collected.\n|user|: How to make the game interesting \n|assistant|: To make the game more interesting, you can consider adding various features such as: 1.  Increase the complexity of the terrain or add more hazards from steep slopes and deep sand to sharp rocks and high radiation, there are countless ways a mission can be delayed or end unexpectedly.  2. Specify a landing site by creating scripts that place the rover at a certain location at the beginning of the game.  3.  Let others play it and suggest improvements.\n|user|: sprite the sprite of bevarage?\n|assistant|: It seems like there might be a typo in your question.  A Mars fetch rover sprite is a sample collection tube.  \n|user|: Of course I knew it!  just teasing, sorry.  How to scripts sprite?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6e97640495151e68-3-1866",
+          "text": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu\nStudent Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu\n\nSkip Navigation\n\nJPL\u00a0Education\nIntern\nLearn\nTeach\nNews\nEvents\nShare\n\n\tNASA OSTEM \n\nmenu and search\n\nACTIVITIESCode a Mars Sample Collection Video Game \n\nJump To\n\nMaterials1. Get set up2. Make the rover drive3. Add sample tubes for collection4. Add a countdown timer5. Add a scoring system6. Add hazards7. Add landing code8. Take it farther \n\nJPL\u00a0Education\nclose menu\n\nintern\n\nabout\napply\nresources\n\nlearn\n\nactivities\ntoolkit\ncontests\nLearning Space\n\nteach\n\nactivities\nresources\nworkshops\nprograms\nTeachable Moments\n\nnews\n\nevents\n\nshare\n\n\tNASA OSTEM \n\nStay Connected\n\n\t Explore Rocks Using Core Sampling\n\t\n\n\t Make a Scale Solar System\n\t\n\n \n\nproject\n\nCode a Mars Sample Collection Video Game\n\nGo to Educator GuideNASA sends rovers to Mars to collect data and carry out scientific studies. The Perseverance Mars rover is designed to take that data collection one step further by gathering rock cores in sample tubes and leaving them on the surface for a future \"fetch rover\" to collect. The fetch rover would collect the samples and bring them to a Mars ascent vehicle \u2013 a rocket that would carry the samples from the surface to orbit around Mars \u2013 for eventual return to Earth.In this project, you will use Scratch, a visual programming language, to create a video game that simulates the way NASA collects samples on Mars! \n\nMaterials Computer with internet accessFree Scratch accountMars fetch rover sprite \u2013\u00a0Download PNGMars sample collection tube sprite \u2013\u00a0Download PNG Jezero crater surface images \u2013\u00a0Download ZIP\n\n1. Get set up Download the Jezero Crater surface images, the Mars sample collection tube image, and Mars fetch rover sprite image, and save them to a computer. Unzip the surface images zip file into a new folder. On the Scratch website, click Create to begin a new project.",
+          "title": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu",
+          "url": "https://www.jpl.nasa.gov/edu/learn/project/code-a-mars-sample-collection-video-game/",
+          "score": 38.54473,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725033416
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: If I include a scoring system, how should I total the points?\n|assistant|: You have the flexibility to determine how points are totaled in your game's scoring system. You could, for example, increase the score by one or more points for each sample tube collected. However, it does not provide specific details on how to total the points. Therefore, you can choose a method that best fits your game design.\n|user|: any sample setting?\n|assistant|: There is no specific sample setting provided. However, for the Mars Sample Collection Video Game, you are encouraged to study the backdrop images closely and identify areas that look interesting to place sample tubes in those spots.  Develop code to create a scoring system. Increase the score by one or more points for each sample tube collected.\n|user|: How to make the game interesting \n|assistant|: To make the game more interesting, you can consider adding various features such as: 1.  Increase the complexity of the terrain or add more hazards from steep slopes and deep sand to sharp rocks and high radiation, there are countless ways a mission can be delayed or end unexpectedly.  2. Specify a landing site by creating scripts that place the rover at a certain location at the beginning of the game.  3.  Let others play it and suggest improvements.\n|user|: sprite the sprite of bevarage?\n|assistant|: It seems like there might be a typo in your question.  A Mars fetch rover sprite is a sample collection tube.  \n|user|: Of course I knew it!  just teasing, sorry.  How to scripts sprite?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6e97640495151e68-1401-3422",
+          "text": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu\nMaterials Computer with internet accessFree Scratch accountMars fetch rover sprite \u2013\u00a0Download PNGMars sample collection tube sprite \u2013\u00a0Download PNG Jezero crater surface images \u2013\u00a0Download ZIP\n\n1. Get set up Download the Jezero Crater surface images, the Mars sample collection tube image, and Mars fetch rover sprite image, and save them to a computer. Unzip the surface images zip file into a new folder. On the Scratch website, click Create to begin a new project. (Sign in or create an account if you want to save your work so you can revisit or redesign your game in the future.) Create a new backdrop by moving the mouse over Choose a Backdrop in the Stage window and selecting Upload Backdrop. Pick the Jezero Crater surface image of your choice. The Stage area of the screen should now display your selected backdrop image. (See example image.) Create a new sprite by moving the mouse over Choose a sprite in the Sprite window and selecting Upload sprite. Choose the Mars fetch rover sprite image. There should now be a rover placed over your backdrop image along with the original cat sprite. (See example image.) Delete the existing cat sprite by clicking on it in the Sprites window and clicking the \u201cx\u201d in the corner. With the rover sprite selected, you\u2019re ready to create the code that manages the game and controls the rover!+ Expand image\n\n2. Make the rover drive NASA explores Mars with orbiters that travel around the planet, stationary landers on the ground, and rovers that can travel many miles on the surface. For rovers to visit more than one place on Mars, they must be able to drive. Rovers on Mars aren\u2019t controlled with joysticks or keyboards. But in the future, astronauts in orbit around Mars or on the surface of the planet could use remote controls to drive rovers. Your game can use keys on the keyboard to make the rover drive.\nTasks\n\nMake the rover move up, down, left, and right on the screen using four different keys on the keyboard. Hint: See if a block in the Events section will help.",
+          "title": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu",
+          "url": "https://www.jpl.nasa.gov/edu/learn/project/code-a-mars-sample-collection-video-game/",
+          "score": 14.165461,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725033419
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "rover sprite scripts setting for sprite"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6e97640495151e68-3007-5072",
+          "text": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu\nRovers on Mars aren\u2019t controlled with joysticks or keyboards. But in the future, astronauts in orbit around Mars or on the surface of the planet could use remote controls to drive rovers. Your game can use keys on the keyboard to make the rover drive.\nTasks\n\nMake the rover move up, down, left, and right on the screen using four different keys on the keyboard. Hint: See if a block in the Events section will help. (See example image.)\nSpecify how far the rover will move each time one of those keys is pressed. Select a distance that makes the rover movement appear smooth when the key is pressed and held. Hint: See if a block in the Motion section will help. (See example image.) \nMake the rover rotate so it points in the direction of travel.\nBonus: Make the rover move diagonally using keys other than the keys already assigned.\n\n+ Expand image\n\n3. Add sample tubes for collection Sample tubes contain valuable rock samples collected by the Perseverance Mars rover and left behind for a fetch rover to collect. You should add sample collection tubes to your game to provide destinations for your rover. By studying the backdrop images closely, you can identify areas that look interesting and place sample tubes in those spots.\nTasks\n\nAdd three or more sample tube sprites to visit during gameplay by placing the downloaded sample tube sprites to the backdrop by selecting Upload sprite the same way you did in Step 1.\nMake the sample tube sprites disappear when they are visited by the rover. Hint: See if a block in the Control section will help. (See example image.) \nMake the sample tube sprites reappear when players click the green flag to restart the game.\n\n+ Expand image\n\n4. Add a countdown timer NASA\u2019s missions to Mars and other destinations have a planned life expectancy. Some missions, including every Mars rover to date, have been extended and operated beyond their planned mission life expectancy, while others experience problems that shorten their mission. You can create a timer that counts down to the end of the mission and ends the game.",
+          "title": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu",
+          "url": "https://www.jpl.nasa.gov/edu/learn/project/code-a-mars-sample-collection-video-game/",
+          "score": 12.222934,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725033421
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "rover sprite scripts setting for sprite"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "To script the sprite, you can start by creating a new sprite in your Scratch project. Then, you can use the available blocks in Scratch to create scripts that control the sprite's behavior. For example, you can use the \"when green flag clicked\" block to specify what happens when the game starts, and use motion blocks to make the sprite move, turn, or change costumes. You can also use control blocks to add loops, conditionals, or variables to your scripts. The specific scripts you create will depend on how you want the sprite to behave in your game."
+    },
+    {
+      "speaker": "user",
+      "text": "other games?",
+      "timestamp": 1725033847,
+      "enrichments": {
+        "Question Type": [
+          "Factoid",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "There are several other games available on the NASA Space Place website that you might find interesting. Here are some of them: 1. Snap it! An Eclipse Photo Adventure - Help the Traveler snap photos of an eclipse!  2. Play Helios: A Game About How the Sun Makes Energy! - Where does the Sun's energy come from?  3. Space Volcanoes! - Explore the many volcanoes in our solar system using the Space Volcano Explorer. 4. Go With the Flow: An Ocean Currents Game - In this ocean currents game, use heat and salt to float your sub to the treasure! 5. Write your own zany adventure story!  6. Play Solar System Switch-a-Roo! - Put clues together to find the planets and moons. 7. DSN Uplink-Downlink: A DSN Game - Help the big antennas gather data from the spacecraft. 8. Roman Space Observer - Catch as many astrophysical objects and phenomena as possible in this game! 9. CubeSat Builder: Build a NASA Spacecraft!  10. Scope It Out! - Scope It Out! includes an introduction to telescopes and two matching games. You can access these games through the NASA Space Place website.",
+      "timestamp": 1725033854,
+      "contexts": [
+        {
+          "document_id": "87fdc8101cee16b1-1441-3295",
+          "text": "Play | NASA Space Place \u2013 NASA Science for Kids\nCatch as many astrophysical objects and phenomena as possible in this game! This link takes you away from NASA Space Place. \nplay\nLinks out \n\nCubeSat Builder: Build a NASA Spacecraft!\n\n Build a NASA Spacecraft in this game! This link takes you away from NASA Space Place. \nplay\nLinks out \n\nScope It Out!\n\n Scope It Out! includes an introduction to telescopes and two matching games. This link takes you away from NASA Space Place. \nplay\nLinks out \n\nViewspace\n\n Explore the universe with interactives and videos. This link takes you away from NASA Space Place. \nplay\nLinks out \n\nMars Photo Booth\n\n Put yourself in mission control, or on Mars, next to the rover. This link takes you away from NASA Space Place. \nplay\nLinks out \n\nSpace Forensics Game\n\n Stars exploding? Who would do such a thing? Join Detective Eagle Quark on his investigation of this mystery in this Space Forensics interactive game. This link takes you away from NASA Space Place. \nplay\nLinks out \n\nClimate Time Machine\n\n See into the past and ahead to the future with the Climate Time Machine. This link takes you away from NASA Space Place. \nplay\nLinks out \n\nCoral Bleaching\n\n See what happens to the coral reef depending on the various conditions you choose. This link takes you away from NASA Space Place. \nplay\nLinks out \n\nMars Rover Game\n\n Mars Rover drivers wanted! Search for water as your game rover climbs up and down hills to explore Mars. This link takes you away from NASA Space Place. \nplay\nLinks out \n\nNASA Home and City\n\n Trace space back to you! This link takes you away from NASA Space Place. \nplay\nLinks out \n\n\t Games\t \n\n\t Crafts\t \n\n\t Activities\t \n\n\t Videos\t \n\n\t Glossary\t \n\n\t Mystery\t \n\nAbout Us\nPrivacy Policy\nImage Use\nAccessibility\n\nContact NASA Space Place\n\n Last Updated: May 6th, 2024 \n\n \n\nMore\nLess\n\nBy Subject\n\nSpace\nSun\nEarth\nSolar System\nPeople & Technology",
+          "title": "Play | NASA Space Place \u2013 NASA Science for Kids",
+          "url": "https://spaceplace.nasa.gov/menu/play/",
+          "score": 19.048628,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725034899
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Nasa space games"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "87fdc8101cee16b1-2-1877",
+          "text": "Play | NASA Space Place \u2013 NASA Science for Kids\nPlay | NASA Space Place \u2013 NASA Science for Kids\n\nplay\n\nVea en Espa\u00f1ol\n\nEarth\nSun\nSolar System\nUniverse\nScience and Tech\nEducators\n\nPlay\n\n \n\nSnap it! An Eclipse Photo Adventure\n\n Help the Traveler snap photos of an eclipse! \nplay\n\nRelay: A Laser-Based Space Communications Game\n\n Learn about laser-based space communications in this game! \nplay\n\nColor Your Universe: Find the Hidden Objects\n\n Can you find all the NASA and space-themed hidden objects? \nplay\n\nExplore Mars: A Mars Rover Game\n\n Drive around the Red Planet and gather information in this fun coding game! \nplay\n\nPlay Helios: A Game About How the Sun Makes Energy!\n\n Where does the Sun's energy come from? Play Helios to find out! \nplay\n\nSpace Volcanoes!\n\n Explore the many volcanoes in our solar system using the Space Volcano Explorer. \nexplore\n\nGo With the Flow: An Ocean Currents Game\n\n In this ocean currents game, use heat and salt to float your sub to the treasure! \nplay\n\nWrite your own zany adventure story!\n\n Write your own zany adventure story! \nplay\n\nPlay Solar System Switch-a-Roo!\n\n Put clues together to find the planets and moons. \nplay\n\nDSN Uplink-Downlink: A DSN Game\n\n Help the big antennas gather data from the spacecraft. \nplay\n\nNASA Space Voyagers: The Game\n\n In this strategy card game, build a spacecraft that can explore destinations throughout our solar system. This link takes you away from NASA Space Place. \nplay\nLinks out \n\nRoman Space Observer\n\n Catch as many astrophysical objects and phenomena as possible in this game! This link takes you away from NASA Space Place. \nplay\nLinks out \n\nCubeSat Builder: Build a NASA Spacecraft!\n\n Build a NASA Spacecraft in this game! This link takes you away from NASA Space Place. \nplay\nLinks out \n\nScope It Out!\n\n Scope It Out! includes an introduction to telescopes and two matching games. This link takes you away from NASA Space Place. \nplay",
+          "title": "Play | NASA Space Place \u2013 NASA Science for Kids",
+          "url": "https://spaceplace.nasa.gov/menu/play/",
+          "score": 18.343628,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725034905
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Nasa space games"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "0b305f509b508809-0-1978",
+          "text": "Relay: A Laser-Based Space Communications Game | NASA Space Place \u2013 NASA Science for Kids\n\n\nRelay: A Laser-Based Space Communications Game | NASA Space Place \u2013 NASA Science for Kids\n\nrelay-laser-communications-game\n\nEarth\nSun\nSolar System\nUniverse\nScience and Tech\nEducators\n\nRelay: A Laser-Based Space Communications Game\n\nAbout the game\nIn this game you will send information, or data, back to Earth using lasers. You will use mirrors to move the laser and avoid obstacles to get the data back to Earth. Each level has new challenges and your ultimate goal is to build a communication network and synchronize, or match, the time on atomic clocks.\n\nAbout the mission\nOptical communication uses lasers to send data with a type of light that we can\u2019t see, called infrared light. Since the 1950s, NASA missions have used a different type of waves, called radio waves, to send data to and from space. With current radio wave communications, it takes about nine weeks to send a complete map of Mars back to Earth. With lasers, it only takes about nine days!\nOptical communication is very useful for space missions because data can be sent faster and more securely. Optical communication systems are also smaller, weigh less, and use less power. A smaller size means more room for science instruments, and using less power means less of a drain of the spacecraft\u2019s batteries. These are all very important details for NASA when designing and creating mission concepts. To learn more, visit Laser Communications | NASA.\n\n        \tarticle last updated July 28, 2022\n        \n\nIf you liked this, you may like:\n\nDSN Uplink-Downlink: A DSN Game\n\nSnap it! An Eclipse Photo Adventure\n\nExplore Mars: A Mars Rover Game\n\n\t    Games\t    \n\n\t    Crafts\t    \n\n\t    Activities\t    \n\n\t    Videos\t    \n\n\t    Glossary\t    \n\n\t    Mystery\t    \n\nAbout Us\nPrivacy Policy\nImage Use\nAccessibility\n\nContact NASA Space Place\n\n        Last Updated: May 6th, 2024    \n\n \n\nMore\nLess\n\nBy Subject\n\nSpace\nSun\nEarth\nSolar System\nPeople & Technology\nParents & Educators\n\nBy Type\n\nExplore\nDo\nPlay\n\nMore\nLess\n\n",
+          "title": "Relay: A Laser-Based Space Communications Game | NASA Space Place \u2013 NASA Science for Kids",
+          "url": "https://spaceplace.nasa.gov/relay-laser-communications-game/en/",
+          "score": 17.996096,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725034909
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Nasa space games"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "379d0812978017d7-1195-3397",
+          "text": "Student Project: NASA Space Voyagers: The Game | NASA/JPL Edu\nMaterials Printer (for printing game materials)6-13 sheets of 8.5x11 paper (depending which materials you'll be printing out)Starter Pack of game cards (requires 6 sheets of paper) \u2013 Download PDFScissors2 six-sided diceSticky notes, coins, OR other markers for tracking damages to spacecraftPen and paper for tallying points(Optional) Outer Worlds Expansion Pack (requires 1 sheet of paper) \u2013 Download PDF(Optional) game mat (requires 6 sheets of paper) \u2013 Download PDF(Optional) tape for assembling game mat\n\n1. Get to know the missions In this game, you\u2019ll lead a mission to explore some of the most interesting environments in our solar system including the Moon, Mars, and Jupiter's moon Europa. Before getting started, read on to learn about some of the current and future NASA missions exploring the same destinations you will soon encounter with your fleet of spacecraft. NASA\u2019s Artemis program calls for sending the first woman and next man to the surface of the Moon by 2024. It also seeks to establish a permanent and sustainable presence on the Moon. The agency will use what we learn on the Moon to prepare for humanity's next giant leap \u2013 sending astronauts to Mars.On Mars, Perseverance, NASA's most advanced Mars rover to date, is taking the next steps in our exploration of the Red Planet. Only the fifth NASA rover to land on Mars, Perseverance is building on the work and scientific discoveries of its predecessors by searching for evidence of ancient microbial life on the Red Planet.In the near future, NASA plans to take its search for life even farther into the solar system to Jupiter's ocean moon Europa. This small moon contains more water beneath its icy shell than all of Earth's oceans combined. NASA's Europa Clipper mission, currently in development, is designed to orbit Europa, make up-close observations, and investigate whether the icy moon has conditions suitable for life.About the image: From left to right: An artistic depiction of the Artemis program's Gateway space station; a selfie taken by the Perseverance rover on Mars; and an artistic depiction of the Europa Clipper spacecraft orbiting Jupiter's moon Europa. Image credit: NASA/JPL-Caltech | + Expand image",
+          "title": "Student Project: NASA Space Voyagers: The Game | NASA/JPL Edu",
+          "url": "https://www.jpl.nasa.gov/edu/learn/project/nasa-space-voyagers-the-game/",
+          "score": 18.04821,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725037361
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Nasa space games"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "There are several other games available on the NASA Space Place website that you might find interesting. Here are some of them:\n1. Snap it! An Eclipse Photo Adventure - Help the Traveler snap photos of an eclipse!\n2. Explore Mars: A Mars Rover Game - Drive around the Red Planet and gather information in this fun coding game!\n3. Play Helios: A Game About How the Sun Makes Energy! - Where does the Sun's energy come from? Play Helios to find out!\n4. Space Volcanoes! - Explore the many volcanoes in our solar system using the Space Volcano Explorer.\n5. Go With the Flow: An Ocean Currents Game - In this ocean currents game, use heat and salt to float your sub to the treasure!\n6. Write your own zany adventure story! - Write your own zany adventure story!\n7. Play Solar System Switch-a-Roo! - Put clues together to find the planets and moons.\n8. DSN Uplink-Downlink: A DSN Game - Help the big antennas gather data from the spacecraft.\n9. Roman Space Observer - Catch as many astrophysical objects and phenomena as possible in this game!\n10. CubeSat Builder: Build a NASA Spacecraft! - Build a NASA Spacecraft in this game!\n11. Scope It Out! - Scope It Out! includes an introduction to telescopes and two matching games.\nYou can access these games through the NASA Space Place website."
+    },
+    {
+      "speaker": "user",
+      "text": "Do they use guns?  ",
+      "timestamp": 1725035505,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "UNANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Sorry, I do not have that information at the moment. ",
+      "timestamp": 1725035510,
+      "contexts": [
+        {
+          "document_id": "6e97640495151e68-4584-6689",
+          "text": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu\nMake the sample tube sprites reappear when players click the green flag to restart the game.\n\n+ Expand image\n\n4. Add a countdown timer NASA\u2019s missions to Mars and other destinations have a planned life expectancy. Some missions, including every Mars rover to date, have been extended and operated beyond their planned mission life expectancy, while others experience problems that shorten their mission. You can create a timer that counts down to the end of the mission and ends the game. Your timer should not be so short that the game is unplayable or unwinnable, but it should not be so long that there is no challenge to playing the game. As a bonus, you can create code to extend or shorten the planned mission time.\nTasks\n\nCreate a timer that counts from a set time down to zero. Hint: Create a Time variable that you can program to change. (See example image.)\nMake gameplay stop when the timer reaches zero.\nMake a \u201cMission Over\u201d message appear when the timer reaches zero.\nMake the timer start over when a player clicks the green flag to restart the game.\nBonus: Develop code that will increase or decrease the amount of time on the timer by one or two seconds at random.\n\n+ Expand image\n\n5. Add a scoring system Rover missions on Mars don\u2019t have a scoring system. But the science they collect is valuable, and some discoveries may be more exciting, interesting, or important than others. To determine how well players are doing while playing your game, you can develop a scoring system that includes points earned for collecting sample tubes. How points are totaled is up to you. You could also program your game to reduce point totals in certain scenarios (see Step 6, for example).\nTasks\n\nDevelop code to create a scoring system.\nIncrease the score by one or more points for each sample tube collected.\n\n+ Expand image\n\n6. Add hazards Space travel and other worlds are fraught with hazards. From steep slopes and deep sand to sharp rocks and high radiation, there are countless ways a mission can be delayed or end unexpectedly. Program your game to include hazards that players need to avoid.",
+          "title": "Student Project: Code a Mars Sample Collection Video Game | NASA/JPL Edu",
+          "url": "https://www.jpl.nasa.gov/edu/learn/project/code-a-mars-sample-collection-video-game/",
+          "score": 43.821945,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1725036044
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: If I include a scoring system, how should I total the points?\n|assistant|: You have the flexibility to determine how points are totaled in your game's scoring system. You could, for example, increase the score by one or more points for each sample tube collected. However, it does not provide specific details on how to total the points. Therefore, you can choose a method that best fits your game design.\n|user|: any sample setting?\n|assistant|: There is no specific sample setting provided. However, for the Mars Sample Collection Video Game, you are encouraged to study the backdrop images closely and identify areas that look interesting to place sample tubes in those spots.  Develop code to create a scoring system. Increase the score by one or more points for each sample tube collected.\n|user|: How to make the game interesting \n|assistant|: To make the game more interesting, you can consider adding various features such as: 1.  Increase the complexity of the terrain or add more hazards from steep slopes and deep sand to sharp rocks and high radiation, there are countless ways a mission can be delayed or end unexpectedly.  2. Specify a landing site by creating scripts that place the rover at a certain location at the beginning of the game.  3.  Let others play it and suggest improvements.\n|user|: sprite the sprite of bevarage?\n|assistant|: It seems like there might be a typo in your question.  A Mars fetch rover sprite is a sample collection tube.  \n|user|: Of course I knew it!  just teasing, sorry.  How to scripts sprite?\n|assistant|: To script the sprite, create a new sprite by moving the mouse over Choose a sprite in the Sprite window and selecting Upload sprite. Choose the Mars fetch rover sprite image.  Then, you can use the available blocks in Scratch to create scripts that control the sprite's behavior. For example, make the sample tube sprites disappear when they are visited by the rover, or  reappear when players click the green flag to restart the game.  Use motion blocks to make the sprite move, turn, or change costumes. You can also use control blocks to add loops, conditionals, or variables to your scripts.\n|user|: other games?\n|assistant|: There are several other games available on the NASA Space Place website that you might find interesting. Here are some of them: 1. Snap it! An Eclipse Photo Adventure - Help the Traveler snap photos of an eclipse!  2. Play Helios: A Game About How the Sun Makes Energy! - Where does the Sun's energy come from?  3. Space Volcanoes! - Explore the many volcanoes in our solar system using the Space Volcano Explorer. 4. Go With the Flow: An Ocean Currents Game - In this ocean currents game, use heat and salt to float your sub to the treasure! 5. Write your own zany adventure story!  6. Play Solar System Switch-a-Roo! - Put clues together to find the planets and moons. 7. DSN Uplink-Downlink: A DSN Game - Help the big antennas gather data from the spacecraft. 8. Roman Space Observer - Catch as many astrophysical objects and phenomena as possible in this game! 9. CubeSat Builder: Build a NASA Spacecraft!  10. Scope It Out! - Scope It Out! includes an introduction to telescopes and two matching games. You can access these games through the NASA Space Place website.\n|user|: Do they use guns?  "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "0b305f509b508809-0-1978",
+          "text": "Relay: A Laser-Based Space Communications Game | NASA Space Place \u2013 NASA Science for Kids\n\n\nRelay: A Laser-Based Space Communications Game | NASA Space Place \u2013 NASA Science for Kids\n\nrelay-laser-communications-game\n\nEarth\nSun\nSolar System\nUniverse\nScience and Tech\nEducators\n\nRelay: A Laser-Based Space Communications Game\n\nAbout the game\nIn this game you will send information, or data, back to Earth using lasers. You will use mirrors to move the laser and avoid obstacles to get the data back to Earth. Each level has new challenges and your ultimate goal is to build a communication network and synchronize, or match, the time on atomic clocks.\n\nAbout the mission\nOptical communication uses lasers to send data with a type of light that we can\u2019t see, called infrared light. Since the 1950s, NASA missions have used a different type of waves, called radio waves, to send data to and from space. With current radio wave communications, it takes about nine weeks to send a complete map of Mars back to Earth. With lasers, it only takes about nine days!\nOptical communication is very useful for space missions because data can be sent faster and more securely. Optical communication systems are also smaller, weigh less, and use less power. A smaller size means more room for science instruments, and using less power means less of a drain of the spacecraft\u2019s batteries. These are all very important details for NASA when designing and creating mission concepts. To learn more, visit Laser Communications | NASA.\n\n        \tarticle last updated July 28, 2022\n        \n\nIf you liked this, you may like:\n\nDSN Uplink-Downlink: A DSN Game\n\nSnap it! An Eclipse Photo Adventure\n\nExplore Mars: A Mars Rover Game\n\n\t    Games\t    \n\n\t    Crafts\t    \n\n\t    Activities\t    \n\n\t    Videos\t    \n\n\t    Glossary\t    \n\n\t    Mystery\t    \n\nAbout Us\nPrivacy Policy\nImage Use\nAccessibility\n\nContact NASA Space Place\n\n        Last Updated: May 6th, 2024    \n\n \n\nMore\nLess\n\nBy Subject\n\nSpace\nSun\nEarth\nSolar System\nPeople & Technology\nParents & Educators\n\nBy Type\n\nExplore\nDo\nPlay\n\nMore\nLess\n\n",
+          "title": "Relay: A Laser-Based Space Communications Game | NASA Space Place \u2013 NASA Science for Kids",
+          "url": "https://spaceplace.nasa.gov/relay-laser-communications-game/en/",
+          "score": 16.144876,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1725036035
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Nasa space games use guns?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "87fdc8101cee16b1-1441-3295",
+          "text": "Play | NASA Space Place \u2013 NASA Science for Kids\nCatch as many astrophysical objects and phenomena as possible in this game! This link takes you away from NASA Space Place. \nplay\nLinks out \n\nCubeSat Builder: Build a NASA Spacecraft!\n\n Build a NASA Spacecraft in this game! This link takes you away from NASA Space Place. \nplay\nLinks out \n\nScope It Out!\n\n Scope It Out! includes an introduction to telescopes and two matching games. This link takes you away from NASA Space Place. \nplay\nLinks out \n\nViewspace\n\n Explore the universe with interactives and videos. This link takes you away from NASA Space Place. \nplay\nLinks out \n\nMars Photo Booth\n\n Put yourself in mission control, or on Mars, next to the rover. This link takes you away from NASA Space Place. \nplay\nLinks out \n\nSpace Forensics Game\n\n Stars exploding? Who would do such a thing? Join Detective Eagle Quark on his investigation of this mystery in this Space Forensics interactive game. This link takes you away from NASA Space Place. \nplay\nLinks out \n\nClimate Time Machine\n\n See into the past and ahead to the future with the Climate Time Machine. This link takes you away from NASA Space Place. \nplay\nLinks out \n\nCoral Bleaching\n\n See what happens to the coral reef depending on the various conditions you choose. This link takes you away from NASA Space Place. \nplay\nLinks out \n\nMars Rover Game\n\n Mars Rover drivers wanted! Search for water as your game rover climbs up and down hills to explore Mars. This link takes you away from NASA Space Place. \nplay\nLinks out \n\nNASA Home and City\n\n Trace space back to you! This link takes you away from NASA Space Place. \nplay\nLinks out \n\n\t Games\t \n\n\t Crafts\t \n\n\t Activities\t \n\n\t Videos\t \n\n\t Glossary\t \n\n\t Mystery\t \n\nAbout Us\nPrivacy Policy\nImage Use\nAccessibility\n\nContact NASA Space Place\n\n Last Updated: May 6th, 2024 \n\n \n\nMore\nLess\n\nBy Subject\n\nSpace\nSun\nEarth\nSolar System\nPeople & Technology",
+          "title": "Play | NASA Space Place \u2013 NASA Science for Kids",
+          "url": "https://spaceplace.nasa.gov/menu/play/",
+          "score": 16.074991,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "no",
+                "timestamp": 1725036041
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Nasa space games use guns?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "No, NASA does not use guns in their Mars rover missions. The document states that players should avoid hazards, but it does not mention the use of guns as a means to deal with those hazards."
+    },
+    {
+      "speaker": "user",
+      "text": "I meant all those games in general, not specific to the Mars game.",
+      "timestamp": 1725036177,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "No, as far as I know, they use a rubber-band-powered rover and a Cardboard Rover. The Cardboard Rover is a light-powered device that can move to collect as much light as possible without overheating. They also use \u03c0 (pi) to solve stellar math problems, mirrors to move the laser and avoid obstacles to get the data back to Earth, and laser-based space communications, among other technologies.",
+      "timestamp": 1725036180,
+      "contexts": [
+        {
+          "document_id": "87fdc8101cee16b1-2-1877",
+          "text": "Play | NASA Space Place \u2013 NASA Science for Kids\nPlay | NASA Space Place \u2013 NASA Science for Kids\n\nplay\n\nVea en Espa\u00f1ol\n\nEarth\nSun\nSolar System\nUniverse\nScience and Tech\nEducators\n\nPlay\n\n \n\nSnap it! An Eclipse Photo Adventure\n\n Help the Traveler snap photos of an eclipse! \nplay\n\nRelay: A Laser-Based Space Communications Game\n\n Learn about laser-based space communications in this game! \nplay\n\nColor Your Universe: Find the Hidden Objects\n\n Can you find all the NASA and space-themed hidden objects? \nplay\n\nExplore Mars: A Mars Rover Game\n\n Drive around the Red Planet and gather information in this fun coding game! \nplay\n\nPlay Helios: A Game About How the Sun Makes Energy!\n\n Where does the Sun's energy come from? Play Helios to find out! \nplay\n\nSpace Volcanoes!\n\n Explore the many volcanoes in our solar system using the Space Volcano Explorer. \nexplore\n\nGo With the Flow: An Ocean Currents Game\n\n In this ocean currents game, use heat and salt to float your sub to the treasure! \nplay\n\nWrite your own zany adventure story!\n\n Write your own zany adventure story! \nplay\n\nPlay Solar System Switch-a-Roo!\n\n Put clues together to find the planets and moons. \nplay\n\nDSN Uplink-Downlink: A DSN Game\n\n Help the big antennas gather data from the spacecraft. \nplay\n\nNASA Space Voyagers: The Game\n\n In this strategy card game, build a spacecraft that can explore destinations throughout our solar system. This link takes you away from NASA Space Place. \nplay\nLinks out \n\nRoman Space Observer\n\n Catch as many astrophysical objects and phenomena as possible in this game! This link takes you away from NASA Space Place. \nplay\nLinks out \n\nCubeSat Builder: Build a NASA Spacecraft!\n\n Build a NASA Spacecraft in this game! This link takes you away from NASA Space Place. \nplay\nLinks out \n\nScope It Out!\n\n Scope It Out! includes an introduction to telescopes and two matching games. This link takes you away from NASA Space Place. \nplay",
+          "title": "Play | NASA Space Place \u2013 NASA Science for Kids",
+          "url": "https://spaceplace.nasa.gov/menu/play/",
+          "score": 18.343628,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725037241
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Nasa space games "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "0b305f509b508809-0-1978",
+          "text": "Relay: A Laser-Based Space Communications Game | NASA Space Place \u2013 NASA Science for Kids\n\n\nRelay: A Laser-Based Space Communications Game | NASA Space Place \u2013 NASA Science for Kids\n\nrelay-laser-communications-game\n\nEarth\nSun\nSolar System\nUniverse\nScience and Tech\nEducators\n\nRelay: A Laser-Based Space Communications Game\n\nAbout the game\nIn this game you will send information, or data, back to Earth using lasers. You will use mirrors to move the laser and avoid obstacles to get the data back to Earth. Each level has new challenges and your ultimate goal is to build a communication network and synchronize, or match, the time on atomic clocks.\n\nAbout the mission\nOptical communication uses lasers to send data with a type of light that we can\u2019t see, called infrared light. Since the 1950s, NASA missions have used a different type of waves, called radio waves, to send data to and from space. With current radio wave communications, it takes about nine weeks to send a complete map of Mars back to Earth. With lasers, it only takes about nine days!\nOptical communication is very useful for space missions because data can be sent faster and more securely. Optical communication systems are also smaller, weigh less, and use less power. A smaller size means more room for science instruments, and using less power means less of a drain of the spacecraft\u2019s batteries. These are all very important details for NASA when designing and creating mission concepts. To learn more, visit Laser Communications | NASA.\n\n        \tarticle last updated July 28, 2022\n        \n\nIf you liked this, you may like:\n\nDSN Uplink-Downlink: A DSN Game\n\nSnap it! An Eclipse Photo Adventure\n\nExplore Mars: A Mars Rover Game\n\n\t    Games\t    \n\n\t    Crafts\t    \n\n\t    Activities\t    \n\n\t    Videos\t    \n\n\t    Glossary\t    \n\n\t    Mystery\t    \n\nAbout Us\nPrivacy Policy\nImage Use\nAccessibility\n\nContact NASA Space Place\n\n        Last Updated: May 6th, 2024    \n\n \n\nMore\nLess\n\nBy Subject\n\nSpace\nSun\nEarth\nSolar System\nPeople & Technology\nParents & Educators\n\nBy Type\n\nExplore\nDo\nPlay\n\nMore\nLess\n\n",
+          "title": "Relay: A Laser-Based Space Communications Game | NASA Space Place \u2013 NASA Science for Kids",
+          "url": "https://spaceplace.nasa.gov/relay-laser-communications-game/en/",
+          "score": 17.996096,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725037239
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Nasa space games "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "00751ce378f21667-829-2798",
+          "text": "Activities for Students \u2013\u00a0NASA Jet Propulsion Laboratory\nAll topicsAeronauticsAircraft Probes, Satellites and/or SpacecraftAlgebraArtsAstrobiologyAstronomyChemistryComputer ScienceData Collection, Analysis and ProbabilityEarthEarth and Space ScienceEarth HistoryEarth ProcessesEarth ScienceEarth StructureEarth, Moon and SunElectricity and MagnetismEnergyEngineering and TechnologyGeometryHeat and ThermodynamicsImage Processing and VisualizationLanguage ArtsLife SciencesLight and OpticsMathematicsMeasurementMotion and ForcesNumber and OperationsPhysical SciencesProblem SolvingRemote SensingScience and SocietySolar SystemStates of MatterStructure and Properties of MatterTechnology and SocietyThe Design ProcessThe Nature of ScienceThe Nature of TechnologyThe Scientific Process \n\n\tlist view\n\t \n\n\tgrid view\n\t \n\nTake the Challenge!\nCan you use \u03c0 (pi) to solve these stellar math problems faced by NASA scientists and engineers?\n\nproject\nThe NASA Pi Day Challenge\n\nproject\n\nThe NASA Pi Day Challenge\n\nCan you use \u03c0 (pi) to solve these stellar math problems faced by NASA scientists and engineers?TAGS:AsteroidsEarthExoplanetsJupiterMarsMercurypipi daypi day challengeJWSTPsycheEclipseEuropaMarsMars Sample ReturnSaturnSunUniverse\n\nGet Started!\nCreate a video game that lets players explore the Red Planet with a helicopter like the one going to Mars with NASA's Perseverance rover!\n\nproject\nCode a Mars Helicopter Video Game\n\nproject\n\nCode a Mars Helicopter Video Game\n\nCreate a video game that lets players explore the Red Planet with a helicopter like the one going to Mars with NASA's Perseverance rover!TAGS:MarsMars RoverMars HelicoptercodingprogramminghelicopterMars 2020en Espa\u00f1olvideo tutorialspace travelScratchDesign Your SpacecraftMars Sample ReturnMissionsRoversSpacecraft\n\nGet started!\nUse Scratch, a visual programming language, to create a video game that simulates the way NASA will collect samples on Mars!\n\nproject\nCode a Mars Sample Collection Video Game\n\nproject\n\nCode a Mars Sample Collection Video Game",
+          "title": "Activities for Students \u2013\u00a0NASA Jet Propulsion Laboratory",
+          "url": "https://www.jpl.nasa.gov/edu/learn/tag/search/mars+sample+return",
+          "score": 18.710964,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725037203
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Nasa scientific games "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "56052d9c558de508-829-2811",
+          "text": "Activities for Students \u2013\u00a0NASA Jet Propulsion Laboratory\nAll topicsAeronauticsAircraft Probes, Satellites and/or SpacecraftAlgebraArtsAstrobiologyAstronomyChemistryComputer ScienceData Collection, Analysis and ProbabilityEarthEarth and Space ScienceEarth HistoryEarth ProcessesEarth ScienceEarth StructureEarth, Moon and SunElectricity and MagnetismEnergyEngineering and TechnologyGeometryHeat and ThermodynamicsImage Processing and VisualizationLanguage ArtsLife SciencesLight and OpticsMathematicsMeasurementMotion and ForcesNumber and OperationsPhysical SciencesProblem SolvingRemote SensingScience and SocietySolar SystemStates of MatterStructure and Properties of MatterTechnology and SocietyThe Design ProcessThe Nature of ScienceThe Nature of TechnologyThe Scientific Process \n\n\tlist view\n\t \n\n\tgrid view\n\t \n\nTry it out!\nIn this challenge, you will build and program a light-powered device that can move to collect as much light as possible while not overheating.\n\nproject\nMake and Code a Light-Powered Device\n\nproject\n\nMake and Code a Light-Powered Device\n\nIn this challenge, you will build and program a light-powered device that can move to collect as much light as possible while not overheating.TAGS:Climate ChangeEarthEarth's MoonJupiterMarsMissionsMoonsRoversSolarSolar PowerSolar PanelJunoPsycheCodingIo FlybySpacecraftSun\n\nPlay!\nIn this strategy card game, you'll build spacecraft that can explore the Moon, Mars, and other destinations throughout our solar system while withstanding challenges thrown your way.\n\nproject\nNASA Space Voyagers: The Game\n\nproject\n\nNASA Space Voyagers: The Game\n\nIn this strategy card game, you'll build spacecraft that can explore the Moon, Mars, and other destinations throughout our solar system while withstanding challenges thrown your way.TAGS:EarthEarth's MoonJupiterMarsMission to MarsPerseveranceCuriosityVikingPathfinderRangerApolloArtemisDesign Your SpacecraftIngenuityHelicopterMars HelicopterEuropaEuropa ClipperArtemisOcean WorldsIo FlybyMissionsMoonsRoversSpacecraft\n\nExplore more",
+          "title": "Activities for Students \u2013\u00a0NASA Jet Propulsion Laboratory",
+          "url": "https://www.jpl.nasa.gov/edu/learn/tag/search/Io+Flyby",
+          "score": 18.699362,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725037206
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Nasa scientific games "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "0d769154d6dcdbc7-829-2840",
+          "text": "Activities for Students \u2013\u00a0NASA Jet Propulsion Laboratory\nAll topicsAeronauticsAircraft Probes, Satellites and/or SpacecraftAlgebraArtsAstrobiologyAstronomyChemistryComputer ScienceData Collection, Analysis and ProbabilityEarthEarth and Space ScienceEarth HistoryEarth ProcessesEarth ScienceEarth StructureEarth, Moon and SunElectricity and MagnetismEnergyEngineering and TechnologyGeometryHeat and ThermodynamicsImage Processing and VisualizationLanguage ArtsLife SciencesLight and OpticsMathematicsMeasurementMotion and ForcesNumber and OperationsPhysical SciencesProblem SolvingRemote SensingScience and SocietySolar SystemStates of MatterStructure and Properties of MatterTechnology and SocietyThe Design ProcessThe Nature of ScienceThe Nature of TechnologyThe Scientific Process \n\n\tlist view\n\t \n\n\tgrid view\n\t \n\nTry it out!\nBuild a rubber-band-powered rover that can scramble across a room.\n\nproject\nMake a Cardboard Rover\n\nproject\n\nMake a Cardboard Rover\n\nBuild a rubber-band-powered rover that can scramble across a room.TAGS:DesignFlightProjectDIYEngineeringBuildingThe Engineering Design ProcessMoon 2024ApolloMay the Fourthen Espa\u00f1olspace travelDesign Your SpacecraftcodingmicrodevicesprogrammingEarth's MoonMarsMissionsRoversSpacecraft\n\nGet Started!\nCreate a video game that lets players explore the Red Planet with a helicopter like the one going to Mars with NASA's Perseverance rover!\n\nproject\nCode a Mars Helicopter Video Game\n\nproject\n\nCode a Mars Helicopter Video Game\n\nCreate a video game that lets players explore the Red Planet with a helicopter like the one going to Mars with NASA's Perseverance rover!TAGS:MarsMars RoverMars HelicoptercodingprogramminghelicopterMars 2020en Espa\u00f1olvideo tutorialspace travelScratchDesign Your SpacecraftMars Sample ReturnMissionsRoversSpacecraft\n\nPlay!\nIn this strategy card game, you'll build spacecraft that can explore the Moon, Mars, and other destinations throughout our solar system while withstanding challenges thrown your way.\n\nproject\nNASA Space Voyagers: The Game\n\nproject\n\nNASA Space Voyagers: The Game",
+          "title": "Activities for Students \u2013\u00a0NASA Jet Propulsion Laboratory",
+          "url": "https://www.jpl.nasa.gov/edu/learn/tag/search/Design+Your+Spacecraft",
+          "score": 18.633444,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725037209
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Nasa scientific games "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "No, guns are not typically used in the games mentioned. They are educational and scientific games related to space exploration, not shooting games."
+    },
+    {
+      "speaker": "user",
+      "text": "Great!  there certainly are scientists who care about violent culture in the US!",
+      "timestamp": 1725037977,
+      "enrichments": {
+        "Question Type": [
+          "Non-Question",
+          "Opinion"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, it seems that the focus of the games and activities provided by NASA/JPL Edu is on education, space exploration, and scientific discovery. They inspire the world through innovations for the benefit of humanity.",
+      "timestamp": 1725037980,
+      "contexts": [
+        {
+          "document_id": "4e6b3c9b505969b6-1288-3570",
+          "text": "A Message from Dr. Laurie Leshin\nWe seek to: NISAR Assembly: NASA-ISRO Synthetic Aperture Radar being assembled in SAF Credit: NASA/JPL-Caltech Drive the forefront of scientific discovery and extraordinary benefit to humanity through innovative missions, technology, and researchInspire people everywhere to think bigger and imagine what is possibleLeverage our unique capabilities to advance the broader space-exploration ecosystemCreate a safe, inclusive, exciting workplace where all can thriveWe have big aspirations, driven by our values. We aim to be: \n BOLD.\n We are courageous explorers, driven by our conviction to take informed risks and expand the edge of possibility. We build and manage complex missions designed to tackle the most challenging scientific questions and address global challenges. We are motivated by building first-of-a-kind systems and by knowing that our discoveries will advance knowledge and drive positive change in society. \n INCLUSIVE.\n We create a collaborative culture where our teams, colleagues, and partners feel valued and empowered to innovate. We appreciate excellence, expertise, and experience across all disciplines. We embrace difference with respect and curiosity. We create environments where teams can achieve things not thought possible. We take pride in the breadth of our reach, engagement, and impact. \n TRUSTED.\n We operate with integrity and the highest professional standards. We do the right thing. We honor our commitments. We work to advance our relationships. We share information and expertise with each other, with partners, and with the world. We work together toward ambitious common goals and outcomes. \n Looking forward, we see our work through the lens of:\n \n SUCCEED\n \n Advance science and exploration by delivering on our commitments\n \n Learn More\n \n SEED\n \n Grow our capabilities to enable the future of scientific exploration from space\n \n Learn More\n \n LEAD\n \n Be an inspiring role model and enabling industry leader\n \n Learn More\n Within the Succeed, Seed and Lead framework, we will focus on a set of strategic imperatives to guide our path forward:1. World Class Workforce2. Position For Performance3. Transformative Science and Technology4. Lab-wide Planning and Prioritization5. Industry Leading Workplace Culture6. Global Inspiration7.",
+          "title": "A Message from Dr. Laurie Leshin",
+          "url": "https://www.jpl.nasa.gov/a-plan-for-jpl",
+          "score": 17.14743,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725039162
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Nasa scientists  culture"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "01ecc36678dae793-8277-9197",
+          "text": "People of NASA Science - NASA Science\nMark ClampinDr. Mark Clampin is the Astrophysics Division Director in the Science Mission Directorate at NASA Headquarters in Washington, DC. The\u2026BioValeria SalazarSystems Engineer - NASA's Jet Propulsion Laboratory (JPL)BioPrevious12345\u20268NextReturn to topThe National Aeronautics and Space AdministrationNASA explores the unknown in air and space, innovates for the benefit of humanity, and inspires the world through discovery.About NASA's MissionJoin UsHomeNews & EventsMultimediaNASA+MissionsHumans in SpaceEarth & ClimateThe Solar SystemThe UniverseScienceAeronauticsTechnologyLearning ResourcesAbout NASANASA en Espa\u00f1olFollow NASAMore NASA Social AccountsNASA NewslettersSitemapFor MediaPrivacy PolicyFOIANo FEAR ActOffice of the IGBudget & Annual ReportsAgency Financial ReportsContact NASAAccessibilityPage Last Updated:5 months agoPage Editor:SMD Content EditorsResponsible NASA Official for Science:Dana Bolles",
+          "title": "People of NASA Science - NASA Science",
+          "url": "https://science.nasa.gov/science-people/",
+          "score": 16.567291,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725038806
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Nasa scientists  culture"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "a699bdfdc1eb02c3-7435-9816",
+          "text": "NASA Impacts - NASA\nBenefits to Humanity\n\nBenefits to Science\n\nInternational Space Station\n\nScience\n\nTechnology\n\nEconomic Impact\nNASA contributes to our Nation\u2019s economic competitiveness, fueling growth in American industry and supporting quality, high-paying jobs across the country. NASA commissioned a study of its national economic impact for FY21, which showed that every U.S. state and the District of Columbia benefited from NASA activities.\n\n\tNASA Economic Impact Report about Economic Impact\n\nArtemis\n\nNASA\u2019s Artemis campaign will return humans to the lunar surface in the 2020s, create a long-term American presence for years to come, and provide the experience and technology to conduct the first human missions to Mars. While providing scientific returns, geopolitical leadership, and the enduring value of human and robotic space exploration, Artemis offers considerable benefits to American citizens in the prospect of substantial economic growth while driving a workforce of the future.\n\n Learn More about Artemis \n\nNASA astronauts Reid Wiseman, Victor Glover, and Christina Hammock Koch, and Canadian Space Agency astronaut Jeremy Hansen will venture around the Moon on Artemis II, the first crewed mission on NASA\u2019s path to establishing a long-term presence at the Moon for science and exploration through Artemis. NASA/James Blair \n\nAeronautics\n\nResults achieved by NASA\u2019s aeronautical innovators through the years directly benefit today\u2019s air transportation system, the aviation industry, and the passengers and businesses who rely on those advances in flight every day. As a result, every U.S. commercial aircraft and U.S. air traffic control tower uses NASA-developed technology to improve efficiency and maintain safety.\n\n Learn More about Aeronautics \n\nNASA\u2019s DC-8 airborne laboratory is inspected and secured for the night at Cecil Field in Jacksonville, Florida. NASA/John Gould \n\nBenefits to Humanity\n\nTechnologies and missions we develop for human spaceflight have thousands of applications on Earth, boosting the economy, creating new career paths, and advancing everyday technologies all around us.\n\n Learn More about Benefits to Humanity \n\nThe Ivanpah Solar Electric Generating System is an example of a concentrated solar power plant, which works by having hundreds of reflective panels heating up a central tower.Cliff Ho/U.S. Department of Energy \n\nBenefits to Science",
+          "title": "NASA Impacts - NASA",
+          "url": "https://www.nasa.gov/nasa-impacts/",
+          "score": 15.206248,
+          "feedback": {
+            "relevant": {
+              "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+                "value": "yes",
+                "timestamp": 1725039139
+              },
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "no",
+                "timestamp": 1726582910
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Nasa mission humanity"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, it seems that the focus of the games and activities provided by NASA/JPL Edu is on education, space exploration, and scientific discovery, rather than promoting violence or the use of weapons."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "created",
+      "timestamp": 1725039162
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "edited",
+      "timestamp": 1726583031
+    },
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "accepted",
+      "timestamp": 1726583213
+    }
+  ],
+  "editor": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+  "domain": "mt-rag-govt-elser-512-100-20240611",
+  "reviewer": "9dcd142c-415e-4161-a82f-c8b14bfb36ac"
+}

@@ -1,0 +1,837 @@
+{
+  "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-clapnq-elser-512-100-20240503",
+      "size": "183408"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "how does the mls all star game work",
+      "timestamp": 1723634867,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The MLS All-Star Game is an annual soccer game featuring select players from Major League Soccer. It originally started with a traditional East vs. West format, but later evolved into inviting a club from abroad to play against a league all-star team. Players are awarded roster spots through a combination of fan voting and selections by the appointed manager and league commissioner. The game takes place during the middle of the MLS season, which coincides with the pre-seasons of most European leagues. The MLS All-Stars have an 8-4 record in the competition as of 2015.",
+      "timestamp": 1723634871,
+      "contexts": [
+        {
+          "document_id": "832021719_633-1349-0-716",
+          "text": "Major League Soccer All-Star Game\nThe Major League Soccer All - Star Game is an annual soccer game held by Major League Soccer featuring select players from the league against an international club . MLS initially adopted a traditional all - star game format used by other North American sports leagues where the Eastern Conference squared off against the Western Conference . This eventually evolved into the current system where the league annually invites a club from abroad to play against a league all - star team . The MLS All - Stars hold an 8 -- 4 record in the competition marking the season 's midpoint . Players are awarded rosters spots through a combination of fan voting and selections by the appointed manager and league commissioner .",
+          "title": "Major League Soccer All-Star Game",
+          "score": 20.664732,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723635164
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: how does the mls all star game work"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "832021719_1932-3263-0-1331",
+          "text": "Major League Soccer All-Star Game\nMajor League Soccer 's first all - star game was played at Giants Stadium in the summer of 1996 . The game , using the traditional East -- West format with players handpicked by the coaching staffs , was the first game of a doubleheader with the Brazilian national team defeating a team of FIFA World All - Stars . The matchup between divisions would only be used for six seasons as MLS tried experimenting with different formats . The 1998 All - Star Game placed a team of American MLS players against MLS players from abroad . The 2002 game , the first to use a league - wide all - star team , is the only game to feature a national team opponent . Since then ( except in 2004 ) , every opponent has been a professional club invited by the league . The MLS All - Stars won their first six games before falling to Everton in penalties in 2009 . All games since 2005 have been against teams from Europe , the majority of which have been from England 's Premier League . This is a feasible format because unlike MLS ( which runs a spring - summer - fall schedule ) the major European leagues all run a fall - winter - spring schedule , meaning the middle of the MLS season coincides with the pre-seasons of most European leagues . From a European perspective , the match is considered to be a pre-season friendly against an MLS XI .",
+          "title": "Major League Soccer All-Star Game",
+          "score": 18.0077,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723635166
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: how does the mls all star game work"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The MLS All-Star Game is an annual soccer game featuring select players from Major League Soccer. It originally started with a traditional East vs. West format, but later evolved into inviting a club from abroad to play against a league all-star team. Players are awarded roster spots through a combination of fan voting and selections by the appointed manager and league commissioner. The game takes place during the middle of the MLS season, which coincides with the pre-seasons of most European leagues, making it a feasible format for European clubs to participate. The MLS All-Stars have an 8-4 record in the competition as of 2015."
+    },
+    {
+      "speaker": "user",
+      "text": "What is it called outside of the USA?",
+      "timestamp": 1723635319,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "In the United States, it is known as soccer. Some other countries also call it soccer, but in most parts of the world, it is called football. Sports commonly called football in certain places include association football ( known as soccer in some countries ) ; gridiron football ( specifically American football or Canadian football ) ; Australian rules football ; rugby football ( either rugby league or rugby union ) ; and Gaelic football .",
+      "timestamp": 1723635321,
+      "contexts": [
+        {
+          "document_id": "822349642_58247-58657-0-410",
+          "text": "Southern United States\nIn recent decades association football , known in the South as in the rest of the United States as `` soccer '' , has become a popular sport at youth and collegiate levels throughout the region . The game has been historically widespread at the college level in the Atlantic coast states of Maryland , Virginia , and the Carolinas , which contain many of the nation 's most successful college soccer programs .",
+          "title": "Southern United States",
+          "score": 23.268707,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723635762
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Southern United States In recent decades association football , known in the South as in the rest of the United States as `` soccer ''"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "864952571_491-1122-0-631",
+          "text": "Football\nFootball is a family of team sports that involve , to varying degrees , kicking a ball to score a goal . Unqualified , the word football is understood to refer to whichever form of football is the most popular in the regional context in which the word appears . Sports commonly called football in certain places include association football ( known as soccer in some countries ) ; gridiron football ( specifically American football or Canadian football ) ; Australian rules football ; rugby football ( either rugby league or rugby union ) ; and Gaelic football . These different variations of football are known as football codes .",
+          "title": "Football",
+          "score": 21.84145,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723635764
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "football Football is a family of team sports that involve , to varying degrees , kicking a ball to score a goal .f"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "I don't have specific information about what the MLS All-Star Game is called outside of the USA. However, it's commonly referred to as the \"MLS All-Star Game\" in international soccer circles."
+    },
+    {
+      "speaker": "user",
+      "text": "Can women play it?",
+      "timestamp": 1723636443,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, women's association football, also commonly known as women's football or women's soccer, is the most prominent team sport for women worldwide. In the 1970s, Italy became the first country to have professional women's football players on a part-time basis. An Italian women's football federation, known as Federazione Femminile Italiana Gioco Calcio or FFIGC, ran a \"World Championships\" tournament in Rome supported by the Martini and Rossi wine manufacturers, entirely without the involvement of FIFA or any of the common national associations.",
+      "timestamp": 1723636447,
+      "contexts": [
+        {
+          "document_id": "850509972_112-410-0-298",
+          "text": "Women's association football\nWomen 's association football , also commonly known as women 's football , or women 's soccer , is the most prominent team sport played by women around the globe . It is played at the professional level in numerous countries throughout the world and 176 national teams participate internationally .",
+          "title": "Women's association football",
+          "score": 17.933485,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723636884
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Women's association football"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "850509972_7146-7467-0-321",
+          "text": "Women's association football\nDuring the 1970s , Italy became the first country with professional women 's football players on a part - time basis . In 1985 , the United States national soccer team was formed and in 1989 , Japan became the first country to have a semi-professional women 's football league , the L. League - still in existence today .",
+          "title": "Women's association football",
+          "score": 24.609406,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723636881
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Women's association football During the 1970s , Italy became the first country with professional women"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "850509972_6450-7120-0-670",
+          "text": "Women's association football\nIn 1970 an Italian ladies football federation , known as Federazione Femminili Italiana Gioco Calcia or FFIGC , ran a `` World Championships '' tournament in Rome supported by the Martini and Rossi strong wine manufacturers , entirely without the involvement of FIFA or any of the common National associations . This event was at least partly played by clubs . But a somewhat more successful World Championships with national teams was hosted by Mexico the following year . The final ( won by Denmark ) was played at the famous Estadio Azteca , the largest arena in the entire Americas north of the Panama Canal at the time , in front of no less than 112.500 attenders .",
+          "title": "Women's association football",
+          "score": 19.147892,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723638100
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Women's association football During the 1970s , Italy became the first country with professional women"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, women can play soccer, including in Major League Soccer's counterpart, the National Women's Soccer League, and at the international level in FIFA Women's World Cup and Olympics. However, the specific document provided does not mention any details about women participating in the MLS All-Star Game."
+    },
+    {
+      "speaker": "user",
+      "text": "Which is the most popular? ",
+      "timestamp": 1723638544,
+      "enrichments": {
+        "Question Type": [
+          "Comparative"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The World Cup is the world's most prestigious association football tournament and has the highest television audience of any sport, making it the most popular event globally. In terms of viewership, it exceeds even the Olympic Games. On the other hand, American football is the most popular sport in the United States, with 1.1 million high school football players and nearly 70,000 college football players.",
+      "timestamp": 1723638550,
+      "contexts": [
+        {
+          "document_id": "864952571_56601-57435-0-834",
+          "text": "Football\nSeveral of the football codes are the most popular team sports in the world . Globally , association football is played by over 250 million players in over 200 nations , and has the highest television audience in sport , making it the most popular in the world , American football , with 1.1 million high school football players and nearly 70,000 college football players , is the most popular sport in the United States , with the annual Super Bowl game accounting for nine of the top ten of the most watched broadcasts in U.S. television history . Australian rules football has the highest spectator attendance of all sports in Australia . Similarly , Gaelic football is the most popular sport in Ireland in terms of match attendance , and the All - Ireland Football Final is the most watched event of that nation 's sporting year .",
+          "title": "Football",
+          "score": 18.578104,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723639108
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "most popular version of football worldwide"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "865335038_2029-2437-0-408",
+          "text": "FIFA World Cup\nThe World Cup is the most prestigious association football tournament in the world , as well as the most widely viewed and followed sporting event in the world , exceeding even the Olympic Games ; the cumulative viewership of all matches of the 2006 World Cup was estimated to be 26.29 billion with an estimated 715.1 million people watching the final match , a ninth of the entire population of the planet .",
+          "title": "FIFA World Cup",
+          "score": 16.756672,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723639105
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "most popular version of football worldwide"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The most popular version of football worldwide is soccer, known as football in most countries. According to FIFA, soccer is played by over 240 million people across the globe in more than 200 countries. However, in the United States, the term \"football\" is often used to refer to American football, which is a different sport."
+    },
+    {
+      "speaker": "user",
+      "text": "Where does it originate from?",
+      "timestamp": 1723639254,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The origins of modern football codes can be traced back to Western Europe, particularly England. In 1409, King Henry IV of England made one of the earliest documented uses of the English word \"football\" when he issued a proclamation forbidding the levying of money for \"foteball\". FIFA acknowledges England as the birthplace of club football. The Football Association, established in 1863 by Ebenezer Cobb Morley, is recognized as the oldest football association, with the first set of football rules being drafted at that time.",
+      "timestamp": 1723639259,
+      "contexts": [
+        {
+          "document_id": "864952571_9169-9336-0-167",
+          "text": "Football\nThese games and others may well go far back into antiquity . However , the main sources of modern football codes appear to lie in western Europe , especially England .",
+          "title": "Football",
+          "score": 18.12235,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723639870
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "where does soccer football originate from?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "803829007_118588-119583-0-995",
+          "text": "United Kingdom\nA 2003 poll found that football is the most popular sport in the United Kingdom . England is recognised by FIFA as the birthplace of club football , and The Football Association is the oldest of its kind , with the rules of football first drafted in 1863 by Ebenezer Cobb Morley . Each of the Home Nations has its own football association , national team and league system . The English top division , the Premier League , is the most watched football league in the world . The first - ever international football match was contested by England and Scotland on 30 November 1872 . England , Scotland , Wales and Northern Ireland compete as separate countries in international competitions . A Great Britain Olympic football team was assembled for the first time to compete in the London 2012 Olympic Games . However , the Scottish , Welsh and Northern Irish football associations declined to participate , fearing that it would undermine their independent status -- a fear confirmed by FIFA . The",
+          "title": "United Kingdom",
+          "score": 22.193083,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723639867
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Does football originate in England?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "864952571_14735-14940-0-205",
+          "text": "Football\nKing Henry IV of England also presented one of the earliest documented uses of the English word `` football '' , in 1409 , when he issued a proclamation forbidding the levying of money for `` foteball '' .",
+          "title": "Football",
+          "score": 21.651602,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723639864
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Does football originate in England?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Association football, commonly known as football or soccer, originated in England in the mid-19th century. It was a evolution of various forms of football that were played in England and Scotland, including rugby football and Gaelic football. The rules of modern football were first codified in 1863 by the Football Association in England. Since then, it has become a global phenomenon and the most popular sport in the world."
+    },
+    {
+      "speaker": "user",
+      "text": "Is American football derived from it?",
+      "timestamp": 1723640203,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, American football evolved in the United States from the sports of association football (known in the U.S. as soccer) and rugby football.",
+      "timestamp": 1723640208,
+      "contexts": [
+        {
+          "document_id": "856059988_2018-3047-0-1029",
+          "text": "American football\nAmerican football evolved in the United States , originating from the sports of association football ( known in the U.S. as soccer ) and rugby football . The first match of American football was played on November 6 , 1869 , between two college teams , Rutgers and Princeton , under rules based on the association football rules of the time . During the latter half of the 1870s , colleges playing association football switched to the Rugby Union code , which allowed carrying the ball . A set of rule changes drawn up from 1880 onward by Walter Camp , the `` Father of American Football '' , established the snap , eleven - player teams , and the concept of downs ; later rule changes legalized the forward pass , created the neutral zone , and specified the size and shape of the football . The sport is closely related to Canadian football , which evolved parallel and contemporary to the American game , and most of the features that distinguish American football from rugby and soccer are also present in Canadian football .",
+          "title": "American football",
+          "score": 20.646463,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723640454
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Does American football come from football or soccer?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "856059988_5524-5831-0-307",
+          "text": "American football\nAmerican football evolved from the sports of association football ( soccer ) and rugby football . Rugby football , like American football , is a sport where two competing teams vie for control of a ball , which can be kicked through a set of goalposts or run into the opponent 's goal area to score points .",
+          "title": "American football",
+          "score": 19.089882,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723640452
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Does American football come from football or soccer?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, American football has roots in rugby football, which in turn traces its origins back to association football (also known as soccer) in England. Early forms of rugby were often referred to as \"football,\" and the first intercollegiate football game in the United States, played between Princeton and Rutgers in 1869, was based on rugby principles. Over time, these principles evolved into the distinct sport of American football, characterized by features such as forward passing, down-and-distance rules, and protective gear."
+    },
+    {
+      "speaker": "user",
+      "text": "Where American football is popular?",
+      "timestamp": 1723641119,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The National Football League (NFL) has the highest average attendance of any sports league in the world, and the Super Bowl is watched by millions globally. American football is played in European countries such as Switzerland, which has American football clubs in every major city, and Germany, where the sport has around 45,000 registered amateur players. In Europe, almost all nations have their leagues, highlighting its importance, such as Austria (Austrian Football League), Germany (German Football League), Great Britain (BAFA National Leagues), France (Ligue \u00c9lite de Football Am\u00e9ricain), and Italy (Italian Football League). However, American football has not yet reached the same level of popularity it has in, for example, North America. Football organizers are targeting Europe to expand the game.",
+      "timestamp": 1723641121,
+      "contexts": [
+        {
+          "document_id": "856059988_55164-55970-0-804",
+          "text": "American football\nThe sport is played in European countries such as Switzerland , which has American football clubs in every major city , and Germany , where the sport has around 45,000 registered amateur players . In Europe , almost all nations have their own leagues , highlighting its importance those of Austria ( Austrian Football League ) , Germany ( German Football League ) , Great Britain ( BAFA National Leagues ) , France ( Ligue \u00c9lite de Football Am\u00e9ricain ) and Italy ( Italian Football League ) . But in these countries American football has not yet reached the same level of popularity it has , for example , in North America . There are national teams of Austria , Finland , France , Germany , Great Britain , Hungary , Israel , Italy , Netherlands , Poland , Romania , Russia , Serbia , Spain and Sweden .",
+          "title": "American football",
+          "score": 18.966248,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723641389
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Where American football is popular?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "856059988_54309-55163-0-854",
+          "text": "American football\nEurope is a major target for expansion of the game by football organizers . In the United Kingdom in the 1980s , the sport was fairly popular , with the 1986 Super Bowl being watched by over 4 million people ( about 1 out of every 14 Britons ) . The sport 's popularity faded over the 1990s , coinciding with the establishment of the Premier League . According to BBC America , there is a `` social stigma '' surrounding American football in the UK , with many Brits feeling the sport has no right to call itself ' football ' due to the small emphasis on kicking . Nonetheless , the sport has retained a following in the United Kingdom ; the NFL operates a media network in the country , and since 2007 has hosted the NFL International Series in London . Super Bowl viewership has also rebounded , with over 4.4 million Britons watching Super Bowl XLVI .",
+          "title": "American football",
+          "score": 18.824518,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723641397
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Where American football is popular?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "866493429_130703-131952-0-1249",
+          "text": "United States\nAmerican football is by several measures the most popular spectator sport ; the National Football League ( NFL ) has the highest average attendance of any sports league in the world , and the Super Bowl is watched by millions globally . Baseball has been regarded as the U.S. national sport since the late 19th century , with Major League Baseball ( MLB ) being the top league . Basketball and ice hockey are the country 's next two leading professional team sports , with the top leagues being the National Basketball Association ( NBA ) and the National Hockey League ( NHL ) . These four major sports , when played professionally , each occupy a season at different but overlapping , times of the year . College football and basketball attract large audiences . In soccer , the country hosted the 1994 FIFA World Cup , the men 's national soccer team qualified for ten World Cups and the women 's team has won the FIFA Women 's World Cup three times ; Major League Soccer is the sport 's highest league in the United States ( featuring 19 American and 3 Canadian teams ) . The market for professional sports in the United States is roughly $69 billion , roughly 50 % larger than that of all of Europe , the Middle East , and Africa combined . The",
+          "title": "United States",
+          "score": 18.720894,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723641400
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Where American football is popular?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "American football is most popular in the United States. It has 1.1 million high school football players and nearly 70,000 college football players. The National Football League (NFL) is the professional league for American football in the U.S., and it is one of the major professional sports leagues in the country."
+    },
+    {
+      "speaker": "user",
+      "text": "Is it similar to rugby?",
+      "timestamp": 1723641635,
+      "enrichments": {
+        "Question Type": [
+          "Comparative"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, both sports originated from the older game of rugby football in the 19th century. British colonists and the British military introduced football to North America, where it became popular in American and Canadian universities and prep schools. At that time, association football and rugby football were not as distinct as they are now, and teams would negotiate the rules before each game. It's possible to compare American football and rugby league because they share origins and similar game concepts. Along with Canadian football, the rugby league is the sport most similar to American football. Both sports involve a limited number of downs or tackles, and scoring touchdowns or tries takes precedence over goal-kicking.",
+      "timestamp": 1723641639,
+      "contexts": [
+        {
+          "document_id": "808419312_394-761-0-367",
+          "text": "Comparison of American football and rugby league\nA comparison between American football and rugby league is possible because of their shared origins and similar game concepts . Along with Canadian football , rugby league is the most similar sport to American football . Both sports involve the concept of a limited number of downs / tackles and scoring touchdowns / tries takes clear precedence over goal - kicking .",
+          "title": "Comparison of American football and rugby league",
+          "score": 23.487846,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723642124
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Is American football similar to rugby?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "808419312_2507-3040-0-533",
+          "text": "Comparison of American football and rugby league\nBoth sports descend from the older game of rugby football in the 19th Century when its two offshoots developed . British colonists and the British military in Canada brought football to North America . It became popular in American and Canadian universities and prep schools . At the time , association football and rugby football were not as differentiated as they are now and teams would negotiate the rules before playing each game . The sports of American football and Canadian football evolved from these intercollegiate games .",
+          "title": "Comparison of American football and rugby league",
+          "score": 19.324364,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723642121
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Is American football similar to rugby?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, American football shares some similarities with rugby as it evolved from both association football (soccer) and rugby football. Both sports involve a ball being moved down a field with the objective of scoring points, and they both allow for physical contact between players. However, there are significant differences in the rules, strategies, and equipment used in both sports. For instance, in American football, players wear helmets, shoulder pads, and other protective gear, while rugby players do not. Additionally, American football features more stoppages in play and allows for forward passing, whereas rugby does not."
+    },
+    {
+      "speaker": "user",
+      "text": "How many teams?",
+      "timestamp": 1723642529,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "The football league consists of 32 teams.",
+      "timestamp": 1723642533,
+      "contexts": [
+        {
+          "document_id": "837407666_1762-2394-0-632",
+          "text": "History of the National Football League\nThe rival American Football League was founded in 1960 . It was very successful , and forced a merger with the older NFL that resulted in a greatly expanded league and the creation of the Super Bowl , which has become the most - watched annual sporting event in the United States . The league continued to expand to its current size of 32 teams . A series of labor agreements during the 1990s and increasingly large television contracts has helped keep the league one of the most profitable in the U.S. , and the only major league in the U.S. since 1990 to avoid a work stoppage that resulted in the loss of regular - season games .",
+          "title": "History of the National Football League",
+          "score": 20.437042,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723642680
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "How many American football teams are in the USA?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "In Major League Soccer (MLS), there are currently 26 teams, with plans to expand to 28 teams. As for the MLS All-Star Game, it features a team of all-stars from the MLS against a top international club. In American football, the National Football League (NFL) consists of 32 teams."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "created",
+      "timestamp": 1723642698
+    },
+    {
+      "author": "868c6e58-57c1-48ee-8c67-832dbedcac18",
+      "status": "accepted",
+      "timestamp": 1725550833
+    },
+    {
+      "author": "53573702-4140-4812-8658-ae10a54edfc8",
+      "status": "edited",
+      "timestamp": 1726589525
+    },
+    {
+      "author": "53573702-4140-4812-8658-ae10a54edfc8",
+      "status": "accepted",
+      "timestamp": 1726589607
+    }
+  ],
+  "editor": "53573702-4140-4812-8658-ae10a54edfc8",
+  "domain": "mt-rag-clapnq-elser-512-100-20240503",
+  "reviewer": "53573702-4140-4812-8658-ae10a54edfc8"
+}

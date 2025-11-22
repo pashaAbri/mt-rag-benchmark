@@ -1,0 +1,722 @@
+{
+  "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-ibmcloud-elser-512-100-20240502",
+      "size": "72442"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"bool\": {\n    \"must\": {\n      \"text_expansion\": {\n        \"ml.tokens\": {\n          \"model_id\": \".elser_model_1\",\n          \"model_text\": \"${QUERY}\"\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "What are the differences between query parameters and message parameters?",
+      "timestamp": 1723075835,
+      "enrichments": {
+        "Question Type": [
+          "Comparative"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Query parameters and message parameters are two types of parameters sent from WebSocket API. Query parameters are sent when phone integration connects to the service and are used in queries written with the Discovery Query Language. Message parameters are sent as part of the JSON data in the request body.",
+      "timestamp": 1723075850,
+      "contexts": [
+        {
+          "document_id": "ibmcld_16321-14177-15957",
+          "text": "\nThe WebSocket API sends two types of parameters: query parameters, which are sent when phone integration connects to the service, and message parameters, which are sent as part of the JSON data in the request body. For a full list of parameters, see the [Text to Speech API documentation](https://cloud.ibm.com/apidocs/text-to-speech).\n\n\n\n\n\n command_info.type : disable_barge_in \n\nDisables speech barge-in so that playback isn't interrupted when the caller speaks while audio is being played back.\n\nNo parameters.\n\n\n\n\n\n command_info.type : enable_barge_in \n\nEnables speech barge-in so that callers can interrupt playback by speaking.\n\nNo parameters.\n\n\n\n\n\n Changing the assistant's voice \n\nYou can change the voice of your assistant when it covers certain topics in the conversation that warrant it. For example, you might want to use a voice with a British accent for a branch of the conversation that applies only to customers in the UK.\n\nThis example shows how to specify a voice during the conversation:\n\n{\n\"generic\": [\n{\n\"response_type\": \"text_to_speech\",\n\"command_info\": {\n\"type\": \"configure\",\n\"parameters\": {\n\"synthesize\": {\n\"voice\": \"en-GB_KateV3Voice\"\n}\n}\n}\n}\n]\n}\n\nShow more\n\nIn the voice parameter, specify the voice model that you want to use. For more information about voice model options, see [Supported languages and voices](https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-voiceslanguageVoices).\n\nThe model you specify must be one that is supported by the Text to Speech service instance that is configured for use with the integration.\n\n\n\n\n\n\n\n Transferring a call to a live agent \n\nWhen you configure the phone integration, you can optionally set up backup call center support, which makes it possible for the assistant to transfer a call to a human.",
+          "url": "https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-phone-actions",
+          "score": 11.969907,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723078883
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What are the differences between query parameters and message parameters?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_07098-7-2215",
+          "text": "\nQuery parameters \n\nYou can use these parameters when you write queries with the Discovery Query Language. For more information, see the Discovery [API reference](https://cloud.ibm.com/apidocs/discovery-dataquery). For an overview of query concepts, see the [Query overview](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-query-concepts).\n\nQueries that are written in the Discovery Query Language can include both search and structure parameters.\n\nThe default values for query parameters can differ by project type. For more information about default values, see [Default query settings](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-query-defaults).\n\n\n\n Search parameters \n\nUse search parameters to search your collection, identify a result set, and analyze the result set.\n\nThe results set is the group of documents that are identified by the combined searches of the search parameters. The results set might be significantly larger than the returned results. If an empty query is submitted, the results set is equal to all the documents in the collection.\n\nDocuments that you do not have permissions to access are not returned in query results.\n\n\n\n\n\n Answer finding \n\nIBM Cloud\n\nThe find_answers parameter is supported in managed deployments only.\n\nBy default, Discovery provides answers by returning the entire [passage](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-query-parameterspassages) that contains the answer to a natural language query. When the answer-finding feature is enabled, Discovery also provides a \"short answer\" within the passage, and a confidence score to show whether the \"short answer\" answers the question that is explicit or implicit in the user query. Applications that use the answer-finding feature can display the short answer alone or can display the short answer emphasized in the context of the full passage. For most applications, displaying the short answer emphasized within the full passage is preferable, because answers generally make more sense in context.\n\nThe answer finding feature behaves in the following ways:\n\nIn the passage examples that follow, the short answers are shown in bold font.\n\n\n\n* Finds answers.",
+          "url": "https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-query-parameters",
+          "score": 16.348398,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723076484
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "query parameters"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_07191-1691-3739",
+          "text": "\nIf you test the same search term on a small data set, you might find that the filter and query parameters return very similar (if not identical) results. However, there is a difference between the two parameters.\n\n\n\n* Using a filter parameter alone returns search results in no specific order.\n* Using a query parameter alone returns search results in order of relevance.\n\n\n\nIn large data sets, if you need results returned in order of relevance, it is advisable that you combine the filter and query parameters because using them together improves performance. The reason is because the filter parameter runs first and caches results, and then the query parameter ranks them. For an example of using filters and queries together, see [Building combined queries](https://cloud.ibm.com/docs/discovery?topic=discovery-query-conceptsbuilding-combined-queries). Filters can also be used in aggregations.\n\nWhen you write a query that includes both a filter, and an aggregation, query, or natural_language_query parameter; the filter parameters run first, after which any aggregation, query, or natural_language_query parameters run in parallel.\n\nWith a simple query, especially on a small data set, filter and query often return the exact same (or similar) results. If a filter and query call return similar results, and getting a response in order of relevance does not matter, it is better to use filter because filter calls are faster and are cached. Caching means that the next time you make that call, you get a much quicker response, particularly in a big data set.\n\n\n\n\n\n\n\n aggregation \n\nAggregation queries return a count of documents matching a set of data values; for example, top keywords, overall sentiment of entities, and more. For the full list of aggregation options, see the [Aggregations table](https://cloud.ibm.com/docs/discovery?topic=discovery-query-aggregations). These aggregations are written using the [Discovery Query Language](https://cloud.ibm.com/docs/discovery?topic=discovery-query-operators).\n\n\n\n\n\n natural_language_query",
+          "url": "https://cloud.ibm.com/docs/discovery?topic=discovery-query-parameters",
+          "score": 13.369863,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723076486
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "query parameters"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Based on the provided document, query parameters and message parameters are two types of parameters used in different contexts in the WebSocket API. Query parameters are sent when phone integration connects to the service and are used in queries written with the Discovery Query Language to search a collection, identify a result set, and analyze the result set. On the other hand, message parameters are sent as part of the JSON data in the request body and are used for commands like disabling or enabling speech barge-in or changing the voice of the assistant. The document does not provide a detailed comparison between the two, but it can be inferred that query parameters are used for searching and filtering data, while message parameters are used for controlling the behavior of the service."
+    },
+    {
+      "speaker": "user",
+      "text": "can you tell me more about WebSocket API?",
+      "timestamp": 1723076877,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Of course! The WebSocket interface of the IBM Watson\u00ae Speech to Text service is the most natural way for a client to interact with the service. Because of their advantages, WebSockets are the preferred mechanism for speech recognition.  The WebSocket interface can take minutes to produce final results for a recognition request for an especially long audio file. For the WebSocket interface, the underlying TCP connection remains idle while the service prepares the response. ",
+      "timestamp": 1723076883,
+      "contexts": [
+        {
+          "document_id": "ibmcld_13429-163247-165127",
+          "text": "\nThe WebSocket section also discusses the maximum frame or message size of 4 MB enforced by the WebSocket interface.\n\nHTTP and WebSocket interfaces can now return warnings\n: The JSON response for a recognition request can now include an array of warning messages for invalid query parameters or JSON fields that are included with a request. Each element of the array is a string that describes the nature of the warning followed by an array of invalid argument strings. For example, \"warnings\": [ \"Unknown arguments: u'{invalid_arg_1}', u'{invalid_arg_2}'].\" ]. For more information, see the [API & SDK reference](https://cloud.ibm.com/apidocs/speech-to-text).\n\nBeta Apple iOS SDK is deprecated\n: The beta Watson Speech Software Development Kit (SDK) for the Apple\u00ae iOS operating system is deprecated. Use the Watson SDK for the Apple\u00ae iOS operating system instead. The new SDK is available from the [ios-sdk repository](https://github.com/watson-developer-cloud/ios-sdk) in the watson-developer-cloud namespace on GitHub.\n\nWebSocket interface can produce delayed results\n: The WebSocket interface can take minutes to produce final results for a recognition request for an especially long audio file. For the WebSocket interface, the underlying TCP connection remains idle while the service prepares the response. Therefore, the connection can close due to a timeout. To avoid the timeout with the WebSocket interface, request interim results (\"interim_results\": \"true\") in the JSON for the start message to initiate the request. You can discard the interim results if you do not need them. This issue will be resolved in a future update.\n\n\n\n\n\n 19 January 2016 \n\nNew profanity filtering feature\n: The service was updated to include a new profanity filtering feature on January 19, 2016. By default, the service censors profanity from its transcription results for US English audio.",
+          "url": "https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-release-notes",
+          "score": 16.93188,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723077016
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "WebSocket API"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_13455-7-1568",
+          "text": "\nThe WebSocket interface \n\nThe WebSocket interface of the IBM Watson\u00ae Speech to Text service is the most natural way for a client to interact with the service. To use the WebSocket interface for speech recognition, you first use the /v1/recognize method to establish a persistent connection with the service. You then send text and binary messages over the connection to initiate and manage recognition requests.\n\nBecause of their advantages, WebSockets are the preferred mechanism for speech recognition. For more information, see [Advantages of the WebSocket interface](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-service-featuresfeatures-websocket-advantages). For more information about the WebSocket interface and its parameters, see the [API & SDK reference](https://cloud.ibm.com/apidocs/speech-to-text).\n\n\n\n Managing a WebSocket connection \n\nThe WebSocket recognition request and response cycle has the following steps:\n\n\n\n1. [Open a connection](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-websocketsws-open)\n2. [Initiate a recognition request](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-websocketsws-start)\n3. [Send audio and receive recognition results](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-websocketsws-audio)\n4. [End a recognition request](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-websocketsws-stop)\n5. [Send additional requests and modify request parameters](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-websocketsws-more)\n6.",
+          "url": "https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-websockets",
+          "score": 17.015211,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723077018
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "WebSocket API"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Of course! The WebSocket API is a method for interacting with the IBM Watson Speech to Text service. It uses the WebSocket protocol to create a persistent connection between the client and the service. This connection allows for the sending and receiving of both text and binary messages, which are used to initiate and manage recognition requests.\nThe WebSocket recognition request and response cycle consists of several steps: opening a connection, initiating a recognition request, sending audio and receiving recognition results, ending a recognition request, sending additional requests and modifying request parameters.\nWebSocket connections offer several advantages over other methods of interaction, such as HTTP. They allow for real-time, bidirectional communication, and can handle large payloads of data. Additionally, they remain open, minimizing the overhead associated with establishing a new connection for each request.\nFor more detailed information about the WebSocket API, its parameters, and how to use it, please refer to the [API & SDK reference](https://cloud.ibm.com/apidocs/speech-to-text)."
+    },
+    {
+      "speaker": "user",
+      "text": "how can I use WebSocket API?",
+      "timestamp": 1723078794,
+      "enrichments": {
+        "Question Type": [
+          "How-To"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "To use the WebSocket interface, you first use the /v1/recognize method to establish a connection with the service. You specify parameters such as the language model and any custom models that are to be used for requests that are sent over the connection. You then register event listeners to handle responses from the service. For the WebSocket interface, you first specify the customization ID with the language_customization_id parameter of the /v1/recognize method. You use this method to establish a WebSocket connection with the service. To use the WebSocket API for speech recognition, you first establish a persistent connection with the service using the /v1/recognize method. Then, you send text and binary messages over the connection to initiate and manage recognition requests. To synthesize text to speech with the WebSocket interface of the IBM Watson\u00ae Text to Speech service, you first establish a connection with the service by calling its /v1/synthesize method. You then send the text to be synthesized to the service as a JSON text message over the connection.",
+      "timestamp": 1723078799,
+      "contexts": [
+        {
+          "document_id": "ibmcld_13297-4312-5935",
+          "text": "\nTo use the WebSocket interface, you first use the /v1/recognize method to establish a connection with the service. You specify parameters such as the language model and any custom models that are to be used for requests that are sent over the connection. You then register event listeners to handle responses from the service. To make a request, you send a JSON text message that includes the audio format and any additional parameters. You pass the audio as a binary message (blob), and then send a text message to signal the end of the audio.\n\nThe following example provides JavaScript code that establishes a connection and sends the text and binary messages for a recognition request. The basic example does not include the code to define all of the necessary event handlers for the connection.\n\nvar access_token = {access_token};\nvar wsURI = '{ws_url}/v1/recognize'\n+ '?access_token=' + access_token;\nvar websocket = new WebSocket(wsURI);\n\nwebsocket.onopen = function(evt) { onOpen(evt) };\n\nfunction onOpen(evt) {\nvar message = {\naction: 'start',\ncontent-type: 'audio/flac'\n};\nwebsocket.send(JSON.stringify(message));\nwebsocket.send(blob);\nwebsocket.send(JSON.stringify({action: 'stop'}));\n}\nShow more\n\n\n\n\n\n Using the synchronous HTTP interface \n\n[The synchronous HTTP interface](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-http) provides the simplest way to make a recognition request. You use the POST /v1/recognize method to make a request to the service. You pass the audio and all parameters with the single request. The following curl example shows a basic HTTP recognition request:\n\nIBM Cloud",
+          "url": "https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-basic-request",
+          "score": 19.605917,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723078825
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "how can I use WebSocket API?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_13790-7-1700",
+          "text": "\nThe WebSocket interface \n\nTo synthesize text to speech with the WebSocket interface of the IBM Watson\u00ae Text to Speech service, you first establish a connection with the service by calling its /v1/synthesize method. You then send the text to be synthesized to the service as a JSON text message over the connection. The service automatically closes the WebSocket connection when it finishes processing the request.\n\nThe synthesize request and response cycle includes the following steps:\n\n\n\n1. [Open a connection](https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-usingWebSocketWSopen).\n2. [Send input text](https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-usingWebSocketWSsend).\n3. [Receive a response](https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-usingWebSocketWSreceive).\n\n\n\nThe WebSocket interface accepts identical input and produces identical results as the GET and POST /v1/synthesize methods of the HTTP interface. In addition, the WebSocket interface also supports use of the SSML <mark> element to identify the location of user-specified markers in the audio. It can also return timing information for all strings of the input text. (The <mark> element and word timings are available only with the WebSocket interface.)\n\n\n\n* For more information about obtaining word timings, see [Generating word timings](https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-timing).\n* For more information about the WebSocket interface and its parameters, see the [API & SDK reference](https://cloud.ibm.com/apidocs/text-to-speech).\n\n\n\nThe snippets of example code that follow are written in JavaScript and are based on the HTML5 WebSocket API.",
+          "url": "https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-usingWebSocket",
+          "score": 18.647387,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723078853
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "how can I use WebSocket API?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_13361-1589-2935",
+          "text": "\n* For the [WebSocket interface](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-websockets), you first specify the customization ID with the language_customization_id parameter of the /v1/recognize method. You use this method to establish a WebSocket connection with the service.\n\nvar access_token = {access_token};\nvar wsURI = '{ws_url}/v1/recognize'\n+ '?access_token=' + access_token\n+ '&language_customization_id={customization_id}';\nvar websocket = new WebSocket(wsURI);\n\nYou then specify the name of the grammar with the grammar_name parameter in the JSON start message for the active connection. Passing this value with the start message allows you to change the grammar dynamically for each request that you send over the connection.\n\nfunction onOpen(evt) {\nvar message = {\naction: 'start',\ncontent-type: 'audio/l16;rate=22050',\ngrammar_name: '{grammar_name}'\n};\nwebsocket.send(JSON.stringify(message));\nwebsocket.send(blob);\n}\n* For the [synchronous HTTP interface](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-http), pass both parameters with the POST /v1/recognize method.\n\nIBM Cloud\n\ncurl -X POST -u \"apikey:{apikey}\" --header \"Content-Type: audio/flac\" --data-binary @audio-file.flac \"{url}/v1/recognize?language_customization_id={customization_id}&grammar_name={grammar_name}\"\n\nIBM Cloud Pak for Data",
+          "url": "https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-grammarUse",
+          "score": 17.856237,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723078854
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "how can I use WebSocket API?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_13455-7-1568",
+          "text": "\nThe WebSocket interface \n\nThe WebSocket interface of the IBM Watson\u00ae Speech to Text service is the most natural way for a client to interact with the service. To use the WebSocket interface for speech recognition, you first use the /v1/recognize method to establish a persistent connection with the service. You then send text and binary messages over the connection to initiate and manage recognition requests.\n\nBecause of their advantages, WebSockets are the preferred mechanism for speech recognition. For more information, see [Advantages of the WebSocket interface](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-service-featuresfeatures-websocket-advantages). For more information about the WebSocket interface and its parameters, see the [API & SDK reference](https://cloud.ibm.com/apidocs/speech-to-text).\n\n\n\n Managing a WebSocket connection \n\nThe WebSocket recognition request and response cycle has the following steps:\n\n\n\n1. [Open a connection](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-websocketsws-open)\n2. [Initiate a recognition request](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-websocketsws-start)\n3. [Send audio and receive recognition results](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-websocketsws-audio)\n4. [End a recognition request](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-websocketsws-stop)\n5. [Send additional requests and modify request parameters](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-websocketsws-more)\n6.",
+          "url": "https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-websockets",
+          "score": 18.074583,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723078855
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "how can I use WebSocket API?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "To use the WebSocket API for speech recognition, you first establish a persistent connection with the service using the /v1/recognize method. Then, you send text and binary messages over the connection to initiate and manage recognition requests. The WebSocket interface uses a series of steps for managing a connection, including opening a connection, initiating a recognition request, sending audio and receiving recognition results, ending a recognition request, sending additional requests and modifying request parameters, and closing the connection. For more detailed information, you can refer to the API & SDK reference provided by IBM.\nRegarding your previous question, query parameters and message parameters are two types of parameters sent from WebSocket API. Query parameters are sent when phone integration connects to the service and are used in queries written with the Discovery Query Language. Message parameters, on the other hand, are sent as part of the JSON data in the request body."
+    },
+    {
+      "speaker": "user",
+      "text": "what is the customization ID here?",
+      "timestamp": 1723081506,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Customization_id identifies the custom model's Globally Unique Identifier (GUID). The GUID is used to identify the model in methods of the interface. You can specify the customization ID of the custom model to which the grammar is to be added.",
+      "timestamp": 1723081511,
+      "contexts": [
+        {
+          "document_id": "ibmcld_13386-1713-3820",
+          "text": "\n* customization_id identifies the custom model's Globally Unique Identifier (GUID). The GUID is used to identify the model in methods of the interface.\n* created is the date and time in Coordinated Universal Time (UTC) at which the custom model was created.\n* updated is the date and time in Coordinated Universal Time (UTC) at which the custom model was last modified.\n* language is the language of the custom model.\n* owner identifies the credentials of the service instance that owns the custom model.\n* name is the name of the custom model.\n* description shows the description of the custom model, if one was provided at its creation.\n* base_model_name indicates the name of the language model for which the custom model was created.\n* versions provides a list of the available versions of the custom model. Each element of the array indicates a version of the base model with which the custom model can be used. Multiple versions exist only if the custom model is upgraded to a new version of its base model. Otherwise, only a single version is shown. For more information, see [Listing version information for a custom model](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-custom-upgrade-usecustom-upgrade-use-listing).\n\n\n\nThe methods also return a status field that indicates the state of the custom model:\n\n\n\n* pending indicates that the model was created. It is waiting either for valid training data (audio resources) to be added or for the service to finish analyzing data that was added.\n* ready indicates that the model contains valid audio data and is ready to be trained. If the model contains a mix of valid and invalid audio resources, training of the model fails unless you set the strict query parameter to false. For more information, see [Training failures](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-acousticfailedTraining-acoustic).\n* training indicates that the model is being trained on audio data.\n* available indicates that the model is trained and ready to use with recognition requests.\n* upgrading indicates that the model is being upgraded.",
+          "url": "https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-manageAcousticModels",
+          "score": 16.578676,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723081668
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "the customization ID"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_13352-2748-4496",
+          "text": "\nYou use the POST /v1/customizations/{customization_id}/grammars/{grammar_name} method to add a grammar file to a custom model.\n\ncustomization_id (required string)\n: Specify the customization ID of the custom model to which the grammar is to be added.\n\ngrammar_name (required string)\n: Specify a name for the grammar. Use a localized name that matches the language of the custom model and reflects the contents of the grammar.\n\n\n\n* Include a maximum of 128 characters in the name.\n* Do not use characters that need to be URL-encoded. For example, do not use spaces, slashes, backslashes, colons, ampersands, double quotes, plus signs, equals signs, questions marks, and so on in the name. (The service does not prevent the use of these characters. But because they must be URL-encoded wherever used, their use is strongly discouraged.)\n* Do not use the name of a grammar or corpus that has already been added to the custom model.\n* Do not use the name user, which is reserved by the service to denote custom words that are added or modified by the user.\n* Do not use the name base_lm or default_lm. Both names are reserved for future use by the service.\n\n\n\nContent-Type (required string)\n: Use the request header to specify the format of the grammar:\n\n\n\n* application/srgs for an ABNF grammar\n* application/srgs+xml for an XML grammar\n\n\n\nPass the grammar text file as the body of the request. The following example adds the grammar file named confirm.abnf to the custom model with the specified ID. The example names the grammar confirm-abnf.\n\nIBM Cloud\n\ncurl -X POST -u \"apikey:{apikey}\" --header \"Content-Type: application/srgs\" --data-binary @confirm.abnf \"{url}/v1/customizations/{customization_id}/grammars/confirm-abnf\"\n\nIBM Cloud Pak for Data",
+          "url": "https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-grammarAdd",
+          "score": 15.063949,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723081669
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "the customization ID"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The customization ID is a unique identifier for a custom model in the IBM Watson Speech to Text service. When creating a custom model, you specify a customization ID that is used to identify the model in various methods and interfaces. In the context of the WebSocket API, you can specify the customization ID with the `language_customization_id` parameter of the `/v1/recognize` method to use a specific custom model for recognition requests over the WebSocket connection."
+    },
+    {
+      "speaker": "user",
+      "text": "I want to secure the phone connection before the integration ",
+      "timestamp": 1723082055,
+      "enrichments": {
+        "Question Type": [
+          "How-To",
+          "Non-Question"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "To secure the phone connection before integration, you can go to the Advanced options tab in the phone integration settings and select one or both of the following options:\n1. Force secure trunking: This option uses Secure Real-Time Transfer Protocol (SRTP) to secure the audio that is transmitted over the phone.\n2. Enable SIP authentication: This option requires SIP digest authentication for all inbound traffic. When this option is selected, the SIP digest user name and password must be configured, and the SIP trunk being used to connect to Assistant must be configured to use only TLS. However, if you use Twilio as your SIP trunk provider, you cannot enable SIP authentication for outbound SIP trunks to Watson Assistant.\nAdditionally, to configure how your assistant interacts with a SIP trunk from an external provider, go to the SIP trunk tab in the phone integration settings and update the SIP trunking integration section. Here, you can list the headers that you want your assistant to use in the \"SIP INVITE headers to extract\" field.",
+      "timestamp": 1723082060,
+      "contexts": [
+        {
+          "document_id": "ibmcld_16288-1733-3996",
+          "text": "\nIt's important that the Assistant be configured with an Action or webhook that can handle this scenario.\n\n\n\nThe phone integration supports disaster recovery by providing the ability to do a fast failover to another region instead of routing the call to a live agent when a service outage occurs. This is accomplished by sending a SIP 503 response to the upstream SIP trunking provider, instead of auto referring the call to a live agent when failures happen during the setup of a call. This 503 response can then be used by the SIP trunking provider to reroute the call to another region. If you want to take advantage of this capability, open a service ticket against the Watson Assistant service instance that requires disaster recovery.\n\n\n\n\n\n Secure the phone connection \n\nYou can add security to the phone connection by going to the Advanced options tab in the phone integration settings, and selecting one or both of the following options:\n\n\n\n* Force secure trunking: Select this option to use Secure Real-Time Transfer Protocol (SRTP) to secure the audio that is transmitted over the phone. For more information about RTP, see [Call routing details](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-deploy-phone-configdeploy-phone-config-route).\n* Enable SIP authentication: Select this option if you want to require SIP digest authentication.\n\nWhen SIP authentication is required, all inbound traffic (meaning requests from the SIP provider to your assistant) is authenticated using SIP digest authentication, and must be sent using Transport Layer Security (TLS). If this option is selected, the SIP digest user name and password must be configured, and the SIP trunk being used to connect to Assistant must be configured to use only TLS.\n\nIf you use Twilio as your SIP trunk provider, you cannot enable SIP authentication for outbound SIP trunks to Watson Assistant.\n\n\n\n\n\n\n\n Applying advanced SIP trunk configuration settings \n\nTo configure how your assistant interacts with a SIP trunk from an external provider, go to the SIP trunk tab in the phone integration settings, and update the following options in the SIP trunking integration section:\n\n\n\n* SIP INVITE headers to extract: List the headers that you want your assistant to use.",
+          "url": "https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-deploy-phone-config",
+          "score": 18.002815,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723083504
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "You can add security to the phone connection by going to the Advanced options tab in the phone integration settings, and selecting one or both of the following options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "speaker": "user",
+      "text": "I want to secure the phone connection before the phone interaction and optimize your actions for phone interaction.",
+      "timestamp": 1723082233,
+      "enrichments": {
+        "Question Type": [
+          "How-To",
+          "Non-Question"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "To secure the phone connection before the interaction, follow the previous steps I've decribed. To optimize your actions for phone interaction, consider the following: 1. Do not include HTML elements in your action responses. Use Markdown for formatting instead. 2. Use a search extension to include search results in actions that the phone integration will read. Make sure the entire search response is less than 5,000 characters long. Test the search results and curate the data collection as necessary. ",
+      "timestamp": 1723082241,
+      "contexts": [
+        {
+          "document_id": "ibmcld_16288-1733-3996",
+          "text": "\nIt's important that the Assistant be configured with an Action or webhook that can handle this scenario.\n\n\n\nThe phone integration supports disaster recovery by providing the ability to do a fast failover to another region instead of routing the call to a live agent when a service outage occurs. This is accomplished by sending a SIP 503 response to the upstream SIP trunking provider, instead of auto referring the call to a live agent when failures happen during the setup of a call. This 503 response can then be used by the SIP trunking provider to reroute the call to another region. If you want to take advantage of this capability, open a service ticket against the Watson Assistant service instance that requires disaster recovery.\n\n\n\n\n\n Secure the phone connection \n\nYou can add security to the phone connection by going to the Advanced options tab in the phone integration settings, and selecting one or both of the following options:\n\n\n\n* Force secure trunking: Select this option to use Secure Real-Time Transfer Protocol (SRTP) to secure the audio that is transmitted over the phone. For more information about RTP, see [Call routing details](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-deploy-phone-configdeploy-phone-config-route).\n* Enable SIP authentication: Select this option if you want to require SIP digest authentication.\n\nWhen SIP authentication is required, all inbound traffic (meaning requests from the SIP provider to your assistant) is authenticated using SIP digest authentication, and must be sent using Transport Layer Security (TLS). If this option is selected, the SIP digest user name and password must be configured, and the SIP trunk being used to connect to Assistant must be configured to use only TLS.\n\nIf you use Twilio as your SIP trunk provider, you cannot enable SIP authentication for outbound SIP trunks to Watson Assistant.\n\n\n\n\n\n\n\n Applying advanced SIP trunk configuration settings \n\nTo configure how your assistant interacts with a SIP trunk from an external provider, go to the SIP trunk tab in the phone integration settings, and update the following options in the SIP trunking integration section:\n\n\n\n* SIP INVITE headers to extract: List the headers that you want your assistant to use.",
+          "url": "https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-deploy-phone-config",
+          "score": 18.002815,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723082354
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "You can add security to the phone connection by going to the Advanced options tab in the phone integration settings, and selecting one or both of the following options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16288-6287-8401",
+          "text": "\nWhen you use the phone integration as the first line of assistance for customers, it's a good idea to have a live agent backup available. You can design your assistant to transfer a call to a human in case the phone connection fails, or if a user asks to speak to someone.\n\nYour company might already have one or more phone numbers that connect to an automatic call dispatcher (ACD) that can queue callers until an appropriate agent is available. If not, choose a call center service to use as your backup.\n\nA conversation cannot be transferred from one integration type to another. For example, if you use the web chat integration with service desk support, you cannot transfer a phone call to the service desk that is set up for the web chat.\n\nYou must provide the call center SIP URI for the call center service you use. You must specify this information in your assistant when you enable a call transfer from a dialog node or action step. For more information, see [Transferring a call to a live agent](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-phone-actionsphone-actions-transfer).\n\n\n\n\n\n Optimize your actions for phone interaction \n\nFor the best customer experience, design your dialog with the capabilities of the phone integration in mind:\n\n\n\n* Do not include HTML elements in your action responses. To add formatting, use Markdown. For more information, see [Formatting responses](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-respondrespond-formatting).\n* You can use a search extension to include search results in actions that the phone integration will read. When search results are returned, the phone integration reads the introductory message (for example, I found this information that might be helpful), and then the body of only the first search result.\n\nThe entire search response (meaning the introductory message plus the body of the first search result) must be less than 5,000 characters long or the response will not be read at all. Be sure to test the search results that are returned and curate the data collection that you use as necessary.",
+          "url": "https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-deploy-phone-config",
+          "score": 22.168814,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723082356
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "For the best customer experience, design your dialog with the capabilities of the phone integration in mind"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "To secure the phone connection before the integration, you can follow these steps:\n1. Go to the Advanced options tab in the phone integration settings and select the \"Force secure trunking\" option to use Secure Real-Time Transfer Protocol (SRTP) to secure the audio that is transmitted over the phone.\n2. Enable SIP authentication by selecting the \"Enable SIP authentication\" option. This will require SIP digest authentication for all inbound traffic and must be sent using Transport Layer Security (TLS). The SIP digest user name and password must be configured, and the SIP trunk being used to connect to Assistant must be configured to use only TLS. However, if you use Twilio as your SIP trunk provider, you cannot enable SIP authentication for outbound SIP trunks to Watson Assistant.\nTo optimize your actions for phone interaction, consider the following:\n1. Do not include HTML elements in your action responses. Use Markdown for formatting instead.\n2. Use a search extension to include search results in actions that the phone integration will read. Make sure the entire search response is less than 5,000 characters long. Test the search results and curate the data collection as necessary.\nAdditionally, you can configure how your assistant interacts with a SIP trunk from an external provider by going to the SIP trunk tab in the phone integration settings and updating the SIP trunking integration section. Here, you can list the headers that you want your assistant to use in the \"SIP INVITE headers to extract\" field."
+    },
+    {
+      "speaker": "user",
+      "text": "what if I want to have more phone numbers for interaction? any limits?",
+      "timestamp": 1723083793,
+      "enrichments": {
+        "Question Type": [
+          "Composite"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "If you are using existing phone numbers you configured via a SIP trunk provider, you can add multiple numbers to the same phone integration. If you generated a free phone number, you cannot add more numbers. The Voice add-on use is charged separately and in addition to your service plan charges. Plan usage is measured based on the number of monthly active users, where a user is identified by the caller's unique phone number. ",
+      "timestamp": 1723083796,
+      "contexts": [
+        {
+          "document_id": "ibmcld_16287-7751-9832",
+          "text": "\nHowever, provisioning the new number might take several minutes.\n\n\n\n\n\n Adding more phone numbers \n\nIf you are using existing phone numbers you configured via a SIP trunk provider, you can add multiple numbers to the same phone integration.\n\nIf you generated a free phone number, you cannot add more numbers.\n\nTo add more phone numbers:\n\n\n\n1. In the phone integration settings, go to the Phone number tab.\n2. Use one of the following methods:\n\n\n\n* To add phone numbers one by one, click Add phone number in the table, and enter the phone number along with an optional description. Click the Add button to save the number.\n* To import a set of phone numbers that are stored in a comma-separated values (CSV) file, click the Upload a CSV file icon (![Add phone number][images/phone-integ-import-number.png]), and then find the CSV file that contains the list of phone numbers.\n\nThe phone numbers you upload will replace any existing numbers in the table.\n\n\n\n\n\n\n\n\n\n Setting up live agent escalation \n\nIf you want your assistant to be able to transfer a conversation to a live agent, you can connect your phone integration to a contact center. For more information, see instructions for the supported platform:\n\n\n\n* [Genesys](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-deploy-phone-genesys)\n* [Twilio Flex](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-deploy-phone-flex)\n\n\n\n\n\n\n\n Phone integration limits \n\nAny speech service charges incurred by the phone integration are included as Voice add-on charges in your Watson Assistant service plan usage. The Voice add-on use is charged separately and in addition to your service plan charges.\n\nPlan usage is measured based on the number of monthly active users, where a user is identified by the caller's unique phone number. An MD5 hash is applied to the phone number and the 128-bit hash value is used for billing purposes.\n\nThe number of concurrent calls that your assistant can participate in at one time depends on your plan type.\n\n\n\nPlan details\n\n Plan Concurrent calls \n\n Enterprise 1,000",
+          "url": "https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-deploy-phone",
+          "score": 27.641855,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723083868
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "If you are using existing phone numbers you configured via a SIP trunk provider, you can add multiple numbers to the same phone integration."
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16287-9341-9853",
+          "text": "\nThe Voice add-on use is charged separately and in addition to your service plan charges.\n\nPlan usage is measured based on the number of monthly active users, where a user is identified by the caller's unique phone number. An MD5 hash is applied to the phone number and the 128-bit hash value is used for billing purposes.\n\nThe number of concurrent calls that your assistant can participate in at one time depends on your plan type.\n\n\n\nPlan details\n\n Plan Concurrent calls \n\n Enterprise 1,000 \n Plus 100 \n Trial 5",
+          "url": "https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-deploy-phone",
+          "score": 18.4835,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723083870
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Plan usage is measured based on the number of monthly active users"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, there are limits to the number of phone numbers you can have for interaction depending on your plan type. For the Enterprise plan, you can have 1,00"
+    },
+    {
+      "speaker": "user",
+      "text": "what if I have call and transfer failures; therefore, I need to use other third-party providers.",
+      "timestamp": 1723084421,
+      "enrichments": {
+        "Question Type": [
+          "Troubleshooting"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "You can configure the phone integration to transfer the caller to a human agent if the phone connection fails for any reason. IBM has established relationships with Five9, Genesys, Vonage, and Voximplant. These providers can set up a SIP trunk for your voice traffic and manage access from allowed IP addresses. The network configuration required to support the SIP trunk connection can typically be handled for you with minimal effort. If you need assistance setting up an account with another SIP trunk provider, you can open a support request.",
+      "timestamp": 1723084425,
+      "contexts": [
+        {
+          "document_id": "ibmcld_16288-7-2218",
+          "text": "\nPhone integration configuration \n\nIBM Cloud\n\nAfter you have set up the phone integration for your assistant, you can modify the phone integration settings to customize the call behavior.\n\n\n\n Handling call and transfer failures \n\nYou can configure the phone integration to transfer the caller to a human agent if the phone connection fails for any reason. To transfer the caller to a human agent automatically, go to the Advanced tab in the phone integration settings, and make the following configuration selections:\n\n\n\n* SIP target when a call fails: Add the SIP endpoint for your support agent service. Specify a SIP or telephone URI for a general call queue that can redirect requests to other queues. For more information, see [Configuring backup call center support](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-deploy-phone-configdeploy-phone-config-transfer-service).\n* Call failure message: Add the message you want the assistant to say to a caller before it transfers the call to a human agent.\n\n\n\nIf, after you transfer the call to a human, the connection to a live agent fails for any reason, you can configure what to do.\n\n\n\n* Transfer failure message: Add the message you want the assistant to say to a caller if transfer to a live agent fails. The message can be up to 150 characters in length.\n* Disconnect call on transfer failure: Choose whether to disconnect the call after the failure message. This option is enabled by default. If this option is disabled, when a call transfer fails, your assistant can disconnect or process a different action.\n\nIf you choose to leave a call connected despite a transfer failure, Watson Assistant will initiate a new turn to determine the next step. It's important that the Assistant be configured with an Action or webhook that can handle this scenario.\n\n\n\nThe phone integration supports disaster recovery by providing the ability to do a fast failover to another region instead of routing the call to a live agent when a service outage occurs. This is accomplished by sending a SIP 503 response to the upstream SIP trunking provider, instead of auto referring the call to a live agent when failures happen during the setup of a call.",
+          "url": "https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-deploy-phone-config",
+          "score": 17.866583,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723084544
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Handling call and transfer failures"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_16288-10521-12298",
+          "text": "\nYou can get the SIP URI for your phone integration from the phone integration configuration page.\n6. If you plan to support call transfers, enable Call Transfer (SIP REFER) in your SIP trunk. If you expect to transfer calls to the public switched telephone network (PSTN), also enable PSTN Transfer on your trunk.\n7. Select Numbers from the navigation bar for your SIP trunk, and then do one of the following things:\n\n\n\n* Click Add a number and then Buy a Number.\n* If you already have a number, you can click Add a number and then Add an Existing Number.\n\n\n\n\n\nIf you use a Lite or Trial Twilio account for testing purposes, then be sure to verify the transfer target. For more information, see the [Twilio documentation](https://support.twilio.com/hc/en-us/articles/223136107-How-does-Twilio-s-Free-Trial-work-).\n\nYou cannot enable SIP authentication if you choose Twilio as your SIP trunk provider. Twilio doesn't support SIPS for originating calls.\n\n\n\n\n\n Using other third-party providers \n\nYou can ask for help setting up an account with another SIP trunk provider by opening a support request.\n\nIBM has established relationships with the following SIP trunk providers:\n\n\n\n* [Five9](https://www.five9.com/products/capabilities/contact-center-software)\n* [Genesys](https://www.genesys.com/en-sg/definitions/what-is-a-trunk)\n* [Vonage](https://www.vonage.com/communications-apis/sip-trunking/)\n* [Voximplant](https://voximplant.com/)\n\n\n\nThe SIP trunk provider sets up a SIP trunk for your voice traffic, and manages access from allowed IP addresses. Most of the major SIP trunk providers have existing relationships with IBM. Therefore, the network configuration that is required to support the SIP trunk connection typically can be handled for you with minimal effort.\n\n\n\n1.",
+          "url": "https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-deploy-phone-config",
+          "score": 23.61981,
+          "feedback": {
+            "relevant": {
+              "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+                "value": "yes",
+                "timestamp": 1723084545
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "You can ask for help setting up an account with another SIP trunk provider by opening a support request."
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "If you experience call and transfer failures, you may consider using other third-party SIP trunk providers. IBM has established relationships with Five9, Genesys, Vonage, and Voximplant. These providers can set up a SIP trunk for your voice traffic and manage access from allowed IP addresses. The network configuration required to support the SIP trunk connection can typically be handled for you with minimal effort. If you need assistance setting up an account with another SIP trunk provider, you can open a support request."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+      "status": "created",
+      "timestamp": 1723084585
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "accepted",
+      "timestamp": 1725558215
+    },
+    {
+      "author": "87334bc6-dd39-4565-ae2b-832e60a24b08",
+      "status": "edited",
+      "timestamp": 1727122514
+    },
+    {
+      "author": "87334bc6-dd39-4565-ae2b-832e60a24b08",
+      "status": "accepted",
+      "timestamp": 1727122653
+    }
+  ],
+  "editor": "87334bc6-dd39-4565-ae2b-832e60a24b08",
+  "domain": "mt-rag-ibmcloud-elser-512-100-20240502",
+  "reviewer": "87334bc6-dd39-4565-ae2b-832e60a24b08"
+}

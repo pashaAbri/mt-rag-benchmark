@@ -1,0 +1,1503 @@
+{
+  "author": "d2b56e91-6d89-4df4-b89a-eef8d969850b",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-govt-elser-512-100-20240611",
+      "size": "49607"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "What does a small claims court do",
+      "timestamp": 1723645956,
+      "enrichments": {
+        "Question Type": [
+          "Explanation",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "A small claims court is designed to provide a fair, quick, and inexpensive way for individuals to resolve disputes involving relatively small amounts of money. You must have asked the defendant to pay and the defendant has refused. You may not have a lawyer represent you. The judge will hear your case or the court will give parties an opportunity to meet with a mediator at the time of trial. The Small Claims Court has a monetary limit on the amount of money damages that can be claimed, usually up to $12,500 for \"a natural person\", with some exceptions.",
+      "timestamp": 1723645962,
+      "contexts": [
+        {
+          "document_id": "7db93570207c64fa-1397-3499",
+          "text": "\r\n\tSmall Claims Court Process: Sacramento Superior Court\r\n\nfair, quick, and inexpensive manner. You may ask a lawyer for advice before you \r\n go to court; however, you may not have a lawyer represent you in court. The \r\n rules are fairly simple and the hearing is informal. You may even ask for\r\n mediation\r\n the day of your trial.\n\nConsider Mediation\n\r\n An alternative to formal litigation in the court \r\n is the use of a mediator to resolve Small Claims disputes. All parties \r\n must mutually agree to mediation, and the formal rules of court do not apply to \r\n the mediation process. Parties may contact the Small Claim's mediation and\r\n advisory services to make arrangements for mediation before the court hears their case.\r\n Alternatively, the court will give parties an opportunity to meet with a mediator at\r\n the time of trial.\n\nInstead of a judge, you decide the outcome of your \r\n case\r\n \nYou can discuss many issues that may not be \r\n admitted in court \n\n\r\n The party filing the claim is the plaintiff. \r\n The person being sued is the defendant.\n\r\n If you are the defendant and are filing a Claim of \r\n Defendant, you will remain the defendant and the plaintiff will remain the \r\n plaintiff.\n\r\n The Small Claims court clerks can answer many \r\n kinds of questions and provide the forms you need; however, they are prohibited \r\n by law from giving legal advice. The Small Claims Mediation and Advisory Services provides legal \r\n advice free of charge to both the plaintiff and the defendant.\n\r\n If you choose Small Claims court to resolve a \r\n dispute and you are the plaintiff, you give up the right to have another court \r\n review the Small Claims judge's decision. In other words, the plaintiff has no \r\n right of appeal. So if you should lose, that is probably the end of the case. \r\n However, the person or entity you sue (defendant) may appeal the judge's ruling. \r\n When such an appeal is filed, the entire case will be heard again.\r\n \n\nLocation and Telephone Number\n\r\n The \r\n Carol Miller Justice Center is located at 301 \r\n Bicentennial Circle. Small Claims offices are located on the 2nd floor. The courtrooms\r\n are located on the 3rd floor.",
+          "title": "\r\n\tSmall Claims Court Process: Sacramento Superior Court\r\n",
+          "url": "https://saccourt.ca.gov/small-claims/process.aspx",
+          "score": 16.62387,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723646133
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What does a small claims court do"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "7db93570207c64fa-3073-4995",
+          "text": "\r\n\tSmall Claims Court Process: Sacramento Superior Court\r\n\nSo if you should lose, that is probably the end of the case. \r\n However, the person or entity you sue (defendant) may appeal the judge's ruling. \r\n When such an appeal is filed, the entire case will be heard again.\r\n \n\nLocation and Telephone Number\n\r\n The \r\n Carol Miller Justice Center is located at 301 \r\n Bicentennial Circle. Small Claims offices are located on the 2nd floor. The courtrooms\r\n are located on the 3rd floor. The telephone number is 916-875-7746. There is a a flat fee of $5.00 per day.\r\n \n\nFiling Your Claim\n\r\n \tThe Small Claims e-filing system is currently unavailable. You may file your Small Claims case by filling out either a SC-100 (Plaintiff\u2019s Claim),\r\n \tSC-120 (Defendant\u2019s Claim), or SC-500 (Plaintiff\u2019s Claim for Covid-19 Rental Debt). The forms are located on the California Judicial Council website\r\n \tat www.courts.ca.gov/forms.htm?query=small%20claims - external link. Copy and paste the link into your internet browser. Once you complete the appropriate forms, print\r\n \tand mail or drop off the forms at the Carol Miller Justice Center at the below address.\nInformation Needed to File a Small Claims Action\n\nAre you the plaintiff or defendant?\r\n \nDo you know where you must file your claim? See \r\n Choosing the Correct Court. \nHave you had an arbitration of an attorney-client \r\n fee dispute? \nKnow the dollar amount of your claim.\r\n \nYou must first ask the defendant(s) for the money \r\n or property to satisfy your claim. \nKnow the reason why you are suing the other party.\r\n \nIf you are a minor, you will need a guardian and \r\n they need to fill out and file the Guardian Ad Litem form. \nIf you are a business, a corporation, association, \r\n a partnership, or sole proprietorship, what is your fictitious business number \r\n and its expiration date? \nKnow whether the defendant is an individual, an \r\n individual doing business as, a corporation, a partnership or a government \r\n agency.",
+          "title": "\r\n\tSmall Claims Court Process: Sacramento Superior Court\r\n",
+          "url": "https://saccourt.ca.gov/small-claims/process.aspx",
+          "score": 16.249113,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723646162
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What does a small claims court do"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "7db93570207c64fa-4531-6584",
+          "text": "\r\n\tSmall Claims Court Process: Sacramento Superior Court\r\n\nKnow the reason why you are suing the other party.\r\n \nIf you are a minor, you will need a guardian and \r\n they need to fill out and file the Guardian Ad Litem form. \nIf you are a business, a corporation, association, \r\n a partnership, or sole proprietorship, what is your fictitious business number \r\n and its expiration date? \nKnow whether the defendant is an individual, an \r\n individual doing business as, a corporation, a partnership or a government \r\n agency. \nIf the defendant is a minor, you must find out the \r\n name of the defendant's guardian. \nIf the defendant is a business or government \r\n agency, you should know who the agent for service of process is (the legal \r\n representative of the organization to be notified of the suit.) \nAre any of the defendants in the military service \r\n as defined in Section 101 of the Soldiers and Sailors' Relief Act of 1940?\r\n \n\n\r\n If you do not have access to a computer, you may contact the Small Claims clerk\u2019s office to obtain the appropriate forms.\r\n You may also obtain forms through the mail by submitting a request for forms, along with a \r\n large self-addressed, stamped manila envelope. Please send your request to the \r\n following address:\n\r\n Sacramento County Small Claims Court\r\n 301 Bicentennial Circle\r\n Sacramento, CA 95826-2701\n\nMonetary Limits\n\r\n The Small Claims court has a monetary limit, \r\n called a jurisdictional limit, on the amount of money damages that can be \r\n claimed. Usually, the most \"a natural person\" can ask for is $12,500; however, you are \r\n limited to filing no more than two claims anywhere in the State of California \r\n for over $2,500 in one calendar year. You may file an unlimited amount of claims \r\n for $2,500 or less. The jurisdictional limits of the Small Claims court do not apply to disputes related to Covid-19 rental debt. \r\n \n\nService\n\r\n The party who has filed the case must cause the \r\n legal documents to be served upon the other party. If this service is not done \r\n correctly, the court will require the plaintiff to re-serve the papers correctly",
+          "title": "\r\n\tSmall Claims Court Process: Sacramento Superior Court\r\n",
+          "url": "https://saccourt.ca.gov/small-claims/process.aspx",
+          "score": 15.801118,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723646195
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What does a small claims court do"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6d8c260a4cf63440-4260-6441",
+          "text": "The Superior Court of California - County of Ventura - Small Claims\nThis means you have asked the defendant to pay and the defendant has refused.\nThe forms to file a small claims case can be located on the court website under Online Forms by selecting the Judicial Council hyperlink. If you do not have \r\n access to a computer, you may either come directly to the clerk\u2019s office to fill out the appropriate paperwork or have the paperwork mailed to you by sending in \r\n your request along with a self-addressed stamped envelope. Small Claims forms cannot be filed by fax.\nIf you want to file a small claim and you are a business or corporation that operates or does business under a fictitious name (\u201cdoing business as\u201d or \u201cdba\u201d) \r\n you must complete Judicial Council form SC-103, Fictitious Business Name form and file \r\n it with you claim form. If you do not file this form, the court will dismiss your claim at the time of the hearing.\nIf the claim you are filing is to enforce the payment of a debt, you must provide a written calculation showing how you calculated the amount owed that \r\n must include the original debt amount, each payment credited to the debt, each fee and charge added to the debt, each payment credited against those fees \r\n and charges, all other debits or charges to the account and an explanation of the nature of those fees, charges, debits, and all other credits to the \r\n debt, by source and amount. This is required by law and your claim cannot be filed without this information.\n\nTypes of Service\n\nThe defendant must be served with a copy of the claim 15 days prior to the hearing date if they live in county and 20 days prior to the hearing if they \r\n live out of county.\nThe types of service are:\nCertified mail. Service by certified mail must be done by the clerk's office. The fee is $15.00 per defendant. You cannot serve the defendant yourself. \r\n Certified mail is the least effective form of service and the green return receipt must be signed by the defendant personally or the court will delay your \r\n hearing and ask you to attempt another form of service. You will need to check with the court prior to the hearing to see if the receipt for certified mail \r\n was returned to the court.\nPersonal service.",
+          "title": "The Superior Court of California - County of Ventura - Small Claims",
+          "url": "https://www.ventura.courts.ca.gov/small-claims.html",
+          "score": 25.707804,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723646325
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "The Superior Court of California - County of Ventura - Small Claims"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "A small claims court is designed to provide a fair, quick, and inexpensive way for individuals to resolve disputes involving relatively small amounts of money. In the Sacramento Superior Court's Small Claims Court, the process is informal and you may not have a lawyer represent you. The judge will hear your case and you will decide the outcome together with the other party. If you reach an agreement through mediation, you can discuss many issues that may not be admitted in court. The Small Claims Court has a monetary limit on the amount of money damages that can be claimed, usually up to $12,500 for a natural person, with some exceptions."
+    },
+    {
+      "speaker": "user",
+      "text": "My renter left and the damage to the apartment is $1000 more than the security deposit. Is this a claim for small claims court?",
+      "timestamp": 1723646412,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, if you are at least 18 years old, you can file a small claims court case for the additional $1000, as Small Claims cases are for damages of $10,000 or less.  You will need to bring proof to to your court date to show to the other side. Examples of proof (also called evidence) are: Repair receipts, Photos of damage, Emails.",
+      "timestamp": 1723646415,
+      "contexts": [
+        {
+          "document_id": "902597c38243f958-1536-3462",
+          "text": "Small Claims | Superior Court of California | County of Tulare\nEnglish\n\nEspa\u00f1ol\n\n Translate\n \n\nEnglish\n\nEspa\u00f1ol\n\nSearch\n\n Search\n\n \n\nDivisions\n\nSmall Claims\n\n Small Claims\n \n\nThe Small Claims Court is a special court where disputes are resolved inexpensively and quickly. Small Claims cases are for damages of $10,000 or less. Small Claims is affordable and fast, with simple and informal rules. Attorneys are not allowed.\n\nWhat Is Small Claims Court?\nSmall claims court is a special court where disputes are resolved quickly and inexpensively. The rules are simple and informal. The person who sues is the plaintiff. The person who is sued is the defendant. In small claims court, you may ask a lawyer for advice before you go to court, but you cannot have a lawyer in court.\nYour claim cannot be for more than $10,000.00. If you have a claim for more than this amount, you may file a limited civil case, or you may sue in the small claims court and give up your right to the amount over $10,000.00. You cannot, however, file more than two cases in small claims court for more than $2,500.00 each during a calendar year.\nWho Can File a Claim?\nYou must be at least 18 years old to file a claim. If you are not yet 18, you may ask the court to appoint a guardian ad litem. This is a person who will act for you in the case. The guardian ad litem is usually a parent, relative, or an adult friend. A person who sues in small claims court must first make a demand, if possible. This means that you have asked the defendant to pay, and the defendant has refused. If your claim is for possession of property, you must ask the defendant to give you the property.\nUnless you fall within two technical exceptions, you must be the original owner of the claim. This means that if the claim is assigned, the buyer cannot sue in the small claims court. You must also appear at the small claims hearing yourself unless you filed the claim for a corporation or other entity that is not a natural person.",
+          "title": "Small Claims | Superior Court of California | County of Tulare",
+          "url": "https://www.tulare.courts.ca.gov/divisions/small-claims",
+          "score": 28.163662,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723646549
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What does a small claims court do\n|assistant|: A small claims court is designed to provide a fair, quick, and inexpensive way for individuals to resolve disputes involving relatively small amounts of money. You must have asked the defendant to pay and the defendant has refused. You may not have a lawyer represent you. The judge will hear your case or the court will give parties an opportunity to meet with a mediator at the time of trial. The Small Claims Court has a monetary limit on the amount of money damages that can be claimed, usually up to $12,500 for \"a natural person\", with some exceptions.\n|user|: My renter left and the damage to the apartment is $1000 more than the security deposit. Is this a claim for small claims court?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "8993b53fcdab5c13-4310-6136",
+          "text": "Before you sue the other side back | California Courts | Self Help Guide\nAn example of this is when a landlord doesn't refund a security deposit or give a reason why within 21 days.\u00a0In that case, the law says you can sue for more than the security deposit amount because the landlord didn't follow the law.\nIf the other side owes you more than $10,000 (or $5,000 if its owed to your business), you may not be able to file in small claims court. Learn more\u00a0\nSmall claims court is only for cases where a person asks for less than $10,000 or $5,000 if the money is owed to a business. If you or your business wants to ask for more, you can ask for the case to be heard in regular civil court. Talk to a Small Claims Advisor to find out more.\n\nDo you have proof?\nYou don\u2019t have to have all your proof together before you sue the other side back. But, you need to know what proof to\u00a0get to show the other side and bring to your court date.\nExamples of proof (also called evidence) are:\nRepair receipts\nPhotos of damage\nEmails\nBusiness records\n\nExample: bills for repair costs\nSomeone\u2019s car hit your car. They're suing you for damages but you\u00a0have a police report showing the other driver is at fault. But, you haven\u2019t finished the body work repairs so you don\u2019t have a bill to show how much the other driver owes you. Make sure you have the paid invoice to bring with you to your court hearing.\n\nExample: Pictures of a clean apartment\nYour landlord doesn\u2019t want to return your security deposit and wouldn\u2019t do a walk-through with you when you moved out. They're suing you so you'll pay for damages that cost more than your deposit. In your court case against the landlord you would bring photos of the clean home with timestamps that show when the photos were taken and/or have your friend who saw the clean home come to your court date to talk about it.\n\nYou can use a subpoena to get the proof you need",
+          "title": "Before you sue the other side back | California Courts | Self Help Guide",
+          "url": "https://selfhelp.courts.ca.gov/you-sue-other-side-back",
+          "score": 26.111227,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723646555
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What does a small claims court do\n|assistant|: A small claims court is designed to provide a fair, quick, and inexpensive way for individuals to resolve disputes involving relatively small amounts of money. You must have asked the defendant to pay and the defendant has refused. You may not have a lawyer represent you. The judge will hear your case or the court will give parties an opportunity to meet with a mediator at the time of trial. The Small Claims Court has a monetary limit on the amount of money damages that can be claimed, usually up to $12,500 for \"a natural person\", with some exceptions.\n|user|: My renter left and the damage to the apartment is $1000 more than the security deposit. Is this a claim for small claims court?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "fc7539e8229642aa-2865-4889",
+          "text": "Before you start a small claims case | California Courts | Self Help Guide\nThey stopped paying and have missed 2 payments.\n\tYou want to sue them for the entire $5,000 loan amount. But, you can only sue for the missed payments (which in this example is $200, unless your agreement with them says something else).\n\u00a0\nYou can sue them for the missed payments and then sue them again if they miss more payments. Or,\u00a0wait until the end of the loan payments and sue for the whole amount\n\nEXAMPLE: security deposit\nYour landlord didn\u2019t return your deposit after you moved out and also didn\u2019t send you a letter explaining why they kept your entire deposit within the time the law says they must.\n\tThe law allows you to sue for more than the deposit amount to punish the landlord for not following the law. You also may be able to ask for other money like interest or penalties in other types of lawsuits, too.\n\nIf you only want something other than money\nGenerally, small claims cases are about money, not for the judge to order someone to do something or not do something.\u00a0\nIf you want someone to do something (or not do something) but having them pay you money would be acceptable instead, then a small claims case is an option.\n\nEXAMPLE: Take down the fence or Pay\nYour neighbor built a fence on your property and you want them to take it down. You'd also be okay with them leaving the fence where it is and paying you $9,000. You can\u00a0start a small claims case if they won't agree to pay you.\n\nEXAMPLE: returning the BBQ grill\nYou and your ex broke up and you want the BBQ grill back that you paid for.\u00a0Your ex won't return it to you. In small claims court, the judge can't make your ex give you the grill, but you could ask that the judge order your ex to pay you money equivalent to the price of a used BBQ grill.\n\nIf you're not asking for money, talk to a small claims advisor\nIf you only\u00a0want to ask the judge to order the other side to do something or not do something, you may need to start a regular\u00a0civil court case, not a small claims case.\u00a0Talk to a\u00a0Small Claims Advisor\u00a0or get other legal help.",
+          "title": "Before you start a small claims case | California Courts | Self Help Guide",
+          "url": "https://selfhelp.courts.ca.gov/small-claims/before-you-start",
+          "score": 26.109173,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723646560
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What does a small claims court do\n|assistant|: A small claims court is designed to provide a fair, quick, and inexpensive way for individuals to resolve disputes involving relatively small amounts of money. You must have asked the defendant to pay and the defendant has refused. You may not have a lawyer represent you. The judge will hear your case or the court will give parties an opportunity to meet with a mediator at the time of trial. The Small Claims Court has a monetary limit on the amount of money damages that can be claimed, usually up to $12,500 for \"a natural person\", with some exceptions.\n|user|: My renter left and the damage to the apartment is $1000 more than the security deposit. Is this a claim for small claims court?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "fc7539e8229642aa-7437-9437",
+          "text": "Before you start a small claims case | California Courts | Self Help Guide\nYou need to know where whoever you think owes you money\u00a0is so\nYou can put that address on the court forms\nThey can be given the forms if you decide to sue them. If you're suing a business, they may have a designated person that receives court forms (known as Agent for Service of Process)\nGet tips on how to find a person or a business\u00a0and agent for service of process.\nThere are different rules if you want to sue someone who lives outside California. Learn more\nIf the person you want to sue is living outside California, you may not be able to sue them unless they return to California. There are some exceptions. For example, if you are suing because of a car accident and the other driver is from out of state or you are suing about a property you rented and the owner of the property lives out of state.\nTalk to a small claims advisor if the person you want to sue lives outside California. Even if you are able to sue them, it may be hard to collect the money out of state.\n\nYou have proof\nYou don\u2019t have to have all your proof together before you start a small claims case. But, you have to know what you need and that you will be able to get it in time to\u00a0bring to your court hearing. Examples of proof (also called evidence) are:\nRepair receipts\nPhotos of damage\nEmails\nBusiness records\n\nEXAMPLE: proof of repair costs\nSomeone\u00a0hit your car with theirs. You have a police report showing the other driver is at fault. You also need a paid\u00a0invoice or a few estimates for the repair costs to bring with you to your court hearing.\n\nEXAMPLE: pictures of a clean apartment\nYour landlord didn't return your security deposit. You could bring photos of the clean home with timestamps that show when the photos were taken or have your friend who saw the clean home come to your court hearing to talk about it.\n\nGive yourself time\u00a0to get the proof you need.\u00a0It can sometimes take months to get the proof you need. For example, you may need a court order to get business or medical records (a subpoena).",
+          "title": "Before you start a small claims case | California Courts | Self Help Guide",
+          "url": "https://selfhelp.courts.ca.gov/small-claims/before-you-start",
+          "score": 22.709225,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723646712
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Before you start a small claims case | California Courts | Self Help Guide"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "7db93570207c64fa-7824-10025",
+          "text": "\r\n\tSmall Claims Court Process: Sacramento Superior Court\r\n\nAt this point, the person who served the documents must also mail the \r\n second copy of the claim to the defendant at the exact same address where the \r\n first copy was left. This is to be done with the first class mail, postage \r\n pre-paid. No other form of mail is permitted.\n\nMarshall, Sheriff, or Constable in the county \r\n where the defendant lives or does business. If you choose this method, you must \r\n then contact the Sheriff's Department for further instructions. It is your \r\n responsibility to insure that the completed proof of service be returned to the \r\n Small Claims court prior to the scheduled court date.\r\n \nPrivate process server (a listing of process \r\n servers may be found in the yellow pages under process serving. If you choose \r\n this method, you must make arrangements with the process server of your choice.\r\n It is your responsibility to insure that the completed proof of service be \r\n returned to the Small Claims court prior to the scheduled court date.\r\n \nBy anyone at least 18 years of age who is not a \r\n party to the action. They must fill out a proof of service form and it is \r\n your responsibility to insure that the completed proof of service be returned to \r\n the Small Claims court prior to the scheduled court date.\r\n \nThe court no longer provides service by certified mail. You may not send the certified mail yourself.\r\n \n\nWebsites to Help You File a Claim\n\r\n The \r\n California Courts Self-Help Center - external link has information on\r\n how to file your claim and how to enforce the judgment.\n\r\n The California Department of Consumer Affairs - external link also has a Web \r\n site with useful information to help you file your claim. This site also \r\n contains information about how to collect the judgment.\n\nHearings Before Temporary Judges\n\r\n The Small Claims court uses temporary judges to \r\n hear the cases. A temporary judge is an attorney who has been licensed to \r\n practice law in California for a minimum of five years and who volunteers to \r\n assist the court by hearing certain cases. They meet the same minimum \r\n qualifications as a judge or commissioner. The temporary judge is required to \r\n take a training program before hearing cases.",
+          "title": "\r\n\tSmall Claims Court Process: Sacramento Superior Court\r\n",
+          "url": "https://saccourt.ca.gov/small-claims/process.aspx",
+          "score": 23.87308,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723646826
+              },
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "no",
+                "timestamp": 1726584446
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Small Claims Court Process: Sacramento Superior Court"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, you can file a small claims court case for the additional $1000. According to the document, if your landlord didn't return your deposit after you moved out and also didn't send you a letter explaining why they kept your entire deposit within the time the law says they must, you can sue for more than the deposit amount to punish the landlord for not following the law. However, you can only sue for the missed payments and then sue again if they miss more payments. You cannot sue for the entire loan amount upfront."
+    },
+    {
+      "speaker": "user",
+      "text": "Are the forms online?",
+      "timestamp": 1723646988,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, the forms to file a small claims case can be located on the court website under Online Forms by selecting the Judicial Council hyperlink. ",
+      "timestamp": 1723646994,
+      "contexts": [
+        {
+          "document_id": "902597c38243f958-1536-3462",
+          "text": "Small Claims | Superior Court of California | County of Tulare\nEnglish\n\nEspa\u00f1ol\n\n Translate\n \n\nEnglish\n\nEspa\u00f1ol\n\nSearch\n\n Search\n\n \n\nDivisions\n\nSmall Claims\n\n Small Claims\n \n\nThe Small Claims Court is a special court where disputes are resolved inexpensively and quickly. Small Claims cases are for damages of $10,000 or less. Small Claims is affordable and fast, with simple and informal rules. Attorneys are not allowed.\n\nWhat Is Small Claims Court?\nSmall claims court is a special court where disputes are resolved quickly and inexpensively. The rules are simple and informal. The person who sues is the plaintiff. The person who is sued is the defendant. In small claims court, you may ask a lawyer for advice before you go to court, but you cannot have a lawyer in court.\nYour claim cannot be for more than $10,000.00. If you have a claim for more than this amount, you may file a limited civil case, or you may sue in the small claims court and give up your right to the amount over $10,000.00. You cannot, however, file more than two cases in small claims court for more than $2,500.00 each during a calendar year.\nWho Can File a Claim?\nYou must be at least 18 years old to file a claim. If you are not yet 18, you may ask the court to appoint a guardian ad litem. This is a person who will act for you in the case. The guardian ad litem is usually a parent, relative, or an adult friend. A person who sues in small claims court must first make a demand, if possible. This means that you have asked the defendant to pay, and the defendant has refused. If your claim is for possession of property, you must ask the defendant to give you the property.\nUnless you fall within two technical exceptions, you must be the original owner of the claim. This means that if the claim is assigned, the buyer cannot sue in the small claims court. You must also appear at the small claims hearing yourself unless you filed the claim for a corporation or other entity that is not a natural person.",
+          "title": "Small Claims | Superior Court of California | County of Tulare",
+          "url": "https://www.tulare.courts.ca.gov/divisions/small-claims",
+          "score": 34.38371,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723647125
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What does a small claims court do\n|assistant|: A small claims court is designed to provide a fair, quick, and inexpensive way for individuals to resolve disputes involving relatively small amounts of money. You must have asked the defendant to pay and the defendant has refused. You may not have a lawyer represent you. The judge will hear your case or the court will give parties an opportunity to meet with a mediator at the time of trial. The Small Claims Court has a monetary limit on the amount of money damages that can be claimed, usually up to $12,500 for \"a natural person\", with some exceptions.\n|user|: My renter left and the damage to the apartment is $1000 more than the security deposit. Is this a claim for small claims court?\n|assistant|: Yes, you can file a small claims court case for the additional $1000. Small Claims cases are for damages of $10,000 or less. You must be at least 18 years old to file a claim. Do you have proof? You need to know what proof to get to show the other side and bring to your court date. Examples of proof (also called evidence) are: Repair receipts, Photos of damage, Emails.\n|user|: Are the forms online?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "8993b53fcdab5c13-4310-6136",
+          "text": "Before you sue the other side back | California Courts | Self Help Guide\nAn example of this is when a landlord doesn't refund a security deposit or give a reason why within 21 days.\u00a0In that case, the law says you can sue for more than the security deposit amount because the landlord didn't follow the law.\nIf the other side owes you more than $10,000 (or $5,000 if its owed to your business), you may not be able to file in small claims court. Learn more\u00a0\nSmall claims court is only for cases where a person asks for less than $10,000 or $5,000 if the money is owed to a business. If you or your business wants to ask for more, you can ask for the case to be heard in regular civil court. Talk to a Small Claims Advisor to find out more.\n\nDo you have proof?\nYou don\u2019t have to have all your proof together before you sue the other side back. But, you need to know what proof to\u00a0get to show the other side and bring to your court date.\nExamples of proof (also called evidence) are:\nRepair receipts\nPhotos of damage\nEmails\nBusiness records\n\nExample: bills for repair costs\nSomeone\u2019s car hit your car. They're suing you for damages but you\u00a0have a police report showing the other driver is at fault. But, you haven\u2019t finished the body work repairs so you don\u2019t have a bill to show how much the other driver owes you. Make sure you have the paid invoice to bring with you to your court hearing.\n\nExample: Pictures of a clean apartment\nYour landlord doesn\u2019t want to return your security deposit and wouldn\u2019t do a walk-through with you when you moved out. They're suing you so you'll pay for damages that cost more than your deposit. In your court case against the landlord you would bring photos of the clean home with timestamps that show when the photos were taken and/or have your friend who saw the clean home come to your court date to talk about it.\n\nYou can use a subpoena to get the proof you need",
+          "title": "Before you sue the other side back | California Courts | Self Help Guide",
+          "url": "https://selfhelp.courts.ca.gov/you-sue-other-side-back",
+          "score": 31.261757,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723647131
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What does a small claims court do\n|assistant|: A small claims court is designed to provide a fair, quick, and inexpensive way for individuals to resolve disputes involving relatively small amounts of money. You must have asked the defendant to pay and the defendant has refused. You may not have a lawyer represent you. The judge will hear your case or the court will give parties an opportunity to meet with a mediator at the time of trial. The Small Claims Court has a monetary limit on the amount of money damages that can be claimed, usually up to $12,500 for \"a natural person\", with some exceptions.\n|user|: My renter left and the damage to the apartment is $1000 more than the security deposit. Is this a claim for small claims court?\n|assistant|: Yes, you can file a small claims court case for the additional $1000. Small Claims cases are for damages of $10,000 or less. You must be at least 18 years old to file a claim. Do you have proof? You need to know what proof to get to show the other side and bring to your court date. Examples of proof (also called evidence) are: Repair receipts, Photos of damage, Emails.\n|user|: Are the forms online?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6d8c260a4cf63440-5941-8167",
+          "text": "The Superior Court of California - County of Ventura - Small Claims\nService by certified mail must be done by the clerk's office. The fee is $15.00 per defendant. You cannot serve the defendant yourself. \r\n Certified mail is the least effective form of service and the green return receipt must be signed by the defendant personally or the court will delay your \r\n hearing and ask you to attempt another form of service. You will need to check with the court prior to the hearing to see if the receipt for certified mail \r\n was returned to the court.\nPersonal service. Personal service means someone gives the papers directly to the person being sued or to the agent authorized to accept service for a \r\n business or public entity. A plaintiff cannot serve the defendant. Anyone over the age of 18, not a party to the action, may serve the defendant. The \r\n person serving the claim must sign a proof of service form showing when the defendant was served and this form must be filed with the court 5 days prior \r\n to the hearing date. You can have the Sheriff serve the defendant for a fee of $40.00 per defendant or you can hire a registered process service to \r\n serve the defendant.\nIf service is not completed your case will be taken off calendar and you will need to reset the hearing and have the defendant re-served.\n\nSettlement Before Court\n\nIf the case is settled after the filing of the claim and before the hearing date, the plaintiff must file Judicial Council form \u201cRequest For Dismissal\u201d \r\n (CIV-110) with the court. If the claim was satisfied with payment by check, \r\n the plaintiff may want to wait until the check has cleared the bank before filing the dismissal.\n\nSmall Claims Mediation Program\n\nMediation at the Court.\u00a0\u00a0Free mediation services for litigants in small claims cases is provided by trained \r\n volunteer mediators through Ventura Center for Dispute Settlement who are available at the court at the time of your hearing.\nBenefits:\n\nMediation is Power.\u00a0\u00a0In mediation, the parties \r\n determine the outcome of the case, rather than having the judge decide for you.\nSave Business Relationships and Friendships.\u00a0\u00a0Mediation \r\n can help maintain important relationships without going to court.\nHave Both Views of the Dispute Heard.\u00a0\u00a0Many cases \r\n aren\u2019t just about money.",
+          "title": "The Superior Court of California - County of Ventura - Small Claims",
+          "url": "https://www.ventura.courts.ca.gov/small-claims.html",
+          "score": 29.796942,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723647136
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What does a small claims court do\n|assistant|: A small claims court is designed to provide a fair, quick, and inexpensive way for individuals to resolve disputes involving relatively small amounts of money. You must have asked the defendant to pay and the defendant has refused. You may not have a lawyer represent you. The judge will hear your case or the court will give parties an opportunity to meet with a mediator at the time of trial. The Small Claims Court has a monetary limit on the amount of money damages that can be claimed, usually up to $12,500 for \"a natural person\", with some exceptions.\n|user|: My renter left and the damage to the apartment is $1000 more than the security deposit. Is this a claim for small claims court?\n|assistant|: Yes, you can file a small claims court case for the additional $1000. Small Claims cases are for damages of $10,000 or less. You must be at least 18 years old to file a claim. Do you have proof? You need to know what proof to get to show the other side and bring to your court date. Examples of proof (also called evidence) are: Repair receipts, Photos of damage, Emails.\n|user|: Are the forms online?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6d8c260a4cf63440-4260-6441",
+          "text": "The Superior Court of California - County of Ventura - Small Claims\nThis means you have asked the defendant to pay and the defendant has refused.\nThe forms to file a small claims case can be located on the court website under Online Forms by selecting the Judicial Council hyperlink. If you do not have \r\n access to a computer, you may either come directly to the clerk\u2019s office to fill out the appropriate paperwork or have the paperwork mailed to you by sending in \r\n your request along with a self-addressed stamped envelope. Small Claims forms cannot be filed by fax.\nIf you want to file a small claim and you are a business or corporation that operates or does business under a fictitious name (\u201cdoing business as\u201d or \u201cdba\u201d) \r\n you must complete Judicial Council form SC-103, Fictitious Business Name form and file \r\n it with you claim form. If you do not file this form, the court will dismiss your claim at the time of the hearing.\nIf the claim you are filing is to enforce the payment of a debt, you must provide a written calculation showing how you calculated the amount owed that \r\n must include the original debt amount, each payment credited to the debt, each fee and charge added to the debt, each payment credited against those fees \r\n and charges, all other debits or charges to the account and an explanation of the nature of those fees, charges, debits, and all other credits to the \r\n debt, by source and amount. This is required by law and your claim cannot be filed without this information.\n\nTypes of Service\n\nThe defendant must be served with a copy of the claim 15 days prior to the hearing date if they live in county and 20 days prior to the hearing if they \r\n live out of county.\nThe types of service are:\nCertified mail. Service by certified mail must be done by the clerk's office. The fee is $15.00 per defendant. You cannot serve the defendant yourself. \r\n Certified mail is the least effective form of service and the green return receipt must be signed by the defendant personally or the court will delay your \r\n hearing and ask you to attempt another form of service. You will need to check with the court prior to the hearing to see if the receipt for certified mail \r\n was returned to the court.\nPersonal service.",
+          "title": "The Superior Court of California - County of Ventura - Small Claims",
+          "url": "https://www.ventura.courts.ca.gov/small-claims.html",
+          "score": 25.707804,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723647436
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "The Superior Court of California - County of Ventura - Small Claims"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "0ce98cc298a99188-1333-3335",
+          "text": "\r\n\tSmall Claims E-Filing: Sacramento Superior Court\r\n\nThis information sheet explains some of the rules and general information related to Covid-19 Rental Debt cases filed in the Small Claims Court.\n\nSC-100 - Plaintiff\u2019s Claim and Order to Go to Small Claims Court\nDO NOT USE THIS FORM WHEN SUING FOR RESIDENTIAL COVID-19 RENTAL DEBT. This form allows you to sue someone in Small Claims Court. Claims must be $12,500 and under.\n\nSC-100A - Other Plaintiffs or Defendants\nUse this form to name additional plaintiffs or defendants and attach to SC-100. DO NOT use with SC-500.\n\nSC-100-INFO\nThis information sheet is for a person who sues in Small Claims Court. It explains some of the rules and general information about Small Claims Court. It may also be helpful for the person who is sued. For information related to COVID-19 Rental Debt, please see SC-500-INFO sheet.\n\nRA-015 - Opposition to Remote Proceeding\nUse this form to show the court why a remote appearance or testimony should not be allowed.\n\nThe following PDF forms can only be opened in Adobe Reader or Acrobat. They will not reliably open directly in any Web browser, except for Internet Explorer, which, as of 2/14/2023, is being discontinued and will be removed from Windows 10 and later operating systems. \nTo open a form:\n\nClick the form link - The links to these forms have been configured to automatically use your browser\u2019s \"download\" feature so you will notice the download widget at the top right or lower left of your browser (depending on your browser). \n\r\n On the download widget, Click \u2018Show in folder\u2019 (location will vary by browser) to open the folder where the PDF form was downloaded\r\n \nNOTE: Do not simply click the download widget or \u2018Open\u2019 or it will attempt to open the PDF in the browser and a \u2018Please wait\u2026\u2019 message will be displayed. \n\nLocate the file in the folder and open it directly in your version of Adobe Reader or Acrobat\n\nSC-120 \u2013 Defendant\u2019s Claim and Order to Go to Small Claims Court\nThis form is for those who are being sued and want to file a countersuit.",
+          "title": "\r\n\tSmall Claims E-Filing: Sacramento Superior Court\r\n",
+          "url": "https://saccourt.ca.gov/efiling/small-claims.aspx",
+          "score": 24.990911,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723647697
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Small Claims E-Filing: Sacramento Superior Court"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "7e4251fc01e38b5d-49753-51642",
+          "text": "The Superior Court of California - County of Ventura - FAQs\nIf a court reporter was present at the proceeding, a copy of the transcript may be purchased by contacting the court reporter\u00e2\u0080\u0099s office at (805) 289\u00e2\u0080\u00908989.\n\nFor more information please visit our Records page.\n\nSmall Claims\n\nQ:\u00a0\u00a0How much can I sue for in Small Claims court?\nA:\u00a0\u00a0Your claim cannot ask for more than $5,000 if you are a business or public entity or for more than $10,000 if you are a natural person \r\n (including a sole proprietor). If you have a claim for more than this amount, you may sue in the civil division of the trial court or you may sue in the \r\n small claims court and give up your right to the amount over the limit. You cannot file more than two cases in small claims court for more than $2,500 \r\n each during a calendar year.\n\nQ:\u00a0\u00a0May I sue for the recovery of property?\nA:\u00a0\u00a0Small claims court is for the recovery of money only.\n\nQ:\u00a0\u00a0How do I file a claim?\nA:\u00a0\u00a0The forms to file a small claims case can be located on the court website under Online Forms by selecting the Judicial Council hyperlink. \r\n If you do not have access to a computer, you may either come directly to the clerk\u00e2\u0080\u0099s office to fill out the appropriate paperwork or have the paperwork \r\n mailed to you by sending in your request along with a self-addressed stamped envelope. There is also a Small Claims Kiosk in the clerk\u00e2\u0080\u0099s office where \r\n you can complete the claim form online by answering questions. This is an easy process and if used, the clerk will print your claim forms for you for no cost.\n\nQ:\u00a0\u00a0How old do I have to be to file a claim?\nA:\u00a0\u00a0You must be at least 18 years of age to file a claim. If you are not yet 18, you may ask the court to appoint a guardian ad litem. This is a \r\n person who will act for you in the case. The guardian ad litem is usually a parent, a relative or an adult friend.\n\nQ:\u00a0\u00a0How much does it cost to file a claim?\nA:\u00a0\u00a0See the fee structure below.",
+          "title": "The Superior Court of California - County of Ventura - FAQs",
+          "url": "https://www.ventura.courts.ca.gov/faqs.html",
+          "score": 22.430298,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723648406
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "The Superior Court of California - County of Ventura - FAQs If a court reporter was present at the proceeding,"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, the forms for Small Claims Court in the County of Tulare, California are available online on their website. However, for service by certified mail, the fee is $15.00 per defendant and must be done by the clerk's office. Personal service can be done by anyone over the age of 18, not a party to the action, and the fee for service by the Sheriff is $40.00 per defendant. The proof of service form must be filed with the court 5 days prior to the hearing date. If service is not completed, your case will be taken off calendar and you will need to reset the hearing and have the defendant re-served."
+    },
+    {
+      "speaker": "user",
+      "text": "How much is the filing fee?",
+      "timestamp": 1723648527,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "In Ventura County the filing fee for a small claims case depends on the amount of your claim: * If your claim is for $1,500.00 or less, the filing fee is $30.00. * If your claim is more than $1,500.00 but less than or equal to $5,000.00, the filing fee is $50.00. * If your claim is more than $5,000.00 but less than or equal to $10,000.00, the filing fee is $75.00. * If you have filed more than 12 small claims in California within the past 12 months, the filing fee is $100.00. Service by certified mail must be done by the clerk's office. The fee is $15.00 per defendant. For Sacramento: Find out how much it will cost to file Small Claims forms online.",
+      "timestamp": 1723648532,
+      "contexts": [
+        {
+          "document_id": "902597c38243f958-1536-3462",
+          "text": "Small Claims | Superior Court of California | County of Tulare\nEnglish\n\nEspa\u00f1ol\n\n Translate\n \n\nEnglish\n\nEspa\u00f1ol\n\nSearch\n\n Search\n\n \n\nDivisions\n\nSmall Claims\n\n Small Claims\n \n\nThe Small Claims Court is a special court where disputes are resolved inexpensively and quickly. Small Claims cases are for damages of $10,000 or less. Small Claims is affordable and fast, with simple and informal rules. Attorneys are not allowed.\n\nWhat Is Small Claims Court?\nSmall claims court is a special court where disputes are resolved quickly and inexpensively. The rules are simple and informal. The person who sues is the plaintiff. The person who is sued is the defendant. In small claims court, you may ask a lawyer for advice before you go to court, but you cannot have a lawyer in court.\nYour claim cannot be for more than $10,000.00. If you have a claim for more than this amount, you may file a limited civil case, or you may sue in the small claims court and give up your right to the amount over $10,000.00. You cannot, however, file more than two cases in small claims court for more than $2,500.00 each during a calendar year.\nWho Can File a Claim?\nYou must be at least 18 years old to file a claim. If you are not yet 18, you may ask the court to appoint a guardian ad litem. This is a person who will act for you in the case. The guardian ad litem is usually a parent, relative, or an adult friend. A person who sues in small claims court must first make a demand, if possible. This means that you have asked the defendant to pay, and the defendant has refused. If your claim is for possession of property, you must ask the defendant to give you the property.\nUnless you fall within two technical exceptions, you must be the original owner of the claim. This means that if the claim is assigned, the buyer cannot sue in the small claims court. You must also appear at the small claims hearing yourself unless you filed the claim for a corporation or other entity that is not a natural person.",
+          "title": "Small Claims | Superior Court of California | County of Tulare",
+          "url": "https://www.tulare.courts.ca.gov/divisions/small-claims",
+          "score": 36.29553,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723648722
+              },
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "no",
+                "timestamp": 1726585472
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What does a small claims court do\n|assistant|: A small claims court is designed to provide a fair, quick, and inexpensive way for individuals to resolve disputes involving relatively small amounts of money. You must have asked the defendant to pay and the defendant has refused. You may not have a lawyer represent you. The judge will hear your case or the court will give parties an opportunity to meet with a mediator at the time of trial. The Small Claims Court has a monetary limit on the amount of money damages that can be claimed, usually up to $12,500 for \"a natural person\", with some exceptions.\n|user|: My renter left and the damage to the apartment is $1000 more than the security deposit. Is this a claim for small claims court?\n|assistant|: Yes, you can file a small claims court case for the additional $1000. Small Claims cases are for damages of $10,000 or less. You must be at least 18 years old to file a claim. Do you have proof? You need to know what proof to get to show the other side and bring to your court date. Examples of proof (also called evidence) are: Repair receipts, Photos of damage, Emails.\n|user|: Are the forms online?\n|assistant|: The forms for Small Claims Court are available online on their website. The forms to file a small claims case can be located on the court website under Online Forms by selecting the Judicial Council hyperlink. Small Claims E-Filing in Sacramento Superior Court: The PDF forms can only be opened in Adobe Reader or Acrobat.\n|user|: How much is the filing fee?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "0ce98cc298a99188-1333-3335",
+          "text": "\r\n\tSmall Claims E-Filing: Sacramento Superior Court\r\n\nThis information sheet explains some of the rules and general information related to Covid-19 Rental Debt cases filed in the Small Claims Court.\n\nSC-100 - Plaintiff\u2019s Claim and Order to Go to Small Claims Court\nDO NOT USE THIS FORM WHEN SUING FOR RESIDENTIAL COVID-19 RENTAL DEBT. This form allows you to sue someone in Small Claims Court. Claims must be $12,500 and under.\n\nSC-100A - Other Plaintiffs or Defendants\nUse this form to name additional plaintiffs or defendants and attach to SC-100. DO NOT use with SC-500.\n\nSC-100-INFO\nThis information sheet is for a person who sues in Small Claims Court. It explains some of the rules and general information about Small Claims Court. It may also be helpful for the person who is sued. For information related to COVID-19 Rental Debt, please see SC-500-INFO sheet.\n\nRA-015 - Opposition to Remote Proceeding\nUse this form to show the court why a remote appearance or testimony should not be allowed.\n\nThe following PDF forms can only be opened in Adobe Reader or Acrobat. They will not reliably open directly in any Web browser, except for Internet Explorer, which, as of 2/14/2023, is being discontinued and will be removed from Windows 10 and later operating systems. \nTo open a form:\n\nClick the form link - The links to these forms have been configured to automatically use your browser\u2019s \"download\" feature so you will notice the download widget at the top right or lower left of your browser (depending on your browser). \n\r\n On the download widget, Click \u2018Show in folder\u2019 (location will vary by browser) to open the folder where the PDF form was downloaded\r\n \nNOTE: Do not simply click the download widget or \u2018Open\u2019 or it will attempt to open the PDF in the browser and a \u2018Please wait\u2026\u2019 message will be displayed. \n\nLocate the file in the folder and open it directly in your version of Adobe Reader or Acrobat\n\nSC-120 \u2013 Defendant\u2019s Claim and Order to Go to Small Claims Court\nThis form is for those who are being sued and want to file a countersuit.",
+          "title": "\r\n\tSmall Claims E-Filing: Sacramento Superior Court\r\n",
+          "url": "https://saccourt.ca.gov/efiling/small-claims.aspx",
+          "score": 35.6048,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723648728
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What does a small claims court do\n|assistant|: A small claims court is designed to provide a fair, quick, and inexpensive way for individuals to resolve disputes involving relatively small amounts of money. You must have asked the defendant to pay and the defendant has refused. You may not have a lawyer represent you. The judge will hear your case or the court will give parties an opportunity to meet with a mediator at the time of trial. The Small Claims Court has a monetary limit on the amount of money damages that can be claimed, usually up to $12,500 for \"a natural person\", with some exceptions.\n|user|: My renter left and the damage to the apartment is $1000 more than the security deposit. Is this a claim for small claims court?\n|assistant|: Yes, you can file a small claims court case for the additional $1000. Small Claims cases are for damages of $10,000 or less. You must be at least 18 years old to file a claim. Do you have proof? You need to know what proof to get to show the other side and bring to your court date. Examples of proof (also called evidence) are: Repair receipts, Photos of damage, Emails.\n|user|: Are the forms online?\n|assistant|: The forms for Small Claims Court are available online on their website. The forms to file a small claims case can be located on the court website under Online Forms by selecting the Judicial Council hyperlink. Small Claims E-Filing in Sacramento Superior Court: The PDF forms can only be opened in Adobe Reader or Acrobat.\n|user|: How much is the filing fee?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "7e4251fc01e38b5d-51303-53129",
+          "text": "The Superior Court of California - County of Ventura - FAQs\nA:\u00a0\u00a0You must be at least 18 years of age to file a claim. If you are not yet 18, you may ask the court to appoint a guardian ad litem. This is a \r\n person who will act for you in the case. The guardian ad litem is usually a parent, a relative or an adult friend.\n\nQ:\u00a0\u00a0How much does it cost to file a claim?\nA:\u00a0\u00a0See the fee structure below.\n\nIf the claim is for $1,500.00 or less, the filing fee is $30.00. \nIf the claim is more than $1,500.00 but less than or equal to $5,000.00, the filing fee is $50.00.\nIf the claim is more than $5,000.00 but less than or equal to $10,000.00, the filing fee is $75.00.\nIf the person has filed more than 12 small claims in California within the past 12 months, the filing fee is $100.00.\n\nQ:\u00a0\u00a0How do I obtain the forms needed to file my claim?\nA:\u00a0\u00a0Forms can be obtained on at the State Forms page of the California Courts website. \r\n The forms can also be completed online. Forms can also be obtained at either court location or may be received by mail by sending your request along with a self-addressed \r\n stamped envelope to the court.\n\nQ:\u00a0\u00a0Do my forms have to be typed?\nA:\u00a0\u00a0The forms do not have to be typed. They can be handwritten but must be legible. It is preferable that the forms be completed in blue or black ink.\n\nQ:\u00a0\u00a0Is this the proper court to hear my case?\nA:\u00a0\u00a0You must sue in the right court and location. This rule is called venue. The Ventura Superior Court has two divisions where small claims cases are assigned \r\n and heard. The right location may be any of these:\n\nWhere the defendant lives or where the business involved is located; \nWhere the damage or accident happened;\nWhere the contract was signed or carried out;\nIf the defendant is a corporation, where the contract was broken\nFor a retail installment account or sales contract or a motor vehicle finance sale:",
+          "title": "The Superior Court of California - County of Ventura - FAQs",
+          "url": "https://www.ventura.courts.ca.gov/faqs.html",
+          "score": 34.5608,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723648735
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What does a small claims court do\n|assistant|: A small claims court is designed to provide a fair, quick, and inexpensive way for individuals to resolve disputes involving relatively small amounts of money. You must have asked the defendant to pay and the defendant has refused. You may not have a lawyer represent you. The judge will hear your case or the court will give parties an opportunity to meet with a mediator at the time of trial. The Small Claims Court has a monetary limit on the amount of money damages that can be claimed, usually up to $12,500 for \"a natural person\", with some exceptions.\n|user|: My renter left and the damage to the apartment is $1000 more than the security deposit. Is this a claim for small claims court?\n|assistant|: Yes, you can file a small claims court case for the additional $1000. Small Claims cases are for damages of $10,000 or less. You must be at least 18 years old to file a claim. Do you have proof? You need to know what proof to get to show the other side and bring to your court date. Examples of proof (also called evidence) are: Repair receipts, Photos of damage, Emails.\n|user|: Are the forms online?\n|assistant|: The forms for Small Claims Court are available online on their website. The forms to file a small claims case can be located on the court website under Online Forms by selecting the Judicial Council hyperlink. Small Claims E-Filing in Sacramento Superior Court: The PDF forms can only be opened in Adobe Reader or Acrobat.\n|user|: How much is the filing fee?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6d8c260a4cf63440-4260-6441",
+          "text": "The Superior Court of California - County of Ventura - Small Claims\nThis means you have asked the defendant to pay and the defendant has refused.\nThe forms to file a small claims case can be located on the court website under Online Forms by selecting the Judicial Council hyperlink. If you do not have \r\n access to a computer, you may either come directly to the clerk\u2019s office to fill out the appropriate paperwork or have the paperwork mailed to you by sending in \r\n your request along with a self-addressed stamped envelope. Small Claims forms cannot be filed by fax.\nIf you want to file a small claim and you are a business or corporation that operates or does business under a fictitious name (\u201cdoing business as\u201d or \u201cdba\u201d) \r\n you must complete Judicial Council form SC-103, Fictitious Business Name form and file \r\n it with you claim form. If you do not file this form, the court will dismiss your claim at the time of the hearing.\nIf the claim you are filing is to enforce the payment of a debt, you must provide a written calculation showing how you calculated the amount owed that \r\n must include the original debt amount, each payment credited to the debt, each fee and charge added to the debt, each payment credited against those fees \r\n and charges, all other debits or charges to the account and an explanation of the nature of those fees, charges, debits, and all other credits to the \r\n debt, by source and amount. This is required by law and your claim cannot be filed without this information.\n\nTypes of Service\n\nThe defendant must be served with a copy of the claim 15 days prior to the hearing date if they live in county and 20 days prior to the hearing if they \r\n live out of county.\nThe types of service are:\nCertified mail. Service by certified mail must be done by the clerk's office. The fee is $15.00 per defendant. You cannot serve the defendant yourself. \r\n Certified mail is the least effective form of service and the green return receipt must be signed by the defendant personally or the court will delay your \r\n hearing and ask you to attempt another form of service. You will need to check with the court prior to the hearing to see if the receipt for certified mail \r\n was returned to the court.\nPersonal service.",
+          "title": "The Superior Court of California - County of Ventura - Small Claims",
+          "url": "https://www.ventura.courts.ca.gov/small-claims.html",
+          "score": 25.707804,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723648829
+              },
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "yes",
+                "timestamp": 1726585553
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "The Superior Court of California - County of Ventura - Small Claims"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "0ce98cc298a99188-5-1748",
+          "text": "\r\n\tSmall Claims E-Filing: Sacramento Superior Court\r\n\nSmall Claims E-Filing: Sacramento Superior Court\r\n\nEspa\u00f1ol \nTi\u1ebfng Vi\u1ec7t\n\ud55c\uad6d\uc5b4\n\u4e2d\u6587\n\u0440\u0443\u0441\u0441\u043a\u0438\u0439\n\nLocations\nFAQ\nADA\nContact\n\nSaturday, May 25, 2024\n\nThe Court will be closed on Monday, May 27th in observance of Memorial Day\n\nToggle navigation\n\nHome\nOnline Services\n\nInfo Centers \n\nFor Jurors\nFor Parties\nFor Attorneys\nFor the Media\nFor Vendors\nSelf-Help Central\nOnline Services\n\nDepartments \n\nAppeals\nCivil\nCourt Reporters\nCriminal\nExhibits\nFamily and Children\nInterpreter Services\nJuror Service Center\nJuvenile\nLandlord / Tenant\nProbate\nRestraining Orders\nSmall Claims\nTraffic (Adult/Juvenile)\n\nGeneral Info \n\nGeneral Information\nCourt Locations\nFees and Forms\nCourt Reporters\nInterpreter Services\nLocal Rules\nNews Releases andPublic Notices\nCareer Opportunities - external link\nCommunity Outreach\nVirtual Courthouse\n\nSite Map / Index\n\nContact\n\nSmall Claims e-Filing\n\nHome > E-Filing Services > Small Claims e-Filing\n\n\r\n\t Fee Schedule\nFind out how much it will cost to file Small Claims forms online.\n\nSC-500 - Plaintiff\u2019s Claim and Order to Go to Small Claims Court (COVID-19 Rental Debt)\nUse this form when suing for residential Covid-19 Rental Debt Only.\n\nSC-500A - Other Plaintiffs or Defendants\nUse this form to name additional plaintiffs or defendants and attach to SC-500.\n\nSC-500-INFO \u2013 COVID-19 Rental Debt in Small Claims Court\nThis information sheet explains some of the rules and general information related to Covid-19 Rental Debt cases filed in the Small Claims Court.\n\nSC-100 - Plaintiff\u2019s Claim and Order to Go to Small Claims Court\nDO NOT USE THIS FORM WHEN SUING FOR RESIDENTIAL COVID-19 RENTAL DEBT. This form allows you to sue someone in Small Claims Court. Claims must be $12,500 and under.\n\nSC-100A - Other Plaintiffs or Defendants",
+          "title": "\r\n\tSmall Claims E-Filing: Sacramento Superior Court\r\n",
+          "url": "https://saccourt.ca.gov/efiling/small-claims.aspx",
+          "score": 26.919275,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723648928
+              },
+              "7ee1aecf-492d-4847-a436-3db915c57d2e": {
+                "value": "no",
+                "timestamp": 1726585585
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Small Claims E-Filing: Sacramento Superior Court"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The filing fee for a small claims case depends on the amount of your claim:\n* If your claim is for $1,500.00 or less, the filing fee is $30.00.\n* If your claim is more than $1,500.00 but less than or equal to $5,000.00, the filing fee is $50.00.\n* If your claim is more than $5,000.00 but less than or equal to $10,000.00, the filing fee is $75.00.\n* If you have filed more than 12 small claims in California within the past 12 months, the filing fee is $100.00.\nThese fees are subject to change, so it's always a good idea to check the current fee schedule on the court's website."
+    },
+    {
+      "speaker": "user",
+      "text": "How about mediation?",
+      "timestamp": 1723652284,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "You can mediate your case before or after a small claims case has been filed. If you mediate before filing a case and an agreement is reached at the mediation, there will be no need to file a small claims case. If a case has already been filed, the agreement reached at the mediation can be entered into the court record without having to appear in court. The Superior Court of California  provides free mediation services for litigants in small claims cases. The mediation is facilitated by trained volunteer mediators. The benefits of mediation include determining the outcome of the case by the parties themselves, saving important relationships without going to court, and having both views of the dispute heard. If the case is settled after the filing of the claim and before the hearing date, the plaintiff must file Judicial Council form \u201cRequest For Dismissal\u201d (CIV-110) with the court.",
+      "timestamp": 1723652289,
+      "contexts": [
+        {
+          "document_id": "6d8c260a4cf63440-5941-8167",
+          "text": "The Superior Court of California - County of Ventura - Small Claims\nService by certified mail must be done by the clerk's office. The fee is $15.00 per defendant. You cannot serve the defendant yourself. \r\n Certified mail is the least effective form of service and the green return receipt must be signed by the defendant personally or the court will delay your \r\n hearing and ask you to attempt another form of service. You will need to check with the court prior to the hearing to see if the receipt for certified mail \r\n was returned to the court.\nPersonal service. Personal service means someone gives the papers directly to the person being sued or to the agent authorized to accept service for a \r\n business or public entity. A plaintiff cannot serve the defendant. Anyone over the age of 18, not a party to the action, may serve the defendant. The \r\n person serving the claim must sign a proof of service form showing when the defendant was served and this form must be filed with the court 5 days prior \r\n to the hearing date. You can have the Sheriff serve the defendant for a fee of $40.00 per defendant or you can hire a registered process service to \r\n serve the defendant.\nIf service is not completed your case will be taken off calendar and you will need to reset the hearing and have the defendant re-served.\n\nSettlement Before Court\n\nIf the case is settled after the filing of the claim and before the hearing date, the plaintiff must file Judicial Council form \u201cRequest For Dismissal\u201d \r\n (CIV-110) with the court. If the claim was satisfied with payment by check, \r\n the plaintiff may want to wait until the check has cleared the bank before filing the dismissal.\n\nSmall Claims Mediation Program\n\nMediation at the Court.\u00a0\u00a0Free mediation services for litigants in small claims cases is provided by trained \r\n volunteer mediators through Ventura Center for Dispute Settlement who are available at the court at the time of your hearing.\nBenefits:\n\nMediation is Power.\u00a0\u00a0In mediation, the parties \r\n determine the outcome of the case, rather than having the judge decide for you.\nSave Business Relationships and Friendships.\u00a0\u00a0Mediation \r\n can help maintain important relationships without going to court.\nHave Both Views of the Dispute Heard.\u00a0\u00a0Many cases \r\n aren\u2019t just about money.",
+          "title": "The Superior Court of California - County of Ventura - Small Claims",
+          "url": "https://www.ventura.courts.ca.gov/small-claims.html",
+          "score": 38.153572,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723652719
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What does a small claims court do\n|assistant|: A small claims court is designed to provide a fair, quick, and inexpensive way for individuals to resolve disputes involving relatively small amounts of money. You must have asked the defendant to pay and the defendant has refused. You may not have a lawyer represent you. The judge will hear your case or the court will give parties an opportunity to meet with a mediator at the time of trial. The Small Claims Court has a monetary limit on the amount of money damages that can be claimed, usually up to $12,500 for \"a natural person\", with some exceptions.\n|user|: My renter left and the damage to the apartment is $1000 more than the security deposit. Is this a claim for small claims court?\n|assistant|: Yes, you can file a small claims court case for the additional $1000. Small Claims cases are for damages of $10,000 or less. You must be at least 18 years old to file a claim. Do you have proof? You need to know what proof to get to show the other side and bring to your court date. Examples of proof (also called evidence) are: Repair receipts, Photos of damage, Emails.\n|user|: Are the forms online?\n|assistant|: The forms for Small Claims Court are available online on their website. The forms to file a small claims case can be located on the court website under Online Forms by selecting the Judicial Council hyperlink. Small Claims E-Filing in Sacramento Superior Court: The PDF forms can only be opened in Adobe Reader or Acrobat.\n|user|: How much is the filing fee?\n|assistant|: In Ventura County the filing fee for a small claims case depends on the amount of your claim: * If your claim is for $1,500.00 or less, the filing fee is $30.00. * If your claim is more than $1,500.00 but less than or equal to $5,000.00, the filing fee is $50.00. * If your claim is more than $5,000.00 but less than or equal to $10,000.00, the filing fee is $75.00. * If you have filed more than 12 small claims in California within the past 12 months, the filing fee is $100.00. Service by certified mail must be done by the clerk's office. The fee is $15.00 per defendant. For Sacramento: Find out how much it will cost to file Small Claims forms online.\n|user|: How about mediation?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "7e4251fc01e38b5d-51303-53129",
+          "text": "The Superior Court of California - County of Ventura - FAQs\nA:\u00a0\u00a0You must be at least 18 years of age to file a claim. If you are not yet 18, you may ask the court to appoint a guardian ad litem. This is a \r\n person who will act for you in the case. The guardian ad litem is usually a parent, a relative or an adult friend.\n\nQ:\u00a0\u00a0How much does it cost to file a claim?\nA:\u00a0\u00a0See the fee structure below.\n\nIf the claim is for $1,500.00 or less, the filing fee is $30.00. \nIf the claim is more than $1,500.00 but less than or equal to $5,000.00, the filing fee is $50.00.\nIf the claim is more than $5,000.00 but less than or equal to $10,000.00, the filing fee is $75.00.\nIf the person has filed more than 12 small claims in California within the past 12 months, the filing fee is $100.00.\n\nQ:\u00a0\u00a0How do I obtain the forms needed to file my claim?\nA:\u00a0\u00a0Forms can be obtained on at the State Forms page of the California Courts website. \r\n The forms can also be completed online. Forms can also be obtained at either court location or may be received by mail by sending your request along with a self-addressed \r\n stamped envelope to the court.\n\nQ:\u00a0\u00a0Do my forms have to be typed?\nA:\u00a0\u00a0The forms do not have to be typed. They can be handwritten but must be legible. It is preferable that the forms be completed in blue or black ink.\n\nQ:\u00a0\u00a0Is this the proper court to hear my case?\nA:\u00a0\u00a0You must sue in the right court and location. This rule is called venue. The Ventura Superior Court has two divisions where small claims cases are assigned \r\n and heard. The right location may be any of these:\n\nWhere the defendant lives or where the business involved is located; \nWhere the damage or accident happened;\nWhere the contract was signed or carried out;\nIf the defendant is a corporation, where the contract was broken\nFor a retail installment account or sales contract or a motor vehicle finance sale:",
+          "title": "The Superior Court of California - County of Ventura - FAQs",
+          "url": "https://www.ventura.courts.ca.gov/faqs.html",
+          "score": 37.632027,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723652798
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What does a small claims court do\n|assistant|: A small claims court is designed to provide a fair, quick, and inexpensive way for individuals to resolve disputes involving relatively small amounts of money. You must have asked the defendant to pay and the defendant has refused. You may not have a lawyer represent you. The judge will hear your case or the court will give parties an opportunity to meet with a mediator at the time of trial. The Small Claims Court has a monetary limit on the amount of money damages that can be claimed, usually up to $12,500 for \"a natural person\", with some exceptions.\n|user|: My renter left and the damage to the apartment is $1000 more than the security deposit. Is this a claim for small claims court?\n|assistant|: Yes, you can file a small claims court case for the additional $1000. Small Claims cases are for damages of $10,000 or less. You must be at least 18 years old to file a claim. Do you have proof? You need to know what proof to get to show the other side and bring to your court date. Examples of proof (also called evidence) are: Repair receipts, Photos of damage, Emails.\n|user|: Are the forms online?\n|assistant|: The forms for Small Claims Court are available online on their website. The forms to file a small claims case can be located on the court website under Online Forms by selecting the Judicial Council hyperlink. Small Claims E-Filing in Sacramento Superior Court: The PDF forms can only be opened in Adobe Reader or Acrobat.\n|user|: How much is the filing fee?\n|assistant|: In Ventura County the filing fee for a small claims case depends on the amount of your claim: * If your claim is for $1,500.00 or less, the filing fee is $30.00. * If your claim is more than $1,500.00 but less than or equal to $5,000.00, the filing fee is $50.00. * If your claim is more than $5,000.00 but less than or equal to $10,000.00, the filing fee is $75.00. * If you have filed more than 12 small claims in California within the past 12 months, the filing fee is $100.00. Service by certified mail must be done by the clerk's office. The fee is $15.00 per defendant. For Sacramento: Find out how much it will cost to file Small Claims forms online.\n|user|: How about mediation?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6d8c260a4cf63440-4260-6441",
+          "text": "The Superior Court of California - County of Ventura - Small Claims\nThis means you have asked the defendant to pay and the defendant has refused.\nThe forms to file a small claims case can be located on the court website under Online Forms by selecting the Judicial Council hyperlink. If you do not have \r\n access to a computer, you may either come directly to the clerk\u2019s office to fill out the appropriate paperwork or have the paperwork mailed to you by sending in \r\n your request along with a self-addressed stamped envelope. Small Claims forms cannot be filed by fax.\nIf you want to file a small claim and you are a business or corporation that operates or does business under a fictitious name (\u201cdoing business as\u201d or \u201cdba\u201d) \r\n you must complete Judicial Council form SC-103, Fictitious Business Name form and file \r\n it with you claim form. If you do not file this form, the court will dismiss your claim at the time of the hearing.\nIf the claim you are filing is to enforce the payment of a debt, you must provide a written calculation showing how you calculated the amount owed that \r\n must include the original debt amount, each payment credited to the debt, each fee and charge added to the debt, each payment credited against those fees \r\n and charges, all other debits or charges to the account and an explanation of the nature of those fees, charges, debits, and all other credits to the \r\n debt, by source and amount. This is required by law and your claim cannot be filed without this information.\n\nTypes of Service\n\nThe defendant must be served with a copy of the claim 15 days prior to the hearing date if they live in county and 20 days prior to the hearing if they \r\n live out of county.\nThe types of service are:\nCertified mail. Service by certified mail must be done by the clerk's office. The fee is $15.00 per defendant. You cannot serve the defendant yourself. \r\n Certified mail is the least effective form of service and the green return receipt must be signed by the defendant personally or the court will delay your \r\n hearing and ask you to attempt another form of service. You will need to check with the court prior to the hearing to see if the receipt for certified mail \r\n was returned to the court.\nPersonal service.",
+          "title": "The Superior Court of California - County of Ventura - Small Claims",
+          "url": "https://www.ventura.courts.ca.gov/small-claims.html",
+          "score": 37.092155,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723652921
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What does a small claims court do\n|assistant|: A small claims court is designed to provide a fair, quick, and inexpensive way for individuals to resolve disputes involving relatively small amounts of money. You must have asked the defendant to pay and the defendant has refused. You may not have a lawyer represent you. The judge will hear your case or the court will give parties an opportunity to meet with a mediator at the time of trial. The Small Claims Court has a monetary limit on the amount of money damages that can be claimed, usually up to $12,500 for \"a natural person\", with some exceptions.\n|user|: My renter left and the damage to the apartment is $1000 more than the security deposit. Is this a claim for small claims court?\n|assistant|: Yes, you can file a small claims court case for the additional $1000. Small Claims cases are for damages of $10,000 or less. You must be at least 18 years old to file a claim. Do you have proof? You need to know what proof to get to show the other side and bring to your court date. Examples of proof (also called evidence) are: Repair receipts, Photos of damage, Emails.\n|user|: Are the forms online?\n|assistant|: The forms for Small Claims Court are available online on their website. The forms to file a small claims case can be located on the court website under Online Forms by selecting the Judicial Council hyperlink. Small Claims E-Filing in Sacramento Superior Court: The PDF forms can only be opened in Adobe Reader or Acrobat.\n|user|: How much is the filing fee?\n|assistant|: In Ventura County the filing fee for a small claims case depends on the amount of your claim: * If your claim is for $1,500.00 or less, the filing fee is $30.00. * If your claim is more than $1,500.00 but less than or equal to $5,000.00, the filing fee is $50.00. * If your claim is more than $5,000.00 but less than or equal to $10,000.00, the filing fee is $75.00. * If you have filed more than 12 small claims in California within the past 12 months, the filing fee is $100.00. Service by certified mail must be done by the clerk's office. The fee is $15.00 per defendant. For Sacramento: Find out how much it will cost to file Small Claims forms online.\n|user|: How about mediation?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "7e4251fc01e38b5d-60335-62593",
+          "text": "The Superior Court of California - County of Ventura - FAQs\nQ:\u00a0\u00a0When is Small Claims mediation appropriate?\nA:\u00a0\u00a0You can mediate your case before or after a small claims case has been filed. If you mediate before filing a case \r\n and an agreement is reached at the mediation, there will be no need to file a small claims case. If a case has already been filed, \r\n the agreement reached at the mediation can be entered into the court record without having to appear in court. You may also have \r\n an opportunity to mediate your case on the day of the hearing at the courthouse.\n\r\n Mediation may be particularly useful when parties have a relationship they want to preserve. So when family members, neighbors, \r\n or business partners have a dispute, mediation may be the most effective process to use. However, mediation may be beneficial in \r\n almost any kind of dispute between people. Mediation is effective even when emotions are getting in the way of resolution. An \r\n effective mediator can help the parties communicate with each other in a respectful and constructive manner.\n\nQ:\u00a0\u00a0When may Small Claims mediation be inappropriate?\nA:\u00a0\u00a0Mediation may not be appropriate if one of the parties is unwilling to cooperate or communicate. Mediation also \r\n may not be effective if one of the parties has a significant advantage in power over the other. Therefore, mediation may not be \r\n a good choice if the parties have a history of abuse or victimization. Mediation is not appropriate in cases in which a crime is involved.\n\nQ:\u00a0\u00a0What is the role of the Small Claims mediator?\nA:\u00a0\u00a0The mediator is an impartial neutral intermediary whose role is to facilitate a discussion of the issues and \r\n perspectives between the parties in an effort to help them reach an agreement. The mediator does not impose a settlement, \r\n but will assist the parties in exploring settlement options. Generally, the mediator does not communicate with the court except \r\n to file the parties\u00e2\u0080\u0099 settlement agreement.\n\nQ:\u00a0\u00a0Is Small Claims mediation confidential?\nA:\u00a0\u00a0All communication, negotiations, or settlement discussions in the court of a mediation or mediation consultation \r\n are confidential. This means that whatever is said in the mediation meeting, even if no settlement is reached, may not be used \r\n in any later court proceeding.",
+          "title": "The Superior Court of California - County of Ventura - FAQs",
+          "url": "https://www.ventura.courts.ca.gov/faqs.html",
+          "score": 19.36338,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723653919
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Mediation in Small Claims  Court"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "7e4251fc01e38b5d-62092-64266",
+          "text": "The Superior Court of California - County of Ventura - FAQs\nbut will assist the parties in exploring settlement options. Generally, the mediator does not communicate with the court except \r\n to file the parties\u00e2\u0080\u0099 settlement agreement.\n\nQ:\u00a0\u00a0Is Small Claims mediation confidential?\nA:\u00a0\u00a0All communication, negotiations, or settlement discussions in the court of a mediation or mediation consultation \r\n are confidential. This means that whatever is said in the mediation meeting, even if no settlement is reached, may not be used \r\n in any later court proceeding.\n\nQ:\u00a0\u00a0Is Small Claims mediation required by the court?\nA:\u00a0\u00a0Mediation is a \"voluntary\" process. Any party may end a mediation at any time without adverse consequences. \r\n The mediator is not empowered to hold you in a mediation against your wishes. That said, there is so much that is offered by mediation, \r\n and so little to lose, that you are encouraged to participate fully.\n\nQ:\u00a0\u00a0How long does a Small Claims mediation last and how do I prepare?\nA:\u00a0\u00a0Usually, mediation of a small claims dispute lasts around 30 minutes to an hour if held at the court. \r\n You need to be prepared to discuss all relevant issues in your case. You need to be prepared to state your position and \r\n to listen carefully to the other side. You will be required to exchange evidence with the other side. This will be a \r\n requirement by the court even if you do not mediate in order to shorten trial time.\n\nQ:\u00a0\u00a0What if we don\u00e2\u0080\u0099t settle our dispute at the Small claims mediation?\nA:\u00a0\u00a0If you and the other party are unable to reach a full agreement at the mediation, your case will still be \r\n decided by the Judge, Commissioner or Temporary Judge assigned to your small claims case usually on the same day your hearing \r\n was originally scheduled. If you mediate before filing a small claims case, but don\u00e2\u0080\u0099t reach a full agreement, you can still \r\n file a small claims case with the court.\n\r\n However, your claim may be time sensitive, so you may want to check with your attorney or with the Small Claims Advisor to \r\n determine when you have to file your case. You can visit the Small Claims Advisor in person or call (805) 654-5054.\n\nFor more information please visit our Small Claims page.",
+          "title": "The Superior Court of California - County of Ventura - FAQs",
+          "url": "https://www.ventura.courts.ca.gov/faqs.html",
+          "score": 18.669918,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723653938
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Mediation in Small Claims  Court"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6d8c260a4cf63440-7698-9836",
+          "text": "The Superior Court of California - County of Ventura - Small Claims\nvolunteer mediators through Ventura Center for Dispute Settlement who are available at the court at the time of your hearing.\nBenefits:\n\nMediation is Power.\u00a0\u00a0In mediation, the parties \r\n determine the outcome of the case, rather than having the judge decide for you.\nSave Business Relationships and Friendships.\u00a0\u00a0Mediation \r\n can help maintain important relationships without going to court.\nHave Both Views of the Dispute Heard.\u00a0\u00a0Many cases \r\n aren\u2019t just about money. However, in front of a judge, they may be. Mediation gives each party a chance to resolve all issues \r\n so they can move on with their lives.\nSave Time.\u00a0\u00a0In small claims cases, as soon as a \r\n settlement is reached the mediator will take your settlement agreement back to court and your case will be heard more quickly. \r\n The judge will review and sign the settlement agreement and the parties are then free to go.\nNothing to Lose.\u00a0\u00a0If an agreement is not reached \r\n in mediation, you will still have your opportunity to have your matter heard by the court.\n\nMediation prior to court.\u00a0\u00a0In addition to providing mediation services at the Court, free of charge, the Ventura Center for Dispute Settlement dba Conflict Resolution Institute also provides mediation services at its offices where you can resolve disputes before filing a court action or prior to an existing court date for low or no fees . Contact Information:\nConflict Resolution Institute\r\n 555 Airport Way Ste. D\r\n Camarillo, CA 93010\r\n 805-384-1313\nwww.conflictresolutionvc.org\r\n Email: office@ConflictResolutionVC.org\n\nCollection of Judgments\n\nIf you won the case and the court awarded you money and the defendant does not voluntarily pay the judgment, the court will not collect the money or \r\n enforce the judgment for you. You must pursue collection of the judgment. This information is provided on the reverse side of the \"Notice of Entry of \r\n Judgment\" which is mailed to all parties after the hearing.\nIf you do not have information regarding the judgment debtor\u2019s income or property, you may make the debtor come to court to answer questions. This \r\n is done by filing an order for examination.",
+          "title": "The Superior Court of California - County of Ventura - Small Claims",
+          "url": "https://www.ventura.courts.ca.gov/small-claims.html",
+          "score": 18.007195,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723655220
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Mediation in Small Claims  Court"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The Superior Court of California - County of Ventura offers a Small Claims Mediation Program, which provides free mediation services for litigants in small claims cases. The mediation is facilitated by trained volunteer mediators from the Ventura Center for Dispute Settlement. The benefits of mediation include determining the outcome of the case by the parties themselves, saving important relationships without going to court, and having both views of the dispute heard. If the case is settled after the filing of the claim and before the hearing date, the plaintiff must file Judicial Council form \u201cRequest For Dismissal\u201d (CIV-110) with the court."
+    },
+    {
+      "speaker": "user",
+      "text": "We require the assistance of an interpreter.",
+      "timestamp": 1723656093,
+      "enrichments": {
+        "Question Type": [
+          "Non-Question"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "If you require the assistance of a foreign language interpreter or a sign language interpreter in a small claims court case, you should inform the court well in advance of your court date to ensure an interpreter is available. The court is responsible for providing foreign or sign language interpreters for parties who need their assistance to understand the legal proceeding, and Court Interpreters are provided free of charge. Just make sure to request this assistance as soon as possible, to avoid delays.",
+      "timestamp": 1723656098,
+      "contexts": [
+        {
+          "document_id": "6d8c260a4cf63440-5941-8167",
+          "text": "The Superior Court of California - County of Ventura - Small Claims\nService by certified mail must be done by the clerk's office. The fee is $15.00 per defendant. You cannot serve the defendant yourself. \r\n Certified mail is the least effective form of service and the green return receipt must be signed by the defendant personally or the court will delay your \r\n hearing and ask you to attempt another form of service. You will need to check with the court prior to the hearing to see if the receipt for certified mail \r\n was returned to the court.\nPersonal service. Personal service means someone gives the papers directly to the person being sued or to the agent authorized to accept service for a \r\n business or public entity. A plaintiff cannot serve the defendant. Anyone over the age of 18, not a party to the action, may serve the defendant. The \r\n person serving the claim must sign a proof of service form showing when the defendant was served and this form must be filed with the court 5 days prior \r\n to the hearing date. You can have the Sheriff serve the defendant for a fee of $40.00 per defendant or you can hire a registered process service to \r\n serve the defendant.\nIf service is not completed your case will be taken off calendar and you will need to reset the hearing and have the defendant re-served.\n\nSettlement Before Court\n\nIf the case is settled after the filing of the claim and before the hearing date, the plaintiff must file Judicial Council form \u201cRequest For Dismissal\u201d \r\n (CIV-110) with the court. If the claim was satisfied with payment by check, \r\n the plaintiff may want to wait until the check has cleared the bank before filing the dismissal.\n\nSmall Claims Mediation Program\n\nMediation at the Court.\u00a0\u00a0Free mediation services for litigants in small claims cases is provided by trained \r\n volunteer mediators through Ventura Center for Dispute Settlement who are available at the court at the time of your hearing.\nBenefits:\n\nMediation is Power.\u00a0\u00a0In mediation, the parties \r\n determine the outcome of the case, rather than having the judge decide for you.\nSave Business Relationships and Friendships.\u00a0\u00a0Mediation \r\n can help maintain important relationships without going to court.\nHave Both Views of the Dispute Heard.\u00a0\u00a0Many cases \r\n aren\u2019t just about money.",
+          "title": "The Superior Court of California - County of Ventura - Small Claims",
+          "url": "https://www.ventura.courts.ca.gov/small-claims.html",
+          "score": 38.153572,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723656409
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What does a small claims court do\n|assistant|: A small claims court is designed to provide a fair, quick, and inexpensive way for individuals to resolve disputes involving relatively small amounts of money. You must have asked the defendant to pay and the defendant has refused. You may not have a lawyer represent you. The judge will hear your case or the court will give parties an opportunity to meet with a mediator at the time of trial. The Small Claims Court has a monetary limit on the amount of money damages that can be claimed, usually up to $12,500 for \"a natural person\", with some exceptions.\n|user|: My renter left and the damage to the apartment is $1000 more than the security deposit. Is this a claim for small claims court?\n|assistant|: Yes, you can file a small claims court case for the additional $1000. Small Claims cases are for damages of $10,000 or less. You must be at least 18 years old to file a claim. Do you have proof? You need to know what proof to get to show the other side and bring to your court date. Examples of proof (also called evidence) are: Repair receipts, Photos of damage, Emails.\n|user|: Are the forms online?\n|assistant|: The forms for Small Claims Court are available online on their website. The forms to file a small claims case can be located on the court website under Online Forms by selecting the Judicial Council hyperlink. Small Claims E-Filing in Sacramento Superior Court: The PDF forms can only be opened in Adobe Reader or Acrobat.\n|user|: How much is the filing fee?\n|assistant|: In Ventura County the filing fee for a small claims case depends on the amount of your claim: * If your claim is for $1,500.00 or less, the filing fee is $30.00. * If your claim is more than $1,500.00 but less than or equal to $5,000.00, the filing fee is $50.00. * If your claim is more than $5,000.00 but less than or equal to $10,000.00, the filing fee is $75.00. * If you have filed more than 12 small claims in California within the past 12 months, the filing fee is $100.00. Service by certified mail must be done by the clerk's office. The fee is $15.00 per defendant. For Sacramento: Find out how much it will cost to file Small Claims forms online.\n|user|: How about mediation?\n|assistant|: You can mediate your case before or after a small claims case has been filed. If you mediate before filing a case and an agreement is reached at the mediation, there will be no need to file a small claims case. If a case has already been filed, the agreement reached at the mediation can be entered into the court record without having to appear in court. The Superior Court of California  provides free mediation services for litigants in small claims cases. The mediation is facilitated by trained volunteer mediators. The benefits of mediation include determining the outcome of the case by the parties themselves, saving important relationships without going to court, and having both views of the dispute heard. If the case is settled after the filing of the claim and before the hearing date, the plaintiff must file Judicial Council form \u201cRequest For Dismissal\u201d (CIV-110) with the court.\n|user|: We require the assistance of an interpreter."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "7e4251fc01e38b5d-51303-53129",
+          "text": "The Superior Court of California - County of Ventura - FAQs\nA:\u00a0\u00a0You must be at least 18 years of age to file a claim. If you are not yet 18, you may ask the court to appoint a guardian ad litem. This is a \r\n person who will act for you in the case. The guardian ad litem is usually a parent, a relative or an adult friend.\n\nQ:\u00a0\u00a0How much does it cost to file a claim?\nA:\u00a0\u00a0See the fee structure below.\n\nIf the claim is for $1,500.00 or less, the filing fee is $30.00. \nIf the claim is more than $1,500.00 but less than or equal to $5,000.00, the filing fee is $50.00.\nIf the claim is more than $5,000.00 but less than or equal to $10,000.00, the filing fee is $75.00.\nIf the person has filed more than 12 small claims in California within the past 12 months, the filing fee is $100.00.\n\nQ:\u00a0\u00a0How do I obtain the forms needed to file my claim?\nA:\u00a0\u00a0Forms can be obtained on at the State Forms page of the California Courts website. \r\n The forms can also be completed online. Forms can also be obtained at either court location or may be received by mail by sending your request along with a self-addressed \r\n stamped envelope to the court.\n\nQ:\u00a0\u00a0Do my forms have to be typed?\nA:\u00a0\u00a0The forms do not have to be typed. They can be handwritten but must be legible. It is preferable that the forms be completed in blue or black ink.\n\nQ:\u00a0\u00a0Is this the proper court to hear my case?\nA:\u00a0\u00a0You must sue in the right court and location. This rule is called venue. The Ventura Superior Court has two divisions where small claims cases are assigned \r\n and heard. The right location may be any of these:\n\nWhere the defendant lives or where the business involved is located; \nWhere the damage or accident happened;\nWhere the contract was signed or carried out;\nIf the defendant is a corporation, where the contract was broken\nFor a retail installment account or sales contract or a motor vehicle finance sale:",
+          "title": "The Superior Court of California - County of Ventura - FAQs",
+          "url": "https://www.ventura.courts.ca.gov/faqs.html",
+          "score": 37.632027,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723656445
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What does a small claims court do\n|assistant|: A small claims court is designed to provide a fair, quick, and inexpensive way for individuals to resolve disputes involving relatively small amounts of money. You must have asked the defendant to pay and the defendant has refused. You may not have a lawyer represent you. The judge will hear your case or the court will give parties an opportunity to meet with a mediator at the time of trial. The Small Claims Court has a monetary limit on the amount of money damages that can be claimed, usually up to $12,500 for \"a natural person\", with some exceptions.\n|user|: My renter left and the damage to the apartment is $1000 more than the security deposit. Is this a claim for small claims court?\n|assistant|: Yes, you can file a small claims court case for the additional $1000. Small Claims cases are for damages of $10,000 or less. You must be at least 18 years old to file a claim. Do you have proof? You need to know what proof to get to show the other side and bring to your court date. Examples of proof (also called evidence) are: Repair receipts, Photos of damage, Emails.\n|user|: Are the forms online?\n|assistant|: The forms for Small Claims Court are available online on their website. The forms to file a small claims case can be located on the court website under Online Forms by selecting the Judicial Council hyperlink. Small Claims E-Filing in Sacramento Superior Court: The PDF forms can only be opened in Adobe Reader or Acrobat.\n|user|: How much is the filing fee?\n|assistant|: In Ventura County the filing fee for a small claims case depends on the amount of your claim: * If your claim is for $1,500.00 or less, the filing fee is $30.00. * If your claim is more than $1,500.00 but less than or equal to $5,000.00, the filing fee is $50.00. * If your claim is more than $5,000.00 but less than or equal to $10,000.00, the filing fee is $75.00. * If you have filed more than 12 small claims in California within the past 12 months, the filing fee is $100.00. Service by certified mail must be done by the clerk's office. The fee is $15.00 per defendant. For Sacramento: Find out how much it will cost to file Small Claims forms online.\n|user|: How about mediation?\n|assistant|: You can mediate your case before or after a small claims case has been filed. If you mediate before filing a case and an agreement is reached at the mediation, there will be no need to file a small claims case. If a case has already been filed, the agreement reached at the mediation can be entered into the court record without having to appear in court. The Superior Court of California  provides free mediation services for litigants in small claims cases. The mediation is facilitated by trained volunteer mediators. The benefits of mediation include determining the outcome of the case by the parties themselves, saving important relationships without going to court, and having both views of the dispute heard. If the case is settled after the filing of the claim and before the hearing date, the plaintiff must file Judicial Council form \u201cRequest For Dismissal\u201d (CIV-110) with the court.\n|user|: We require the assistance of an interpreter."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6d8c260a4cf63440-4260-6441",
+          "text": "The Superior Court of California - County of Ventura - Small Claims\nThis means you have asked the defendant to pay and the defendant has refused.\nThe forms to file a small claims case can be located on the court website under Online Forms by selecting the Judicial Council hyperlink. If you do not have \r\n access to a computer, you may either come directly to the clerk\u2019s office to fill out the appropriate paperwork or have the paperwork mailed to you by sending in \r\n your request along with a self-addressed stamped envelope. Small Claims forms cannot be filed by fax.\nIf you want to file a small claim and you are a business or corporation that operates or does business under a fictitious name (\u201cdoing business as\u201d or \u201cdba\u201d) \r\n you must complete Judicial Council form SC-103, Fictitious Business Name form and file \r\n it with you claim form. If you do not file this form, the court will dismiss your claim at the time of the hearing.\nIf the claim you are filing is to enforce the payment of a debt, you must provide a written calculation showing how you calculated the amount owed that \r\n must include the original debt amount, each payment credited to the debt, each fee and charge added to the debt, each payment credited against those fees \r\n and charges, all other debits or charges to the account and an explanation of the nature of those fees, charges, debits, and all other credits to the \r\n debt, by source and amount. This is required by law and your claim cannot be filed without this information.\n\nTypes of Service\n\nThe defendant must be served with a copy of the claim 15 days prior to the hearing date if they live in county and 20 days prior to the hearing if they \r\n live out of county.\nThe types of service are:\nCertified mail. Service by certified mail must be done by the clerk's office. The fee is $15.00 per defendant. You cannot serve the defendant yourself. \r\n Certified mail is the least effective form of service and the green return receipt must be signed by the defendant personally or the court will delay your \r\n hearing and ask you to attempt another form of service. You will need to check with the court prior to the hearing to see if the receipt for certified mail \r\n was returned to the court.\nPersonal service.",
+          "title": "The Superior Court of California - County of Ventura - Small Claims",
+          "url": "https://www.ventura.courts.ca.gov/small-claims.html",
+          "score": 37.092155,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723656876
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What does a small claims court do\n|assistant|: A small claims court is designed to provide a fair, quick, and inexpensive way for individuals to resolve disputes involving relatively small amounts of money. You must have asked the defendant to pay and the defendant has refused. You may not have a lawyer represent you. The judge will hear your case or the court will give parties an opportunity to meet with a mediator at the time of trial. The Small Claims Court has a monetary limit on the amount of money damages that can be claimed, usually up to $12,500 for \"a natural person\", with some exceptions.\n|user|: My renter left and the damage to the apartment is $1000 more than the security deposit. Is this a claim for small claims court?\n|assistant|: Yes, you can file a small claims court case for the additional $1000. Small Claims cases are for damages of $10,000 or less. You must be at least 18 years old to file a claim. Do you have proof? You need to know what proof to get to show the other side and bring to your court date. Examples of proof (also called evidence) are: Repair receipts, Photos of damage, Emails.\n|user|: Are the forms online?\n|assistant|: The forms for Small Claims Court are available online on their website. The forms to file a small claims case can be located on the court website under Online Forms by selecting the Judicial Council hyperlink. Small Claims E-Filing in Sacramento Superior Court: The PDF forms can only be opened in Adobe Reader or Acrobat.\n|user|: How much is the filing fee?\n|assistant|: In Ventura County the filing fee for a small claims case depends on the amount of your claim: * If your claim is for $1,500.00 or less, the filing fee is $30.00. * If your claim is more than $1,500.00 but less than or equal to $5,000.00, the filing fee is $50.00. * If your claim is more than $5,000.00 but less than or equal to $10,000.00, the filing fee is $75.00. * If you have filed more than 12 small claims in California within the past 12 months, the filing fee is $100.00. Service by certified mail must be done by the clerk's office. The fee is $15.00 per defendant. For Sacramento: Find out how much it will cost to file Small Claims forms online.\n|user|: How about mediation?\n|assistant|: You can mediate your case before or after a small claims case has been filed. If you mediate before filing a case and an agreement is reached at the mediation, there will be no need to file a small claims case. If a case has already been filed, the agreement reached at the mediation can be entered into the court record without having to appear in court. The Superior Court of California  provides free mediation services for litigants in small claims cases. The mediation is facilitated by trained volunteer mediators. The benefits of mediation include determining the outcome of the case by the parties themselves, saving important relationships without going to court, and having both views of the dispute heard. If the case is settled after the filing of the claim and before the hearing date, the plaintiff must file Judicial Council form \u201cRequest For Dismissal\u201d (CIV-110) with the court.\n|user|: We require the assistance of an interpreter."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ac89e3b843ade8bf-6279-8392",
+          "text": "Interpreters & Language Access | Superior Court of California | County of Alameda\nFor questions regarding language access or court interpreters or to submit The Interpreter Request Form or the Language Access Services Complaint Form, use the following contact information:\nPhone: (510) 891-6006\nEmail:\u00a0Lang@alameda.courts.ca.gov\n\nAccess to Programs, Services, and Professionals \n\nPursuant to California Rules of Court, Rule 1.300:\n(1) As soon as feasible, courts must adopt procedures to enable court litigants with limited English proficiency (LEP) to access services provided directly by the court to the same extent as litigants who are English proficient.\u00a0\n(2) Courts should seek out opportunities to partner with other courts and with community service providers in the use of technology to expand access to bilingual staff members and interpreters among courts.\n(3) Courts are encouraged to keep a list of language-accessible services that are available in their geographic region and to provide this information on a neutral and non-endorsing basis to bench officers and litigants, as appropriate.\u00a0\n(4) To the extent feasible, a court should avoid order an LEP litigant to a private program that is not language accessible.\u00a0\nLitigants\u00a0\nIf a court-ordered service is provided by court personnel, language assistance will be made available to LEP litigants. If a court-ordered service is provided by a social services agency or other entity under contract with the court, the court will obtain assurances from the agency or entity that it will provide language assistance to LEP litigants. If the Court has ordered you to participate in a private program, service, or with a professional that is not language accessible to you, you may inform the Court of this in writing. If you are unable to access language assistance or an alternative private program, service, or professional as ordered by the Court, or you are unable to complete them within the court-ordered time frame, you may submit Form LA-400: Service Not Available in My Language: Request to Change Court Order. The Court may respond by entering an alternative order or extending the deadline for completion.\u00a0\nService Providers",
+          "title": "Interpreters & Language Access | Superior Court of California | County of Alameda",
+          "url": "https://www.alameda.courts.ca.gov/general-information/interpreters-language-access",
+          "score": 13.795138,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723657559
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "We require the assistance of an interpreter."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "61bcdbdbd253c012-1482-3776",
+          "text": "Request an interpreter | California Courts | Self Help Guide\nCourt Interpreters are provided free of\u00a0charge\nYou must request an interpreter in advance\nAsk the court to provide an interpreter as soon as you find out that you need to go to court\nCourt interpreters must follow specific rules for what they can and can\u2019t do\n\nThey must interpret what is being said in the courtroom into your language and interpret your words into English\n\nThey must keep all communications between you and your lawyer confidential\n\nThey must disclose any conflicts of interest they may have with your case\n\nThey cannot give you legal advice\n\nCourt interpreters cannot typically provide services outside of the courtroom\nSome courts have interpreters available in their Self-Help Centers to assist with interpretation outside of the courtroom. You can contact your court\u2019s Self-Help Center to find out if this is available at your court.\nOnly qualified court interpreters can interpret court proceedings\nYou are usually not allowed to have a friend or relative who speaks English to serve as the interpreter for you in the courtroom. However, if you will need help outside of the courtroom with getting information or filling out forms, you may get help from a friend or relative who speaks English\n\nHow to request an interpreter\n\nVisit the Language Access page of your court\u2019s website\nThe procedure for requesting an interpreter varies from one court to another. Your court\u2019s website will list the steps required by your specific court to request an interpreter.\u00a0\u00a0\nHere is some information you should look for on your court\u2019s website so you can understand your court\u2019s requirements:\u00a0\n\nDoes my court require advanced notice for an interpreter to be present?\u00a0\n\nWhat form does my court use for requesting an interpreter? (Most courts use Request for an Interpreter (Civil) (form INT-300) but others use a different form.)\u00a0\n\nDoes my court allow for interpreter requests to\u00a0be made\u00a0online or by email?\u00a0\n\nHow do I find my court's website?\u00a0\nUse the Find My Court\u00a0to quickly access your court\u2019s language access information\u00a0\n\nFill out the form\nIf your court requires a form to request an interpreter, your next step is to complete the form. The form is available in many languages but must be filled out in English.\u00a0\u00a0Many courts use the Request for Interpreter (Civil) (form INT-300).",
+          "title": "Request an interpreter | California Courts | Self Help Guide",
+          "url": "https://selfhelp.courts.ca.gov/request-interpreter",
+          "score": 13.1173935,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723657552
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "We require the assistance of an interpreter."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "08346fcd8f6e1c7f-3119-5387",
+          "text": "Request an Interpreter | Superior Court of California | County of Tuolumne\nWhether you need a foreign language interpreter or a sign language interpreter, you should notify the court as soon as possible as to your interpretation needs. If you wait until your court date, it is likely that your matter will have to be continued to a future date.\n\nLiving Toolkit for Language Access\nClick here to view the Living Toolkit for Language Access on the California Courts website\nLEP Plan (Limited English Proficiency)\nClick here to view LEP Plan\nIf you require a sign language interpreter, or a foreign language interpreter, please call the court at (209) 533-5563 for Criminal or Traffic matters, or (209) 533-5555 for Civil, Family Law, Probate or Small Claims.\u00a0\nNOTE: We recommend that you contact the court as soon as possible to ensure the availability of the accommodation you are requesting at the time of your hearing.\n\nContact Information\nCriminal or Traffic matters: (209) 533-5563\nCivil, Family Law, Probate or Small Claims: (209) 533-5555\u00a0\n\nFrequently Asked Questions\n\nWhat is a certified interpreter?\n\nA certified interpreter is an individual who has passed the Court Interpreter Certification Examination, or the required examination for American Sign Language, and fulfills the Judicial Council requirements. The certified interpreter must pass a written and oral exam in English and any other language they are being certified for.\n\nWhat is a registered interpreter?\n\nInterpreters of spoken languages for which there is no state certifying examination are required to pass the English Fluency Examination, and fulfill the corresponding Judicial Council requirements, in order to become registered interpreters of a non-designated certified language.\n\nWhat can I expect from an interpreter?\n\nInterpreters have an important job in the courtroom. They interpret court proceedings for witnesses and defendants with limited English skills, or for parties who are deaf or hard of hearing.\n\nWhich languages are State Certified?\n\nThere are fifteen (15) languages currently certified by the State: American Sign Language, Arabic, Eastern Armenian, Western Armenian, Cantonese, Farsi, Japanese, Khmer, Korean, Mandarin, Portuguese, Punjabi, Russian, Spanish, Tagalog, and Vietnamese.\n\nWhen does a case qualify for a court-appointed interpreter?",
+          "title": "Request an Interpreter | Superior Court of California | County of Tuolumne",
+          "url": "https://www.tuolumne.courts.ca.gov/general-information/request-interpreter",
+          "score": 12.760529,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723657542
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "We require the assistance of an interpreter."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "08346fcd8f6e1c7f-4897-7159",
+          "text": "Request an Interpreter | Superior Court of California | County of Tuolumne\nThey interpret court proceedings for witnesses and defendants with limited English skills, or for parties who are deaf or hard of hearing.\n\nWhich languages are State Certified?\n\nThere are fifteen (15) languages currently certified by the State: American Sign Language, Arabic, Eastern Armenian, Western Armenian, Cantonese, Farsi, Japanese, Khmer, Korean, Mandarin, Portuguese, Punjabi, Russian, Spanish, Tagalog, and Vietnamese.\n\nWhen does a case qualify for a court-appointed interpreter?\n\nWhen needed, a foreign language or American sign language interpreter may be requested to assist at any calendared hearing in all case types.\n\nWho pays for the services of an interpreter in Superior Court?\n\nCourt appointed interpreters are provided at no charge to the party needing these services. The cost of the court appointed interpreter will be paid by the Superior Court.\nIn all judicial proceedings instituted by the Superior Court wherein the codes mandate the appointment of an interpreter, the cost of the court appointed interpreter will be paid by the Superior Court from appropriations available to the judiciary.\u00a0\n\nWho pays for the interpreter when the interpreter is needed for non-court proceedings away from the courthouse?\n\nWhen the District Attorney, Public Defender or defense counsel need the services of an interpreter away from the courthouse, they should make arrangements to contact, contract, and pay the interpreter.\n\nHow do I request an interpreter for my hearing?\n\nTo obtain a court provided interpreter, the party or the party's attorney may call\u00a0(209) 533-5563 for Criminal or Traffic matters, or (209) 533-5555 for Civil, Family Law, Probate or Small Claims.\u00a0\n\n \n\n Was this helpful?\n \n\nYes\n\nNo\n\nYes\n\nNo\n\nAny additional feedback?\n\nEmail (optional)\n\nThis question is for testing whether or not you are a human visitor and to prevent automated spam submissions.\n\nLeave this field blank\n\nWas this helpful?\n \n\nAdministrative\n\nADA Information\n\nEmployment\n\nLocation & Contact Info\n\nAttorney Resources\n\nLocal Forms\n\nLocal Rules\n\nCalifornia Court\n\nCA Courts Self-Help Center\n\nJudicial Council\n\nPublic Resources\n\nCourt Holidays\n\nCourthouse Security\n\nTentative Rulings\n\nSuperior Court of California\nCounty of Tuolumne\n\nJudicial Branch of California",
+          "title": "Request an Interpreter | Superior Court of California | County of Tuolumne",
+          "url": "https://www.tuolumne.courts.ca.gov/general-information/request-interpreter",
+          "score": 12.947842,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723657535
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "We require the assistance of an interpreter."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "If you require the assistance of an interpreter in a small claims court case in Ventura County, you should inform the court as soon as possible. The court is responsible for providing interpreters for parties who cannot understand or speak English sufficiently in a legal proceeding. However, it is recommended to contact the court well in advance of your court date to ensure an interpreter is available."
+    },
+    {
+      "speaker": "user",
+      "text": "The defendant and I live in different counties, where do I sue?",
+      "timestamp": 1723658580,
+      "enrichments": {
+        "Question Type": [
+          "Explanation",
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "If the defendant and you live in different counties, you can sue in the county where the defendant lives or where the business involved is located, where the damage or accident happened, where the contract was signed or carried out, or if the defendant is a corporation, where the contract was broken. For a retail installment account or sales contract or a motor vehicle finance sale, you can also sue in the county where the property was bought, even if the defendant does not live in that county. If you file your claim in the wrong county, the court will dismiss the claim.",
+      "timestamp": 1723658586,
+      "contexts": [
+        {
+          "document_id": "6d8c260a4cf63440-5941-8167",
+          "text": "The Superior Court of California - County of Ventura - Small Claims\nService by certified mail must be done by the clerk's office. The fee is $15.00 per defendant. You cannot serve the defendant yourself. \r\n Certified mail is the least effective form of service and the green return receipt must be signed by the defendant personally or the court will delay your \r\n hearing and ask you to attempt another form of service. You will need to check with the court prior to the hearing to see if the receipt for certified mail \r\n was returned to the court.\nPersonal service. Personal service means someone gives the papers directly to the person being sued or to the agent authorized to accept service for a \r\n business or public entity. A plaintiff cannot serve the defendant. Anyone over the age of 18, not a party to the action, may serve the defendant. The \r\n person serving the claim must sign a proof of service form showing when the defendant was served and this form must be filed with the court 5 days prior \r\n to the hearing date. You can have the Sheriff serve the defendant for a fee of $40.00 per defendant or you can hire a registered process service to \r\n serve the defendant.\nIf service is not completed your case will be taken off calendar and you will need to reset the hearing and have the defendant re-served.\n\nSettlement Before Court\n\nIf the case is settled after the filing of the claim and before the hearing date, the plaintiff must file Judicial Council form \u201cRequest For Dismissal\u201d \r\n (CIV-110) with the court. If the claim was satisfied with payment by check, \r\n the plaintiff may want to wait until the check has cleared the bank before filing the dismissal.\n\nSmall Claims Mediation Program\n\nMediation at the Court.\u00a0\u00a0Free mediation services for litigants in small claims cases is provided by trained \r\n volunteer mediators through Ventura Center for Dispute Settlement who are available at the court at the time of your hearing.\nBenefits:\n\nMediation is Power.\u00a0\u00a0In mediation, the parties \r\n determine the outcome of the case, rather than having the judge decide for you.\nSave Business Relationships and Friendships.\u00a0\u00a0Mediation \r\n can help maintain important relationships without going to court.\nHave Both Views of the Dispute Heard.\u00a0\u00a0Many cases \r\n aren\u2019t just about money.",
+          "title": "The Superior Court of California - County of Ventura - Small Claims",
+          "url": "https://www.ventura.courts.ca.gov/small-claims.html",
+          "score": 38.153572,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723658773
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What does a small claims court do\n|assistant|: A small claims court is designed to provide a fair, quick, and inexpensive way for individuals to resolve disputes involving relatively small amounts of money. You must have asked the defendant to pay and the defendant has refused. You may not have a lawyer represent you. The judge will hear your case or the court will give parties an opportunity to meet with a mediator at the time of trial. The Small Claims Court has a monetary limit on the amount of money damages that can be claimed, usually up to $12,500 for \"a natural person\", with some exceptions.\n|user|: My renter left and the damage to the apartment is $1000 more than the security deposit. Is this a claim for small claims court?\n|assistant|: Yes, you can file a small claims court case for the additional $1000. Small Claims cases are for damages of $10,000 or less. You must be at least 18 years old to file a claim. Do you have proof? You need to know what proof to get to show the other side and bring to your court date. Examples of proof (also called evidence) are: Repair receipts, Photos of damage, Emails.\n|user|: Are the forms online?\n|assistant|: The forms for Small Claims Court are available online on their website. The forms to file a small claims case can be located on the court website under Online Forms by selecting the Judicial Council hyperlink. Small Claims E-Filing in Sacramento Superior Court: The PDF forms can only be opened in Adobe Reader or Acrobat.\n|user|: How much is the filing fee?\n|assistant|: In Ventura County the filing fee for a small claims case depends on the amount of your claim: * If your claim is for $1,500.00 or less, the filing fee is $30.00. * If your claim is more than $1,500.00 but less than or equal to $5,000.00, the filing fee is $50.00. * If your claim is more than $5,000.00 but less than or equal to $10,000.00, the filing fee is $75.00. * If you have filed more than 12 small claims in California within the past 12 months, the filing fee is $100.00. Service by certified mail must be done by the clerk's office. The fee is $15.00 per defendant. For Sacramento: Find out how much it will cost to file Small Claims forms online.\n|user|: How about mediation?\n|assistant|: You can mediate your case before or after a small claims case has been filed. If you mediate before filing a case and an agreement is reached at the mediation, there will be no need to file a small claims case. If a case has already been filed, the agreement reached at the mediation can be entered into the court record without having to appear in court. The Superior Court of California  provides free mediation services for litigants in small claims cases. The mediation is facilitated by trained volunteer mediators. The benefits of mediation include determining the outcome of the case by the parties themselves, saving important relationships without going to court, and having both views of the dispute heard. If the case is settled after the filing of the claim and before the hearing date, the plaintiff must file Judicial Council form \u201cRequest For Dismissal\u201d (CIV-110) with the court.\n|user|: We require the assistance of an interpreter.\n|assistant|: If you require the assistance of a foreign language interpreter or a sign language interpreter in a small claims court case, you should inform the court as soon as possible. Court Interpreters are provided free of charge. The court is responsible for providing interpreters for parties who cannot understand or speak English sufficiently in a legal proceeding. However, it is recommended to contact the court well in advance of your court date to ensure an interpreter is available.\n|user|: The defendant and I live in different counties, where do I sue?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "7e4251fc01e38b5d-51303-53129",
+          "text": "The Superior Court of California - County of Ventura - FAQs\nA:\u00a0\u00a0You must be at least 18 years of age to file a claim. If you are not yet 18, you may ask the court to appoint a guardian ad litem. This is a \r\n person who will act for you in the case. The guardian ad litem is usually a parent, a relative or an adult friend.\n\nQ:\u00a0\u00a0How much does it cost to file a claim?\nA:\u00a0\u00a0See the fee structure below.\n\nIf the claim is for $1,500.00 or less, the filing fee is $30.00. \nIf the claim is more than $1,500.00 but less than or equal to $5,000.00, the filing fee is $50.00.\nIf the claim is more than $5,000.00 but less than or equal to $10,000.00, the filing fee is $75.00.\nIf the person has filed more than 12 small claims in California within the past 12 months, the filing fee is $100.00.\n\nQ:\u00a0\u00a0How do I obtain the forms needed to file my claim?\nA:\u00a0\u00a0Forms can be obtained on at the State Forms page of the California Courts website. \r\n The forms can also be completed online. Forms can also be obtained at either court location or may be received by mail by sending your request along with a self-addressed \r\n stamped envelope to the court.\n\nQ:\u00a0\u00a0Do my forms have to be typed?\nA:\u00a0\u00a0The forms do not have to be typed. They can be handwritten but must be legible. It is preferable that the forms be completed in blue or black ink.\n\nQ:\u00a0\u00a0Is this the proper court to hear my case?\nA:\u00a0\u00a0You must sue in the right court and location. This rule is called venue. The Ventura Superior Court has two divisions where small claims cases are assigned \r\n and heard. The right location may be any of these:\n\nWhere the defendant lives or where the business involved is located; \nWhere the damage or accident happened;\nWhere the contract was signed or carried out;\nIf the defendant is a corporation, where the contract was broken\nFor a retail installment account or sales contract or a motor vehicle finance sale:",
+          "title": "The Superior Court of California - County of Ventura - FAQs",
+          "url": "https://www.ventura.courts.ca.gov/faqs.html",
+          "score": 37.632027,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723658787
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What does a small claims court do\n|assistant|: A small claims court is designed to provide a fair, quick, and inexpensive way for individuals to resolve disputes involving relatively small amounts of money. You must have asked the defendant to pay and the defendant has refused. You may not have a lawyer represent you. The judge will hear your case or the court will give parties an opportunity to meet with a mediator at the time of trial. The Small Claims Court has a monetary limit on the amount of money damages that can be claimed, usually up to $12,500 for \"a natural person\", with some exceptions.\n|user|: My renter left and the damage to the apartment is $1000 more than the security deposit. Is this a claim for small claims court?\n|assistant|: Yes, you can file a small claims court case for the additional $1000. Small Claims cases are for damages of $10,000 or less. You must be at least 18 years old to file a claim. Do you have proof? You need to know what proof to get to show the other side and bring to your court date. Examples of proof (also called evidence) are: Repair receipts, Photos of damage, Emails.\n|user|: Are the forms online?\n|assistant|: The forms for Small Claims Court are available online on their website. The forms to file a small claims case can be located on the court website under Online Forms by selecting the Judicial Council hyperlink. Small Claims E-Filing in Sacramento Superior Court: The PDF forms can only be opened in Adobe Reader or Acrobat.\n|user|: How much is the filing fee?\n|assistant|: In Ventura County the filing fee for a small claims case depends on the amount of your claim: * If your claim is for $1,500.00 or less, the filing fee is $30.00. * If your claim is more than $1,500.00 but less than or equal to $5,000.00, the filing fee is $50.00. * If your claim is more than $5,000.00 but less than or equal to $10,000.00, the filing fee is $75.00. * If you have filed more than 12 small claims in California within the past 12 months, the filing fee is $100.00. Service by certified mail must be done by the clerk's office. The fee is $15.00 per defendant. For Sacramento: Find out how much it will cost to file Small Claims forms online.\n|user|: How about mediation?\n|assistant|: You can mediate your case before or after a small claims case has been filed. If you mediate before filing a case and an agreement is reached at the mediation, there will be no need to file a small claims case. If a case has already been filed, the agreement reached at the mediation can be entered into the court record without having to appear in court. The Superior Court of California  provides free mediation services for litigants in small claims cases. The mediation is facilitated by trained volunteer mediators. The benefits of mediation include determining the outcome of the case by the parties themselves, saving important relationships without going to court, and having both views of the dispute heard. If the case is settled after the filing of the claim and before the hearing date, the plaintiff must file Judicial Council form \u201cRequest For Dismissal\u201d (CIV-110) with the court.\n|user|: We require the assistance of an interpreter.\n|assistant|: If you require the assistance of a foreign language interpreter or a sign language interpreter in a small claims court case, you should inform the court as soon as possible. Court Interpreters are provided free of charge. The court is responsible for providing interpreters for parties who cannot understand or speak English sufficiently in a legal proceeding. However, it is recommended to contact the court well in advance of your court date to ensure an interpreter is available.\n|user|: The defendant and I live in different counties, where do I sue?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6d8c260a4cf63440-4260-6441",
+          "text": "The Superior Court of California - County of Ventura - Small Claims\nThis means you have asked the defendant to pay and the defendant has refused.\nThe forms to file a small claims case can be located on the court website under Online Forms by selecting the Judicial Council hyperlink. If you do not have \r\n access to a computer, you may either come directly to the clerk\u2019s office to fill out the appropriate paperwork or have the paperwork mailed to you by sending in \r\n your request along with a self-addressed stamped envelope. Small Claims forms cannot be filed by fax.\nIf you want to file a small claim and you are a business or corporation that operates or does business under a fictitious name (\u201cdoing business as\u201d or \u201cdba\u201d) \r\n you must complete Judicial Council form SC-103, Fictitious Business Name form and file \r\n it with you claim form. If you do not file this form, the court will dismiss your claim at the time of the hearing.\nIf the claim you are filing is to enforce the payment of a debt, you must provide a written calculation showing how you calculated the amount owed that \r\n must include the original debt amount, each payment credited to the debt, each fee and charge added to the debt, each payment credited against those fees \r\n and charges, all other debits or charges to the account and an explanation of the nature of those fees, charges, debits, and all other credits to the \r\n debt, by source and amount. This is required by law and your claim cannot be filed without this information.\n\nTypes of Service\n\nThe defendant must be served with a copy of the claim 15 days prior to the hearing date if they live in county and 20 days prior to the hearing if they \r\n live out of county.\nThe types of service are:\nCertified mail. Service by certified mail must be done by the clerk's office. The fee is $15.00 per defendant. You cannot serve the defendant yourself. \r\n Certified mail is the least effective form of service and the green return receipt must be signed by the defendant personally or the court will delay your \r\n hearing and ask you to attempt another form of service. You will need to check with the court prior to the hearing to see if the receipt for certified mail \r\n was returned to the court.\nPersonal service.",
+          "title": "The Superior Court of California - County of Ventura - Small Claims",
+          "url": "https://www.ventura.courts.ca.gov/small-claims.html",
+          "score": 37.092155,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723658889
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What does a small claims court do\n|assistant|: A small claims court is designed to provide a fair, quick, and inexpensive way for individuals to resolve disputes involving relatively small amounts of money. You must have asked the defendant to pay and the defendant has refused. You may not have a lawyer represent you. The judge will hear your case or the court will give parties an opportunity to meet with a mediator at the time of trial. The Small Claims Court has a monetary limit on the amount of money damages that can be claimed, usually up to $12,500 for \"a natural person\", with some exceptions.\n|user|: My renter left and the damage to the apartment is $1000 more than the security deposit. Is this a claim for small claims court?\n|assistant|: Yes, you can file a small claims court case for the additional $1000. Small Claims cases are for damages of $10,000 or less. You must be at least 18 years old to file a claim. Do you have proof? You need to know what proof to get to show the other side and bring to your court date. Examples of proof (also called evidence) are: Repair receipts, Photos of damage, Emails.\n|user|: Are the forms online?\n|assistant|: The forms for Small Claims Court are available online on their website. The forms to file a small claims case can be located on the court website under Online Forms by selecting the Judicial Council hyperlink. Small Claims E-Filing in Sacramento Superior Court: The PDF forms can only be opened in Adobe Reader or Acrobat.\n|user|: How much is the filing fee?\n|assistant|: In Ventura County the filing fee for a small claims case depends on the amount of your claim: * If your claim is for $1,500.00 or less, the filing fee is $30.00. * If your claim is more than $1,500.00 but less than or equal to $5,000.00, the filing fee is $50.00. * If your claim is more than $5,000.00 but less than or equal to $10,000.00, the filing fee is $75.00. * If you have filed more than 12 small claims in California within the past 12 months, the filing fee is $100.00. Service by certified mail must be done by the clerk's office. The fee is $15.00 per defendant. For Sacramento: Find out how much it will cost to file Small Claims forms online.\n|user|: How about mediation?\n|assistant|: You can mediate your case before or after a small claims case has been filed. If you mediate before filing a case and an agreement is reached at the mediation, there will be no need to file a small claims case. If a case has already been filed, the agreement reached at the mediation can be entered into the court record without having to appear in court. The Superior Court of California  provides free mediation services for litigants in small claims cases. The mediation is facilitated by trained volunteer mediators. The benefits of mediation include determining the outcome of the case by the parties themselves, saving important relationships without going to court, and having both views of the dispute heard. If the case is settled after the filing of the claim and before the hearing date, the plaintiff must file Judicial Council form \u201cRequest For Dismissal\u201d (CIV-110) with the court.\n|user|: We require the assistance of an interpreter.\n|assistant|: If you require the assistance of a foreign language interpreter or a sign language interpreter in a small claims court case, you should inform the court as soon as possible. Court Interpreters are provided free of charge. The court is responsible for providing interpreters for parties who cannot understand or speak English sufficiently in a legal proceeding. However, it is recommended to contact the court well in advance of your court date to ensure an interpreter is available.\n|user|: The defendant and I live in different counties, where do I sue?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "902597c38243f958-4586-6748",
+          "text": "Small Claims | Superior Court of California | County of Tulare\nContact the plaintiff and try to resolve the dispute\nFamiliarize yourself with small claims court procedures\nIf you have a claim against the plaintiff, consider resolving it at the same hearing.\nPrepare for the hearing. (Organize your thoughts, collect evidence, talk to witnesses.)\nKeep communication open. Try to resolve the dispute with the other party before the hearing.\nIf you owe money, try to pay it or work out a payment plan.\nIf necessary, ask the court to postpone the hearing to let you and the plaintiff resolve the dispute informally.\nTry to avoid a court judgment from being entered against you, since it may appear on your credit record.\nAttend the hearing and present your defense.\nWhere Can You File Your Claim?\nYou must sue in the right court and judicial district. This rule is called venue. If you file your claim in the wrong court, the court will dismiss your claim unless all defendants personally appear at the hearing and agree that the claim may be heard.\nThe right judicial district may be:\nWhere the defendant lives or where the business involved is located\nWhere the damage or accident occurred\nWhere the contract was signed or carried out\nIf the defendant is a corporation, where the contract was signed\nFor a retail installment account or sales contract or a motor vehicle finance sale:\nWhere the defendant lives\nWhere the buyer (defendant) lived when the contract was entered into\nWhere the buyer (defendant) signed the contract\nWhere the goods or vehicle are permanently kept\n\nWho Will Hear Your Case?\nYour case will be heard by a small claims court commissioner, a temporary judge, or a judge. A commissioner has all the responsibilities and powers of a judge. A temporary judge (judge pro tem) is an attorney who volunteers his or her time to hear and decide cases. A temporary judge also has all the responsibilities and powers of a judge. The judge may decide the case at the time of the hearing or mail the decision to the parties later.\nNotifying the Defendant of the Claim\nYou must make sure the defendant finds out about your lawsuit. This has to be done according to the rules, or your case may be dismissed or delayed.",
+          "title": "Small Claims | Superior Court of California | County of Tulare",
+          "url": "https://www.tulare.courts.ca.gov/divisions/small-claims",
+          "score": 15.410792,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723659312
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "The defendant in my small claim moved out of the county, what do I do?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6d8c260a4cf63440-1371-3411",
+          "text": "The Superior Court of California - County of Ventura - Small Claims\n* * * PUBLIC NOTICE * * *\n\nEffective 1/22/24 - Small Claims, Appeals, Mental Health Clerk\u2019s Office Appointments no Longer Required.\nAdministrative Order 20.22 - 2nd AMENDED, RE Small Claims Trials\u00a0posted 11/14/2022\r\n \u00a0(Espa\u00f1ol)\n\nCheck back often for updates.\n\nSmall Claims is for the recovery of money only. A corporation, partnership, public entity, or other business can sue for up to $6,250. \u00a0A \u201cnatural person\u201d (not a business or public entity) \r\n may claim up to $12,500. You cannot file more than two claims for more than $2500 each during a calendar year. No attorneys are permitted to represent \r\n either party. Forms for filing small claims can be obtained at any court location. They are also available electronically at this site. To receive \r\n forms by mail send a request with a self-addressed, stamped envelope to the court.\nYou must sue in the right county. If you file your claim in the wrong county, the court will dismiss the claim. Ventura County is the proper place to file if:\nThe defendant lives or does business in Ventura County.\nThe property was damaged or the injury occurred in Ventura County.\nA contract (written or spoken) was made, signed, performed or broken by the Defendant in Ventura County.\nThe defendant lived or did business in Ventura County when the contract was broken.\nThe buyer or lessee signed the contract, now lives or lived in Ventura County when the contract was made, if this claim is about an offer or contract for personal, family, or household goods, services, or loans.\nThe buyer signed the contract, now lives or lived in Ventura County when the contract was made, if this claim is about a retail installment contract (like a credit card).\nThe buyer signed the contract, now lives, or lived in Ventura County when the contract was made, or where the vehicle is permanently garaged, if this claim is about a vehicle finance sale.\nIf your claim occurred in the east end of the county, your case will be set for hearing in the East County Division / Simi Valley location.\n\n91301\n91302\n91304",
+          "title": "The Superior Court of California - County of Ventura - Small Claims",
+          "url": "https://www.ventura.courts.ca.gov/small-claims.html",
+          "score": 14.951393,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "yes",
+                "timestamp": 1723659320
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "The defendant in my small claim moved out of the county, what do I do?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "If the defendant and you live in different counties, you can sue in the county where the defendant lives or where the business involved is located, where the damage or accident happened, where the contract was signed or carried out, or if the defendant is a corporation, where the contract was broken. For a retail installment account or sales contract or a motor vehicle finance sale, you can also sue in the county where the property was bought, even if the defendant does not live in that county."
+    },
+    {
+      "speaker": "user",
+      "text": "Can a 17 year old be the defendant in a claim?",
+      "timestamp": 1723660217,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "It is unclear, however the plaintiff must be at least 18 years of age to file a claim. If the plaintiff is not yet 18, they need to fill out guardian ad litem form.",
+      "timestamp": 1723660221,
+      "contexts": [
+        {
+          "document_id": "6d8c260a4cf63440-5941-8167",
+          "text": "The Superior Court of California - County of Ventura - Small Claims\nService by certified mail must be done by the clerk's office. The fee is $15.00 per defendant. You cannot serve the defendant yourself. \r\n Certified mail is the least effective form of service and the green return receipt must be signed by the defendant personally or the court will delay your \r\n hearing and ask you to attempt another form of service. You will need to check with the court prior to the hearing to see if the receipt for certified mail \r\n was returned to the court.\nPersonal service. Personal service means someone gives the papers directly to the person being sued or to the agent authorized to accept service for a \r\n business or public entity. A plaintiff cannot serve the defendant. Anyone over the age of 18, not a party to the action, may serve the defendant. The \r\n person serving the claim must sign a proof of service form showing when the defendant was served and this form must be filed with the court 5 days prior \r\n to the hearing date. You can have the Sheriff serve the defendant for a fee of $40.00 per defendant or you can hire a registered process service to \r\n serve the defendant.\nIf service is not completed your case will be taken off calendar and you will need to reset the hearing and have the defendant re-served.\n\nSettlement Before Court\n\nIf the case is settled after the filing of the claim and before the hearing date, the plaintiff must file Judicial Council form \u201cRequest For Dismissal\u201d \r\n (CIV-110) with the court. If the claim was satisfied with payment by check, \r\n the plaintiff may want to wait until the check has cleared the bank before filing the dismissal.\n\nSmall Claims Mediation Program\n\nMediation at the Court.\u00a0\u00a0Free mediation services for litigants in small claims cases is provided by trained \r\n volunteer mediators through Ventura Center for Dispute Settlement who are available at the court at the time of your hearing.\nBenefits:\n\nMediation is Power.\u00a0\u00a0In mediation, the parties \r\n determine the outcome of the case, rather than having the judge decide for you.\nSave Business Relationships and Friendships.\u00a0\u00a0Mediation \r\n can help maintain important relationships without going to court.\nHave Both Views of the Dispute Heard.\u00a0\u00a0Many cases \r\n aren\u2019t just about money.",
+          "title": "The Superior Court of California - County of Ventura - Small Claims",
+          "url": "https://www.ventura.courts.ca.gov/small-claims.html",
+          "score": 38.153572,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723660402
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What does a small claims court do\n|assistant|: A small claims court is designed to provide a fair, quick, and inexpensive way for individuals to resolve disputes involving relatively small amounts of money. You must have asked the defendant to pay and the defendant has refused. You may not have a lawyer represent you. The judge will hear your case or the court will give parties an opportunity to meet with a mediator at the time of trial. The Small Claims Court has a monetary limit on the amount of money damages that can be claimed, usually up to $12,500 for \"a natural person\", with some exceptions.\n|user|: My renter left and the damage to the apartment is $1000 more than the security deposit. Is this a claim for small claims court?\n|assistant|: Yes, you can file a small claims court case for the additional $1000. Small Claims cases are for damages of $10,000 or less. You must be at least 18 years old to file a claim. Do you have proof? You need to know what proof to get to show the other side and bring to your court date. Examples of proof (also called evidence) are: Repair receipts, Photos of damage, Emails.\n|user|: Are the forms online?\n|assistant|: The forms for Small Claims Court are available online on their website. The forms to file a small claims case can be located on the court website under Online Forms by selecting the Judicial Council hyperlink. Small Claims E-Filing in Sacramento Superior Court: The PDF forms can only be opened in Adobe Reader or Acrobat.\n|user|: How much is the filing fee?\n|assistant|: In Ventura County the filing fee for a small claims case depends on the amount of your claim: * If your claim is for $1,500.00 or less, the filing fee is $30.00. * If your claim is more than $1,500.00 but less than or equal to $5,000.00, the filing fee is $50.00. * If your claim is more than $5,000.00 but less than or equal to $10,000.00, the filing fee is $75.00. * If you have filed more than 12 small claims in California within the past 12 months, the filing fee is $100.00. Service by certified mail must be done by the clerk's office. The fee is $15.00 per defendant. For Sacramento: Find out how much it will cost to file Small Claims forms online.\n|user|: How about mediation?\n|assistant|: You can mediate your case before or after a small claims case has been filed. If you mediate before filing a case and an agreement is reached at the mediation, there will be no need to file a small claims case. If a case has already been filed, the agreement reached at the mediation can be entered into the court record without having to appear in court. The Superior Court of California  provides free mediation services for litigants in small claims cases. The mediation is facilitated by trained volunteer mediators. The benefits of mediation include determining the outcome of the case by the parties themselves, saving important relationships without going to court, and having both views of the dispute heard. If the case is settled after the filing of the claim and before the hearing date, the plaintiff must file Judicial Council form \u201cRequest For Dismissal\u201d (CIV-110) with the court.\n|user|: We require the assistance of an interpreter.\n|assistant|: If you require the assistance of a foreign language interpreter or a sign language interpreter in a small claims court case, you should inform the court as soon as possible. Court Interpreters are provided free of charge. The court is responsible for providing interpreters for parties who cannot understand or speak English sufficiently in a legal proceeding. However, it is recommended to contact the court well in advance of your court date to ensure an interpreter is available.\n|user|: The defendant and I live in different counties, where do I sue?\n|assistant|: If the defendant and you live in different counties, you can sue in the county where the defendant lives or where the business involved is located, where the damage or accident happened, where the contract was signed or carried out, or if the defendant is a corporation, where the contract was broken. For a retail installment account or sales contract or a motor vehicle finance sale, you can also sue in the county where the property was bought, even if the defendant does not live in that county. If you file your claim in the wrong county, the court will dismiss the claim.\n|user|: Can a 17 year old be the defendant in a claim?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "7e4251fc01e38b5d-51303-53129",
+          "text": "The Superior Court of California - County of Ventura - FAQs\nA:\u00a0\u00a0You must be at least 18 years of age to file a claim. If you are not yet 18, you may ask the court to appoint a guardian ad litem. This is a \r\n person who will act for you in the case. The guardian ad litem is usually a parent, a relative or an adult friend.\n\nQ:\u00a0\u00a0How much does it cost to file a claim?\nA:\u00a0\u00a0See the fee structure below.\n\nIf the claim is for $1,500.00 or less, the filing fee is $30.00. \nIf the claim is more than $1,500.00 but less than or equal to $5,000.00, the filing fee is $50.00.\nIf the claim is more than $5,000.00 but less than or equal to $10,000.00, the filing fee is $75.00.\nIf the person has filed more than 12 small claims in California within the past 12 months, the filing fee is $100.00.\n\nQ:\u00a0\u00a0How do I obtain the forms needed to file my claim?\nA:\u00a0\u00a0Forms can be obtained on at the State Forms page of the California Courts website. \r\n The forms can also be completed online. Forms can also be obtained at either court location or may be received by mail by sending your request along with a self-addressed \r\n stamped envelope to the court.\n\nQ:\u00a0\u00a0Do my forms have to be typed?\nA:\u00a0\u00a0The forms do not have to be typed. They can be handwritten but must be legible. It is preferable that the forms be completed in blue or black ink.\n\nQ:\u00a0\u00a0Is this the proper court to hear my case?\nA:\u00a0\u00a0You must sue in the right court and location. This rule is called venue. The Ventura Superior Court has two divisions where small claims cases are assigned \r\n and heard. The right location may be any of these:\n\nWhere the defendant lives or where the business involved is located; \nWhere the damage or accident happened;\nWhere the contract was signed or carried out;\nIf the defendant is a corporation, where the contract was broken\nFor a retail installment account or sales contract or a motor vehicle finance sale:",
+          "title": "The Superior Court of California - County of Ventura - FAQs",
+          "url": "https://www.ventura.courts.ca.gov/faqs.html",
+          "score": 37.632027,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723660395
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What does a small claims court do\n|assistant|: A small claims court is designed to provide a fair, quick, and inexpensive way for individuals to resolve disputes involving relatively small amounts of money. You must have asked the defendant to pay and the defendant has refused. You may not have a lawyer represent you. The judge will hear your case or the court will give parties an opportunity to meet with a mediator at the time of trial. The Small Claims Court has a monetary limit on the amount of money damages that can be claimed, usually up to $12,500 for \"a natural person\", with some exceptions.\n|user|: My renter left and the damage to the apartment is $1000 more than the security deposit. Is this a claim for small claims court?\n|assistant|: Yes, you can file a small claims court case for the additional $1000. Small Claims cases are for damages of $10,000 or less. You must be at least 18 years old to file a claim. Do you have proof? You need to know what proof to get to show the other side and bring to your court date. Examples of proof (also called evidence) are: Repair receipts, Photos of damage, Emails.\n|user|: Are the forms online?\n|assistant|: The forms for Small Claims Court are available online on their website. The forms to file a small claims case can be located on the court website under Online Forms by selecting the Judicial Council hyperlink. Small Claims E-Filing in Sacramento Superior Court: The PDF forms can only be opened in Adobe Reader or Acrobat.\n|user|: How much is the filing fee?\n|assistant|: In Ventura County the filing fee for a small claims case depends on the amount of your claim: * If your claim is for $1,500.00 or less, the filing fee is $30.00. * If your claim is more than $1,500.00 but less than or equal to $5,000.00, the filing fee is $50.00. * If your claim is more than $5,000.00 but less than or equal to $10,000.00, the filing fee is $75.00. * If you have filed more than 12 small claims in California within the past 12 months, the filing fee is $100.00. Service by certified mail must be done by the clerk's office. The fee is $15.00 per defendant. For Sacramento: Find out how much it will cost to file Small Claims forms online.\n|user|: How about mediation?\n|assistant|: You can mediate your case before or after a small claims case has been filed. If you mediate before filing a case and an agreement is reached at the mediation, there will be no need to file a small claims case. If a case has already been filed, the agreement reached at the mediation can be entered into the court record without having to appear in court. The Superior Court of California  provides free mediation services for litigants in small claims cases. The mediation is facilitated by trained volunteer mediators. The benefits of mediation include determining the outcome of the case by the parties themselves, saving important relationships without going to court, and having both views of the dispute heard. If the case is settled after the filing of the claim and before the hearing date, the plaintiff must file Judicial Council form \u201cRequest For Dismissal\u201d (CIV-110) with the court.\n|user|: We require the assistance of an interpreter.\n|assistant|: If you require the assistance of a foreign language interpreter or a sign language interpreter in a small claims court case, you should inform the court as soon as possible. Court Interpreters are provided free of charge. The court is responsible for providing interpreters for parties who cannot understand or speak English sufficiently in a legal proceeding. However, it is recommended to contact the court well in advance of your court date to ensure an interpreter is available.\n|user|: The defendant and I live in different counties, where do I sue?\n|assistant|: If the defendant and you live in different counties, you can sue in the county where the defendant lives or where the business involved is located, where the damage or accident happened, where the contract was signed or carried out, or if the defendant is a corporation, where the contract was broken. For a retail installment account or sales contract or a motor vehicle finance sale, you can also sue in the county where the property was bought, even if the defendant does not live in that county. If you file your claim in the wrong county, the court will dismiss the claim.\n|user|: Can a 17 year old be the defendant in a claim?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "6d8c260a4cf63440-4260-6441",
+          "text": "The Superior Court of California - County of Ventura - Small Claims\nThis means you have asked the defendant to pay and the defendant has refused.\nThe forms to file a small claims case can be located on the court website under Online Forms by selecting the Judicial Council hyperlink. If you do not have \r\n access to a computer, you may either come directly to the clerk\u2019s office to fill out the appropriate paperwork or have the paperwork mailed to you by sending in \r\n your request along with a self-addressed stamped envelope. Small Claims forms cannot be filed by fax.\nIf you want to file a small claim and you are a business or corporation that operates or does business under a fictitious name (\u201cdoing business as\u201d or \u201cdba\u201d) \r\n you must complete Judicial Council form SC-103, Fictitious Business Name form and file \r\n it with you claim form. If you do not file this form, the court will dismiss your claim at the time of the hearing.\nIf the claim you are filing is to enforce the payment of a debt, you must provide a written calculation showing how you calculated the amount owed that \r\n must include the original debt amount, each payment credited to the debt, each fee and charge added to the debt, each payment credited against those fees \r\n and charges, all other debits or charges to the account and an explanation of the nature of those fees, charges, debits, and all other credits to the \r\n debt, by source and amount. This is required by law and your claim cannot be filed without this information.\n\nTypes of Service\n\nThe defendant must be served with a copy of the claim 15 days prior to the hearing date if they live in county and 20 days prior to the hearing if they \r\n live out of county.\nThe types of service are:\nCertified mail. Service by certified mail must be done by the clerk's office. The fee is $15.00 per defendant. You cannot serve the defendant yourself. \r\n Certified mail is the least effective form of service and the green return receipt must be signed by the defendant personally or the court will delay your \r\n hearing and ask you to attempt another form of service. You will need to check with the court prior to the hearing to see if the receipt for certified mail \r\n was returned to the court.\nPersonal service.",
+          "title": "The Superior Court of California - County of Ventura - Small Claims",
+          "url": "https://www.ventura.courts.ca.gov/small-claims.html",
+          "score": 37.092155,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723660415
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: What does a small claims court do\n|assistant|: A small claims court is designed to provide a fair, quick, and inexpensive way for individuals to resolve disputes involving relatively small amounts of money. You must have asked the defendant to pay and the defendant has refused. You may not have a lawyer represent you. The judge will hear your case or the court will give parties an opportunity to meet with a mediator at the time of trial. The Small Claims Court has a monetary limit on the amount of money damages that can be claimed, usually up to $12,500 for \"a natural person\", with some exceptions.\n|user|: My renter left and the damage to the apartment is $1000 more than the security deposit. Is this a claim for small claims court?\n|assistant|: Yes, you can file a small claims court case for the additional $1000. Small Claims cases are for damages of $10,000 or less. You must be at least 18 years old to file a claim. Do you have proof? You need to know what proof to get to show the other side and bring to your court date. Examples of proof (also called evidence) are: Repair receipts, Photos of damage, Emails.\n|user|: Are the forms online?\n|assistant|: The forms for Small Claims Court are available online on their website. The forms to file a small claims case can be located on the court website under Online Forms by selecting the Judicial Council hyperlink. Small Claims E-Filing in Sacramento Superior Court: The PDF forms can only be opened in Adobe Reader or Acrobat.\n|user|: How much is the filing fee?\n|assistant|: In Ventura County the filing fee for a small claims case depends on the amount of your claim: * If your claim is for $1,500.00 or less, the filing fee is $30.00. * If your claim is more than $1,500.00 but less than or equal to $5,000.00, the filing fee is $50.00. * If your claim is more than $5,000.00 but less than or equal to $10,000.00, the filing fee is $75.00. * If you have filed more than 12 small claims in California within the past 12 months, the filing fee is $100.00. Service by certified mail must be done by the clerk's office. The fee is $15.00 per defendant. For Sacramento: Find out how much it will cost to file Small Claims forms online.\n|user|: How about mediation?\n|assistant|: You can mediate your case before or after a small claims case has been filed. If you mediate before filing a case and an agreement is reached at the mediation, there will be no need to file a small claims case. If a case has already been filed, the agreement reached at the mediation can be entered into the court record without having to appear in court. The Superior Court of California  provides free mediation services for litigants in small claims cases. The mediation is facilitated by trained volunteer mediators. The benefits of mediation include determining the outcome of the case by the parties themselves, saving important relationships without going to court, and having both views of the dispute heard. If the case is settled after the filing of the claim and before the hearing date, the plaintiff must file Judicial Council form \u201cRequest For Dismissal\u201d (CIV-110) with the court.\n|user|: We require the assistance of an interpreter.\n|assistant|: If you require the assistance of a foreign language interpreter or a sign language interpreter in a small claims court case, you should inform the court as soon as possible. Court Interpreters are provided free of charge. The court is responsible for providing interpreters for parties who cannot understand or speak English sufficiently in a legal proceeding. However, it is recommended to contact the court well in advance of your court date to ensure an interpreter is available.\n|user|: The defendant and I live in different counties, where do I sue?\n|assistant|: If the defendant and you live in different counties, you can sue in the county where the defendant lives or where the business involved is located, where the damage or accident happened, where the contract was signed or carried out, or if the defendant is a corporation, where the contract was broken. For a retail installment account or sales contract or a motor vehicle finance sale, you can also sue in the county where the property was bought, even if the defendant does not live in that county. If you file your claim in the wrong county, the court will dismiss the claim.\n|user|: Can a 17 year old be the defendant in a claim?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "7db93570207c64fa-3073-4995",
+          "text": "\r\n\tSmall Claims Court Process: Sacramento Superior Court\r\n\nSo if you should lose, that is probably the end of the case. \r\n However, the person or entity you sue (defendant) may appeal the judge's ruling. \r\n When such an appeal is filed, the entire case will be heard again.\r\n \n\nLocation and Telephone Number\n\r\n The \r\n Carol Miller Justice Center is located at 301 \r\n Bicentennial Circle. Small Claims offices are located on the 2nd floor. The courtrooms\r\n are located on the 3rd floor. The telephone number is 916-875-7746. There is a a flat fee of $5.00 per day.\r\n \n\nFiling Your Claim\n\r\n \tThe Small Claims e-filing system is currently unavailable. You may file your Small Claims case by filling out either a SC-100 (Plaintiff\u2019s Claim),\r\n \tSC-120 (Defendant\u2019s Claim), or SC-500 (Plaintiff\u2019s Claim for Covid-19 Rental Debt). The forms are located on the California Judicial Council website\r\n \tat www.courts.ca.gov/forms.htm?query=small%20claims - external link. Copy and paste the link into your internet browser. Once you complete the appropriate forms, print\r\n \tand mail or drop off the forms at the Carol Miller Justice Center at the below address.\nInformation Needed to File a Small Claims Action\n\nAre you the plaintiff or defendant?\r\n \nDo you know where you must file your claim? See \r\n Choosing the Correct Court. \nHave you had an arbitration of an attorney-client \r\n fee dispute? \nKnow the dollar amount of your claim.\r\n \nYou must first ask the defendant(s) for the money \r\n or property to satisfy your claim. \nKnow the reason why you are suing the other party.\r\n \nIf you are a minor, you will need a guardian and \r\n they need to fill out and file the Guardian Ad Litem form. \nIf you are a business, a corporation, association, \r\n a partnership, or sole proprietorship, what is your fictitious business number \r\n and its expiration date? \nKnow whether the defendant is an individual, an \r\n individual doing business as, a corporation, a partnership or a government \r\n agency.",
+          "title": "\r\n\tSmall Claims Court Process: Sacramento Superior Court\r\n",
+          "url": "https://saccourt.ca.gov/small-claims/process.aspx",
+          "score": 15.759621,
+          "feedback": {
+            "relevant": {
+              "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+                "value": "no",
+                "timestamp": 1723660502
+              },
+              "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+                "value": "yes",
+                "timestamp": 1727198275
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Can a minor child be sued in small claims court"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, a 17-year-old can be the defendant in a small claims case. However, the plaintiff must be at least 18 years of age to file a claim. If the plaintiff is not yet 18, they may ask the court to appoint a guardian ad litem, who will act for them in the case."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "d2b56e91-6d89-4df4-b89a-eef8d969850b",
+      "status": "created",
+      "timestamp": 1723660552
+    },
+    {
+      "author": "87334bc6-dd39-4565-ae2b-832e60a24b08",
+      "status": "accepted",
+      "timestamp": 1726025565
+    },
+    {
+      "author": "7ee1aecf-492d-4847-a436-3db915c57d2e",
+      "status": "edited",
+      "timestamp": 1726588718
+    },
+    {
+      "author": "7ee1aecf-492d-4847-a436-3db915c57d2e",
+      "status": "accepted",
+      "timestamp": 1726588852
+    },
+    {
+      "author": "87334bc6-dd39-4565-ae2b-832e60a24b08",
+      "status": "edited",
+      "timestamp": 1727198307
+    },
+    {
+      "author": "87334bc6-dd39-4565-ae2b-832e60a24b08",
+      "status": "accepted",
+      "timestamp": 1727198310
+    }
+  ],
+  "editor": "87334bc6-dd39-4565-ae2b-832e60a24b08",
+  "domain": "mt-rag-govt-elser-512-100-20240611",
+  "reviewer": "87334bc6-dd39-4565-ae2b-832e60a24b08"
+}

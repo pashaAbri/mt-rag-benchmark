@@ -1,0 +1,911 @@
+{
+  "author": "2077e44f-68bd-4df7-89a1-27ac26e1eb9a",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-ibmcloud-elser-512-100-20240502",
+      "size": "72442"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": {\n        \"text_expansion\": {\n          \"ml.tokens\": {\n            \"model_id\": \".elser_model_1\",\n            \"model_text\": \"${QUERY}\"\n          }\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "google/flan-t5-xl",
+    "name": "flan-t5-xl-3b",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "Should we switch to a different method for installing the mobile SDK, considering the current approach's limitations?  ",
+      "timestamp": 1724436688,
+      "enrichments": {
+        "Question Type": [
+          "Opinion"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "You can install the mobile SDK by using CocoaPods, Carthage, or from the source directory. However, I am not aware of any particular limitations.",
+      "timestamp": 1724436689,
+      "contexts": [
+        {
+          "document_id": "ibmcld_10817-7-1802",
+          "text": "\nMobile SDK \n\nIBM Cloud\u00ae Functions provides a mobile SDK for iOS and watchOS devices that enables mobile apps to fire remote triggers and invoke remote actions. A version for Android is not available, so Android developers can use the OpenWhisk REST API directly. The mobile SDK is written in Swift 4 and supports iOS 11 and later releases. You can build the mobile SDK by using Xcode 9.\n\nThe mobile SDK is not supported for IAM-based namespaces. Use a Cloud Foundry-based namespace instead.\n\n\n\n Add the SDK to your app \n\nYou can install the mobile SDK by using CocoaPods, Carthage, or from the source directory.\n\n\n\n Install mobile SDK with CocoaPods \n\nThe IBM Cloud\u00ae Functions SDK for mobile is available for public distribution through CocoaPods. Assuming CocoaPods is installed, put the following lines into a file called Podfile inside the starter app project directory.\n\ninstall! 'cocoapods', :deterministic_uuids => false\nuse_frameworks!\n\ntarget 'MyApp' do\npod 'OpenWhisk', :git => 'https://github.com/apache/incubator-openwhisk-client-swift.git', :tag => '0.3.0'\nend\n\ntarget 'MyApp WatchKit Extension' do\npod 'OpenWhisk', :git => 'https://github.com/apache/incubator-openwhisk-client-swift.git', :tag => '0.3.0'\nend\n\nFrom the command line, type pod install. This command installs the SDK for an iOS app with a watchOS extension. Use the workspace file CocoaPods creates for your app to open the project in Xcode.\n\nAfter installation, open your project workspace. You might get the following warning when building: Use Legacy Swift Language Version\u201d (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly.",
+          "url": "https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-pkg_mobile_sdk",
+          "score": 16.728172,
+          "feedback": {
+            "relevant": {
+              "2077e44f-68bd-4df7-89a1-27ac26e1eb9a": {
+                "value": "yes",
+                "timestamp": 1724437210
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Should we switch to a different method for installing the mobile SDK, considering the current approach's limitations?  "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_10817-2884-4620",
+          "text": "\nInstall mobile SDK from source code \n\n\n\n1. Download the [source code](https://github.com/apache/openwhisk-client-swift).\n2. Open the project by using the OpenWhisk.xcodeproj with Xcode. The project contains two schemes: \"OpenWhisk\" (targeted for iOS) and \"OpenWhiskWatch\" (targeted for watchOS 2).\n3. Build the project for the targets that you need and add the resulting frameworks to your app (usually in /Library/Developer/Xcode/DerivedData/your-app-name).\n\n\n\n\n\n\n\n\n\n Install the starter app example for mobile SDK \n\nYou can use the Cloud Functions CLI to download example code that embeds the Cloud Functions SDK framework.\n\nTo install the starter app example, enter the following command:\n\nibmcloud fn sdk install iOS\n\nThis command downloads a compressed file that contains the starter app. The project directory contains a Podfile.\n\nTo install the SDK, enter the following command:\n\npod install\n\n\n\n\n\n Getting started with mobile SDK \n\nTo get up and running quickly, create a WhiskCredentials object with your Cloud Functions API credentials and create a Cloud Functions instance from the object.\n\nFor example, use the following example code to create a credentials object:\n\nlet credentialsConfiguration = WhiskCredentials(accessKey: \"myKey\", accessToken: \"myToken\")\nlet whisk = Whisk(credentials: credentialsConfiguration!)\n\nIn previous example, you pass in the myKey and myToken that you get from Cloud Functions. You can retrieve the key and token with the following CLI command:\n\nibmcloud fn property get --auth\n\nExample output\n\nwhisk auth kkkkkkkk-kkkk-kkkk-kkkk-kkkkkkkkkkkk:tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt\n\nThe string before the colon is your key, and the string after the colon is your token.",
+          "url": "https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-pkg_mobile_sdk",
+          "score": 16.65177,
+          "feedback": {
+            "relevant": {
+              "2077e44f-68bd-4df7-89a1-27ac26e1eb9a": {
+                "value": "yes",
+                "timestamp": 1724437254
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Should we switch to a different method for installing the mobile SDK, considering the current approach's limitations?  "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_12330-7-2140",
+          "text": "\nContent \n\n\n\n Languages / platforms \n\nEvery IBM Service that offers public APIs SHOULD offer SDKs for the languages / platforms most commonly used by developers that use the service.\n\n\n\n* Java, Node, Python, and Go are \"first-tier\" languages that should have SDK support.\n* iOS and Android SDKs are important for services that may be used from mobile devices.\n* Other languages that may warrant SDK support in particular domains are C#, Ruby, Scala.\n\n\n\n\n\n\n\n Basic interface \n\nThe SDK SHOULD provide a basic interface that maps directly onto the operations of the underlying API. Each method of an SDK SHOULD correspond to exactly one operation of the underlying API, and this relationship should be clear from design of the API.\n\nOperations whose functionality is fully supported by a related operation SHOULD be omitted. This can occur, for example, when an operation is exposed with both a GET and an POST method, where the GET offers a subset of the features of the POST but with a simpler interface.\n\n\n\n\n\n Methods \n\nMethods MUST employ a flexible parameter-passing design that allows optional parameters to be added to a method without causing incompatibility with applications using the prior version of the method.\n\nIn some languages this can be accomplished using standard language features like default parameter values, but in other languages (e.g. Java) the method parameters must be encapsulated into an \"options\" object.\n\n\n\n\n\n Streaming \n\nFor a language/runtime that supports stream value types:\n\n\n\n* The SDK SHOULD allow any potentially large input value to a method to be supplied as a stream.\n* The SDK SHOULD allow the result of a method to be returned as a stream if that value may be large.\n\n\n\n\n\n\n\n Asynchronous method calls \n\nThe SDK MUST support asynchronous invocation of any method that performs a network operation. The SDK SHOULD support synchronous or pseudo-synchronous (e.g. async/await) invocation of methods that perform network operation in languages where this method style is idiomatic.\n\n\n\n\n\n Instrumentation \n\nThe SDK SHOULD be instrumented so that relevant usage data can be collected by the service.",
+          "url": "https://cloud.ibm.com/docs/sdk-handbook?topic=sdk-handbook-content",
+          "score": 15.016662,
+          "feedback": {
+            "relevant": {
+              "2077e44f-68bd-4df7-89a1-27ac26e1eb9a": {
+                "value": "no",
+                "timestamp": 1724436896
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Should we switch to a different method for installing the mobile SDK, considering the current approach's limitations?  "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "I do not have specific information."
+    },
+    {
+      "speaker": "user",
+      "text": "I meant the issues that may arise when installing it with CocoaPods. ",
+      "timestamp": 1724437402,
+      "enrichments": {
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Question Type": [
+          "Troubleshooting"
+        ],
+        "Answerability": [
+          "PARTIAL"
+        ]
+      },
+      "alternatives": [
+        {
+          "text": "I meant, should we switch to a different method, given the issues that may arise when installing Mobile SDK from CocoaPods",
+          "enrichments": {
+            "Multi-Turn": [
+              "Clarification"
+            ],
+            "Standalone Type": [
+              "Standalone"
+            ],
+            "Question Type": [
+              "Troubleshooting"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "speaker": "agent",
+      "text": "I am not aware of any particular limitations.",
+      "timestamp": 1724437406,
+      "contexts": [
+        {
+          "document_id": "ibmcld_10817-1342-3184",
+          "text": "\nUse the workspace file CocoaPods creates for your app to open the project in Xcode.\n\nAfter installation, open your project workspace. You might get the following warning when building: Use Legacy Swift Language Version\u201d (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly. This is caused if CocoaPods does not update the Swift version in the Pods project. To fix, select the Pods project and the IBM Cloud\u00ae Functions target. Go to Build Settings and change the setting Use Legacy Swift Language Version to no. Alternatively, you can add the following post installation instructions at the end of you Podfile:\n\npost_install do installer\ninstaller.pods_project.targets.each do target\ntarget.build_configurations.each do config\nconfig.build_settings['SWIFT_VERSION'] = '4.0'\nend\nend\nend\n\n\n\n\n\n Install mobile SDK with Carthage \n\nCreate a file in the project directory for your app and name it Cartfile. Put the following line in the file:\n\ngithub \"openwhisk/openwhisk-client-swift.git\" > 0.3.0 Or latest version\n\nFrom the command line, type carthage update --platform ios. Carthage downloads and builds the SDK, creates a directory that is called Carthage in the project directory for your app, and puts an OpenWhisk.framework file inside Carthage/build/iOS.\n\nYou must then add OpenWhisk.framework file to the embedded frameworks in your Xcode project\n\n\n\n\n\n Install mobile SDK from source code \n\n\n\n1. Download the [source code](https://github.com/apache/openwhisk-client-swift).\n2. Open the project by using the OpenWhisk.xcodeproj with Xcode. The project contains two schemes: \"OpenWhisk\" (targeted for iOS) and \"OpenWhiskWatch\" (targeted for watchOS 2).\n3.",
+          "url": "https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-pkg_mobile_sdk",
+          "score": 29.686296,
+          "feedback": {
+            "relevant": {
+              "2077e44f-68bd-4df7-89a1-27ac26e1eb9a": {
+                "value": "yes",
+                "timestamp": 1724437454
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Should we switch to a different method for installing the mobile SDK, considering the current approach's limitations?  \n|assistant|: You can install the mobile SDK by using CocoaPods, Carthage, or from the source directory. However, I am not aware of any particular limitations.\n|user|: I meant the issues that may arise when installing it with CocoaPods. "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_04518-7-1743",
+          "text": "\nInitializing BMSClient \n\nBMSCore provides the HTTP infrastructure that the other IBM Cloud\u00ae Web and Mobile services client SDKs use to communicate with their corresponding IBM Cloud services.\n\n\n\n Initializing your Android app \n\nYou can either download and import the BMSCore package to your Android Studio project, or use Gradle.\n\n\n\n1. Import the Client SDK by adding the following import statement at the beginning of your project file:\n\nimport com.ibm.mobilefirstplatform.clientsdk.android.core.api.;\n2. Initialize the BMSClient SDK in your Android application by adding the initialization code in the onCreate method of the main activity in your Android app, or in a location that works best for your project.\n\nBMSClient.getInstance().initialize(getApplicationContext(), BMSClient.REGION_US_SOUTH); // Make sure that you point to your region\n\nYou must initialize the BMSClient with the bluemixRegion parameter. In the initializer, the bluemixRegion value specifies which IBM Cloud deployment you are using, for example, BMSClient.REGION_US_SOUTH, BMSClient.REGION_UK, or BMSClient.REGION_SYDNEY.\n\n\n\n\n\n\n\n Initializing your iOS app \n\nYou can use [CocoaPods](https://cocoapods.org) or [Carthage](https://github.com/Carthage/Carthage) to get the BMSCore package.\n\n\n\n1. To install BMSCore by using CocoaPods, add the following lines to your Podfile. If your project doesn't have a Podfile yet, use the pod init command.\n\nuse_frameworks!\n\ntarget 'MyApp' do\npod 'BMSCore'\nend\n\nThen run the pod install command, and open the generated .xcworkspace file. To update to a newer release of BMSCore, use pod update BMSCore.\n\nFor more information about using CocoaPods, see the [CocoaPods Guides](https://guides.cocoapods.org/using/index.html).\n2.",
+          "url": "https://cloud.ibm.com/docs/cli?topic=cli-sdk_BMSClient",
+          "score": 29.06348,
+          "feedback": {
+            "relevant": {
+              "2077e44f-68bd-4df7-89a1-27ac26e1eb9a": {
+                "value": "yes",
+                "timestamp": 1724437470
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Should we switch to a different method for installing the mobile SDK, considering the current approach's limitations?  \n|assistant|: You can install the mobile SDK by using CocoaPods, Carthage, or from the source directory. However, I am not aware of any particular limitations.\n|user|: I meant the issues that may arise when installing it with CocoaPods. "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_10817-7-1802",
+          "text": "\nMobile SDK \n\nIBM Cloud\u00ae Functions provides a mobile SDK for iOS and watchOS devices that enables mobile apps to fire remote triggers and invoke remote actions. A version for Android is not available, so Android developers can use the OpenWhisk REST API directly. The mobile SDK is written in Swift 4 and supports iOS 11 and later releases. You can build the mobile SDK by using Xcode 9.\n\nThe mobile SDK is not supported for IAM-based namespaces. Use a Cloud Foundry-based namespace instead.\n\n\n\n Add the SDK to your app \n\nYou can install the mobile SDK by using CocoaPods, Carthage, or from the source directory.\n\n\n\n Install mobile SDK with CocoaPods \n\nThe IBM Cloud\u00ae Functions SDK for mobile is available for public distribution through CocoaPods. Assuming CocoaPods is installed, put the following lines into a file called Podfile inside the starter app project directory.\n\ninstall! 'cocoapods', :deterministic_uuids => false\nuse_frameworks!\n\ntarget 'MyApp' do\npod 'OpenWhisk', :git => 'https://github.com/apache/incubator-openwhisk-client-swift.git', :tag => '0.3.0'\nend\n\ntarget 'MyApp WatchKit Extension' do\npod 'OpenWhisk', :git => 'https://github.com/apache/incubator-openwhisk-client-swift.git', :tag => '0.3.0'\nend\n\nFrom the command line, type pod install. This command installs the SDK for an iOS app with a watchOS extension. Use the workspace file CocoaPods creates for your app to open the project in Xcode.\n\nAfter installation, open your project workspace. You might get the following warning when building: Use Legacy Swift Language Version\u201d (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly.",
+          "url": "https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-pkg_mobile_sdk",
+          "score": 28.440388,
+          "feedback": {
+            "relevant": {
+              "2077e44f-68bd-4df7-89a1-27ac26e1eb9a": {
+                "value": "yes",
+                "timestamp": 1724437481
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Should we switch to a different method for installing the mobile SDK, considering the current approach's limitations?  \n|assistant|: You can install the mobile SDK by using CocoaPods, Carthage, or from the source directory. However, I am not aware of any particular limitations.\n|user|: I meant the issues that may arise when installing it with CocoaPods. "
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "speaker": "user",
+      "text": "No, there is a warning that comes up when installing it from CocoaPods.",
+      "timestamp": 1724437811,
+      "enrichments": {
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Question Type": [
+          "Troubleshooting"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      },
+      "alternatives": [
+        {
+          "text": "No, there is a warning that comes up when installing Mobile SDK with CocoaPods.",
+          "enrichments": {
+            "answerability": [
+              "ANSWERABLE"
+            ],
+            "Standalone Type": [
+              "Standalone"
+            ],
+            "Multi-Turn": [
+              "Correction"
+            ],
+            "Question Type": [
+              "Troubleshooting"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes, you are correct. After installation with CocoaPods, when you open your project workspace, you might get the following warning when building: \"Use Legacy Swift Language Version (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly.\" This is caused if CocoaPods does not update the Swift version in the Pods project.",
+      "timestamp": 1724437813,
+      "contexts": [
+        {
+          "document_id": "ibmcld_10817-1342-3184",
+          "text": "\nUse the workspace file CocoaPods creates for your app to open the project in Xcode.\n\nAfter installation, open your project workspace. You might get the following warning when building: Use Legacy Swift Language Version\u201d (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly. This is caused if CocoaPods does not update the Swift version in the Pods project. To fix, select the Pods project and the IBM Cloud\u00ae Functions target. Go to Build Settings and change the setting Use Legacy Swift Language Version to no. Alternatively, you can add the following post installation instructions at the end of you Podfile:\n\npost_install do installer\ninstaller.pods_project.targets.each do target\ntarget.build_configurations.each do config\nconfig.build_settings['SWIFT_VERSION'] = '4.0'\nend\nend\nend\n\n\n\n\n\n Install mobile SDK with Carthage \n\nCreate a file in the project directory for your app and name it Cartfile. Put the following line in the file:\n\ngithub \"openwhisk/openwhisk-client-swift.git\" > 0.3.0 Or latest version\n\nFrom the command line, type carthage update --platform ios. Carthage downloads and builds the SDK, creates a directory that is called Carthage in the project directory for your app, and puts an OpenWhisk.framework file inside Carthage/build/iOS.\n\nYou must then add OpenWhisk.framework file to the embedded frameworks in your Xcode project\n\n\n\n\n\n Install mobile SDK from source code \n\n\n\n1. Download the [source code](https://github.com/apache/openwhisk-client-swift).\n2. Open the project by using the OpenWhisk.xcodeproj with Xcode. The project contains two schemes: \"OpenWhisk\" (targeted for iOS) and \"OpenWhiskWatch\" (targeted for watchOS 2).\n3.",
+          "url": "https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-pkg_mobile_sdk",
+          "score": 29.29511,
+          "feedback": {
+            "relevant": {
+              "2077e44f-68bd-4df7-89a1-27ac26e1eb9a": {
+                "value": "yes",
+                "timestamp": 1724438158
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Should we switch to a different method for installing the mobile SDK, considering the current approach's limitations?  \n|assistant|: You can install the mobile SDK by using CocoaPods, Carthage, or from the source directory. However, I am not aware of any particular limitations.\n|user|: I meant the issues that may arise when installing it with CocoaPods. \n|assistant|: I am not aware of any particular limitations.\n|user|: No, there is a warning that comes up when installing it from CocoaPods."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_04518-7-1743",
+          "text": "\nInitializing BMSClient \n\nBMSCore provides the HTTP infrastructure that the other IBM Cloud\u00ae Web and Mobile services client SDKs use to communicate with their corresponding IBM Cloud services.\n\n\n\n Initializing your Android app \n\nYou can either download and import the BMSCore package to your Android Studio project, or use Gradle.\n\n\n\n1. Import the Client SDK by adding the following import statement at the beginning of your project file:\n\nimport com.ibm.mobilefirstplatform.clientsdk.android.core.api.;\n2. Initialize the BMSClient SDK in your Android application by adding the initialization code in the onCreate method of the main activity in your Android app, or in a location that works best for your project.\n\nBMSClient.getInstance().initialize(getApplicationContext(), BMSClient.REGION_US_SOUTH); // Make sure that you point to your region\n\nYou must initialize the BMSClient with the bluemixRegion parameter. In the initializer, the bluemixRegion value specifies which IBM Cloud deployment you are using, for example, BMSClient.REGION_US_SOUTH, BMSClient.REGION_UK, or BMSClient.REGION_SYDNEY.\n\n\n\n\n\n\n\n Initializing your iOS app \n\nYou can use [CocoaPods](https://cocoapods.org) or [Carthage](https://github.com/Carthage/Carthage) to get the BMSCore package.\n\n\n\n1. To install BMSCore by using CocoaPods, add the following lines to your Podfile. If your project doesn't have a Podfile yet, use the pod init command.\n\nuse_frameworks!\n\ntarget 'MyApp' do\npod 'BMSCore'\nend\n\nThen run the pod install command, and open the generated .xcworkspace file. To update to a newer release of BMSCore, use pod update BMSCore.\n\nFor more information about using CocoaPods, see the [CocoaPods Guides](https://guides.cocoapods.org/using/index.html).\n2.",
+          "url": "https://cloud.ibm.com/docs/cli?topic=cli-sdk_BMSClient",
+          "score": 28.128103,
+          "feedback": {
+            "relevant": {
+              "2077e44f-68bd-4df7-89a1-27ac26e1eb9a": {
+                "value": "yes",
+                "timestamp": 1724438172
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Should we switch to a different method for installing the mobile SDK, considering the current approach's limitations?  \n|assistant|: You can install the mobile SDK by using CocoaPods, Carthage, or from the source directory. However, I am not aware of any particular limitations.\n|user|: I meant the issues that may arise when installing it with CocoaPods. \n|assistant|: I am not aware of any particular limitations.\n|user|: No, there is a warning that comes up when installing it from CocoaPods."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_10817-7-1802",
+          "text": "\nMobile SDK \n\nIBM Cloud\u00ae Functions provides a mobile SDK for iOS and watchOS devices that enables mobile apps to fire remote triggers and invoke remote actions. A version for Android is not available, so Android developers can use the OpenWhisk REST API directly. The mobile SDK is written in Swift 4 and supports iOS 11 and later releases. You can build the mobile SDK by using Xcode 9.\n\nThe mobile SDK is not supported for IAM-based namespaces. Use a Cloud Foundry-based namespace instead.\n\n\n\n Add the SDK to your app \n\nYou can install the mobile SDK by using CocoaPods, Carthage, or from the source directory.\n\n\n\n Install mobile SDK with CocoaPods \n\nThe IBM Cloud\u00ae Functions SDK for mobile is available for public distribution through CocoaPods. Assuming CocoaPods is installed, put the following lines into a file called Podfile inside the starter app project directory.\n\ninstall! 'cocoapods', :deterministic_uuids => false\nuse_frameworks!\n\ntarget 'MyApp' do\npod 'OpenWhisk', :git => 'https://github.com/apache/incubator-openwhisk-client-swift.git', :tag => '0.3.0'\nend\n\ntarget 'MyApp WatchKit Extension' do\npod 'OpenWhisk', :git => 'https://github.com/apache/incubator-openwhisk-client-swift.git', :tag => '0.3.0'\nend\n\nFrom the command line, type pod install. This command installs the SDK for an iOS app with a watchOS extension. Use the workspace file CocoaPods creates for your app to open the project in Xcode.\n\nAfter installation, open your project workspace. You might get the following warning when building: Use Legacy Swift Language Version\u201d (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly.",
+          "url": "https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-pkg_mobile_sdk",
+          "score": 27.907387,
+          "feedback": {
+            "relevant": {
+              "2077e44f-68bd-4df7-89a1-27ac26e1eb9a": {
+                "value": "yes",
+                "timestamp": 1724438179
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Should we switch to a different method for installing the mobile SDK, considering the current approach's limitations?  \n|assistant|: You can install the mobile SDK by using CocoaPods, Carthage, or from the source directory. However, I am not aware of any particular limitations.\n|user|: I meant the issues that may arise when installing it with CocoaPods. \n|assistant|: I am not aware of any particular limitations.\n|user|: No, there is a warning that comes up when installing it from CocoaPods."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "assistant: I am not aware of any particular limitations."
+    },
+    {
+      "speaker": "user",
+      "text": "Can I just not use CocoaPods?",
+      "timestamp": 1724438324,
+      "enrichments": {
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Question Type": [
+          "Opinion"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      },
+      "alternatives": [
+        {
+          "text": "Can I just not use CocoaPods to install Mobile SDK?",
+          "enrichments": {
+            "answerability": [
+              "ANSWERABLE"
+            ],
+            "Question Type": [
+              "Factoid"
+            ],
+            "Standalone Type": [
+              "Standalone"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "speaker": "agent",
+      "text": "If you do not want to use CocoaPods, you can install mobile SDK with Carthage, or you can install mobile SDK from source code.  ",
+      "timestamp": 1724438327,
+      "contexts": [
+        {
+          "document_id": "ibmcld_10817-1342-3184",
+          "text": "\nUse the workspace file CocoaPods creates for your app to open the project in Xcode.\n\nAfter installation, open your project workspace. You might get the following warning when building: Use Legacy Swift Language Version\u201d (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly. This is caused if CocoaPods does not update the Swift version in the Pods project. To fix, select the Pods project and the IBM Cloud\u00ae Functions target. Go to Build Settings and change the setting Use Legacy Swift Language Version to no. Alternatively, you can add the following post installation instructions at the end of you Podfile:\n\npost_install do installer\ninstaller.pods_project.targets.each do target\ntarget.build_configurations.each do config\nconfig.build_settings['SWIFT_VERSION'] = '4.0'\nend\nend\nend\n\n\n\n\n\n Install mobile SDK with Carthage \n\nCreate a file in the project directory for your app and name it Cartfile. Put the following line in the file:\n\ngithub \"openwhisk/openwhisk-client-swift.git\" > 0.3.0 Or latest version\n\nFrom the command line, type carthage update --platform ios. Carthage downloads and builds the SDK, creates a directory that is called Carthage in the project directory for your app, and puts an OpenWhisk.framework file inside Carthage/build/iOS.\n\nYou must then add OpenWhisk.framework file to the embedded frameworks in your Xcode project\n\n\n\n\n\n Install mobile SDK from source code \n\n\n\n1. Download the [source code](https://github.com/apache/openwhisk-client-swift).\n2. Open the project by using the OpenWhisk.xcodeproj with Xcode. The project contains two schemes: \"OpenWhisk\" (targeted for iOS) and \"OpenWhiskWatch\" (targeted for watchOS 2).\n3.",
+          "url": "https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-pkg_mobile_sdk",
+          "score": 53.457996,
+          "feedback": {
+            "relevant": {
+              "2077e44f-68bd-4df7-89a1-27ac26e1eb9a": {
+                "value": "yes",
+                "timestamp": 1724438658
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Should we switch to a different method for installing the mobile SDK, considering the current approach's limitations?  \n|assistant|: You can install the mobile SDK by using CocoaPods, Carthage, or from the source directory. However, I am not aware of any particular limitations.\n|user|: I meant the issues that may arise when installing it with CocoaPods. \n|assistant|: I am not aware of any particular limitations.\n|user|: No, there is a warning that comes up when installing it from CocoaPods.\n|assistant|: Yes, you are correct. After installation with CocoaPods, when you open your project workspace, you might get the following warning when building: \"Use Legacy Swift Language Version (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly.\" This is caused if CocoaPods does not update the Swift version in the Pods project.\n|user|: Can I just not use CocoaPods?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_10817-7-1802",
+          "text": "\nMobile SDK \n\nIBM Cloud\u00ae Functions provides a mobile SDK for iOS and watchOS devices that enables mobile apps to fire remote triggers and invoke remote actions. A version for Android is not available, so Android developers can use the OpenWhisk REST API directly. The mobile SDK is written in Swift 4 and supports iOS 11 and later releases. You can build the mobile SDK by using Xcode 9.\n\nThe mobile SDK is not supported for IAM-based namespaces. Use a Cloud Foundry-based namespace instead.\n\n\n\n Add the SDK to your app \n\nYou can install the mobile SDK by using CocoaPods, Carthage, or from the source directory.\n\n\n\n Install mobile SDK with CocoaPods \n\nThe IBM Cloud\u00ae Functions SDK for mobile is available for public distribution through CocoaPods. Assuming CocoaPods is installed, put the following lines into a file called Podfile inside the starter app project directory.\n\ninstall! 'cocoapods', :deterministic_uuids => false\nuse_frameworks!\n\ntarget 'MyApp' do\npod 'OpenWhisk', :git => 'https://github.com/apache/incubator-openwhisk-client-swift.git', :tag => '0.3.0'\nend\n\ntarget 'MyApp WatchKit Extension' do\npod 'OpenWhisk', :git => 'https://github.com/apache/incubator-openwhisk-client-swift.git', :tag => '0.3.0'\nend\n\nFrom the command line, type pod install. This command installs the SDK for an iOS app with a watchOS extension. Use the workspace file CocoaPods creates for your app to open the project in Xcode.\n\nAfter installation, open your project workspace. You might get the following warning when building: Use Legacy Swift Language Version\u201d (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly.",
+          "url": "https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-pkg_mobile_sdk",
+          "score": 42.19606,
+          "feedback": {
+            "relevant": {
+              "2077e44f-68bd-4df7-89a1-27ac26e1eb9a": {
+                "value": "yes",
+                "timestamp": 1724438654
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Should we switch to a different method for installing the mobile SDK, considering the current approach's limitations?  \n|assistant|: You can install the mobile SDK by using CocoaPods, Carthage, or from the source directory. However, I am not aware of any particular limitations.\n|user|: I meant the issues that may arise when installing it with CocoaPods. \n|assistant|: I am not aware of any particular limitations.\n|user|: No, there is a warning that comes up when installing it from CocoaPods.\n|assistant|: Yes, you are correct. After installation with CocoaPods, when you open your project workspace, you might get the following warning when building: \"Use Legacy Swift Language Version (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly.\" This is caused if CocoaPods does not update the Swift version in the Pods project.\n|user|: Can I just not use CocoaPods?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_04518-1426-3052",
+          "text": "\nuse_frameworks!\n\ntarget 'MyApp' do\npod 'BMSCore'\nend\n\nThen run the pod install command, and open the generated .xcworkspace file. To update to a newer release of BMSCore, use pod update BMSCore.\n\nFor more information about using CocoaPods, see the [CocoaPods Guides](https://guides.cocoapods.org/using/index.html).\n2. To install BMSCore by using Carthage, follow these [instructions](https://github.com/Carthage/Carthagegetting-started).\n\n\n\n1. Add the following line to your Cartfile:\n\ngithub \"ibm-bluemix-mobile-services/bms-clientsdk-swift-core\"\n2. Run the carthage update command.\n3. After the build is finished, add BMSCore.framework to your project by following [Step 3](https://github.com/Carthage/Carthagegetting-started) in the Carthage instructions.\n\nFor apps that are built with Swift 2.3, use the carthage update --toolchain com.apple.dt.toolchain.Swift_2_3 command. Otherwise, use the carthage update command.\n\n\n\n3. Import the BMSCore module.\n\nimport BMSCore\n4. Initialize the BMSClient class by using the following code.\n\nPlace the initialization code in the application(_:didFinishLaunchingWithOptions:) method of your app delegate, or in a location that works best for your project.\n\nBMSClient.sharedInstance.initialize(bluemixRegion: BMSClient.Region.usSouth) // Make sure that you point to your region\n\nYou must initialize the BMSClient with the bluemixRegion parameter. In the initializer, the bluemixRegion value specifies which IBM Cloud deployment you're using, for example, BMSClient.Region.usSouth, BMSClient.Region.unitedKingdom, or BMSClient.Region.sydney.\n\n\n\n\n\n\n\n Initializing your Cordova app \n\n\n\n1.",
+          "url": "https://cloud.ibm.com/docs/cli?topic=cli-sdk_BMSClient",
+          "score": 37.805668,
+          "feedback": {
+            "relevant": {
+              "2077e44f-68bd-4df7-89a1-27ac26e1eb9a": {
+                "value": "yes",
+                "timestamp": 1724438674
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Should we switch to a different method for installing the mobile SDK, considering the current approach's limitations?  \n|assistant|: You can install the mobile SDK by using CocoaPods, Carthage, or from the source directory. However, I am not aware of any particular limitations.\n|user|: I meant the issues that may arise when installing it with CocoaPods. \n|assistant|: I am not aware of any particular limitations.\n|user|: No, there is a warning that comes up when installing it from CocoaPods.\n|assistant|: Yes, you are correct. After installation with CocoaPods, when you open your project workspace, you might get the following warning when building: \"Use Legacy Swift Language Version (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly.\" This is caused if CocoaPods does not update the Swift version in the Pods project.\n|user|: Can I just not use CocoaPods?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "assistant: No, you cannot just skip the CocoaPods."
+    },
+    {
+      "speaker": "user",
+      "text": "What are the instructions to do it using Carthage?",
+      "timestamp": 1724438734,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      },
+      "alternatives": [
+        {
+          "text": "What are the instructions to install Mobile SDK using Carthage?",
+          "enrichments": {
+            "answerability": [
+              "ANSWERABLE"
+            ],
+            "Standalone Type": [
+              "Standalone"
+            ],
+            "Question Type": [
+              "Summarization"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "speaker": "agent",
+      "text": "You can install mobile SDK with Carthage as follows. Create a file in the project directory for your app and name it Cartfile. Put the following line in the file: github \"openwhisk/openwhisk-client-swift.git\" > 0.3.0 Or latest version From the command line, type carthage update --platform ios. Carthage downloads and builds the SDK, creates a directory that is called Carthage in the project directory for your app, and puts an OpenWhisk.framework file inside Carthage/build/iOS. You must then add OpenWhisk.framework file to the embedded frameworks in your Xcode project.",
+      "timestamp": 1724438742,
+      "contexts": [
+        {
+          "document_id": "ibmcld_10817-1342-3184",
+          "text": "\nUse the workspace file CocoaPods creates for your app to open the project in Xcode.\n\nAfter installation, open your project workspace. You might get the following warning when building: Use Legacy Swift Language Version\u201d (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly. This is caused if CocoaPods does not update the Swift version in the Pods project. To fix, select the Pods project and the IBM Cloud\u00ae Functions target. Go to Build Settings and change the setting Use Legacy Swift Language Version to no. Alternatively, you can add the following post installation instructions at the end of you Podfile:\n\npost_install do installer\ninstaller.pods_project.targets.each do target\ntarget.build_configurations.each do config\nconfig.build_settings['SWIFT_VERSION'] = '4.0'\nend\nend\nend\n\n\n\n\n\n Install mobile SDK with Carthage \n\nCreate a file in the project directory for your app and name it Cartfile. Put the following line in the file:\n\ngithub \"openwhisk/openwhisk-client-swift.git\" > 0.3.0 Or latest version\n\nFrom the command line, type carthage update --platform ios. Carthage downloads and builds the SDK, creates a directory that is called Carthage in the project directory for your app, and puts an OpenWhisk.framework file inside Carthage/build/iOS.\n\nYou must then add OpenWhisk.framework file to the embedded frameworks in your Xcode project\n\n\n\n\n\n Install mobile SDK from source code \n\n\n\n1. Download the [source code](https://github.com/apache/openwhisk-client-swift).\n2. Open the project by using the OpenWhisk.xcodeproj with Xcode. The project contains two schemes: \"OpenWhisk\" (targeted for iOS) and \"OpenWhiskWatch\" (targeted for watchOS 2).\n3.",
+          "url": "https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-pkg_mobile_sdk",
+          "score": 54.119736,
+          "feedback": {
+            "relevant": {
+              "2077e44f-68bd-4df7-89a1-27ac26e1eb9a": {
+                "value": "yes",
+                "timestamp": 1724439043
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Should we switch to a different method for installing the mobile SDK, considering the current approach's limitations?  \n|assistant|: You can install the mobile SDK by using CocoaPods, Carthage, or from the source directory. However, I am not aware of any particular limitations.\n|user|: I meant the issues that may arise when installing it with CocoaPods. \n|assistant|: I am not aware of any particular limitations.\n|user|: No, there is a warning that comes up when installing it from CocoaPods.\n|assistant|: Yes, you are correct. After installation with CocoaPods, when you open your project workspace, you might get the following warning when building: \"Use Legacy Swift Language Version (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly.\" This is caused if CocoaPods does not update the Swift version in the Pods project.\n|user|: Can I just not use CocoaPods?\n|assistant|: If you do not want to use CocoaPods, you can install mobile SDK with Carthage, or you can install mobile SDK from source code.  \n|user|: What are the instructions to do it using Carthage?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_10817-7-1802",
+          "text": "\nMobile SDK \n\nIBM Cloud\u00ae Functions provides a mobile SDK for iOS and watchOS devices that enables mobile apps to fire remote triggers and invoke remote actions. A version for Android is not available, so Android developers can use the OpenWhisk REST API directly. The mobile SDK is written in Swift 4 and supports iOS 11 and later releases. You can build the mobile SDK by using Xcode 9.\n\nThe mobile SDK is not supported for IAM-based namespaces. Use a Cloud Foundry-based namespace instead.\n\n\n\n Add the SDK to your app \n\nYou can install the mobile SDK by using CocoaPods, Carthage, or from the source directory.\n\n\n\n Install mobile SDK with CocoaPods \n\nThe IBM Cloud\u00ae Functions SDK for mobile is available for public distribution through CocoaPods. Assuming CocoaPods is installed, put the following lines into a file called Podfile inside the starter app project directory.\n\ninstall! 'cocoapods', :deterministic_uuids => false\nuse_frameworks!\n\ntarget 'MyApp' do\npod 'OpenWhisk', :git => 'https://github.com/apache/incubator-openwhisk-client-swift.git', :tag => '0.3.0'\nend\n\ntarget 'MyApp WatchKit Extension' do\npod 'OpenWhisk', :git => 'https://github.com/apache/incubator-openwhisk-client-swift.git', :tag => '0.3.0'\nend\n\nFrom the command line, type pod install. This command installs the SDK for an iOS app with a watchOS extension. Use the workspace file CocoaPods creates for your app to open the project in Xcode.\n\nAfter installation, open your project workspace. You might get the following warning when building: Use Legacy Swift Language Version\u201d (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly.",
+          "url": "https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-pkg_mobile_sdk",
+          "score": 41.77861,
+          "feedback": {
+            "relevant": {
+              "2077e44f-68bd-4df7-89a1-27ac26e1eb9a": {
+                "value": "yes",
+                "timestamp": 1724439050
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Should we switch to a different method for installing the mobile SDK, considering the current approach's limitations?  \n|assistant|: You can install the mobile SDK by using CocoaPods, Carthage, or from the source directory. However, I am not aware of any particular limitations.\n|user|: I meant the issues that may arise when installing it with CocoaPods. \n|assistant|: I am not aware of any particular limitations.\n|user|: No, there is a warning that comes up when installing it from CocoaPods.\n|assistant|: Yes, you are correct. After installation with CocoaPods, when you open your project workspace, you might get the following warning when building: \"Use Legacy Swift Language Version (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly.\" This is caused if CocoaPods does not update the Swift version in the Pods project.\n|user|: Can I just not use CocoaPods?\n|assistant|: If you do not want to use CocoaPods, you can install mobile SDK with Carthage, or you can install mobile SDK from source code.  \n|user|: What are the instructions to do it using Carthage?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_04518-1426-3052",
+          "text": "\nuse_frameworks!\n\ntarget 'MyApp' do\npod 'BMSCore'\nend\n\nThen run the pod install command, and open the generated .xcworkspace file. To update to a newer release of BMSCore, use pod update BMSCore.\n\nFor more information about using CocoaPods, see the [CocoaPods Guides](https://guides.cocoapods.org/using/index.html).\n2. To install BMSCore by using Carthage, follow these [instructions](https://github.com/Carthage/Carthagegetting-started).\n\n\n\n1. Add the following line to your Cartfile:\n\ngithub \"ibm-bluemix-mobile-services/bms-clientsdk-swift-core\"\n2. Run the carthage update command.\n3. After the build is finished, add BMSCore.framework to your project by following [Step 3](https://github.com/Carthage/Carthagegetting-started) in the Carthage instructions.\n\nFor apps that are built with Swift 2.3, use the carthage update --toolchain com.apple.dt.toolchain.Swift_2_3 command. Otherwise, use the carthage update command.\n\n\n\n3. Import the BMSCore module.\n\nimport BMSCore\n4. Initialize the BMSClient class by using the following code.\n\nPlace the initialization code in the application(_:didFinishLaunchingWithOptions:) method of your app delegate, or in a location that works best for your project.\n\nBMSClient.sharedInstance.initialize(bluemixRegion: BMSClient.Region.usSouth) // Make sure that you point to your region\n\nYou must initialize the BMSClient with the bluemixRegion parameter. In the initializer, the bluemixRegion value specifies which IBM Cloud deployment you're using, for example, BMSClient.Region.usSouth, BMSClient.Region.unitedKingdom, or BMSClient.Region.sydney.\n\n\n\n\n\n\n\n Initializing your Cordova app \n\n\n\n1.",
+          "url": "https://cloud.ibm.com/docs/cli?topic=cli-sdk_BMSClient",
+          "score": 38.854168,
+          "feedback": {
+            "relevant": {
+              "2077e44f-68bd-4df7-89a1-27ac26e1eb9a": {
+                "value": "yes",
+                "timestamp": 1724439059
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Should we switch to a different method for installing the mobile SDK, considering the current approach's limitations?  \n|assistant|: You can install the mobile SDK by using CocoaPods, Carthage, or from the source directory. However, I am not aware of any particular limitations.\n|user|: I meant the issues that may arise when installing it with CocoaPods. \n|assistant|: I am not aware of any particular limitations.\n|user|: No, there is a warning that comes up when installing it from CocoaPods.\n|assistant|: Yes, you are correct. After installation with CocoaPods, when you open your project workspace, you might get the following warning when building: \"Use Legacy Swift Language Version (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly.\" This is caused if CocoaPods does not update the Swift version in the Pods project.\n|user|: Can I just not use CocoaPods?\n|assistant|: If you do not want to use CocoaPods, you can install mobile SDK with Carthage, or you can install mobile SDK from source code.  \n|user|: What are the instructions to do it using Carthage?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "You can install mobile SDK with Carthage Create a file in the project directory for your app and name it Cartfile. Put the following line in the file: github \"openwhisk/openwhisk-client-swift.git\" > 0.3.0 Or latest version From the command line, type carthage update --platform ios. Carthage downloads and builds the SDK, creates a directory that is called Carthage in the project directory for your app, and puts an OpenWhisk.framework file inside Carthage/build/iOS. You must then add OpenWhisk.framework file to the embedded frameworks in your Xcode project Install mobile SDK from source code 1. Download the [source code](https://github.com/apache/openwhisk-client-swift). 2. Open the project by using the OpenWhisk.xcodeproj with Xcode. The project contains two schemes: \"OpenWhisk\" (targeted for iOS) and \"OpenWhiskWatch\" (targeted for watchOS 2). 3. [END]"
+    },
+    {
+      "speaker": "user",
+      "text": "What is the latest version of Carthage and where can I donwload it?",
+      "timestamp": 1724439093,
+      "enrichments": {
+        "Question Type": [
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "UNANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I do not have information about that.",
+      "timestamp": 1724439101,
+      "contexts": [
+        {
+          "document_id": "ibmcld_10817-1342-3184",
+          "text": "\nUse the workspace file CocoaPods creates for your app to open the project in Xcode.\n\nAfter installation, open your project workspace. You might get the following warning when building: Use Legacy Swift Language Version\u201d (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly. This is caused if CocoaPods does not update the Swift version in the Pods project. To fix, select the Pods project and the IBM Cloud\u00ae Functions target. Go to Build Settings and change the setting Use Legacy Swift Language Version to no. Alternatively, you can add the following post installation instructions at the end of you Podfile:\n\npost_install do installer\ninstaller.pods_project.targets.each do target\ntarget.build_configurations.each do config\nconfig.build_settings['SWIFT_VERSION'] = '4.0'\nend\nend\nend\n\n\n\n\n\n Install mobile SDK with Carthage \n\nCreate a file in the project directory for your app and name it Cartfile. Put the following line in the file:\n\ngithub \"openwhisk/openwhisk-client-swift.git\" > 0.3.0 Or latest version\n\nFrom the command line, type carthage update --platform ios. Carthage downloads and builds the SDK, creates a directory that is called Carthage in the project directory for your app, and puts an OpenWhisk.framework file inside Carthage/build/iOS.\n\nYou must then add OpenWhisk.framework file to the embedded frameworks in your Xcode project\n\n\n\n\n\n Install mobile SDK from source code \n\n\n\n1. Download the [source code](https://github.com/apache/openwhisk-client-swift).\n2. Open the project by using the OpenWhisk.xcodeproj with Xcode. The project contains two schemes: \"OpenWhisk\" (targeted for iOS) and \"OpenWhiskWatch\" (targeted for watchOS 2).\n3.",
+          "url": "https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-pkg_mobile_sdk",
+          "score": 66.54929,
+          "feedback": {
+            "relevant": {
+              "2077e44f-68bd-4df7-89a1-27ac26e1eb9a": {
+                "value": "no",
+                "timestamp": 1724439353
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Should we switch to a different method for installing the mobile SDK, considering the current approach's limitations?  \n|assistant|: You can install the mobile SDK by using CocoaPods, Carthage, or from the source directory. However, I am not aware of any particular limitations.\n|user|: I meant the issues that may arise when installing it with CocoaPods. \n|assistant|: I am not aware of any particular limitations.\n|user|: No, there is a warning that comes up when installing it from CocoaPods.\n|assistant|: Yes, you are correct. After installation with CocoaPods, when you open your project workspace, you might get the following warning when building: \"Use Legacy Swift Language Version (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly.\" This is caused if CocoaPods does not update the Swift version in the Pods project.\n|user|: Can I just not use CocoaPods?\n|assistant|: If you do not want to use CocoaPods, you can install mobile SDK with Carthage, or you can install mobile SDK from source code.  \n|user|: What are the instructions to do it using Carthage?\n|assistant|: You can install mobile SDK with Carthage as follows. Create a file in the project directory for your app and name it Cartfile. Put the following line in the file: github \"openwhisk/openwhisk-client-swift.git\" > 0.3.0 Or latest version From the command line, type carthage update --platform ios. Carthage downloads and builds the SDK, creates a directory that is called Carthage in the project directory for your app, and puts an OpenWhisk.framework file inside Carthage/build/iOS. You must then add OpenWhisk.framework file to the embedded frameworks in your Xcode project.\n|user|: What is the latest version of Carthage and where can I donwload it?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_10817-7-1802",
+          "text": "\nMobile SDK \n\nIBM Cloud\u00ae Functions provides a mobile SDK for iOS and watchOS devices that enables mobile apps to fire remote triggers and invoke remote actions. A version for Android is not available, so Android developers can use the OpenWhisk REST API directly. The mobile SDK is written in Swift 4 and supports iOS 11 and later releases. You can build the mobile SDK by using Xcode 9.\n\nThe mobile SDK is not supported for IAM-based namespaces. Use a Cloud Foundry-based namespace instead.\n\n\n\n Add the SDK to your app \n\nYou can install the mobile SDK by using CocoaPods, Carthage, or from the source directory.\n\n\n\n Install mobile SDK with CocoaPods \n\nThe IBM Cloud\u00ae Functions SDK for mobile is available for public distribution through CocoaPods. Assuming CocoaPods is installed, put the following lines into a file called Podfile inside the starter app project directory.\n\ninstall! 'cocoapods', :deterministic_uuids => false\nuse_frameworks!\n\ntarget 'MyApp' do\npod 'OpenWhisk', :git => 'https://github.com/apache/incubator-openwhisk-client-swift.git', :tag => '0.3.0'\nend\n\ntarget 'MyApp WatchKit Extension' do\npod 'OpenWhisk', :git => 'https://github.com/apache/incubator-openwhisk-client-swift.git', :tag => '0.3.0'\nend\n\nFrom the command line, type pod install. This command installs the SDK for an iOS app with a watchOS extension. Use the workspace file CocoaPods creates for your app to open the project in Xcode.\n\nAfter installation, open your project workspace. You might get the following warning when building: Use Legacy Swift Language Version\u201d (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly.",
+          "url": "https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-pkg_mobile_sdk",
+          "score": 52.315605,
+          "feedback": {
+            "relevant": {
+              "2077e44f-68bd-4df7-89a1-27ac26e1eb9a": {
+                "value": "no",
+                "timestamp": 1724439362
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Should we switch to a different method for installing the mobile SDK, considering the current approach's limitations?  \n|assistant|: You can install the mobile SDK by using CocoaPods, Carthage, or from the source directory. However, I am not aware of any particular limitations.\n|user|: I meant the issues that may arise when installing it with CocoaPods. \n|assistant|: I am not aware of any particular limitations.\n|user|: No, there is a warning that comes up when installing it from CocoaPods.\n|assistant|: Yes, you are correct. After installation with CocoaPods, when you open your project workspace, you might get the following warning when building: \"Use Legacy Swift Language Version (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly.\" This is caused if CocoaPods does not update the Swift version in the Pods project.\n|user|: Can I just not use CocoaPods?\n|assistant|: If you do not want to use CocoaPods, you can install mobile SDK with Carthage, or you can install mobile SDK from source code.  \n|user|: What are the instructions to do it using Carthage?\n|assistant|: You can install mobile SDK with Carthage as follows. Create a file in the project directory for your app and name it Cartfile. Put the following line in the file: github \"openwhisk/openwhisk-client-swift.git\" > 0.3.0 Or latest version From the command line, type carthage update --platform ios. Carthage downloads and builds the SDK, creates a directory that is called Carthage in the project directory for your app, and puts an OpenWhisk.framework file inside Carthage/build/iOS. You must then add OpenWhisk.framework file to the embedded frameworks in your Xcode project.\n|user|: What is the latest version of Carthage and where can I donwload it?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_04518-1426-3052",
+          "text": "\nuse_frameworks!\n\ntarget 'MyApp' do\npod 'BMSCore'\nend\n\nThen run the pod install command, and open the generated .xcworkspace file. To update to a newer release of BMSCore, use pod update BMSCore.\n\nFor more information about using CocoaPods, see the [CocoaPods Guides](https://guides.cocoapods.org/using/index.html).\n2. To install BMSCore by using Carthage, follow these [instructions](https://github.com/Carthage/Carthagegetting-started).\n\n\n\n1. Add the following line to your Cartfile:\n\ngithub \"ibm-bluemix-mobile-services/bms-clientsdk-swift-core\"\n2. Run the carthage update command.\n3. After the build is finished, add BMSCore.framework to your project by following [Step 3](https://github.com/Carthage/Carthagegetting-started) in the Carthage instructions.\n\nFor apps that are built with Swift 2.3, use the carthage update --toolchain com.apple.dt.toolchain.Swift_2_3 command. Otherwise, use the carthage update command.\n\n\n\n3. Import the BMSCore module.\n\nimport BMSCore\n4. Initialize the BMSClient class by using the following code.\n\nPlace the initialization code in the application(_:didFinishLaunchingWithOptions:) method of your app delegate, or in a location that works best for your project.\n\nBMSClient.sharedInstance.initialize(bluemixRegion: BMSClient.Region.usSouth) // Make sure that you point to your region\n\nYou must initialize the BMSClient with the bluemixRegion parameter. In the initializer, the bluemixRegion value specifies which IBM Cloud deployment you're using, for example, BMSClient.Region.usSouth, BMSClient.Region.unitedKingdom, or BMSClient.Region.sydney.\n\n\n\n\n\n\n\n Initializing your Cordova app \n\n\n\n1.",
+          "url": "https://cloud.ibm.com/docs/cli?topic=cli-sdk_BMSClient",
+          "score": 47.10214,
+          "feedback": {
+            "relevant": {
+              "2077e44f-68bd-4df7-89a1-27ac26e1eb9a": {
+                "value": "no",
+                "timestamp": 1724439372
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Should we switch to a different method for installing the mobile SDK, considering the current approach's limitations?  \n|assistant|: You can install the mobile SDK by using CocoaPods, Carthage, or from the source directory. However, I am not aware of any particular limitations.\n|user|: I meant the issues that may arise when installing it with CocoaPods. \n|assistant|: I am not aware of any particular limitations.\n|user|: No, there is a warning that comes up when installing it from CocoaPods.\n|assistant|: Yes, you are correct. After installation with CocoaPods, when you open your project workspace, you might get the following warning when building: \"Use Legacy Swift Language Version (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly.\" This is caused if CocoaPods does not update the Swift version in the Pods project.\n|user|: Can I just not use CocoaPods?\n|assistant|: If you do not want to use CocoaPods, you can install mobile SDK with Carthage, or you can install mobile SDK from source code.  \n|user|: What are the instructions to do it using Carthage?\n|assistant|: You can install mobile SDK with Carthage as follows. Create a file in the project directory for your app and name it Cartfile. Put the following line in the file: github \"openwhisk/openwhisk-client-swift.git\" > 0.3.0 Or latest version From the command line, type carthage update --platform ios. Carthage downloads and builds the SDK, creates a directory that is called Carthage in the project directory for your app, and puts an OpenWhisk.framework file inside Carthage/build/iOS. You must then add OpenWhisk.framework file to the embedded frameworks in your Xcode project.\n|user|: What is the latest version of Carthage and where can I donwload it?"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_10852-44214-45420",
+          "text": "\n* [Install mobile SDK with Carthage](https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-pkg_mobile_sdkinstall-mobile-sdk-carthage)\n* [Install mobile SDK from source code](https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-pkg_mobile_sdkinstall-mobile-sdk-source-code)\n\n\n\n* [Install the starter app example for mobile SDK](https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-pkg_mobile_sdkinstall-mobile-sdk-starter-app)\n* [Getting started with mobile SDK](https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-pkg_mobile_sdkget-started-mobile-sdk)\n* [Invoke a mobile SDK action](https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-pkg_mobile_sdkinvoke-mobile-sdk-action)\n* [Fire a mobile SDK trigger](https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-pkg_mobile_sdkfire-mobile-sdk-trigger)\n* [Use mobile SDK actions that return a result](https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-pkg_mobile_sdkmobile-sdk-actions-results)\n* [Configuring the mobile SDK](https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-pkg_mobile_sdkconfigure-mobile-sdk)\n\n\n\n* [Support for qualified names with mobile SDK](https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-pkg_mobile_sdkqualified-names-mobile-sdk)",
+          "url": "https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-sitemap",
+          "score": 16.7159,
+          "feedback": {
+            "relevant": {
+              "2077e44f-68bd-4df7-89a1-27ac26e1eb9a": {
+                "value": "no",
+                "timestamp": 1724439404
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "Latest Carthage version for IBM Cloud"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "assistant: You can install mobile SDK with Carthage as follows. Create a file in the project directory for your app and name it Cartfile. Put the following line in the file: github \"openwhisk/openwhisk-client-swift.git\" > 0.3.0 Or latest version From the command line, type carthage update --platform ios. Carthage downloads and builds the SDK, creates a directory that is called Carthage in the project directory for your app, and puts an OpenWhisk.framework file inside Carthage/build/iOS. You must then add OpenWhisk.framework file to the embedded frameworks in your Xcode project."
+    },
+    {
+      "speaker": "user",
+      "text": "Ah, I'd better go to Google ...",
+      "timestamp": 1724439437,
+      "enrichments": {
+        "Question Type": [
+          "Non-Question"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "CONVERSATIONAL"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "I am sorry I could not help more.",
+      "timestamp": 1724439441,
+      "contexts": [
+        {
+          "document_id": "ibmcld_10817-1342-3184",
+          "text": "\nUse the workspace file CocoaPods creates for your app to open the project in Xcode.\n\nAfter installation, open your project workspace. You might get the following warning when building: Use Legacy Swift Language Version\u201d (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly. This is caused if CocoaPods does not update the Swift version in the Pods project. To fix, select the Pods project and the IBM Cloud\u00ae Functions target. Go to Build Settings and change the setting Use Legacy Swift Language Version to no. Alternatively, you can add the following post installation instructions at the end of you Podfile:\n\npost_install do installer\ninstaller.pods_project.targets.each do target\ntarget.build_configurations.each do config\nconfig.build_settings['SWIFT_VERSION'] = '4.0'\nend\nend\nend\n\n\n\n\n\n Install mobile SDK with Carthage \n\nCreate a file in the project directory for your app and name it Cartfile. Put the following line in the file:\n\ngithub \"openwhisk/openwhisk-client-swift.git\" > 0.3.0 Or latest version\n\nFrom the command line, type carthage update --platform ios. Carthage downloads and builds the SDK, creates a directory that is called Carthage in the project directory for your app, and puts an OpenWhisk.framework file inside Carthage/build/iOS.\n\nYou must then add OpenWhisk.framework file to the embedded frameworks in your Xcode project\n\n\n\n\n\n Install mobile SDK from source code \n\n\n\n1. Download the [source code](https://github.com/apache/openwhisk-client-swift).\n2. Open the project by using the OpenWhisk.xcodeproj with Xcode. The project contains two schemes: \"OpenWhisk\" (targeted for iOS) and \"OpenWhiskWatch\" (targeted for watchOS 2).\n3.",
+          "url": "https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-pkg_mobile_sdk",
+          "score": 65.62906,
+          "feedback": {
+            "relevant": {
+              "2077e44f-68bd-4df7-89a1-27ac26e1eb9a": {
+                "value": "no",
+                "timestamp": 1724439466
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Should we switch to a different method for installing the mobile SDK, considering the current approach's limitations?  \n|assistant|: You can install the mobile SDK by using CocoaPods, Carthage, or from the source directory. However, I am not aware of any particular limitations.\n|user|: I meant the issues that may arise when installing it with CocoaPods. \n|assistant|: I am not aware of any particular limitations.\n|user|: No, there is a warning that comes up when installing it from CocoaPods.\n|assistant|: Yes, you are correct. After installation with CocoaPods, when you open your project workspace, you might get the following warning when building: \"Use Legacy Swift Language Version (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly.\" This is caused if CocoaPods does not update the Swift version in the Pods project.\n|user|: Can I just not use CocoaPods?\n|assistant|: If you do not want to use CocoaPods, you can install mobile SDK with Carthage, or you can install mobile SDK from source code.  \n|user|: What are the instructions to do it using Carthage?\n|assistant|: You can install mobile SDK with Carthage as follows. Create a file in the project directory for your app and name it Cartfile. Put the following line in the file: github \"openwhisk/openwhisk-client-swift.git\" > 0.3.0 Or latest version From the command line, type carthage update --platform ios. Carthage downloads and builds the SDK, creates a directory that is called Carthage in the project directory for your app, and puts an OpenWhisk.framework file inside Carthage/build/iOS. You must then add OpenWhisk.framework file to the embedded frameworks in your Xcode project.\n|user|: What is the latest version of Carthage and where can I donwload it?\n|assistant|: I do not have information about that.\n|user|: Ah, I'd better go to Google ..."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_10817-7-1802",
+          "text": "\nMobile SDK \n\nIBM Cloud\u00ae Functions provides a mobile SDK for iOS and watchOS devices that enables mobile apps to fire remote triggers and invoke remote actions. A version for Android is not available, so Android developers can use the OpenWhisk REST API directly. The mobile SDK is written in Swift 4 and supports iOS 11 and later releases. You can build the mobile SDK by using Xcode 9.\n\nThe mobile SDK is not supported for IAM-based namespaces. Use a Cloud Foundry-based namespace instead.\n\n\n\n Add the SDK to your app \n\nYou can install the mobile SDK by using CocoaPods, Carthage, or from the source directory.\n\n\n\n Install mobile SDK with CocoaPods \n\nThe IBM Cloud\u00ae Functions SDK for mobile is available for public distribution through CocoaPods. Assuming CocoaPods is installed, put the following lines into a file called Podfile inside the starter app project directory.\n\ninstall! 'cocoapods', :deterministic_uuids => false\nuse_frameworks!\n\ntarget 'MyApp' do\npod 'OpenWhisk', :git => 'https://github.com/apache/incubator-openwhisk-client-swift.git', :tag => '0.3.0'\nend\n\ntarget 'MyApp WatchKit Extension' do\npod 'OpenWhisk', :git => 'https://github.com/apache/incubator-openwhisk-client-swift.git', :tag => '0.3.0'\nend\n\nFrom the command line, type pod install. This command installs the SDK for an iOS app with a watchOS extension. Use the workspace file CocoaPods creates for your app to open the project in Xcode.\n\nAfter installation, open your project workspace. You might get the following warning when building: Use Legacy Swift Language Version\u201d (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly.",
+          "url": "https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-pkg_mobile_sdk",
+          "score": 52.037453,
+          "feedback": {
+            "relevant": {
+              "2077e44f-68bd-4df7-89a1-27ac26e1eb9a": {
+                "value": "no",
+                "timestamp": 1724439476
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Should we switch to a different method for installing the mobile SDK, considering the current approach's limitations?  \n|assistant|: You can install the mobile SDK by using CocoaPods, Carthage, or from the source directory. However, I am not aware of any particular limitations.\n|user|: I meant the issues that may arise when installing it with CocoaPods. \n|assistant|: I am not aware of any particular limitations.\n|user|: No, there is a warning that comes up when installing it from CocoaPods.\n|assistant|: Yes, you are correct. After installation with CocoaPods, when you open your project workspace, you might get the following warning when building: \"Use Legacy Swift Language Version (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly.\" This is caused if CocoaPods does not update the Swift version in the Pods project.\n|user|: Can I just not use CocoaPods?\n|assistant|: If you do not want to use CocoaPods, you can install mobile SDK with Carthage, or you can install mobile SDK from source code.  \n|user|: What are the instructions to do it using Carthage?\n|assistant|: You can install mobile SDK with Carthage as follows. Create a file in the project directory for your app and name it Cartfile. Put the following line in the file: github \"openwhisk/openwhisk-client-swift.git\" > 0.3.0 Or latest version From the command line, type carthage update --platform ios. Carthage downloads and builds the SDK, creates a directory that is called Carthage in the project directory for your app, and puts an OpenWhisk.framework file inside Carthage/build/iOS. You must then add OpenWhisk.framework file to the embedded frameworks in your Xcode project.\n|user|: What is the latest version of Carthage and where can I donwload it?\n|assistant|: I do not have information about that.\n|user|: Ah, I'd better go to Google ..."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_04518-1426-3052",
+          "text": "\nuse_frameworks!\n\ntarget 'MyApp' do\npod 'BMSCore'\nend\n\nThen run the pod install command, and open the generated .xcworkspace file. To update to a newer release of BMSCore, use pod update BMSCore.\n\nFor more information about using CocoaPods, see the [CocoaPods Guides](https://guides.cocoapods.org/using/index.html).\n2. To install BMSCore by using Carthage, follow these [instructions](https://github.com/Carthage/Carthagegetting-started).\n\n\n\n1. Add the following line to your Cartfile:\n\ngithub \"ibm-bluemix-mobile-services/bms-clientsdk-swift-core\"\n2. Run the carthage update command.\n3. After the build is finished, add BMSCore.framework to your project by following [Step 3](https://github.com/Carthage/Carthagegetting-started) in the Carthage instructions.\n\nFor apps that are built with Swift 2.3, use the carthage update --toolchain com.apple.dt.toolchain.Swift_2_3 command. Otherwise, use the carthage update command.\n\n\n\n3. Import the BMSCore module.\n\nimport BMSCore\n4. Initialize the BMSClient class by using the following code.\n\nPlace the initialization code in the application(_:didFinishLaunchingWithOptions:) method of your app delegate, or in a location that works best for your project.\n\nBMSClient.sharedInstance.initialize(bluemixRegion: BMSClient.Region.usSouth) // Make sure that you point to your region\n\nYou must initialize the BMSClient with the bluemixRegion parameter. In the initializer, the bluemixRegion value specifies which IBM Cloud deployment you're using, for example, BMSClient.Region.usSouth, BMSClient.Region.unitedKingdom, or BMSClient.Region.sydney.\n\n\n\n\n\n\n\n Initializing your Cordova app \n\n\n\n1.",
+          "url": "https://cloud.ibm.com/docs/cli?topic=cli-sdk_BMSClient",
+          "score": 46.558384,
+          "feedback": {
+            "relevant": {
+              "2077e44f-68bd-4df7-89a1-27ac26e1eb9a": {
+                "value": "no",
+                "timestamp": 1724439483
+              }
+            }
+          },
+          "query": {
+            "query": {
+              "bool": {
+                "must": {
+                  "text_expansion": {
+                    "ml.tokens": {
+                      "model_id": ".elser_model_1",
+                      "model_text": "|user|: Should we switch to a different method for installing the mobile SDK, considering the current approach's limitations?  \n|assistant|: You can install the mobile SDK by using CocoaPods, Carthage, or from the source directory. However, I am not aware of any particular limitations.\n|user|: I meant the issues that may arise when installing it with CocoaPods. \n|assistant|: I am not aware of any particular limitations.\n|user|: No, there is a warning that comes up when installing it from CocoaPods.\n|assistant|: Yes, you are correct. After installation with CocoaPods, when you open your project workspace, you might get the following warning when building: \"Use Legacy Swift Language Version (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly.\" This is caused if CocoaPods does not update the Swift version in the Pods project.\n|user|: Can I just not use CocoaPods?\n|assistant|: If you do not want to use CocoaPods, you can install mobile SDK with Carthage, or you can install mobile SDK from source code.  \n|user|: What are the instructions to do it using Carthage?\n|assistant|: You can install mobile SDK with Carthage as follows. Create a file in the project directory for your app and name it Cartfile. Put the following line in the file: github \"openwhisk/openwhisk-client-swift.git\" > 0.3.0 Or latest version From the command line, type carthage update --platform ios. Carthage downloads and builds the SDK, creates a directory that is called Carthage in the project directory for your app, and puts an OpenWhisk.framework file inside Carthage/build/iOS. You must then add OpenWhisk.framework file to the embedded frameworks in your Xcode project.\n|user|: What is the latest version of Carthage and where can I donwload it?\n|assistant|: I do not have information about that.\n|user|: Ah, I'd better go to Google ..."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "assistant: You can search for Carthage on Google."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "2077e44f-68bd-4df7-89a1-27ac26e1eb9a",
+      "status": "created",
+      "timestamp": 1724439542
+    },
+    {
+      "author": "2077e44f-68bd-4df7-89a1-27ac26e1eb9a",
+      "status": "accepted",
+      "timestamp": 1725044875
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "edited",
+      "timestamp": 1726587836
+    },
+    {
+      "author": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+      "status": "accepted",
+      "timestamp": 1726588204
+    }
+  ],
+  "editor": "f6ce971c-68d2-4c26-b1c0-477dd28a5181",
+  "domain": "mt-rag-ibmcloud-elser-512-100-20240502",
+  "reviewer": "f6ce971c-68d2-4c26-b1c0-477dd28a5181"
+}

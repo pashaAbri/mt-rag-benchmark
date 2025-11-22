@@ -1,0 +1,648 @@
+{
+  "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+  "retriever": {
+    "collection": {
+      "name": "mt-rag-ibmcloud-elser-512-100-20240502",
+      "size": "72442"
+    },
+    "parameters": {
+      "max_count": 3,
+      "max_utterances": -1,
+      "query_syntax": "{\n  \"bool\": {\n    \"must\": {\n      \"text_expansion\": {\n        \"ml.tokens\": {\n          \"model_id\": \".elser_model_1\",\n          \"model_text\": \"${QUERY}\"\n        }\n      }\n    }\n  }\n}",
+      "project": "{\n  \"text\": \"text\",\n  \"title\": \"title\",\n  \"url\": \"url\"\n}"
+    }
+  },
+  "generator": {
+    "id": "mistralai/mixtral-8x7b-instruct-v01",
+    "name": "mixtral-8x7b-instruct-v01",
+    "prompt": {
+      "template": "[INST]\n${CONTEXT}\n${SYSTEM_INST}\n${INPUT}\n[/INST]\nanswer:",
+      "input": "${SPEAKER}: ${TEXT}\n",
+      "context": "[DOCUMENT]\n${TEXT}\n[END]\n",
+      "system_instruction": "You are an AI Assistant, tasked with providing responses that are well-grounded in the provided documents. Given one or more documents and a user query, generate a response to the query. If no answer can be found in the documents, say, \"I do not have specific information\"."
+    },
+    "parameters": {
+      "min_new_tokens": 1,
+      "max_new_tokens": 512,
+      "repetition_penalty": 1.05,
+      "stop_sequences": [
+        "<|endoftext|>"
+      ]
+    }
+  },
+  "messages": [
+    {
+      "speaker": "user",
+      "text": "What are the steps involved to delete the CIS instance?",
+      "timestamp": 1723067129,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "N/A"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "To delete a CIS instance, you must first delete all global load balancers, pools, and health checks. Then, delete the associated domain (zone). Go to the Overview page and click the trash can icon next to the domain name located in the Service Details section to start the deletion process.\nIf you are moving your domain to a different provider, be sure to migrate your DNS records and other configuration information to the new provider before activating the domain there. Activating the domain before migrating from CIS can cause your domain to change to a \"Moved\" state.\nYou can visit the IBM Cloud Internet Services for more information on how to delete the CIS instance. Delete the CIS instance if you created it specifically for this tutorial.\n\nRelated content\n\nIBM Cloud Internet Service",
+      "timestamp": 1723067133,
+      "contexts": [
+        {
+          "document_id": "ibmcld_04145-1739-3868",
+          "text": "\nThe functionality of this plan was split across various tiers and are now available in Enterprise Essential, Enterprise Advanced, and Enterprise Premier plans. See [Transition to Enterprise](https://cloud.ibm.com/docs/cis?topic=cis-transitioning-next-plan).\n\n\n\n\n\n How do I delete my CIS instance? \n\nTo delete a CIS instance, you must first delete all global load balancers, pools, and health checks. Then delete the associated domain (zone). Go to the Overview page and click the trash can icon next to the domain name located in the Service Details section to start the deletion process.\n\nIf you are moving your domain to a different provider, be sure to migrate your DNS records and other configuration information to the new provider before activating the domain there. Activating the domain before migrating from CIS can cause your domain to changed to a [Moved state](https://cloud.ibm.com/docs/cis?topic=cis-domain-moved-status).\n\n\n\n\n\n I added a user to my account and gave that user permission to manage Internet Services instance(s). Why is that user facing authentication issues? \n\nIt's possible that you did not assign \"service access roles\" to the user. Note that there are two separate sets of roles:\n\n\n\n* Platform access\n* Service access\n\n\n\nYou need platform access roles to create and manage service instances, while service access roles perform service-specific operations on service instances. In the console, these settings can be updated by selecting Manage > Security > Identity and Access.\n\n\n\n\n\n Why is my domain in Pending state? How do I activate it? \n\nWhen you add a domain to CIS, we give you a couple of name servers to configure at your registrar (or at your DNS provider, if you are adding a subdomain). The domain or subdomain remains in pending state until you configure the name servers correctly. Make sure you add both the name servers to your registrar or DNS provider. We periodically scan the public DNS system to check whether the name servers have been configured as instructed. As soon as we are able to verify the name server change (which can take up to 24 hours), we activate your domain.",
+          "url": "https://cloud.ibm.com/docs/cis?topic=cis-faq",
+          "score": 15.984549,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723067627
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What are the steps involved to delete the CIS instance?"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_13139-19107-19978",
+          "text": "\nDelete the CIS instance if you created it specifically for this tutorial.\n\n\n\n\n\n\n\n\n\n Related content \n\n\n\n* [IBM Cloud Internet Services](https://cloud.ibm.com/docs/cis?topic=cis-getting-started)\n* [Manage your IBM CIS for optimal security](https://cloud.ibm.com/docs/cis?topic=cis-manage-your-ibm-cis-for-optimal-securitymanage-your-ibm-cis-for-optimal-security)\n* [Kubernetes Service](https://cloud.ibm.com/docs/containers)\n* [Building containers from images](https://cloud.ibm.com/docs/containers?topic=containers-images)\n* [Best practice to secure traffic and internet application via CIS](https://cloud.ibm.com/docs/cis?topic=cis-manage-your-ibm-cis-for-optimal-securitybest-practice-configure-security-level-selectively)\n* [Improving App Availability with Multizone Clusters](https://www.ibm.com/cloud/blog/announcements/improving-app-availability-multizone-clusters)",
+          "url": "https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis",
+          "score": 15.979247,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723067624
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: What are the steps involved to delete the CIS instance?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "To delete a CIS instance, you must first delete all global load balancers, pools, and health checks. Then delete the associated domain (zone). Go to the Overview page and click the trash can icon next to the domain name located in the Service Details section to start the deletion process. If you are moving your domain to a different provider, make sure to migrate your DNS records and other configuration information to the new provider before activating the domain there."
+    },
+    {
+      "speaker": "user",
+      "text": "Do I need to import or recreate my DNS records in CIS?",
+      "timestamp": 1723068019,
+      "enrichments": {
+        "Question Type": [
+          "Factoid",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "No, before you switch the traffic for your domain to CIS, it's important to import or recreate your DNS records in CIS. Although you can skip this step, it's crucial to ensure that your DNS records are correctly configured in CIS to avoid any parts of your website becoming inaccessible. Here are the command options: DNS_DOMAIN_ID: The ID of the DNS domain. Since CIS doesn't support email traffic by default, you need to set the PTR record to the location of your email server. You may need to reach out to your email provider for help. Import records - By default, a total of 3500 DNS records are allowed (imported and created on CIS). ",
+      "timestamp": 1723068023,
+      "contexts": [
+        {
+          "document_id": "ibmcld_04195-6086-8151",
+          "text": "\nBecause CIS doesn't support email traffic by default, you must set the PTR record to the location of your email server. Contact your email provider for assistance.\n\n\n\n\n\n\n\n Updating DNS records \n\nIn each record row, you can click the Edit record option from the menu, which opens a dialog box that you can use to update the record.\n\nAfter you are finished making your changes, select Update record to save them, or Cancel to abort the changes.\n\n\n\n\n\n Deleting DNS records \n\nIn each record row, you can select the Delete record option from the menu, which opens a dialog box to confirm the delete process.\n\nYou can select the Delete button to confirm your delete action. Select Cancel if you don't want to delete.\n\n\n\n\n\n Importing and exporting DNS records \n\nDNS records can be imported into and exported from CIS. All files are imported and exported as .txt files in BIND format. Learn more about [BIND format](https://en.wikipedia.org/wiki/Zone_file). Click the overflow menu and select to import or export records.\n\nImport records - By default, a total of 3500 DNS records are allowed (imported and created on CIS). You can import multiple files, one at a time, as long as the total number of records is under the max limit. After importing, you are shown a summary with the number of records successfully added and the number that failed, along with the reason why each record failed.\n\nExport records - Use Export records to create a backup of your zone file, or export it to use with another DNS provider. When this menu option is clicked, the records are downloaded to the location specified by your browser settings (typically the Downloads folder). To select another folder location, change your browser's settings to prompt you for a location with each download.\n\n\n\n\n\n Configuring and managing your secure DNS \n\nDNSSec is a technology to digitally sign DNS data so you can be assured it is valid. To eliminate vulnerability from the internet, DNSSec must be deployed at each step in the lookup, from root zone to final domain name (for example, www.icann.org).",
+          "url": "https://cloud.ibm.com/docs/cis?topic=cis-set-up-your-dns-for-cis",
+          "score": 20.620844,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723069585
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Because CIS doesn't support email traffic by default"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_04149-3050-4970",
+          "text": "\nSelect Let's get started from the welcome page to begin setting up CIS.\n\n\n\n\n\n\n\n Step 2. Add and configure your domain \n\nNext, begin protecting and improving the performance of your web service by entering your domain or a subdomain.\n\nSpecify DNS zones. You can configure the name servers for these domains or subdomains at the domain's registrar or DNS provider. Do not use CNAMEs.\n\nThe Overview screen shows your domain in Pending status and remains Pending until you complete configuring your name servers with the registrar or existing DNS provider, which is covered in Step 4.\n\nYou cannot delete the CIS instance after you add a domain. To delete the instance, delete the domain from the instance first.\n\n\n\n\n\n Step 3. Set up your DNS records (optional) \n\nBefore transitioning the traffic for your domain to CIS, it is recommended that you import or recreate your DNS records in CIS. You can choose to skip this step, but if your DNS records are not configured properly in CIS, it might leave parts of your website inaccessible.\n\nImport records by uploading your exported records from your current DNS, or manually create your DNS records. To import records, select Import records.\n\nWhen you are finished, or to skip this step, select Next step.\n\n\n\n\n\n Step 4. Configure your name servers with the registrar or existing DNS provider \n\nTo begin receiving the benefits of CIS, you must delegate your domain to CIS. To delegate a domain, create an NS record with the name servers provided by CIS at your domain's registrar or existing DNS provider. If you are unsure of who the registrar is for your domain, you can look it up at [whois.icann.org](https://whois.icann.org/).\n\nIf you delegate a subdomain (for instance, subdomain.example.com) from another DNS provider, you must replace the existing name server (NS) records and replace them with a name server record for each of the name servers that are provided by CIS.",
+          "url": "https://cloud.ibm.com/docs/cis?topic=cis-getting-started",
+          "score": 20.59727,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723069588
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Select Let's get started from the welcome page to begin setting up CIS."
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "No, you don't need to import or recreate your DNS records in CIS. When you add a domain to CIS, you are given a couple of name servers to configure at your registrar or DNS provider. The domain or subdomain remains in a pending state until you configure the name servers correctly. Once you have configured the name servers, CIS will automatically detect and activate your domain. You can find more information about this process in the provided document."
+    },
+    {
+      "speaker": "user",
+      "text": "Can I add a custom domain?",
+      "timestamp": 1723070321,
+      "enrichments": {
+        "Question Type": [
+          "Explanation"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "To add a custom domain to IBM Cloud Internet Services, follow these steps:\n1. Go to the Overview page of your CIS instance.\n2. Under the Domain section, click the plus (+) icon next to your domain.\n3. choose the 'Connect domain' option in the revealed section.\n4. Complete the process by setting up DNS records and delegating domain management as instructed in the provided document.\nAfter adding a new domain, you can switch between your domains using the list menu in the Domain section to configure settings for each domain.\nWork with your Domain Name Service (DNS) provider or IBM Cloud DNS to register your custom domain. If the apps you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as .custom_domain.net. Note that custom domains are required to use Ingress with private ALBs.",
+      "timestamp": 1723070327,
+      "contexts": [
+        {
+          "document_id": "ibmcld_04185-0-765",
+          "text": "\n\n\n\n\n\n\n  Adding domains to your CIS instance \n\nIBM Cloud\u00ae Internet Services supports multiple domains with the Standard Next and Enterprise Tier plans.\n\nTo add an additional domain to your CIS instance, go to the Overview page. Under the Domain section, select the plus (+) icon next to your domain. This reveals a section to connect an additional domain. Follow the steps in this section to complete adding a new domain:\n\n\n\n*  Connect domain\n*  Set up DNS records\n*  Delegate domain management\n\n\n\nAfter adding a new domain, use the list menu in the Domain section to switch between your domains. The Domain section is located on the Overview page and at the beginning of every page. Switching between domains allows you to configure settings for each domain.\n\n\n\n\n\n\n",
+          "url": "https://cloud.ibm.com/docs/cis?topic=cis-multi-domain-support",
+          "score": 22.94809,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723070480
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Adding domains to your CIS instance"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_05980-10127-11813",
+          "text": "\nTo register your custom domain, work with your Domain Name Service (DNS) provider or [IBM Cloud DNS](https://cloud.ibm.com/docs/dns?topic=dns-getting-started). If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as .custom_domain.net. Note that domains are limited to 130 characters or fewer in Kubernetes version 1.20 or later.\n2. Define an alias for your custom domain by specifying the IBM-provided subdomain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run ibmcloud ks cluster get --cluster <cluster_name> and look for the Ingress subdomain field.\n\nSpecifying the IBM-provided subdomain as a CNAME is required for automatic health checks to remove any failing IPs from the DNS response, and to ensure that your custom domain updates when you add or remove ALBs.\n\n\n\n\n\n\n\n Creating custom domains for private ALBs \n\nFollow the steps to create a custom domain for private ALBs. Note that custom domains are required to use Ingress with private ALBs.\n\nIf you have a classic cluster with only a private VLAN, you must first configure your own [DNS service that is available on your private network](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).\n\n\n\n1. Create a custom domain through your DNS service provider. Note that Ingress URLs must be 130 characters or fewer.\n2. Map your custom domain to the private ALBs by adding their IP addresses as A records (classic clusters) or their VPC hostname as a CNAME (VPC clusters). To find the ALB IP addresses (classic) or hostname (VPC), run ibmcloud ks ingress alb ls -c <cluster_name_or_ID>.",
+          "url": "https://cloud.ibm.com/docs/containers?topic=containers-managed-ingress-setup",
+          "score": 14.527828,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723071001
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Custom domain"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, you can add a custom domain to IBM Cloud Internet Services (CIS). When you add a domain to CIS, you will be given a couple of name servers to configure at your registrar (or at your DNS provider, if you are adding a subdomain). The domain or subdomain will remain in a pending state until you configure the name servers correctly. Once the name server change has been verified (which can take up to 24 hours), your domain will be activated. You can find more information about adding a custom domain to CIS in the IBM Cloud documentation."
+    },
+    {
+      "speaker": "user",
+      "text": "What is the transportation layer?",
+      "timestamp": 1723104325,
+      "enrichments": {
+        "Question Type": [
+          "Explanation",
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Mutual Transport Layer Security (mTLS) authentication ensures that traffic is secure and trusted in both directions between a client and server. This feature is exclusively available for customers at the Enterprise or Security plan level. \nWhen mTLS is configured, access is only granted to requests with a corresponding client certificate. Upon reaching the application, CIS requests the client certificate. If the client fails to present the certificate, the request is denied. Otherwise, the key exchange proceeds.\nThe Transport Layer Security (TLS) options allow you to control whether visitors can browse your website over a secure connection and, if they do, how IBM Cloud\u00ae Internet Services connects to your origin server. Mutual TLS is not enabled by default. It is an additional service that requires prior authorization and enablement.",
+      "timestamp": 1723104330,
+      "contexts": [
+        {
+          "document_id": "ibmcld_04184-7-1931",
+          "text": "\nUsing mutual TLS \n\nMutual Transport Layer Security (mTLS) authentication ensures that traffic is both secure and trusted in both directions between a client and server. It is only available for customers at the Enterprise or Security plan level.\n\nWhen mTLS is configured, access is granted only to requests with a corresponding client certificate. When a request reaches the application, CIS responds with a request for the client certificate. If the client fails to present the certificate, the request is not allowed to proceed. Otherwise, the key exchange proceeds.\n\nZoom\n\n![Diagram of mTLS handshake](https://cloud.ibm.com/docs-content/v1/content/cb1eb27836421578019401fa7556779109430b29/cis/images/mtls-handshake.png)\n\nFigure 1. Diagram of an mTLS handshake\n\n\n\n Configuring mutual TLS \n\nMutual TLS is not enabled by default. It is an additional service that requires prior authorization and enablement.\n\nTo obtain authorization, you must submit an IBM Support case.\n\nAfter mTLS is turned on for your account, take the following steps to enable it.\n\n\n\n1. Navigate to the Security page in the CIS UI.\n2. Select the Mutual TLS tab.\n3. Click Enable to enable the feature.\n\n\n\nAfter mTLS is enabled, it cannot be disabled.\n\nTo set up mTLS authentication in the IBM Cloud Internet Services UI for a particular endpoint:\n\n\n\n1. In the Root certificates table, click Add to define a new root certificate.\n2. Paste the certificate content into the content field, provide a name for the Root CA, and add one or more fully qualified domain names (FQDN) of the endpoints that you want to use this certificate. These FQDNs are the hostnames that are used for the resources being protected by the application policy. You must associate the Root CA with the FQDN that the application being protected uses.\n3. Click Save.\n\nIf your zone is using an intermediate certificate in addition to the root certificate, upload the entire chain.\n4.",
+          "url": "https://cloud.ibm.com/docs/cis?topic=cis-mtls-features",
+          "score": 15.929632,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723104549
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Mutual Transport Layer Security "
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_04122-7-1660",
+          "text": "\nSetting Transport Layer Security (TLS) options \n\nThe Transport Layer Security (TLS) options let you control whether visitors can browse your website over a secure connection, and when they do, how IBM Cloud\u00ae Internet Services connects to your origin server.\n\nUse the latest version of the TLS protocol (TLS 1.3) for improved security and performance by switching from Off to On.\n\n\n\n TLS encryption modes \n\nSet the TLS mode by selecting one of the following options from the Mode list.\n\nThese options are listed in the order from the least secure (Off) to the most secure (End-to-End CA signed).\n\n\n\n* [Off](https://cloud.ibm.com/docs/cis?topic=cis-cis-tls-optionstls-encryption-modes-off) (not recommended)\n* [Client-to-Edge](https://cloud.ibm.com/docs/cis?topic=cis-cis-tls-optionstls-encryption-modes-client-to-edge) (edge to origin not encrypted, self-signed certificates are not supported)\n* [End-to-End flexible](https://cloud.ibm.com/docs/cis?topic=cis-cis-tls-optionstls-encryption-modes-end-to-end-flexible) (edge to origin certificates can be self-signed)\n* [End-to-End CA signed](https://cloud.ibm.com/docs/cis?topic=cis-cis-tls-optionstls-encryption-modes-end-to-end-ca-signed) (default and recommended)\n* [HTTPS only origin pull](https://cloud.ibm.com/docs/cis?topic=cis-cis-tls-optionstls-encryption-modes-origin-only-pull) (Enterprise only)\n\n\n\n\n\n Off \n\nNo secure connection between your visitor and CIS, and no secure connection between CIS and your web server. Visitors can only view your website over HTTP, and any visitor attempting to connect using HTTPS receives an HTTP 301 Redirect to the plain HTTP version of your website.\n\nZoom\n\n!",
+          "url": "https://cloud.ibm.com/docs/cis?topic=cis-cis-tls-options",
+          "score": 12.575332,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723104552
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Mutual Transport Layer Security "
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "The transportation layer is not explicitly defined in the provided document. However, in the context of networking, the transportation layer often refers to Layer 4 in the Open Systems Interconnection (OSI) model, which handles the transmission of data between nodes. It is responsible for end-to-end communication over a network, providing services such as connection-oriented communication, reliability, flow control, and multiplexing. In the TCP/IP model, the transportation layer corresponds to the Transport layer, where protocols like Transmission Control Protocol (TCP) and User Datagram Protocol (UDP) operate."
+    },
+    {
+      "speaker": "user",
+      "text": "Is privacy protected?",
+      "timestamp": 1723105976,
+      "enrichments": {
+        "Question Type": [
+          "Explanation",
+          "Factoid"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "Yes. Data privacy is upheld through the use of private data collections. For example, multiple wholesalers and a group of farmers can be connected to a single channel. If a farmer and a wholesaler want to conduct a private transaction, they can create a channel for this purpose. Alternatively, they can choose to establish a private data collection on the smart contract governing their business interactions to maintain privacy regarding sensitive aspects of the sale, such as the price, without the need to create an additional channel. This policy applies to EU-US and Swiss-US customers. If a government wants access to data held by IBM on behalf of a SaaS client, IBM expects that government to deal directly with that client. Data privacy and governance are of utmost importance. As a leader in providing a fully managed and globally distributable Database-as-a-Service, IBM\u00ae Cloudant\u00ae for IBM Cloud\u00ae allows customers to position data in any global IBM Cloud\u00ae or AWS region. By providing customers with high levels of data mobility to meet their local needs, IBM\u00ae and IBM Cloudant take data privacy and governance seriously. IBM Cloud Delivery Services does not use DLP monitoring. Access controls are implemented on all databases restricted to privileged users only.",
+      "timestamp": 1723105979,
+      "contexts": [
+        {
+          "document_id": "ibmcld_04000-28869-30854",
+          "text": "\nData privacy is achieved by using [private data collections](https://hyperledger-fabric.readthedocs.io/en/release-1.4/private-data/private-data.htmlwhat-is-a-private-data-collection). For example, several wholesalers and a set of farmers might be joined to a single channel. If a farmer and a wholesaler want to transact privately, they can create a channel for this purpose. But they can also decide to create a private data collection on the smart contract that governs their business interactions to maintain privacy over sensitive aspects of the sale, such as the price, without having to create a secondary channel. To learn more about when to use private data within a blockchain, visit the [Private Data](https://hyperledger-fabric.readthedocs.io/en/release-1.4/private-data/private-data.htmlprivate-data) concept article in the Fabric documentation.\n\nIn order to use private data with IBM Blockchain Platform, the following three conditions must be satisfied:\n\n\n\n1. Define the private data collection. A private data collection file can be added to your smart contract. Then, at run time, your client application can use private data-specific chaincode APIs to input and retrieve data from the collection. For more information about how to use private data collections with your smart contract, see the Fabric SDK tutorial on [Using private data](https://hyperledger.github.io/fabric-sdk-node/release-1.4/tutorial-private-data.html) in the Fabric SDK documentation.\n2. Deploy the smart contract. After you define the smart contract private data collection, you need to install the smart contract on the peers that are members of the channel. When you instantiate the smart contract on the channel by using the console, you need to upload the collection configuration JSON file. For more information on how to [create a collection definition JSON file](https://hyperledger.github.io/fabric-sdk-node/release-1.4/tutorial-private-data.html) see the Fabric SDK documentation topic.",
+          "url": "https://cloud.ibm.com/docs/blockchain?topic=blockchain-ibp-console-smart-contracts-v14",
+          "score": 11.318068,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723106567
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "privacy"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_09513-12728-14481",
+          "text": "\nThis is applicable to EU-US and Swiss-US customers: [https://www.ibm.com/privacy/details/us/en/privacy_shield.html](https://www.ibm.com/privacy/details/us/en/privacy_shield.html)\n\nData Responsibility at IBM [https://www.ibm.com/blogs/policy/dataresponsibility-at-ibm/](https://www.ibm.com/blogs/policy/dataresponsibility-at-ibm/) If a government wants access to data held by IBM on behalf of a SaaS client, IBM would expect that government to deal directly with that client\n\nData Processing Addendum (GDPR)\n\n[https://www.ibm.com/support/customer/csol/terms/?id=Z126-7870&lc=en#detail-document](https://www.ibm.com/support/customer/csol/terms/?id=Z126-7870&lc=endetail-document)\n\n\n\n\n\n Data Privacy and Subject Rights \n\nIBM Privacy Statement IBM's Privacy Statement describes IBM's general privacy practices and subject rights that apply to personal information. For complete statement details click on the link below. [https://www.ibm.com/privacy/us/en/](https://www.ibm.com/privacy/us/en/)\n\nRight to Lodge a Complaint In the event a client or customer considers our processing of personal information not to be compliant with applicable data protection laws, a complaint can be submitted directly with IBM by using the form in the link below. [https://www.ibm.com/scripts/contact/contact/us/en/privacy/](https://www.ibm.com/scripts/contact/contact/us/en/privacy/)\n\n\n\n\n\n NIST \n\nIBM Maximo Application Suite Manage Servers (commercial public offerings) follow NIST guidelines and assess against NIST controls, but claim no specific NIST compliance(s).\n\n\n\n\n\n Data Leakage Prevention / Data Loss Prevention (DLP) \n\nIBM Cloud Delivery Services does not use DLP monitoring. Access controls are implemented on all databases restricted to privileged users only.",
+          "url": "https://cloud.ibm.com/docs/mas-saas?topic=mas-saas-Security",
+          "score": 10.337127,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723106570
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "privacy"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_00511-7-1875",
+          "text": "\nData privacy and governance \n\nAs a pioneer in the provision of a fully managed and globally distributable Database-as-a-Service, IBM\u00ae Cloudant\u00ae for IBM Cloud\u00ae allows customers to locate data in any global IBM Cloud\u00ae or AWS region. By providing customers with such high levels of data mobility to serve the local needs of customers, IBM\u00ae, and IBM Cloudant take data privacy and governance seriously.\n\nIBM Cloud data privacy processing processes and procedures are documented within the IBM Cloud DPA. This Data Processing Addendum (DPA) and its applicable DPA Exhibits apply to the Processing of Personal Data by IBM Cloud on behalf of Client (Client Personal Data). The processing of Personal Data is subject to the General Data Protection Regulation 2016/679 (GDPR). It is also subject to any other data protection laws that are identified at [Data Protection Laws](https://www.ibm.com/support/customer/csol/terms?id=DPA-DPL&lc=endetail-document) in order to provide services (Services) according to the Agreement between Client and IBM Cloud. The IBM Cloud DPA can be found at [Data Processing Addendum](https://www.ibm.com/dpa).\n\nIn addition to the DPA, the cloud services contain DPA exhibits that detail the types of data that is processed by this service. Cloud services also contain the relevant processing locations (including hosting locations) where client PI is processed. The relevant DPA exhibit for IBM Cloudant can be found on the [IBM Cloud Terms site](https://www.ibm.com/support/customer/csol/contractexplorer/cloud/datasheets/2052E430379B11E58B2CB2A838CE4F20/en).\n\nIBM Cloud relies on Standard Contractual Clauses (as our primary data transfer mechanism) in our customer contracts. IBM Cloud also relies on numerous supplementary measures to help clients ensure an adequate level of protection when they transfer personal data outside of the EU/EEA.",
+          "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-data-privacy-and-governance",
+          "score": 10.20824,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723106576
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "privacy"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "Yes, IBM Cloud Internet Services provides features to protect the privacy of your users. For example, Mutual Transport Layer Security (mTLS) authentication ensures that traffic is secure and trusted in both directions between a client and server. Additionally, the Web Application Firewall (WAF) feature can help protect against attacks and unauthorized access. However, for specific information about how IBM Cloud Internet Services implements privacy protection, please refer to the official documentation."
+    },
+    {
+      "speaker": "user",
+      "text": "What about security?",
+      "timestamp": 1723106882,
+      "enrichments": {
+        "Question Type": [
+          "Summarization"
+        ],
+        "Multi-Turn": [
+          "Follow-up"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "IBM Cloud Internet Services (CIS) offers Transport Layer Security (TLS) options that enable you to control whether visitors can access your website over a secure connection and, if they do, how IBM Cloud\u00ae Internet Services connects to your origin server. A Transport Layer Security (TLS) secret includes a signed TLS certificate, along with all its intermediate certificates, and the corresponding private key from a certificate authority (CA). You use TLS secrets when working with custom domain mappings.\nTo view the CLI help for creating a TLS secret, run ibmcloud ce secret create --format tls. Mutual Transport Layer Security (mTLS) authentication ensures that traffic is both secure and trusted in both directions between a client and server. It is only available for customers at the Enterprise or Security plan level.\nWhen mTLS is configured, access is only granted to requests with a corresponding client certificate. When a request reaches the application, CIS requests the client certificate. If the client fails to present the certificate, the request is not allowed to proceed. Otherwise, the key exchange continues.",
+      "timestamp": 1723106889,
+      "contexts": [
+        {
+          "document_id": "ibmcld_04122-7-1660",
+          "text": "\nSetting Transport Layer Security (TLS) options \n\nThe Transport Layer Security (TLS) options let you control whether visitors can browse your website over a secure connection, and when they do, how IBM Cloud\u00ae Internet Services connects to your origin server.\n\nUse the latest version of the TLS protocol (TLS 1.3) for improved security and performance by switching from Off to On.\n\n\n\n TLS encryption modes \n\nSet the TLS mode by selecting one of the following options from the Mode list.\n\nThese options are listed in the order from the least secure (Off) to the most secure (End-to-End CA signed).\n\n\n\n* [Off](https://cloud.ibm.com/docs/cis?topic=cis-cis-tls-optionstls-encryption-modes-off) (not recommended)\n* [Client-to-Edge](https://cloud.ibm.com/docs/cis?topic=cis-cis-tls-optionstls-encryption-modes-client-to-edge) (edge to origin not encrypted, self-signed certificates are not supported)\n* [End-to-End flexible](https://cloud.ibm.com/docs/cis?topic=cis-cis-tls-optionstls-encryption-modes-end-to-end-flexible) (edge to origin certificates can be self-signed)\n* [End-to-End CA signed](https://cloud.ibm.com/docs/cis?topic=cis-cis-tls-optionstls-encryption-modes-end-to-end-ca-signed) (default and recommended)\n* [HTTPS only origin pull](https://cloud.ibm.com/docs/cis?topic=cis-cis-tls-optionstls-encryption-modes-origin-only-pull) (Enterprise only)\n\n\n\n\n\n Off \n\nNo secure connection between your visitor and CIS, and no secure connection between CIS and your web server. Visitors can only view your website over HTTP, and any visitor attempting to connect using HTTPS receives an HTTP 301 Redirect to the plain HTTP version of your website.\n\nZoom\n\n!",
+          "url": "https://cloud.ibm.com/docs/cis?topic=cis-cis-tls-options",
+          "score": 22.393383,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723107376
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Setting Transport Layer Security (TLS) options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_04184-7-1931",
+          "text": "\nUsing mutual TLS \n\nMutual Transport Layer Security (mTLS) authentication ensures that traffic is both secure and trusted in both directions between a client and server. It is only available for customers at the Enterprise or Security plan level.\n\nWhen mTLS is configured, access is granted only to requests with a corresponding client certificate. When a request reaches the application, CIS responds with a request for the client certificate. If the client fails to present the certificate, the request is not allowed to proceed. Otherwise, the key exchange proceeds.\n\nZoom\n\n![Diagram of mTLS handshake](https://cloud.ibm.com/docs-content/v1/content/cb1eb27836421578019401fa7556779109430b29/cis/images/mtls-handshake.png)\n\nFigure 1. Diagram of an mTLS handshake\n\n\n\n Configuring mutual TLS \n\nMutual TLS is not enabled by default. It is an additional service that requires prior authorization and enablement.\n\nTo obtain authorization, you must submit an IBM Support case.\n\nAfter mTLS is turned on for your account, take the following steps to enable it.\n\n\n\n1. Navigate to the Security page in the CIS UI.\n2. Select the Mutual TLS tab.\n3. Click Enable to enable the feature.\n\n\n\nAfter mTLS is enabled, it cannot be disabled.\n\nTo set up mTLS authentication in the IBM Cloud Internet Services UI for a particular endpoint:\n\n\n\n1. In the Root certificates table, click Add to define a new root certificate.\n2. Paste the certificate content into the content field, provide a name for the Root CA, and add one or more fully qualified domain names (FQDN) of the endpoints that you want to use this certificate. These FQDNs are the hostnames that are used for the resources being protected by the application policy. You must associate the Root CA with the FQDN that the application being protected uses.\n3. Click Save.\n\nIf your zone is using an intermediate certificate in addition to the root certificate, upload the entire chain.\n4.",
+          "url": "https://cloud.ibm.com/docs/cis?topic=cis-mtls-features",
+          "score": 15.343007,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723107369
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Setting Transport Layer Security (TLS) options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_05278-264010-265653",
+          "text": "\nA Transport Layer Security (TLS) secret contains a signed TLS certificate, including all its intermediate certificates, and its corresponding private key from a certificate authority (CA). Use TLS secrets when you work with custom domain mappings.\n\nTo see CLI help for creating a TLS secret, run ibmcloud ce secret create --format tls.\n\nThe following example creates an TLS secret that is named mysecret-tls. The certificate chain that corresponds to the custom domain is contained in the file certificate.txt and the matching private key file is contained in the file privatekey.txt. Both of these files are located in the root directory of the local workstation.\n\nibmcloud ce secret create --name mysecret-tls --format tls --cert-chain-file certificate.txt --private-key-file privatekey.txt\n\n\n\n\n\n Example output for a TLS secret \n\nCreating TLS secret mysecret-tls...\nOK\n\n\n\n\n\n\n\n ibmcloud ce secret delete \n\nDelete a secret.\n\nibmcloud ce secret delete --name SECRET_NAME [--force] [--ignore-not-found] [--quiet]\n\n\n\n Command Options \n\n--name, -n\n: The name of the secret. This value is required.\n\n--force, -f\n: Force deletion without confirmation. This value is optional. The default value is false.\n\n--ignore-not-found, --inf\n: If not found, do not fail. This value is optional. The default value is false.\n\n--quiet, -q\n: Specify this option to reduce the output of the command. This value is optional. The default value is false.\n\n\n\n\n\n Example \n\nibmcloud ce secret delete --name mysecret-genericfromfile -f\n\n\n\n\n\n Example output \n\nDeleting secret mysecret-genericfromfile...\nOK\n\n\n\n\n\n\n\n ibmcloud ce secret get \n\nDisplay the details of a secret.",
+          "url": "https://cloud.ibm.com/docs/codeengine?topic=codeengine-cli",
+          "score": 14.570643,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723107372
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Setting Transport Layer Security (TLS) options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "IBM Cloud Internet Services (CIS) provides several security features to protect your applications and websites. These include a Web Application Firewall (WAF) to filter and block malicious traffic, mutual Transport Layer Security (mTLS) authentication to ensure secure communication between clients and servers, and private data collections to maintain privacy in business transactions. CIS also allows you to control how visitors access your website over secure connections. Additionally, IBM Cloudant, a fully managed and globally distributable Database-as-a-Service, enables customers to position data in any global IBM Cloud or AWS region, ensuring data privacy and governance."
+    },
+    {
+      "speaker": "user",
+      "text": "I'm allowed to use only my firewall rules.",
+      "timestamp": 1723109001,
+      "enrichments": {
+        "Question Type": [
+          "Non-Question"
+        ],
+        "Multi-Turn": [
+          "Clarification"
+        ],
+        "Answerability": [
+          "ANSWERABLE"
+        ]
+      }
+    },
+    {
+      "speaker": "agent",
+      "text": "No. However, IBM Cloud Internet Services firewall rules provide flexibility and control by targeting HTTP traffic and applying custom criteria to block, challenge, log, or allow specific requests.\nYou can create various types of firewall rules, but your customer plan restricts the number of active rules on your site. Please refer to the Plan comparison page for more details on entitlements.\nThe number of active rules per plan is fixed, and it is impossible to purchase additional active ones now. By default, the IBM Cloud for VMware as a Service \u2013 single tenant instance is provisioned with a default firewall rule designed to block all traffic for basic network security. Additional rules must be configured to allow traffic from your existing network to access the Public Internet and to enable access to the virtual machine from the Public Internet. To create a firewall rule:\n\nIn the top menu navigation, click on Networking.\n\nClick on Edge Gateways and select your virtual data center's Edge Gateway.\n\nIn the left navigation under Services, click on Firewall.",
+      "timestamp": 1723109007,
+      "contexts": [
+        {
+          "document_id": "ibmcld_04106-7-2045",
+          "text": "\nCreating, editing, and deleting firewall rules \n\nIBM Cloud\u00ae Internet Services firewall rules offer power and flexibility by targeting HTTP traffic and applying custom criteria to block, challenge, log, or allow certain requests.\n\nYou can create many types of firewall rules. However, the number of active rules on your site is limited by your customer plan. See the [Plan comparison](https://cloud.ibm.com/docs/cis?topic=cis-cis-plan-comparison) page for more information on entitlements.\n\nThe number of active rules per plan is fixed. You cannot purchase additional active rules at this time.\n\nBefore getting started, it's a good idea to become familiar with [Using fields, functions, and expressions](https://cloud.ibm.com/docs/cis?topic=cis-fields-and-expressions).\n\n\n\n Creating a firewall rule \n\nTake the following steps to configure a basic firewall rule:\n\n\n\n1. Navigate to Security > Firewall Rules.\n2. Click Create Firewall Rule.\n3. Enter a rule name and optional description.\n4. Optionally, input a priority, if necessary. Note that a priority of zero is a null priority and is evaluated last.\n5. Use the UI builder in the Incoming requests section to add a condition. To build an expression with multiple conditions, click either:\n\n\n\n* And - to evaluate conditions using and logic\n* Or - to evaluate conditions or groups of previously and'ed conditions using or logic\n\n\n\nYou can see that as you build a condition, the Expression Preview shows the expression in plain text.\n\nIn the Expression Preview, you can click to edit your expression manually instead of using the Visual Expression Builder, or switch between the two. However, depending on the complexity of a manually constructed expression, the Visual Expression Builder might be unable to render it.\n6. Pick an action from the Response list menu.\n7. To save your rule, choose the most appropriate option by clicking either:\n\n\n\n* Save as draft to save your rule, but leave it disabled.\n* Save and deploy to save your rule and activate it.\n\n\n\n\n\n\n\n\n\n Editing a firewall rule",
+          "url": "https://cloud.ibm.com/docs/cis?topic=cis-about-firewall-rules",
+          "score": 20.036991,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723109308
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Creating, editing, and deleting firewall rules"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "document_id": "ibmcld_13189-15707-17534",
+          "text": "\nBy default, the IBM Cloud\u00ae for VMware as a Service \u2013 single tenant instance has been provisioned with a default firewall rule that will drop all traffic for ensuring basic network security. Additional rules must be put in place to allow the traffic from the previously created network to access the Public Internet and for you to access the virtual machine from the Public Internet.\n\n\n\nFirewall rules\n\n Name Applications Source Destination Action IP protocol \n\n dnat-to-jump RDP, ICMP ALL Any ipset-dnat-to-jump Allow IPv4 \n egress-to-inet N/A sg-private-networks Any Allow IPv4 \n default_rule N/A Any Any Drop IPv4 \n\n\n\nThe default_rule has been pre-provisioned by IBM Cloud. It is listed above just for illustration purposes.\n\nTo create a firewall rule:\n\n\n\n1. In the top menu navigation, click on Networking.\n2. Click on Edge Gateways and select your virtual data center's Edge Gateway.\n3. In the left navigation under Services, click on Firewall.\n4. Click on Edit Rules.\n5. Click on New on Top to create a new firewall rule above the default_rule (drop any).\n6. A new entry in the firewall rule list will be created. To complete the entry:\n\n\n\n1. Name \u2013 In this example, dnat-to-jump is used.\n2. Application - Click on the pencil icon next to Applications and select RDP and ICMP ALL from the applications list. You can filter with a name. Click on Save when complete.\n3. Source \u2013 Click on the pencil icon next to source and toggle the slider next to Any source to green (enabled). Click on Keep when complete.\n4. Destination \u2013 Click on the pencil icon next to destination and select IP Set ipset-dnat-to-jump (or Static Group if that would have been used). Click on Keep when complete.\n\n\n\n7. Review the inputs and click on Save when complete.\n\n\n\nThe new firewall rule will be created. This may take a few seconds to complete.",
+          "url": "https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vmware-as-a-service-vdc",
+          "score": 18.868555,
+          "feedback": {
+            "relevant": {
+              "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+                "value": "yes",
+                "timestamp": 1723109302
+              }
+            }
+          },
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Creating a firewall rule"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "original_text": "If you are allowed to use only your firewall rules, you may not be able to utilize the full features of IBM Cloud Internet Services (CIS) for securing and load balancing your application. CIS provides services like Global Load Balancer (GLB), Caching, Web Application Firewall (WAF), and Page rule which can be configured to secure and optimize your application traffic. However, if you are restricted to using only your firewall rules, you would primarily be relying on your own firewall for security, and might not be able to leverage the advanced features of CIS."
+    }
+  ],
+  "status": "accepted",
+  "status_history": [
+    {
+      "author": "9dcd142c-415e-4161-a82f-c8b14bfb36ac",
+      "status": "created",
+      "timestamp": 1723109349
+    },
+    {
+      "author": "dc79eb51-e320-43c1-841c-3b1baa66d0aa",
+      "status": "accepted",
+      "timestamp": 1725585207
+    },
+    {
+      "author": "53573702-4140-4812-8658-ae10a54edfc8",
+      "status": "edited",
+      "timestamp": 1726658820
+    },
+    {
+      "author": "53573702-4140-4812-8658-ae10a54edfc8",
+      "status": "accepted",
+      "timestamp": 1726658958
+    }
+  ],
+  "editor": "53573702-4140-4812-8658-ae10a54edfc8",
+  "domain": "mt-rag-ibmcloud-elser-512-100-20240502",
+  "reviewer": "53573702-4140-4812-8658-ae10a54edfc8"
+}
