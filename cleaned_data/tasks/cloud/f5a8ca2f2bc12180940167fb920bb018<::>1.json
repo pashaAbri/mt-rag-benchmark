@@ -1,0 +1,78 @@
+{
+  "task_id": "f5a8ca2f2bc12180940167fb920bb018<::>1",
+  "conversation_id": "65",
+  "turn_id": 1,
+  "domain": "cloud",
+  "input": "What are the different types of dialog nodes?",
+  "gold_answer": "There are various types of dialog nodes. These include the Welcome node, which greets users when interacting with the assistant, and the Anything else node, which provides responses for unrecognized user input. You can also create custom nodes by adding a condition that triggers the assistant to process the node. It is possible to create an intent that can be recognized when a customer asks to speak to someone. After defining the intent, you can add a root-level dialog node that conditions the intent.",
+  "enrichments": {
+    "Question Type": [
+      "Comparative"
+    ],
+    "Multi-Turn": [
+      "N/A"
+    ],
+    "Answerability": [
+      "ANSWERABLE"
+    ]
+  },
+  "retrieved_contexts": [
+    {
+      "document_id": "ibmcld_02952-1632-3754",
+      "text": "\nCreate an intent that can recognize when a customer asks to speak to someone. After defining the intent, you can add a root-level dialog node that conditions on the intent. As the dialog node response, add a Connect to human agent response type. At run time, if the user asks to speak to someone, this node is triggered and a transfer is initiated on the user's behalf.\n* When the conversation broaches a topic that is sensitive in nature, you can start a transfer.\n\nFor example, an insurance company might want questions about bereavement benefits always to be handled by a person. Or, if a customer wants to close an account, you might want to transfer the conversation to a respresentative who is authorized to offer incentives to keep the customer's business.\n* When the assistant repeatedly fails to understand a customer's request. Instead of asking the customer to retry or rephrase the question over and over, your assistant can offer to transfer the customer to a human agent.\n\n\n\nTo design a dialog that can transfer the conversation, complete the following steps:\n\n\n\n1. Add an intent to your skill that can recognize a user's request to speak to a human.\n\nYou can create your own intent or add the prebuilt intent named General_Connect_to_Agent that is provided with the General content catalog.\n2. Add a root node to your dialog that conditions on the intent you created in the previous step. Choose Connect to human agent as the response type.\n\nFor more information, see [Adding a Connect to human agent response type](https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-dialog-overviewdialog-overview-add-connect-to-human-agent).\n3. Add meaningful names to the dialog nodes in your dialog.\n\nWhen a conversation is transferred to an agent, the name of the most-recently processed dialog node is sent with it. To ensure that a useful summary is provided to service desk agents when a conversation is transferred to them, add short dialog node names that reflect the node's purpose. For example, Find a store.\n\nSome older skills specify the purpose of the node in the external node name field instead.",
+      "url": "https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-dialog-support",
+      "score": 16.80034,
+      "feedback": {
+        "relevant": {
+          "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+            "value": "yes",
+            "timestamp": 1723673726
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "|user|: What are the different types of dialog nodes?"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_02882-7-2075",
+      "text": "\nBuilding a conversational flow \n\nThe dialog defines what your assistant says in response to customers.\n\n\n\n Creating a dialog \n\nTo create a dialog, complete the following steps:\n\n\n\n1. Click the Dialog tab, and then click Create dialog.\n\nWhen you open the dialog editor for the first time, the following nodes are created for you:\n\n\n\n* Welcome: The first node. It contains a greeting that is displayed to your users when they first engage with your assistant. You can edit the greeting.\n\n\n\nThis node is not triggered in dialog flows that are initiated by users. For example, dialogs that are deployed in environments such as messaging channels where customers start the conversation do not process nodes with the welcome special condition.\n\n\n\n* Anything else: The final node. It contains phrases that are used to reply to users when their input is not recognized. You can replace the responses that are provided or add more responses with a similar meaning to add variety to the conversation. You can also choose whether you want your assistant to return each response that is defined in turn or return them in random order.\n\n\n\n2. To add more nodes to the dialog tree, click the More![More icon](https://cloud.ibm.com/docs-content/v1/content/a2b18c153837bce00a5b4de496e4b4ca64bbf56e/assistant-data/images/kabob.png) icon on the Welcome node, and then select Add node below.\n3. In the If assistant recognizes field, enter a condition that, when met, triggers your assistant to process the node.\n\nTo start off, you typically want to add an intent as the condition. For example, if you add open_account here, it means that you want the response that you will specify in this node to be returned to the user if the user input indicates that the user wants to open an account.\n\nAs you begin to define a condition, a box is displayed that shows you your options. You can enter one of the following characters, and then pick a value from the list of options that is displayed.\n\n\n\nCondition builder syntax\n\n Character Lists defined values for these artifact types \n\n `#` intents",
+      "url": "https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-dialog-overview",
+      "score": 16.001131,
+      "feedback": {
+        "relevant": {
+          "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+            "value": "yes",
+            "timestamp": 1723673723
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "|user|: What are the different types of dialog nodes?"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "timestamp": 1723673431
+}

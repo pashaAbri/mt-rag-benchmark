@@ -1,0 +1,126 @@
+{
+  "task_id": "1065ea5ad1ae2b90e6fce67d851a7a66<::>4",
+  "conversation_id": "67",
+  "turn_id": 4,
+  "domain": "cloud",
+  "input": "Excuse me, I meant source code example, rather.",
+  "gold_answer": "I apologize for the misunderstanding. Here's an example of how to install the IBM Cloud Functions SDK for mobile using Carthage from the source code:\n1. Clone the IBM Cloud Functions SDK for mobile repository from GitHub: `git clone https://github.com/openwhisk/openwhisk-client-swift.git`\n2. Navigate to the cloned repository: `cd openwhisk-client-swift`\n3. Install Carthage: `brew install carthage`\n4. Run `carthage bootstrap` to build the framework.\n5. Add the `OpenWhisk.framework` file to the embedded frameworks in your Xcode project.",
+  "enrichments": {
+    "Question Type": [
+      "How-To"
+    ],
+    "Multi-Turn": [
+      "Clarification"
+    ],
+    "Answerability": [
+      "ANSWERABLE"
+    ]
+  },
+  "retrieved_contexts": [
+    {
+      "document_id": "ibmcld_05413-4562-6193",
+      "text": "\nNotice that your project is also selected for context, so all subsequent application-related commands are within the scope of this new sample project.\n\n\n\n\n\n Step 3: Creating a directory and source code \n\n\n\n1. Create a directory on your local workstation that is named myapp and navigate into it. In this directory, save all the files that are required to build the image and to run your app.\n\nmkdir myapp && cd myapp\n2. Create a file called server.js and copy the following source code into it.\n\nconst http = require('http');\n\nhttp.createServer(function (request, response) {\nresponse.writeHead(200, {'Content-Type': 'text/plain'});\nresponse.end( \"Hello worldn\" );\n}).listen(8080);\n\nThis example uses Node.js. You can substitute code from any [supported runtime](https://cloud.ibm.com/docs/codeengine?topic=codeengine-plan-buildbuild-buildpack-strat).\n\n\n\n\n\n\n\n Step 4: Deploying your application \n\nPush your code to Code Engine by using the application create command. You must provide a name for your application and the location of the source code. The following example creates an application called myapp that uses the buildpack strategy and provides the location for the source code in the current directory (.).\n\nibmcloud ce app create --name myapp --build-source . --strategy buildpacks\n\nExample output\n\nCreating application 'myapp'...\nPackaging files to upload from source path '.'...\nSubmitting build run 'myapp-run-220999-210706331'...\nCreating image 'private.us.icr.io/ce--6ef04-khxrbwa0lci/app-myapp:220418-0207-askql'...\nWaiting for build run to complete...\nBuild run status: 'Running'\nBuild run completed successfully.",
+      "url": "https://cloud.ibm.com/docs/codeengine?topic=codeengine-migrate-cf-ce-tutorial",
+      "score": 13.939744,
+      "feedback": {
+        "relevant": {
+          "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+            "value": "yes",
+            "timestamp": 1723212212
+          }
+        }
+      },
+      "query": {
+        "bool": {
+          "must": {
+            "text_expansion": {
+              "ml.tokens": {
+                "model_id": ".elser_model_1",
+                "model_text": "source directory \ncode example"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_12341-4075-4962",
+      "text": "\nYour SDK needs to contain the following resources to help your users:\n\n\n\n* README.md\n* NPM metadata\n* [Contributor guidelines](https://cloud.ibm.com/docs/sdk-handbook?topic=sdk-handbook-documentationsdk-contributor-docs)\n* Code Samples\n* [Service documentation](https://cloud.ibm.com/docs/sdk-handbook?topic=sdk-handbook-documentation)\n\n\n\n\n\n\n\n Samples \n\nFor your JavaScript SDK, you will want some simple code samples and explanations of what each does. Linking out to the API reference documentation for more advanced use is strongly encouraged.\n\nAt minimum, the samples should be included in the README.md file. They should communicate how to install the library, and complete the basic operations provided by your API.\n\nThe samples should include JavaScript and TypeScript examples where applicable as well as simple installation and initialization instructions for Angular and React.",
+      "url": "https://cloud.ibm.com/docs/sdk-handbook?topic=sdk-handbook-node",
+      "score": 17.860685,
+      "feedback": {
+        "relevant": {
+          "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+            "value": "yes",
+            "timestamp": 1723212070
+          }
+        }
+      },
+      "query": {
+        "bool": {
+          "must": {
+            "text_expansion": {
+              "ml.tokens": {
+                "model_id": ".elser_model_1",
+                "model_text": "source directory \ncode for SDK"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_12346-3022-5172",
+      "text": "\nGiven that the overwhelming majority of SDK adopters will be using Xcode as their development environment, you will want to include your .xcodeproj directory for contributors to easily get started.\n\nYou should use the standard [development tools](https://cloud.ibm.com/docs/sdk-handbook?topic=sdk-handbook-developer-tools) for Swift to check style and code coverage.\n\n\n\n\n\n Standard features \n\n\n\n Authentication \n\nYou are not required to use a particular library to provide the authentication for your service.\n\nYour SDK must support all of the authentication methods supported by your service.\n\n\n\n\n\n Configuration \n\nYour SDK should allow various SDK configuration properties (e.g. service URL, authentication credentials) to be supplied through an external configuration mechanism (e.g. properties file or environment variables) in addition to a programmatic path. This will relieve SDK users from focusing on configuration-related functionality and will allow applications using your SDK to be flexible and avoid 'hard-coding' configuration information inside the application code.\n\nIf you build this capability into your SDK, you must document this mechanism clearly with examples.\n\n\n\n\n\n Requests \n\nMost networking operations in your Swift SDK should be asynchronous. DispatchGroups and other semaphores can be used for synchronous operations.\n\n\n\n\n\n Using swift-sdk-core \n\n[IBM swift-sdk-core](https://github.com/IBM/swift-sdk-core), formerly watson-developer-cloud/RestKit provides configuration and authentication support. You can use the existing functionality provided by this dependency in your SDK to leverage key capabilities in similar manners across the IBM Cloud.\n\n\n\n\n\n\n\n Documentation \n\nYour SDK is not useful if your audience cannot understand how to consume it in order to do the basic operations for your service. Your SDK needs to contain the following resources to help your users:\n\n\n\n* README.md\n* [Contributor Guidelines](https://cloud.ibm.com/docs/sdk-handbook?topic=sdk-handbook-documentationsdk-contributor-docs)\n* Code Samples\n* [Service documentation](https://cloud.ibm.com/docs/sdk-handbook?topic=sdk-handbook-documentation)",
+      "url": "https://cloud.ibm.com/docs/sdk-handbook?topic=sdk-handbook-swift",
+      "score": 17.012682,
+      "feedback": {
+        "relevant": {
+          "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+            "value": "yes",
+            "timestamp": 1723212059
+          }
+        }
+      },
+      "query": {
+        "bool": {
+          "must": {
+            "text_expansion": {
+              "ml.tokens": {
+                "model_id": ".elser_model_1",
+                "model_text": "source directory \ncode for SDK"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_12341-1239-2954",
+      "text": "\nThe releases of these SDKs should be published on [NPM](https://www.npmjs.com/). Your NPM package should be [scoped](https://docs.npmjs.com/creating-and-publishing-scoped-public-packagescreating-a-scoped-public-package) with [@ibm-cloud](https://www.npmjs.com/search?q=%40ibm-cloud), so that NPM users can find similar packages across NPM.\n\nYour SDK should follow the [semantic versioning best practices](https://cloud.ibm.com/docs/sdk-handbook?topic=sdk-handbook-distributiondistribution-semver).\n\n\n\n\n\n Community support \n\nAllow your users to find answers to their questions. Users should be able to report problems on GitHub by raising issues on your SDK repository. Having a public Slack channel is a great way to engage with users who have questions specific to their use cases.\n\n\n\n\n\n Style guidelines \n\nYou should follow the [Airbnb conventions](https://github.com/airbnb/javascript), with two spaces for indentation.\n\nYou should use the standard [development tools](https://cloud.ibm.com/docs/sdk-handbook?topic=sdk-handbook-devtools) for JavaScript to check style and code coverage.\n\n\n\n\n\n Streaming support \n\nIf your API takes fileType parameters, you should accept Node.js streams as an input type.\n\n\n\n\n\n Dependencies \n\nUse a well-defined, well-documented request library that includes browser support, like [axios](https://github.com/axios/axios), [superagent](https://github.com/visionmedia/superagent), or [node-fetch](https://github.com/node-fetch/node-fetch).\n\n\n\n\n\n Objects for arguments \n\nThe methods in your SDK should take a JSON object as an argument. This object will contain the options for the requests, instead of using positional parameters in the function definition.\n\n\n\n\n\n Async architecture",
+      "url": "https://cloud.ibm.com/docs/sdk-handbook?topic=sdk-handbook-node",
+      "score": 17.911348,
+      "feedback": {
+        "relevant": {
+          "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+            "value": "yes",
+            "timestamp": 1723212263
+          }
+        }
+      },
+      "query": {
+        "bool": {
+          "must": {
+            "text_expansion": {
+              "ml.tokens": {
+                "model_id": ".elser_model_1",
+                "model_text": "source directory \ncode for SDK"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "timestamp": 1723210431
+}

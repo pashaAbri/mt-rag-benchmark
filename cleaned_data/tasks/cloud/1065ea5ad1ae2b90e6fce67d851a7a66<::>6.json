@@ -1,0 +1,152 @@
+{
+  "task_id": "1065ea5ad1ae2b90e6fce67d851a7a66<::>6",
+  "conversation_id": "67",
+  "turn_id": 6,
+  "domain": "cloud",
+  "input": "Oops, no return result...",
+  "gold_answer": "If the action returns a result, set hasResult to true in the invokeAction call. The result of the action is returned in the reply dictionary.",
+  "enrichments": {
+    "Question Type": [
+      "Troubleshooting"
+    ],
+    "Multi-Turn": [
+      "Follow-up"
+    ],
+    "Answerability": [
+      "ANSWERABLE"
+    ]
+  },
+  "retrieved_contexts": [
+    {
+      "document_id": "ibmcld_10817-1342-3184",
+      "text": "\nUse the workspace file CocoaPods creates for your app to open the project in Xcode.\n\nAfter installation, open your project workspace. You might get the following warning when building: Use Legacy Swift Language Version\u201d (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly. This is caused if CocoaPods does not update the Swift version in the Pods project. To fix, select the Pods project and the IBM Cloud\u00ae Functions target. Go to Build Settings and change the setting Use Legacy Swift Language Version to no. Alternatively, you can add the following post installation instructions at the end of you Podfile:\n\npost_install do installer\ninstaller.pods_project.targets.each do target\ntarget.build_configurations.each do config\nconfig.build_settings['SWIFT_VERSION'] = '4.0'\nend\nend\nend\n\n\n\n\n\n Install mobile SDK with Carthage \n\nCreate a file in the project directory for your app and name it Cartfile. Put the following line in the file:\n\ngithub \"openwhisk/openwhisk-client-swift.git\" > 0.3.0 Or latest version\n\nFrom the command line, type carthage update --platform ios. Carthage downloads and builds the SDK, creates a directory that is called Carthage in the project directory for your app, and puts an OpenWhisk.framework file inside Carthage/build/iOS.\n\nYou must then add OpenWhisk.framework file to the embedded frameworks in your Xcode project\n\n\n\n\n\n Install mobile SDK from source code \n\n\n\n1. Download the [source code](https://github.com/apache/openwhisk-client-swift).\n2. Open the project by using the OpenWhisk.xcodeproj with Xcode. The project contains two schemes: \"OpenWhisk\" (targeted for iOS) and \"OpenWhiskWatch\" (targeted for watchOS 2).\n3.",
+      "url": "https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-pkg_mobile_sdk",
+      "score": 59.762127,
+      "feedback": {
+        "relevant": {
+          "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+            "value": "no",
+            "timestamp": 1723215873
+          }
+        }
+      },
+      "query": {
+        "bool": {
+          "must": {
+            "text_expansion": {
+              "ml.tokens": {
+                "model_id": ".elser_model_1",
+                "model_text": "|user|: Should we switch to a different method for installing the mobile SDK, considering the current approach's limitations?\n|assistant|: There are two methods for installing the IBM Cloud Functions SDK for mobile: using CocoaPods and building from the source code.  However, there are no mentioned limitations of the CocoaPods method that would require switching to a different method. \n|user|: carthage?\n|assistant|: Yes, you can also use Carthage as an alternative to CocoaPods for installing the IBM Cloud Functions SDK for mobile.  Note that this method requires manual addition of the framework to the Xcode project, unlike CocoaPods which automatically generates a workspace file for you to open the project in Xcode.\n|user|: any example of code for cart ahh sauce rather?\n|assistant|: Sure, here's an example of how to install the IBM Cloud Functions SDK for mobile using Carthage: 1. Create a file named `Cartfile` in the project directory for your app and add the following line: `github \"openwhisk/openwhisk-client-swift.git\" > 0.3.0 Or latest version` 2. From the command line, navigate to the project directory and type `carthage update --platform ios`. Carthage will download and build the SDK, creating a directory called `Carthage` in the project directory for your app, and putting an `OpenWhisk.framework` file inside `Carthage/build/iOS`. 3. Add the `OpenWhisk.framework` file to the embedded frameworks in your Xcode project. \n|user|: Excuse me, I meant source code example, rather.\n|assistant|: I apologize for the misunderstanding. Here's an example of how to install the IBM Cloud Functions SDK for mobile using Carthage from the source code:\n1. Clone the IBM Cloud Functions SDK for mobile repository from GitHub: `git clone https://github.com/openwhisk/openwhisk-client-swift.git`\n2. Navigate to the cloned repository: `cd openwhisk-client-swift`\n3. Install Carthage: `brew install carthage`\n4. Run `carthage bootstrap` to build the framework.\n5. Add the `OpenWhisk.framework` file to the embedded frameworks in your Xcode project.\n|user|: ok, you don't get it. this a part of clpud service? any additional charge?\n|assistant|: The IBM Cloud Functions SDK for mobile is available for public distribution and is free to use as part of the IBM Cloud Functions service.  However, please note that standard data usage charges for your mobile device may apply depending on your mobile carrier plan. In the Pricing Sheet page, type the monthly usage of the runtime and services of your app to find charges.  SDK for Node.js\u2122 charges for runtime by GB-hours $0.07 USD/GB-hour.\n|user|: Oops, no return result..."
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_10817-7-1802",
+      "text": "\nMobile SDK \n\nIBM Cloud\u00ae Functions provides a mobile SDK for iOS and watchOS devices that enables mobile apps to fire remote triggers and invoke remote actions. A version for Android is not available, so Android developers can use the OpenWhisk REST API directly. The mobile SDK is written in Swift 4 and supports iOS 11 and later releases. You can build the mobile SDK by using Xcode 9.\n\nThe mobile SDK is not supported for IAM-based namespaces. Use a Cloud Foundry-based namespace instead.\n\n\n\n Add the SDK to your app \n\nYou can install the mobile SDK by using CocoaPods, Carthage, or from the source directory.\n\n\n\n Install mobile SDK with CocoaPods \n\nThe IBM Cloud\u00ae Functions SDK for mobile is available for public distribution through CocoaPods. Assuming CocoaPods is installed, put the following lines into a file called Podfile inside the starter app project directory.\n\ninstall! 'cocoapods', :deterministic_uuids => false\nuse_frameworks!\n\ntarget 'MyApp' do\npod 'OpenWhisk', :git => 'https://github.com/apache/incubator-openwhisk-client-swift.git', :tag => '0.3.0'\nend\n\ntarget 'MyApp WatchKit Extension' do\npod 'OpenWhisk', :git => 'https://github.com/apache/incubator-openwhisk-client-swift.git', :tag => '0.3.0'\nend\n\nFrom the command line, type pod install. This command installs the SDK for an iOS app with a watchOS extension. Use the workspace file CocoaPods creates for your app to open the project in Xcode.\n\nAfter installation, open your project workspace. You might get the following warning when building: Use Legacy Swift Language Version\u201d (SWIFT_VERSION) is required to be configured correctly for targets which use Swift. Use the [Edit > Convert > To Current Swift Syntax\u2026] menu to choose a Swift version or use the Build Settings editor to configure the build setting directly.",
+      "url": "https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-pkg_mobile_sdk",
+      "score": 53.49403,
+      "feedback": {
+        "relevant": {
+          "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+            "value": "no",
+            "timestamp": 1723215869
+          }
+        }
+      },
+      "query": {
+        "bool": {
+          "must": {
+            "text_expansion": {
+              "ml.tokens": {
+                "model_id": ".elser_model_1",
+                "model_text": "|user|: Should we switch to a different method for installing the mobile SDK, considering the current approach's limitations?\n|assistant|: There are two methods for installing the IBM Cloud Functions SDK for mobile: using CocoaPods and building from the source code.  However, there are no mentioned limitations of the CocoaPods method that would require switching to a different method. \n|user|: carthage?\n|assistant|: Yes, you can also use Carthage as an alternative to CocoaPods for installing the IBM Cloud Functions SDK for mobile.  Note that this method requires manual addition of the framework to the Xcode project, unlike CocoaPods which automatically generates a workspace file for you to open the project in Xcode.\n|user|: any example of code for cart ahh sauce rather?\n|assistant|: Sure, here's an example of how to install the IBM Cloud Functions SDK for mobile using Carthage: 1. Create a file named `Cartfile` in the project directory for your app and add the following line: `github \"openwhisk/openwhisk-client-swift.git\" > 0.3.0 Or latest version` 2. From the command line, navigate to the project directory and type `carthage update --platform ios`. Carthage will download and build the SDK, creating a directory called `Carthage` in the project directory for your app, and putting an `OpenWhisk.framework` file inside `Carthage/build/iOS`. 3. Add the `OpenWhisk.framework` file to the embedded frameworks in your Xcode project. \n|user|: Excuse me, I meant source code example, rather.\n|assistant|: I apologize for the misunderstanding. Here's an example of how to install the IBM Cloud Functions SDK for mobile using Carthage from the source code:\n1. Clone the IBM Cloud Functions SDK for mobile repository from GitHub: `git clone https://github.com/openwhisk/openwhisk-client-swift.git`\n2. Navigate to the cloned repository: `cd openwhisk-client-swift`\n3. Install Carthage: `brew install carthage`\n4. Run `carthage bootstrap` to build the framework.\n5. Add the `OpenWhisk.framework` file to the embedded frameworks in your Xcode project.\n|user|: ok, you don't get it. this a part of clpud service? any additional charge?\n|assistant|: The IBM Cloud Functions SDK for mobile is available for public distribution and is free to use as part of the IBM Cloud Functions service.  However, please note that standard data usage charges for your mobile device may apply depending on your mobile carrier plan. In the Pricing Sheet page, type the monthly usage of the runtime and services of your app to find charges.  SDK for Node.js\u2122 charges for runtime by GB-hours $0.07 USD/GB-hour.\n|user|: Oops, no return result..."
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_04518-1426-3052",
+      "text": "\nuse_frameworks!\n\ntarget 'MyApp' do\npod 'BMSCore'\nend\n\nThen run the pod install command, and open the generated .xcworkspace file. To update to a newer release of BMSCore, use pod update BMSCore.\n\nFor more information about using CocoaPods, see the [CocoaPods Guides](https://guides.cocoapods.org/using/index.html).\n2. To install BMSCore by using Carthage, follow these [instructions](https://github.com/Carthage/Carthagegetting-started).\n\n\n\n1. Add the following line to your Cartfile:\n\ngithub \"ibm-bluemix-mobile-services/bms-clientsdk-swift-core\"\n2. Run the carthage update command.\n3. After the build is finished, add BMSCore.framework to your project by following [Step 3](https://github.com/Carthage/Carthagegetting-started) in the Carthage instructions.\n\nFor apps that are built with Swift 2.3, use the carthage update --toolchain com.apple.dt.toolchain.Swift_2_3 command. Otherwise, use the carthage update command.\n\n\n\n3. Import the BMSCore module.\n\nimport BMSCore\n4. Initialize the BMSClient class by using the following code.\n\nPlace the initialization code in the application(_:didFinishLaunchingWithOptions:) method of your app delegate, or in a location that works best for your project.\n\nBMSClient.sharedInstance.initialize(bluemixRegion: BMSClient.Region.usSouth) // Make sure that you point to your region\n\nYou must initialize the BMSClient with the bluemixRegion parameter. In the initializer, the bluemixRegion value specifies which IBM Cloud deployment you're using, for example, BMSClient.Region.usSouth, BMSClient.Region.unitedKingdom, or BMSClient.Region.sydney.\n\n\n\n\n\n\n\n Initializing your Cordova app \n\n\n\n1.",
+      "url": "https://cloud.ibm.com/docs/cli?topic=cli-sdk_BMSClient",
+      "score": 47.63039,
+      "feedback": {
+        "relevant": {
+          "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+            "value": "no",
+            "timestamp": 1723215865
+          }
+        }
+      },
+      "query": {
+        "bool": {
+          "must": {
+            "text_expansion": {
+              "ml.tokens": {
+                "model_id": ".elser_model_1",
+                "model_text": "|user|: Should we switch to a different method for installing the mobile SDK, considering the current approach's limitations?\n|assistant|: There are two methods for installing the IBM Cloud Functions SDK for mobile: using CocoaPods and building from the source code.  However, there are no mentioned limitations of the CocoaPods method that would require switching to a different method. \n|user|: carthage?\n|assistant|: Yes, you can also use Carthage as an alternative to CocoaPods for installing the IBM Cloud Functions SDK for mobile.  Note that this method requires manual addition of the framework to the Xcode project, unlike CocoaPods which automatically generates a workspace file for you to open the project in Xcode.\n|user|: any example of code for cart ahh sauce rather?\n|assistant|: Sure, here's an example of how to install the IBM Cloud Functions SDK for mobile using Carthage: 1. Create a file named `Cartfile` in the project directory for your app and add the following line: `github \"openwhisk/openwhisk-client-swift.git\" > 0.3.0 Or latest version` 2. From the command line, navigate to the project directory and type `carthage update --platform ios`. Carthage will download and build the SDK, creating a directory called `Carthage` in the project directory for your app, and putting an `OpenWhisk.framework` file inside `Carthage/build/iOS`. 3. Add the `OpenWhisk.framework` file to the embedded frameworks in your Xcode project. \n|user|: Excuse me, I meant source code example, rather.\n|assistant|: I apologize for the misunderstanding. Here's an example of how to install the IBM Cloud Functions SDK for mobile using Carthage from the source code:\n1. Clone the IBM Cloud Functions SDK for mobile repository from GitHub: `git clone https://github.com/openwhisk/openwhisk-client-swift.git`\n2. Navigate to the cloned repository: `cd openwhisk-client-swift`\n3. Install Carthage: `brew install carthage`\n4. Run `carthage bootstrap` to build the framework.\n5. Add the `OpenWhisk.framework` file to the embedded frameworks in your Xcode project.\n|user|: ok, you don't get it. this a part of clpud service? any additional charge?\n|assistant|: The IBM Cloud Functions SDK for mobile is available for public distribution and is free to use as part of the IBM Cloud Functions service.  However, please note that standard data usage charges for your mobile device may apply depending on your mobile carrier plan. In the Pricing Sheet page, type the monthly usage of the runtime and services of your app to find charges.  SDK for Node.js\u2122 charges for runtime by GB-hours $0.07 USD/GB-hour.\n|user|: Oops, no return result..."
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_10863-4041-5570",
+      "text": "\nresolve({ cloudant_result: 'SUCCESS' });\n}, 5000);\n});\n}\nShow more\n6. Click Save.\n7. Test your action by clicking Invoke and waiting for the following output to display.\n\nExample output\n\nResults:\n{\n\"cloudant_result\": \"SUCCESS\"\n}\n\nLogs:\n[\n\"2020-04-21T01:53:36.739565Z stdout: fake db access done. Resolving Promise...\"\n]\n\n\n\n\n\nYour db-access action is ready!\n\n\n\n\n\n Step 3: Create the ow-sdk-action actionow-sdk-action action \n\nThe ow-sdk-action action is a Node.js program that calls the other two actions: cos-access and db-access. When invoked, the ow-sdk-action action code acts as a custom sequence, first calling cos-access, then db-access, and finally cos-access again. The results of each action are stored in a variable that is called chained_action_results, which is then returned at the end. When the action is invoked, follow the code comments to see what is happening.\n\n\n\n1. From the Actions page, create a third action called ow-sdk-action.\n\n\n\n1. Name your action ow-sdk-action.\n2. Select the action-tutorial package.\n3. Select Node.js 10 for the runtime.\n4. Click Create.\n5. Paste in the following code example:\n\n/\n* main() will be run when you invoke this action\n* @param Cloud Functions actions accept a single parameter, which must be a JSON object.\n* @return The output of this action, which must be a JSON object.\n/\nconst openwhisk = require('openwhisk');\nconst ow = openwhisk();\n\nfunction main(params) {\n// for demonstration purposes, we keep track of the individual results of each action that we invoke in our",
+      "url": "https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-tutorial_action",
+      "score": 17.289219,
+      "feedback": {
+        "relevant": {
+          "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+            "value": "yes",
+            "timestamp": 1723215861
+          }
+        }
+      },
+      "query": {
+        "bool": {
+          "must": {
+            "text_expansion": {
+              "ml.tokens": {
+                "model_id": ".elser_model_1",
+                "model_text": "SDK actions return result"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_10817-5370-6915",
+      "text": "\nTo fire a remote trigger, you can call the fireTrigger method, and pass in parameters as needed by using a dictionary.\n\n// In this example we are firing a trigger when our location has changed by a certain amount\nvar locationParams = Dictionary<String, String>()\nlocationParams[\"payload\"] = \"{\"lat\":41.27093, \"lon\":-73.77763}\"\ndo {\ntry whisk.fireTrigger(name: \"locationChanged\", package: \"mypackage\", namespace: \"mynamespace\", parameters: locationParams, callback: {(reply, error) -> Void in\nif let error = error {\nprint(\"Error firing trigger (error.localizedDescription)\")\n} else {\nprint(\"Trigger fired!\")\n}\n})\n} catch {\nprint(\"Error (error)\")\n}\n\nIn the previous example, you are firing a trigger that is called locationChanged.\n\n\n\n\n\n Use mobile SDK actions that return a result \n\nIf the action returns a result, set hasResult to true in the invokeAction call. The result of the action is returned in the reply dictionary, for example:\n\ndo {\ntry whisk.invokeAction(name: \"actionWithResult\", package: \"mypackage\", namespace: \"mynamespace\", parameters: params, hasResult: true, callback: {(reply, error) -> Void in\nif let error = error {\n//do something\nprint(\"Error invoking Action (error.localizedDescription)\")\n} else {\nvar result = reply[\"result\"]\nprint(\"Got result (result)\")\n}\n})\n} catch {\nprint(\"Error (error)\")\n}\n\nBy default, the SDK returns only the activation ID and any result that is produced by the invoked action. To get metadata of the entire response object, which includes the HTTP response status code, use the following setting:",
+      "url": "https://cloud.ibm.com/docs/openwhisk?topic=openwhisk-pkg_mobile_sdk",
+      "score": 15.419876,
+      "feedback": {
+        "relevant": {
+          "f6ce971c-68d2-4c26-b1c0-477dd28a5181": {
+            "value": "yes",
+            "timestamp": 1723215848
+          }
+        }
+      },
+      "query": {
+        "bool": {
+          "must": {
+            "text_expansion": {
+              "ml.tokens": {
+                "model_id": ".elser_model_1",
+                "model_text": "SDK actions return result"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "timestamp": 1723215150
+}

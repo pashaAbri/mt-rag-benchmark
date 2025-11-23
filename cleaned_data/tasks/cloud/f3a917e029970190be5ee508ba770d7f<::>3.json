@@ -1,0 +1,74 @@
+{
+  "task_id": "f3a917e029970190be5ee508ba770d7f<::>3",
+  "conversation_id": "50",
+  "turn_id": 3,
+  "domain": "cloud",
+  "input": "Can I add a custom domain?",
+  "gold_answer": "To add a custom domain to IBM Cloud Internet Services, follow these steps:\n1. Go to the Overview page of your CIS instance.\n2. Under the Domain section, click the plus (+) icon next to your domain.\n3. choose the 'Connect domain' option in the revealed section.\n4. Complete the process by setting up DNS records and delegating domain management as instructed in the provided document.\nAfter adding a new domain, you can switch between your domains using the list menu in the Domain section to configure settings for each domain.\nWork with your Domain Name Service (DNS) provider or IBM Cloud DNS to register your custom domain. If the apps you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as .custom_domain.net. Note that custom domains are required to use Ingress with private ALBs.",
+  "enrichments": {
+    "Question Type": [
+      "Explanation"
+    ],
+    "Multi-Turn": [
+      "Clarification"
+    ],
+    "Answerability": [
+      "ANSWERABLE"
+    ]
+  },
+  "retrieved_contexts": [
+    {
+      "document_id": "ibmcld_04185-0-765",
+      "text": "\n\n\n\n\n\n\n  Adding domains to your CIS instance \n\nIBM Cloud\u00ae Internet Services supports multiple domains with the Standard Next and Enterprise Tier plans.\n\nTo add an additional domain to your CIS instance, go to the Overview page. Under the Domain section, select the plus (+) icon next to your domain. This reveals a section to connect an additional domain. Follow the steps in this section to complete adding a new domain:\n\n\n\n*  Connect domain\n*  Set up DNS records\n*  Delegate domain management\n\n\n\nAfter adding a new domain, use the list menu in the Domain section to switch between your domains. The Domain section is located on the Overview page and at the beginning of every page. Switching between domains allows you to configure settings for each domain.\n\n\n\n\n\n\n",
+      "url": "https://cloud.ibm.com/docs/cis?topic=cis-multi-domain-support",
+      "score": 22.94809,
+      "feedback": {
+        "relevant": {
+          "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+            "value": "yes",
+            "timestamp": 1723070480
+          }
+        }
+      },
+      "query": {
+        "bool": {
+          "must": {
+            "text_expansion": {
+              "ml.tokens": {
+                "model_id": ".elser_model_1",
+                "model_text": "Adding domains to your CIS instance"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_05980-10127-11813",
+      "text": "\nTo register your custom domain, work with your Domain Name Service (DNS) provider or [IBM Cloud DNS](https://cloud.ibm.com/docs/dns?topic=dns-getting-started). If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as .custom_domain.net. Note that domains are limited to 130 characters or fewer in Kubernetes version 1.20 or later.\n2. Define an alias for your custom domain by specifying the IBM-provided subdomain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run ibmcloud ks cluster get --cluster <cluster_name> and look for the Ingress subdomain field.\n\nSpecifying the IBM-provided subdomain as a CNAME is required for automatic health checks to remove any failing IPs from the DNS response, and to ensure that your custom domain updates when you add or remove ALBs.\n\n\n\n\n\n\n\n Creating custom domains for private ALBs \n\nFollow the steps to create a custom domain for private ALBs. Note that custom domains are required to use Ingress with private ALBs.\n\nIf you have a classic cluster with only a private VLAN, you must first configure your own [DNS service that is available on your private network](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).\n\n\n\n1. Create a custom domain through your DNS service provider. Note that Ingress URLs must be 130 characters or fewer.\n2. Map your custom domain to the private ALBs by adding their IP addresses as A records (classic clusters) or their VPC hostname as a CNAME (VPC clusters). To find the ALB IP addresses (classic) or hostname (VPC), run ibmcloud ks ingress alb ls -c <cluster_name_or_ID>.",
+      "url": "https://cloud.ibm.com/docs/containers?topic=containers-managed-ingress-setup",
+      "score": 14.527828,
+      "feedback": {
+        "relevant": {
+          "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+            "value": "yes",
+            "timestamp": 1723071001
+          }
+        }
+      },
+      "query": {
+        "bool": {
+          "must": {
+            "text_expansion": {
+              "ml.tokens": {
+                "model_id": ".elser_model_1",
+                "model_text": "Custom domain"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "timestamp": 1723070321
+}

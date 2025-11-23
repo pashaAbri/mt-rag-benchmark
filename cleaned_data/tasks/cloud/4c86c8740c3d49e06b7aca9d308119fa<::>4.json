@@ -1,0 +1,50 @@
+{
+  "task_id": "4c86c8740c3d49e06b7aca9d308119fa<::>4",
+  "conversation_id": "95",
+  "turn_id": 4,
+  "domain": "cloud",
+  "input": "what are some practices for IBM Cloud Kubernetes Service do you recommend?",
+  "gold_answer": "Here are some best practices for using IBM Cloud Kubernetes Service: 1. Keep your cluster up-to-date: Regularly update your cluster to avoid getting into an unsupported state and experiencing operational impact. 2. Ensure compatibility between master and worker nodes: Your worker nodes can't run a later major.minor Kubernetes version than the master. They can be up to two versions behind the master version (n-2). 3. Update worker nodes for each patch version: Unlike the master, you must update your workers for each patch version. 4. Review the version archive instructions: If your cluster runs an unsupported Kubernetes version, follow the version archive instructions.",
+  "enrichments": {
+    "Question Type": [
+      "Opinion"
+    ],
+    "Multi-Turn": [
+      "Follow-up"
+    ],
+    "Answerability": [
+      "ANSWERABLE"
+    ]
+  },
+  "retrieved_contexts": [
+    {
+      "document_id": "ibmcld_06209-1393-3390",
+      "text": "\nIf your cluster runs an unsupported Kubernetes version, follow the [version archive instructions](https://cloud.ibm.com/docs/containers?topic=containers-cs_versionsk8s_version_archive). To avoid getting in an unsupported state and operational impact, keep your cluster up-to-date.\n\nCan my worker nodes run a later version than the master?\n: Your worker nodes can't run a later major.minor Kubernetes version than the master. Additionally, your worker nodes can be only up to two versions behind the master version (n-2). First, [update your master](https://cloud.ibm.com/docs/containers?topic=containers-updateupdate_master) to the latest Kubernetes version. Then, [update the worker nodes](https://cloud.ibm.com/docs/containers?topic=containers-updateworker_node) in your cluster.\n\nWorker nodes can run later patch versions than the master, such as patch versions that are specific to worker nodes for security updates.\n\nHow are patch updates applied?\n: By default, patch updates for the master are applied automatically over the course of several days, so a master patch version might show up as available before it is applied to your master. The update automation also skips clusters that are in an unhealthy state or have operations currently in progress. Occasionally, IBM might disable automatic updates for a specific master fix pack, such as a patch that is only needed if a master is updated from one minor version to another. In any of these cases, you can [check the versions change log](https://cloud.ibm.com/docs/containers?topic=containers-changelog) for any potential impact and choose to safely use the ibmcloud ks cluster master update[command](https://cloud.ibm.com/docs/containers?topic=containers-kubernetes-service-clics_cluster_update) yourself without waiting for the update automation to apply.\n\nUnlike the master, you must update your workers for each patch version.\n\nWhat happens during the master update?\n: Your master is highly available with three replica master pods.",
+      "url": "https://cloud.ibm.com/docs/containers?topic=containers-update",
+      "score": 50.76136,
+      "feedback": {
+        "relevant": {
+          "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+            "value": "yes",
+            "timestamp": 1724987437
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "|user|: How can I update the cluster master?\n|assistant|: To update the cluster master, you should follow these steps:\n1. Check if your cluster is unsupported by reviewing the State field in the output of the `ibmcloud ks cluster ls` command or in the IBM Cloud Kubernetes Service console.\n2. If your cluster is unsupported, you need to create a new cluster and deploy your apps to the new cluster. Then, you can delete the unsupported cluster.\n3. Before updating to the latest version, make sure to update deprecated clusters to a supported version that is one or two behind the current version. For example, you can update to version 1.21 or 1.22 before updating to the latest version, 1.23.\n4. If the worker nodes run a version two or more behind the master, update them to the same version as the master to avoid issues with your pods.\n5. Finally, update the cluster using the instructions provided in the IBM Cloud documentation: <https://cloud.ibm.com/docs/containers?topic=containers-updateupdate>.\nKeep in mind that updating a cluster to a new version may impact deployed apps, so it's essential to prepare accordingly.\n|user|: CIS Kubernetes Benchmark\n|assistant|: The CIS Kubernetes Benchmark is a framework of specific steps to configure Kubernetes more securely and with standards that are commensurate to various industry regulations. It is published by the Center for Internet Security (CIS). When a new Kubernetes version is released, IBM engineers compare the default configuration of a cluster that runs that Kubernetes version against the benchmark and publishes the results in the IBM Cloud documentation. The benchmark recommendations are provided by the Center for Internet Security, and it covers recommendations for master components, etcd, control plane configurations, worker nodes, and policies such as for users, network, and pod security.\n|user|: Can I use IBM Cloud\u00ae Kubernetes Service clusters only in USA?\n|assistant|: No, you can deploy IBM Cloud\u00ae Kubernetes Service clusters worldwide, not just in the USA. Cloud Kubernetes Service is available in a subset of these locations, including worldwide multizone regions and single zone regions.\n|user|: what are some practices for IBM Cloud Kubernetes Service do you recommend?"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "timestamp": 1724986953
+}

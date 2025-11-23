@@ -1,0 +1,134 @@
+{
+  "task_id": "1c041ce47a81941c26899fdf08bde961<::>4",
+  "conversation_id": "26",
+  "turn_id": 4,
+  "domain": "cloud",
+  "input": "can you give more details about the query API?",
+  "gold_answer": "Watson Query provides REST APIs that you can use to interact with your instance. When you submit a search from the product user interface, your text is passed as a natural language query value to the Query API. You can use operators when you write queries to submit to Discovery by using the Query API. The API coordination node can make a request directly to servers that host that data rather than needing to combine responses from many servers. The API coordination node is also free from buffering the response since it has no combination step to carry out. As a result, the data arrives at the client more quickly.",
+  "enrichments": {
+    "Question Type": [
+      "Summarization"
+    ],
+    "Multi-Turn": [
+      "Clarification"
+    ],
+    "Answerability": [
+      "ANSWERABLE"
+    ]
+  },
+  "retrieved_contexts": [
+    {
+      "document_id": "ibmcld_06308-0-500",
+      "text": "\n\n\n\n\n\n\n  APIs and SDKs \n\nWatson Query provides REST APIs that you can use to interact with your instance.\n\nTo access data, view and create database objects, administer, and monitor your service, use the [Watson Query APIs](https://cloud.ibm.com/apidocs/data-virtualization-on-cloud).\n\nThe following Watson Query SDKs are supported by IBM:\n\n\n\n*  [Go SDK](https://github.com/IBM/data-virtualization-on-cloud-go-sdk/)\n*  [Java SDK](https://github.com/IBM/data-virtualization-on-cloud-java-sdk/)\n\n\n\n\n\n\n\n\n\n",
+      "url": "https://cloud.ibm.com/docs/data-virtualization?topic=data-virtualization-con_rest_api",
+      "score": 15.024299,
+      "feedback": {
+        "relevant": {
+          "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+            "value": "yes",
+            "timestamp": 1724210488
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "query API"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_07094-7-1956",
+      "text": "\nDefault query settings \n\nLearn about how the search query is configured for each project type by default.\n\nWhen you submit a search from the product user interface, your text is passed as a natural language query value to the Query API. Other parameters that you can define when you use the API are assigned default values for queries that are made from the user interface. The following tables explain which values are specified by default for each project type. For more information about the Query API, see [Query reference](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-query-reference).\n\nYou can override some of the default values by using improvement tools in the user interface. For example, you can use the Search results tool to change parameters such as passages.enabled. For more information, see [Changing the result content](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-query-resultsquery-results-content).\n\nThe enrichments that are applied to your data autmoatically differ by project type. For more information, see [Default project settings](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-projectsprojects-include-project-defaults-reuse).\n\n\n\n Default query settings \n\n\n\nDefault query settings\n\n Query default Document Retrieval Document Retrieval for Contracts \n\n aggregation [term(enriched_text.entities.text,name:entities)] [term(enriched_html.contract. elements.categories.label,count:25,name:categories)] \n count 10 10 \n highlight false false \n passages.characters 200 200 \n passages.count 10 10 \n passages.enabled true true \n passages.fields [\"text\", \"title\"] [\"text\", \"title\"] \n passages.find_answers false false \n passages.max_answers_per_passage 1 1 \n passages.max_per_document 1 1 \n passages.per_document true true \n return [] [] \n spelling_suggestions false true \n sort \"\" \"\" \n table_results.count 10 10 \n table_results.enabled false true \n table_results.per_document 0 0",
+      "url": "https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-query-defaults",
+      "score": 14.2016735,
+      "feedback": {
+        "relevant": {
+          "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+            "value": "yes",
+            "timestamp": 1724210490
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "query API"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_07096-7-1899",
+      "text": "\nQuery operators \n\nYou can use operators when you write queries to submit to Discovery by using the Query API.\n\nThe types of operators that are supported differ by query type:\n\n\n\n* [Natural language queries](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-query-operatorsnlq-operator)\n* [Discovery Query Language (DQL) queries](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-query-operatorsdql-operators)\n\n\n\n\n\n Natural Language Query (NLQ) operator \n\nThe natural_language_query parameter accepts a string value.\n\n\n\n \"\" (Phrase query) \n\nUse quotation marks to emphasize a single word or phrase in the query that is most important to match. For example, the following request boosts documents that contain the term \u201cnomination\u201d in them.\n\n{\n\"natural_language_query\":\"What is the process for \"nomination\" of bonds?\"\n}\n\nSpecifying a quoted phrase does not prevent documents without the phrase from being returned. It merely gives more weight to documents with the phrase than those without it. For example, the query results might also contain documents that mention \u201cbonds\u201d or \u201cprocess\u201d and do not contain the word \u201cnomination\u201d.\n\nThe following request boosts the phrase \u201cchange in monetary policy\u201d and also matches \u201cchange\u201d or \u201cmonetary\u201d or \u201cpolicy\u201d.\n\n{\n\"natural_language_query\":\"\"change in monetary policy\"\"\n}\n\nSingle quotation marks (') are not supported. You cannot use wildcards (*) in phrase queries.\n\n\n\n\n\n\n\n Discovery Query Language (DQL) operators \n\nOperators are the separators between different parts of a query.\n\n\n\n . (JSON delimiter) \n\nThis delimiter separates the levels of hierarchy in the JSON schema\n\nFor example, the following query argument identifies the section of the enriched_text object that contains entities and the text recognized as an entity.\n\nenriched_text.entities.text\n\nThe JSON representation of this section looks as follows:\n\nZoom\n\n!",
+      "url": "https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-query-operators",
+      "score": 14.247873,
+      "feedback": {
+        "relevant": {
+          "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+            "value": "yes",
+            "timestamp": 1724210492
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "query API"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_00512-5160-7348",
+      "text": "\nSee also a brief overview of the underlying querying mechanism that you use to select the query mechanism that is best for each query your application needs to make.\n\n\n\n Global querying \n\nYou can make global queries to the following index types:\n\n\n\n* IBM Cloudant Query\n* Views\n* Search\n\n\n\nWhen you make a global query, the database must perform a scatter-gather operation across all data in the database. This action means making requests of many individual database servers. The API coordination node receives the responses from all these servers and combines them to form a single response to the client. This response might involve buffering data and delaying the response to the client if, for example, data requires sorting.\n\n\n\n\n\n Partition querying \n\nYou can make partition queries to the following index types:\n\n\n\n* IBM Cloudant Query\n* Views\n* Search\n\n\n\nWhen you make a partition query, the database can query just the data within a single partition. A partition's data resides in just one shard (with three replicas). The API coordination node can make a request directly to servers that host that data rather than needing to combine responses from many servers. The API coordination node is also free from buffering the response since it has no combination step to carry out. As a result, the data arrives at the client more quickly.\n\nAs the size of a database increases, the number of shards must also increase. The increase in shards directly increases the number of queries that the API coordination node needs to make to servers that host data when you use global queries. However, when you use partition queries, the number of shards has no effect on the number of servers the API coordination node needs to contact. As this number stays small, increasing data size has no effect on query latency, unlike global queries.\n\n\n\n\n\n\n\n Partitioned databases tutorials \n\nYou can see two examples of using partitioned databases:\n\n\n\n1. Read about [partitioned databases and Node.js](https://blog.cloudant.com/2019/05/24/Partitioned-Databases-with-Cloudant-Libraries.html) in this blog article that includes how to create a partitioned database, search, views, and a global index.\n2.",
+      "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-database-partitioning",
+      "score": 14.303577,
+      "feedback": {
+        "relevant": {
+          "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+            "value": "yes",
+            "timestamp": 1724210495
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "query API"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "timestamp": 1724210082
+}

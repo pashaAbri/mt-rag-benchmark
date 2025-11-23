@@ -1,0 +1,219 @@
+{
+  "task_id": "5815bb4a99e2a0d8a986348da4c49083<::>6",
+  "conversation_id": "100",
+  "turn_id": 6,
+  "domain": "cloud",
+  "input": "Are there serverless instances?",
+  "gold_answer": "Yes, there are serverless instances in the context of IBM Analytics Engine. The IBM Analytics Engine Standard serverless plan for Apache Spark offers a new consumption model using Apache Spark. An Analytics Engine serverless instance does not consume any resources when no workloads are running. When you submit Spark applications, Spark clusters are created in seconds and are spun down as soon as the applications finish running.",
+  "enrichments": {
+    "Multi-Turn": [
+      "Follow-up"
+    ],
+    "Question Type": [
+      "Factoid",
+      "Summarization"
+    ],
+    "Answerability": [
+      "ANSWERABLE"
+    ]
+  },
+  "retrieved_contexts": [
+    {
+      "document_id": "ibmcld_12498-8087-10171",
+      "text": "\nAnd, ultimately, it makes it a little more efficient for the management of your secrets while you're going through your DevOps operations.\n\nThank you. If you have questions, please drop us a line. If you want to see more videos like this in the future, please like and subscribe, and don't forget you can grow your skills and earn a badge with IBM Cloud Labs which, are free browser-based interactive Kubernetes labs.\n\n\n\n\n\n Working with secrets of different types \n\nSecrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a\n\ndynamic secrethas its expiration date and time enforced when its secret data is read or accessed.\n\nSecrets Manager further classifies static and dynamic secrets by their general purpose or function. For example, each secret type is identified by programmatic name, such as username_password. If you're looking to manage your secret by using the Secrets Manager API or CLI, you can use these programmatic names to run operations on secrets according to their type.\n\nReview the following table to understand the types of static and dynamic secrets that you can create and manage with the service.\n\n\n\nTable 1. Secret types in Secrets Manager\n\n Type Programmatic name Kind Description \n\n [Arbitrary secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-arbitrary-secrets) arbitrary Static Arbitrary pieces of sensitive data, including any type of structured or unstructured data, that you can use to access an application or resource. \n [IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials) iam_credentials* Dynamic A dynamically generated service ID and API key that can be used to access an IBM Cloud service that requires IAM authentication. \n [Key-value secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-key-value) kv Static Pieces of sensitive data that is structured in JSON format that you can use to access an application or resource.",
+      "url": "https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-what-is-secret",
+      "score": 38.981373,
+      "feedback": {
+        "relevant": {
+          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+            "value": "no",
+            "timestamp": 1723567298
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?\n|assistant|: Both dynamic and static secrets have their own ways of protecting against vulnerabilities. Secrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a dynamic secret has its expiration date and time enforced when its secret data is read or accessed. The static code scan stage runs a static code analyzer tool on the specified app repo codebases. The static-scan task runs a scan on the specified repos. The Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n|user|: Do they both rotate secrets?\n|assistant|: Both dynamic and static secrets can have their expiration dates enforced, leading to the rotation of the secrets. The key difference lies in when this enforcement occurs. For static secrets, the expiration date and time are enforced at secret creation or rotation time. In contrast, for dynamic secrets, the expiration date and time are enforced when the secret data is read or accessed. When trying to rotate a secret, the request's success depends on whether the previous version is locked or not. Automatic rotation is available only for secrets that are generated by Secrets Manager. With IBM Cloud\u00ae Secrets Manager, you can design a strategy for rotating your secrets and sensitive data.\n|user|: What is an IAM credential?\n|assistant|: IBM Cloud Identity and Access Management (IAM) service securely authenticates users and controls access to all resources consistently in the IBM Cloud Platform. An IAM (Identity and Access Management) credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. These credentials allow you to authenticate your identity and control your access to various IBM Cloud resources.\n|user|: Can I track my users?\n|assistant|: You can use the Activity Tracker service to track how users and applications interact. The IBM Cloud Activity Tracker service records user-initiated activities that change the state of a service in IBM Cloud. You can use this service to investigate abnormal activity and critical actions and to comply with regulatory audit requirements. Tracking Instances with IBM Cloud Activity Tracker and Access Management (IAM) service allows you to securely authenticate users and control access to all resources consistently in the IBM Cloud Platform. \n|user|: Are there serverless instances?"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_07578-1215486-1217535",
+      "text": "\nThere are several different strategies that you might use to approach secret groups. For more information and recommendations, see [Best practices for organizing secrets and assigning access](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-best-practices-organize-secrets).\n* What is an IAM credential?\n\nAn IAM credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. For more information about creating and storing IAM credentials, see [Creating IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials).\n* What happens when I rotate my secret?\n\nWhen a secret is rotated, a new version of its value becomes available for use. You can choose to manually add a value or automatically generate one at regular intervals by enabling automatic rotation.\n\nFor more information about secret rotation, see [Rotating secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-manual-rotation).\n* What happens when my secret expires?\n\nIn some secret types such as arbitrary or username_password, you can set the date and time when your secret expires. When the secret reaches its expiration date, it transitions to a Destroyed state. When the transition happens, the value that is associated with the secret is no longer recoverable. The transition to the Destroyed state can take up to a couple of minutes after the secret expires, or a lock that prevented expiration is removed.\n\nFor more information about how your information is protected, see [Securing your data](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-mng-data).\n* What are differences between the Reader and SecretsReader roles?\n\nBoth the Reader and SecretsReader roles help you to assign read-only access to Secrets Manager resources.\n\n\n\n* As a reader, you can browse a high-level view of secrets in your instance.",
+      "url": "https://cloud.ibm.com/docs/faqs",
+      "score": 37.692577,
+      "feedback": {
+        "relevant": {
+          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+            "value": "no",
+            "timestamp": 1723567290
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?\n|assistant|: Both dynamic and static secrets have their own ways of protecting against vulnerabilities. Secrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a dynamic secret has its expiration date and time enforced when its secret data is read or accessed. The static code scan stage runs a static code analyzer tool on the specified app repo codebases. The static-scan task runs a scan on the specified repos. The Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n|user|: Do they both rotate secrets?\n|assistant|: Both dynamic and static secrets can have their expiration dates enforced, leading to the rotation of the secrets. The key difference lies in when this enforcement occurs. For static secrets, the expiration date and time are enforced at secret creation or rotation time. In contrast, for dynamic secrets, the expiration date and time are enforced when the secret data is read or accessed. When trying to rotate a secret, the request's success depends on whether the previous version is locked or not. Automatic rotation is available only for secrets that are generated by Secrets Manager. With IBM Cloud\u00ae Secrets Manager, you can design a strategy for rotating your secrets and sensitive data.\n|user|: What is an IAM credential?\n|assistant|: IBM Cloud Identity and Access Management (IAM) service securely authenticates users and controls access to all resources consistently in the IBM Cloud Platform. An IAM (Identity and Access Management) credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. These credentials allow you to authenticate your identity and control your access to various IBM Cloud resources.\n|user|: Can I track my users?\n|assistant|: You can use the Activity Tracker service to track how users and applications interact. The IBM Cloud Activity Tracker service records user-initiated activities that change the state of a service in IBM Cloud. You can use this service to investigate abnormal activity and critical actions and to comply with regulatory audit requirements. Tracking Instances with IBM Cloud Activity Tracker and Access Management (IAM) service allows you to securely authenticate users and control access to all resources consistently in the IBM Cloud Platform. \n|user|: Are there serverless instances?"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_16727-1218119-1220168",
+      "text": "\nThere are several different strategies that you might use to approach secret groups. For more information and recommendations, see [Best practices for organizing secrets and assigning access](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-best-practices-organize-secrets).\n* What is an IAM credential?\n\nAn IAM credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. For more information about creating and storing IAM credentials, see [Creating IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials).\n* What happens when I rotate my secret?\n\nWhen a secret is rotated, a new version of its value becomes available for use. You can choose to manually add a value or automatically generate one at regular intervals by enabling automatic rotation.\n\nFor more information about secret rotation, see [Rotating secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-manual-rotation).\n* What happens when my secret expires?\n\nIn some secret types such as arbitrary or username_password, you can set the date and time when your secret expires. When the secret reaches its expiration date, it transitions to a Destroyed state. When the transition happens, the value that is associated with the secret is no longer recoverable. The transition to the Destroyed state can take up to a couple of minutes after the secret expires, or a lock that prevented expiration is removed.\n\nFor more information about how your information is protected, see [Securing your data](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-mng-data).\n* What are differences between the Reader and SecretsReader roles?\n\nBoth the Reader and SecretsReader roles help you to assign read-only access to Secrets Manager resources.\n\n\n\n* As a reader, you can browse a high-level view of secrets in your instance.",
+      "url": "https://cloud.ibm.com/docs?tab=faqs",
+      "score": 37.692577,
+      "feedback": {
+        "relevant": {
+          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+            "value": "no",
+            "timestamp": 1723567284
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?\n|assistant|: Both dynamic and static secrets have their own ways of protecting against vulnerabilities. Secrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a dynamic secret has its expiration date and time enforced when its secret data is read or accessed. The static code scan stage runs a static code analyzer tool on the specified app repo codebases. The static-scan task runs a scan on the specified repos. The Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n|user|: Do they both rotate secrets?\n|assistant|: Both dynamic and static secrets can have their expiration dates enforced, leading to the rotation of the secrets. The key difference lies in when this enforcement occurs. For static secrets, the expiration date and time are enforced at secret creation or rotation time. In contrast, for dynamic secrets, the expiration date and time are enforced when the secret data is read or accessed. When trying to rotate a secret, the request's success depends on whether the previous version is locked or not. Automatic rotation is available only for secrets that are generated by Secrets Manager. With IBM Cloud\u00ae Secrets Manager, you can design a strategy for rotating your secrets and sensitive data.\n|user|: What is an IAM credential?\n|assistant|: IBM Cloud Identity and Access Management (IAM) service securely authenticates users and controls access to all resources consistently in the IBM Cloud Platform. An IAM (Identity and Access Management) credential is a type of dynamic secret that you can use to access an IBM Cloud resource that requires IAM authentication. When you create an IAM credential through Secrets Manager, the service creates a service ID and an API key on your behalf. These credentials allow you to authenticate your identity and control your access to various IBM Cloud resources.\n|user|: Can I track my users?\n|assistant|: You can use the Activity Tracker service to track how users and applications interact. The IBM Cloud Activity Tracker service records user-initiated activities that change the state of a service in IBM Cloud. You can use this service to investigate abnormal activity and critical actions and to comply with regulatory audit requirements. Tracking Instances with IBM Cloud Activity Tracker and Access Management (IAM) service allows you to securely authenticate users and control access to all resources consistently in the IBM Cloud Platform. \n|user|: Are there serverless instances?"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_00096-7-2347",
+      "text": "\nExplore creating serverless instances and submitting applications using the CLI \n\nLearn how to use the IBM Analytics Engine CLI to create the services that you need to create and manage a serverless instance, and submit and monitor your Spark applications.\n\nYou create a serverless instance by selecting the IBM Analytics Engine Standard serverless plan. When a serverless instance is provisioned, an Apache Spark cluster is created, which you can customize with library packages of your choice, and is where you run your Spark applications.\n\n\n\n Objectives \n\nYou will learn how to install and set up the following services and components that you will need to use the CLI:\n\n\n\n* An IBM Cloud Object Storage instance in which your IBM Analytics Engine instance stores custom application libraries and Spark history events.\n* A Object Storage bucket for application files and data files.\n* An IBM Analytics Engine serverless instance. This instance is allocated compute and memory resources on demand whenever Spark workloads are deployed. When an application is not in running state, no computing resources are allocated to the instance. The price is based on the actual usage of resources consumed by the instance, billed on a per second basis.\n* Logging service to help you to troubleshoot issues that might occur in the IBM Analytics Engine instance and submitted application, as well as to view any output generated by your application. When you run applications with logging enabled, logs are forwarded to an IBM Log Analysis service where they are indexed, enabling full-text search through all generated messages and convenient querying based on specific fields.\n\n\n\n\n\n\n\n Before you begin \n\nTo start using the the Analytics Engine V3 CLI you need:\n\n\n\n* An IBM Cloud\u00ae account.\n* To install the IBM Cloud CLI. See [Getting started with the IBM Cloud CLI](https://cloud.ibm.com/docs/cli?topic=cli-getting-started) for the instructions to download and install the CLI.\n\n\n\nNow you can start using the Analytics Engine V3 CLI. You must follow the instructions in steps 1 and 2 to install the required services before you start with step 3 to upload and submit Spark applications. Step 4 shows you how to create a logging instance and enable logging. Step 5 shows you how to delete an Analytics Engine instance, although this step is optional.",
+      "url": "https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-using-cli",
+      "score": 25.54247,
+      "feedback": {
+        "relevant": {
+          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+            "value": "yes",
+            "timestamp": 1723567318
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "What is a serverless Spark instance"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_00007-7-2159",
+      "text": "\nGetting started tutorial \n\nIBM Analytics Engine Serverless instance is allocated to compute and memory resources on demand when Spark workloads are deployed. When an application is not in running state, no computing resources are allocated to the IBM Analytics Engine instance. Pricing is based on the actual amount of resources consumed by the instance, billed on a per second basis.\n\n\n\n* [Serverless instance architecture and concepts](https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-serverless-architecture-concepts)\n* [Provisioning a serverless instance](https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-provisioning-serverless)\n\n\n\n\n\n Getting started using serverless IBM Analytics Engine instances \n\nThe IBM Analytics Engine Standard Serverless plan for Apache Spark offers the ability to spin up IBM Analytics Engine serverless instances within seconds, customize them with library packages of your choice, and run your Spark workloads.\n\nCurrently, you can create IBM Analytics Engine serverless instances only in the US South region.\n\n\n\n\n\n Before you begin \n\nTo start running Spark applications in IBM Analytics Engine, you need:\n\n\n\n* An IBM Cloud\u00ae account.\n* Instance home storage in IBM Cloud Object Storage that is referenced from the IBM Analytics Engine instance. This storage is used to store Spark History events, which are created by your applications and any custom library sets, which need to be made available to your Spark applications.\n* An IBM Analytics Engine serverless instance.\n\n\n\n\n\n\n\n Provision an instance and create a cluster \n\nTo provision an IBM Analytics Engine instance:\n\n\n\n1. Get a basic understanding of the architecture and key concepts. See [Serverless instance architecture and concepts](https://cloud.ibm.com/docs/analyticsengine?-serverless-architecture-concepts).\n2. [Provision a serverless instance](https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-provisioning-serverless)\n\n\n\n\n\n\n\n Run applications \n\nTo run Spark applications in a serverless IBM Analytics Engine instance:\n\n\n\n1. Optionally, give users access to the provisioned instance to enable collaboration.",
+      "url": "https://cloud.ibm.com/docs/AnalyticsEngine",
+      "score": 24.451962,
+      "feedback": {
+        "relevant": {
+          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+            "value": "yes",
+            "timestamp": 1723567323
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "What is a serverless Spark instance"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_00060-7-1693",
+      "text": "\nRetrieving details of a serverless instance \n\nYou can retrieve information, like the instance ID (or GUID) and the provisioning state of an IBM Analytics Engine serverless instance from the instance details. You need the instance ID to use the Spark application REST API and the Livy batch APIs.\n\nYou can retrieve the details by:\n\n\n\n* [Using the IBM Cloud CLI](https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-retrieve-instance-detailsretrieve-guid-cli)\n* [Using the IBM Cloud REST API](https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-retrieve-instance-detailsretrieve-guid-api)\n\n\n\n\n\n Accessing instance details by using the IBM Cloud CLI \n\nTo get the details of an instance:\n\n\n\n1. List all of the created serverless instances:\n\n$ ibmcloud resource service-instances --service-name ibmanalyticsengine\n\nThis call retrieves the instances of type service_instance in all resource groups in all locations for your account.\n\nExample response:\n\nName Location State Type Resource Group ID\nserverless-instance us-south active service_instance 65xxxxxxxxxxxxxxxa3fd\n2. Enter the following command with the server instance name of your instance to view the instance details:\n\n$ ibmcloud resource service-instance \"Analytics Engine-xyz\"\n\nThis retrieves your instance from the resource groups under your account.\n\nExample response:\n\nName: Analytics Engine-xyz\nID:\ncrn:v1:staging:public:ibmanalyticsengine:us-south:a/XXXXX:XXXXX::\nGUID: XXXXX\nLocation: us-south\nService Name: ibmanalyticsengine\nService Plan Name: standard-serverless-spark\nResource Group Name: Default\nState: active\nType: service_instance\nSub Type:\nCreated at: 2021-01-06T07:49:12Z\nCreated by: XXXXX",
+      "url": "https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-retrieve-instance-details",
+      "score": 25.063637,
+      "feedback": {
+        "relevant": {
+          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+            "value": "yes",
+            "timestamp": 1723567327
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "What is a serverless Spark instance"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "document_id": "ibmcld_16727-107922-110226",
+      "text": "\n* Port 8443 Knox\n* Port 22 SSH\n* Port 9443 Ambari\n\n\n\n* What is IBM Analytics Engine serverless?\n\nThe IBM Analytics Engine Standard serverless plan for Apache Spark offers a new consumption model using Apache Spark. An Analytics Engine serverless instance does not consume any resources when no workloads are running. When you submit Spark applications, Spark clusters are created in seconds and are spun down as soon as the applications finish running. You can develop and deploy Spark SQL, data transformation, data science, or machine learning jobs using the Spark application API.\n* What are the advantages of IBM Analytics Engine serverless instances?\n\nWith IBM Analytics Engine serverless, compute and memory resources are allocated on demand when Spark workloads are deployed. When an application is not in running state, no computing resources are allocated to the IBM Analytics Engine serverless instance. Pricing is based on the actual amount of resources consumed by the instance, billed on a per second basis.\n* Does the IBM Analytics Engine Standard serverless plan for Apache Spark support Hadoop?\n\nNo, currently, the IBM Analytics Engine Standard serverless plan for Apache Spark only supports Apache Spark.\n* Can I change the instance home storage of a serverless instance?\n\nNo, you can't. After an instance home storage is associated with an IBM Analytics Engine serverless instance, it cannot be changed because instance home contains all instance relevant data, such as the Spark events and custom libraries. Changing instance home would result in the loss of the Spark history data and custom libraries.\n* How is user management and access control managed in a serverless instance?\n\nUser management and access control of an IBM Analytics Engine serverless instance and its APIs is done through IBM Cloud\u00ae Identity and Access Management (IAM). You use IAM access policies to invite users to collaborate on your instance and grant them the necessary privileges. See [Granting permissions to users](https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-grant-permissions-serverless).\n* How do I define the size of the cluster to run my Spark application?\n\nYou can specify the size of the cluster either at the time the instance is created or when submitting Spark applications.",
+      "url": "https://cloud.ibm.com/docs?tab=faqs",
+      "score": 24.205097,
+      "feedback": {
+        "relevant": {
+          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+            "value": "yes",
+            "timestamp": 1723567333
+          }
+        }
+      },
+      "query": {
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "What is a serverless Spark instance"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "timestamp": 1723565756
+}
