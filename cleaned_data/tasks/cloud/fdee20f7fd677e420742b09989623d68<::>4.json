@@ -3,72 +3,80 @@
   "conversation_id": "12",
   "turn_id": 4,
   "domain": "cloud",
-  "input": "Is web chat secure enough for me to pass some sesitive data?",
-  "gold_answer": "When you enable web chat security, all messages received by the web chat integration that are not accompanied by a properly signed JSON Web Token (JWT) will be rejected. JWTs are digitally signed using a private encryption key that only you have, ensuring that each message originates with your website. You can also use the public key provided by IBM to add an additional level of encryption for passing sensitive data from the web chat. This private context variable will be available for use by the dialog but not by anything else.",
-  "enrichments": {
-    "Question Type": [
-      "Explanation"
-    ],
-    "Multi-Turn": [
-      "Follow-up"
-    ],
-    "Answerability": [
-      "ANSWERABLE"
-    ]
-  },
-  "retrieved_contexts": [
-    {
-      "document_id": "ibmcld_16385-7-2272",
-      "text": "\nOverview: Securing the web chat \n\nIf you enable security, you can configure the web chat to authenticate users, protect private data, and restrict access to your assistant.\n\nAll messages that are sent between the web chat and the assistant are encrypted using Transport Layer Security (TLS), which protects sensitive data as it travels through the network. However, there are still potential security exposures that you might need to protect against. By enabling the web chat security feature and updating your website code appropriately, you can add the following protections:\n\n\n\n* You can prevent unauthorized websites from sending messages to your assistant, even if they copy your web chat embed script. (The unique identifiers in the embed script, such as the integration ID and service instance ID, are visible to anyone who has access to your website.)\n* You can securely authenticate customers in order to control access to features of your assistant that require authorization.\n* You can encrypt sensistive data so that customers cannot see it, while still allowing your assistant to access it.\n\n\n\nWeb chat security uses JSON Web Tokens (JWTs), which are data objects that are sent with each message from your website to the Watson Assistant service. Because a JWT is digitally signed using a private encryption key that only you have, it ensures that each message originates with your website. The JWT payload can also be used to securely authenticate users and carry encrypted private data.\n\nFor detailed information about JSON Web Tokens, see the [JWT specification](https://tools.ietf.org/html/rfc7519)).\n\nEnabling web chat security involves making the following customizations:\n\n\n\n* Implementing web application server code that generates a JWT signed with your private encryption key\n* Customizing the web chat configuration to provide the generated JWT\n* Enabling security in the web chat security settings\n\nAfter you enable web chat security, any message received by the web chat integration that is not accompanied by a properly signed JWT will be rejected.\n\n\n\nFor detailed information about how to complete these steps, see [Enabling web chat security](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-web-chat-security-enable).",
-      "url": "https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-web-chat-security",
-      "score": 16.305052,
-      "feedback": {
-        "relevant": {
-          "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
-            "value": "yes",
-            "timestamp": 1723256347
-          }
-        }
-      },
-      "query": {
-        "bool": {
-          "must": {
-            "text_expansion": {
-              "ml.tokens": {
-                "model_id": ".elser_model_1",
-                "model_text": "Enable security"
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "document_id": "ibmcld_02855-27616-29462",
-      "text": "\nreturn new Promise(function(resolve, reject) {\n// And then pass the new JWT into the callback and the service will resume processing messages.\nevent.identityToken = 'YOUR NEW JWT';\nresolve();\n});\n}});\ninstance.render();\n}\n};\nsetTimeout(function(){\nconst t=document.createElement('script');\nt.src=\"https://web-chat.global.assistant.watson.appdomain.cloud/loadWatsonAssistantChat.js\";\ndocument.head.appendChild(t);\n});\n</script>\nShow more\n\n\n\n\n\n\n\n Passing sensitive data \n\nYou can optionally copy the public key that is provided by IBM, and use it to add an additional level of encryption to support passing sensitive data from the web chat.\n\nUse this method to send sensitive information in messages that come from your website, such as a information about a customer's loyalty level, a user ID, or security tokens to use in webhooks that you call from your dialog. Information that is passed to your assistant in this way is stored in a private variable in your assistant. Private variables cannot be seen by customers and are never sent back to the web chat.\n\nFor example, you might start a business process for a VIP customer that is different from the process you start for less important customers. You likely do not want non-VIPs to know that they are categorized as such. But you must pass this informataion to your dialog because it changes the route of the conversation. You can pass the customer MVP status as an encrypted variable. This private context variable will be available for use by the dialog, but not by anything else.\n\n\n\n1. From the web chat configuration page, copy the public key from the IBM provided public key field.\n2. From your website, write a function that signs a JSON Web Token.\n\nFor example, the following NodeJS code snippet shows a function that accepts a userID and payload content and sends it to the web chat.",
-      "url": "https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-deploy-web-chat",
-      "score": 13.724722,
-      "feedback": {
-        "relevant": {
-          "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
-            "value": "yes",
-            "timestamp": 1723256349
-          }
-        }
-      },
-      "query": {
-        "bool": {
-          "must": {
-            "text_expansion": {
-              "ml.tokens": {
-                "model_id": ".elser_model_1",
-                "model_text": "Passing sensitive data"
-              }
-            }
-          }
-        }
-      }
+  "user": {
+    "speaker": "user",
+    "text": "Is web chat secure enough for me to pass some sesitive data?",
+    "timestamp": 1723256153,
+    "enrichments": {
+      "Question Type": [
+        "Explanation"
+      ],
+      "Multi-Turn": [
+        "Follow-up"
+      ],
+      "Answerability": [
+        "ANSWERABLE"
+      ]
     }
-  ],
-  "timestamp": 1723256153
+  },
+  "agent": {
+    "speaker": "agent",
+    "text": "When you enable web chat security, all messages received by the web chat integration that are not accompanied by a properly signed JSON Web Token (JWT) will be rejected. JWTs are digitally signed using a private encryption key that only you have, ensuring that each message originates with your website. You can also use the public key provided by IBM to add an additional level of encryption for passing sensitive data from the web chat. This private context variable will be available for use by the dialog but not by anything else.",
+    "timestamp": 1723256157,
+    "contexts": [
+      {
+        "document_id": "ibmcld_16385-7-2272",
+        "text": "\nOverview: Securing the web chat \n\nIf you enable security, you can configure the web chat to authenticate users, protect private data, and restrict access to your assistant.\n\nAll messages that are sent between the web chat and the assistant are encrypted using Transport Layer Security (TLS), which protects sensitive data as it travels through the network. However, there are still potential security exposures that you might need to protect against. By enabling the web chat security feature and updating your website code appropriately, you can add the following protections:\n\n\n\n* You can prevent unauthorized websites from sending messages to your assistant, even if they copy your web chat embed script. (The unique identifiers in the embed script, such as the integration ID and service instance ID, are visible to anyone who has access to your website.)\n* You can securely authenticate customers in order to control access to features of your assistant that require authorization.\n* You can encrypt sensistive data so that customers cannot see it, while still allowing your assistant to access it.\n\n\n\nWeb chat security uses JSON Web Tokens (JWTs), which are data objects that are sent with each message from your website to the Watson Assistant service. Because a JWT is digitally signed using a private encryption key that only you have, it ensures that each message originates with your website. The JWT payload can also be used to securely authenticate users and carry encrypted private data.\n\nFor detailed information about JSON Web Tokens, see the [JWT specification](https://tools.ietf.org/html/rfc7519)).\n\nEnabling web chat security involves making the following customizations:\n\n\n\n* Implementing web application server code that generates a JWT signed with your private encryption key\n* Customizing the web chat configuration to provide the generated JWT\n* Enabling security in the web chat security settings\n\nAfter you enable web chat security, any message received by the web chat integration that is not accompanied by a properly signed JWT will be rejected.\n\n\n\nFor detailed information about how to complete these steps, see [Enabling web chat security](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-web-chat-security-enable).",
+        "url": "https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-web-chat-security",
+        "score": 16.305052,
+        "feedback": {
+          "relevant": {
+            "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+              "value": "yes",
+              "timestamp": 1723256347
+            }
+          }
+        },
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "Enable security"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "document_id": "ibmcld_02855-27616-29462",
+        "text": "\nreturn new Promise(function(resolve, reject) {\n// And then pass the new JWT into the callback and the service will resume processing messages.\nevent.identityToken = 'YOUR NEW JWT';\nresolve();\n});\n}});\ninstance.render();\n}\n};\nsetTimeout(function(){\nconst t=document.createElement('script');\nt.src=\"https://web-chat.global.assistant.watson.appdomain.cloud/loadWatsonAssistantChat.js\";\ndocument.head.appendChild(t);\n});\n</script>\nShow more\n\n\n\n\n\n\n\n Passing sensitive data \n\nYou can optionally copy the public key that is provided by IBM, and use it to add an additional level of encryption to support passing sensitive data from the web chat.\n\nUse this method to send sensitive information in messages that come from your website, such as a information about a customer's loyalty level, a user ID, or security tokens to use in webhooks that you call from your dialog. Information that is passed to your assistant in this way is stored in a private variable in your assistant. Private variables cannot be seen by customers and are never sent back to the web chat.\n\nFor example, you might start a business process for a VIP customer that is different from the process you start for less important customers. You likely do not want non-VIPs to know that they are categorized as such. But you must pass this informataion to your dialog because it changes the route of the conversation. You can pass the customer MVP status as an encrypted variable. This private context variable will be available for use by the dialog, but not by anything else.\n\n\n\n1. From the web chat configuration page, copy the public key from the IBM provided public key field.\n2. From your website, write a function that signs a JSON Web Token.\n\nFor example, the following NodeJS code snippet shows a function that accepts a userID and payload content and sends it to the web chat.",
+        "url": "https://cloud.ibm.com/docs/assistant-data?topic=assistant-data-deploy-web-chat",
+        "score": 13.724722,
+        "feedback": {
+          "relevant": {
+            "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+              "value": "yes",
+              "timestamp": 1723256349
+            }
+          }
+        },
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "Passing sensitive data"
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "original_text": "Yes, the web chat can be secure enough for passing sensitive data, given certain customizations. When you enable web chat security, all messages received by the web chat integration that are not accompanied by a properly signed JSON Web Token (JWT) will be rejected. JWTs are digitally signed using a private encryption key that only you have, ensuring that each message originates with your website. You can also use the public key provided by IBM to add an additional level of encryption for passing sensitive data from the web chat. This private context variable will be available for use by the dialog but not by anything else. For detailed instructions on how to enable web chat security, refer to the documentation on \"Enabling web chat security\" (<https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-web-chat-security-enable>)."
+  }
 }

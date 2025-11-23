@@ -3,168 +3,176 @@
   "conversation_id": "100",
   "turn_id": 2,
   "domain": "cloud",
-  "input": "Which one protects more from vulnerabilities?",
-  "gold_answer": "Both dynamic and static secrets have their own ways of protecting against vulnerabilities. The static code scan stage runs a static code analyzer tool on the specified app repo codebases.  The Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.",
-  "enrichments": {
-    "Question Type": [
-      "Comparative"
-    ],
-    "Multi-Turn": [
-      "Follow-up"
-    ],
-    "Answerability": [
-      "ANSWERABLE"
-    ]
-  },
-  "retrieved_contexts": [
-    {
-      "document_id": "ibmcld_12498-8087-10171",
-      "text": "\nAnd, ultimately, it makes it a little more efficient for the management of your secrets while you're going through your DevOps operations.\n\nThank you. If you have questions, please drop us a line. If you want to see more videos like this in the future, please like and subscribe, and don't forget you can grow your skills and earn a badge with IBM Cloud Labs which, are free browser-based interactive Kubernetes labs.\n\n\n\n\n\n Working with secrets of different types \n\nSecrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a\n\ndynamic secrethas its expiration date and time enforced when its secret data is read or accessed.\n\nSecrets Manager further classifies static and dynamic secrets by their general purpose or function. For example, each secret type is identified by programmatic name, such as username_password. If you're looking to manage your secret by using the Secrets Manager API or CLI, you can use these programmatic names to run operations on secrets according to their type.\n\nReview the following table to understand the types of static and dynamic secrets that you can create and manage with the service.\n\n\n\nTable 1. Secret types in Secrets Manager\n\n Type Programmatic name Kind Description \n\n [Arbitrary secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-arbitrary-secrets) arbitrary Static Arbitrary pieces of sensitive data, including any type of structured or unstructured data, that you can use to access an application or resource. \n [IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials) iam_credentials* Dynamic A dynamically generated service ID and API key that can be used to access an IBM Cloud service that requires IAM authentication. \n [Key-value secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-key-value) kv Static Pieces of sensitive data that is structured in JSON format that you can use to access an application or resource.",
-      "url": "https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-what-is-secret",
-      "score": 32.54135,
-      "feedback": {
-        "relevant": {
-          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
-            "value": "yes",
-            "timestamp": 1723558878
-          },
-          "87334bc6-dd39-4565-ae2b-832e60a24b08": {
-            "value": "no",
-            "timestamp": 1727124418
-          }
-        }
-      },
-      "query": {
-        "query": {
-          "bool": {
-            "must": {
-              "text_expansion": {
-                "ml.tokens": {
-                  "model_id": ".elser_model_1",
-                  "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "document_id": "ibmcld_12467-1716-3849",
-      "text": "\n* When you try to modify or delete a secret while it is locked, Secrets Manager denies the request with an HTTP 412 Precondition Failed response. You see an error message similar to the following example:\n\nThe requested action can't be completed because the secret version is locked.\n\nIf you're working with\n\ndynamic secrets, such as IAM credentials, locking your secrets also means that by default, those secrets can't be read or accessed. For more information, see [Why can't I read a locked IAM credentials secret?](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-locked-iam-credentials)\n* If a locked secret reaches its expiration date, it stays in the Active state and its data remains accessible to your applications. Secrets Manager moves the secret to the Destroyed state and permanently deletes the expired secret data only after all locks on the secret are removed.\n\nSSL/TLS certificates still reach their defined expiration dates and move into a Destroyed state even if they are locked. For more information, see [Why did my locked certificate move to the Destroyed state?](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-locked-certificates)\n* If you try to rotate a secret while its current version is locked and the previous version is unlocked (or if an automatic rotation is scheduled), the request to rotate the secret is allowed. The current secret version becomes the new previous version, retaining its existing locks. A new current version is created without any locks.\n* If you try to rotate a secret while its previous version is locked (or if an automatic rotation is scheduled), your request to rotate the secret is denied. Rotation is allowed only after all locks on the previous secret version are removed.\n\n\n\n\n\n Creating locks in the UI \n\nYou can create up to 1000 locks on a secret by using the Secrets Manager UI. Each lock can be used to represent a single application or service that uses your secret.\n\nA secret is considered locked after you attach one or more locks to it. A lock can be applied only on a secret version that contains active payload, or secret data.",
-      "url": "https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-secret-locks",
-      "score": 29.514965,
-      "feedback": {
-        "relevant": {
-          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
-            "value": "no",
-            "timestamp": 1723558898
-          }
-        }
-      },
-      "query": {
-        "query": {
-          "bool": {
-            "must": {
-              "text_expansion": {
-                "ml.tokens": {
-                  "model_id": ".elser_model_1",
-                  "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "document_id": "ibmcld_12493-7948-9647",
-      "text": "\nUse the following commands to add a static secret, such as a user credential or an arbitrary secret, to your Secrets Manager instance. Allowable values for SECRET_TYPE are: arbitrary,imported_cert, [kv](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-vault-manage-kv-cli), private_cert, public_cert, and username_password.\n\nCreate a secret in the default secret group.\n\nvault write [-format=FORMAT] ibmcloud/SECRET_TYPE/secrets name=NAME [description=\"DESCRIPTION\"] [username=USERNAME] [password=USERNAME] [payload=DATA] [expiration_date=EXPIRATION] [certificate=CERTIFICATE_DATA] [private_key=PRIVATE_KEY_DATA] [intermediate=INTERMEDIATE_CERTIFICATE_DATA] [ca=CA_CONFIGURATION_NAME] [dns=DNS_CONFIGURATION_NAME] [key_algorithm=KEY_ALGORITHM] [labels=LABEL,LABEL]\n\nCreate a secret in a specified secret group.\n\nvault write [-format=FORMAT] ibmcloud/SECRET_TYPE/secrets/groups/SECRET_GROUP_ID name=NAME [description=\"DESCRIPTION\"] [username=USERNAME] [password=USERNAME] [payload=DATA] [expiration_date=EXPIRATION] [certificate=CERTIFICATE_DATA] [private_key=PRIVATE_KEY_DATA] [intermediate=INTERMEDIATE_CERTIFICATE_DATA] [ca=CA_CONFIGURATION_NAME] [dns=DNS_CONFIGURATION_NAME] [key_algorithm=KEY_ALGORITHM] [labels=LABEL,LABEL]\n\n\n\n Prerequisites \n\nYou need the [Writer service role](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam) to create secrets.\n\n\n\n\n\n Command options \n\nname\n: The human-readable alias that you want to assign to the secret. Required.\n\ndescription\n: An extended description to assign to the secret.\n\nexpiration_date\n: The expiration date that you want to assign to the secret. Supported for the arbitrary and username_password secret types.",
-      "url": "https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-vault-cli",
-      "score": 29.34182,
-      "feedback": {
-        "relevant": {
-          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
-            "value": "no",
-            "timestamp": 1723558939
-          }
-        }
-      },
-      "query": {
-        "query": {
-          "bool": {
-            "must": {
-              "text_expansion": {
-                "ml.tokens": {
-                  "model_id": ".elser_model_1",
-                  "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "document_id": "ibmcld_06843-4238-6198",
-      "text": "\nThis command returns either cc, cd, ci, or pr, depending on which pipeline is running. This way, you can reuse the setup script between pipelines if necessary.\n\n\n\n\n\n Static code scan \n\nThe static code scan stage runs a static code analyzer tool on the specified app repo codebases.\n\nCC pipeline provides the repos that are found in the inventory for the scanner.\n\nYou can use any of the following methods to add static code to your pipeline:\n\n\n\n* Provide an already running SonarQube instance name, URL, and credentials by adding the SonarQube tool to your toolchain. The static-scan task runs a scan on the specified repos.\n* Add your code to the static-scan custom stage in your .pipeline-config.yaml file for a custom implementation.\n\n\n\n\n\n\n\n Dynamic scan \n\nThe Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n\n\n\n* Add your own dynamic scan code to the dynamic-scan custom stage in your .pipeline-config.yaml file for a custom implementation.\n\n\n\nTo learn more about configuring dynamic scan by using OWASP-ZAP, see [Configuring ZAP scan for CC pipeline](https://cloud.ibm.com/docs/devsecops?topic=devsecops-zap-scanszap-scan-for-cc).\n\n\n\n\n\n Scans and checks in compliance checks \n\n\n\nTable 3. Compliance scans and checks\n\n Scan or check Description \n\n Detect secrets The [IBM Detect Secrets](https://github.com/IBM/detect-secrets) tool identifies where secrets are visible in app code. \n Code Risk Analyzer vulnerability scan Finds vulnerabilities for all of the app package dependencies, container base images, and operating system packages. Uses the Code Risk Analyzer tool. \n Code Risk Analyzer CIS check Runs configuration checks on Kubernetes deployment manifests. Uses the Code Risk Analyzer tool. \n Code Risk Analyzer Bill of Material (BOM) check The BOM for a specified repo that captures the pedigree of all of the dependencies. This BOM is collected at different granularities.",
-      "url": "https://cloud.ibm.com/docs/devsecops?topic=devsecops-devsecops-cc-pipeline",
-      "score": 16.38534,
-      "feedback": {
-        "relevant": {
-          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
-            "value": "yes",
-            "timestamp": 1723559199
-          }
-        }
-      },
-      "query": {
-        "query": {
-          "bool": {
-            "must": {
-              "text_expansion": {
-                "ml.tokens": {
-                  "model_id": ".elser_model_1",
-                  "model_text": "static-scan test"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "document_id": "ibmcld_06804-2648-4507",
-      "text": "\nThe static-scan task runs a scan on the specified repos.\n* If you don't have your own SonarQube instance, the pipeline creates a SonarQube instance during the pipeline run. You can access this instance after the static-scan stage successfully runs.\n* Add your own static scan code to the static-scan custom stage in your .pipeline-config.yaml file for a custom implementation.\n\n\n\n\n\n Adding SonarQube scan to your pipelines \n\nFor more information about integrating SonarQube with the continuous integration pipeline, see [Configuring SonarQube](https://cloud.ibm.com/docs/devsecops?topic=devsecops-sonarqube).\n\n\n\n\n\n\n\n Scans and checks in compliance checks \n\n\n\nTable 5. Compliance scans and checks\n\n Scan or check Description \n\n Detect secrets The [IBM Detect Secrets](https://github.com/IBM/detect-secrets) tool identifies where secrets are visible in app code. \n Code Risk Analyzer vulnerability scan Finds vulnerabilities for all of the app package dependencies, container base images, and operating system packages. Uses the Code Risk Analyzer tool. \n Code Risk Analyzer CIS check Runs configuration checks on Kubernetes deployment manifests. Uses the Code Risk Analyzer tool. \n Code Risk Analyzer Bill of Material (BOM) check The BOM for a specified repo that captures the pedigree of all of the dependencies. This BOM is collected at different granularities. For example, the BOM captures the list of base images that are used in the build, the list of packages from the base images, and the list of app packages that are installed over the base image. The BOM acts as a ground truth for the analytic results and can potentially be used to enforce policy gates. Uses the Code Risk Analyzer tool. \n Repository compliance checking Checks that branch protection settings are correct. For example, the master/main branch should always restrict the force push.",
-      "url": "https://cloud.ibm.com/docs/devsecops?topic=devsecops-cd-devsecops-ci-pipeline",
-      "score": 15.255749,
-      "feedback": {
-        "relevant": {
-          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
-            "value": "yes",
-            "timestamp": 1723559254
-          },
-          "87334bc6-dd39-4565-ae2b-832e60a24b08": {
-            "value": "no",
-            "timestamp": 1727124507
-          }
-        }
-      },
-      "query": {
-        "query": {
-          "bool": {
-            "must": {
-              "text_expansion": {
-                "ml.tokens": {
-                  "model_id": ".elser_model_1",
-                  "model_text": "static-scan test"
-                }
-              }
-            }
-          }
-        }
-      }
+  "user": {
+    "speaker": "user",
+    "text": "Which one protects more from vulnerabilities?",
+    "timestamp": 1723558700,
+    "enrichments": {
+      "Question Type": [
+        "Comparative"
+      ],
+      "Multi-Turn": [
+        "Follow-up"
+      ],
+      "Answerability": [
+        "ANSWERABLE"
+      ]
     }
-  ],
-  "timestamp": 1723558700
+  },
+  "agent": {
+    "speaker": "agent",
+    "text": "Both dynamic and static secrets have their own ways of protecting against vulnerabilities. The static code scan stage runs a static code analyzer tool on the specified app repo codebases.  The Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.",
+    "timestamp": 1723558705,
+    "contexts": [
+      {
+        "document_id": "ibmcld_12498-8087-10171",
+        "text": "\nAnd, ultimately, it makes it a little more efficient for the management of your secrets while you're going through your DevOps operations.\n\nThank you. If you have questions, please drop us a line. If you want to see more videos like this in the future, please like and subscribe, and don't forget you can grow your skills and earn a badge with IBM Cloud Labs which, are free browser-based interactive Kubernetes labs.\n\n\n\n\n\n Working with secrets of different types \n\nSecrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a\n\ndynamic secrethas its expiration date and time enforced when its secret data is read or accessed.\n\nSecrets Manager further classifies static and dynamic secrets by their general purpose or function. For example, each secret type is identified by programmatic name, such as username_password. If you're looking to manage your secret by using the Secrets Manager API or CLI, you can use these programmatic names to run operations on secrets according to their type.\n\nReview the following table to understand the types of static and dynamic secrets that you can create and manage with the service.\n\n\n\nTable 1. Secret types in Secrets Manager\n\n Type Programmatic name Kind Description \n\n [Arbitrary secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-arbitrary-secrets) arbitrary Static Arbitrary pieces of sensitive data, including any type of structured or unstructured data, that you can use to access an application or resource. \n [IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials) iam_credentials* Dynamic A dynamically generated service ID and API key that can be used to access an IBM Cloud service that requires IAM authentication. \n [Key-value secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-key-value) kv Static Pieces of sensitive data that is structured in JSON format that you can use to access an application or resource.",
+        "url": "https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-what-is-secret",
+        "score": 32.54135,
+        "feedback": {
+          "relevant": {
+            "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+              "value": "yes",
+              "timestamp": 1723558878
+            },
+            "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+              "value": "no",
+              "timestamp": 1727124418
+            }
+          }
+        },
+        "query": {
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "document_id": "ibmcld_12467-1716-3849",
+        "text": "\n* When you try to modify or delete a secret while it is locked, Secrets Manager denies the request with an HTTP 412 Precondition Failed response. You see an error message similar to the following example:\n\nThe requested action can't be completed because the secret version is locked.\n\nIf you're working with\n\ndynamic secrets, such as IAM credentials, locking your secrets also means that by default, those secrets can't be read or accessed. For more information, see [Why can't I read a locked IAM credentials secret?](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-locked-iam-credentials)\n* If a locked secret reaches its expiration date, it stays in the Active state and its data remains accessible to your applications. Secrets Manager moves the secret to the Destroyed state and permanently deletes the expired secret data only after all locks on the secret are removed.\n\nSSL/TLS certificates still reach their defined expiration dates and move into a Destroyed state even if they are locked. For more information, see [Why did my locked certificate move to the Destroyed state?](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-locked-certificates)\n* If you try to rotate a secret while its current version is locked and the previous version is unlocked (or if an automatic rotation is scheduled), the request to rotate the secret is allowed. The current secret version becomes the new previous version, retaining its existing locks. A new current version is created without any locks.\n* If you try to rotate a secret while its previous version is locked (or if an automatic rotation is scheduled), your request to rotate the secret is denied. Rotation is allowed only after all locks on the previous secret version are removed.\n\n\n\n\n\n Creating locks in the UI \n\nYou can create up to 1000 locks on a secret by using the Secrets Manager UI. Each lock can be used to represent a single application or service that uses your secret.\n\nA secret is considered locked after you attach one or more locks to it. A lock can be applied only on a secret version that contains active payload, or secret data.",
+        "url": "https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-secret-locks",
+        "score": 29.514965,
+        "feedback": {
+          "relevant": {
+            "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+              "value": "no",
+              "timestamp": 1723558898
+            }
+          }
+        },
+        "query": {
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "document_id": "ibmcld_12493-7948-9647",
+        "text": "\nUse the following commands to add a static secret, such as a user credential or an arbitrary secret, to your Secrets Manager instance. Allowable values for SECRET_TYPE are: arbitrary,imported_cert, [kv](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-vault-manage-kv-cli), private_cert, public_cert, and username_password.\n\nCreate a secret in the default secret group.\n\nvault write [-format=FORMAT] ibmcloud/SECRET_TYPE/secrets name=NAME [description=\"DESCRIPTION\"] [username=USERNAME] [password=USERNAME] [payload=DATA] [expiration_date=EXPIRATION] [certificate=CERTIFICATE_DATA] [private_key=PRIVATE_KEY_DATA] [intermediate=INTERMEDIATE_CERTIFICATE_DATA] [ca=CA_CONFIGURATION_NAME] [dns=DNS_CONFIGURATION_NAME] [key_algorithm=KEY_ALGORITHM] [labels=LABEL,LABEL]\n\nCreate a secret in a specified secret group.\n\nvault write [-format=FORMAT] ibmcloud/SECRET_TYPE/secrets/groups/SECRET_GROUP_ID name=NAME [description=\"DESCRIPTION\"] [username=USERNAME] [password=USERNAME] [payload=DATA] [expiration_date=EXPIRATION] [certificate=CERTIFICATE_DATA] [private_key=PRIVATE_KEY_DATA] [intermediate=INTERMEDIATE_CERTIFICATE_DATA] [ca=CA_CONFIGURATION_NAME] [dns=DNS_CONFIGURATION_NAME] [key_algorithm=KEY_ALGORITHM] [labels=LABEL,LABEL]\n\n\n\n Prerequisites \n\nYou need the [Writer service role](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam) to create secrets.\n\n\n\n\n\n Command options \n\nname\n: The human-readable alias that you want to assign to the secret. Required.\n\ndescription\n: An extended description to assign to the secret.\n\nexpiration_date\n: The expiration date that you want to assign to the secret. Supported for the arbitrary and username_password secret types.",
+        "url": "https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-vault-cli",
+        "score": 29.34182,
+        "feedback": {
+          "relevant": {
+            "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+              "value": "no",
+              "timestamp": 1723558939
+            }
+          }
+        },
+        "query": {
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: Is Dynamic secret better than Static secret?\n|assistant|: You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.\n|user|: Which one protects more from vulnerabilities?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "document_id": "ibmcld_06843-4238-6198",
+        "text": "\nThis command returns either cc, cd, ci, or pr, depending on which pipeline is running. This way, you can reuse the setup script between pipelines if necessary.\n\n\n\n\n\n Static code scan \n\nThe static code scan stage runs a static code analyzer tool on the specified app repo codebases.\n\nCC pipeline provides the repos that are found in the inventory for the scanner.\n\nYou can use any of the following methods to add static code to your pipeline:\n\n\n\n* Provide an already running SonarQube instance name, URL, and credentials by adding the SonarQube tool to your toolchain. The static-scan task runs a scan on the specified repos.\n* Add your code to the static-scan custom stage in your .pipeline-config.yaml file for a custom implementation.\n\n\n\n\n\n\n\n Dynamic scan \n\nThe Dynamic scan stage runs a dynamic application security testing tool to find vulnerabilities in the deployed application.\n\n\n\n* Add your own dynamic scan code to the dynamic-scan custom stage in your .pipeline-config.yaml file for a custom implementation.\n\n\n\nTo learn more about configuring dynamic scan by using OWASP-ZAP, see [Configuring ZAP scan for CC pipeline](https://cloud.ibm.com/docs/devsecops?topic=devsecops-zap-scanszap-scan-for-cc).\n\n\n\n\n\n Scans and checks in compliance checks \n\n\n\nTable 3. Compliance scans and checks\n\n Scan or check Description \n\n Detect secrets The [IBM Detect Secrets](https://github.com/IBM/detect-secrets) tool identifies where secrets are visible in app code. \n Code Risk Analyzer vulnerability scan Finds vulnerabilities for all of the app package dependencies, container base images, and operating system packages. Uses the Code Risk Analyzer tool. \n Code Risk Analyzer CIS check Runs configuration checks on Kubernetes deployment manifests. Uses the Code Risk Analyzer tool. \n Code Risk Analyzer Bill of Material (BOM) check The BOM for a specified repo that captures the pedigree of all of the dependencies. This BOM is collected at different granularities.",
+        "url": "https://cloud.ibm.com/docs/devsecops?topic=devsecops-devsecops-cc-pipeline",
+        "score": 16.38534,
+        "feedback": {
+          "relevant": {
+            "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+              "value": "yes",
+              "timestamp": 1723559199
+            }
+          }
+        },
+        "query": {
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "static-scan test"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "document_id": "ibmcld_06804-2648-4507",
+        "text": "\nThe static-scan task runs a scan on the specified repos.\n* If you don't have your own SonarQube instance, the pipeline creates a SonarQube instance during the pipeline run. You can access this instance after the static-scan stage successfully runs.\n* Add your own static scan code to the static-scan custom stage in your .pipeline-config.yaml file for a custom implementation.\n\n\n\n\n\n Adding SonarQube scan to your pipelines \n\nFor more information about integrating SonarQube with the continuous integration pipeline, see [Configuring SonarQube](https://cloud.ibm.com/docs/devsecops?topic=devsecops-sonarqube).\n\n\n\n\n\n\n\n Scans and checks in compliance checks \n\n\n\nTable 5. Compliance scans and checks\n\n Scan or check Description \n\n Detect secrets The [IBM Detect Secrets](https://github.com/IBM/detect-secrets) tool identifies where secrets are visible in app code. \n Code Risk Analyzer vulnerability scan Finds vulnerabilities for all of the app package dependencies, container base images, and operating system packages. Uses the Code Risk Analyzer tool. \n Code Risk Analyzer CIS check Runs configuration checks on Kubernetes deployment manifests. Uses the Code Risk Analyzer tool. \n Code Risk Analyzer Bill of Material (BOM) check The BOM for a specified repo that captures the pedigree of all of the dependencies. This BOM is collected at different granularities. For example, the BOM captures the list of base images that are used in the build, the list of packages from the base images, and the list of app packages that are installed over the base image. The BOM acts as a ground truth for the analytic results and can potentially be used to enforce policy gates. Uses the Code Risk Analyzer tool. \n Repository compliance checking Checks that branch protection settings are correct. For example, the master/main branch should always restrict the force push.",
+        "url": "https://cloud.ibm.com/docs/devsecops?topic=devsecops-cd-devsecops-ci-pipeline",
+        "score": 15.255749,
+        "feedback": {
+          "relevant": {
+            "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+              "value": "yes",
+              "timestamp": 1723559254
+            },
+            "87334bc6-dd39-4565-ae2b-832e60a24b08": {
+              "value": "no",
+              "timestamp": 1727124507
+            }
+          }
+        },
+        "query": {
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "static-scan test"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "original_text": "Both dynamic and static secrets have their own ways of protecting against vulnerabilities. Dynamic secrets can reduce the risk of exposure since they are automatically rotated and changed frequently. On the other hand, static secrets can provide strong protection if managed properly, with secure storage, access control, and regular auditing. It's essential to follow best practices for managing secrets, regardless of whether they are dynamic or static."
+  }
 }

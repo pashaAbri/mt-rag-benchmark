@@ -3,133 +3,141 @@
   "conversation_id": "100",
   "turn_id": 1,
   "domain": "cloud",
-  "input": "Is Dynamic secret better than Static secret?",
-  "gold_answer": "You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.",
-  "enrichments": {
-    "Question Type": [
-      "Comparative",
-      "Opinion"
-    ],
-    "Multi-Turn": [
-      "N/A"
-    ],
-    "Answerability": [
-      "ANSWERABLE"
-    ]
-  },
-  "retrieved_contexts": [
-    {
-      "document_id": "ibmcld_12498-8087-10171",
-      "text": "\nAnd, ultimately, it makes it a little more efficient for the management of your secrets while you're going through your DevOps operations.\n\nThank you. If you have questions, please drop us a line. If you want to see more videos like this in the future, please like and subscribe, and don't forget you can grow your skills and earn a badge with IBM Cloud Labs which, are free browser-based interactive Kubernetes labs.\n\n\n\n\n\n Working with secrets of different types \n\nSecrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a\n\ndynamic secrethas its expiration date and time enforced when its secret data is read or accessed.\n\nSecrets Manager further classifies static and dynamic secrets by their general purpose or function. For example, each secret type is identified by programmatic name, such as username_password. If you're looking to manage your secret by using the Secrets Manager API or CLI, you can use these programmatic names to run operations on secrets according to their type.\n\nReview the following table to understand the types of static and dynamic secrets that you can create and manage with the service.\n\n\n\nTable 1. Secret types in Secrets Manager\n\n Type Programmatic name Kind Description \n\n [Arbitrary secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-arbitrary-secrets) arbitrary Static Arbitrary pieces of sensitive data, including any type of structured or unstructured data, that you can use to access an application or resource. \n [IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials) iam_credentials* Dynamic A dynamically generated service ID and API key that can be used to access an IBM Cloud service that requires IAM authentication. \n [Key-value secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-key-value) kv Static Pieces of sensitive data that is structured in JSON format that you can use to access an application or resource.",
-      "url": "https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-what-is-secret",
-      "score": 15.649247,
-      "feedback": {
-        "relevant": {
-          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
-            "value": "yes",
-            "timestamp": 1723558503
-          }
-        }
-      },
-      "query": {
-        "query": {
-          "bool": {
-            "must": {
-              "text_expansion": {
-                "ml.tokens": {
-                  "model_id": ".elser_model_1",
-                  "model_text": "|user|: Is Dynamic secret better than Static secret?"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "document_id": "ibmcld_12493-7948-9647",
-      "text": "\nUse the following commands to add a static secret, such as a user credential or an arbitrary secret, to your Secrets Manager instance. Allowable values for SECRET_TYPE are: arbitrary,imported_cert, [kv](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-vault-manage-kv-cli), private_cert, public_cert, and username_password.\n\nCreate a secret in the default secret group.\n\nvault write [-format=FORMAT] ibmcloud/SECRET_TYPE/secrets name=NAME [description=\"DESCRIPTION\"] [username=USERNAME] [password=USERNAME] [payload=DATA] [expiration_date=EXPIRATION] [certificate=CERTIFICATE_DATA] [private_key=PRIVATE_KEY_DATA] [intermediate=INTERMEDIATE_CERTIFICATE_DATA] [ca=CA_CONFIGURATION_NAME] [dns=DNS_CONFIGURATION_NAME] [key_algorithm=KEY_ALGORITHM] [labels=LABEL,LABEL]\n\nCreate a secret in a specified secret group.\n\nvault write [-format=FORMAT] ibmcloud/SECRET_TYPE/secrets/groups/SECRET_GROUP_ID name=NAME [description=\"DESCRIPTION\"] [username=USERNAME] [password=USERNAME] [payload=DATA] [expiration_date=EXPIRATION] [certificate=CERTIFICATE_DATA] [private_key=PRIVATE_KEY_DATA] [intermediate=INTERMEDIATE_CERTIFICATE_DATA] [ca=CA_CONFIGURATION_NAME] [dns=DNS_CONFIGURATION_NAME] [key_algorithm=KEY_ALGORITHM] [labels=LABEL,LABEL]\n\n\n\n Prerequisites \n\nYou need the [Writer service role](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam) to create secrets.\n\n\n\n\n\n Command options \n\nname\n: The human-readable alias that you want to assign to the secret. Required.\n\ndescription\n: An extended description to assign to the secret.\n\nexpiration_date\n: The expiration date that you want to assign to the secret. Supported for the arbitrary and username_password secret types.",
-      "url": "https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-vault-cli",
-      "score": 13.329453,
-      "feedback": {
-        "relevant": {
-          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
-            "value": "no",
-            "timestamp": 1723558528
-          }
-        }
-      },
-      "query": {
-        "query": {
-          "bool": {
-            "must": {
-              "text_expansion": {
-                "ml.tokens": {
-                  "model_id": ".elser_model_1",
-                  "model_text": "|user|: Is Dynamic secret better than Static secret?"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "document_id": "ibmcld_12717-7818-8740",
-      "text": "\nCheck whether DevSecOps Toolchain passes static code scan to identify vulnerabilities in source code CM-3(2)(0), CM-4(0), CM-4(1)(0), CM-7(1)(a), CM-7(b), RA-5(1)(0), RA-5(2)(0), RA-5(3)(0), RA-5(a), RA-5(b), RA-5(c), RA-5(d), SA-10(e), SA-15(a), SA-3(a), SA-3(d), SA-8(0), SI-10(0), SI-2(2)(0), SI-2(a), SI-2(b), SI-2(c), and SI-2(d) Rule was added \n Check whether DevSecOps Toolchain passes dynamic code scan to identify vulnerabilities in deployed artifacts CM-3(2)(0), CM-4(0), CM-4(1)(0), CM-7(1)(a), CM-7(b), RA-5(1)(0), RA-5(2)(0), RA-5(3)(0), RA-5(a), RA-5(b), RA-5(c), RA-5(d), SA-10(e), SA-15(a), SA-3(a), SA-3(d), SA-8(0), SI-10(0), SI-2(2)(0), SI-2(a), SI-2(b), SI-2(c), and SI-2(d) Rule was added \n Check whether Secrets Manager arbitrary secrets are rotated at least every # days IA-5(g) Rule was added \n Check whether Secrets Manager user credentials are rotated at least every # days IA-5(g) Rule was added",
-      "url": "https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-fs-change-log",
-      "score": 13.168503,
-      "feedback": {
-        "relevant": {
-          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
-            "value": "no",
-            "timestamp": 1723558548
-          }
-        }
-      },
-      "query": {
-        "query": {
-          "bool": {
-            "must": {
-              "text_expansion": {
-                "ml.tokens": {
-                  "model_id": ".elser_model_1",
-                  "model_text": "|user|: Is Dynamic secret better than Static secret?"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "document_id": "ibmcld_16729-294066-295916",
-      "text": "\nA script and tool will assist you to simulate the transmission of web server log messages from a static file to Event Streams.\n\nObject Storage Event Streams\n\n+3\n\nAnalytics Engine,Data Engine,Key Protect\n\n\n\n* 3 hours\n* 2023-05-05\n\n\n\n[Getting started with Secrets Manager](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-getting-started)Getting started with Secrets Manager\n\nThis tutorial focuses on storing and managing a username and password in IBM Cloud\u00ae Secrets Manager. With Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications. Secrets are stored in a dedicated Secrets Manager instance, built on open source HashiCorp Vault.\n\nSecrets Manager\n\n\n\n* 10 minutes\n* 2023-03-01\n\n\n\n[Access a storage bucket by using a dynamic secret](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-tutorial-access-storage-bucket)Access a storage bucket by using a dynamic secret\n\nIn this tutorial, you learn how to use IBM Cloud\u00ae Secrets Manager to create and lease an IAM credential that can be used to access a bucket in Cloud Object Storage.\n\nSecrets Manager Object Storage\n\n\n\n* 1 hour\n* 2023-05-30\n\n\n\n[Secure secrets for apps that run in your Kubernetes cluster](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-tutorial-kubernetes-secrets)Secure secrets for apps that run in your Kubernetes cluster\n\nThis tutorial is for the Classic flavor of Kubernetes Service clusters. External Secrets is also available as an OpenShift operator.\n\nSecrets Manager\n\n\n\n* 45 minutes\n* 2023-06-15\n\n\n\n[Part 2: Create a GitHub issue when your certificates are about to expire](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-tutorial-expiring-secrets-part-2)Part 2: Create a GitHub issue when your certificates are about to expire",
-      "url": "https://cloud.ibm.com/docs?tab=tutorials",
-      "score": 13.097604,
-      "feedback": {
-        "relevant": {
-          "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
-            "value": "yes",
-            "timestamp": 1723558616
-          }
-        }
-      },
-      "query": {
-        "query": {
-          "bool": {
-            "must": {
-              "text_expansion": {
-                "ml.tokens": {
-                  "model_id": ".elser_model_1",
-                  "model_text": "Is Dynamic secret better than Static secret?"
-                }
-              }
-            }
-          }
-        }
-      }
+  "user": {
+    "speaker": "user",
+    "text": "Is Dynamic secret better than Static secret?",
+    "timestamp": 1723558341,
+    "enrichments": {
+      "Question Type": [
+        "Comparative",
+        "Opinion"
+      ],
+      "Multi-Turn": [
+        "N/A"
+      ],
+      "Answerability": [
+        "ANSWERABLE"
+      ]
     }
-  ],
-  "timestamp": 1723558341
+  },
+  "agent": {
+    "speaker": "agent",
+    "text": "You can not compare dynamic and static secrets in terms of one being \"better\" than another. There are differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. With a Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications.",
+    "timestamp": 1723558345,
+    "contexts": [
+      {
+        "document_id": "ibmcld_12498-8087-10171",
+        "text": "\nAnd, ultimately, it makes it a little more efficient for the management of your secrets while you're going through your DevOps operations.\n\nThank you. If you have questions, please drop us a line. If you want to see more videos like this in the future, please like and subscribe, and don't forget you can grow your skills and earn a badge with IBM Cloud Labs which, are free browser-based interactive Kubernetes labs.\n\n\n\n\n\n Working with secrets of different types \n\nSecrets that you create in Secrets Manager can be static or dynamic in nature. A static secret has its expiration date and time enforced at secret creation or rotation time. In contrast, a\n\ndynamic secrethas its expiration date and time enforced when its secret data is read or accessed.\n\nSecrets Manager further classifies static and dynamic secrets by their general purpose or function. For example, each secret type is identified by programmatic name, such as username_password. If you're looking to manage your secret by using the Secrets Manager API or CLI, you can use these programmatic names to run operations on secrets according to their type.\n\nReview the following table to understand the types of static and dynamic secrets that you can create and manage with the service.\n\n\n\nTable 1. Secret types in Secrets Manager\n\n Type Programmatic name Kind Description \n\n [Arbitrary secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-arbitrary-secrets) arbitrary Static Arbitrary pieces of sensitive data, including any type of structured or unstructured data, that you can use to access an application or resource. \n [IAM credentials](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials) iam_credentials* Dynamic A dynamically generated service ID and API key that can be used to access an IBM Cloud service that requires IAM authentication. \n [Key-value secrets](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-key-value) kv Static Pieces of sensitive data that is structured in JSON format that you can use to access an application or resource.",
+        "url": "https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-what-is-secret",
+        "score": 15.649247,
+        "feedback": {
+          "relevant": {
+            "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+              "value": "yes",
+              "timestamp": 1723558503
+            }
+          }
+        },
+        "query": {
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: Is Dynamic secret better than Static secret?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "document_id": "ibmcld_12493-7948-9647",
+        "text": "\nUse the following commands to add a static secret, such as a user credential or an arbitrary secret, to your Secrets Manager instance. Allowable values for SECRET_TYPE are: arbitrary,imported_cert, [kv](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-vault-manage-kv-cli), private_cert, public_cert, and username_password.\n\nCreate a secret in the default secret group.\n\nvault write [-format=FORMAT] ibmcloud/SECRET_TYPE/secrets name=NAME [description=\"DESCRIPTION\"] [username=USERNAME] [password=USERNAME] [payload=DATA] [expiration_date=EXPIRATION] [certificate=CERTIFICATE_DATA] [private_key=PRIVATE_KEY_DATA] [intermediate=INTERMEDIATE_CERTIFICATE_DATA] [ca=CA_CONFIGURATION_NAME] [dns=DNS_CONFIGURATION_NAME] [key_algorithm=KEY_ALGORITHM] [labels=LABEL,LABEL]\n\nCreate a secret in a specified secret group.\n\nvault write [-format=FORMAT] ibmcloud/SECRET_TYPE/secrets/groups/SECRET_GROUP_ID name=NAME [description=\"DESCRIPTION\"] [username=USERNAME] [password=USERNAME] [payload=DATA] [expiration_date=EXPIRATION] [certificate=CERTIFICATE_DATA] [private_key=PRIVATE_KEY_DATA] [intermediate=INTERMEDIATE_CERTIFICATE_DATA] [ca=CA_CONFIGURATION_NAME] [dns=DNS_CONFIGURATION_NAME] [key_algorithm=KEY_ALGORITHM] [labels=LABEL,LABEL]\n\n\n\n Prerequisites \n\nYou need the [Writer service role](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam) to create secrets.\n\n\n\n\n\n Command options \n\nname\n: The human-readable alias that you want to assign to the secret. Required.\n\ndescription\n: An extended description to assign to the secret.\n\nexpiration_date\n: The expiration date that you want to assign to the secret. Supported for the arbitrary and username_password secret types.",
+        "url": "https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-vault-cli",
+        "score": 13.329453,
+        "feedback": {
+          "relevant": {
+            "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+              "value": "no",
+              "timestamp": 1723558528
+            }
+          }
+        },
+        "query": {
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: Is Dynamic secret better than Static secret?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "document_id": "ibmcld_12717-7818-8740",
+        "text": "\nCheck whether DevSecOps Toolchain passes static code scan to identify vulnerabilities in source code CM-3(2)(0), CM-4(0), CM-4(1)(0), CM-7(1)(a), CM-7(b), RA-5(1)(0), RA-5(2)(0), RA-5(3)(0), RA-5(a), RA-5(b), RA-5(c), RA-5(d), SA-10(e), SA-15(a), SA-3(a), SA-3(d), SA-8(0), SI-10(0), SI-2(2)(0), SI-2(a), SI-2(b), SI-2(c), and SI-2(d) Rule was added \n Check whether DevSecOps Toolchain passes dynamic code scan to identify vulnerabilities in deployed artifacts CM-3(2)(0), CM-4(0), CM-4(1)(0), CM-7(1)(a), CM-7(b), RA-5(1)(0), RA-5(2)(0), RA-5(3)(0), RA-5(a), RA-5(b), RA-5(c), RA-5(d), SA-10(e), SA-15(a), SA-3(a), SA-3(d), SA-8(0), SI-10(0), SI-2(2)(0), SI-2(a), SI-2(b), SI-2(c), and SI-2(d) Rule was added \n Check whether Secrets Manager arbitrary secrets are rotated at least every # days IA-5(g) Rule was added \n Check whether Secrets Manager user credentials are rotated at least every # days IA-5(g) Rule was added",
+        "url": "https://cloud.ibm.com/docs/security-compliance?topic=security-compliance-fs-change-log",
+        "score": 13.168503,
+        "feedback": {
+          "relevant": {
+            "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+              "value": "no",
+              "timestamp": 1723558548
+            }
+          }
+        },
+        "query": {
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: Is Dynamic secret better than Static secret?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "document_id": "ibmcld_16729-294066-295916",
+        "text": "\nA script and tool will assist you to simulate the transmission of web server log messages from a static file to Event Streams.\n\nObject Storage Event Streams\n\n+3\n\nAnalytics Engine,Data Engine,Key Protect\n\n\n\n* 3 hours\n* 2023-05-05\n\n\n\n[Getting started with Secrets Manager](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-getting-started)Getting started with Secrets Manager\n\nThis tutorial focuses on storing and managing a username and password in IBM Cloud\u00ae Secrets Manager. With Secrets Manager, you can create, lease, and centrally manage secrets that are used in IBM Cloud services or your custom-built applications. Secrets are stored in a dedicated Secrets Manager instance, built on open source HashiCorp Vault.\n\nSecrets Manager\n\n\n\n* 10 minutes\n* 2023-03-01\n\n\n\n[Access a storage bucket by using a dynamic secret](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-tutorial-access-storage-bucket)Access a storage bucket by using a dynamic secret\n\nIn this tutorial, you learn how to use IBM Cloud\u00ae Secrets Manager to create and lease an IAM credential that can be used to access a bucket in Cloud Object Storage.\n\nSecrets Manager Object Storage\n\n\n\n* 1 hour\n* 2023-05-30\n\n\n\n[Secure secrets for apps that run in your Kubernetes cluster](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-tutorial-kubernetes-secrets)Secure secrets for apps that run in your Kubernetes cluster\n\nThis tutorial is for the Classic flavor of Kubernetes Service clusters. External Secrets is also available as an OpenShift operator.\n\nSecrets Manager\n\n\n\n* 45 minutes\n* 2023-06-15\n\n\n\n[Part 2: Create a GitHub issue when your certificates are about to expire](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-tutorial-expiring-secrets-part-2)Part 2: Create a GitHub issue when your certificates are about to expire",
+        "url": "https://cloud.ibm.com/docs?tab=tutorials",
+        "score": 13.097604,
+        "feedback": {
+          "relevant": {
+            "d2b56e91-6d89-4df4-b89a-eef8d969850b": {
+              "value": "yes",
+              "timestamp": 1723558616
+            }
+          }
+        },
+        "query": {
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Is Dynamic secret better than Static secret?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "original_text": "The document does not provide a direct comparison between dynamic and static secrets in terms of being \"better\" than one another. Instead, it explains the differences between them. Dynamic secrets have their expiration date and time enforced when their secret data is read or accessed, while static secrets have their expiration date and time enforced at secret creation or rotation time. The choice between dynamic and static secrets would depend on the specific requirements and security policies of your system."
+  }
 }

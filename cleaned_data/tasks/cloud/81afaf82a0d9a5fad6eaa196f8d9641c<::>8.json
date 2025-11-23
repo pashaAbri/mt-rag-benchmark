@@ -3,202 +3,210 @@
   "conversation_id": "42",
   "turn_id": 8,
   "domain": "cloud",
-  "input": "backups.",
-  "gold_answer": "You always must a strategy for backing up your Block Storage for VPC volumes. Here are some considerations:Cloud Identity and Access Management (IAM) Evaluate your IAM access permissions to create and manage backups. Volumes Evaluate which volumes are most important to back up. You can create backups of boot and data volumes. A volume with numerous changes and a lengthy retention period requires more attention than a volume with moderate changes. Also, the cumulative size of all backups for a volume can't exceed 10 TB. Backup schedule Determine a backup schedule based on the type of volumes that you're backing up. For example, you might want to back up critical data that changes frequently more often than static data. Retention Determine a retention policy for backups in the backup plan. As subsequent backups are created, keep in mind that you incur costs for each backup that you retain.  You do your first backup  with a seed( a complete , a full backup)using  Delta Technology. With this technology, \"full backups\" are created at each session, but it saves enormous amounts of space on the vault and decreases the amount of time each subsequent backup takes to complete. Also . Administrators can set backups to follow an hourly, daily, weekly, or custom schedule that targets full systems, specific directories, or even individual files.",
-  "enrichments": {
-    "Question Type": [
-      "Keyword"
-    ],
-    "Multi-Turn": [
-      "Follow-up"
-    ],
-    "Answerability": [
-      "ANSWERABLE"
-    ]
-  },
-  "retrieved_contexts": [
-    {
-      "document_id": "ibmcld_09061-1334-3188",
-      "text": "\nWhen the first user authorizes a key for deletion, it remains in the [Active state](https://cloud.ibm.com/docs/key-protect?topic=key-protect-key-states) for seven days, during which all key operations are allowed on the key. To complete the deletion, another user with a Manager role can use the Key Protect GUI or API to delete the key at any point during those seven days, at which time the key will be moved to the Destroyed state. Note that because it is impossible to purge an active key, another user must delete the key before it can purged.\n* The key and its associated data will be inaccessible 90 days after being deleted. When you delete a key, it is \"soft deleted\", meaning that the key and its associated data will be restorable up to 30 days after deletion. You are able to still retrieve associated data such as key metadata, registrations, and policies for up to 90 days. After 90 days, the key becomes eligible to be automatically [purged](https://cloud.ibm.com/docs/key-protect?topic=key-protect-delete-dual-auth-keysdelete-dual-auth-keys-key-purge), or hard deleted, and its associated data will be permanently removed from the Key Protect service.\n\n\n\n\n\n\n\n Authorize deletion for a key in the console \n\n[After you enable dual authorization for an instance or key](https://cloud.ibm.com/docs/key-protect?topic=key-protect-manage-dual-auth), you can provide the first authorization to delete a key by using the Key Protect IBM Cloud console.\n\n\n\n1. [Log in to the IBM Cloud console](https://cloud.ibm.com/login/).\n2. Go to Menu > Resource List to view a list of your resources.\n3. From your IBM Cloud resource list, select your provisioned instance of Key Protect.\n4. On the application details page, use the Keys table to browse the keys in your service.\n5. Click the \u22ef icon to open a list of options for the key that you want to delete.",
-      "url": "https://cloud.ibm.com/docs/key-protect?topic=key-protect-delete-dual-auth-keys",
-      "score": 49.493065,
-      "feedback": {
-        "relevant": {
-          "868c6e58-57c1-48ee-8c67-832dbedcac18": {
-            "value": "no",
-            "timestamp": 1723464513
-          }
-        }
-      },
-      "query": {
-        "bool": {
-          "must": {
-            "text_expansion": {
-              "ml.tokens": {
-                "model_id": ".elser_model_1",
-                "model_text": "|user|: How can I delete a key?\n|assistant|: To delete a key using IBM Key Protect, you can follow these steps:\n1. Log in to the IBM Cloud console.\n2. Go to Menu > Resource List to view a list of your resources.\n3. From your IBM Cloud resource list, select your provisioned instance of Key Protect.\n4. On the application details page, use the Keys table to browse the keys in your service.\n5. Click the \u22ef icon to open a list of options for the key that you want to delete.\nPlease note that when you delete a key, it is \"soft deleted\", meaning that the key and its associated data will be restorable up to 30 days after deletion. After 90 days, the key becomes eligible to be automatically purged, or hard deleted, and its associated data will be permanently removed from the Key Protect service.\nAlso, keep in mind that deleting a key will make any data encrypted by the key inaccessible. If the key is restored within the 30-day time frame, this can be reversed. However, after 30 days, key metadata, registrations, and policies are available for up to 90 days, at which point the key becomes eligible to be purged. Once a key is no longer restorable and has been purged, its associated data can no longer be accessed.\n|user|: what happen when the first user authorizes a key for deletion?\n|assistant|: When the first user authorizes a key for deletion, it remains in the Active state for seven days. During this time, all key operations are allowed on the key. To complete the deletion, another user with a Manager role can use the Key Protect GUI or API to delete the key at any point during those seven days. Once the key is deleted, it will be moved to the Destroyed state. However, because it is impossible to purge an active key, another user must delete the key before it can be purged.\nThe key and its associated data will be inaccessible 90 days after being deleted. When you delete a key, it is \"soft deleted\", meaning that the key and its associated data will be restorable up to 30 days after deletion. You are able to still retrieve associated data such as key metadata, registrations, and policies for up to 90 days. After 90 days, the key becomes eligible to be automatically purged, or hard deleted, and its associated data will be permanently removed from the Key Protect service.\n|user|: What could happen if no action is taken by the second user and the 7-day period experies?\n|assistant|: If no action is taken by the second user and the 7-day period expires, the key will remain in the Active state and will not be deleted and you must restart the dual authorization process to delete the key . All key operations will still be allowed on the key. The key and its associated data will continue to be accessible and will not be moved to the Destroyed state. No further action can be taken to delete the key until the first user authorizes deletion again.\n|user|: In case, the server expired, Could I remove the entry from the resource list?\n|assistant|: In case  the server expire, you indeed can remove  the entry from the resource list and also  wait for the target time to trigger deletion for you, or even manually trigger the deletion from the resource reclamations.If an expired server is restored, only the entry within the resource list is restored, not the server itself.Restoring servers that belong to paid plans\nServers that belong to a paid plans do not expire, and that's why they can be restored during the reclamation period. If a server is restored, the timeframe for which the server was within the resource reclamations is billed to your account. After the server is deleted, only metadata, which isn't considered to be personal data is kept for 6 months. Make sure you back up important data for future use because you can't recover data after the virtual server has been deleted.\n\n\n|user|: Why could not I delete keys?\n|assistant|: One of the reason you could not delete a key it is when you are using the the Hyper Protect Crypto Services user interface. The service was not able to delete key \"<key_name>\". Because the key is enabled with the dual authorization policy and you set the key for deletion, a second approver needs to continue with the key deletion operation. Note that you will not be able to delete the key if it is protecting a registered IBM Cloud resource that's non-erasable due to a retention policy.\n\n\n|user|: What could happen if I force a deletion on a key?\n|assistant|: If you force a deletion on a key won't succeed if the key is protecting a registered IBM Cloud resource that's non-erasable due to a retention policy, which is a Write Once Read Many (WORM) policy set on the your IBM Cloud resource. You can verify whether a key is associated with a non-erasable resource by checking the 'preventKeyDeletion\" field in the registration details for the key. Then, you must contact an account owner to remove the retention policy on each registered IBM Cloud resource that is associated with the key before you can delete the key. However, You must use the force option to delete a root key that is registered with another cloud resource.\nRegistrations are associations between root keys and other cloud resources, such as Cloud Object Storage (COS) buckets or Cloud Databases deployments.\n|user|:  Cryptoshredding .\n|assistant|: The Cryptoshredding Key Protect provides for a force delete of a key that is in use by IBM Cloud\u00ae services, including your Cloud Databases deployments. This action is called cryptoshredding.Note that Cryptoshredding is a destructive action. When the key is deleted, your data is unrecoverable even from a soft delete state.\n|user|: backups."
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "document_id": "ibmcld_07578-1209748-1211682",
-      "text": "\nDeleting a key moves it into a Destroyed state, a \"soft\" deletion in which the key can still be seen and restored for 30 days. After 90 days, the key will be automatically purged, or \"hard deleted\", and its associated data will be permanently shredded and removed from the Key Protect service. If it is desirable that a key be purged sooner than 90 days, it is also possible to hard delete a key four hours after it has been moved into the Destroyed state.\n\nAfter a key has been deleted, any data that is encrypted by the key becomes inaccessible, though this can be reversed if the key is restored within the 30-day time frame. After 30 days, key metadata, registrations, and policies are available for up to 90 days, at which point the key becomes eligible to be purged. Note that once a key is no longer restorable and has been purged, its associated data can no longer be accessed. As a result, [destroying resources](https://cloud.ibm.com/docs/key-protect?topic=key-protect-security-and-compliancedata-deletion) is not recommended for production environments unless absolutely necessary.\n* What happens if I try to delete a key that's actively encrypting data?\n\nFor your protection, Key Protect prevents the deletion of a key that's actively encrypting data in the cloud. If you try to delete a key that's registered with a cloud resource, the action won't succeed.\n\nIf needed, you can [force deletion on a key](https://cloud.ibm.com/docs/key-protect?topic=key-protect-delete-keysdelete-keys-force-delete) by using the Key Protect APIs. [Review which resources are encrypted by the key](https://cloud.ibm.com/docs/key-protect?topic=key-protect-view-protected-resources) and verify with the owner of the resources to ensure you no longer require access to that data.\n\nIf you can't delete a key because a retention policy exists on the associated resource, contact the account owner to remove the retention policy on that resource.",
-      "url": "https://cloud.ibm.com/docs/faqs",
-      "score": 44.869015,
-      "feedback": {
-        "relevant": {
-          "868c6e58-57c1-48ee-8c67-832dbedcac18": {
-            "value": "no",
-            "timestamp": 1723464525
-          }
-        }
-      },
-      "query": {
-        "bool": {
-          "must": {
-            "text_expansion": {
-              "ml.tokens": {
-                "model_id": ".elser_model_1",
-                "model_text": "|user|: How can I delete a key?\n|assistant|: To delete a key using IBM Key Protect, you can follow these steps:\n1. Log in to the IBM Cloud console.\n2. Go to Menu > Resource List to view a list of your resources.\n3. From your IBM Cloud resource list, select your provisioned instance of Key Protect.\n4. On the application details page, use the Keys table to browse the keys in your service.\n5. Click the \u22ef icon to open a list of options for the key that you want to delete.\nPlease note that when you delete a key, it is \"soft deleted\", meaning that the key and its associated data will be restorable up to 30 days after deletion. After 90 days, the key becomes eligible to be automatically purged, or hard deleted, and its associated data will be permanently removed from the Key Protect service.\nAlso, keep in mind that deleting a key will make any data encrypted by the key inaccessible. If the key is restored within the 30-day time frame, this can be reversed. However, after 30 days, key metadata, registrations, and policies are available for up to 90 days, at which point the key becomes eligible to be purged. Once a key is no longer restorable and has been purged, its associated data can no longer be accessed.\n|user|: what happen when the first user authorizes a key for deletion?\n|assistant|: When the first user authorizes a key for deletion, it remains in the Active state for seven days. During this time, all key operations are allowed on the key. To complete the deletion, another user with a Manager role can use the Key Protect GUI or API to delete the key at any point during those seven days. Once the key is deleted, it will be moved to the Destroyed state. However, because it is impossible to purge an active key, another user must delete the key before it can be purged.\nThe key and its associated data will be inaccessible 90 days after being deleted. When you delete a key, it is \"soft deleted\", meaning that the key and its associated data will be restorable up to 30 days after deletion. You are able to still retrieve associated data such as key metadata, registrations, and policies for up to 90 days. After 90 days, the key becomes eligible to be automatically purged, or hard deleted, and its associated data will be permanently removed from the Key Protect service.\n|user|: What could happen if no action is taken by the second user and the 7-day period experies?\n|assistant|: If no action is taken by the second user and the 7-day period expires, the key will remain in the Active state and will not be deleted and you must restart the dual authorization process to delete the key . All key operations will still be allowed on the key. The key and its associated data will continue to be accessible and will not be moved to the Destroyed state. No further action can be taken to delete the key until the first user authorizes deletion again.\n|user|: In case, the server expired, Could I remove the entry from the resource list?\n|assistant|: In case  the server expire, you indeed can remove  the entry from the resource list and also  wait for the target time to trigger deletion for you, or even manually trigger the deletion from the resource reclamations.If an expired server is restored, only the entry within the resource list is restored, not the server itself.Restoring servers that belong to paid plans\nServers that belong to a paid plans do not expire, and that's why they can be restored during the reclamation period. If a server is restored, the timeframe for which the server was within the resource reclamations is billed to your account. After the server is deleted, only metadata, which isn't considered to be personal data is kept for 6 months. Make sure you back up important data for future use because you can't recover data after the virtual server has been deleted.\n\n\n|user|: Why could not I delete keys?\n|assistant|: One of the reason you could not delete a key it is when you are using the the Hyper Protect Crypto Services user interface. The service was not able to delete key \"<key_name>\". Because the key is enabled with the dual authorization policy and you set the key for deletion, a second approver needs to continue with the key deletion operation. Note that you will not be able to delete the key if it is protecting a registered IBM Cloud resource that's non-erasable due to a retention policy.\n\n\n|user|: What could happen if I force a deletion on a key?\n|assistant|: If you force a deletion on a key won't succeed if the key is protecting a registered IBM Cloud resource that's non-erasable due to a retention policy, which is a Write Once Read Many (WORM) policy set on the your IBM Cloud resource. You can verify whether a key is associated with a non-erasable resource by checking the 'preventKeyDeletion\" field in the registration details for the key. Then, you must contact an account owner to remove the retention policy on each registered IBM Cloud resource that is associated with the key before you can delete the key. However, You must use the force option to delete a root key that is registered with another cloud resource.\nRegistrations are associations between root keys and other cloud resources, such as Cloud Object Storage (COS) buckets or Cloud Databases deployments.\n|user|:  Cryptoshredding .\n|assistant|: The Cryptoshredding Key Protect provides for a force delete of a key that is in use by IBM Cloud\u00ae services, including your Cloud Databases deployments. This action is called cryptoshredding.Note that Cryptoshredding is a destructive action. When the key is deleted, your data is unrecoverable even from a soft delete state.\n|user|: backups."
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "document_id": "ibmcld_16727-1212381-1214315",
-      "text": "\nDeleting a key moves it into a Destroyed state, a \"soft\" deletion in which the key can still be seen and restored for 30 days. After 90 days, the key will be automatically purged, or \"hard deleted\", and its associated data will be permanently shredded and removed from the Key Protect service. If it is desirable that a key be purged sooner than 90 days, it is also possible to hard delete a key four hours after it has been moved into the Destroyed state.\n\nAfter a key has been deleted, any data that is encrypted by the key becomes inaccessible, though this can be reversed if the key is restored within the 30-day time frame. After 30 days, key metadata, registrations, and policies are available for up to 90 days, at which point the key becomes eligible to be purged. Note that once a key is no longer restorable and has been purged, its associated data can no longer be accessed. As a result, [destroying resources](https://cloud.ibm.com/docs/key-protect?topic=key-protect-security-and-compliancedata-deletion) is not recommended for production environments unless absolutely necessary.\n* What happens if I try to delete a key that's actively encrypting data?\n\nFor your protection, Key Protect prevents the deletion of a key that's actively encrypting data in the cloud. If you try to delete a key that's registered with a cloud resource, the action won't succeed.\n\nIf needed, you can [force deletion on a key](https://cloud.ibm.com/docs/key-protect?topic=key-protect-delete-keysdelete-keys-force-delete) by using the Key Protect APIs. [Review which resources are encrypted by the key](https://cloud.ibm.com/docs/key-protect?topic=key-protect-view-protected-resources) and verify with the owner of the resources to ensure you no longer require access to that data.\n\nIf you can't delete a key because a retention policy exists on the associated resource, contact the account owner to remove the retention policy on that resource.",
-      "url": "https://cloud.ibm.com/docs?tab=faqs",
-      "score": 44.869015,
-      "feedback": {
-        "relevant": {
-          "868c6e58-57c1-48ee-8c67-832dbedcac18": {
-            "value": "no",
-            "timestamp": 1723464528
-          }
-        }
-      },
-      "query": {
-        "bool": {
-          "must": {
-            "text_expansion": {
-              "ml.tokens": {
-                "model_id": ".elser_model_1",
-                "model_text": "|user|: How can I delete a key?\n|assistant|: To delete a key using IBM Key Protect, you can follow these steps:\n1. Log in to the IBM Cloud console.\n2. Go to Menu > Resource List to view a list of your resources.\n3. From your IBM Cloud resource list, select your provisioned instance of Key Protect.\n4. On the application details page, use the Keys table to browse the keys in your service.\n5. Click the \u22ef icon to open a list of options for the key that you want to delete.\nPlease note that when you delete a key, it is \"soft deleted\", meaning that the key and its associated data will be restorable up to 30 days after deletion. After 90 days, the key becomes eligible to be automatically purged, or hard deleted, and its associated data will be permanently removed from the Key Protect service.\nAlso, keep in mind that deleting a key will make any data encrypted by the key inaccessible. If the key is restored within the 30-day time frame, this can be reversed. However, after 30 days, key metadata, registrations, and policies are available for up to 90 days, at which point the key becomes eligible to be purged. Once a key is no longer restorable and has been purged, its associated data can no longer be accessed.\n|user|: what happen when the first user authorizes a key for deletion?\n|assistant|: When the first user authorizes a key for deletion, it remains in the Active state for seven days. During this time, all key operations are allowed on the key. To complete the deletion, another user with a Manager role can use the Key Protect GUI or API to delete the key at any point during those seven days. Once the key is deleted, it will be moved to the Destroyed state. However, because it is impossible to purge an active key, another user must delete the key before it can be purged.\nThe key and its associated data will be inaccessible 90 days after being deleted. When you delete a key, it is \"soft deleted\", meaning that the key and its associated data will be restorable up to 30 days after deletion. You are able to still retrieve associated data such as key metadata, registrations, and policies for up to 90 days. After 90 days, the key becomes eligible to be automatically purged, or hard deleted, and its associated data will be permanently removed from the Key Protect service.\n|user|: What could happen if no action is taken by the second user and the 7-day period experies?\n|assistant|: If no action is taken by the second user and the 7-day period expires, the key will remain in the Active state and will not be deleted and you must restart the dual authorization process to delete the key . All key operations will still be allowed on the key. The key and its associated data will continue to be accessible and will not be moved to the Destroyed state. No further action can be taken to delete the key until the first user authorizes deletion again.\n|user|: In case, the server expired, Could I remove the entry from the resource list?\n|assistant|: In case  the server expire, you indeed can remove  the entry from the resource list and also  wait for the target time to trigger deletion for you, or even manually trigger the deletion from the resource reclamations.If an expired server is restored, only the entry within the resource list is restored, not the server itself.Restoring servers that belong to paid plans\nServers that belong to a paid plans do not expire, and that's why they can be restored during the reclamation period. If a server is restored, the timeframe for which the server was within the resource reclamations is billed to your account. After the server is deleted, only metadata, which isn't considered to be personal data is kept for 6 months. Make sure you back up important data for future use because you can't recover data after the virtual server has been deleted.\n\n\n|user|: Why could not I delete keys?\n|assistant|: One of the reason you could not delete a key it is when you are using the the Hyper Protect Crypto Services user interface. The service was not able to delete key \"<key_name>\". Because the key is enabled with the dual authorization policy and you set the key for deletion, a second approver needs to continue with the key deletion operation. Note that you will not be able to delete the key if it is protecting a registered IBM Cloud resource that's non-erasable due to a retention policy.\n\n\n|user|: What could happen if I force a deletion on a key?\n|assistant|: If you force a deletion on a key won't succeed if the key is protecting a registered IBM Cloud resource that's non-erasable due to a retention policy, which is a Write Once Read Many (WORM) policy set on the your IBM Cloud resource. You can verify whether a key is associated with a non-erasable resource by checking the 'preventKeyDeletion\" field in the registration details for the key. Then, you must contact an account owner to remove the retention policy on each registered IBM Cloud resource that is associated with the key before you can delete the key. However, You must use the force option to delete a root key that is registered with another cloud resource.\nRegistrations are associations between root keys and other cloud resources, such as Cloud Object Storage (COS) buckets or Cloud Databases deployments.\n|user|:  Cryptoshredding .\n|assistant|: The Cryptoshredding Key Protect provides for a force delete of a key that is in use by IBM Cloud\u00ae services, including your Cloud Databases deployments. This action is called cryptoshredding.Note that Cryptoshredding is a destructive action. When the key is deleted, your data is unrecoverable even from a soft delete state.\n|user|: backups."
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "document_id": "ibmcld_07578-1295308-1297427",
-      "text": "\nWhen you create a new retention scheme or modify an existing retention, make sure that the Archiving option is not selected. Archiving is not supported.\n* What is Delta Technology?\n\nThe first backup is a \"seed\" (a complete, full backup), the next and subsequent ones are \"deltas\" (that is, changes only), but they are equivalent to, and still considered a \"full backup\". That is, you're able to restore all or any files from it. With this technology, \"full backups\" are created at each session, but it saves enormous amounts of space on the vault and decreases the amount of time each subsequent backup takes to complete.\n* Are the backups secure?\n\nBy default all encryption over the wire (OTW) is encrypted with AES 256-bit encryption. You can also choose to store data in encrypted format by using AES 256-bit.\n\nYou must remember your encryption password. Your data can't be restored without your password. If you lose your password, you can't get your data back.\n\nCompression ratios allow for zero compression to a maximum ratios compression that, depending on file type, might be compressed anywhere from 20 percent to 30 percent.\n* What information is stored with system state backups?\n\nThe system state backups include, but aren't limited to COM + class registration database, registry, boot files, system files, performance counter. It's all dependent on your system. System files vary by system O/S and service packs. Usually there are several thousand of them. MS Windows makes a dynamic list of these DLLs when you include them in the backup. By including the system files, you can recover from corrupted system files, or if you accidentally remove some service packs, or want to recover with a bare-metal restore. You can return to the state of the backup without having to reinstall the O/S from the installation kit, and then installing each service pack separately.\n\nNo user data file is included in System state backup. A system state backup job must be configured as a stand-alone job. There mustn't be any other data source that is included in the System State backup job.\n* What happens to open files?",
-      "url": "https://cloud.ibm.com/docs/faqs",
-      "score": 14.848782,
-      "feedback": {
-        "relevant": {
-          "868c6e58-57c1-48ee-8c67-832dbedcac18": {
-            "value": "yes",
-            "timestamp": 1723465194
-          }
-        }
-      },
-      "query": {
-        "bool": {
-          "must": {
-            "text_expansion": {
-              "ml.tokens": {
-                "model_id": ".elser_model_1",
-                "model_text": "backups."
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "document_id": "ibmcld_16727-1297973-1300092",
-      "text": "\nWhen you create a new retention scheme or modify an existing retention, make sure that the Archiving option is not selected. Archiving is not supported.\n* What is Delta Technology?\n\nThe first backup is a \"seed\" (a complete, full backup), the next and subsequent ones are \"deltas\" (that is, changes only), but they are equivalent to, and still considered a \"full backup\". That is, you're able to restore all or any files from it. With this technology, \"full backups\" are created at each session, but it saves enormous amounts of space on the vault and decreases the amount of time each subsequent backup takes to complete.\n* Are the backups secure?\n\nBy default all encryption over the wire (OTW) is encrypted with AES 256-bit encryption. You can also choose to store data in encrypted format by using AES 256-bit.\n\nYou must remember your encryption password. Your data can't be restored without your password. If you lose your password, you can't get your data back.\n\nCompression ratios allow for zero compression to a maximum ratios compression that, depending on file type, might be compressed anywhere from 20 percent to 30 percent.\n* What information is stored with system state backups?\n\nThe system state backups include, but aren't limited to COM + class registration database, registry, boot files, system files, performance counter. It's all dependent on your system. System files vary by system O/S and service packs. Usually there are several thousand of them. MS Windows makes a dynamic list of these DLLs when you include them in the backup. By including the system files, you can recover from corrupted system files, or if you accidentally remove some service packs, or want to recover with a bare-metal restore. You can return to the state of the backup without having to reinstall the O/S from the installation kit, and then installing each service pack separately.\n\nNo user data file is included in System state backup. A system state backup job must be configured as a stand-alone job. There mustn't be any other data source that is included in the System State backup job.\n* What happens to open files?",
-      "url": "https://cloud.ibm.com/docs?tab=faqs",
-      "score": 14.848782,
-      "feedback": {
-        "relevant": {
-          "868c6e58-57c1-48ee-8c67-832dbedcac18": {
-            "value": "yes",
-            "timestamp": 1723465092
-          }
-        }
-      },
-      "query": {
-        "bool": {
-          "must": {
-            "text_expansion": {
-              "ml.tokens": {
-                "model_id": ".elser_model_1",
-                "model_text": "backups."
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "document_id": "ibmcld_15051-7-1984",
-      "text": "\nPlanning backups \n\nWhen you plan a strategy for backing up your Block Storage for VPC volumes, you might find this checklist helpful to configure and use the backup service.\n\n\n\n Planning backups \n\nConsider the following prerequisites before you set up the VPC Backup Service.\n\n\n\nTable 1. Checklist for planning backup policies\n\n Item Considerations \n\n Cloud Identity and Access Management (IAM) Evaluate your [IAM access permissions](https://cloud.ibm.com/docs/vpc?topic=vpc-backup-service-managebaas-vpc-iam) to create and manage backups. \n Volumes Evaluate which volumes are most important to back up. You can create backups of boot and data volumes. A volume with numerous changes and a lengthy retention period requires more attention than a volume with moderate changes. Also, the cumulative size of all backups for a volume can't exceed 10 TB. \n Backup schedule Determine a backup schedule based on the type of volumes that you're backing up. For example, you might want to back up critical data that changes frequently more often than static data. \n Retention Determine a retention policy for backups in the backup plan. As subsequent backups are created, keep in mind that you incur costs for each backup that you retain. Deleting older backups keeps costs down. \n Backup plans Decide on the number of backup plans that you need for a policy. For example, you can have separate plans for daily backups, weekly, and monthly. \n Interface Choose the UI, CLI, API, or Terraform for creating and managing your backups. \n Billing Think about the number of backup snapshots that you want to take and other [billing considerations](https://cloud.ibm.com/docs/vpc?topic=vpc-snapshots-vpc-about&interface=apisnapshots_vpc_considerations) as the number of backup snapshots grows. \n Volume restore Evaluate when you might want to restore a volume from a backup. Keep in mind that restoring from a backup is a manual operation and not immediate such as a disaster recovery solution.",
-      "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-backups-vpc-planning",
-      "score": 14.370063,
-      "feedback": {
-        "relevant": {
-          "868c6e58-57c1-48ee-8c67-832dbedcac18": {
-            "value": "yes",
-            "timestamp": 1723464684
-          }
-        }
-      },
-      "query": {
-        "bool": {
-          "must": {
-            "text_expansion": {
-              "ml.tokens": {
-                "model_id": ".elser_model_1",
-                "model_text": "backups."
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "document_id": "ibmcld_13986-0-1805",
-      "text": "\n\n\n\n\n\n\n  Backup services \n\n\n\n  IBM Cloud Backup \n\nIBM Cloud\u00ae Backup for Classic is an automated agent-based backup system that is managed through the IBM Cloud Backup for Classic WebCC browser-based management utility, providing users with a method to back up data between servers in one or more data centers on the IBM Cloud\u00ae network. Administrators can set backups to follow an hourly, daily, weekly, or custom schedule that targets full systems, specific directories, or even individual files. Extra plug-ins allow for compatibility with software like MS Exchange and MS SQL, and other types of third-party software to perform a Bare Metal Restore, when necessary.\n\nFor more information about IBM Cloud Backup for Classic services, see [Getting Started with IBM Cloud Backup for Classic services](https://cloud.ibm.com/docs/Backup?topic=Backup-getting-started).\n\n\n\n\n\n  R1Soft Continuous Data Protection \n\nContinuous Data Protection is a high-performance backup software from R1Soft that is used for backup of both physical and virtual devices. Continuous Data Protection consists of three main components: the R1Soft server, the agent, and the database plug-ins, which are available for purchase separately from the first two components. Because R1Soft Continuous Data Protection is a third-party backup solution, interactions with Continuous Data Protection take place entirely outside of IBM Cloud\u00ae proprietary interfaces. However, R1Soft Continuous Data Protection passwords can be tracked and stored within IBM Cloud console. All other interactions with R1Soft Continuous Data Protection are documented on the R1Soft website.\n\nFor more information about R1Soft Continuous Data Protection backup services, see [R1Soft Documentation](http://wiki.r1soft.com/display/ServerBackupManager/Home).\n\n\n\n\n\n\n\n\n\n",
-      "url": "https://cloud.ibm.com/docs/virtual-servers?topic=virtual-servers-backup-services",
-      "score": 13.942363,
-      "feedback": {
-        "relevant": {
-          "868c6e58-57c1-48ee-8c67-832dbedcac18": {
-            "value": "yes",
-            "timestamp": 1723465165
-          }
-        }
-      },
-      "query": {
-        "bool": {
-          "must": {
-            "text_expansion": {
-              "ml.tokens": {
-                "model_id": ".elser_model_1",
-                "model_text": "backups."
-              }
-            }
-          }
-        }
-      }
+  "user": {
+    "speaker": "user",
+    "text": "backups.",
+    "timestamp": 1723464226,
+    "enrichments": {
+      "Question Type": [
+        "Keyword"
+      ],
+      "Multi-Turn": [
+        "Follow-up"
+      ],
+      "Answerability": [
+        "ANSWERABLE"
+      ]
     }
-  ],
-  "timestamp": 1723464226
+  },
+  "agent": {
+    "speaker": "agent",
+    "text": "You always must a strategy for backing up your Block Storage for VPC volumes. Here are some considerations:Cloud Identity and Access Management (IAM) Evaluate your IAM access permissions to create and manage backups. Volumes Evaluate which volumes are most important to back up. You can create backups of boot and data volumes. A volume with numerous changes and a lengthy retention period requires more attention than a volume with moderate changes. Also, the cumulative size of all backups for a volume can't exceed 10 TB. Backup schedule Determine a backup schedule based on the type of volumes that you're backing up. For example, you might want to back up critical data that changes frequently more often than static data. Retention Determine a retention policy for backups in the backup plan. As subsequent backups are created, keep in mind that you incur costs for each backup that you retain.  You do your first backup  with a seed( a complete , a full backup)using  Delta Technology. With this technology, \"full backups\" are created at each session, but it saves enormous amounts of space on the vault and decreases the amount of time each subsequent backup takes to complete. Also . Administrators can set backups to follow an hourly, daily, weekly, or custom schedule that targets full systems, specific directories, or even individual files.",
+    "timestamp": 1723464234,
+    "contexts": [
+      {
+        "document_id": "ibmcld_09061-1334-3188",
+        "text": "\nWhen the first user authorizes a key for deletion, it remains in the [Active state](https://cloud.ibm.com/docs/key-protect?topic=key-protect-key-states) for seven days, during which all key operations are allowed on the key. To complete the deletion, another user with a Manager role can use the Key Protect GUI or API to delete the key at any point during those seven days, at which time the key will be moved to the Destroyed state. Note that because it is impossible to purge an active key, another user must delete the key before it can purged.\n* The key and its associated data will be inaccessible 90 days after being deleted. When you delete a key, it is \"soft deleted\", meaning that the key and its associated data will be restorable up to 30 days after deletion. You are able to still retrieve associated data such as key metadata, registrations, and policies for up to 90 days. After 90 days, the key becomes eligible to be automatically [purged](https://cloud.ibm.com/docs/key-protect?topic=key-protect-delete-dual-auth-keysdelete-dual-auth-keys-key-purge), or hard deleted, and its associated data will be permanently removed from the Key Protect service.\n\n\n\n\n\n\n\n Authorize deletion for a key in the console \n\n[After you enable dual authorization for an instance or key](https://cloud.ibm.com/docs/key-protect?topic=key-protect-manage-dual-auth), you can provide the first authorization to delete a key by using the Key Protect IBM Cloud console.\n\n\n\n1. [Log in to the IBM Cloud console](https://cloud.ibm.com/login/).\n2. Go to Menu > Resource List to view a list of your resources.\n3. From your IBM Cloud resource list, select your provisioned instance of Key Protect.\n4. On the application details page, use the Keys table to browse the keys in your service.\n5. Click the \u22ef icon to open a list of options for the key that you want to delete.",
+        "url": "https://cloud.ibm.com/docs/key-protect?topic=key-protect-delete-dual-auth-keys",
+        "score": 49.493065,
+        "feedback": {
+          "relevant": {
+            "868c6e58-57c1-48ee-8c67-832dbedcac18": {
+              "value": "no",
+              "timestamp": 1723464513
+            }
+          }
+        },
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "|user|: How can I delete a key?\n|assistant|: To delete a key using IBM Key Protect, you can follow these steps:\n1. Log in to the IBM Cloud console.\n2. Go to Menu > Resource List to view a list of your resources.\n3. From your IBM Cloud resource list, select your provisioned instance of Key Protect.\n4. On the application details page, use the Keys table to browse the keys in your service.\n5. Click the \u22ef icon to open a list of options for the key that you want to delete.\nPlease note that when you delete a key, it is \"soft deleted\", meaning that the key and its associated data will be restorable up to 30 days after deletion. After 90 days, the key becomes eligible to be automatically purged, or hard deleted, and its associated data will be permanently removed from the Key Protect service.\nAlso, keep in mind that deleting a key will make any data encrypted by the key inaccessible. If the key is restored within the 30-day time frame, this can be reversed. However, after 30 days, key metadata, registrations, and policies are available for up to 90 days, at which point the key becomes eligible to be purged. Once a key is no longer restorable and has been purged, its associated data can no longer be accessed.\n|user|: what happen when the first user authorizes a key for deletion?\n|assistant|: When the first user authorizes a key for deletion, it remains in the Active state for seven days. During this time, all key operations are allowed on the key. To complete the deletion, another user with a Manager role can use the Key Protect GUI or API to delete the key at any point during those seven days. Once the key is deleted, it will be moved to the Destroyed state. However, because it is impossible to purge an active key, another user must delete the key before it can be purged.\nThe key and its associated data will be inaccessible 90 days after being deleted. When you delete a key, it is \"soft deleted\", meaning that the key and its associated data will be restorable up to 30 days after deletion. You are able to still retrieve associated data such as key metadata, registrations, and policies for up to 90 days. After 90 days, the key becomes eligible to be automatically purged, or hard deleted, and its associated data will be permanently removed from the Key Protect service.\n|user|: What could happen if no action is taken by the second user and the 7-day period experies?\n|assistant|: If no action is taken by the second user and the 7-day period expires, the key will remain in the Active state and will not be deleted and you must restart the dual authorization process to delete the key . All key operations will still be allowed on the key. The key and its associated data will continue to be accessible and will not be moved to the Destroyed state. No further action can be taken to delete the key until the first user authorizes deletion again.\n|user|: In case, the server expired, Could I remove the entry from the resource list?\n|assistant|: In case  the server expire, you indeed can remove  the entry from the resource list and also  wait for the target time to trigger deletion for you, or even manually trigger the deletion from the resource reclamations.If an expired server is restored, only the entry within the resource list is restored, not the server itself.Restoring servers that belong to paid plans\nServers that belong to a paid plans do not expire, and that's why they can be restored during the reclamation period. If a server is restored, the timeframe for which the server was within the resource reclamations is billed to your account. After the server is deleted, only metadata, which isn't considered to be personal data is kept for 6 months. Make sure you back up important data for future use because you can't recover data after the virtual server has been deleted.\n\n\n|user|: Why could not I delete keys?\n|assistant|: One of the reason you could not delete a key it is when you are using the the Hyper Protect Crypto Services user interface. The service was not able to delete key \"<key_name>\". Because the key is enabled with the dual authorization policy and you set the key for deletion, a second approver needs to continue with the key deletion operation. Note that you will not be able to delete the key if it is protecting a registered IBM Cloud resource that's non-erasable due to a retention policy.\n\n\n|user|: What could happen if I force a deletion on a key?\n|assistant|: If you force a deletion on a key won't succeed if the key is protecting a registered IBM Cloud resource that's non-erasable due to a retention policy, which is a Write Once Read Many (WORM) policy set on the your IBM Cloud resource. You can verify whether a key is associated with a non-erasable resource by checking the 'preventKeyDeletion\" field in the registration details for the key. Then, you must contact an account owner to remove the retention policy on each registered IBM Cloud resource that is associated with the key before you can delete the key. However, You must use the force option to delete a root key that is registered with another cloud resource.\nRegistrations are associations between root keys and other cloud resources, such as Cloud Object Storage (COS) buckets or Cloud Databases deployments.\n|user|:  Cryptoshredding .\n|assistant|: The Cryptoshredding Key Protect provides for a force delete of a key that is in use by IBM Cloud\u00ae services, including your Cloud Databases deployments. This action is called cryptoshredding.Note that Cryptoshredding is a destructive action. When the key is deleted, your data is unrecoverable even from a soft delete state.\n|user|: backups."
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "document_id": "ibmcld_07578-1209748-1211682",
+        "text": "\nDeleting a key moves it into a Destroyed state, a \"soft\" deletion in which the key can still be seen and restored for 30 days. After 90 days, the key will be automatically purged, or \"hard deleted\", and its associated data will be permanently shredded and removed from the Key Protect service. If it is desirable that a key be purged sooner than 90 days, it is also possible to hard delete a key four hours after it has been moved into the Destroyed state.\n\nAfter a key has been deleted, any data that is encrypted by the key becomes inaccessible, though this can be reversed if the key is restored within the 30-day time frame. After 30 days, key metadata, registrations, and policies are available for up to 90 days, at which point the key becomes eligible to be purged. Note that once a key is no longer restorable and has been purged, its associated data can no longer be accessed. As a result, [destroying resources](https://cloud.ibm.com/docs/key-protect?topic=key-protect-security-and-compliancedata-deletion) is not recommended for production environments unless absolutely necessary.\n* What happens if I try to delete a key that's actively encrypting data?\n\nFor your protection, Key Protect prevents the deletion of a key that's actively encrypting data in the cloud. If you try to delete a key that's registered with a cloud resource, the action won't succeed.\n\nIf needed, you can [force deletion on a key](https://cloud.ibm.com/docs/key-protect?topic=key-protect-delete-keysdelete-keys-force-delete) by using the Key Protect APIs. [Review which resources are encrypted by the key](https://cloud.ibm.com/docs/key-protect?topic=key-protect-view-protected-resources) and verify with the owner of the resources to ensure you no longer require access to that data.\n\nIf you can't delete a key because a retention policy exists on the associated resource, contact the account owner to remove the retention policy on that resource.",
+        "url": "https://cloud.ibm.com/docs/faqs",
+        "score": 44.869015,
+        "feedback": {
+          "relevant": {
+            "868c6e58-57c1-48ee-8c67-832dbedcac18": {
+              "value": "no",
+              "timestamp": 1723464525
+            }
+          }
+        },
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "|user|: How can I delete a key?\n|assistant|: To delete a key using IBM Key Protect, you can follow these steps:\n1. Log in to the IBM Cloud console.\n2. Go to Menu > Resource List to view a list of your resources.\n3. From your IBM Cloud resource list, select your provisioned instance of Key Protect.\n4. On the application details page, use the Keys table to browse the keys in your service.\n5. Click the \u22ef icon to open a list of options for the key that you want to delete.\nPlease note that when you delete a key, it is \"soft deleted\", meaning that the key and its associated data will be restorable up to 30 days after deletion. After 90 days, the key becomes eligible to be automatically purged, or hard deleted, and its associated data will be permanently removed from the Key Protect service.\nAlso, keep in mind that deleting a key will make any data encrypted by the key inaccessible. If the key is restored within the 30-day time frame, this can be reversed. However, after 30 days, key metadata, registrations, and policies are available for up to 90 days, at which point the key becomes eligible to be purged. Once a key is no longer restorable and has been purged, its associated data can no longer be accessed.\n|user|: what happen when the first user authorizes a key for deletion?\n|assistant|: When the first user authorizes a key for deletion, it remains in the Active state for seven days. During this time, all key operations are allowed on the key. To complete the deletion, another user with a Manager role can use the Key Protect GUI or API to delete the key at any point during those seven days. Once the key is deleted, it will be moved to the Destroyed state. However, because it is impossible to purge an active key, another user must delete the key before it can be purged.\nThe key and its associated data will be inaccessible 90 days after being deleted. When you delete a key, it is \"soft deleted\", meaning that the key and its associated data will be restorable up to 30 days after deletion. You are able to still retrieve associated data such as key metadata, registrations, and policies for up to 90 days. After 90 days, the key becomes eligible to be automatically purged, or hard deleted, and its associated data will be permanently removed from the Key Protect service.\n|user|: What could happen if no action is taken by the second user and the 7-day period experies?\n|assistant|: If no action is taken by the second user and the 7-day period expires, the key will remain in the Active state and will not be deleted and you must restart the dual authorization process to delete the key . All key operations will still be allowed on the key. The key and its associated data will continue to be accessible and will not be moved to the Destroyed state. No further action can be taken to delete the key until the first user authorizes deletion again.\n|user|: In case, the server expired, Could I remove the entry from the resource list?\n|assistant|: In case  the server expire, you indeed can remove  the entry from the resource list and also  wait for the target time to trigger deletion for you, or even manually trigger the deletion from the resource reclamations.If an expired server is restored, only the entry within the resource list is restored, not the server itself.Restoring servers that belong to paid plans\nServers that belong to a paid plans do not expire, and that's why they can be restored during the reclamation period. If a server is restored, the timeframe for which the server was within the resource reclamations is billed to your account. After the server is deleted, only metadata, which isn't considered to be personal data is kept for 6 months. Make sure you back up important data for future use because you can't recover data after the virtual server has been deleted.\n\n\n|user|: Why could not I delete keys?\n|assistant|: One of the reason you could not delete a key it is when you are using the the Hyper Protect Crypto Services user interface. The service was not able to delete key \"<key_name>\". Because the key is enabled with the dual authorization policy and you set the key for deletion, a second approver needs to continue with the key deletion operation. Note that you will not be able to delete the key if it is protecting a registered IBM Cloud resource that's non-erasable due to a retention policy.\n\n\n|user|: What could happen if I force a deletion on a key?\n|assistant|: If you force a deletion on a key won't succeed if the key is protecting a registered IBM Cloud resource that's non-erasable due to a retention policy, which is a Write Once Read Many (WORM) policy set on the your IBM Cloud resource. You can verify whether a key is associated with a non-erasable resource by checking the 'preventKeyDeletion\" field in the registration details for the key. Then, you must contact an account owner to remove the retention policy on each registered IBM Cloud resource that is associated with the key before you can delete the key. However, You must use the force option to delete a root key that is registered with another cloud resource.\nRegistrations are associations between root keys and other cloud resources, such as Cloud Object Storage (COS) buckets or Cloud Databases deployments.\n|user|:  Cryptoshredding .\n|assistant|: The Cryptoshredding Key Protect provides for a force delete of a key that is in use by IBM Cloud\u00ae services, including your Cloud Databases deployments. This action is called cryptoshredding.Note that Cryptoshredding is a destructive action. When the key is deleted, your data is unrecoverable even from a soft delete state.\n|user|: backups."
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "document_id": "ibmcld_16727-1212381-1214315",
+        "text": "\nDeleting a key moves it into a Destroyed state, a \"soft\" deletion in which the key can still be seen and restored for 30 days. After 90 days, the key will be automatically purged, or \"hard deleted\", and its associated data will be permanently shredded and removed from the Key Protect service. If it is desirable that a key be purged sooner than 90 days, it is also possible to hard delete a key four hours after it has been moved into the Destroyed state.\n\nAfter a key has been deleted, any data that is encrypted by the key becomes inaccessible, though this can be reversed if the key is restored within the 30-day time frame. After 30 days, key metadata, registrations, and policies are available for up to 90 days, at which point the key becomes eligible to be purged. Note that once a key is no longer restorable and has been purged, its associated data can no longer be accessed. As a result, [destroying resources](https://cloud.ibm.com/docs/key-protect?topic=key-protect-security-and-compliancedata-deletion) is not recommended for production environments unless absolutely necessary.\n* What happens if I try to delete a key that's actively encrypting data?\n\nFor your protection, Key Protect prevents the deletion of a key that's actively encrypting data in the cloud. If you try to delete a key that's registered with a cloud resource, the action won't succeed.\n\nIf needed, you can [force deletion on a key](https://cloud.ibm.com/docs/key-protect?topic=key-protect-delete-keysdelete-keys-force-delete) by using the Key Protect APIs. [Review which resources are encrypted by the key](https://cloud.ibm.com/docs/key-protect?topic=key-protect-view-protected-resources) and verify with the owner of the resources to ensure you no longer require access to that data.\n\nIf you can't delete a key because a retention policy exists on the associated resource, contact the account owner to remove the retention policy on that resource.",
+        "url": "https://cloud.ibm.com/docs?tab=faqs",
+        "score": 44.869015,
+        "feedback": {
+          "relevant": {
+            "868c6e58-57c1-48ee-8c67-832dbedcac18": {
+              "value": "no",
+              "timestamp": 1723464528
+            }
+          }
+        },
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "|user|: How can I delete a key?\n|assistant|: To delete a key using IBM Key Protect, you can follow these steps:\n1. Log in to the IBM Cloud console.\n2. Go to Menu > Resource List to view a list of your resources.\n3. From your IBM Cloud resource list, select your provisioned instance of Key Protect.\n4. On the application details page, use the Keys table to browse the keys in your service.\n5. Click the \u22ef icon to open a list of options for the key that you want to delete.\nPlease note that when you delete a key, it is \"soft deleted\", meaning that the key and its associated data will be restorable up to 30 days after deletion. After 90 days, the key becomes eligible to be automatically purged, or hard deleted, and its associated data will be permanently removed from the Key Protect service.\nAlso, keep in mind that deleting a key will make any data encrypted by the key inaccessible. If the key is restored within the 30-day time frame, this can be reversed. However, after 30 days, key metadata, registrations, and policies are available for up to 90 days, at which point the key becomes eligible to be purged. Once a key is no longer restorable and has been purged, its associated data can no longer be accessed.\n|user|: what happen when the first user authorizes a key for deletion?\n|assistant|: When the first user authorizes a key for deletion, it remains in the Active state for seven days. During this time, all key operations are allowed on the key. To complete the deletion, another user with a Manager role can use the Key Protect GUI or API to delete the key at any point during those seven days. Once the key is deleted, it will be moved to the Destroyed state. However, because it is impossible to purge an active key, another user must delete the key before it can be purged.\nThe key and its associated data will be inaccessible 90 days after being deleted. When you delete a key, it is \"soft deleted\", meaning that the key and its associated data will be restorable up to 30 days after deletion. You are able to still retrieve associated data such as key metadata, registrations, and policies for up to 90 days. After 90 days, the key becomes eligible to be automatically purged, or hard deleted, and its associated data will be permanently removed from the Key Protect service.\n|user|: What could happen if no action is taken by the second user and the 7-day period experies?\n|assistant|: If no action is taken by the second user and the 7-day period expires, the key will remain in the Active state and will not be deleted and you must restart the dual authorization process to delete the key . All key operations will still be allowed on the key. The key and its associated data will continue to be accessible and will not be moved to the Destroyed state. No further action can be taken to delete the key until the first user authorizes deletion again.\n|user|: In case, the server expired, Could I remove the entry from the resource list?\n|assistant|: In case  the server expire, you indeed can remove  the entry from the resource list and also  wait for the target time to trigger deletion for you, or even manually trigger the deletion from the resource reclamations.If an expired server is restored, only the entry within the resource list is restored, not the server itself.Restoring servers that belong to paid plans\nServers that belong to a paid plans do not expire, and that's why they can be restored during the reclamation period. If a server is restored, the timeframe for which the server was within the resource reclamations is billed to your account. After the server is deleted, only metadata, which isn't considered to be personal data is kept for 6 months. Make sure you back up important data for future use because you can't recover data after the virtual server has been deleted.\n\n\n|user|: Why could not I delete keys?\n|assistant|: One of the reason you could not delete a key it is when you are using the the Hyper Protect Crypto Services user interface. The service was not able to delete key \"<key_name>\". Because the key is enabled with the dual authorization policy and you set the key for deletion, a second approver needs to continue with the key deletion operation. Note that you will not be able to delete the key if it is protecting a registered IBM Cloud resource that's non-erasable due to a retention policy.\n\n\n|user|: What could happen if I force a deletion on a key?\n|assistant|: If you force a deletion on a key won't succeed if the key is protecting a registered IBM Cloud resource that's non-erasable due to a retention policy, which is a Write Once Read Many (WORM) policy set on the your IBM Cloud resource. You can verify whether a key is associated with a non-erasable resource by checking the 'preventKeyDeletion\" field in the registration details for the key. Then, you must contact an account owner to remove the retention policy on each registered IBM Cloud resource that is associated with the key before you can delete the key. However, You must use the force option to delete a root key that is registered with another cloud resource.\nRegistrations are associations between root keys and other cloud resources, such as Cloud Object Storage (COS) buckets or Cloud Databases deployments.\n|user|:  Cryptoshredding .\n|assistant|: The Cryptoshredding Key Protect provides for a force delete of a key that is in use by IBM Cloud\u00ae services, including your Cloud Databases deployments. This action is called cryptoshredding.Note that Cryptoshredding is a destructive action. When the key is deleted, your data is unrecoverable even from a soft delete state.\n|user|: backups."
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "document_id": "ibmcld_07578-1295308-1297427",
+        "text": "\nWhen you create a new retention scheme or modify an existing retention, make sure that the Archiving option is not selected. Archiving is not supported.\n* What is Delta Technology?\n\nThe first backup is a \"seed\" (a complete, full backup), the next and subsequent ones are \"deltas\" (that is, changes only), but they are equivalent to, and still considered a \"full backup\". That is, you're able to restore all or any files from it. With this technology, \"full backups\" are created at each session, but it saves enormous amounts of space on the vault and decreases the amount of time each subsequent backup takes to complete.\n* Are the backups secure?\n\nBy default all encryption over the wire (OTW) is encrypted with AES 256-bit encryption. You can also choose to store data in encrypted format by using AES 256-bit.\n\nYou must remember your encryption password. Your data can't be restored without your password. If you lose your password, you can't get your data back.\n\nCompression ratios allow for zero compression to a maximum ratios compression that, depending on file type, might be compressed anywhere from 20 percent to 30 percent.\n* What information is stored with system state backups?\n\nThe system state backups include, but aren't limited to COM + class registration database, registry, boot files, system files, performance counter. It's all dependent on your system. System files vary by system O/S and service packs. Usually there are several thousand of them. MS Windows makes a dynamic list of these DLLs when you include them in the backup. By including the system files, you can recover from corrupted system files, or if you accidentally remove some service packs, or want to recover with a bare-metal restore. You can return to the state of the backup without having to reinstall the O/S from the installation kit, and then installing each service pack separately.\n\nNo user data file is included in System state backup. A system state backup job must be configured as a stand-alone job. There mustn't be any other data source that is included in the System State backup job.\n* What happens to open files?",
+        "url": "https://cloud.ibm.com/docs/faqs",
+        "score": 14.848782,
+        "feedback": {
+          "relevant": {
+            "868c6e58-57c1-48ee-8c67-832dbedcac18": {
+              "value": "yes",
+              "timestamp": 1723465194
+            }
+          }
+        },
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "backups."
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "document_id": "ibmcld_16727-1297973-1300092",
+        "text": "\nWhen you create a new retention scheme or modify an existing retention, make sure that the Archiving option is not selected. Archiving is not supported.\n* What is Delta Technology?\n\nThe first backup is a \"seed\" (a complete, full backup), the next and subsequent ones are \"deltas\" (that is, changes only), but they are equivalent to, and still considered a \"full backup\". That is, you're able to restore all or any files from it. With this technology, \"full backups\" are created at each session, but it saves enormous amounts of space on the vault and decreases the amount of time each subsequent backup takes to complete.\n* Are the backups secure?\n\nBy default all encryption over the wire (OTW) is encrypted with AES 256-bit encryption. You can also choose to store data in encrypted format by using AES 256-bit.\n\nYou must remember your encryption password. Your data can't be restored without your password. If you lose your password, you can't get your data back.\n\nCompression ratios allow for zero compression to a maximum ratios compression that, depending on file type, might be compressed anywhere from 20 percent to 30 percent.\n* What information is stored with system state backups?\n\nThe system state backups include, but aren't limited to COM + class registration database, registry, boot files, system files, performance counter. It's all dependent on your system. System files vary by system O/S and service packs. Usually there are several thousand of them. MS Windows makes a dynamic list of these DLLs when you include them in the backup. By including the system files, you can recover from corrupted system files, or if you accidentally remove some service packs, or want to recover with a bare-metal restore. You can return to the state of the backup without having to reinstall the O/S from the installation kit, and then installing each service pack separately.\n\nNo user data file is included in System state backup. A system state backup job must be configured as a stand-alone job. There mustn't be any other data source that is included in the System State backup job.\n* What happens to open files?",
+        "url": "https://cloud.ibm.com/docs?tab=faqs",
+        "score": 14.848782,
+        "feedback": {
+          "relevant": {
+            "868c6e58-57c1-48ee-8c67-832dbedcac18": {
+              "value": "yes",
+              "timestamp": 1723465092
+            }
+          }
+        },
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "backups."
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "document_id": "ibmcld_15051-7-1984",
+        "text": "\nPlanning backups \n\nWhen you plan a strategy for backing up your Block Storage for VPC volumes, you might find this checklist helpful to configure and use the backup service.\n\n\n\n Planning backups \n\nConsider the following prerequisites before you set up the VPC Backup Service.\n\n\n\nTable 1. Checklist for planning backup policies\n\n Item Considerations \n\n Cloud Identity and Access Management (IAM) Evaluate your [IAM access permissions](https://cloud.ibm.com/docs/vpc?topic=vpc-backup-service-managebaas-vpc-iam) to create and manage backups. \n Volumes Evaluate which volumes are most important to back up. You can create backups of boot and data volumes. A volume with numerous changes and a lengthy retention period requires more attention than a volume with moderate changes. Also, the cumulative size of all backups for a volume can't exceed 10 TB. \n Backup schedule Determine a backup schedule based on the type of volumes that you're backing up. For example, you might want to back up critical data that changes frequently more often than static data. \n Retention Determine a retention policy for backups in the backup plan. As subsequent backups are created, keep in mind that you incur costs for each backup that you retain. Deleting older backups keeps costs down. \n Backup plans Decide on the number of backup plans that you need for a policy. For example, you can have separate plans for daily backups, weekly, and monthly. \n Interface Choose the UI, CLI, API, or Terraform for creating and managing your backups. \n Billing Think about the number of backup snapshots that you want to take and other [billing considerations](https://cloud.ibm.com/docs/vpc?topic=vpc-snapshots-vpc-about&interface=apisnapshots_vpc_considerations) as the number of backup snapshots grows. \n Volume restore Evaluate when you might want to restore a volume from a backup. Keep in mind that restoring from a backup is a manual operation and not immediate such as a disaster recovery solution.",
+        "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-backups-vpc-planning",
+        "score": 14.370063,
+        "feedback": {
+          "relevant": {
+            "868c6e58-57c1-48ee-8c67-832dbedcac18": {
+              "value": "yes",
+              "timestamp": 1723464684
+            }
+          }
+        },
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "backups."
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "document_id": "ibmcld_13986-0-1805",
+        "text": "\n\n\n\n\n\n\n  Backup services \n\n\n\n  IBM Cloud Backup \n\nIBM Cloud\u00ae Backup for Classic is an automated agent-based backup system that is managed through the IBM Cloud Backup for Classic WebCC browser-based management utility, providing users with a method to back up data between servers in one or more data centers on the IBM Cloud\u00ae network. Administrators can set backups to follow an hourly, daily, weekly, or custom schedule that targets full systems, specific directories, or even individual files. Extra plug-ins allow for compatibility with software like MS Exchange and MS SQL, and other types of third-party software to perform a Bare Metal Restore, when necessary.\n\nFor more information about IBM Cloud Backup for Classic services, see [Getting Started with IBM Cloud Backup for Classic services](https://cloud.ibm.com/docs/Backup?topic=Backup-getting-started).\n\n\n\n\n\n  R1Soft Continuous Data Protection \n\nContinuous Data Protection is a high-performance backup software from R1Soft that is used for backup of both physical and virtual devices. Continuous Data Protection consists of three main components: the R1Soft server, the agent, and the database plug-ins, which are available for purchase separately from the first two components. Because R1Soft Continuous Data Protection is a third-party backup solution, interactions with Continuous Data Protection take place entirely outside of IBM Cloud\u00ae proprietary interfaces. However, R1Soft Continuous Data Protection passwords can be tracked and stored within IBM Cloud console. All other interactions with R1Soft Continuous Data Protection are documented on the R1Soft website.\n\nFor more information about R1Soft Continuous Data Protection backup services, see [R1Soft Documentation](http://wiki.r1soft.com/display/ServerBackupManager/Home).\n\n\n\n\n\n\n\n\n\n",
+        "url": "https://cloud.ibm.com/docs/virtual-servers?topic=virtual-servers-backup-services",
+        "score": 13.942363,
+        "feedback": {
+          "relevant": {
+            "868c6e58-57c1-48ee-8c67-832dbedcac18": {
+              "value": "yes",
+              "timestamp": 1723465165
+            }
+          }
+        },
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "backups."
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "original_text": "Backups are crucial when dealing with data and server management. It is recommended to regularly back up important data for future use because once the virtual server has been deleted, you cannot recover the data. In the context of IBM Key Protect, when you delete a key, it is \"soft deleted\", meaning that the key and its associated data will be restorable up to 30 days after deletion. However, after 90 days, the key becomes eligible to be automatically purged, or hard deleted, and its associated data will be permanently removed from the Key Protect service. Therefore, it is essential to have backups of any data encrypted by the key to avoid data loss."
+  }
 }

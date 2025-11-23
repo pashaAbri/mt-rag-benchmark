@@ -3,132 +3,140 @@
   "conversation_id": "26",
   "turn_id": 8,
   "domain": "cloud",
-  "input": "use IBM Cloudant Query",
-  "gold_answer": "IBM Cloudant Query uses Mongo-style query syntax to search for documents by using logical operators. IBM Cloudant Query is a combination of a view and a search indexFor faster performance, an IBM Cloudant Query _find must be backed by a suitable secondary index. You will be able to create an index, run a simple query, run a query with two fields and run a query with operators via IBM Cloudant Query.",
-  "enrichments": {
-    "Question Type": [
-      "Keyword"
-    ],
-    "Multi-Turn": [
-      "Follow-up"
-    ],
-    "Answerability": [
-      "ANSWERABLE"
-    ]
-  },
-  "retrieved_contexts": [
-    {
-      "document_id": "ibmcld_00539-7-1755",
-      "text": "\nUsing IBM Cloudant Query FAQ \n\n[IBM\u00ae Cloudant\u00ae for IBM Cloud\u00ae Query](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query) is an API for querying slices of data based on the values of a database's document attributes. It is a flexible API that must be used carefully to ensure that database performance can be maintained as the data size grows over time.\n\n\n\n How do I use IBM Cloudant Query? \n\nIBM Cloudant Query is accessed through the [POST /{db}/_find](https://cloud.ibm.com/apidocs/cloudantpostfind) API endpoint where the JSON specification of the query is passed in the HTTP POST body. For example, this query finds up to 10 documents where the firstname is \"Charles\" and the surname is \"Dickens\":\n\n{\n\"selector\": {\n\"firstname\": \"Charles\",\n\"surname\": \"Dickens\"\n},\n\"limit\": 10\n}\n\nFor more information, see [Selector Syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-queryselector-syntax).\n\n\n\n\n\n How do I create an index to support an IBM Cloudant Query? \n\nWithout a suitable secondary index, IBM Cloudant Query scans each document in the database in turn until it has enough matches to satisfy the query. The larger the data set and the more documents it has to scan to find matching documents, the slower the response time. For faster performance, an IBM Cloudant Query _find must be backed by a suitable secondary index. A secondary index is a pre-calculated data structure that allows IBM Cloudant to quickly jump to the slice of data it needs without scanning irrelevant documents. For the surname fields, we call the [POST /{db}/_index](https://cloud.ibm.com/apidocs/cloudantpostindex) endpoint to pass the JSON index definition as the HTTP POST body:\n\n{\n\"index\": {\n\"fields\": [\"firstname\", \"surname\"]\n},\n\"ddoc\": \"jsonindexes\",",
-      "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-faq-using-cloudant-query",
-      "score": 20.026327,
-      "feedback": {
-        "relevant": {
-          "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
-            "value": "yes",
-            "timestamp": 1724213315
-          }
-        }
-      },
-      "query": {
-        "query": {
-          "bool": {
-            "must": {
-              "text_expansion": {
-                "ml.tokens": {
-                  "model_id": ".elser_model_1",
-                  "model_text": "Using IBM Cloudant Query"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "document_id": "ibmcld_00491-1283-3050",
-      "text": "\n(Optional) [Create an acurl alias](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-working-with-curlencode-user-name-and-password).\n\n\n\nIf you decide not to set up acurl, use the following URL with curl instead of the one provided in the exercises, curl \"https://$USERNAME:$PASSWORD@$ACCOUNT.cloudant.com/databasedemo\".\n\nThe acurl alias is more secure. It prevents someone from reading your password over your shoulder as you type. It also makes sure that your password isn\u2019t sent in plain text over the network by enforcing HTTPS.\n\nNow, we're ready to learn how to run queries against the database you created in step two of [Before you begin](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-creating-an-ibm-cloudant-querybefore-you-begin-qt).\n\n\n\n\n\n Step 1: Creating an index \n\nIBM Cloudant Query uses Mongo-style query syntax to search for documents by using logical operators. IBM Cloudant Query is a combination of a view and a search index.\n\nWhen you use IBM Cloudant Query, the query planner looks at the selector (your query) to determine the correct index to choose from. In memory, you filter out the documents by the selector, which is why, even without an index, you can still query with various fields.\n\nIf no available defined index matches the specified query, then IBM Cloudant uses the _all_docs index, which looks up documents by ID. In the worst case scenario, it returns all the documents by ID (full table scan). Full table scans are expensive to process. It is recommended that you create an index.\n\nTo create an index, follow these steps:\n\n\n\n1. Copy the following sample JSON data into a file named query-demo-index.json:\n\n{\n\"index\": {\n\"fields\": [\n\"descriptionField\",\n\"temperatureField\"\n],\n\"partial_filter_selector\": {\n\"descriptionField\": {",
-      "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-creating-an-ibm-cloudant-query",
-      "score": 19.767525,
-      "feedback": {
-        "relevant": {
-          "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
-            "value": "yes",
-            "timestamp": 1724213317
-          }
-        }
-      },
-      "query": {
-        "query": {
-          "bool": {
-            "must": {
-              "text_expansion": {
-                "ml.tokens": {
-                  "model_id": ".elser_model_1",
-                  "model_text": "Using IBM Cloudant Query"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "document_id": "ibmcld_00491-3787-5406",
-      "text": "\nStep 2: Running a simple query \n\nThis example demonstrates how IBM Cloudant Query finds documents based on the descriptionField with the value boiling.\n\nTo run the query, follow these steps:\n\n\n\n1. Copy the following sample JSON into a data file named query1.json:\n\n{\n\"selector\": {\n\"descriptionField\": \"boiling\"\n}\n}\n2. Run the following command to query the database:\n\nacurl \"https://$ACCOUNT.cloudant.com/databasedemo/_find\" -X POST -H \"Content-Type: application/json\" -d @query1.json\n3. Review the query results:\n\n{\n\"docs\": [{\n\"_id\": \"91d1fa833d28efe15069604f98de701d\",\n\n\"_rev\": \"1-f998fc7b89d4466c1e7bb204b1b00f74\",\n\"numberField\": 1,\n\"nameField\": \"one\",\n\"descriptionField\": \"boiling\",\n\"temperatureField\": 100\n}],\n\"bookmark\": \"g1AAAABweJzLYWBgYMpgSmHgKy5JLCrJTq2MT8lPzkzJBYorWBqmGKYlWhgbpxhZpKalGpoamFmaGZikWVqkpJobGKaA9HHA9BGlIwsAmn8eLw\",\n\"warning\": \"No matching index found, create an index to optimize query time.\"\n}\n\n\n\nNext, you find a document in the database by using two fields.\n\n\n\n\n\n Step 3: Running a query with two fields \n\nThis example uses two fields to find a document with the values: freezing and -5.\n\nThe search is described by using a ['selector' expression](https://cloud.ibm.com/apidocs/cloudantpostfind) that looks like the following example:\n\n{\n\"selector\": {\n\"descriptionField\": \"freezing\",\n\"temperatureField\": -5\n}\n}\n\nYou can tailor the results by adding more details within the selector expression. The fields parameter specifies the fields to include with the results. In our example, the results include the nameField, descriptionField, and temperatureField, as shown in the following example.",
-      "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-creating-an-ibm-cloudant-query",
-      "score": 13.767165,
-      "feedback": {
-        "relevant": {
-          "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
-            "value": "yes",
-            "timestamp": 1724213318
-          }
-        }
-      },
-      "query": {
-        "query": {
-          "bool": {
-            "must": {
-              "text_expansion": {
-                "ml.tokens": {
-                  "model_id": ".elser_model_1",
-                  "model_text": "Step 2: Running a simple query"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "document_id": "ibmcld_00491-6023-7483",
-      "text": "\n\"bookmark\": \"g1AAAABweJzLYWBgYMpgSmHgKy5JLCrJTq2MT8lPzkzJBYorpBiYGJolWaSZmaWYpFqmGBiYmKclphhappqZmRglG5uD9HHA9BGlIwsAms8eJw\",\n\"warning\": \"No matching index found, create an index to optimize query time.\"\n}\n\n\n\nNext, you find a document in the database by using multiple operators.\n\n\n\n\n\n Step 4: Running a query with operators \n\nIn this example, the $gt (greater than) and $eq (equal) operators are used to search for documents that include a temperature that is greater than 20 degrees and a description that contains the value hot. The results include the descriptionField and temperatureField, shown in descending order by temperature.\n\nYou use a selector expression like the following example:\n\n{\n\"selector\": {\n\"temperatureField\": {\n\"$gt\": 50\n},\n\"descriptionField\": {\n\"$eq\": \"hot\"\n}\n},\n\"fields\": [\n\"descriptionField\",\n\"temperatureField\"\n],\n\"sort\": [{\n\"temperatureField\": \"desc\"\n}],\n\"use_index\": \"_design/query-demo-index\"\n}\nShow more\n\nTo run the query, follow these steps:\n\n\n\n1. Copy the following sample JSON to a file named query3.json.\n\n{\n\"selector\": {\n\"descriptionField\": {\n\"$eq\": \"hot\"\n},\n\"temperatureField\": {\n\"$gt\": 50\n}\n},\n\"fields\": [\n\"descriptionField\",\n\"temperatureField\"\n],\n\"sort\": [{\n\"temperatureField\": \"desc\"\n}],\n\"use_index\": \"_design/query-demo-index\"\n}\nShow more\n2. Run this query:\n\nacurl \"https://$ACCOUNT.cloudant.com/databasedemo/_find\" -X POST -H \"Content-Type: application/json\" -d @query3.json\n3. Review the query results:\n\n{\n\"docs\": [{",
-      "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-creating-an-ibm-cloudant-query",
-      "score": 15.878329,
-      "feedback": {
-        "relevant": {
-          "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
-            "value": "yes",
-            "timestamp": 1724213320
-          }
-        }
-      },
-      "query": {
-        "query": {
-          "bool": {
-            "must": {
-              "text_expansion": {
-                "ml.tokens": {
-                  "model_id": ".elser_model_1",
-                  "model_text": "Running a query with operators"
-                }
-              }
-            }
-          }
-        }
-      }
+  "user": {
+    "speaker": "user",
+    "text": "use IBM Cloudant Query",
+    "timestamp": 1724213178,
+    "enrichments": {
+      "Question Type": [
+        "Keyword"
+      ],
+      "Multi-Turn": [
+        "Follow-up"
+      ],
+      "Answerability": [
+        "ANSWERABLE"
+      ]
     }
-  ],
-  "timestamp": 1724213178
+  },
+  "agent": {
+    "speaker": "agent",
+    "text": "IBM Cloudant Query uses Mongo-style query syntax to search for documents by using logical operators. IBM Cloudant Query is a combination of a view and a search indexFor faster performance, an IBM Cloudant Query _find must be backed by a suitable secondary index. You will be able to create an index, run a simple query, run a query with two fields and run a query with operators via IBM Cloudant Query.",
+    "timestamp": 1724213184,
+    "contexts": [
+      {
+        "document_id": "ibmcld_00539-7-1755",
+        "text": "\nUsing IBM Cloudant Query FAQ \n\n[IBM\u00ae Cloudant\u00ae for IBM Cloud\u00ae Query](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query) is an API for querying slices of data based on the values of a database's document attributes. It is a flexible API that must be used carefully to ensure that database performance can be maintained as the data size grows over time.\n\n\n\n How do I use IBM Cloudant Query? \n\nIBM Cloudant Query is accessed through the [POST /{db}/_find](https://cloud.ibm.com/apidocs/cloudantpostfind) API endpoint where the JSON specification of the query is passed in the HTTP POST body. For example, this query finds up to 10 documents where the firstname is \"Charles\" and the surname is \"Dickens\":\n\n{\n\"selector\": {\n\"firstname\": \"Charles\",\n\"surname\": \"Dickens\"\n},\n\"limit\": 10\n}\n\nFor more information, see [Selector Syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-queryselector-syntax).\n\n\n\n\n\n How do I create an index to support an IBM Cloudant Query? \n\nWithout a suitable secondary index, IBM Cloudant Query scans each document in the database in turn until it has enough matches to satisfy the query. The larger the data set and the more documents it has to scan to find matching documents, the slower the response time. For faster performance, an IBM Cloudant Query _find must be backed by a suitable secondary index. A secondary index is a pre-calculated data structure that allows IBM Cloudant to quickly jump to the slice of data it needs without scanning irrelevant documents. For the surname fields, we call the [POST /{db}/_index](https://cloud.ibm.com/apidocs/cloudantpostindex) endpoint to pass the JSON index definition as the HTTP POST body:\n\n{\n\"index\": {\n\"fields\": [\"firstname\", \"surname\"]\n},\n\"ddoc\": \"jsonindexes\",",
+        "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-faq-using-cloudant-query",
+        "score": 20.026327,
+        "feedback": {
+          "relevant": {
+            "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+              "value": "yes",
+              "timestamp": 1724213315
+            }
+          }
+        },
+        "query": {
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Using IBM Cloudant Query"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "document_id": "ibmcld_00491-1283-3050",
+        "text": "\n(Optional) [Create an acurl alias](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-working-with-curlencode-user-name-and-password).\n\n\n\nIf you decide not to set up acurl, use the following URL with curl instead of the one provided in the exercises, curl \"https://$USERNAME:$PASSWORD@$ACCOUNT.cloudant.com/databasedemo\".\n\nThe acurl alias is more secure. It prevents someone from reading your password over your shoulder as you type. It also makes sure that your password isn\u2019t sent in plain text over the network by enforcing HTTPS.\n\nNow, we're ready to learn how to run queries against the database you created in step two of [Before you begin](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-creating-an-ibm-cloudant-querybefore-you-begin-qt).\n\n\n\n\n\n Step 1: Creating an index \n\nIBM Cloudant Query uses Mongo-style query syntax to search for documents by using logical operators. IBM Cloudant Query is a combination of a view and a search index.\n\nWhen you use IBM Cloudant Query, the query planner looks at the selector (your query) to determine the correct index to choose from. In memory, you filter out the documents by the selector, which is why, even without an index, you can still query with various fields.\n\nIf no available defined index matches the specified query, then IBM Cloudant uses the _all_docs index, which looks up documents by ID. In the worst case scenario, it returns all the documents by ID (full table scan). Full table scans are expensive to process. It is recommended that you create an index.\n\nTo create an index, follow these steps:\n\n\n\n1. Copy the following sample JSON data into a file named query-demo-index.json:\n\n{\n\"index\": {\n\"fields\": [\n\"descriptionField\",\n\"temperatureField\"\n],\n\"partial_filter_selector\": {\n\"descriptionField\": {",
+        "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-creating-an-ibm-cloudant-query",
+        "score": 19.767525,
+        "feedback": {
+          "relevant": {
+            "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+              "value": "yes",
+              "timestamp": 1724213317
+            }
+          }
+        },
+        "query": {
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Using IBM Cloudant Query"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "document_id": "ibmcld_00491-3787-5406",
+        "text": "\nStep 2: Running a simple query \n\nThis example demonstrates how IBM Cloudant Query finds documents based on the descriptionField with the value boiling.\n\nTo run the query, follow these steps:\n\n\n\n1. Copy the following sample JSON into a data file named query1.json:\n\n{\n\"selector\": {\n\"descriptionField\": \"boiling\"\n}\n}\n2. Run the following command to query the database:\n\nacurl \"https://$ACCOUNT.cloudant.com/databasedemo/_find\" -X POST -H \"Content-Type: application/json\" -d @query1.json\n3. Review the query results:\n\n{\n\"docs\": [{\n\"_id\": \"91d1fa833d28efe15069604f98de701d\",\n\n\"_rev\": \"1-f998fc7b89d4466c1e7bb204b1b00f74\",\n\"numberField\": 1,\n\"nameField\": \"one\",\n\"descriptionField\": \"boiling\",\n\"temperatureField\": 100\n}],\n\"bookmark\": \"g1AAAABweJzLYWBgYMpgSmHgKy5JLCrJTq2MT8lPzkzJBYorWBqmGKYlWhgbpxhZpKalGpoamFmaGZikWVqkpJobGKaA9HHA9BGlIwsAmn8eLw\",\n\"warning\": \"No matching index found, create an index to optimize query time.\"\n}\n\n\n\nNext, you find a document in the database by using two fields.\n\n\n\n\n\n Step 3: Running a query with two fields \n\nThis example uses two fields to find a document with the values: freezing and -5.\n\nThe search is described by using a ['selector' expression](https://cloud.ibm.com/apidocs/cloudantpostfind) that looks like the following example:\n\n{\n\"selector\": {\n\"descriptionField\": \"freezing\",\n\"temperatureField\": -5\n}\n}\n\nYou can tailor the results by adding more details within the selector expression. The fields parameter specifies the fields to include with the results. In our example, the results include the nameField, descriptionField, and temperatureField, as shown in the following example.",
+        "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-creating-an-ibm-cloudant-query",
+        "score": 13.767165,
+        "feedback": {
+          "relevant": {
+            "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+              "value": "yes",
+              "timestamp": 1724213318
+            }
+          }
+        },
+        "query": {
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Step 2: Running a simple query"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "document_id": "ibmcld_00491-6023-7483",
+        "text": "\n\"bookmark\": \"g1AAAABweJzLYWBgYMpgSmHgKy5JLCrJTq2MT8lPzkzJBYorpBiYGJolWaSZmaWYpFqmGBiYmKclphhappqZmRglG5uD9HHA9BGlIwsAms8eJw\",\n\"warning\": \"No matching index found, create an index to optimize query time.\"\n}\n\n\n\nNext, you find a document in the database by using multiple operators.\n\n\n\n\n\n Step 4: Running a query with operators \n\nIn this example, the $gt (greater than) and $eq (equal) operators are used to search for documents that include a temperature that is greater than 20 degrees and a description that contains the value hot. The results include the descriptionField and temperatureField, shown in descending order by temperature.\n\nYou use a selector expression like the following example:\n\n{\n\"selector\": {\n\"temperatureField\": {\n\"$gt\": 50\n},\n\"descriptionField\": {\n\"$eq\": \"hot\"\n}\n},\n\"fields\": [\n\"descriptionField\",\n\"temperatureField\"\n],\n\"sort\": [{\n\"temperatureField\": \"desc\"\n}],\n\"use_index\": \"_design/query-demo-index\"\n}\nShow more\n\nTo run the query, follow these steps:\n\n\n\n1. Copy the following sample JSON to a file named query3.json.\n\n{\n\"selector\": {\n\"descriptionField\": {\n\"$eq\": \"hot\"\n},\n\"temperatureField\": {\n\"$gt\": 50\n}\n},\n\"fields\": [\n\"descriptionField\",\n\"temperatureField\"\n],\n\"sort\": [{\n\"temperatureField\": \"desc\"\n}],\n\"use_index\": \"_design/query-demo-index\"\n}\nShow more\n2. Run this query:\n\nacurl \"https://$ACCOUNT.cloudant.com/databasedemo/_find\" -X POST -H \"Content-Type: application/json\" -d @query3.json\n3. Review the query results:\n\n{\n\"docs\": [{",
+        "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-creating-an-ibm-cloudant-query",
+        "score": 15.878329,
+        "feedback": {
+          "relevant": {
+            "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+              "value": "yes",
+              "timestamp": 1724213320
+            }
+          }
+        },
+        "query": {
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Running a query with operators"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "original_text": "Sure! To use IBM Cloudant Query, you need to access it through the `POST /{db}/_find` API endpoint and pass the JSON specification of the query in the HTTP POST body. Here's an example query that finds up to 10 documents where the `firstname` is \"Charles\" and the `surname` is \"Dickens\":\n```json\n{\n \"selector\": {\n   \"firstname\": \"Charles\",\n   \"surname\": \"Dickens\"\n },\n \"limit\": 10\n}\n```\nFor faster performance, it's recommended to create a secondary index to support the query. You can create an index by calling the `POST /{db}/_index` endpoint and passing the JSON index definition as the HTTP POST body. For example, to create an index for the `firstname` and `surname` fields, you can use the following JSON definition:\n```json\n{\n \"index\": {\n   \"fields\": [\"firstname\", \"surname\"]\n },\n \"ddoc\": \"jsonindexes\"\n}\n```\nFor more information, you can refer to the Selector Syntax documentation for the query syntax and the Indexing documentation for creating indexes."
+  }
 }

@@ -3,104 +3,112 @@
   "conversation_id": "63",
   "turn_id": 4,
   "domain": "cloud",
-  "input": "VPC",
-  "gold_answer": "The IBM Cloud\u00ae Virtual Private Cloud is a virtual network connected to your customer account. It allows you to have precise control over your virtual infrastructure and network traffic segmentation. This provides cloud security and the flexibility to scale as needed. With IBM Cloud\u00ae Virtual Private Cloud, you can create your own space within IBM Cloud\u00ae. A virtual private cloud (VPC) is a secure, isolated virtual network that blends the security of a private cloud with the scalability and accessibility of IBM's public cloud. The Virtual Private Cloud (VPC) ensures network isolation and security within the IBM Cloud. It can serve as a foundational unit that encompasses a business division (such as marketing, development, accounting) or a set of microservices managed by a DevSecOps team.\n",
-  "enrichments": {
-    "Question Type": [
-      "Keyword"
-    ],
-    "Multi-Turn": [
-      "Clarification"
-    ],
-    "Answerability": [
-      "ANSWERABLE"
-    ]
-  },
-  "retrieved_contexts": [
-    {
-      "document_id": "ibmcld_14762-7-2008",
-      "text": "\nVirtual Private Cloud overview \n\nThe IBM Cloud\u00ae Virtual Private Cloud is a virtual network that is linked to your customer account. It gives you cloud security, with the ability to scale dynamically, by providing fine-grained control over your virtual infrastructure and your network traffic segmentation.\n\nEach VPC is deployed to a single region. Within that region, the VPC can span multiple zones.\n\nIBM Cloud virtual or IBM Cloud bare metal server presented in your VPC is attached to subnets. Subnets within the VPC offer private connectivity, thus your servers can communicate within and between the subnets by using an implicit router. Subnets in your VPC can connect to the public internet through an optional public gateway, or you can assign floating IP addresses to any network interface of the servers.\n\nThe following diagram shows an overview of IBM Cloud VPC.\n\nZoom\n\n![IBM VPC connectivity and security](https://cloud.ibm.com/docs-content/v1/content/5bdb37c0149145723c5437e8176651928565e722/vmwaresolutions/images/vpc-ryo-diagrams-overview-virtual.svg)\n\nFigure 1. IBM Cloud VPC connectivity and security\n\nReview the following concepts to understand how IBM Cloud VPC is constructed. The terminology is used throughout this architecture solution.\n\nA region is an abstraction that is related to the geographic area in which a VPC is deployed. Each region contains multiple zones, which represent independent fault domains. A VPC can span multiple zones within its assigned region. A region is also often referred to a multizone region or MZR.\n\nA zone is an abstraction that refers to the physical data center, which hosts the compute, network, storage resources, and the related cooling and power, which provides services and applications. Zones are isolated from each other, so to create no shared single point of failure, improved fault tolerance, and reduced latency. Each zone is assigned a default address prefix, which specifies the range of addresses in which subnets can be created.",
-      "url": "https://cloud.ibm.com/docs/vmwaresolutions?topic=vmwaresolutions-vpc-ryo-vpc",
-      "score": 24.682812,
-      "feedback": {
-        "relevant": {
-          "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
-            "value": "yes",
-            "timestamp": 1723541839
-          }
-        }
-      },
-      "query": {
-        "query": {
-          "bool": {
-            "must": {
-              "text_expansion": {
-                "ml.tokens": {
-                  "model_id": ".elser_model_1",
-                  "model_text": "What is a virtual private cloud?"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "document_id": "ibmcld_16729-187656-189537",
-      "text": "\nA Virtual Private Cloud (VPC) provides network isolation and security in the IBM Cloud. A VPC can be a building block that encapsulates a corporate division (marketing, development, accounting, ...) or a collection of microservices owned by a DevSecOps team. VPCs can be connected to an on-premises enterprise and each other. This may create the need to route traffic through centralized firewall-gateway appliances. This tutorial will walk through the implementation of a hub and spoke architecture depicted in this high-level view:\n\nVirtual Private Cloud (VPC) Transit Gateway\n\n+1\n\nDirect Link on Classic\n\n\n\n* 2 hours\n* 2023-05-05\n\n\n\n[Centralize communication through a VPC Transit Hub and Spoke architecture - Part two](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vpc-transit2)Centralize communication through a VPC Transit Hub and Spoke architecture - Part two\n\nA layered architecture will introduce resources and demonstrate connectivity. Each layer will add additional connectivity and resources. The layers are implemented in Terraform. It will be possible to change parameters, like number of zones, by changing a Terraform variable. A layered approach allows the tutorial to introduce small problems and demonstrate a solution in the context of a complete architecture.\n\nVirtual Private Cloud (VPC) Transit Gateway\n\n+4\n\nDirect Link on Classic,DNS Services,IBM Cloud Databases,Databases For Redis\n\n\n\n* 2 hours\n* 2023-05-05\n\n\n\n[Connecting Locations with IBM Cloud using Direct Link](https://cloud.ibm.com/docs/satellite?topic=satellite-direct-link-tutorial)Connecting Locations with IBM Cloud using Direct Link\n\nUse a secure IBM Cloud\u00ae Direct Link connection for Satellite Link communications between your services running in an IBM Cloud Satellite\u00ae Location and IBM Cloud\u00ae.\n\nSatellite Kubernetes service\n\n+1\n\nDirect Link\n\n\n\n* 2 hours\n* 2023-07-05",
-      "url": "https://cloud.ibm.com/docs?tab=tutorials",
-      "score": 24.934782,
-      "feedback": {
-        "relevant": {
-          "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
-            "value": "yes",
-            "timestamp": 1723541836
-          }
-        }
-      },
-      "query": {
-        "query": {
-          "bool": {
-            "must": {
-              "text_expansion": {
-                "ml.tokens": {
-                  "model_id": ".elser_model_1",
-                  "model_text": "What is a virtual private cloud?"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "document_id": "ibmcld_14916-7-2291",
-      "text": "\nOverview \n\nUse IBM Cloud\u00ae Virtual Private Cloud to create your own space in IBM Cloud\u00ae. A virtual private cloud (VPC) is a secure, isolated virtual network that combines the security of a private cloud with the availability and scalability of IBM's public cloud.\n\n\n\n Logical isolation \n\nVPC gives your applications logical isolation from other networks, while providing scalability and security. To make this logical isolation possible, the VPC is divided into subnets that use a range of private IP addresses. You can create subnets in suggested prefix ranges, or bring your own public IP address range (BYOIP) to your IBM Cloud account. By default, all resources within the same VPC can communicate with each other over the private network, regardless of their subnet.\n\n\n\n\n\n Quick instance provisioning with high network performance \n\nYou can quickly provision scalable compute resources in your VPC by creating virtual server instances with the core and RAM configuration that's best for your workload. You can select from the supported stock images or custom images that were imported from IBM Cloud Object Storage. All images are cloud-init enabled. You can connect to your instance without using a password by adding SSH keys.\n\nYou can create instances with up to 80 Gbps network bandwidth per instance. Each instance can be multi-homed, that is, you can create multiple network interfaces per instance.\n\n\n\n\n\n Multi-architecture images \n\nYou can choose to create virtual server instances with different operating systems on x86_64 or s390x processor architecture. For more information, see [Images](https://cloud.ibm.com/docs/vpc?topic=vpc-about-images).\n\n\n\n\n\n Storage capabilities \n\nWhen you create an instance, a 100 GB block storage volume is automatically attached as a primary boot volume. To add secondary data volumes to your instance, create block storage volumes.\n\n\n\n\n\n External connectivity \n\nSeveral options are available for enabling your instances to communicate with the public internet:\n\n\n\n* To enable all instances in a subnet to send outgoing traffic, attach a public gateway to the subnet.\n* To enable communication to and from a particular instance, independent of whether the subnet is attached to a public gateway, associate the instance with a floating IP.",
-      "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-about-vpc",
-      "score": 26.346514,
-      "feedback": {
-        "relevant": {
-          "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
-            "value": "yes",
-            "timestamp": 1723541834
-          }
-        }
-      },
-      "query": {
-        "query": {
-          "bool": {
-            "must": {
-              "text_expansion": {
-                "ml.tokens": {
-                  "model_id": ".elser_model_1",
-                  "model_text": "What is a virtual private cloud?"
-                }
-              }
-            }
-          }
-        }
-      }
+  "user": {
+    "speaker": "user",
+    "text": "VPC",
+    "timestamp": 1723541556,
+    "enrichments": {
+      "Question Type": [
+        "Keyword"
+      ],
+      "Multi-Turn": [
+        "Clarification"
+      ],
+      "Answerability": [
+        "ANSWERABLE"
+      ]
     }
-  ],
-  "timestamp": 1723541556
+  },
+  "agent": {
+    "speaker": "agent",
+    "text": "The IBM Cloud\u00ae Virtual Private Cloud is a virtual network connected to your customer account. It allows you to have precise control over your virtual infrastructure and network traffic segmentation. This provides cloud security and the flexibility to scale as needed. With IBM Cloud\u00ae Virtual Private Cloud, you can create your own space within IBM Cloud\u00ae. A virtual private cloud (VPC) is a secure, isolated virtual network that blends the security of a private cloud with the scalability and accessibility of IBM's public cloud. The Virtual Private Cloud (VPC) ensures network isolation and security within the IBM Cloud. It can serve as a foundational unit that encompasses a business division (such as marketing, development, accounting) or a set of microservices managed by a DevSecOps team.\n",
+    "timestamp": 1723541562,
+    "contexts": [
+      {
+        "document_id": "ibmcld_14762-7-2008",
+        "text": "\nVirtual Private Cloud overview \n\nThe IBM Cloud\u00ae Virtual Private Cloud is a virtual network that is linked to your customer account. It gives you cloud security, with the ability to scale dynamically, by providing fine-grained control over your virtual infrastructure and your network traffic segmentation.\n\nEach VPC is deployed to a single region. Within that region, the VPC can span multiple zones.\n\nIBM Cloud virtual or IBM Cloud bare metal server presented in your VPC is attached to subnets. Subnets within the VPC offer private connectivity, thus your servers can communicate within and between the subnets by using an implicit router. Subnets in your VPC can connect to the public internet through an optional public gateway, or you can assign floating IP addresses to any network interface of the servers.\n\nThe following diagram shows an overview of IBM Cloud VPC.\n\nZoom\n\n![IBM VPC connectivity and security](https://cloud.ibm.com/docs-content/v1/content/5bdb37c0149145723c5437e8176651928565e722/vmwaresolutions/images/vpc-ryo-diagrams-overview-virtual.svg)\n\nFigure 1. IBM Cloud VPC connectivity and security\n\nReview the following concepts to understand how IBM Cloud VPC is constructed. The terminology is used throughout this architecture solution.\n\nA region is an abstraction that is related to the geographic area in which a VPC is deployed. Each region contains multiple zones, which represent independent fault domains. A VPC can span multiple zones within its assigned region. A region is also often referred to a multizone region or MZR.\n\nA zone is an abstraction that refers to the physical data center, which hosts the compute, network, storage resources, and the related cooling and power, which provides services and applications. Zones are isolated from each other, so to create no shared single point of failure, improved fault tolerance, and reduced latency. Each zone is assigned a default address prefix, which specifies the range of addresses in which subnets can be created.",
+        "url": "https://cloud.ibm.com/docs/vmwaresolutions?topic=vmwaresolutions-vpc-ryo-vpc",
+        "score": 24.682812,
+        "feedback": {
+          "relevant": {
+            "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+              "value": "yes",
+              "timestamp": 1723541839
+            }
+          }
+        },
+        "query": {
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "What is a virtual private cloud?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "document_id": "ibmcld_16729-187656-189537",
+        "text": "\nA Virtual Private Cloud (VPC) provides network isolation and security in the IBM Cloud. A VPC can be a building block that encapsulates a corporate division (marketing, development, accounting, ...) or a collection of microservices owned by a DevSecOps team. VPCs can be connected to an on-premises enterprise and each other. This may create the need to route traffic through centralized firewall-gateway appliances. This tutorial will walk through the implementation of a hub and spoke architecture depicted in this high-level view:\n\nVirtual Private Cloud (VPC) Transit Gateway\n\n+1\n\nDirect Link on Classic\n\n\n\n* 2 hours\n* 2023-05-05\n\n\n\n[Centralize communication through a VPC Transit Hub and Spoke architecture - Part two](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vpc-transit2)Centralize communication through a VPC Transit Hub and Spoke architecture - Part two\n\nA layered architecture will introduce resources and demonstrate connectivity. Each layer will add additional connectivity and resources. The layers are implemented in Terraform. It will be possible to change parameters, like number of zones, by changing a Terraform variable. A layered approach allows the tutorial to introduce small problems and demonstrate a solution in the context of a complete architecture.\n\nVirtual Private Cloud (VPC) Transit Gateway\n\n+4\n\nDirect Link on Classic,DNS Services,IBM Cloud Databases,Databases For Redis\n\n\n\n* 2 hours\n* 2023-05-05\n\n\n\n[Connecting Locations with IBM Cloud using Direct Link](https://cloud.ibm.com/docs/satellite?topic=satellite-direct-link-tutorial)Connecting Locations with IBM Cloud using Direct Link\n\nUse a secure IBM Cloud\u00ae Direct Link connection for Satellite Link communications between your services running in an IBM Cloud Satellite\u00ae Location and IBM Cloud\u00ae.\n\nSatellite Kubernetes service\n\n+1\n\nDirect Link\n\n\n\n* 2 hours\n* 2023-07-05",
+        "url": "https://cloud.ibm.com/docs?tab=tutorials",
+        "score": 24.934782,
+        "feedback": {
+          "relevant": {
+            "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+              "value": "yes",
+              "timestamp": 1723541836
+            }
+          }
+        },
+        "query": {
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "What is a virtual private cloud?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "document_id": "ibmcld_14916-7-2291",
+        "text": "\nOverview \n\nUse IBM Cloud\u00ae Virtual Private Cloud to create your own space in IBM Cloud\u00ae. A virtual private cloud (VPC) is a secure, isolated virtual network that combines the security of a private cloud with the availability and scalability of IBM's public cloud.\n\n\n\n Logical isolation \n\nVPC gives your applications logical isolation from other networks, while providing scalability and security. To make this logical isolation possible, the VPC is divided into subnets that use a range of private IP addresses. You can create subnets in suggested prefix ranges, or bring your own public IP address range (BYOIP) to your IBM Cloud account. By default, all resources within the same VPC can communicate with each other over the private network, regardless of their subnet.\n\n\n\n\n\n Quick instance provisioning with high network performance \n\nYou can quickly provision scalable compute resources in your VPC by creating virtual server instances with the core and RAM configuration that's best for your workload. You can select from the supported stock images or custom images that were imported from IBM Cloud Object Storage. All images are cloud-init enabled. You can connect to your instance without using a password by adding SSH keys.\n\nYou can create instances with up to 80 Gbps network bandwidth per instance. Each instance can be multi-homed, that is, you can create multiple network interfaces per instance.\n\n\n\n\n\n Multi-architecture images \n\nYou can choose to create virtual server instances with different operating systems on x86_64 or s390x processor architecture. For more information, see [Images](https://cloud.ibm.com/docs/vpc?topic=vpc-about-images).\n\n\n\n\n\n Storage capabilities \n\nWhen you create an instance, a 100 GB block storage volume is automatically attached as a primary boot volume. To add secondary data volumes to your instance, create block storage volumes.\n\n\n\n\n\n External connectivity \n\nSeveral options are available for enabling your instances to communicate with the public internet:\n\n\n\n* To enable all instances in a subnet to send outgoing traffic, attach a public gateway to the subnet.\n* To enable communication to and from a particular instance, independent of whether the subnet is attached to a public gateway, associate the instance with a floating IP.",
+        "url": "https://cloud.ibm.com/docs/vpc?topic=vpc-about-vpc",
+        "score": 26.346514,
+        "feedback": {
+          "relevant": {
+            "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+              "value": "yes",
+              "timestamp": 1723541834
+            }
+          }
+        },
+        "query": {
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "What is a virtual private cloud?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "original_text": "VPC stands for Virtual Private Cloud. It is a networking service that enables you to define a virtual network within the IBM Cloud. With a VPC, you can create and manage virtual servers, subnets, and security groups, among other resources. This virtual network is isolated from other networks and provides you with complete control over your virtual environment. By using VPC, you can create and configure a virtual network according to your needs, including selecting IP address ranges, configuring routes, setting up firewalls, and attaching additional services. This allows you to build a secure and scalable infrastructure for your applications and workloads."
+  }
 }

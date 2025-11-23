@@ -3,105 +3,113 @@
   "conversation_id": "44",
   "turn_id": 7,
   "domain": "cloud",
-  "input": "Do I need scripts? ",
-  "gold_answer": "Yes. Custom scripts are extension points in the pipeline where adopters, teams, and users can provide scripts to run custom tasks needed for their continuous integration and deployment strategies. These custom scripts control the pipeline stages. You can configure the behavior of stages, script content, and the base image that runs the scripts using a configuration file (pipeline-config.yaml). The scripts and configuration for pipeline stages are loaded from a Git repository (repo), which can be either the application (app) repo (similar to .travis.yml or Jenkinsfile) or a custom repo.\nWhen any of the custom scripts start, the complete URL of the custom script file, including the file name and the commit hash, is printed at the beginning of the pipeline logs as follows: \"The custom script can be viewed using the following link: 'https://<URL>/blob/<commit hash>/.pipeline-config.yaml'\". This improves traceability. The scripts are designed to create a new VPC and install the SAP (SAP NW 7.x release) solution and its dedicated DB SAP HANA box in one task flow. They create a Schematics workspace for you where you can view your script logs and the resources that are provisioned.",
-  "enrichments": {
-    "Question Type": [
-      "Factoid",
-      "Summarization"
-    ],
-    "Multi-Turn": [
-      "Follow-up"
-    ],
-    "Answerability": [
-      "ANSWERABLE"
-    ]
-  },
-  "retrieved_contexts": [
-    {
-      "document_id": "ibmcld_11573-4755-6312",
-      "text": "\nThe scripts are designed to create a new VPC and install SAP (SAP NW 7.x release) solution together with its dedicated DB SAP HANA box in one task flow.\n\n\n\n\n\n SAP Kits \n\nFor each IBM Cloud region, IBM allocates temporary storage on a dedicated temporary Deployment server (Bastion Server) that is used for terraform environment. It is your responsibility to download the necessary SAP and DB kits to your Deployment (Bastion) Server. All file archives are decompressed by Ansible during the automatic deploying process. For more information, see the readme file in the dedicated GitHub repository.\n\n\n\n\n\n Terraform deployment \n\nThe configuration and script files are provided on the GitHub repository:\n\n\n\n* For JAVA stack : [https://github.com/IBM-Cloud/sap-netweaver-java-hana](https://github.com/IBM-Cloud/sap-netweaver-java-hana).\n* For ABAP stack : [https://github.com/IBM-Cloud/sap-netweaver-abap-hana](https://github.com/IBM-Cloud/sap-netweaver-abap-hana)\n\n\n\nFor SAP HANA stand-alone virtual server instance on IBM Cloud Virtual Private Cloud, you modify the:\n\n\n\n* The input.auto.tfvars file to customize the resources for your solution. You specify zones, resource names, SSH keys, and SAP variables.\n\n\n\nAll of the other configuration files are provided and do not need to be modified.\n\n\n\n\n\n Schematics deployment \n\nThe configuration and script files are provided on the GitHub repository:\n\n\n\n* ABAP: [https://github.com/IBM-Cloud/sap-netweaver-abap-hana/tree/main/schematics](https://github.com/IBM-Cloud/sap-netweaver-abap-hana/tree/main/schematics)",
-      "url": "https://cloud.ibm.com/docs/sap?topic=sap-create-terraform-3tier-nw-hana-vpc-ansible",
-      "score": 10.792313,
-      "feedback": {
-        "relevant": {
-          "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
-            "value": "yes",
-            "timestamp": 1724168295
-          }
-        }
-      },
-      "query": {
-        "query": {
-          "bool": {
-            "must": {
-              "text_expansion": {
-                "ml.tokens": {
-                  "model_id": ".elser_model_1",
-                  "model_text": "Scripts"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "document_id": "ibmcld_06836-7-1886",
-      "text": "\nCustom scripts \n\nCustom scripts are extension points in the pipeline where adopters, teams, and users can provide scripts to run custom tasks that are required by their continuous integration and continuous deployment strategies.\n\nCustom scripts control the pipeline stages. You can use a configuration file (pipeline-config.yaml) to configure the behavior of stages, script content, and the base image that runs the scripts. The scripts and configuration for pipeline stages are loaded from a Git repository (repo) that can either be the application (app) repo (similar to .travis.yml or Jenkinsfile) or a custom repo.\n\nWhen any of the custom scripts are started, the complete URL of the custom script file, including the file name and the commit hash, is printed at the beginning of the pipeline logs as follows: The custom script can be viewed using the following link: 'https://<source repo url>/<organization name>/<repository name>/blob/<commit hash>/.pipeline-config.yaml'. This positioning improves traceability.\n\n\n\n Stages \n\nStages in pull request, continuous integration, and continuous deployment pipelines run custom scripts.\n\n\n\n* Pull request pipeline stages: setup, test, and finish. For more information, see [Pull request pipeline](https://cloud.ibm.com/docs/devsecops?topic=devsecops-cd-devsecops-pr-pipeline).\n* Continuous integration pipeline stages: setup, peer-review, test, static-scan, containerize, sign-artifact, deploy, acceptance-test, scan-artifact, release, and finish. For more information, see [Continuous integration pipeline](https://cloud.ibm.com/docs/devsecops?topic=devsecops-cd-devsecops-ci-pipeline).\n* continuous deployment pipeline stages: setup, verify-artifact, deploy, acceptance-test, and finish. For more information, see [continuous deployment pipeline](https://cloud.ibm.com/docs/devsecops?topic=devsecops-cd-devsecops-cd-pipeline).",
-      "url": "https://cloud.ibm.com/docs/devsecops?topic=devsecops-custom-scripts",
-      "score": 10.402259,
-      "feedback": {
-        "relevant": {
-          "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
-            "value": "yes",
-            "timestamp": 1724169358
-          }
-        }
-      },
-      "query": {
-        "query": {
-          "bool": {
-            "must": {
-              "text_expansion": {
-                "ml.tokens": {
-                  "model_id": ".elser_model_1",
-                  "model_text": "Scripts"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "document_id": "ibmcld_04262-10472-11599",
-      "text": "\nThe scripts create a Schematics workspace for you where you can see your script logs and the resources that are provisioned.\n\nIf you want to further customize your resources, you select Enable configuration customization after 'Create' and then Create. The scripts create the Schematics workspace for you and show you the parameters that you can customize. After you are done customizing the parameters, you select Generate Plan then Apply plan. The Terraform scripts run and create your resources.\n\nFor more information about Schematics, see [Getting started: IBM Cloud Schematics](https://cloud.ibm.com/docs/schematics?topic=schematics-getting-started).\n\n\n\n\n\n Next steps \n\nAs the components are provisioned, you are directed to the Schematics workspace page for your deployment, where you can view the script logs.\n\nAfter the Citrix DaaS for IBM Cloud components are provisioned, you need to complete a few post-provisioning steps to get you up and running. For more information, see [Post-provisioning steps for Citrix DaaS on VPC](https://cloud.ibm.com/docs/citrix-daas?topic=citrix-daas-post-provisioning-citrix-daas-vpc).",
-      "url": "https://cloud.ibm.com/docs/citrix-daas?topic=citrix-daas-provisioning-citrix-daas-vpc",
-      "score": 9.922723,
-      "feedback": {
-        "relevant": {
-          "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
-            "value": "yes",
-            "timestamp": 1724168233
-          }
-        }
-      },
-      "query": {
-        "query": {
-          "bool": {
-            "must": {
-              "text_expansion": {
-                "ml.tokens": {
-                  "model_id": ".elser_model_1",
-                  "model_text": "Scripts"
-                }
-              }
-            }
-          }
-        }
-      }
+  "user": {
+    "speaker": "user",
+    "text": "Do I need scripts? ",
+    "timestamp": 1724167458,
+    "enrichments": {
+      "Question Type": [
+        "Factoid",
+        "Summarization"
+      ],
+      "Multi-Turn": [
+        "Follow-up"
+      ],
+      "Answerability": [
+        "ANSWERABLE"
+      ]
     }
-  ],
-  "timestamp": 1724167458
+  },
+  "agent": {
+    "speaker": "agent",
+    "text": "Yes. Custom scripts are extension points in the pipeline where adopters, teams, and users can provide scripts to run custom tasks needed for their continuous integration and deployment strategies. These custom scripts control the pipeline stages. You can configure the behavior of stages, script content, and the base image that runs the scripts using a configuration file (pipeline-config.yaml). The scripts and configuration for pipeline stages are loaded from a Git repository (repo), which can be either the application (app) repo (similar to .travis.yml or Jenkinsfile) or a custom repo.\nWhen any of the custom scripts start, the complete URL of the custom script file, including the file name and the commit hash, is printed at the beginning of the pipeline logs as follows: \"The custom script can be viewed using the following link: 'https://<URL>/blob/<commit hash>/.pipeline-config.yaml'\". This improves traceability. The scripts are designed to create a new VPC and install the SAP (SAP NW 7.x release) solution and its dedicated DB SAP HANA box in one task flow. They create a Schematics workspace for you where you can view your script logs and the resources that are provisioned.",
+    "timestamp": 1724167462,
+    "contexts": [
+      {
+        "document_id": "ibmcld_11573-4755-6312",
+        "text": "\nThe scripts are designed to create a new VPC and install SAP (SAP NW 7.x release) solution together with its dedicated DB SAP HANA box in one task flow.\n\n\n\n\n\n SAP Kits \n\nFor each IBM Cloud region, IBM allocates temporary storage on a dedicated temporary Deployment server (Bastion Server) that is used for terraform environment. It is your responsibility to download the necessary SAP and DB kits to your Deployment (Bastion) Server. All file archives are decompressed by Ansible during the automatic deploying process. For more information, see the readme file in the dedicated GitHub repository.\n\n\n\n\n\n Terraform deployment \n\nThe configuration and script files are provided on the GitHub repository:\n\n\n\n* For JAVA stack : [https://github.com/IBM-Cloud/sap-netweaver-java-hana](https://github.com/IBM-Cloud/sap-netweaver-java-hana).\n* For ABAP stack : [https://github.com/IBM-Cloud/sap-netweaver-abap-hana](https://github.com/IBM-Cloud/sap-netweaver-abap-hana)\n\n\n\nFor SAP HANA stand-alone virtual server instance on IBM Cloud Virtual Private Cloud, you modify the:\n\n\n\n* The input.auto.tfvars file to customize the resources for your solution. You specify zones, resource names, SSH keys, and SAP variables.\n\n\n\nAll of the other configuration files are provided and do not need to be modified.\n\n\n\n\n\n Schematics deployment \n\nThe configuration and script files are provided on the GitHub repository:\n\n\n\n* ABAP: [https://github.com/IBM-Cloud/sap-netweaver-abap-hana/tree/main/schematics](https://github.com/IBM-Cloud/sap-netweaver-abap-hana/tree/main/schematics)",
+        "url": "https://cloud.ibm.com/docs/sap?topic=sap-create-terraform-3tier-nw-hana-vpc-ansible",
+        "score": 10.792313,
+        "feedback": {
+          "relevant": {
+            "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+              "value": "yes",
+              "timestamp": 1724168295
+            }
+          }
+        },
+        "query": {
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Scripts"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "document_id": "ibmcld_06836-7-1886",
+        "text": "\nCustom scripts \n\nCustom scripts are extension points in the pipeline where adopters, teams, and users can provide scripts to run custom tasks that are required by their continuous integration and continuous deployment strategies.\n\nCustom scripts control the pipeline stages. You can use a configuration file (pipeline-config.yaml) to configure the behavior of stages, script content, and the base image that runs the scripts. The scripts and configuration for pipeline stages are loaded from a Git repository (repo) that can either be the application (app) repo (similar to .travis.yml or Jenkinsfile) or a custom repo.\n\nWhen any of the custom scripts are started, the complete URL of the custom script file, including the file name and the commit hash, is printed at the beginning of the pipeline logs as follows: The custom script can be viewed using the following link: 'https://<source repo url>/<organization name>/<repository name>/blob/<commit hash>/.pipeline-config.yaml'. This positioning improves traceability.\n\n\n\n Stages \n\nStages in pull request, continuous integration, and continuous deployment pipelines run custom scripts.\n\n\n\n* Pull request pipeline stages: setup, test, and finish. For more information, see [Pull request pipeline](https://cloud.ibm.com/docs/devsecops?topic=devsecops-cd-devsecops-pr-pipeline).\n* Continuous integration pipeline stages: setup, peer-review, test, static-scan, containerize, sign-artifact, deploy, acceptance-test, scan-artifact, release, and finish. For more information, see [Continuous integration pipeline](https://cloud.ibm.com/docs/devsecops?topic=devsecops-cd-devsecops-ci-pipeline).\n* continuous deployment pipeline stages: setup, verify-artifact, deploy, acceptance-test, and finish. For more information, see [continuous deployment pipeline](https://cloud.ibm.com/docs/devsecops?topic=devsecops-cd-devsecops-cd-pipeline).",
+        "url": "https://cloud.ibm.com/docs/devsecops?topic=devsecops-custom-scripts",
+        "score": 10.402259,
+        "feedback": {
+          "relevant": {
+            "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+              "value": "yes",
+              "timestamp": 1724169358
+            }
+          }
+        },
+        "query": {
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Scripts"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "document_id": "ibmcld_04262-10472-11599",
+        "text": "\nThe scripts create a Schematics workspace for you where you can see your script logs and the resources that are provisioned.\n\nIf you want to further customize your resources, you select Enable configuration customization after 'Create' and then Create. The scripts create the Schematics workspace for you and show you the parameters that you can customize. After you are done customizing the parameters, you select Generate Plan then Apply plan. The Terraform scripts run and create your resources.\n\nFor more information about Schematics, see [Getting started: IBM Cloud Schematics](https://cloud.ibm.com/docs/schematics?topic=schematics-getting-started).\n\n\n\n\n\n Next steps \n\nAs the components are provisioned, you are directed to the Schematics workspace page for your deployment, where you can view the script logs.\n\nAfter the Citrix DaaS for IBM Cloud components are provisioned, you need to complete a few post-provisioning steps to get you up and running. For more information, see [Post-provisioning steps for Citrix DaaS on VPC](https://cloud.ibm.com/docs/citrix-daas?topic=citrix-daas-post-provisioning-citrix-daas-vpc).",
+        "url": "https://cloud.ibm.com/docs/citrix-daas?topic=citrix-daas-provisioning-citrix-daas-vpc",
+        "score": 9.922723,
+        "feedback": {
+          "relevant": {
+            "9dcd142c-415e-4161-a82f-c8b14bfb36ac": {
+              "value": "yes",
+              "timestamp": 1724168233
+            }
+          }
+        },
+        "query": {
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "Scripts"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "original_text": "To install Red Hat OpenShift 4.7 on to an existing vCenter Server instance, you can follow the manual build process provided in the current document. However, the document does not explicitly mention whether scripts are required for the installation process. It is recommended to carefully read and follow the instructions provided in the document to complete the installation. If scripts are necessary, they would be mentioned and explained in the document."
+  }
 }
