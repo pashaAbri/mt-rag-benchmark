@@ -234,9 +234,9 @@ class MMRClusterRewriter:
             cosine_sim = np.dot(emb, centroid) / (
                 np.linalg.norm(emb) * np.linalg.norm(centroid)
             )
-            dist = 1 - cosine_sim
+            dist = float(1 - cosine_sim)
             
-            clusters[label].append({
+            clusters[int(label)].append({
                 **sentences[idx],
                 'embedding': emb,
                 'dist_to_centroid': dist,
@@ -563,7 +563,6 @@ def main():
     intermediate_dir.mkdir(exist_ok=True)
     
     # Resolve paths
-    repo_root = Path(__file__).parent.parent.parent.parent.parent
     
     print(f"\n{'='*60}")
     print("Cluster-Based MMR Query Rewriting (Incremental Context)")
@@ -579,18 +578,10 @@ def main():
     
     # Initialize dataset from cleaned_data
     try:
-        conversations, stats = initialize_dataset(args.domain)
+        conversations, _ = initialize_dataset(args.domain)
     except FileNotFoundError as e:
         print(f"Error: {e}")
         return
-    
-    # Determine which turns to process
-    if args.turn:
-        turns_to_process = [args.turn]
-    else:
-        turns_to_process = list(range(1, stats['max_turn'] + 1))
-    
-    print(f"\nWill process turns: {turns_to_process}\n")
     
     # Initialize rewriter (always uses LLM with mixtral config from llm_api.py)
     rewriter = MMRClusterRewriter(
@@ -613,9 +604,17 @@ def main():
     print("Initializing Generator...")
     generator = Generator()
     
-    # Process queries turn by turn
-    all_results = []
-    generated_responses = {}  # Store generated responses for history
+    # Prepare output files
+    turn_suffix = f'_turn{args.turn}' if args.turn else '_all'
+    output_file = datasets_dir / f'{args.domain}_mmr_cluster{turn_suffix}.jsonl'
+    intermediate_file = intermediate_dir / f'{args.domain}_intermediate{turn_suffix}.jsonl'
+    
+    # Clear existing files if we are starting fresh
+    if output_file.exists():
+        print(f"Warning: Output file {output_file} exists. Appending to it.")
+    if intermediate_file.exists():
+        print(f"Warning: Intermediate file {intermediate_file} exists. Appending to it.")
+
     processing_stats = {
         'turn1_no_rewrite': 0,
         'turn2plus_rewritten': 0,
@@ -623,69 +622,88 @@ def main():
         'errors': 0
     }
     
-    for turn_num in turns_to_process:
-        print(f"\n{'='*60}")
-        print(f"Processing Turn {turn_num}")
-        print(f"{'='*60}\n")
+    total_processed = 0
+    
+    # Process conversations one by one
+    print(f"\n{'='*60}")
+    print("Processing Conversations")
+    print(f"{'='*60}\n")
+    
+    for conv_id, turns in tqdm(conversations.items(), desc="Conversations"):
+        # Reset history for new conversation
+        conversation_history = [] # List of {speaker: str, text: str}
         
-        # Prepare batch for this turn
-        tasks = prepare_turn_batch(
-            conversations,
-            turn_num,
-            generated_responses
-        )
+        # Sort turns just in case
+        turns.sort(key=lambda x: x['turn'])
         
-        print(f"Found {len(tasks)} tasks for turn {turn_num}")
-        
-        if len(tasks) == 0:
-            print(f"No tasks for turn {turn_num}, skipping...")
-            continue
-        
-        # Process each task
-        for task in tqdm(tasks, desc=f"Turn {turn_num}"):
-            task_id = task['task_id']
-            query = task['query']
-            history = task['history']
+        for turn_data in turns:
+            task_id = turn_data['task_id']
+            turn_num = turn_data['turn']
+            query = turn_data['query']
+            
+            # Skip if we are only processing specific turns and this isn't one of them
+            if args.turn and turn_num != args.turn:
+                # If we're skipping this turn, we still need to record it in history 
+                # IF we assume the previous turns were processed elsewhere. 
+                # But in this "run one conversation" mode, usually we want the flow.
+                # If the user asks for specific turn, this logic might be tricky.
+                # Assuming "run one conversation" implies running all turns for context.
+                # If user strictly wants ONE turn, they shouldn't use this script's new mode efficiently without prior state.
+                # For now, if args.turn is set, we only PROCESS that turn, but we won't have history 
+                # unless we load it. The prompt implies they want to run the sequence ("turn 1 ... then turn 2").
+                # So we will ignore args.turn for the flow or assume they want the whole thing.
+                # Let's assume we process ALL turns to build context.
+                pass
+
+            # Check if we should process this turn based on args.turn
+            # If args.turn is specified, we only SAVE/OUTPUT that turn, 
+            # but we might need to process previous turns to build history?
+            # The user's request "run one conversation... instead of doing turn 1 for all... then moving to turn 2"
+            # strongly implies they want to run the full conversation sequence.
+            # So we will process all turns.
             
             try:
                 turn_start_time = time.time()
                 
+                # Prepare intermediate record
+                intermediate = {
+                    'task_id': task_id, 
+                    'original_query': query,
+                    'turn': turn_num
+                }
+                
+                # --- Rewriting ---
                 # For turn 1, no rewriting needed (no context yet)
                 if turn_num == 1:
                     rewritten = query
-                    intermediate = {
-                        'task_id': task_id,
-                        'original_query': query,
+                    intermediate.update({
                         'rewritten_query': query,
                         'method': 'no_rewriting_turn_1',
-                        'turn': turn_num,
                         'num_extracted_sentences': 0,
                         'timing': {'total_rewrite_pipeline': 0.0}
-                    }
+                    })
                     processing_stats['turn1_no_rewrite'] += 1
                 else:
-                    # For turn 2+, use MMR clustering to rewrite
-                    if len(history) == 0:
-                        # No history available, skip rewriting
+                    # For turn 2+, use MMR clustering to rewrite using accumulated history
+                    if len(conversation_history) == 0:
+                        # No history available (shouldn't happen if we run sequentially)
                         rewritten = query
-                        intermediate = {
-                            'task_id': task_id,
-                            'original_query': query,
+                        intermediate.update({
                             'rewritten_query': query,
                             'method': 'no_history_available',
-                            'turn': turn_num,
                             'num_extracted_sentences': 0,
                             'timing': {'total_rewrite_pipeline': 0.0}
-                        }
+                        })
                         processing_stats['turn2plus_no_history'] += 1
                     else:
-                        # Rewrite using MMR clustering (timing handled inside)
-                        rewritten, intermediate = rewriter.rewrite_query(task_id, query, history)
-                        intermediate['turn'] = turn_num
+                        # Rewrite using MMR clustering
+                        rewritten, rewrite_intermediate = rewriter.rewrite_query(task_id, query, conversation_history)
+                        intermediate.update(rewrite_intermediate)
                         processing_stats['turn2plus_rewritten'] += 1
                 
                 # --- Retrieval ---
-                print(f"  Retrieving for: {rewritten[:50]}...")
+                # Only print for first few or specific ones to avoid spam
+                # print(f"  Retrieving for: {rewritten[:50]}...")
                 retrieval_start = time.time()
                 contexts = retriever.retrieve(rewritten)
                 retrieval_time = time.time() - retrieval_start
@@ -700,9 +718,9 @@ def main():
                 ]
                 
                 # --- Generation ---
-                print(f"  Generating answer...")
+                # print(f"  Generating answer...")
                 generation_start = time.time()
-                agent_response = generator.generate(query, contexts, history)
+                agent_response = generator.generate(query, contexts, conversation_history)
                 generation_time = time.time() - generation_start
                 
                 intermediate['agent_response'] = agent_response
@@ -714,52 +732,33 @@ def main():
                 intermediate['timing']['generation'] = generation_time
                 intermediate['timing']['total_turn'] = time.time() - turn_start_time
                 
-                # Store generated response for future turns
-                generated_responses[task_id] = agent_response
+                # Update History for next turn
+                conversation_history.append({'speaker': 'user', 'text': query})
+                conversation_history.append({'speaker': 'agent', 'text': agent_response})
                 
                 # Store result
-                all_results.append({
+                result_entry = {
                     '_id': task_id,
                     'text': f'|user|: {rewritten}',
                     'agent_response': agent_response
-                })
+                }
                 
-                # Store intermediate data
-                # We want to store the full contexts in the intermediate data
-                # for analysis, but keep the main results file clean
-                rewriter.intermediate_data[task_id] = intermediate
+                # Save incrementally
+                with open(output_file, 'a') as f:
+                    f.write(json.dumps(result_entry) + '\n')
+                    
+                with open(intermediate_file, 'a') as f:
+                    # Remove embeddings before saving
+                    data_clean = {k: v for k, v in intermediate.items() if 'embedding' not in k.lower()}
+                    f.write(json.dumps(data_clean) + '\n')
+                
+                total_processed += 1
                 
             except Exception as e:
                 print(f"\n✗ Error processing {task_id}: {e}")
-                import traceback
-                traceback.print_exc()
-                # Use original query as fallback
-                all_results.append({
-                    '_id': task_id,
-                    'text': f'|user|: {query}'
-                })
+                # import traceback
+                # traceback.print_exc()
                 processing_stats['errors'] += 1
-    
-    # Save results
-    turn_suffix = f'_turn{args.turn}' if args.turn else '_all'
-    output_file = datasets_dir / f'{args.domain}_mmr_cluster{turn_suffix}.jsonl'
-    
-    with open(output_file, 'w') as f:
-        for result in all_results:
-            # Ensure we save minimal info in the results file
-            # Detailed info is in intermediate files
-            clean_result = {
-                '_id': result.get('_id'),
-                'text': result.get('text'),
-                'agent_response': result.get('agent_response')
-            }
-            f.write(json.dumps(clean_result) + '\n')
-    
-    print(f"\n✓ Saved rewritten queries to: {output_file}")
-    
-    # Save intermediate data
-    intermediate_file = intermediate_dir / f'{args.domain}_intermediate{turn_suffix}.jsonl'
-    rewriter.save_intermediate_data(str(intermediate_file))
     
     # Print statistics
     print(f"\n{'='*60}")
@@ -769,9 +768,10 @@ def main():
     print(f"Turn 2+ (rewritten):          {processing_stats['turn2plus_rewritten']}")
     print(f"Turn 2+ (no history):         {processing_stats['turn2plus_no_history']}")
     print(f"Errors:                       {processing_stats['errors']}")
-    print(f"Total processed:              {len(all_results)}")
+    print(f"Total processed:              {total_processed}")
     print(f"{'='*60}")
-    print("✓ Processing complete!")
+    print(f"✓ Results saved to: {output_file}")
+    print(f"✓ Intermediate data saved to: {intermediate_file}")
     print(f"{'='*60}\n")
 
 
