@@ -11,12 +11,41 @@ This implementation uses the Elasticsearch Python client to perform BM25 retriev
 Install the required dependencies:
 
 ```bash
-pip install elasticsearch
+pip install "elasticsearch<9.0.0"
 ```
 
-You also need to have Elasticsearch running. You can:
+You also need to have Elasticsearch running. We use **Elasticsearch 8.11.0** for compatibility with our scripts.
 
-### Option 1: Install with Homebrew (macOS - Recommended)
+### Option 1: Local Installation (Recommended for this repo)
+
+This repository includes scripts that can automatically download and run the correct version of Elasticsearch.
+
+**1. Download Elasticsearch 8.11.0:**
+
+Download the `tar.gz` for your OS (e.g., macOS ARM64) and extract it to the project root.
+
+```bash
+# Example for macOS ARM64 (M1/M2/M3)
+cd /path/to/repo/root
+curl -k -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.11.0-darwin-aarch64.tar.gz
+tar -xzf elasticsearch-8.11.0-darwin-aarch64.tar.gz
+```
+
+**2. Start via Script:**
+
+The `run_bm25_es_all.sh` script will automatically start this local instance if it exists in `elasticsearch-8.11.0/`.
+
+### Option 2: Run Elasticsearch using Docker
+
+```bash
+docker run -d --name elasticsearch \
+  -p 9200:9200 \
+  -e "discovery.type=single-node" \
+  -e "xpack.security.enabled=false" \
+  elasticsearch:8.11.0
+```
+
+### Option 3: Install with Homebrew (macOS)
 
 **Install Elasticsearch:**
 ```bash
@@ -46,20 +75,6 @@ brew install openjdk@17
 # xpack.ml.enabled: false
 ```
 
-### Option 2: Run Elasticsearch locally using Docker
-
-```bash
-docker run -d --name elasticsearch \
-  -p 9200:9200 \
-  -e "discovery.type=single-node" \
-  -e "xpack.security.enabled=false" \
-  elasticsearch:8.11.0
-```
-
-### Option 3: Install Elasticsearch directly
-
-Follow the instructions at https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html
-
 ## Usage
 
 Run BM25 retrieval on a specific domain:
@@ -88,7 +103,7 @@ python bm25_retrieval.py \
 
 ## Running All Domains
 
-You can use the provided script to run BM25 retrieval across all domains:
+You can use the provided script to run BM25 retrieval across all domains. This script also handles starting the local Elasticsearch instance if you used Option 1.
 
 ```bash
 ./run_bm25_es_all.sh
@@ -176,4 +191,3 @@ docker run -d --name elasticsearch \
   -e "ES_JAVA_OPTS=-Xms2g -Xmx2g" \
   elasticsearch:8.11.0
 ```
-

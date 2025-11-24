@@ -177,7 +177,8 @@ def main():
     print(f"Connecting to Elasticsearch at {args.es_host}:{args.es_port}...")
     # Initialize Elasticsearch client
     es_client = Elasticsearch(
-        hosts=[{'host': args.es_host, 'port': args.es_port, 'scheme': 'http'}],
+        hosts=[f"http://{args.es_host}:{args.es_port}"],
+        request_timeout=300,
         retry_on_timeout=True,
         max_retries=3
     )
