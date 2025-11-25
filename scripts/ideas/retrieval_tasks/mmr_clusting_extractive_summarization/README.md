@@ -19,6 +19,38 @@ For each conversation, the system processes turns sequentially ($T_1 \rightarrow
     *   Generates an answer using the retrieved documents and history.
     *   **Crucial Step**: This generated answer becomes the history for Turn $N+1$.
 
+## Step-by-Step Method
+
+1.  **Sentence Extraction**
+    *   Breaks down conversation history into individual sentences.
+    *   **User turns**: Treated as single units.
+    *   **Agent turns**: Split into sentences; filters out conversational filler (e.g., "Thank you") and short phrases.
+
+2.  **Embedding**
+    *   Generates vector embeddings for the current query and all extracted history sentences using `BAAI/bge-base-en-v1.5`.
+
+3.  **Clustering (Topic Discovery)**
+    *   Groups historical sentences using **K-Means clustering**.
+    *   **Cluster Count ($k$)**: Calculated as $k \approx \sqrt{n}$, clamped between 2 and 7.
+        *   *Why 2-7?* This range is an empirical heuristic for context window management. It ensures there are enough clusters to capture distinct topics ($min=2$) but prevents the candidate pool from becoming too large ($max=7$) for efficient MMR processing.
+    *   **Representative Selection**: From each cluster, the system selects the top sentences closest to the centroid.
+        *   Default: 3 representatives per cluster.
+        *   *Example*: With 7 clusters, $7 \times 3 = 21$ candidate sentences are passed to the MMR stage.
+
+4.  **MMR Selection (Diversity & Relevance)**
+    *   Applies **Maximal Marginal Relevance (MMR)** to the candidate pool (cluster representatives).
+    *   **Formula**: $\text{Score} = \lambda \cdot \text{Sim}(s, \text{Query}) - (1 - \lambda) \cdot \max_{s_j \in \text{Selected}} \text{Sim}(s, s_j)$
+        *   $\lambda$ (Lambda, default 0.7): Weight for relevance vs diversity. 0.7 favors relevance slightly more than diversity.
+    *   **Process**:
+        1.  **Loop 1**: Selects the sentence with highest similarity to the current query (Redundancy term is 0).
+        2.  **Loops 2+**: Selects the next sentence that is relevant to the query but *dissimilar* to already selected sentences.
+    *   Selects a fixed number of sentences (default: 5) to form the final context for the LLM.
+
+5.  **LLM Rewriting**
+    *   Constructs a prompt with the **selected context sentences** and current query.
+    *   Uses Mixtral to rewrite the query into a standalone version.
+    *   Post-processes the output (capitalization, punctuation).
+
 ## Example Walkthrough (Conversation `3f5fa37...`)
 
 **Turn 1**: "what makes the different shapes of the moon"
