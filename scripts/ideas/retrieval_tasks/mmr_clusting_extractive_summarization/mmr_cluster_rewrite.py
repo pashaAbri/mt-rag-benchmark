@@ -606,8 +606,11 @@ def main():
     
     # Prepare output files
     turn_suffix = f'_turn{args.turn}' if args.turn else '_all'
-    output_file = datasets_dir / f'{args.domain}_mmr_cluster{turn_suffix}.jsonl'
-    intermediate_file = intermediate_dir / f'{args.domain}_intermediate{turn_suffix}.jsonl'
+    # Include params in filename to separate experiments
+    config_suffix = f'_k{args.num_sentences}_lam{args.lambda_param}'
+    
+    output_file = datasets_dir / f'{args.domain}_mmr_cluster{config_suffix}{turn_suffix}.jsonl'
+    intermediate_file = intermediate_dir / f'{args.domain}_intermediate{config_suffix}{turn_suffix}.jsonl'
     
     # Clear existing files if we are starting fresh
     if output_file.exists():
