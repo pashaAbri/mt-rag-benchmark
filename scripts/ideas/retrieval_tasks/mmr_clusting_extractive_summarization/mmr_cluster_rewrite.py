@@ -19,6 +19,7 @@ from collections import defaultdict
 
 import numpy as np
 import nltk
+import torch
 from sentence_transformers import SentenceTransformer
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
@@ -82,8 +83,10 @@ class MMRClusterRewriter:
         self.save_intermediate = save_intermediate
         self.intermediate_dir = intermediate_dir
         
-        print(f"Loading embedding model: {embedding_model}")
-        self.model = SentenceTransformer(embedding_model)
+        # Detect and use GPU if available
+        device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        print(f"Loading embedding model: {embedding_model} on {device}")
+        self.model = SentenceTransformer(embedding_model, device=device)
         
         # Intermediate data storage
         self.intermediate_data = {}
