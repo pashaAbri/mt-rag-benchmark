@@ -1,8 +1,14 @@
 # Enrichments in mtRAG
 
-**Enrichments** are metadata annotations that human annotators added to each user question during the conversation creation process. They classify questions along three key dimensions that are central to the benchmark's design.
+**Enrichments** are metadata annotations that human annotators added to each user question during the conversation
+creation process. They classify questions along three key dimensions that are central to the benchmark's design.
 
 ---
+
+Initial annotation:
+
+- Three dimensions: Question Type (10 categories), Answerability (4 categories), Multi-Turn Type (3 categories)
+- Review Process: Annotators could "repair responses, passage relevance, and dimensions as needed"
 
 ## Three Types of Enrichments
 
@@ -10,12 +16,12 @@
 
 Indicates whether the question can be answered given the retrieved passages.
 
-| Category | Description | Example |
-|----------|-------------|---------|
-| **ANSWERABLE** | Question can be fully answered from passages | "Do the Arizona Cardinals play outside the US?" |
-| **UNANSWERABLE** | Question cannot be answered from available passages | "where do the arizona cardinals play this week" (needs current info not in corpus) |
-| **PARTIAL** | Question can be partially answered (some information available, but incomplete) | Questions where corpus has some but not all needed information |
-| **CONVERSATIONAL** | Not a factual question; conversational/acknowledgment | "Thank you" or "I see" |
+| Category           | Description                                                                   | Example                                                 |
+|--------------------|-------------------------------------------------------------------------------|---------------------------------------------------------|
+| **ANSWERABLE**     | Can be fully answered from passages                                           | "Do the Arizona Cardinals play outside the US?"         |
+| **UNANSWERABLE**   | Cannot be answered from available passages (needs current info not in corpus) | "where do the arizona cardinals play this week"         |
+| **PARTIAL**        | Can be partially answered (some info available, but incomplete)               | Questions where corpus has some but not all needed info |
+| **CONVERSATIONAL** | Not a factual question; conversational/acknowledgment                         | "Thank you" or "I see"                                  |
 
 ---
 
@@ -23,38 +29,18 @@ Indicates whether the question can be answered given the retrieved passages.
 
 Classifies the nature of the question.
 
-| Type | Description |
-|------|-------------|
-| **Factoid** | Simple fact-based questions |
-| **Explanation** | Requires detailed explanation |
-| **Composite** | Multiple questions in one |
-| **Comparative** | Comparing two or more things |
-| **How-To** | Procedural/instructional questions |
-| **Keyword** | Keyword-based search queries |
-| **Opinion** | Subjective questions |
-| **Summarization** | Requesting a summary |
-| **Troubleshooting** | Problem-solving questions |
-| **Non-Question** | Statements or acknowledgments |
-
-#### Examples from the benchmark:
-
-```json
-{
-  "text": "How many teams are in the NFL?",
-  "enrichments": {
-    "Question Type": ["Factoid"]
-  }
-}
-```
-
-```json
-{
-  "text": "Are the Arizona Cardinals and the Chicago Cardinals the same team?",
-  "enrichments": {
-    "Question Type": ["Explanation"]
-  }
-}
-```
+| Type                | Description                        |
+|---------------------|------------------------------------|
+| **Factoid**         | Simple fact-based questions        |
+| **Explanation**     | Requires detailed explanation      |
+| **Composite**       | Multiple questions in one          |
+| **Comparative**     | Comparing two or more things       |
+| **How-To**          | Procedural/instructional questions |
+| **Keyword**         | Keyword-based search queries       |
+| **Opinion**         | Subjective questions               |
+| **Summarization**   | Requesting a summary               |
+| **Troubleshooting** | Problem-solving questions          |
+| **Non-Question**    | Statements or acknowledgments      |
 
 ---
 
@@ -62,66 +48,62 @@ Classifies the nature of the question.
 
 Indicates relationship to previous conversation turns.
 
-| Category | Description | Example |
-|----------|-------------|---------|
-| **Follow-up** | Builds on previous answer, moves conversation forward | After discussing Cardinals: "How many teams are in the NFL?" |
-| **Clarification** | Asks for more detail about previous topic | "Are the Arizona Cardinals and the Chicago Cardinals the same team?" |
-| **N/A** | First turn of conversation (no previous context) | Initial question in a conversation |
+| Category          | Description                                           | Example                                                              |
+|-------------------|-------------------------------------------------------|----------------------------------------------------------------------|
+| **Follow-up**     | Builds on previous answer, moves conversation forward | After discussing Cardinals: "How many teams are in the NFL?"         |
+| **Clarification** | Asks for more detail about previous topic             | "Are the Arizona Cardinals and the Chicago Cardinals the same team?" |
+| **N/A**           | First turn of conversation (no previous context)      | Initial question in a conversation                                   |
 
 ---
 
-## Complete Example
+## Enrichment Statistics
 
-Here's how enrichments appear in an actual conversation message:
+Statistics calculated from all 842 tasks in the `cleaned_data/tasks/` directory.
 
-```json
-{
-  "speaker": "user",
-  "text": "Do the Arizona Cardinals play outside the US?",
-  "enrichments": {
-    "Question Type": ["Explanation"],
-    "Multi-Turn": ["Clarification"],
-    "Answerability": ["ANSWERABLE"]
-  }
-}
-```
+### Question Type Statistics
 
----
+| Question Type   | Count    | Percentage |
+|-----------------|----------|------------|
+| Factoid         | 280      | 25.9%      |
+| Summarization   | 195      | 18.1%      |
+| Explanation     | 158      | 14.6%      |
+| Opinion         | 87       | 8.1%       |
+| How-To          | 85       | 7.9%       |
+| Non-Question    | 84       | 7.8%       |
+| Keyword         | 76       | 7.0%       |
+| Composite       | 51       | 4.7%       |
+| Comparative     | 48       | 4.4%       |
+| Troubleshooting | 15       | 1.4%       |
+| **Total**       | **1079** | **100.0%** |
 
-## Why Enrichments Matter
+*Note: Some tasks may have multiple Question Type labels, which is why the total Question Type labels (1079) exceeds the
+total number of tasks (842).*
 
-1. **Performance Analysis**: Allows measuring model performance by question type, answerability, and multi-turn category
-   - Example: "Do models struggle more with unanswerable questions?"
-   - Example: "How well do models handle clarification questions vs follow-ups?"
+### Multi-Turn Type Statistics
 
-2. **Challenge Design**: Ensures diverse questions across the benchmark
-   - Not all questions are simple factoids
-   - Includes challenging unanswerable questions
-   - Mix of follow-ups and clarifications
+| Multi-Turn Type | Count   | Percentage |
+|-----------------|---------|------------|
+| Follow-up       | 622     | 73.9%      |
+| N/A             | 110     | 13.1%      |
+| Clarification   | 110     | 13.1%      |
+| **Total**       | **842** | **100.0%** |
 
-3. **Fine-grained Evaluation**: Break down results to identify specific weaknesses
-   - "Model X is good at factoid questions but fails on composite questions"
-   - "All models struggle with unanswerable questions (hallucination)"
+### Answerability Statistics
 
-4. **Real-world Simulation**: Natural conversations have this variety
-   - People ask different types of questions
-   - Not everything is answerable
-   - Conversations involve follow-ups and clarifications
+| Answerability Type | Count   | Percentage |
+|--------------------|---------|------------|
+| ANSWERABLE         | 709     | 84.2%      |
+| PARTIAL            | 68      | 8.1%       |
+| UNANSWERABLE       | 55      | 6.5%       |
+| CONVERSATIONAL     | 10      | 1.2%       |
+| **Total**          | **842** | **100.0%** |
 
-5. **Research Insights**: The paper uses enrichments extensively to analyze:
-   - Which question types are most challenging for RAG systems
-   - How answerability affects model behavior (especially hallucinations on unanswerable questions)
-   - Whether multi-turn dependencies cause performance degradation
+### Domain Statistics
 
----
-
-## Statistics from the Benchmark
-
-The benchmark contains diverse distributions across all enrichment categories:
-
-- **Answerability**: Mix of answerable, unanswerable, partial, and conversational questions
-- **Question Types**: All 10 types represented, ensuring comprehensive evaluation
-- **Multi-Turn**: Progressive mix of N/A (first turns), follow-ups, and clarifications as conversations develop
-
-This diversity makes mtRAG a comprehensive test of RAG system capabilities across realistic conversation scenarios.
-
+| Domain    | Count   | Percentage |
+|-----------|---------|------------|
+| CLAPNQ    | 224     | 26.6%      |
+| GOVT      | 214     | 25.4%      |
+| CLOUD     | 205     | 24.3%      |
+| FIQA      | 199     | 23.6%      |
+| **Total** | **842** | **100.0%** |
