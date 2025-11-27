@@ -30,3 +30,13 @@
     * **Elser:** Performance peaks at `k10` and degrades with higher `k`, suggesting too much diversity hurts this
       learned sparse retriever.
 
+##  Other Experiments
+- Adjust the Diversity Parameter (Lambda)
+  - Current Issue: The scripts default to --lambda-param 0.7 (70% relevance, 30% diversity).
+  - Experiment: Run a sweep of lambda values (e.g., 0.3, 0.5, 0.85, 0.9).
+  Hypothesis: For query rewriting, "relevance" to the current query is often more important than "diversity" of history. A higher lambda (e.g., 0.85 or 0.9) might prevent the inclusion of irrelevant historical tangents that distract the LLM.
+- "Context Summary" vs. "Query Rewrite"
+  - Current Issue: The current approach tries to rewrite the query into a standalone question.
+  Experiment: Instead of rewriting the query, use the LLM to summarize the selected sentences into a "Context Block" and append it to the original query.
+  - Format: Context: [Summary of selected history] \n Question: [Original User Query]
+  Why? Rewriting can sometimes hallucinate or alter the user's intent. Providing context alongside the original query allows the retrieval model (especially dense ones) to match both the specific question and the context terms.
