@@ -21,123 +21,166 @@ This document analyzes ELSER (Elastic Learned Sparse Encoder) relevance scores a
 
 ## Question Types - Mean Relevance Scores
 
-| Subtype         | Count | %     | Last Turn | Rewrite   | Questions | Best Strategy |
-| :-------------- | :---- | :---- | :-------- | :-------- | :-------- | :------------ |
-| Troubleshooting | 15    | 1.5%  | 19.72     | 20.58     | **26.19** | Questions     |
-| Non-Question    | 69    | 6.9%  | 17.61     | 20.45     | **22.89** | Questions     |
-| Opinion         | 80    | 8.0%  | 18.29     | 20.88     | **22.70** | Questions     |
-| Keyword         | 73    | 7.3%  | 16.65     | 20.45     | **22.28** | Questions     |
-| Factoid         | 255   | 25.4% | 19.03     | 21.37     | **22.10** | Questions     |
-| Summarization   | 192   | 19.1% | 18.33     | 20.82     | **21.88** | Questions     |
-| Explanation     | 148   | 14.7% | 19.27     | 21.30     | **21.33** | Questions     |
-| Composite       | 49    | 4.9%  | 19.72     | 21.57     | **21.60** | Questions     |
-| Comparative     | 44    | 4.4%  | 19.85     | **22.41** | 21.75     | Rewrite       |
-| How-To          | 80    | 8.0%  | 18.74     | **21.46** | 20.83     | Rewrite       |
+| Domain  | Subtype         | Count |   %   | Last Turn | Rewrite   | Questions | Best Strategy |
+| :------ | :-------------- | :---- | :---: | :-------- | :-------- | :-------- | :------------ |
+| **All** | Troubleshooting | 15    | 1.5%  | 19.72     | 20.58     | **26.19** | Questions     |
+|         | Non-Question    | 69    | 6.9%  | 17.61     | 20.45     | **22.89** | Questions     |
+|         | Opinion         | 80    | 8.0%  | 18.29     | 20.88     | **22.70** | Questions     |
+|         | Keyword         | 73    | 7.3%  | 16.65     | 20.45     | **22.28** | Questions     |
+|         | Factoid         | 255   | 25.4% | 19.03     | 21.37     | **22.10** | Questions     |
+|         | Summarization   | 192   | 19.1% | 18.33     | 20.82     | **21.88** | Questions     |
+|         | Explanation     | 148   | 14.7% | 19.27     | 21.30     | **21.33** | Questions     |
+|         | Composite       | 49    | 4.9%  | 19.72     | 21.57     | **21.60** | Questions     |
+|         | Comparative     | 44    | 4.4%  | 19.85     | **22.41** | 21.75     | Rewrite       |
+|         | How-To          | 80    | 8.0%  | 18.74     | **21.46** | 20.83     | Rewrite       |
+|         |                 |       |       |           |           |           |               |
+| CLAPNQ  | Non-Question    | 12    | 4.3%  | 17.57     | 19.55     | **21.90** | Questions     |
+|         | Opinion         | 19    | 6.8%  | 17.10     | 20.04     | **23.34** | Questions     |
+|         | Keyword         | 17    | 6.1%  | 16.35     | 21.48     | **22.76** | Questions     |
+|         | Factoid         | 101   | 36.1% | 20.12     | 22.44     | **22.62** | Questions     |
+|         | Summarization   | 59    | 21.1% | 19.71     | 21.57     | **22.48** | Questions     |
+|         | Explanation     | 39    | 13.9% | 20.06     | **22.77** | 21.53     | Rewrite       |
+|         | Composite       | 19    | 6.8%  | 20.59     | **22.92** | 21.96     | Rewrite       |
+|         | Comparative     | 7     | 2.5%  | 15.09     | **20.98** | 19.97     | Rewrite       |
+|         | How-To          | 7     | 2.5%  | 19.08     | 21.81     | **23.00** | Questions     |
+|         |                 |       |       |           |           |           |               |
+| CLOUD   | Troubleshooting | 13    | 5.6%  | 19.41     | 20.23     | **26.51** | Questions     |
+|         | Non-Question    | 14    | 6.0%  | 18.01     | 18.97     | **24.38** | Questions     |
+|         | Opinion         | 8     | 3.4%  | 19.40     | 20.87     | **24.30** | Questions     |
+|         | Keyword         | 25    | 10.7% | 17.49     | 20.02     | **24.03** | Questions     |
+|         | Factoid         | 43    | 18.4% | 18.06     | 20.56     | **22.21** | Questions     |
+|         | Summarization   | 37    | 15.9% | 16.79     | 21.32     | **23.00** | Questions     |
+|         | Explanation     | 35    | 15.0% | 18.85     | 19.78     | **21.60** | Questions     |
+|         | Composite       | 12    | 5.2%  | 18.80     | 20.74     | **22.01** | Questions     |
+|         | Comparative     | 13    | 5.6%  | 17.18     | 19.24     | **20.85** | Questions     |
+|         | How-To          | 33    | 14.2% | 17.91     | 19.90     | **19.99** | Questions     |
+|         |                 |       |       |           |           |           |               |
+| FIQA    | Non-Question    | 20    | 8.0%  | 19.63     | 22.49     | **22.69** | Questions     |
+|         | Opinion         | 42    | 16.9% | 19.98     | 22.02     | **22.38** | Questions     |
+|         | Keyword         | 12    | 4.8%  | 16.46     | 21.00     | **22.37** | Questions     |
+|         | Factoid         | 41    | 16.5% | 20.20     | **22.94** | 21.84     | Rewrite       |
+|         | Summarization   | 43    | 17.3% | 19.34     | 21.11     | **21.79** | Questions     |
+|         | Explanation     | 44    | 17.7% | 20.56     | **22.66** | 21.74     | Rewrite       |
+|         | Composite       | 6     | 2.4%  | 20.13     | 21.51     | **21.73** | Questions     |
+|         | Comparative     | 22    | 8.8%  | 22.89     | **24.71** | 23.09     | Rewrite       |
+|         | How-To          | 19    | 7.6%  | 20.64     | **22.88** | 21.05     | Rewrite       |
+|         |                 |       |       |           |           |           |               |
+| GOVT    | Troubleshooting | 2     | 0.8%  | 21.75     | 22.89     | **24.15** | Questions     |
+|         | Non-Question    | 23    | 9.5%  | 15.64     | 20.04     | **22.66** | Questions     |
+|         | Opinion         | 11    | 4.5%  | 13.05     | 18.03     | **21.63** | Questions     |
+|         | Keyword         | 19    | 7.8%  | 15.95     | **19.73** | 19.51     | Rewrite       |
+|         | Factoid         | 70    | 28.8% | 17.35     | 19.42     | **21.42** | Questions     |
+|         | Summarization   | 53    | 21.8% | 17.04     | 19.39     | **20.51** | Questions     |
+|         | Explanation     | 30    | 12.3% | 16.85     | 19.16     | **20.18** | Questions     |
+|         | Composite       | 12    | 4.9%  | 19.08     | 20.29     | **20.55** | Questions     |
+|         | Comparative     | 2     | 0.8%  | 20.44     | **22.62** | 19.07     | Rewrite       |
+|         | How-To          | 21    | 8.6%  | 18.19     | **22.51** | 21.21     | Rewrite       |
 
 _Total: 1005 tasks (tasks can have multiple question types)_
 
-### Key Insights - Question Types
+## Question Types - Relevance Score Patterns
 
-1. **Distribution**: **Factoid** questions are most common (25.4%), followed by **Summarization** (19.1%) and **Explanation** (14.7%). **Troubleshooting** is least common (1.5%).
+### **Troubleshooting** (15 queries)
+**Highest confidence overall** with Questions strategy (26.19). Extremely strong semantic matches. Questions strategy significantly outperforms (+33% vs Last Turn), suggesting self-contained question format works exceptionally well for problem-solving queries.
 
-2. **Questions Strategy Dominates**: 8 out of 10 question types achieve highest scores with the Questions strategy, particularly for:
+### **Non-Question** (69 queries)
+Strong confidence with Questions strategy (22.89). Shows substantial improvement from Last Turn (17.61) to Questions (+30%), indicating that converting implicit statements into explicit questions dramatically improves match quality.
 
-   - **Troubleshooting** (26.19, 1.5% of tasks) - largest advantage, +5.47 over Rewrite
-   - **Non-Question** (22.89, 6.9% of tasks) - queries that aren't proper questions benefit from full context
-   - **Keyword** (22.28, 7.3% of tasks) - short queries perform best when expanded to natural questions
+### **Opinion** (80 queries)
+High confidence with Questions strategy (22.70). Consistent pattern across domains. Benefits significantly from question formatting (+24% vs Last Turn), suggesting opinion queries need explicit framing for best semantic matching.
 
-3. **Rewrite Strategy Wins for Complex Queries**:
+### **Keyword** (73 queries)
+Good confidence with Questions strategy (22.28). Despite **poor retrieval performance** (worst R@5), shows **high relevance scores**, indicating ELSER is confident but often wrong—a critical disconnect between confidence and accuracy.
 
-   - **Comparative** (22.41, 4.4% of tasks) - comparing entities benefits from explicit context rewriting
-   - **How-To** (21.46, 8.0% of tasks) - procedural questions benefit from contextualized rewrites
+### **Factoid** (255 queries)
+Solid confidence with Questions strategy (22.10). Largest category. Moderate improvement with rewriting (+12% vs Last Turn), suggesting factual queries benefit from context but not as dramatically as other types.
 
-4. **Lowest Scores**:
-   - **Keyword** Last Turn (16.65) - confirms that short keyword queries lack sufficient semantic signal
-   - **Non-Question** Last Turn (17.61) - incomplete queries need context
+### **Summarization** (192 queries)
+Good confidence with Questions strategy (21.88). Second-largest category. Consistent ~20% improvement from Last Turn to Questions, indicating summary requests need explicit question framing.
+
+### **Explanation** (148 queries)
+Moderate-to-good confidence with Questions strategy (21.33). Smallest improvement gap between Rewrite (21.30) and Questions (21.33), suggesting explanatory queries are relatively robust to formatting.
+
+### **Composite** (49 queries)
+Good confidence with Questions strategy (21.60). Very close scores between Rewrite (21.57) and Questions, indicating multi-part questions maintain quality across strategies.
+
+### **Comparative** (44 queries)
+**Only category where Rewrite wins** (22.41 vs Questions 21.75). Unique pattern suggests comparative questions benefit more from context integration than explicit question formatting. Aligns with retrieval performance where Rewrite also excelled.
+
+### **How-To** (80 queries)
+**Second category where Rewrite wins** (21.46 vs Questions 20.83). Procedural questions benefit from contextual rewriting, likely because steps and procedures require conversation continuity.
 
 ---
 
 ## Multi-Turn Types - Mean Relevance Scores
 
-| Subtype       | Count | %     | Last Turn | Rewrite | Questions | Best Strategy |
-| :------------ | :---- | :---- | :-------- | :------ | :-------- | :------------ |
-| Follow-up     | 574   | 73.9% | 18.47     | 21.06   | **21.67** | Questions     |
-| N/A           | 102   | 13.1% | 21.22     | 21.22   | **21.22** | All Equal     |
-| Clarification | 101   | 13.0% | 17.28     | 21.29   | **23.15** | Questions     |
+| Domain  | Subtype       | Count |   %   | Last Turn | Rewrite   | Questions | Best Strategy |
+| :------ | :------------ | :---- | :---: | :-------- | :-------- | :-------- | :------------ |
+| **All** | Follow-up     | 574   | 73.9% | 18.47     | 21.06     | **21.67** | Questions     |
+|         | N/A           | 102   | 13.1% | 21.22     | 21.22     | **21.22** | Questions     |
+|         | Clarification | 101   | 13.0% | 17.28     | 21.29     | **23.15** | Questions     |
+|         |               |       |       |           |           |           |               |
+| CLAPNQ  | Follow-up     | 154   | 74.0% | 19.16     | 21.74     | **22.16** | Questions     |
+|         | N/A           | 28    | 13.5% | 21.94     | 21.94     | **21.94** | Questions     |
+|         | Clarification | 26    | 12.5% | 19.49     | **23.18** | 22.97     | Rewrite       |
+|         |               |       |       |           |           |           |               |
+| CLOUD   | Follow-up     | 135   | 71.8% | 17.89     | 20.19     | **22.05** | Questions     |
+|         | N/A           | 25    | 13.3% | **19.80** | 19.80     | 19.80     | Last Turn     |
+|         | Clarification | 28    | 14.9% | 16.72     | 20.59     | **25.22** | Questions     |
+|         |               |       |       |           |           |           |               |
+| FIQA    | Follow-up     | 129   | 71.7% | 19.92     | **22.40** | 21.82     | Rewrite       |
+|         | N/A           | 24    | 13.3% | **23.67** | 23.67     | 23.67     | Last Turn     |
+|         | Clarification | 27    | 15.0% | 18.64     | **22.32** | 21.77     | Rewrite       |
+|         |               |       |       |           |           |           |               |
+| GOVT    | Follow-up     | 156   | 77.6% | 17.11     | 20.04     | **20.74** | Questions     |
+|         | N/A           | 25    | 12.4% | **19.48** | 19.48     | 19.48     | Last Turn     |
+|         | Clarification | 20    | 9.9%  | 13.37     | 18.46     | **22.36** | Questions     |
 
 _Total: 777 tasks_
 
-### Key Insights - Multi-Turn Types
+## Multi-Turn Types - Relevance Score Patterns
 
-1. **Distribution**: **Follow-up** questions dominate (73.9% of tasks), while **Clarification** and **N/A** each represent ~13% of tasks.
+### **Follow-up** (574 queries)
+Largest multi-turn category. Moderate confidence with Questions strategy (21.67). Shows consistent ~17% improvement from Last Turn to Questions. Context clearly helps, but questions format provides additional boost.
 
-2. **Clarification Questions Struggle Most**:
+### **N/A** (102 queries)
+Good confidence, **identical across all strategies** (21.22). These single-turn queries within multi-turn conversations don't benefit from any strategy—they're self-contained and context-independent.
 
-   - Lowest Last Turn score (17.28, 13.0% of tasks) - short queries like "Why?" or "What about X?" lack context
-   - Large gap between Last Turn and Questions (+5.87) - demonstrates critical need for full context
-   - Even Rewrite (21.29) falls short of Questions (23.15), suggesting clarifications are hard to rewrite effectively
-
-3. **Follow-up Questions**:
-
-   - Most common type (73.9% of tasks) - moderate improvement from Rewrite (+2.59 over Last Turn)
-   - Questions strategy provides best performance (+3.20 over Last Turn)
-
-4. **N/A (Single-Turn)**:
-   - All strategies perform identically (21.22, 13.1% of tasks) - expected since there's no conversation context to leverage
+### **Clarification** (101 queries)
+Highest confidence with Questions strategy (23.15). Shows **dramatic improvement** from Last Turn (17.28) to Questions (+34%), the largest gain of any subtype. Clarification questions desperately need explicit formatting and context to achieve good semantic matches.
 
 ---
 
 ## Answerability Types - Mean Relevance Scores
 
-| Subtype    | Count | %     | Last Turn | Rewrite | Questions | Best Strategy |
-| :--------- | :---- | :---- | :-------- | :------ | :-------- | :------------ |
-| ANSWERABLE | 709   | 91.2% | 18.90     | 21.27   | **21.85** | Questions     |
-| PARTIAL    | 68    | 8.8%  | 16.39     | 19.51   | **21.30** | Questions     |
+| Domain  | Subtype    | Count |   %   | Last Turn | Rewrite   | Questions | Best Strategy |
+| :------ | :--------- | :---- | :---: | :-------- | :-------- | :-------- | :------------ |
+| **All** | ANSWERABLE | 709   | 91.2% | 18.90     | 21.27     | **21.85** | Questions     |
+|         | PARTIAL    | 68    | 8.8%  | 16.39     | 19.51     | **21.30** | Questions     |
+|         |            |       |       |           |           |           |               |
+| CLAPNQ  | ANSWERABLE | 192   | 92.3% | 19.85     | 22.08     | **22.25** | Questions     |
+|         | PARTIAL    | 16    | 7.7%  | 16.20     | 20.36     | **21.97** | Questions     |
+|         |            |       |       |           |           |           |               |
+| CLOUD   | ANSWERABLE | 177   | 94.2% | 17.97     | 20.29     | **22.32** | Questions     |
+|         | PARTIAL    | 11    | 5.8%  | 17.94     | 18.68     | **20.74** | Questions     |
+|         |            |       |       |           |           |           |               |
+| FIQA    | ANSWERABLE | 163   | 90.6% | 20.51     | **22.67** | 22.00     | Rewrite       |
+|         | PARTIAL    | 17    | 9.4%  | 17.57     | 21.48     | **22.64** | Questions     |
+|         |            |       |       |           |           |           |               |
+| GOVT    | ANSWERABLE | 177   | 88.1% | 17.31     | 20.07     | **20.82** | Questions     |
+|         | PARTIAL    | 24    | 11.9% | 14.98     | 17.93     | **20.16** | Questions     |
 
 _Total: 777 tasks_
 
-### Key Insights - Answerability Types
+## Answerability Types - Relevance Score Patterns
 
-1. **Distribution**: **ANSWERABLE** questions represent the vast majority (91.2% of tasks), while **PARTIAL** questions are relatively rare (8.8% of tasks).
+### **Answerable** (709 queries)
+Strong baseline confidence with Questions strategy (21.85). Represents the "standard" query quality. Moderate improvement (~16%) from Last Turn to Questions.
 
-2. **PARTIAL Answerability Has Lower Scores**:
-
-   - Consistently lower across all strategies compared to ANSWERABLE
-   - Last Turn: 16.39 vs 18.90 (-2.51) - suggests partial questions are inherently ambiguous
-   - Even Questions strategy (21.30) only reaches the level of ANSWERABLE's Rewrite (21.27)
-
-3. **Questions Strategy Provides Largest Improvement for PARTIAL**:
-   - +4.91 improvement over Last Turn (vs +2.95 for ANSWERABLE)
-   - Suggests that partial questions benefit most from full context
+### **Partial** (68 queries)
+Lower confidence overall with Questions strategy (21.30). Shows **larger improvement gap** from Last Turn (16.39) to Questions (+30% vs 16% for Answerable). Partial queries struggle more with context but benefit dramatically from proper formatting.
 
 ---
-
-## Summary Statistics
-
-### Overall Patterns
-
-1. **Strategy Performance Ranking**:
-
-   - **Questions** > **Rewrite** > **Last Turn** (for most subtypes)
-   - Average improvement: Questions over Last Turn = +3.0 to +5.0 points
-   - Average improvement: Rewrite over Last Turn = +2.0 to +3.0 points
-
-2. **Score Ranges**:
-
-   - **Last Turn**: 16.39 - 21.22 (mean ~18.5)
-   - **Rewrite**: 19.51 - 22.41 (mean ~21.0)
-   - **Questions**: 20.83 - 26.19 (mean ~22.0)
-
-3. **Subtypes with Highest Scores**:
-
-   - Troubleshooting (Questions): 26.19
-   - Comparative (Rewrite): 22.41
-   - Non-Question (Questions): 22.89
-
-4. **Subtypes with Lowest Scores**:
-   - PARTIAL (Last Turn): 16.39
-   - Keyword (Last Turn): 16.65
-   - Clarification (Last Turn): 17.28
 
 ### Interpretation
 
@@ -145,11 +188,48 @@ _Total: 777 tasks_
 - **Scores 15-20**: Moderate matches - some ambiguity or partial relevance
 - **Scores <15**: Weak matches - query may be too short, ambiguous, or lacks context
 
-The analysis confirms that:
+---
 
-- **Context matters**: Rewrite and Questions strategies consistently outperform Last Turn
-- **Question quality matters**: Well-formed questions (Questions strategy) generally achieve highest scores
-- **Query type matters**: Keyword, Clarification, and PARTIAL answerability queries benefit most from context enrichment
+## Critical Insights
+
+### **The Keyword Paradox**
+- **Highest confidence** scores (22.28) but **worst retrieval performance** (R@5: 0.395)
+- ELSER is confident but frequently wrong on keyword queries
+- Indicates overconfidence on sparse, ambiguous queries
+- **Action needed**: Add confidence thresholding or require minimum query length
+
+### **Questions Strategy Dominance**
+- Questions strategy wins in **8 out of 10** question types
+- Only Comparative and How-To benefit more from Rewrite
+- Average improvement: +20-30% over Last Turn
+- Suggests self-contained question format provides clearest semantic signal
+
+### **Clarification Challenge & Opportunity**
+- **Lowest confidence** with Last Turn (17.28) but **highest with Questions** (23.15)
+- Largest improvement of any category (+34%)
+- Clarification queries are most sensitive to formatting
+- Proper question formulation is critical for follow-up understanding
+
+### **Confidence-Performance Alignment Issues**
+- Troubleshooting: High confidence (26.19) + high retrieval (R@5: 0.706) ✓ Aligned
+- Keyword: High confidence (22.28) + low retrieval (R@5: 0.395) ✗ **Misaligned**
+- Factoid: Moderate confidence (22.10) + moderate retrieval (R@5: 0.465) ✓ Aligned
+
+### **Domain Variations**
+- FIQA shows preference for Rewrite in several categories (unique among domains)
+- CLOUD shows strongest Questions preference (highest scores)
+- GOVT shows lowest overall confidence scores (15-20 range)
+
+---
+
+## Possible Paths Forward
+
+1. **Adopt Questions strategy as default** for 8/10 question types
+2. **Use Rewrite for Comparative and How-To** queries specifically
+3. **Implement confidence thresholding** for Keyword queries (high confidence doesn't mean accurate)
+4. **Prioritize clarification handling** - highest potential improvement with proper formatting
+5. **Investigate GOVT domain** - systematically lower confidence suggests index quality issues
+6. **Calibrate confidence scores** - establish domain-specific thresholds (>20 may not always indicate quality match)
 
 ---
 
@@ -160,3 +240,5 @@ Analysis generated by `scripts/discovery/analyze_relevance_scores.py` using:
 - Task enrichments from `cleaned_data/tasks/`
 - ELSER retrieval results from `scripts/baselines/retrieval_scripts/elser/results/`
 - Detailed statistics available in `scripts/discovery/enrichment_analysis_results/relevance_scores_*.csv`
+
+---

@@ -175,27 +175,31 @@ def calculate_statistics(values: List[float]) -> Dict[str, float]:
 def analyze_relevance_scores(
     enrichments: Dict[str, Dict],
     relevance_scores: Dict[str, Dict[str, float]]
-) -> Tuple[Dict, Dict[str, int]]:
+) -> Tuple[Dict, Dict[str, int], Dict]:
     """
-    Analyze relevance scores by enrichment subtype.
+    Analyze relevance scores by enrichment subtype and domain.
     
     Args:
         enrichments: Task enrichments dict
         relevance_scores: Dict mapping strategy -> task_id -> score
     
     Returns:
-        Tuple of (analysis dict, total_counts dict)
-        - analysis: Nested dictionary with statistics
+        Tuple of (analysis dict, total_counts dict, domain_analysis dict)
+        - analysis: Nested dictionary with statistics (aggregated across domains)
         - total_counts: Dictionary mapping enrichment_type -> total count
+        - domain_analysis: Nested dictionary with statistics by domain
     """
-    # Structure: enrichment_type -> subtype -> strategy -> stats
+    # Structure: enrichment_type -> subtype -> strategy -> stats (aggregated)
     analysis = defaultdict(lambda: defaultdict(lambda: defaultdict(dict)))
+    # Structure: enrichment_type -> subtype -> domain -> strategy -> stats (by domain)
+    domain_analysis = defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: defaultdict(dict))))
     # Track total counts per enrichment type for percentage calculation
     total_counts = defaultdict(int)
     
     # Group tasks by enrichment subtypes
     for task_id, task_data in enrichments.items():
         task_enrichments = task_data['enrichments']
+        domain = task_data.get('domain', 'unknown')
         subtypes = extract_enrichment_subtypes(task_enrichments)
         
         # Check if task has scores for any strategy
@@ -223,16 +227,20 @@ def analyze_relevance_scores(
                     
                     score = relevance_scores[strategy][task_id]
                     
-                    # Store value for later statistics calculation
+                    # Store value for aggregated statistics
                     if 'values' not in analysis[enrichment_type][subtype][strategy]:
                         analysis[enrichment_type][subtype][strategy]['values'] = []
-                    
                     analysis[enrichment_type][subtype][strategy]['values'].append(score)
+                    
+                    # Store value for domain-specific statistics
+                    if 'values' not in domain_analysis[enrichment_type][subtype][domain][strategy]:
+                        domain_analysis[enrichment_type][subtype][domain][strategy]['values'] = []
+                    domain_analysis[enrichment_type][subtype][domain][strategy]['values'].append(score)
                 
                 # Count this subtype occurrence (count once per task, not per strategy)
                 total_counts[enrichment_type] += 1
     
-    # Calculate statistics for each group
+    # Calculate statistics for aggregated groups
     for enrichment_type in analysis:
         for subtype in analysis[enrichment_type]:
             for strategy in analysis[enrichment_type][subtype]:
@@ -240,7 +248,16 @@ def analyze_relevance_scores(
                 stats = calculate_statistics(values)
                 analysis[enrichment_type][subtype][strategy] = stats
     
-    return dict(analysis), dict(total_counts)
+    # Calculate statistics for domain-specific groups
+    for enrichment_type in domain_analysis:
+        for subtype in domain_analysis[enrichment_type]:
+            for domain in domain_analysis[enrichment_type][subtype]:
+                for strategy in domain_analysis[enrichment_type][subtype][domain]:
+                    values = domain_analysis[enrichment_type][subtype][domain][strategy]['values']
+                    stats = calculate_statistics(values)
+                    domain_analysis[enrichment_type][subtype][domain][strategy] = stats
+    
+    return dict(analysis), dict(total_counts), dict(domain_analysis)
 
 
 def print_summary_table(analysis: Dict, enrichment_type: str, total_counts: Dict[str, int]):
@@ -292,42 +309,89 @@ def print_summary_table(analysis: Dict, enrichment_type: str, total_counts: Dict
     print()
 
 
-def save_results_to_csv(analysis: Dict, total_counts: Dict[str, int], output_dir: Path):
-    """Save analysis results to CSV files."""
+def save_results_to_csv(analysis: Dict, total_counts: Dict[str, int], domain_analysis: Dict, output_dir: Path):
+    """Save analysis results to CSV files, including domain breakdown."""
     output_dir.mkdir(parents=True, exist_ok=True)
     
-    for enrichment_type in analysis:
+    # Save results with 'all' domain and individual domains
+    for enrichment_type in domain_analysis:
         rows = []
         total_count = total_counts.get(enrichment_type, 0)
         
-        for subtype in analysis[enrichment_type]:
-            # Get count for this subtype (use any strategy, they should be similar)
-            subtype_count = 0
-            for strategy in STRATEGIES:
-                if strategy in analysis[enrichment_type][subtype]:
-                    subtype_count = analysis[enrichment_type][subtype][strategy]['count']
-                    break
-            
-            # Calculate percentage
-            percentage = (subtype_count / total_count * 100) if total_count > 0 else 0.0
-            
-            for strategy in STRATEGIES:
-                if strategy not in analysis[enrichment_type][subtype]:
-                    continue
+        # First, add 'all' domain rows (aggregated statistics)
+        if enrichment_type in analysis:
+            for subtype in analysis[enrichment_type]:
+                # Get count for this subtype (use any strategy)
+                subtype_count = 0
+                for strategy in STRATEGIES:
+                    if strategy in analysis[enrichment_type][subtype]:
+                        subtype_count = analysis[enrichment_type][subtype][strategy]['count']
+                        break
                 
-                stats = analysis[enrichment_type][subtype][strategy]
-                rows.append({
-                    'enrichment_type': enrichment_type,
-                    'subtype': subtype,
-                    'strategy': strategy,
-                    'count': stats['count'],
-                    'percentage': round(percentage, 2),
-                    'mean_score': stats['mean'],
-                    'median_score': stats['median'],
-                    'std_dev': stats['std'],
-                    'min_score': stats['min'],
-                    'max_score': stats['max']
-                })
+                # Calculate percentage
+                percentage = (subtype_count / total_count * 100) if total_count > 0 else 0.0
+                
+                for strategy in STRATEGIES:
+                    if strategy not in analysis[enrichment_type][subtype]:
+                        continue
+                    
+                    stats = analysis[enrichment_type][subtype][strategy]
+                    rows.append({
+                        'enrichment_type': enrichment_type,
+                        'subtype': subtype,
+                        'domain': 'all',
+                        'strategy': strategy,
+                        'count': stats['count'],
+                        'percentage': round(percentage, 2),
+                        'mean_score': stats['mean'],
+                        'median_score': stats['median'],
+                        'std_dev': stats['std'],
+                        'min_score': stats['min'],
+                        'max_score': stats['max']
+                    })
+        
+        # Calculate domain-specific total counts for percentage calculation
+        domain_total_counts = defaultdict(int)
+        for subtype in domain_analysis[enrichment_type]:
+            for domain in domain_analysis[enrichment_type][subtype]:
+                # Count tasks per domain (use any strategy)
+                for strategy in STRATEGIES:
+                    if strategy in domain_analysis[enrichment_type][subtype][domain]:
+                        domain_total_counts[domain] += domain_analysis[enrichment_type][subtype][domain][strategy]['count']
+                        break
+        
+        # Then, add individual domain rows
+        for subtype in domain_analysis[enrichment_type]:
+            for domain in sorted(domain_analysis[enrichment_type][subtype].keys()):
+                # Get count for this subtype-domain combination
+                subtype_domain_count = 0
+                for strategy in STRATEGIES:
+                    if strategy in domain_analysis[enrichment_type][subtype][domain]:
+                        subtype_domain_count = domain_analysis[enrichment_type][subtype][domain][strategy]['count']
+                        break
+                
+                # Calculate percentage within domain
+                domain_total = domain_total_counts.get(domain, 0)
+                percentage = (subtype_domain_count / domain_total * 100) if domain_total > 0 else 0.0
+                
+                for strategy in STRATEGIES:
+                    if strategy not in domain_analysis[enrichment_type][subtype][domain]:
+                        continue
+                    
+                    stats = domain_analysis[enrichment_type][subtype][domain][strategy]
+                    rows.append({
+                        'enrichment_type': enrichment_type,
+                        'subtype': subtype,
+                        'domain': domain,
+                        'strategy': strategy,
+                        'count': stats['count'],
+                        'percentage': round(percentage, 2),
+                        'mean_score': stats['mean'],
+                        'median_score': stats['median'],
+                        'std_dev': stats['std'],
+                        'min_score': stats['min'],
+                        'max_score': stats['max']
+                    })
         
         if rows:
             filename = f"relevance_scores_{enrichment_type}.csv"
@@ -373,12 +437,12 @@ def main():
         print(f"{len(scores)} tasks")
     
     # Analyze performance
-    print("\nAnalyzing relevance scores by enrichment subtype...")
-    analysis, total_counts = analyze_relevance_scores(enrichments, relevance_scores)
+    print("\nAnalyzing relevance scores by enrichment subtype and domain...")
+    analysis, total_counts, domain_analysis = analyze_relevance_scores(enrichments, relevance_scores)
     
     # Print summary tables
     print("\n" + "="*100)
-    print("SUMMARY TABLES")
+    print("SUMMARY TABLES (Aggregated across domains)")
     print("="*100)
     
     # Question Type summary
@@ -394,7 +458,7 @@ def main():
     print("\n" + "="*100)
     print("SAVING RESULTS")
     print("="*100)
-    save_results_to_csv(analysis, total_counts, output_dir)
+    save_results_to_csv(analysis, total_counts, domain_analysis, output_dir)
     
     print("\n" + "="*100)
     print("Analysis complete!")
