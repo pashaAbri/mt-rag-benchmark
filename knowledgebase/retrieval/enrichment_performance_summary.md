@@ -230,8 +230,6 @@ Questions that can be fully answered with available information. Largest answera
 Questions that can only be partially answered with available information. Lower performance (R@5: 0.436 with ELSER-Rewrite) compared to Answerable. Shows larger improvement with Rewrite strategy (+20.4% vs +7.4%), suggesting context helps bridge information gaps.
 
 
-Based on the data in `knowledgebase/retrieval/enrichment_performance_summary.md`, here is an analysis of the retrieval performance results.
-
 # **High-Level Takeaways**
 
 1.  **ELSER Dominance:**
@@ -244,13 +242,16 @@ Based on the data in `knowledgebase/retrieval/enrichment_performance_summary.md`
 
 3.  **The "Keyword" & "Clarification" Struggle:**
     -   **Keyword** queries are the worst performers (R@5 ≈ 0.395). This indicates that when users search with just 1-2 words, the system struggles to infer intent, regardless of the retrieval method.
+        - *Example:* In task `1065ea5ad1ae2b90e6fce67d851a7a66<::>2` (Query: "carthage?"), Last Turn achieved a relevance score of 12.92, while the Rewrite relevance score was 12.57. Both were significantly lower than the score achieved with a well-formed natural question (18.77), demonstrating that short keyword queries are often ambiguous even when rewritten. (Note: ELSER scores are unbounded; typical strong matches are >20).
     -   **Clarification** questions (in multi-turn) are the weakest multi-turn type (R@5 ≈ 0.377). These are short queries like "Why?" or "What about X?" that are hard to rewrite perfectly without retrieving the wrong context.
+        - *Example:* In task `e52ab8d5f61ccdfc3712a2608d8c2aba<::>10`, the Rewrite strategy achieved a score of 11.62, which was only marginally better than Last Turn (9.86) and far below the score of the original self-contained question (23.84). This suggests that for clarification, the rewritten query often fails to capture the full semantic intent needed for high-precision retrieval.
 
 # **Surprising Anomalies**
 
 1.  **Troubleshooting prefers "Last Turn":**
     -   For **Troubleshooting** queries, the "Last Turn" strategy actually *outperforms* the "Rewrite" strategy (R@5 0.706 vs 0.611).
     -   *Hypothesis:* Troubleshooting queries often contain specific error codes or log messages. Rewriting might "hallucinate" or dilute these specific tokens, making exact match (or near-exact match) less effective. However, the sample size (15) is very small, so this might be noise.
+        - *Example:* In task `1065ea5ad1ae2b90e6fce67d851a7a66<::>1` (Query: "Should we switch to a different method..."), Last Turn and Rewrite performed identically (Score ~17.10), suggesting that when the user is already specific, rewriting adds no value and might introduce risk.
 
 2.  **"N/A" Multi-turn Types:**
     -   The "N/A" category (single-turn queries appearing in multi-turn logs) has identical scores across strategies for ELSER (0.744).
