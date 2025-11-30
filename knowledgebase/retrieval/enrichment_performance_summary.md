@@ -318,7 +318,6 @@ Questions that can only be partially answered with available information. Lower 
       - _Example:_ In task `e52ab8d5f61ccdfc3712a2608d8c2aba<::>10`, the Rewrite strategy achieved a score of 11.62, which was only marginally better than Last Turn (9.86) and far below the score of the original self-contained question (23.84). This suggests that for clarification, the rewritten query often fails to capture the full semantic intent needed for high-precision retrieval.
 
 4.  **Troubleshooting prefers "Last Turn":**
-
     - For **Troubleshooting** queries, the "Last Turn" strategy actually _outperforms_ the "Rewrite" strategy (R@5 0.706 vs 0.611).
     - _Hypothesis:_ Troubleshooting queries often contain specific error codes or log messages. Rewriting might "hallucinate" or dilute these specific tokens, making exact match (or near-exact match) less effective. However, the sample size (15) is very small, so this might be noise.
       - _Example:_ In task `1065ea5ad1ae2b90e6fce67d851a7a66<::>1` (Query: "Should we switch to a different method..."), Last Turn and Rewrite performed identically (Score ~17.10), suggesting that when the user is already specific, rewriting adds no value and might introduce risk.
