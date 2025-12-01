@@ -33,7 +33,26 @@ class QPPPredictor:
             self.model = None
 
     def create_prompt(self, query: str, passage: str) -> str:
-        return f"Query: {query}\nPassage: {passage}\nRelevant:"
+        # Use the same prompt format as QPP-GenRE binary prompt
+        return f"Instruction: Please assess the relevance of the provided passage to the following question. Please output \"Relevant\" or \"Irrelevant\".\nQuestion: {query}\nPassage: {passage}\nOutput:"
+
+    def parse_prediction(self, text: str) -> int:
+        """Parse the model output to determine relevance (1 for Relevant, 0 for Irrelevant)"""
+        # Split on "Output:" to get just the generated part
+        if "Output:" in text:
+            prediction = text.split("Output:")[-1].strip()
+        else:
+            prediction = text.strip()
+        
+        # Check for explicit labels
+        prediction_lower = prediction.lower()
+        if "relevant" in prediction_lower and "irrelevant" not in prediction_lower:
+            return 1
+        elif "irrelevant" in prediction_lower or ("ir" in prediction_lower and "relevant" not in prediction_lower):
+            return 0
+        else:
+            # Default to irrelevant if unclear
+            return 0
 
     def predict(self, query: str, passages: List[str]) -> List[int]:
         if not self.model:
@@ -45,9 +64,9 @@ class QPPPredictor:
             inputs = self.tokenizer(prompt, return_tensors="pt").to(self.device)
             
             with torch.no_grad():
-                outputs = self.model.generate(**inputs, max_new_tokens=5)
+                outputs = self.model.generate(**inputs, max_new_tokens=10, do_sample=False)
                 decoded = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
-                is_relevant = 1 if "yes" in decoded.lower() or "relevant" in decoded.lower() else 0
+                is_relevant = self.parse_prediction(decoded)
                 preds.append(is_relevant)
                 
         return preds
