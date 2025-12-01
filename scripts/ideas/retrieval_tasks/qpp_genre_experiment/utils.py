@@ -25,8 +25,10 @@ def load_queries(domain: str) -> Dict[str, str]:
             with open(os.path.join(task_dir, filename), 'r') as f:
                 data = json.load(f)
                 task_id = data.get('task_id')
-                query_text = data.get('question', '')
-                if task_id:
+                # Query text is stored in user.text, not question
+                user_data = data.get('user', {})
+                query_text = user_data.get('text', '') if isinstance(user_data, dict) else ''
+                if task_id and query_text:
                     queries[task_id] = query_text
     return queries
 
