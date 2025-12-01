@@ -39,7 +39,7 @@ for retriever in ['elser', 'bge', 'bm25']:
     
     for domain in ['clapnq', 'cloud', 'fiqa', 'govt']:
         result = subprocess.run(
-            [sys.executable, 'scripts/ideas/retrieval_tasks/multi_strategy_fusion/analyze_per_query_winners.py',
+            [sys.executable, 'scripts/ideas/retrieval_tasks/oracle/analyze_per_query_winners.py',
              '--retriever', retriever, '--domain', domain],
             capture_output=True,
             text=True
