@@ -2,6 +2,8 @@
 
 This table provides a comprehensive view of all retrieval strategies and metrics across conversation turns. It looks at the 777 tasks that are Answerable or Partial only.
 
+**Retriever**: ELSER (Elastic Learned Sparse Encoder) - All baseline strategies (Last Turn, Query Rewrite, Questions) and MMR Clustering use ELSER for retrieval. Note: MMR Clustering uses BGE embeddings for the clustering algorithm, but ELSER for the final retrieval step.
+
 ## Strategies
 
 - **Last Turn**: Uses only the current question, ignoring conversation history

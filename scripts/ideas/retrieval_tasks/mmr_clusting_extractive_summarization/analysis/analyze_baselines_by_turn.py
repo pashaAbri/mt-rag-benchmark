@@ -8,7 +8,7 @@ def extract_turn_from_task_id(task_id):
         return int(task_id.split('<::>')[1])
     return None
 
-def load_baseline_by_turn(query_type='lastturn', retriever='bge'):
+def load_baseline_by_turn(query_type='lastturn', retriever='elser'):
     """Load baseline results grouped by turn."""
     script_dir = Path(__file__).parent
     workspace_root = script_dir.parent.parent.parent.parent.parent
@@ -78,7 +78,7 @@ def load_mmr_by_turn(filter_to_answerable_partial=True):
     # Load baseline task IDs to filter (baselines only include Answerable + Partial)
     baseline_task_ids = set()
     if filter_to_answerable_partial:
-        baseline_path = workspace_root / "scripts/baselines/retrieval_scripts/bge/results/bge_all_lastturn_evaluated.jsonl"
+        baseline_path = workspace_root / "scripts/baselines/retrieval_scripts/elser/results/elser_all_lastturn_evaluated.jsonl"
         if baseline_path.exists():
             with open(baseline_path, 'r') as f:
                 for line in f:
@@ -94,7 +94,7 @@ def load_mmr_by_turn(filter_to_answerable_partial=True):
     all_data = []
     
     for domain in domains:
-        eval_path = mmr_dir / f"results_k10/bge_{domain}_mmr_cluster_k10_evaluated.jsonl"
+        eval_path = mmr_dir / f"results_k10/elser_{domain}_mmr_cluster_k10_evaluated.jsonl"
         if not eval_path.exists():
             continue
             
