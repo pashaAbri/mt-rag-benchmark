@@ -32,7 +32,9 @@ def load_baseline_by_turn(query_type='lastturn', retriever='bge'):
                 scores = entry.get('retriever_scores', {})
                 data.append({
                     'turn': turn,
+                    'Recall@5': scores.get('recall_5', 0),
                     'Recall@10': scores.get('recall_10', 0),
+                    'NDCG@5': scores.get('ndcg_cut_5', 0),
                     'NDCG@10': scores.get('ndcg_cut_10', 0),
                 })
             except Exception as e:
@@ -44,7 +46,9 @@ def load_baseline_by_turn(query_type='lastturn', retriever='bge'):
     df = pd.DataFrame(data)
     # Group by turn and aggregate
     turn_stats = df.groupby('turn').agg({
+        'Recall@5': 'mean',
         'Recall@10': ['mean', 'count'],
+        'NDCG@5': 'mean',
         'NDCG@10': 'mean'
     }).round(4)
     
@@ -52,16 +56,39 @@ def load_baseline_by_turn(query_type='lastturn', retriever='bge'):
     turn_stats.columns = ['_'.join(col).strip() for col in turn_stats.columns.values]
     turn_stats.rename(columns={
         'Recall@10_count': 'count',
+        'Recall@5_mean': 'Recall@5',
         'Recall@10_mean': 'Recall@10',
+        'NDCG@5_mean': 'NDCG@5',
         'NDCG@10_mean': 'NDCG@10'
     }, inplace=True)
     
     return turn_stats
 
-def load_mmr_by_turn():
-    """Load MMR clustering results grouped by turn."""
+def load_mmr_by_turn(filter_to_answerable_partial=True):
+    """Load MMR clustering results grouped by turn.
+    
+    Args:
+        filter_to_answerable_partial: If True, only include tasks that are in baseline files
+                                      (which contain only Answerable + Partial tasks)
+    """
     script_dir = Path(__file__).parent
     mmr_dir = script_dir.parent
+    workspace_root = script_dir.parent.parent.parent.parent.parent
+    
+    # Load baseline task IDs to filter (baselines only include Answerable + Partial)
+    baseline_task_ids = set()
+    if filter_to_answerable_partial:
+        baseline_path = workspace_root / "scripts/baselines/retrieval_scripts/bge/results/bge_all_lastturn_evaluated.jsonl"
+        if baseline_path.exists():
+            with open(baseline_path, 'r') as f:
+                for line in f:
+                    try:
+                        entry = json.loads(line)
+                        task_id = entry.get('task_id', '')
+                        if task_id:
+                            baseline_task_ids.add(task_id)
+                    except:
+                        continue
     
     domains = ['clapnq', 'cloud', 'fiqa', 'govt']
     all_data = []
@@ -76,6 +103,12 @@ def load_mmr_by_turn():
                 try:
                     entry = json.loads(line)
                     task_id = entry.get('task_id', '')
+                    
+                    # Filter to only Answerable/Partial tasks if requested
+                    if filter_to_answerable_partial and baseline_task_ids:
+                        if task_id not in baseline_task_ids:
+                            continue
+                    
                     turn = extract_turn_from_task_id(task_id)
                     
                     if turn is None:
@@ -84,7 +117,9 @@ def load_mmr_by_turn():
                     scores = entry.get('retriever_scores', {})
                     all_data.append({
                         'turn': turn,
+                        'Recall@5': scores.get('recall_5', 0),
                         'Recall@10': scores.get('recall_10', 0),
+                        'NDCG@5': scores.get('ndcg_cut_5', 0),
                         'NDCG@10': scores.get('ndcg_cut_10', 0),
                     })
                 except Exception as e:
@@ -96,7 +131,9 @@ def load_mmr_by_turn():
     df = pd.DataFrame(all_data)
     # Group by turn and aggregate
     turn_stats = df.groupby('turn').agg({
+        'Recall@5': 'mean',
         'Recall@10': ['mean', 'count'],
+        'NDCG@5': 'mean',
         'NDCG@10': 'mean'
     }).round(4)
     
@@ -104,7 +141,9 @@ def load_mmr_by_turn():
     turn_stats.columns = ['_'.join(col).strip() for col in turn_stats.columns.values]
     turn_stats.rename(columns={
         'Recall@10_count': 'count',
+        'Recall@5_mean': 'Recall@5',
         'Recall@10_mean': 'Recall@10',
+        'NDCG@5_mean': 'NDCG@5',
         'NDCG@10_mean': 'NDCG@10'
     }, inplace=True)
     
@@ -123,8 +162,8 @@ def main():
             query_name = query_type.replace('lastturn', 'Last Turn').replace('rewrite', 'Query Rewrite').replace('questions', 'Questions')
             baselines[query_name] = result
     
-    # Load MMR results
-    mmr_results = load_mmr_by_turn()
+    # Load MMR results (filtered to Answerable + Partial only for fair comparison)
+    mmr_results = load_mmr_by_turn(filter_to_answerable_partial=True)
     
     if mmr_results is None:
         print("Error: Could not load MMR results")
@@ -136,46 +175,54 @@ def main():
     for query_name, stats in baselines.items():
         print(f"### {query_name}")
         print("-"*80)
-        print(f"{'Turn':<6} | {'Recall@10':<12} | {'NDCG@10':<12} | {'Count':<8}")
-        print("-"*80)
+        print(f"{'Turn':<6} | {'Recall@5':<12} | {'Recall@10':<12} | {'NDCG@5':<12} | {'NDCG@10':<12} | {'Count':<8}")
+        print("-"*100)
         
         for turn in sorted(stats.index):
-            recall = stats.loc[turn, 'Recall@10']
-            ndcg = stats.loc[turn, 'NDCG@10']
+            recall5 = stats.loc[turn, 'Recall@5']
+            recall10 = stats.loc[turn, 'Recall@10']
+            ndcg5 = stats.loc[turn, 'NDCG@5']
+            ndcg10 = stats.loc[turn, 'NDCG@10']
             count = int(stats.loc[turn, 'count'])
-            print(f"{int(turn):<6} | {recall:<12.4f} | {ndcg:<12.4f} | {count:<8}")
+            print(f"{int(turn):<6} | {recall5:<12.4f} | {recall10:<12.4f} | {ndcg5:<12.4f} | {ndcg10:<12.4f} | {count:<8}")
         
         # Summary stats
         best_turn = stats['Recall@10'].idxmax()
         worst_turn = stats['Recall@10'].idxmin()
-        overall_recall = (stats['Recall@10'] * stats['count']).sum() / stats['count'].sum()
-        overall_ndcg = (stats['NDCG@10'] * stats['count']).sum() / stats['count'].sum()
+        overall_recall5 = (stats['Recall@5'] * stats['count']).sum() / stats['count'].sum()
+        overall_recall10 = (stats['Recall@10'] * stats['count']).sum() / stats['count'].sum()
+        overall_ndcg5 = (stats['NDCG@5'] * stats['count']).sum() / stats['count'].sum()
+        overall_ndcg10 = (stats['NDCG@10'] * stats['count']).sum() / stats['count'].sum()
         
         print(f"\nSummary:")
-        print(f"  Overall: Recall@10 = {overall_recall:.4f}, NDCG@10 = {overall_ndcg:.4f}")
+        print(f"  Overall: Recall@5 = {overall_recall5:.4f}, Recall@10 = {overall_recall10:.4f}, NDCG@5 = {overall_ndcg5:.4f}, NDCG@10 = {overall_ndcg10:.4f}")
         print(f"  Best Turn: {int(best_turn)} (Recall@10 = {stats.loc[best_turn, 'Recall@10']:.4f})")
         print(f"  Worst Turn: {int(worst_turn)} (Recall@10 = {stats.loc[worst_turn, 'Recall@10']:.4f})")
         print()
     
     # Print MMR analysis
     print("### MMR Cluster (k10, λ=0.7)")
-    print("-"*80)
-    print(f"{'Turn':<6} | {'Recall@10':<12} | {'NDCG@10':<12} | {'Count':<8}")
-    print("-"*80)
+    print("-"*100)
+    print(f"{'Turn':<6} | {'Recall@5':<12} | {'Recall@10':<12} | {'NDCG@5':<12} | {'NDCG@10':<12} | {'Count':<8}")
+    print("-"*100)
     
     for turn in sorted(mmr_results.index):
-        recall = mmr_results.loc[turn, 'Recall@10']
-        ndcg = mmr_results.loc[turn, 'NDCG@10']
+        recall5 = mmr_results.loc[turn, 'Recall@5']
+        recall10 = mmr_results.loc[turn, 'Recall@10']
+        ndcg5 = mmr_results.loc[turn, 'NDCG@5']
+        ndcg10 = mmr_results.loc[turn, 'NDCG@10']
         count = int(mmr_results.loc[turn, 'count'])
-        print(f"{int(turn):<6} | {recall:<12.4f} | {ndcg:<12.4f} | {count:<8}")
+        print(f"{int(turn):<6} | {recall5:<12.4f} | {recall10:<12.4f} | {ndcg5:<12.4f} | {ndcg10:<12.4f} | {count:<8}")
     
     mmr_best_turn = mmr_results['Recall@10'].idxmax()
     mmr_worst_turn = mmr_results['Recall@10'].idxmin()
-    mmr_overall_recall = (mmr_results['Recall@10'] * mmr_results['count']).sum() / mmr_results['count'].sum()
-    mmr_overall_ndcg = (mmr_results['NDCG@10'] * mmr_results['count']).sum() / mmr_results['count'].sum()
+    mmr_overall_recall5 = (mmr_results['Recall@5'] * mmr_results['count']).sum() / mmr_results['count'].sum()
+    mmr_overall_recall10 = (mmr_results['Recall@10'] * mmr_results['count']).sum() / mmr_results['count'].sum()
+    mmr_overall_ndcg5 = (mmr_results['NDCG@5'] * mmr_results['count']).sum() / mmr_results['count'].sum()
+    mmr_overall_ndcg10 = (mmr_results['NDCG@10'] * mmr_results['count']).sum() / mmr_results['count'].sum()
     
     print(f"\nSummary:")
-    print(f"  Overall: Recall@10 = {mmr_overall_recall:.4f}, NDCG@10 = {mmr_overall_ndcg:.4f}")
+    print(f"  Overall: Recall@5 = {mmr_overall_recall5:.4f}, Recall@10 = {mmr_overall_recall10:.4f}, NDCG@5 = {mmr_overall_ndcg5:.4f}, NDCG@10 = {mmr_overall_ndcg10:.4f}")
     print(f"  Best Turn: {int(mmr_best_turn)} (Recall@10 = {mmr_results.loc[mmr_best_turn, 'Recall@10']:.4f})")
     print(f"  Worst Turn: {int(mmr_worst_turn)} (Recall@10 = {mmr_results.loc[mmr_worst_turn, 'Recall@10']:.4f})")
     print()
@@ -242,7 +289,9 @@ def main():
     for query_name, stats in baselines.items():
         comparison_data['baselines'][query_name] = {
             int(turn): {
+                'Recall@5': float(stats.loc[turn, 'Recall@5']),
                 'Recall@10': float(stats.loc[turn, 'Recall@10']),
+                'NDCG@5': float(stats.loc[turn, 'NDCG@5']),
                 'NDCG@10': float(stats.loc[turn, 'NDCG@10']),
                 'count': int(stats.loc[turn, 'count'])
             }
@@ -251,14 +300,17 @@ def main():
     
     comparison_data['mmr_cluster'] = {
         int(turn): {
+            'Recall@5': float(mmr_results.loc[turn, 'Recall@5']),
             'Recall@10': float(mmr_results.loc[turn, 'Recall@10']),
+            'NDCG@5': float(mmr_results.loc[turn, 'NDCG@5']),
             'NDCG@10': float(mmr_results.loc[turn, 'NDCG@10']),
             'count': int(mmr_results.loc[turn, 'count'])
         }
         for turn in mmr_results.index
     }
     
-    output_file = "baselines_turn_analysis.json"
+    script_dir = Path(__file__).parent
+    output_file = script_dir / "baselines_turn_analysis.json"
     with open(output_file, 'w') as f:
         json.dump(comparison_data, f, indent=2)
     
