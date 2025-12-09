@@ -13,6 +13,35 @@ This document provides turn-by-turn performance metrics broken down by domain fo
 - **Questions**: Concatenates all questions from the conversation into a single query
 - **MMR Cluster**: Extract sentences from history, cluster them, select diverse representatives via MMR, then rewrite query using LLM (k=10, λ=0.7)
 
+## Overall Performance Summary by Domain
+
+| Domain | Strategy      | R@5        | R@10       | NDCG@5     | NDCG@10    | Total Tasks |
+| ------ | ------------- | ---------- | ---------- | ---------- | ---------- | ----------- |
+| ClapNQ | Last Turn     | 0.5113     | 0.6303     | 0.4749     | 0.5270     | 208         |
+|        | Query Rewrite | 0.5516     | **0.7005** | **0.5135** | **0.5781** | 208         |
+|        | Questions     | 0.3016     | 0.4087     | 0.2692     | 0.3153     | 208         |
+|        | MMR Cluster   | **0.5555** | 0.6994     | 0.5087     | 0.5704     | 208         |
+| ------ | ------------- | ---------- | ---------- | ---------- | ---------- | ----------- |
+| Cloud  | Last Turn     | 0.4201     | 0.5037     | 0.3894     | 0.4273     | 188         |
+|        | Query Rewrite | **0.4297** | **0.5280** | **0.3940** | **0.4377** | 188         |
+|        | Questions     | 0.2180     | 0.3037     | 0.1861     | 0.2220     | 188         |
+|        | MMR Cluster   | 0.4092     | 0.5031     | 0.3658     | 0.4059     | 188         |
+| ------ | ------------- | ---------- | ---------- | ---------- | ---------- | ----------- |
+| FiQA   | Last Turn     | 0.3705     | 0.4719     | 0.3477     | 0.3909     | 180         |
+|        | Query Rewrite | **0.4017** | **0.5357** | **0.3779** | **0.4355** | 180         |
+|        | Questions     | 0.1913     | 0.2494     | 0.1818     | 0.2071     | 180         |
+|        | MMR Cluster   | 0.3730     | 0.4654     | 0.3514     | 0.3907     | 180         |
+| ------ | ------------- | ---------- | ---------- | ---------- | ---------- | ----------- |
+| Govt   | Last Turn     | 0.4449     | 0.5588     | 0.4001     | 0.4486     | 201         |
+|        | Query Rewrite | **0.5082** | **0.6510** | 0.4540     | **0.5169** | 201         |
+|        | Questions     | 0.3540     | 0.4498     | 0.3000     | 0.3397     | 201         |
+|        | MMR Cluster   | 0.5052     | 0.6237     | **0.4505** | 0.5008     | 201         |
+| ------ | ------------- | ---------- | ---------- | ---------- | ---------- | ----------- |
+| ALL    | Last Turn     | 0.4394     | 0.5445     | 0.4054     | 0.4511     | 777         |
+|        | Query Rewrite | **0.4761** | **0.6078** | **0.4378** | **0.4953** | 777         |
+|        | Questions     | 0.2694     | 0.3570     | 0.2368     | 0.2740     | 777         |
+|        | MMR Cluster   | 0.4648     | 0.5781     | 0.4226     | 0.4710     | 777         |
+
 ## ClapNQ Domain
 
 | Turn   | Count   | Strategy        | R@5      | R@10     | NDCG@5   | NDCG@10   | Winner @NDCG@5    |
@@ -233,24 +262,3 @@ This document provides turn-by-turn performance metrics broken down by domain fo
 |        |         | Query Rewrite   | 0.6250   | 0.7500   | 0.5480   | 0.6175    | -13.3%            |
 |        |         | Questions       | 0.7500   | 1.0000   | 0.5737   | 0.6829    | -9.2%             |
 |        |         | MMR Cluster     | 0.7500   | 0.7500   | 0.6235   | 0.6235    | -1.3%             |
-
-## Overall Performance Summary by Domain
-
-| Domain | Strategy      | R@5    | R@10   | NDCG@5 | NDCG@10 | Total Tasks |
-| ------ | ------------- | ------ | ------ | ------ | ------- | ----------- |
-| ClapNQ | Last Turn     | 0.5113 | 0.6303 | 0.4749 | 0.5270  | 208         |
-|        | Query Rewrite | 0.5516 | 0.7005 | 0.5135 | 0.5781  | 208         |
-|        | Questions     | 0.3016 | 0.4087 | 0.2692 | 0.3153  | 208         |
-|        | MMR Cluster   | 0.5555 | 0.6994 | 0.5087 | 0.5704  | 208         |
-| Cloud  | Last Turn     | 0.4201 | 0.5037 | 0.3894 | 0.4273  | 188         |
-|        | Query Rewrite | 0.4297 | 0.5280 | 0.3940 | 0.4377  | 188         |
-|        | Questions     | 0.2180 | 0.3037 | 0.1861 | 0.2220  | 188         |
-|        | MMR Cluster   | 0.4092 | 0.5031 | 0.3658 | 0.4059  | 188         |
-| FiQA   | Last Turn     | 0.3705 | 0.4719 | 0.3477 | 0.3909  | 180         |
-|        | Query Rewrite | 0.4017 | 0.5357 | 0.3779 | 0.4355  | 180         |
-|        | Questions     | 0.1913 | 0.2494 | 0.1818 | 0.2071  | 180         |
-|        | MMR Cluster   | 0.3730 | 0.4654 | 0.3514 | 0.3907  | 180         |
-| Govt   | Last Turn     | 0.4449 | 0.5588 | 0.4001 | 0.4486  | 201         |
-|        | Query Rewrite | 0.5082 | 0.6510 | 0.4540 | 0.5169  | 201         |
-|        | Questions     | 0.3540 | 0.4498 | 0.3000 | 0.3397  | 201         |
-|        | MMR Cluster   | 0.5052 | 0.6237 | 0.4505 | 0.5008  | 201         |
