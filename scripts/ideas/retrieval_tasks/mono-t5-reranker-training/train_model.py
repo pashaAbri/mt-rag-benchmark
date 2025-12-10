@@ -207,6 +207,8 @@ def main():
                         help='Number of warmup steps')
     parser.add_argument('--save-steps', type=int, default=500,
                         help='Save checkpoint every N steps')
+    parser.add_argument('--save-total-limit', type=int, default=3,
+                        help='Maximum number of checkpoints to keep (default: 3)')
     parser.add_argument('--eval-steps', type=int, default=500,
                         help='Evaluate every N steps')
     parser.add_argument('--logging-steps', type=int, default=100,
@@ -342,7 +344,7 @@ def main():
         fp16=args.fp16,
         seed=args.seed,
         report_to="none",  # Disable wandb/tensorboard unless needed
-        save_total_limit=3,  # Keep only last 3 checkpoints
+        save_total_limit=args.save_total_limit,  # Keep specified number of checkpoints
         remove_unused_columns=False,
         predict_with_generate=True,  # Generate tokens for evaluation
     )
