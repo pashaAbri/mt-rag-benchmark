@@ -46,6 +46,7 @@ class DataLoader:
         """Load document text from corpus or retrieval results."""
         # Try corpus first
         if domain not in self._corpus_cache:
+            self._corpus_cache[domain] = {}  # Initialize domain cache
             corpus_path = PROJECT_ROOT / 'corpora' / self.corpus_level / f'{domain}.jsonl'
             if corpus_path.exists():
                 with open(corpus_path, 'r', encoding='utf-8') as f:

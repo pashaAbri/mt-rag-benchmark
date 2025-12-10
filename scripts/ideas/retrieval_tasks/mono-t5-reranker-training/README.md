@@ -12,11 +12,16 @@ The goal is to fine-tune a MonoT5 model to judge document relevance, which will 
 mono-t5-reranker-training/
 ├── prepare_training_data.py  # Script to create train/val/test splits
 ├── data_loader.py            # Utility to load text data at training time
+├── train_model.py            # Training script for MonoT5 fine-tuning
 ├── data/                      # Generated training data (references only)
 │   ├── train.jsonl
 │   ├── val.jsonl
 │   ├── test.jsonl
 │   └── metadata.json
+├── checkpoints/               # Model checkpoints (created during training)
+│   ├── checkpoint-*/
+│   ├── final_model/
+│   └── training_metadata.json
 └── README.md
 ```
 
@@ -106,10 +111,82 @@ for ex in train_examples[:5]:
         print(f"Output: {'true' if ex['label'] == 1 else 'false'}")
 ```
 
-## Next Steps
+## Training
 
-After preparing the data, the next script will:
-1. Use `data_loader.py` to load text from references
-2. Train the MonoT5 model on the training set
-3. Evaluate on the validation set for early stopping
-4. Final evaluation on the test set
+### Usage
+
+After preparing the data, run the training script:
+
+```bash
+python train_model.py
+```
+
+### Options
+
+- `--data-dir`: Directory containing train.jsonl, val.jsonl, test.jsonl (default: `data`)
+- `--output-dir`: Directory to save model checkpoints (default: `checkpoints`)
+- `--model-name`: Base model name (default: `castorini/monot5-base-msmarco`)
+- `--cache-dir`: Cache directory for model (optional)
+- `--max-length`: Maximum sequence length (default: `512`)
+- `--batch-size`: Training batch size (default: `8`)
+- `--eval-batch-size`: Evaluation batch size (default: `16`)
+- `--learning-rate`: Learning rate (default: `1e-5`)
+- `--num-epochs`: Number of training epochs (default: `5`)
+- `--warmup-steps`: Number of warmup steps (default: `500`)
+- `--save-steps`: Save checkpoint every N steps (default: `500`)
+- `--eval-steps`: Evaluate every N steps (default: `500`)
+- `--logging-steps`: Log every N steps (default: `100`)
+- `--early-stopping-patience`: Early stopping patience (default: `3`)
+- `--seed`: Random seed (default: `42`)
+- `--corpus-level`: Corpus level - `passage_level` or `document_level` (default: `passage_level`)
+- `--fp16`: Use mixed precision training (flag)
+- `--gradient-accumulation-steps`: Gradient accumulation steps (default: `1`)
+- `--max-examples`: Limit number of examples for testing (default: `None`, use all)
+
+### Examples
+
+```bash
+# Test with small subset (10 examples) - verify everything works
+python train_model.py --max-examples 10 --num-epochs 1
+
+# Basic training
+python train_model.py
+
+# With custom settings
+python train_model.py \
+    --batch-size 16 \
+    --learning-rate 2e-5 \
+    --num-epochs 3 \
+    --fp16 \
+    --gradient-accumulation-steps 2
+```
+
+### Training Process
+
+The script will:
+
+1. **Load the base model**: Downloads `castorini/monot5-base-msmarco` if not cached
+2. **Load data references**: Reads train/val examples from JSONL files
+3. **Create datasets**: Uses `DataLoader` to fetch text on-the-fly during training
+4. **Train**: Fine-tunes MonoT5 using Hugging Face `Trainer` with:
+   - Cross-entropy loss on "true"/"false" tokens
+   - Early stopping based on validation F1 score
+   - Automatic checkpoint saving
+5. **Evaluate**: Computes accuracy, precision, recall, and F1 on validation set
+6. **Save**: Saves the best model to `checkpoints/final_model/` and training metadata
+
+### Output
+
+After training, you'll find:
+
+- `checkpoints/final_model/`: The best model checkpoint (based on validation F1)
+- `checkpoints/checkpoint-*/`: Intermediate checkpoints (last 3 kept)
+- `checkpoints/training_metadata.json`: Training configuration and final metrics
+
+### Model Format
+
+The trained model expects:
+- **Input**: `Query: {query_text} Document: {document_text} Relevant:`
+- **Output**: Token probabilities for "true" and "false"
+
+The model can be used for relevance scoring by comparing the logits for "true" vs "false" tokens.
