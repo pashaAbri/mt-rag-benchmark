@@ -4,12 +4,13 @@ Utility functions for loading actual text data from references at training time.
 """
 
 import json
+import os
 from pathlib import Path
 from typing import Dict, Optional
 from collections import defaultdict
 
-# Hardcoded paths
-PROJECT_ROOT = Path('/Users/pastil/Dev/Github/mt-rag-benchmark')
+# Portable paths - use environment variable if set, otherwise default to local path
+PROJECT_ROOT = Path(os.getenv('MT_RAG_PROJECT_ROOT', '/Users/pastil/Dev/Github/mt-rag-benchmark'))
 CORPUS_LEVEL = 'passage_level'  # or 'document_level'
 
 
