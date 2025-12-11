@@ -41,15 +41,38 @@ Combining diverse retrieval strategies (`lastturn`, `rewrite`, `questions`) incr
 
 ## Usage
 
+### Run all combinations:
 ```bash
-python scripts/ideas/retrieval_tasks/mono-t5-as-reranker/evaluate_rerank.py
+python scripts/ideas/retrieval_tasks/mono-t5-as-reranker/evaluate_all_combinations.py
+```
+
+### Run specific combinations:
+```bash
+python scripts/ideas/retrieval_tasks/mono-t5-as-reranker/evaluate_all_combinations.py --combinations lastturn+rewrite questions+rewrite
+```
+
+### Skip existing files (faster re-runs):
+```bash
+python scripts/ideas/retrieval_tasks/mono-t5-as-reranker/evaluate_all_combinations.py --skip-existing
+```
+
+### Evaluate all results and generate summaries:
+```bash
+python scripts/ideas/retrieval_tasks/mono-t5-as-reranker/evaluate_all_results.py
 ```
 
 ## Output
-Results are saved in `intermediate/`:
-*   `reranked_{domain}.jsonl`: Raw reranked results.
-*   `reranked_{domain}_evaluated.jsonl`: Results with metrics.
-*   `reranked_{domain}_evaluated_aggregate.csv`: Aggregate metrics (nDCG, Recall).
+Results are saved in `intermediate/` with consistent naming:
+*   `reranked_{strategy_combination}_{domain}.jsonl`: Raw reranked results.
+    *   Examples: `reranked_lastturn_rewrite_clapnq.jsonl`, `reranked_questions_rewrite_govt.jsonl`, `reranked_lastturn_questions_rewrite_cloud.jsonl`
+*   `reranked_{strategy_combination}_{domain}_evaluated.jsonl`: Results with metrics.
+*   `reranked_{strategy_combination}_{domain}_evaluated_aggregate.csv`: Aggregate metrics (nDCG, Recall).
+
+**Strategy combinations:**
+*   `lastturn_rewrite`: Combines lastturn + rewrite strategies
+*   `lastturn_questions`: Combines lastturn + questions strategies  
+*   `questions_rewrite`: Combines questions + rewrite strategies
+*   `lastturn_questions_rewrite`: Combines all three strategies
 
 ## Key Findings
 *   **Overall**: **+5.9% nDCG@10** improvement vs. best single strategy.
