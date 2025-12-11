@@ -23,9 +23,14 @@ Combining diverse retrieval strategies (`lastturn`, `rewrite`, `questions`) incr
     *   **Model**: Uses `castorini/monot5-base-msmarco`, a T5-base model fine-tuned on MS MARCO for passage ranking.
     *   **Query Selection**: Uses the `rewrite` query text as the reference query for scoring, as it provides the most complete standalone context.
     *   **Scoring**:
-        *   Constructs input pairs: `Query: {query_text} Document: {doc_text} Relevant:`
-        *   Computes the probability of the model generating the token "true" vs "false".
-        *   Assigns the "true" probability as the relevance score.
+        *   **Input Prompt**: The model is fed the following text template:
+            ```
+            Query: {query_text} Document: {doc_text} Relevant:
+            ```
+        *   **Logit Extraction**: Extracts the raw output scores (logits) for only the tokens "true" and "false".
+        *   **Probability Calculation**: Applies a softmax to these two logits to get the probability of "true":
+            `score = exp(true_score) / (exp(true_score) + exp(false_score))`
+        *   This probability (0-1) is the final relevance score.
     *   **Ranking**: Sorts all documents in the pool by descending relevance score.
     *   **Truncation**: Retains only the top 100 documents for the final output.
 
@@ -37,9 +42,7 @@ Combining diverse retrieval strategies (`lastturn`, `rewrite`, `questions`) incr
 ## Usage
 
 ```bash
-pip install torch transformers pytrec-eval tqdm
-cd scripts/ideas/retrieval_tasks/mono-t5-as-reranker
-python evaluate_rerank.py
+python scripts/ideas/retrieval_tasks/mono-t5-as-reranker/evaluate_rerank.py
 ```
 
 ## Output
