@@ -22,19 +22,17 @@ def main():
     print(f"Cache directory: {CACHE_DIR}")
     print()
     
-    print("Downloading tokenizer...")
-    tokenizer = T5Tokenizer.from_pretrained(
-        MONO_T5_MODEL,
-        cache_dir=str(CACHE_DIR)
-    )
-    print("✓ Tokenizer downloaded")
+    print("Downloading and loading tokenizer...")
+    tokenizer = T5Tokenizer.from_pretrained(MONO_T5_MODEL)
     
-    print("Downloading model...")
-    model = T5ForConditionalGeneration.from_pretrained(
-        MONO_T5_MODEL,
-        cache_dir=str(CACHE_DIR)
-    )
-    print("✓ Model downloaded")
+    print("Downloading and loading model...")
+    model = T5ForConditionalGeneration.from_pretrained(MONO_T5_MODEL)
+    
+    print(f"Saving to {CACHE_DIR}...")
+    tokenizer.save_pretrained(CACHE_DIR)
+    model.save_pretrained(CACHE_DIR)
+    
+    print("✓ Model and tokenizer saved")
     
     print()
     print("=" * 80)
