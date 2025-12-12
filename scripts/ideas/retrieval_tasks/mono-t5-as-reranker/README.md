@@ -43,26 +43,26 @@ Combining diverse retrieval strategies (`lastturn`, `rewrite`, `questions`) incr
 
 ### Run all combinations:
 ```bash
-python scripts/ideas/retrieval_tasks/mono-t5-as-reranker/evaluate_all_combinations.py
+python scripts/ideas/retrieval_tasks/mono-t5-as-reranker/run_rerank.py
 ```
 
 ### Run specific combinations:
 ```bash
-python scripts/ideas/retrieval_tasks/mono-t5-as-reranker/evaluate_all_combinations.py --combinations lastturn+rewrite questions+rewrite
+python scripts/ideas/retrieval_tasks/mono-t5-as-reranker/run_rerank.py --combinations lastturn+rewrite questions+rewrite
 ```
 
 ### Skip existing files (faster re-runs):
 ```bash
-python scripts/ideas/retrieval_tasks/mono-t5-as-reranker/evaluate_all_combinations.py --skip-existing
+python scripts/ideas/retrieval_tasks/mono-t5-as-reranker/run_rerank.py --skip-existing
 ```
 
 ### Evaluate all results and generate summaries:
 ```bash
-python scripts/ideas/retrieval_tasks/mono-t5-as-reranker/evaluate_all_results.py
+python scripts/ideas/retrieval_tasks/mono-t5-as-reranker/summarize_evaluations.py
 ```
 
 ## Output
-Results are saved in `intermediate/` with consistent naming:
+Results are saved in `intermediate/using_rewrite_query/` with consistent naming:
 *   `reranked_{strategy_combination}_{domain}.jsonl`: Raw reranked results.
     *   Examples: `reranked_lastturn_rewrite_clapnq.jsonl`, `reranked_questions_rewrite_govt.jsonl`, `reranked_lastturn_questions_rewrite_cloud.jsonl`
 *   `reranked_{strategy_combination}_{domain}_evaluated.jsonl`: Results with metrics.
