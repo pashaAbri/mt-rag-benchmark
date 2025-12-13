@@ -1,0 +1,95 @@
+{
+  "task_id": "d5b1e735a040853ed361a3dfde1b8ef0<::>2",
+  "conversation_id": "8",
+  "turn_id": 2,
+  "domain": "cloud",
+  "user": {
+    "speaker": "user",
+    "text": "So it can store any random JSON object or I need to specify fields in advances?",
+    "timestamp": 1724857810,
+    "enrichments": {
+      "Multi-Turn": [
+        "Follow-up"
+      ],
+      "Question Type": [
+        "Composite",
+        "Factoid"
+      ],
+      "Answerability": [
+        "ANSWERABLE"
+      ]
+    }
+  },
+  "agent": {
+    "speaker": "agent",
+    "text": "Yes, IBM Cloudant can store any JSON object subject to some caveats listed below\n1. All documents must have two fields:\n    * A unique _id field. The _id field is detailed in the next section.\n    * A _rev field. The _rev field is a revision identifier, and is essential to the IBM Cloudant replication protocol.\n2. Field names that begin with the underscore character (_) are reserved in IBM Cloudant. This rule means that you can't normally have your own field names that begin with an underscore. For example, the field example would be accepted, but the field _example would result in a doc_validation error message.\n",
+    "timestamp": 1724857812,
+    "contexts": [
+      {
+        "document_id": "ibmcld_00526-7-1750",
+        "text": "\nOverview \n\nDocuments are [JSON objects](https://en.wikipedia.org/wiki/JSONData_types.2C_syntax_and_example). Documents are also containers for your data, and are the basis of the IBM® Cloudant® for IBM Cloud® database.\n\nIf you're using an [IBM Cloudant service on IBM Cloud®](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-publicibm-cloud-public), documents are limited to a maximum size of 1 MB. Exceeding this limit causes a [413 error](https://cloud.ibm.com/apidocs/cloudantlist-of-http-codes).\n\nIBM Cloudant uses an [eventually consistent](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-cap-theoremcap-theorem) model for data. If you use the eventually consistent model, it's possible, under some conditions, to retrieve older document content. For example, older content is retrieved when your application writes or updates a document that is followed immediately by a read of the same document.\n\nIn other words, your application would see the document content as it was before the write or update occurred. For more information about this model, see the topic on [Consistency](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-cap-theoremcap-theorem).\n\n\n\n Document fields \n\nAll documents must have two fields:\n\n\n\n* A unique _id field. The _id field is detailed in the next section.\n* A _rev field. The _rev field is a revision identifier, and is [essential to the IBM Cloudant replication protocol](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-document-versioning-and-mvccdocument-versioning-and-mvcc).\n\n\n\nIn addition to these two mandatory fields, documents can generally contain any other content that can be described by using JSON, subject to some caveats detailed in the following sections.\n\n\n\n Document IDs",
+        "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-documents",
+        "score": 31.14378,
+        "feedback": {
+          "relevant": {
+            "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+              "value": "yes",
+              "timestamp": 1724858280
+            }
+          }
+        },
+        "query": {
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: does IBM offer document databases?\n|assistant|: Yes, IBM offers [IBM Cloudant](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-documents) which stores JSON objects.\n|user|: So it can store any random JSON object or I need to specify fields in advances?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "document_id": "ibmcld_00526-2924-4511",
+        "text": "\nField name restrictions \n\nField names that begin with the underscore character (_) are reserved in IBM Cloudant. This rule means that you can't normally have your own field names that begin with an underscore. For example, the field example would be accepted, but the field _example would result in a doc_validation error message.\n\nSee an example of a JSON document that attempts to create a field with an underscore prefix:\n\n{\n\"_top_level_field_name\": \"some data\"\n}\n\nSee an error message that is returned when you attempt to create a field with an underscore prefix:\n\n{\n\"error\": \"doc_validation\",\n\"reason\": \"Bad special document member: _top_level_field_name\"\n}\n\nHowever, if the field name is for an object that is nested within the document, you can use an underscore prefix for the field name.\n\nSee an example of a JSON document that attempts to create a field with an underscore prefix, nested within an object:\n\n{\n\"another_top_level_field_name\": \"some data\",\n\"another_field\": {\n\"_lower_level_field_name\": \"some more data\"\n}\n}\n\nSee an example success message (abbreviated) returned when a nested field with an underscore prefix is created:\n\n{\n\"ok\": true,\n\"id\": \"2\",\n\"rev\": \"1-9ce...8d4\"\n}\n\n\n\n\n\n\n\n Quorum - writing and reading data \n\nIn a distributed system, it's possible that a request might take some time to complete. A \"quorum\" mechanism is used to help determine when a request, such as a write or read, completes successfully.\n\nFor more information about quorum settings and their implications on dedicated IBM Cloudant systems, contact IBM Cloudant support.\n\n\n\n\n\n Time to live",
+        "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-documents",
+        "score": 20.475416,
+        "feedback": {
+          "relevant": {
+            "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+              "value": "yes",
+              "timestamp": 1724858283
+            }
+          }
+        },
+        "query": {
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "cloudant field name restrictions"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "original_text": "Yes, IBM Cloudant can store any JSON object."
+  },
+  "oracle_metadata": {
+    "predicted_question_type": [
+      "Factoid",
+      "Explanation"
+    ],
+    "tagging_model": "claude-sonnet-4-5-20250929",
+    "history_used": true
+  }
+}

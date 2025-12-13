@@ -1,0 +1,142 @@
+{
+  "task_id": "b4614daadceeecb400f7baf0aa48dcb8<::>3",
+  "conversation_id": "98",
+  "turn_id": 3,
+  "domain": "cloud",
+  "user": {
+    "speaker": "user",
+    "text": "how can I use WebSocket API?",
+    "timestamp": 1723078794,
+    "enrichments": {
+      "Question Type": [
+        "How-To"
+      ],
+      "Multi-Turn": [
+        "Follow-up"
+      ],
+      "Answerability": [
+        "ANSWERABLE"
+      ]
+    }
+  },
+  "agent": {
+    "speaker": "agent",
+    "text": "To use the WebSocket interface, you first use the /v1/recognize method to establish a connection with the service. You specify parameters such as the language model and any custom models that are to be used for requests that are sent over the connection. You then register event listeners to handle responses from the service. For the WebSocket interface, you first specify the customization ID with the language_customization_id parameter of the /v1/recognize method. You use this method to establish a WebSocket connection with the service. To use the WebSocket API for speech recognition, you first establish a persistent connection with the service using the /v1/recognize method. Then, you send text and binary messages over the connection to initiate and manage recognition requests. To synthesize text to speech with the WebSocket interface of the IBM Watson® Text to Speech service, you first establish a connection with the service by calling its /v1/synthesize method. You then send the text to be synthesized to the service as a JSON text message over the connection.",
+    "timestamp": 1723078799,
+    "contexts": [
+      {
+        "document_id": "ibmcld_13297-4312-5935",
+        "text": "\nTo use the WebSocket interface, you first use the /v1/recognize method to establish a connection with the service. You specify parameters such as the language model and any custom models that are to be used for requests that are sent over the connection. You then register event listeners to handle responses from the service. To make a request, you send a JSON text message that includes the audio format and any additional parameters. You pass the audio as a binary message (blob), and then send a text message to signal the end of the audio.\n\nThe following example provides JavaScript code that establishes a connection and sends the text and binary messages for a recognition request. The basic example does not include the code to define all of the necessary event handlers for the connection.\n\nvar access_token = {access_token};\nvar wsURI = '{ws_url}/v1/recognize'\n+ '?access_token=' + access_token;\nvar websocket = new WebSocket(wsURI);\n\nwebsocket.onopen = function(evt) { onOpen(evt) };\n\nfunction onOpen(evt) {\nvar message = {\naction: 'start',\ncontent-type: 'audio/flac'\n};\nwebsocket.send(JSON.stringify(message));\nwebsocket.send(blob);\nwebsocket.send(JSON.stringify({action: 'stop'}));\n}\nShow more\n\n\n\n\n\n Using the synchronous HTTP interface \n\n[The synchronous HTTP interface](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-http) provides the simplest way to make a recognition request. You use the POST /v1/recognize method to make a request to the service. You pass the audio and all parameters with the single request. The following curl example shows a basic HTTP recognition request:\n\nIBM Cloud",
+        "url": "https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-basic-request",
+        "score": 19.605917,
+        "feedback": {
+          "relevant": {
+            "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+              "value": "yes",
+              "timestamp": 1723078825
+            }
+          }
+        },
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "how can I use WebSocket API?"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "document_id": "ibmcld_13790-7-1700",
+        "text": "\nThe WebSocket interface \n\nTo synthesize text to speech with the WebSocket interface of the IBM Watson® Text to Speech service, you first establish a connection with the service by calling its /v1/synthesize method. You then send the text to be synthesized to the service as a JSON text message over the connection. The service automatically closes the WebSocket connection when it finishes processing the request.\n\nThe synthesize request and response cycle includes the following steps:\n\n\n\n1. [Open a connection](https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-usingWebSocketWSopen).\n2. [Send input text](https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-usingWebSocketWSsend).\n3. [Receive a response](https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-usingWebSocketWSreceive).\n\n\n\nThe WebSocket interface accepts identical input and produces identical results as the GET and POST /v1/synthesize methods of the HTTP interface. In addition, the WebSocket interface also supports use of the SSML <mark> element to identify the location of user-specified markers in the audio. It can also return timing information for all strings of the input text. (The <mark> element and word timings are available only with the WebSocket interface.)\n\n\n\n* For more information about obtaining word timings, see [Generating word timings](https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-timing).\n* For more information about the WebSocket interface and its parameters, see the [API & SDK reference](https://cloud.ibm.com/apidocs/text-to-speech).\n\n\n\nThe snippets of example code that follow are written in JavaScript and are based on the HTML5 WebSocket API.",
+        "url": "https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-usingWebSocket",
+        "score": 18.647387,
+        "feedback": {
+          "relevant": {
+            "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+              "value": "yes",
+              "timestamp": 1723078853
+            }
+          }
+        },
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "how can I use WebSocket API?"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "document_id": "ibmcld_13361-1589-2935",
+        "text": "\n* For the [WebSocket interface](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-websockets), you first specify the customization ID with the language_customization_id parameter of the /v1/recognize method. You use this method to establish a WebSocket connection with the service.\n\nvar access_token = {access_token};\nvar wsURI = '{ws_url}/v1/recognize'\n+ '?access_token=' + access_token\n+ '&language_customization_id={customization_id}';\nvar websocket = new WebSocket(wsURI);\n\nYou then specify the name of the grammar with the grammar_name parameter in the JSON start message for the active connection. Passing this value with the start message allows you to change the grammar dynamically for each request that you send over the connection.\n\nfunction onOpen(evt) {\nvar message = {\naction: 'start',\ncontent-type: 'audio/l16;rate=22050',\ngrammar_name: '{grammar_name}'\n};\nwebsocket.send(JSON.stringify(message));\nwebsocket.send(blob);\n}\n* For the [synchronous HTTP interface](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-http), pass both parameters with the POST /v1/recognize method.\n\nIBM Cloud\n\ncurl -X POST -u \"apikey:{apikey}\" --header \"Content-Type: audio/flac\" --data-binary @audio-file.flac \"{url}/v1/recognize?language_customization_id={customization_id}&grammar_name={grammar_name}\"\n\nIBM Cloud Pak for Data",
+        "url": "https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-grammarUse",
+        "score": 17.856237,
+        "feedback": {
+          "relevant": {
+            "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+              "value": "yes",
+              "timestamp": 1723078854
+            }
+          }
+        },
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "how can I use WebSocket API?"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "document_id": "ibmcld_13455-7-1568",
+        "text": "\nThe WebSocket interface \n\nThe WebSocket interface of the IBM Watson® Speech to Text service is the most natural way for a client to interact with the service. To use the WebSocket interface for speech recognition, you first use the /v1/recognize method to establish a persistent connection with the service. You then send text and binary messages over the connection to initiate and manage recognition requests.\n\nBecause of their advantages, WebSockets are the preferred mechanism for speech recognition. For more information, see [Advantages of the WebSocket interface](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-service-featuresfeatures-websocket-advantages). For more information about the WebSocket interface and its parameters, see the [API & SDK reference](https://cloud.ibm.com/apidocs/speech-to-text).\n\n\n\n Managing a WebSocket connection \n\nThe WebSocket recognition request and response cycle has the following steps:\n\n\n\n1. [Open a connection](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-websocketsws-open)\n2. [Initiate a recognition request](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-websocketsws-start)\n3. [Send audio and receive recognition results](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-websocketsws-audio)\n4. [End a recognition request](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-websocketsws-stop)\n5. [Send additional requests and modify request parameters](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-websocketsws-more)\n6.",
+        "url": "https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-websockets",
+        "score": 18.074583,
+        "feedback": {
+          "relevant": {
+            "dc79eb51-e320-43c1-841c-3b1baa66d0aa": {
+              "value": "yes",
+              "timestamp": 1723078855
+            }
+          }
+        },
+        "query": {
+          "bool": {
+            "must": {
+              "text_expansion": {
+                "ml.tokens": {
+                  "model_id": ".elser_model_1",
+                  "model_text": "how can I use WebSocket API?"
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "original_text": "To use the WebSocket API for speech recognition, you first establish a persistent connection with the service using the /v1/recognize method. Then, you send text and binary messages over the connection to initiate and manage recognition requests. The WebSocket interface uses a series of steps for managing a connection, including opening a connection, initiating a recognition request, sending audio and receiving recognition results, ending a recognition request, sending additional requests and modifying request parameters, and closing the connection. For more detailed information, you can refer to the API & SDK reference provided by IBM.\nRegarding your previous question, query parameters and message parameters are two types of parameters sent from WebSocket API. Query parameters are sent when phone integration connects to the service and are used in queries written with the Discovery Query Language. Message parameters, on the other hand, are sent as part of the JSON data in the request body."
+  },
+  "oracle_metadata": {
+    "predicted_question_type": [
+      "How-To",
+      "Explanation"
+    ],
+    "tagging_model": "claude-sonnet-4-5-20250929",
+    "history_used": true
+  }
+}

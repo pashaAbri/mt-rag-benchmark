@@ -1,0 +1,66 @@
+{
+  "task_id": "d5b1e735a040853ed361a3dfde1b8ef0<::>5",
+  "conversation_id": "8",
+  "turn_id": 5,
+  "domain": "cloud",
+  "user": {
+    "speaker": "user",
+    "text": "Not documents, I was asking for attachments?",
+    "timestamp": 1724865981,
+    "enrichments": {
+      "Question Type": [
+        "Explanation"
+      ],
+      "Multi-Turn": [
+        "Clarification"
+      ],
+      "Answerability": [
+        "PARTIAL"
+      ]
+    }
+  },
+  "agent": {
+    "speaker": "agent",
+    "text": "I am sorry I couldn't find any explicit limits on attachment size but as stated earlier IBM Cloudant isn't best suited for handling large amounts of binary data. Thus it’s better to use a separate solution more suited for this purpose and only store the attachment metadata in the IBM Cloudant document.",
+    "timestamp": 1724865987,
+    "contexts": [
+      {
+        "document_id": "ibmcld_00510-7123-9213",
+        "text": "\nIBM Cloudant has support for storing attachments alongside documents, a long-standing feature it inherits from CouchDB. If you use IBM Cloudant as a backend for a web application, you can also store small icons and other static assets such as CSS and JavaScript files with the data.\n\nYou must consider a few things before you use attachments in IBM Cloudant today, especially if you’re looking at larger assets such as images and videos:\n\n\n\n1. IBM Cloudant is expensive as a block store.\n2. IBM Cloudant’s internal implementation is not efficient in handling large amounts of binary data.\n\n\n\nSo, slow and expensive.\n\nIBM Cloudant is acceptable for small assets and occasional use. As a rule, if you need to store binary data alongside IBM Cloudant documents, it’s better to use a separate solution more suited for this purpose. You need store only the attachment metadata in the IBM Cloudant document. Yes, that means you need to write some extra code to upload the attachment to a suitable block store of your choice. Verify that it succeeded before you store the token or URL to the attachment in the IBM Cloudant document.\n\nYour databases are smaller, cheaper, faster, and easier to replicate. For more information, see the following websites:\n\n\n\n* IBM Cloudant docs on [attachments](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-how-to-use-attachments)\n* Detaching IBM Cloudant attachments to [Object Storage](https://medium.com/codait/detaching-cloudant-attachments-to-object-storage-with-serverless-functions-99b8c3c77925)\n\n\n\n\n\n\n\n Fewer databases are better than many \n\nIf you can, limit the number of databases per IBM Cloudant account to 500 or fewer. While this particular number is not magic (IBM Cloudant can safely handle more), several use cases exist that are adversely affected by large numbers of databases in an account.\n\nThe replicator scheduler has a limited number of simultaneous replication jobs that it is prepared to run. As the number of databases grows, the replication latency is likely to increase if you try to replicate everything contained in an account.",
+        "url": "https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-data-modeling",
+        "score": 45.349213,
+        "feedback": {
+          "relevant": {
+            "8163b85d-d338-4ed1-8ebf-cd065ac3dc12": {
+              "value": "yes",
+              "timestamp": 1724866360
+            }
+          }
+        },
+        "query": {
+          "query": {
+            "bool": {
+              "must": {
+                "text_expansion": {
+                  "ml.tokens": {
+                    "model_id": ".elser_model_1",
+                    "model_text": "|user|: does IBM offer document databases?\n|assistant|: Yes, IBM offers [IBM Cloudant](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-documents) which stores JSON objects.\n|user|: So it can store any random JSON object or I need to specify fields in advances?\n|assistant|: Yes, IBM Cloudant can store any JSON object subject to some caveats listed below\n1. All documents must have two fields:\n    * A unique _id field. The _id field is detailed in the next section.\n    * A _rev field. The _rev field is a revision identifier, and is essential to the IBM Cloudant replication protocol.\n2. Field names that begin with the underscore character (_) are reserved in IBM Cloudant. This rule means that you can't normally have your own field names that begin with an underscore. For example, the field example would be accepted, but the field _example would result in a doc_validation error message.\n\n|user|: What if I want to store an image or pdf with a document? \n|assistant|: IBM Cloudant has support for storing attachments alongside documents, a long-standing feature it inherits from CouchDB. So you can easily add an image or PDF as an attachment to your document but you must consider a few things before you use attachments in IBM Cloudant today, especially if you’re looking at larger assets.\n\n1. IBM Cloudant is expensive as a block store.\n2. IBM Cloudant’s internal implementation is not efficient in handling large amounts of binary data. So, slow and expensive. IBM Cloudant is acceptable for small assets and occasional use. As a rule, if you need to store binary data alongside IBM Cloudant documents, it’s better to use a separate solution more suited for this purpose. You need store only the attachment metadata in the IBM Cloudant document.\n|user|: Is there a limit on the file size? \n|assistant|: Yes, documents are limited to a maximum size of 1 MB. Exceeding this limit causes a [413 error](https://cloud.ibm.com/apidocs/cloudantlist-of-http-codes).\n|user|: Not documents, I was asking for attachments?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "original_text": "assistant: IBM Cloudant has support for storing attachments alongside documents, a long-standing feature it inherits from CouchDB. So you can easily add an image or PDF as an attachment to your document but you must consider a few things before you use attachments in IBM Cloudant today, especially if you’re looking at larger assets. 1. IBM Cloudant is expensive as a block store. 2. IBM Cloudant’s internal implementation is not efficient in handling large amounts of binary data. So, slow and expensive. IBM Cloudant is acceptable for small assets and occasional use. As a rule, if you need to store binary data alongside IBM Cloudant documents, it’s better to use a separate solution more suited for this purpose. You need store only the attachment metadata in the IBM Cloudant document."
+  },
+  "oracle_metadata": {
+    "predicted_question_type": [
+      "Explanation",
+      "Troubleshooting"
+    ],
+    "tagging_model": "claude-sonnet-4-5-20250929",
+    "history_used": true
+  }
+}
