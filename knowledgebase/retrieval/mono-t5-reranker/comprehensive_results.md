@@ -2,42 +2,56 @@
 
 ## Strategy Definitions
 
-- **Rewrite (Baseline)**: Standard ELSER retrieval using only the rewritten query (no reranking).
-- **2-Strategy (L+Q)**: Combines documents retrieved by `lastturn` and `questions` queries. Reranked with MonoT5.
+### Single-Strategy Baselines (ELSER retrieval, no reranking)
+- **Lastturn**: ELSER retrieval using only the last user turn in the conversation.
+- **Questions**: ELSER retrieval using all questions from the conversation concatenated.
+- **Rewrite**: ELSER retrieval using the rewritten standalone query.
 
-* **2-Strategy (L+R)**: Combines documents retrieved by `lastturn` and `rewrite` queries. Reranked with MonoT5.
-* **2-Strategy (Q+R)**: Combines documents retrieved by `questions` and `rewrite` queries. Reranked with MonoT5.
-* **3-Strategy**: Combines documents retrieved by `lastturn`, `rewrite`, and `questions` queries. Reranked with MonoT5.
+### Multi-Strategy with MonoT5 Reranking
+- **2-Strategy (L+Q)**: Combines documents retrieved by `lastturn` and `questions` queries. Reranked with MonoT5.
+- **2-Strategy (L+R)**: Combines documents retrieved by `lastturn` and `rewrite` queries. Reranked with MonoT5.
+- **2-Strategy (Q+R)**: Combines documents retrieved by `questions` and `rewrite` queries. Reranked with MonoT5.
+- **3-Strategy**: Combines documents retrieved by `lastturn`, `rewrite`, and `questions` queries. Reranked with MonoT5.
 
 ## Detailed Metrics
 
 | Domain     | Strategy             | R@1        | R@3        | R@5        | R@10       | nDCG@1     | nDCG@3     | nDCG@5     | nDCG@10    |
 | :--------- | :------------------- | :--------- | :--------- | :--------- | :--------- | :--------- | :--------- | :--------- | :--------- |
-| **ALL**    | **Rewrite**          | 0.1871     | 0.3723     | 0.4761     | 0.6078     | 0.4286     | 0.3992     | 0.4378     | 0.4953     |
+| **ALL**    | **Lastturn**         | 0.1725     | 0.3490     | 0.4394     | 0.5445     | 0.3887     | 0.3732     | 0.4054     | 0.4511     |
+|            | **Questions**        | 0.0916     | 0.2011     | 0.2694     | 0.3570     | 0.2085     | 0.2079     | 0.2368     | 0.2740     |
+|            | **Rewrite**          | 0.1871     | 0.3723     | 0.4761     | 0.6078     | 0.4286     | 0.3992     | 0.4378     | 0.4953     |
 |            | **2-Strategy (L+Q)** | 0.1964     | 0.3833     | 0.4846     | 0.5952     | 0.4427     | 0.4099     | 0.4484     | 0.4961     |
 |            | **2-Strategy (L+R)** | 0.2037     | 0.3980     | 0.4964     | 0.6220     | 0.4582     | 0.4272     | 0.4638     | 0.5174     |
 |            | **2-Strategy (Q+R)** | **0.2022** | 0.3954     | 0.4974     | 0.6311     | 0.4556     | 0.4249     | 0.4635     | 0.5204     |
 |            | **3-Strategy**       | 0.2021     | **0.3983** | **0.5000** | **0.6391** | **0.4556** | **0.4266** | **0.4650** | **0.5243** |
 |            |                      |            |            |            |            |            |            |            |            |
-| **ClapNQ** | **Rewrite**          | 0.2087     | 0.4244     | 0.5516     | 0.7006     | 0.5240     | 0.4700     | 0.5135     | 0.5780     |
+| **ClapNQ** | **Lastturn**         | 0.1981     | 0.3973     | 0.5113     | 0.6303     | 0.4760     | 0.4366     | 0.4749     | 0.5270     |
+|            | **Questions**        | 0.1005     | 0.2190     | 0.3016     | 0.4087     | 0.2452     | 0.2362     | 0.2692     | 0.3153     |
+|            | **Rewrite**          | 0.2087     | 0.4244     | 0.5516     | 0.7006     | 0.5240     | 0.4700     | 0.5135     | 0.5780     |
 |            | **2-Strategy (L+Q)** | 0.2197     | 0.4127     | 0.5332     | 0.6673     | **0.5433** | 0.4703     | 0.5092     | 0.5687     |
 |            | **2-Strategy (L+R)** | **0.2186** | 0.4233     | **0.5487** | 0.6988     | 0.5289     | **0.4766** | **0.5184** | 0.5826     |
 |            | **2-Strategy (Q+R)** | 0.2153     | **0.4239** | 0.5415     | **0.7139** | 0.5289     | 0.4753     | 0.5139     | **0.5882** |
 |            | **3-Strategy**       | 0.2153     | **0.4239** | 0.5427     | 0.7041     | 0.5289     | 0.4753     | 0.5148     | 0.5846     |
 |            |                      |            |            |            |            |            |            |            |            |
-| **Cloud**  | **Rewrite**          | 0.1793     | 0.3529     | 0.4297     | 0.5280     | 0.3777     | 0.3654     | 0.3940     | 0.4377     |
+| **Cloud**  | **Lastturn**         | 0.1788     | 0.3534     | 0.4201     | 0.5037     | 0.3723     | 0.3673     | 0.3894     | 0.4273     |
+|            | **Questions**        | 0.0704     | 0.1519     | 0.2180     | 0.3037     | 0.1649     | 0.1565     | 0.1861     | 0.2220     |
+|            | **Rewrite**          | 0.1793     | 0.3529     | 0.4297     | 0.5280     | 0.3777     | 0.3654     | 0.3940     | 0.4377     |
 |            | **2-Strategy (L+Q)** | 0.1887     | 0.3492     | 0.4521     | 0.5384     | 0.3883     | 0.3701     | 0.4114     | 0.4483     |
 |            | **2-Strategy (L+R)** | **0.2113** | **0.3765** | **0.4602** | 0.5513     | **0.4309** | **0.4002** | **0.4312** | 0.4702     |
 |            | **2-Strategy (Q+R)** | 0.2042     | 0.3583     | 0.4562     | 0.5501     | 0.4149     | 0.3839     | 0.4235     | 0.4645     |
 |            | **3-Strategy**       | 0.2042     | 0.3631     | 0.4574     | **0.5641** | 0.4149     | 0.3870     | 0.4243     | **0.4708** |
 |            |                      |            |            |            |            |            |            |            |            |
-| **FiQA**   | **Rewrite**          | 0.1631     | 0.3099     | 0.4016     | 0.5358     | 0.3889     | 0.3441     | 0.3779     | 0.4355     |
+| **FiQA**   | **Lastturn**         | 0.1464     | 0.2930     | 0.3705     | 0.4719     | 0.3444     | 0.3198     | 0.3477     | 0.3909     |
+|            | **Questions**        | 0.0817     | 0.1602     | 0.1913     | 0.2495     | 0.1833     | 0.1683     | 0.1818     | 0.2071     |
+|            | **Rewrite**          | 0.1631     | 0.3099     | 0.4016     | 0.5358     | 0.3889     | 0.3441     | 0.3779     | 0.4355     |
 |            | **2-Strategy (L+Q)** | 0.1524     | 0.3276     | 0.4175     | 0.5022     | 0.3667     | 0.3426     | 0.3774     | 0.4142     |
 |            | **2-Strategy (L+R)** | 0.1614     | **0.3487** | 0.4389     | **0.5571** | 0.4000     | 0.3699     | 0.4039     | **0.4542** |
 |            | **2-Strategy (Q+R)** | **0.1656** | 0.3432     | 0.4335     | 0.5368     | **0.4111** | 0.3698     | 0.4029     | 0.4462     |
 |            | **3-Strategy**       | 0.1637     | **0.3487** | **0.4398** | 0.5564     | 0.4056     | **0.3719** | **0.4052** | **0.4542** |
 |            |                      |            |            |            |            |            |            |            |            |
-| **Govt**   | **Rewrite**          | 0.1936     | 0.3923     | 0.5082     | 0.6510     | 0.4129     | 0.4067     | 0.4540     | 0.5170     |
+| **Govt**   | **Lastturn**         | 0.1636     | 0.3452     | 0.4449     | 0.5588     | 0.3532     | 0.3608     | 0.4001     | 0.4486     |
+|            | **Questions**        | 0.1112     | 0.2652     | 0.3540     | 0.4498     | 0.2338     | 0.2621     | 0.3000     | 0.3397     |
+|            | **Rewrite**          | 0.1936     | 0.3923     | 0.5082     | 0.6510     | 0.4129     | 0.4067     | 0.4540     | 0.5170     |
 |            | **2-Strategy (L+Q)** | 0.2189     | 0.4346     | 0.5248     | 0.6570     | 0.4577     | 0.4450     | 0.4836     | 0.5391     |
 |            | **2-Strategy (L+R)** | 0.2191     | 0.4359     | 0.5277     | 0.6670     | 0.4627     | 0.4527     | 0.4916     | 0.5507     |
 |            | **2-Strategy (Q+R)** | 0.2195     | 0.4475     | 0.5474     | 0.7054     | 0.4577     | 0.4605     | 0.5029     | 0.5689     |
