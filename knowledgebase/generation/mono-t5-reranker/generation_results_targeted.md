@@ -70,6 +70,8 @@ The MT-RAG paper leaderboard uses **IDK-conditioned metrics** on tasks with **�
 | Sample           | n=842 (all tasks)    | n≈426 (≤2 ref passages)                |
 | IDK Conditioning | No                   | Yes (penalizes answering unanswerable) |
 
+> **Note**: The "Paper Baseline" values below are from the paper's published results, which used their own evaluation pipeline. Our reimplementation of the baseline shows some variance (±0.05 H-Mean on average), so this comparison should be interpreted as approximate. The apples-to-apples comparison in the Results section above (Mono-T5 vs Baseline using our evaluation) is more reliable.
+
 ### Mono-T5 vs Paper Baseline (IDK-conditioned, n≈426)
 
 | Rank | Model          | Method             | RL_F | RB_llm | RB_agg |  H-Mean  |
