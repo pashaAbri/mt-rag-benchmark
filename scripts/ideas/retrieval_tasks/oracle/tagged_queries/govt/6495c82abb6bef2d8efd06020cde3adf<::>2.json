@@ -231,11 +231,35 @@
     "original_text": "Yes, according to NASA's Jason-3 satellite, sea levels are rising. This satellite measures sea level, wind speed, and wave height for more than 95% of Earth's ice-free ocean, helping scientists track Earth's rising seas and enabling more accurate weather, ocean, and climate forecasts."
   },
   "oracle_metadata": {
-    "predicted_question_type": [
-      "Factoid",
-      "Opinion"
-    ],
-    "tagging_model": "claude-sonnet-4-5-20250929",
-    "history_used": true
+    "rule_based_tags": {
+      "tagger": "rule_based_v1",
+      "needs_context": true,
+      "confidence": 0.8,
+      "recommended_strategy": "rewrite",
+      "is_fragment": false,
+      "has_pronoun": true,
+      "has_demonstrative": true,
+      "has_implicit_reference": false,
+      "has_anaphoric_expression": false,
+      "has_ellipsis": false,
+      "word_count": 11,
+      "char_count": 55,
+      "matched_patterns": [
+        "pronoun:it",
+        "demonstrative:that"
+      ]
+    },
+    "llm_based_tags": {
+      "tagger": "llm_sonnet_4.5",
+      "model": "claude-sonnet-4-5-20250929",
+      "needs_context": true,
+      "confidence": 0.85,
+      "has_unresolved_pronouns": true,
+      "has_implicit_references": true,
+      "has_anaphoric_expressions": true,
+      "is_incomplete_fragment": false,
+      "reasoning": "The query contains 'Speaking about sea level' which is an anaphoric expression indicating continuation of a prior topic. While 'sea level' is explicitly mentioned, the phrase 'speaking about' suggests this is a follow-up to a previous discussion. The pronoun 'it' appears twice but refers to 'sea level' which is mentioned in the same query, making those pronouns technically resolved. However, the conversational framing ('speaking about') strongly indicates this is part of an ongoing dialogue.",
+      "recommended_strategy": "lastturn"
+    }
   }
 }

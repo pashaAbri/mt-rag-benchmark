@@ -225,10 +225,34 @@
     "original_text": "To gather the relevant worker node data, follow these steps:\n1. Check the conditions of your worker nodes and cluster before you gather data. Specifically, check the CPU and memory level of your nodes. If any node is over 80% in either CPU or memory usage, consider provisioning more nodes or reducing your workload.\n2. If all worker nodes in a cluster, or in a single zone, subnet, or VLAN are affected, you can open an initial support ticket without gathering data. However, you might later be asked to gather the relevant data. If only one or some of your worker nodes are affected, you must gather the relevant data to include in your support ticket.\n3. Before opening a support ticket, review the information and follow any troubleshooting steps in Debugging worker nodes, Worker node states, and Troubleshooting worker nodes in Critical or NotReady state.\n4. To gather worker node data, you can use the command 'kubectl top node' (for Kubernetes clusters) or 'oc top node' (for OpenShift clusters), which will display the CPU and memory usage of each node.\nRegarding the update of a classic worker node, you can make two types of updates: updating only the patch version, or updating the major.minor version with the patch version. For Classic clusters with a storage solution such as OpenShift Data Foundation, you must cordon, drain, and replace each worker node sequentially. If you deployed OpenShift Data Foundation to a subset of worker nodes in your cluster, then after you replace the worker node, you must then edit the ocscluster resource to include the new worker node.\nA major.minor update moves up the Kubernetes version of the worker node to the same version as the master. This type of update often includes changes to the Kubernetes API or other behaviors that you must prepare your cluster for. Remember that your worker nodes can only be one version behind the master version (n-1). You can update the classic worker node to the same patch by using the ibmcloud oc worker update command."
   },
   "oracle_metadata": {
-    "predicted_question_type": [
-      "Keyword"
-    ],
-    "tagging_model": "claude-sonnet-4-5-20250929",
-    "history_used": true
+    "rule_based_tags": {
+      "tagger": "rule_based_v1",
+      "needs_context": true,
+      "confidence": 0.65,
+      "recommended_strategy": "rewrite",
+      "is_fragment": true,
+      "has_pronoun": false,
+      "has_demonstrative": false,
+      "has_implicit_reference": false,
+      "has_anaphoric_expression": false,
+      "has_ellipsis": false,
+      "word_count": 2,
+      "char_count": 11,
+      "matched_patterns": [
+        "fragment"
+      ]
+    },
+    "llm_based_tags": {
+      "tagger": "llm_sonnet_4.5",
+      "model": "claude-sonnet-4-5-20250929",
+      "needs_context": true,
+      "confidence": 0.95,
+      "has_unresolved_pronouns": false,
+      "has_implicit_references": true,
+      "has_anaphoric_expressions": false,
+      "is_incomplete_fragment": true,
+      "reasoning": "This is an incomplete fragment consisting of only a noun phrase without any question or complete statement. It lacks context about what aspect of worker nodes is being asked about (definition, configuration, troubleshooting, etc.). The query implicitly assumes prior context that would clarify the intent.",
+      "recommended_strategy": "rewrite"
+    }
   }
 }

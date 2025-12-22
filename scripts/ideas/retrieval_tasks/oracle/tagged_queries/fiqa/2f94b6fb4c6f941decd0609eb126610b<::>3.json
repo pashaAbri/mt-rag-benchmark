@@ -111,11 +111,34 @@
     ]
   },
   "oracle_metadata": {
-    "predicted_question_type": [
-      "Explanation",
-      "Factoid"
-    ],
-    "tagging_model": "claude-sonnet-4-5-20250929",
-    "history_used": true
+    "rule_based_tags": {
+      "tagger": "rule_based_v1",
+      "needs_context": true,
+      "confidence": 0.65,
+      "recommended_strategy": "rewrite",
+      "is_fragment": true,
+      "has_pronoun": false,
+      "has_demonstrative": false,
+      "has_implicit_reference": false,
+      "has_anaphoric_expression": false,
+      "has_ellipsis": false,
+      "word_count": 6,
+      "char_count": 24,
+      "matched_patterns": [
+        "fragment"
+      ]
+    },
+    "llm_based_tags": {
+      "tagger": "llm_sonnet_4.5",
+      "model": "claude-sonnet-4-5-20250929",
+      "needs_context": true,
+      "confidence": 0.95,
+      "has_unresolved_pronouns": true,
+      "has_implicit_references": true,
+      "has_anaphoric_expressions": true,
+      "is_incomplete_fragment": false,
+      "reasoning": "The query contains 'you' (pronoun referring to previous response) and 'What do you mean by' is an anaphoric expression explicitly requesting clarification of something previously stated. The user is asking for clarification about 'IRA' which was likely mentioned in a prior turn. Without context, we don't know if IRA refers to Individual Retirement Account, Irish Republican Army, Inflation Reduction Act, or another meaning that was discussed.",
+      "recommended_strategy": "lastturn"
+    }
   }
 }

@@ -168,11 +168,35 @@
     "original_text": "Vulnerability Advisor scans images that are stored in IBM Cloud Container Registry to find potential security vulnerabilities in the image content. It checks for known software vulnerabilities and weak system configurations in the image. However, it does not scan encrypted images. When it finds any issues, it provides suggestions to help fix the reported vulnerabilities. Fixing these issues can help secure your IBM Cloud infrastructure."
   },
   "oracle_metadata": {
-    "predicted_question_type": [
-      "Explanation",
-      "Factoid"
-    ],
-    "tagging_model": "claude-sonnet-4-5-20250929",
-    "history_used": true
+    "rule_based_tags": {
+      "tagger": "rule_based_v1",
+      "needs_context": true,
+      "confidence": 0.85,
+      "recommended_strategy": "rewrite",
+      "is_fragment": false,
+      "has_pronoun": true,
+      "has_demonstrative": false,
+      "has_implicit_reference": false,
+      "has_anaphoric_expression": true,
+      "has_ellipsis": false,
+      "word_count": 11,
+      "char_count": 68,
+      "matched_patterns": [
+        "pronoun:it",
+        "anaphoric:then"
+      ]
+    },
+    "llm_based_tags": {
+      "tagger": "llm_sonnet_4.5",
+      "model": "claude-sonnet-4-5-20250929",
+      "needs_context": true,
+      "confidence": 0.95,
+      "has_unresolved_pronouns": true,
+      "has_implicit_references": true,
+      "has_anaphoric_expressions": true,
+      "is_incomplete_fragment": false,
+      "reasoning": "The query starts with 'Then' which is an anaphoric expression indicating continuation from previous context. While 'Vulnerability Advisor' is explicitly named, the pronoun 'it' refers back to this tool. However, the word 'Then' strongly suggests this is a follow-up question in a conversation sequence, implying there was prior discussion about Vulnerability Advisor or related scanning tools that provides important context for understanding the user's intent.",
+      "recommended_strategy": "lastturn"
+    }
   }
 }
