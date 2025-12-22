@@ -102,28 +102,29 @@ def evaluate_tagger(
         if predicted_strategy in ['standalone', 'self-contained']:
             predicted_strategy = 'lastturn'
         
-        # Get R@5 for predicted strategy
-        strategy_col = f"{predicted_strategy}_R@5"
-        if strategy_col not in row.index:
-            # Fallback to rewrite if strategy column doesn't exist
-            strategy_col = "rewrite_R@5"
+        # Get metrics for predicted strategy
+        metrics_to_track = ['R@5', 'R@10', 'nDCG@5', 'nDCG@10']
         
-        predicted_r5 = row[strategy_col]
-        oracle_r5 = row['best_R@5']
-        oracle_strategy = row['best_strategy']
-        rewrite_r5 = row['rewrite_R@5']
-        
-        matched_results.append({
+        result_row = {
             'task_id': task_id,
             'predicted_strategy': predicted_strategy,
-            'oracle_strategy': oracle_strategy,
-            'predicted_r5': predicted_r5,
-            'oracle_r5': oracle_r5,
-            'rewrite_r5': rewrite_r5,
-            'correct': predicted_strategy == oracle_strategy,
+            'oracle_strategy': row['best_strategy'],
+            'correct': predicted_strategy == row['best_strategy'],
             'needs_context': tagger_pred.get('needs_context', True),
             'confidence': tagger_pred.get('confidence', 0.5),
-        })
+        }
+        
+        # Add all metrics for predicted, oracle, and baseline (rewrite)
+        for metric in metrics_to_track:
+            pred_col = f"{predicted_strategy}_{metric}"
+            rewrite_col = f"rewrite_{metric}"
+            oracle_col = f"{row['best_strategy']}_{metric}"
+            
+            result_row[f'predicted_{metric}'] = row.get(pred_col, row.get(rewrite_col, 0))
+            result_row[f'rewrite_{metric}'] = row.get(rewrite_col, 0)
+            result_row[f'oracle_{metric}'] = row.get(oracle_col, 0)
+        
+        matched_results.append(result_row)
     
     if not matched_results:
         return {'error': 'No matched results', 'tagger_name': tagger_name}
@@ -135,14 +136,31 @@ def evaluate_tagger(
     n_correct = results_df['correct'].sum()
     accuracy = n_correct / n_total
     
-    mean_predicted_r5 = results_df['predicted_r5'].mean()
-    mean_oracle_r5 = results_df['oracle_r5'].mean()
-    mean_rewrite_r5 = results_df['rewrite_r5'].mean()
+    # Calculate all metrics
+    metrics_to_track = ['R@5', 'R@10', 'nDCG@5', 'nDCG@10']
+    metrics_results = {}
     
-    # Oracle gap captured
-    oracle_gap = mean_oracle_r5 - mean_rewrite_r5
-    predicted_gap = mean_predicted_r5 - mean_rewrite_r5
-    gap_captured = (predicted_gap / oracle_gap * 100) if oracle_gap > 0 else 0
+    for metric in metrics_to_track:
+        pred_col = f'predicted_{metric}'
+        rewrite_col = f'rewrite_{metric}'
+        oracle_col = f'oracle_{metric}'
+        
+        mean_predicted = results_df[pred_col].mean()
+        mean_rewrite = results_df[rewrite_col].mean()
+        mean_oracle = results_df[oracle_col].mean()
+        
+        oracle_gap = mean_oracle - mean_rewrite
+        predicted_gap = mean_predicted - mean_rewrite
+        gap_captured = (predicted_gap / oracle_gap * 100) if oracle_gap > 0 else 0
+        
+        metrics_results[metric] = {
+            'predicted': mean_predicted,
+            'rewrite': mean_rewrite,
+            'oracle': mean_oracle,
+            'improvement': mean_predicted - mean_rewrite,
+            'improvement_pct': (mean_predicted - mean_rewrite) / mean_rewrite * 100 if mean_rewrite > 0 else 0,
+            'gap_captured': gap_captured,
+        }
     
     # Strategy distribution
     strategy_counts = results_df['predicted_strategy'].value_counts().to_dict()
@@ -153,19 +171,24 @@ def evaluate_tagger(
     # Confidence analysis (if available)
     mean_confidence = results_df['confidence'].mean()
     
+    # Legacy fields for compatibility (using R@5)
+    r5 = metrics_results['R@5']
+    
     return {
         'tagger_name': tagger_name,
         'n_total': n_total,
         'n_missing': missing,
         'accuracy': accuracy,
         'n_correct': int(n_correct),
-        'mean_predicted_r5': mean_predicted_r5,
-        'mean_oracle_r5': mean_oracle_r5,
-        'mean_rewrite_r5': mean_rewrite_r5,
-        'improvement_vs_rewrite': mean_predicted_r5 - mean_rewrite_r5,
-        'improvement_pct': (mean_predicted_r5 - mean_rewrite_r5) / mean_rewrite_r5 * 100,
-        'oracle_gap': oracle_gap,
-        'gap_captured': gap_captured,
+        'metrics': metrics_results,
+        # Legacy R@5 fields
+        'mean_predicted_r5': r5['predicted'],
+        'mean_oracle_r5': r5['oracle'],
+        'mean_rewrite_r5': r5['rewrite'],
+        'improvement_vs_rewrite': r5['improvement'],
+        'improvement_pct': r5['improvement_pct'],
+        'oracle_gap': r5['oracle'] - r5['rewrite'],
+        'gap_captured': r5['gap_captured'],
         'strategy_distribution': strategy_counts,
         'accuracy_by_oracle_strategy': correct_by_strategy,
         'mean_confidence': mean_confidence,
@@ -189,22 +212,20 @@ def print_evaluation_report(metrics: dict):
     print(f"\n### Routing Accuracy ###")
     print(f"  Accuracy (match oracle): {metrics['accuracy']:.1%} ({metrics['n_correct']}/{metrics['n_total']})")
     
-    print(f"\n### Retrieval Performance (R@5) ###")
-    print(f"  Baseline (always rewrite): {metrics['mean_rewrite_r5']:.4f}")
-    print(f"  This tagger:               {metrics['mean_predicted_r5']:.4f}")
-    print(f"  Oracle ceiling:            {metrics['mean_oracle_r5']:.4f}")
+    print(f"\n### Retrieval Performance ###")
+    print(f"  {'Metric':<10} {'Baseline':<10} {'Tagger':<10} {'Oracle':<10} {'vs Base':<12} {'Gap %':<8}")
+    print(f"  {'-'*10} {'-'*10} {'-'*10} {'-'*10} {'-'*12} {'-'*8}")
     
-    print(f"\n### Improvement ###")
-    improvement = metrics['improvement_vs_rewrite']
-    improvement_pct = metrics['improvement_pct']
-    gap = metrics['gap_captured']
-    
-    if improvement >= 0:
-        print(f"  vs Rewrite baseline: +{improvement:.4f} (+{improvement_pct:.1f}%)")
+    if 'metrics' in metrics:
+        for metric_name in ['R@5', 'R@10', 'nDCG@5', 'nDCG@10']:
+            m = metrics['metrics'].get(metric_name, {})
+            if m:
+                improvement = m['improvement']
+                sign = '+' if improvement >= 0 else ''
+                print(f"  {metric_name:<10} {m['rewrite']:<10.4f} {m['predicted']:<10.4f} {m['oracle']:<10.4f} {sign}{improvement:<11.4f} {m['gap_captured']:<8.1f}%")
     else:
-        print(f"  vs Rewrite baseline: {improvement:.4f} ({improvement_pct:.1f}%)")
-    
-    print(f"  Oracle gap captured: {gap:.1f}%")
+        # Legacy format
+        print(f"  {'R@5':<10} {metrics['mean_rewrite_r5']:<10.4f} {metrics['mean_predicted_r5']:<10.4f} {metrics['mean_oracle_r5']:<10.4f}")
     
     print(f"\n### Strategy Distribution ###")
     for strategy, count in sorted(metrics['strategy_distribution'].items()):
