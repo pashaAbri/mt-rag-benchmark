@@ -93,7 +93,9 @@ def train_model(X: pd.DataFrame, y: pd.Series, test_size: float = 0.2) -> Dict:
         'feature_importance': feature_importance.to_dict('records'),
         'X_test': X_test,
         'y_test': y_test,
-        'y_pred': y_pred
+        'y_pred': y_pred,
+        'X_train': X_train,
+        'y_train': y_train
     }
 
 
@@ -164,10 +166,19 @@ def main():
         json.dump(results['feature_importance'], f, indent=2)
     print(f"Feature importance saved to: {importance_file}")
     
+    # Save test set indices for consistent evaluation
+    test_indices_file = output_dir / "test_indices.json"
+    test_indices = results['X_test'].index.tolist()
+    with open(test_indices_file, 'w') as f:
+        json.dump(test_indices, f, indent=2)
+    print(f"Test set indices saved to: {test_indices_file}")
+    
     # Save evaluation results
     eval_file = output_dir / "evaluation_results.json"
     eval_data = {
         'accuracy': results['accuracy'],
+        'test_size': len(results['X_test']),
+        'train_size': len(X) - len(results['X_test']),
         'feature_importance': results['feature_importance']
     }
     with open(eval_file, 'w') as f:
