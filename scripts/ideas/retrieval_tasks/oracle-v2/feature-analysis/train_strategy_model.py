@@ -1,0 +1,237 @@
+#!/usr/bin/env python3
+"""
+Train a model to predict only the optimal strategy (lastturn, rewrite, questions).
+
+This script trains a classifier to predict the strategy component independently,
+which is a simpler task than predicting the full retriever+strategy combination.
+"""
+
+import json
+import argparse
+import shutil
+from pathlib import Path
+from typing import Dict, List, Tuple
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+from sklearn.preprocessing import LabelEncoder
+import joblib
+
+
+def prepare_features(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.Series]:
+    """Prepare features and labels for training."""
+    # Select feature columns (exclude metadata and target)
+    exclude_cols = ['task_id', 'conversation_id', 'oracle_combination', 
+                    'oracle_retriever', 'oracle_strategy', 'oracle_score']
+    
+    feature_cols = [col for col in df.columns if col not in exclude_cols]
+    
+    # Handle missing values
+    X = df[feature_cols].copy()
+    
+    # Encode categorical variables
+    label_encoders = {}
+    for col in X.columns:
+        if X[col].dtype == 'object':
+            le = LabelEncoder()
+            X[col] = X[col].fillna('MISSING')
+            X[col] = le.fit_transform(X[col].astype(str))
+            label_encoders[col] = le
+    
+    # Fill numeric missing values with median
+    numeric_cols = X.select_dtypes(include=[np.number]).columns
+    X[numeric_cols] = X[numeric_cols].fillna(X[numeric_cols].median())
+    
+    # Target: oracle_strategy (extract from oracle_combination if needed)
+    if 'oracle_strategy' in df.columns:
+        y = df['oracle_strategy'].copy()
+    else:
+        # Extract strategy from oracle_combination
+        y = df['oracle_combination'].str.split('_').str[1].copy()
+    
+    return X, y, label_encoders, feature_cols
+
+
+def train_model(X: pd.DataFrame, y: pd.Series, test_size: float = 0.2) -> Dict:
+    """Train a strategy prediction model."""
+    # Split data
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=test_size, random_state=42, stratify=y
+    )
+    
+    # Train Random Forest classifier
+    print("Training Random Forest classifier for strategy prediction...")
+    model = RandomForestClassifier(
+        n_estimators=100,
+        max_depth=20,
+        min_samples_split=5,
+        min_samples_leaf=2,
+        random_state=42,
+        n_jobs=-1
+    )
+    
+    model.fit(X_train, y_train)
+    
+    # Evaluate
+    y_pred = model.predict(X_test)
+    accuracy = accuracy_score(y_test, y_pred)
+    
+    print(f"\nModel Performance:")
+    print(f"  Accuracy: {accuracy:.4f} ({accuracy*100:.2f}%)")
+    print(f"\nClassification Report:")
+    print(classification_report(y_test, y_pred))
+    
+    # Confusion matrix
+    cm = confusion_matrix(y_test, y_pred)
+    print(f"\nConfusion Matrix:")
+    print(cm)
+    
+    # Feature importance
+    feature_importance = pd.DataFrame({
+        'feature': X.columns,
+        'importance': model.feature_importances_
+    }).sort_values('importance', ascending=False)
+    
+    print(f"\nTop 10 Most Important Features:")
+    for idx, row in feature_importance.head(10).iterrows():
+        print(f"  {row['feature']}: {row['importance']:.4f}")
+    
+    # Class distribution
+    print(f"\nClass Distribution:")
+    print(f"  Train set:")
+    print(y_train.value_counts().sort_index())
+    print(f"  Test set:")
+    print(y_test.value_counts().sort_index())
+    
+    return {
+        'model': model,
+        'accuracy': accuracy,
+        'feature_importance': feature_importance.to_dict('records'),
+        'X_test': X_test,
+        'y_test': y_test,
+        'y_pred': y_pred,
+        'X_train': X_train,
+        'y_train': y_train,
+        'confusion_matrix': cm.tolist(),
+        'class_report': classification_report(y_test, y_pred, output_dict=True)
+    }
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Train strategy prediction model"
+    )
+    parser.add_argument(
+        "--data-file",
+        type=str,
+        default="combined_data.csv",
+        help="Combined data CSV file"
+    )
+    parser.add_argument(
+        "--output-dir",
+        type=str,
+        default="models-strategy-only",
+        help="Output directory for models"
+    )
+    parser.add_argument(
+        "--test-size",
+        type=float,
+        default=0.2,
+        help="Test set size"
+    )
+    args = parser.parse_args()
+    
+    script_dir = Path(__file__).parent
+    data_file = script_dir / args.data_file
+    output_dir = script_dir / args.output_dir
+    output_dir.mkdir(parents=True, exist_ok=True)
+    
+    print("=" * 80)
+    print("TRAINING STRATEGY PREDICTION MODEL")
+    print("=" * 80)
+    print(f"Data file: {data_file}")
+    print(f"Output directory: {output_dir}")
+    
+    # Load data
+    print("\nLoading data...")
+    df = pd.read_csv(data_file)
+    print(f"  Loaded {len(df)} samples")
+    
+    # Prepare features
+    print("Preparing features...")
+    X, y, label_encoders, feature_cols = prepare_features(df)
+    print(f"  Features: {len(feature_cols)}")
+    print(f"  Target classes: {y.nunique()}")
+    print(f"  Strategy distribution:")
+    print(y.value_counts().sort_index())
+    
+    # Train model
+    results = train_model(X, y, test_size=args.test_size)
+    
+    # Save model
+    model_file = output_dir / "strategy_model.pkl"
+    joblib.dump(results['model'], model_file)
+    print(f"\nModel saved to: {model_file}")
+    
+    # Save label encoders
+    encoders_file = output_dir / "strategy_label_encoders.json"
+    encoders_dict = {col: list(le.classes_) for col, le in label_encoders.items()}
+    # Also save the target label encoder
+    target_le = LabelEncoder()
+    target_le.fit(y)
+    encoders_dict['strategy'] = list(target_le.classes_)
+    with open(encoders_file, 'w') as f:
+        json.dump(encoders_dict, f, indent=2)
+    print(f"Label encoders saved to: {encoders_file}")
+    
+    # Save feature importance
+    importance_file = output_dir / "strategy_feature_importance.json"
+    with open(importance_file, 'w') as f:
+        json.dump(results['feature_importance'], f, indent=2)
+    print(f"Feature importance saved to: {importance_file}")
+    
+    # Save test set indices (use same split as routing model if it exists)
+    # First check main models directory for consistency
+    main_models_dir = script_dir / "models"
+    main_test_indices_file = main_models_dir / "test_indices.json"
+    
+    if main_test_indices_file.exists():
+        print(f"Using test indices from main models directory: {main_test_indices_file}")
+        # Copy to strategy-only directory for reference
+        test_indices_file = output_dir / "test_indices.json"
+        shutil.copy(main_test_indices_file, test_indices_file)
+        print(f"Copied test indices to: {test_indices_file}")
+    else:
+        test_indices = results['X_test'].index.tolist()
+        test_indices_file = output_dir / "test_indices.json"
+        with open(test_indices_file, 'w') as f:
+            json.dump(test_indices, f, indent=2)
+        print(f"Test set indices saved to: {test_indices_file}")
+    
+    # Save evaluation results
+    eval_file = output_dir / "strategy_evaluation_results.json"
+    eval_data = {
+        'accuracy': results['accuracy'],
+        'test_size': len(results['X_test']),
+        'train_size': len(X) - len(results['X_test']),
+        'feature_importance': results['feature_importance'],
+        'confusion_matrix': results['confusion_matrix'],
+        'classification_report': results['class_report']
+    }
+    with open(eval_file, 'w') as f:
+        json.dump(eval_data, f, indent=2)
+    print(f"Evaluation results saved to: {eval_file}")
+    
+    print("\n" + "=" * 80)
+    print("SUMMARY")
+    print("=" * 80)
+    print(f"Strategy Prediction Accuracy: {results['accuracy']:.4f} ({results['accuracy']*100:.2f}%)")
+    print(f"Test set size: {len(results['X_test'])}")
+    print(f"Train set size: {len(results['X_train'])}")
+
+
+if __name__ == "__main__":
+    main()
+
