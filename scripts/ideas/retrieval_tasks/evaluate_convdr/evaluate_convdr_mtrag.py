@@ -8,7 +8,7 @@ from tqdm import tqdm
 from transformers import AutoTokenizer, AutoModel
 
 # Configuration
-CHECKPOINT_PATH = os.path.abspath("./checkpoints/convdr-kd-cast19")
+CHECKPOINT_PATH = os.path.abspath("./scripts/ideas/retrieval_tasks/evaluate_convdr/.checkpoints/convdr-kd-cast19")
 BATCH_SIZE_QUERY = 8
 BATCH_SIZE_DOC = 32
 MAX_SEQ_LENGTH = 512
@@ -173,8 +173,8 @@ def main():
     print(f"Using device: {device}")
     
     print(f"Loading model from {CHECKPOINT_PATH}...")
-    tokenizer = AutoTokenizer.from_pretrained(CHECKPOINT_PATH)
-    model = AutoModel.from_pretrained(CHECKPOINT_PATH)
+    tokenizer = AutoTokenizer.from_pretrained(CHECKPOINT_PATH, local_files_only=True)
+    model = AutoModel.from_pretrained(CHECKPOINT_PATH, local_files_only=True)
     model.to(device)
     model.eval()
     
