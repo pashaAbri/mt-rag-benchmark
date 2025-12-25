@@ -1,13 +1,7 @@
 #!/usr/bin/env python3
 """
-Debug script for ConvDR evaluation - uses small sample for visibility.
-Run locally to diagnose the embedding collapse issue.
-
-KEY INSIGHT: ConvDR uses a teacher-student framework:
-- TEACHER (ANCE): Encodes PASSAGES (frozen, from pre-training)
-- STUDENT (ConvDR): Encodes QUERIES (trained to match teacher on rewrites)
-
-We must use ANCE for passages and ConvDR for queries!
+Debug script comparing ConvDR vs Contriever for retrieval.
+Contriever is designed for zero-shot cross-domain transfer.
 """
 
 import json
@@ -30,15 +24,17 @@ except ImportError as e:
     sys.exit(1)
 
 # Configuration
-# ConvDR (student) - for encoding QUERIES
-CONVDR_CHECKPOINT = str(Path(__file__).parent / ".checkpoints" / "convdr-kd-cast19")
-
-# ANCE (teacher) - for encoding PASSAGES
-# This is the model ConvDR was trained with as teacher
-ANCE_CHECKPOINT = "castorini/ance-msmarco-passage"  # HuggingFace version of ANCE
+CONTRIEVER_CHECKPOINT = "facebook/contriever"  # Zero-shot dense retriever
 NUM_QUERIES = 5
 NUM_PASSAGES = 100  # Small subset for debugging
 MAX_SEQ_LENGTH = 512
+
+
+def mean_pooling(token_embeddings, attention_mask):
+    """Contriever uses mean pooling instead of CLS token."""
+    input_mask_expanded = attention_mask.unsqueeze(-1).expand(token_embeddings.size()).float()
+    return torch.sum(token_embeddings * input_mask_expanded, 1) / torch.clamp(input_mask_expanded.sum(1), min=1e-9)
+
 
 def load_sample_data(domain='clapnq'):
     """Load a small sample of queries and passages."""
@@ -103,15 +99,20 @@ def load_sample_data(domain='clapnq'):
     return queries, passages, passage_ids, qrels
 
 
-def parse_query_text(text, method='raw'):
-    """Parse query text using different methods."""
+def parse_query_text(text, method='last_turn'):
+    """Parse query text - strip role markers."""
     
-    if method == 'raw':
-        # Original: just replace newlines with spaces
-        return text.replace('\n', ' ').strip()
+    if method == 'last_turn':
+        # Only use the last user turn
+        turns = []
+        for turn in text.split('\n'):
+            turn = turn.strip()
+            if turn.startswith('|user|:'):
+                turns.append(turn.replace('|user|:', '').strip())
+        return turns[-1] if turns else text
     
-    elif method == 'strip_markers':
-        # Strip |user|: and |assistant|: markers, join with space
+    elif method == 'all_turns':
+        # Use all user turns joined
         turns = []
         for turn in text.split('\n'):
             turn = turn.strip()
@@ -123,35 +124,13 @@ def parse_query_text(text, method='raw'):
                 turns.append(turn)
         return ' '.join(turns)
     
-    elif method == 'sep_token':
-        # Strip markers and join with [SEP]
-        turns = []
-        for turn in text.split('\n'):
-            turn = turn.strip()
-            if turn.startswith('|user|:'):
-                turns.append(turn.replace('|user|:', '').strip())
-            elif turn.startswith('|assistant|:'):
-                turns.append(turn.replace('|assistant|:', '').strip())
-            elif turn:
-                turns.append(turn)
-        return ' [SEP] '.join(turns)
-    
-    elif method == 'last_turn':
-        # Only use the last user turn
-        turns = []
-        for turn in text.split('\n'):
-            turn = turn.strip()
-            if turn.startswith('|user|:'):
-                turns.append(turn.replace('|user|:', '').strip())
-        return turns[-1] if turns else text
-    
     else:
-        return text
+        return text.replace('\n', ' ').strip()
 
 
 def main():
     print("=" * 60)
-    print("ConvDR Debug Script")
+    print("Contriever Debug Script")
     print("=" * 60)
     
     # Load data first
@@ -164,104 +143,118 @@ def main():
     
     # Show raw queries
     print("\n" + "-" * 40)
-    print("RAW QUERIES:")
+    print("QUERIES:")
     for i, q in enumerate(queries):
         print(f"\n[Query {i+1}] ID: {q['id']}")
-        print(f"  Raw text:\n    {repr(q['text_raw'][:200])}")
+        last_turn = parse_query_text(q['text_raw'], 'last_turn')
+        print(f"  Last turn: {last_turn}")
         
         # Show relevant passages for this query
         if q['id'] in qrels:
             print(f"  Relevant passages: {list(qrels[q['id']])[:3]}...")
     
-    # Load BOTH models
+    # Load Contriever
     print("\n" + "-" * 40)
-    print("Loading models...")
-    print(f"  ConvDR (query encoder): {CONVDR_CHECKPOINT}")
-    print(f"  ANCE (passage encoder): {ANCE_CHECKPOINT}")
+    print(f"Loading Contriever from {CONTRIEVER_CHECKPOINT}...")
     
     try:
-        # ConvDR for queries
-        convdr_tokenizer = AutoTokenizer.from_pretrained(CONVDR_CHECKPOINT)
-        convdr_model = AutoModel.from_pretrained(CONVDR_CHECKPOINT)
-        convdr_model.eval()
-        print("  ✓ ConvDR loaded")
-        
-        # ANCE for passages
-        ance_tokenizer = AutoTokenizer.from_pretrained(ANCE_CHECKPOINT)
-        ance_model = AutoModel.from_pretrained(ANCE_CHECKPOINT)
-        ance_model.eval()
-        print("  ✓ ANCE loaded")
+        tokenizer = AutoTokenizer.from_pretrained(CONTRIEVER_CHECKPOINT)
+        model = AutoModel.from_pretrained(CONTRIEVER_CHECKPOINT)
+        model.eval()
+        print("✓ Contriever loaded successfully")
     except Exception as e:
-        print(f"  ❌ Failed to load models: {e}")
+        print(f"❌ Failed to load model: {e}")
         return
     
-    def encode_with_model(texts, tokenizer, model):
-        """Encode texts with a specific model."""
+    def encode_with_contriever(texts):
+        """Encode texts with Contriever (uses mean pooling)."""
         inputs = tokenizer(texts, padding=True, truncation=True, 
                           max_length=MAX_SEQ_LENGTH, return_tensors="pt")
         with torch.no_grad():
             outputs = model(**inputs)
-            embeddings = outputs.last_hidden_state[:, 0, :].numpy()
-        return embeddings
+            # Contriever uses mean pooling, not CLS
+            embeddings = mean_pooling(outputs.last_hidden_state, inputs['attention_mask'])
+        return embeddings.numpy()
     
-    # First, test the WRONG way (what we were doing before)
+    # Parse queries
+    parsed_queries_last = [parse_query_text(q['text_raw'], 'last_turn') for q in queries]
+    parsed_queries_all = [parse_query_text(q['text_raw'], 'all_turns') for q in queries]
+    
+    # Encode
     print("\n" + "-" * 40)
-    print("TEST 1: WRONG WAY (ConvDR for both queries AND passages)")
-    print("-" * 40)
+    print("Encoding with Contriever...")
     
-    parsed_queries = [parse_query_text(q['text_raw'], 'last_turn') for q in queries]
-    query_embeddings_wrong = encode_with_model(parsed_queries, convdr_tokenizer, convdr_model)
-    passage_embeddings_wrong = encode_with_model(passages[:20], convdr_tokenizer, convdr_model)
+    query_embeddings_last = encode_with_contriever(parsed_queries_last)
+    query_embeddings_all = encode_with_contriever(parsed_queries_all)
+    passage_embeddings = encode_with_contriever(passages)
+    
+    print(f"  Query embeddings shape: {query_embeddings_last.shape}")
+    print(f"  Passage embeddings shape: {passage_embeddings.shape}")
     
     from numpy.linalg import norm
     
-    # Query-query similarity
-    sims = []
-    for i in range(len(query_embeddings_wrong)):
-        for j in range(i+1, len(query_embeddings_wrong)):
-            sim = np.dot(query_embeddings_wrong[i], query_embeddings_wrong[j]) / (
-                norm(query_embeddings_wrong[i]) * norm(query_embeddings_wrong[j]))
-            sims.append(sim)
-    print(f"  Query-query similarity: {np.mean(sims):.4f} (high = BAD)")
-    
-    # Retrieval
-    print(f"\n  Top-3 retrieved per query:")
-    for i, (q, q_emb) in enumerate(zip(queries, query_embeddings_wrong)):
-        scores = np.dot(passage_embeddings_wrong, q_emb)
-        top_indices = np.argsort(scores)[::-1][:3]
-        print(f"\n  Q{i+1}: {parsed_queries[i][:50]}...")
-        for rank, idx in enumerate(top_indices):
-            pid = passage_ids[idx]
-            is_rel = "✓" if q['id'] in qrels and pid in qrels[q['id']] else ""
-            print(f"    {rank+1}. {pid[:40]}... ({scores[idx]:.1f}) {is_rel}")
-    
-    # Now test the CORRECT way
+    # Test with last turn only
     print("\n" + "-" * 40)
-    print("TEST 2: CORRECT WAY (ConvDR for queries, ANCE for passages)")
+    print("TEST 1: Last turn only")
     print("-" * 40)
     
-    query_embeddings_correct = encode_with_model(parsed_queries, convdr_tokenizer, convdr_model)
-    passage_embeddings_correct = encode_with_model(passages[:20], ance_tokenizer, ance_model)
-    
-    # Query-query similarity (should be similar since same query encoder)
+    # Query-query similarity
     sims = []
-    for i in range(len(query_embeddings_correct)):
-        for j in range(i+1, len(query_embeddings_correct)):
-            sim = np.dot(query_embeddings_correct[i], query_embeddings_correct[j]) / (
-                norm(query_embeddings_correct[i]) * norm(query_embeddings_correct[j]))
+    for i in range(len(query_embeddings_last)):
+        for j in range(i+1, len(query_embeddings_last)):
+            sim = np.dot(query_embeddings_last[i], query_embeddings_last[j]) / (
+                norm(query_embeddings_last[i]) * norm(query_embeddings_last[j]))
+            sims.append(sim)
+    print(f"  Query-query similarity: {np.mean(sims):.4f}")
+    print(f"  (Lower = better discrimination between queries)")
+    
+    # Retrieval
+    print(f"\n  Top-5 retrieved per query:")
+    hits = 0
+    total = 0
+    for i, (q, q_emb) in enumerate(zip(queries, query_embeddings_last)):
+        scores = np.dot(passage_embeddings, q_emb)
+        top_indices = np.argsort(scores)[::-1][:5]
+        print(f"\n  Q{i+1}: {parsed_queries_last[i][:50]}...")
+        for rank, idx in enumerate(top_indices):
+            pid = passage_ids[idx]
+            is_rel = "✓ RELEVANT" if q['id'] in qrels and pid in qrels[q['id']] else ""
+            if is_rel:
+                hits += 1
+            print(f"    {rank+1}. {pid[:40]}... ({scores[idx]:.2f}) {is_rel}")
+        total += 1
+    
+    print(f"\n  Hits in top-5: {hits}/{total*5}")
+    
+    # Test with all turns
+    print("\n" + "-" * 40)
+    print("TEST 2: All conversation turns")
+    print("-" * 40)
+    
+    # Query-query similarity
+    sims = []
+    for i in range(len(query_embeddings_all)):
+        for j in range(i+1, len(query_embeddings_all)):
+            sim = np.dot(query_embeddings_all[i], query_embeddings_all[j]) / (
+                norm(query_embeddings_all[i]) * norm(query_embeddings_all[j]))
             sims.append(sim)
     print(f"  Query-query similarity: {np.mean(sims):.4f}")
     
     # Retrieval
-    print(f"\n  Top-3 retrieved per query:")
-    for i, (q, q_emb) in enumerate(zip(queries, query_embeddings_correct)):
-        scores = np.dot(passage_embeddings_correct, q_emb)
-        top_indices = np.argsort(scores)[::-1][:3]
-        print(f"\n  Q{i+1}: {parsed_queries[i][:50]}...")
+    print(f"\n  Top-5 retrieved per query:")
+    hits = 0
+    for i, (q, q_emb) in enumerate(zip(queries, query_embeddings_all)):
+        scores = np.dot(passage_embeddings, q_emb)
+        top_indices = np.argsort(scores)[::-1][:5]
+        print(f"\n  Q{i+1}: {parsed_queries_all[i][:50]}...")
         for rank, idx in enumerate(top_indices):
             pid = passage_ids[idx]
-            is_rel = "✓" if q['id'] in qrels and pid in qrels[q['id']] else ""
-            print(f"    {rank+1}. {pid[:40]}... ({scores[idx]:.1f}) {is_rel}")
+            is_rel = "✓ RELEVANT" if q['id'] in qrels and pid in qrels[q['id']] else ""
+            if is_rel:
+                hits += 1
+            print(f"    {rank+1}. {pid[:40]}... ({scores[idx]:.2f}) {is_rel}")
+    
+    print(f"\n  Hits in top-5: {hits}/{total*5}")
     
     print("\n" + "=" * 60)
     print("Debug complete!")
@@ -270,4 +263,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
