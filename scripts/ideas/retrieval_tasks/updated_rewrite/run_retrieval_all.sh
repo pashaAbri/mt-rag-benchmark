@@ -1,5 +1,8 @@
 #!/bin/bash
-# Run ELSER retrieval with Aggressive Rewrite queries
+# Run ELSER retrieval with updated rewrite queries
+# Usage: bash run_retrieval_all.sh [prompt_name]
+
+PROMPT_NAME=${1:-aggressive}
 
 # Ensure env vars are set
 if [ -z "$ES_URL" ]; then
@@ -10,19 +13,24 @@ if [ -z "$ES_API_KEY" ]; then
 fi
 
 DOMAINS=("clapnq" "fiqa" "govt" "cloud")
-QUERY_FILE_DIR="scripts/ideas/retrieval_tasks/updated_rewrite/results"
-OUTPUT_DIR="scripts/ideas/retrieval_tasks/updated_rewrite/results"
+BASE_DIR="scripts/ideas/retrieval_tasks/updated_rewrite/results"
+QUERY_FILE_DIR="${BASE_DIR}/${PROMPT_NAME}"
+OUTPUT_DIR="${BASE_DIR}/${PROMPT_NAME}"
+
+echo "Running Retrieval for Strategy: ${PROMPT_NAME}"
+echo "Input/Output Directory: ${OUTPUT_DIR}"
+echo ""
 
 mkdir -p "$OUTPUT_DIR"
 
 for domain in "${DOMAINS[@]}"; do
-    echo "Running ELSER on $domain with Aggressive Rewrite..."
+    echo "Running ELSER on $domain with ${PROMPT_NAME} Rewrite..."
     
     # Check if query file exists
-    QUERY_FILE="${QUERY_FILE_DIR}/${domain}_aggressive_rewrite.jsonl"
+    QUERY_FILE="${QUERY_FILE_DIR}/${domain}_${PROMPT_NAME}_rewrite.jsonl"
     if [ ! -f "$QUERY_FILE" ]; then
         echo "Error: Query file not found: $QUERY_FILE"
-        echo "Please run run_aggressive_rewrite.py first."
+        echo "Please run run_aggressive_rewrite.py --prompt_name ${PROMPT_NAME} first."
         continue
     fi
 
@@ -33,7 +41,7 @@ for domain in "${DOMAINS[@]}"; do
         --domain "$domain" \
         --query_type "rewrite" \
         --query_file "$QUERY_FILE" \
-        --output_file "${OUTPUT_DIR}/elser_${domain}_aggressive_rewrite.jsonl" \
+        --output_file "${OUTPUT_DIR}/elser_${domain}_${PROMPT_NAME}_rewrite.jsonl" \
         --top_k 10 \
         --delay 0.5
     

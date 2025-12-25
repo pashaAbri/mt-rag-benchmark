@@ -21,6 +21,7 @@ from typing import Dict, List, Any, Tuple
 from concurrent.futures import ThreadPoolExecutor
 from tqdm import tqdm
 import anthropic
+from prompts import get_rewrite_prompt
 
 # Add parent directory to path to import common utils if needed
 sys.path.append(str(Path(__file__).parent.parent.parent.parent))
@@ -29,7 +30,7 @@ sys.path.append(str(Path(__file__).parent.parent.parent.parent))
 DOMAINS = ['clapnq', 'cloud', 'fiqa', 'govt']
 
 # Output directory
-OUTPUT_DIR = Path(__file__).parent / "results"
+BASE_OUTPUT_DIR = Path(__file__).parent / "results"
 
 def get_llm_client():
     """Initialize Anthropic client."""
@@ -108,10 +109,11 @@ def aggressive_rewrite_query(
     client,
     current_query: str,
     history: List[Dict[str, str]],
-    model: str = "claude-3-5-sonnet-20241022"  # Using 3.5 Sonnet (newest available via API usually) or specified model
+    model: str = "claude-3-5-sonnet-20241022",
+    prompt_name: str = "aggressive"
 ) -> str:
     """
-    Rewrite the query using the aggressive strategy.
+    Rewrite the query using the specified strategy.
     """
     # If no history (first turn), return original query
     if not history:
@@ -129,31 +131,16 @@ def aggressive_rewrite_query(
     
     history_text = "\n".join(history_lines)
     
-    # Aggressive Rewrite Prompt
-    system_prompt = """You are a Search Engine Query Optimizer. Your task is to rewrite the last user utterance into a fully standalone search query that will retrieve relevant documents.
-
-Rules:
-1. **RESOLVE ALL PRONOUNS**: Replace every pronoun (it, he, she, they, this, that) with the specific entity name it refers to from the conversation history.
-2. **INJECT MISSING CONTEXT**: If the query implies a topic discussed earlier (e.g., "what about security?"), explicitly add the topic (e.g., "IBM Cloud security features").
-3. **SPECIFY GENERIC TERMS**: Replace generic words like "the series", "the act", "the company" with their full proper names (e.g., "The Office US", "The Affordable Care Act").
-4. **IGNORE NATURALNESS**: The output does not need to sound like a natural conversation. It must be an effective keyword-rich search query.
-5. **NEVER OUTPUT THE SAME QUERY**: If the user's query relies on *any* previous context, you MUST modify it.
-
-Output ONLY the rewritten query text, nothing else."""
-
-    user_message = f"""Input Conversation:
-{history_text}
-User: {current_query}
-
-Output ONLY the rewritten query text."""
+    # Get prompts
+    prompts = get_rewrite_prompt(prompt_name, history_text, current_query)
 
     try:
         message = client.messages.create(
             model=model,
             max_tokens=200,
             temperature=0.0,
-            system=system_prompt,
-            messages=[{"role": "user", "content": user_message}]
+            system=prompts["system"],
+            messages=[{"role": "user", "content": prompts["user"]}]
         )
         rewritten = message.content[0].text.strip()
         
@@ -176,7 +163,10 @@ def process_domain(
     args
 ):
     """Process all tasks for a domain."""
-    output_file = OUTPUT_DIR / f"{domain}_aggressive_rewrite.jsonl"
+    output_dir = BASE_OUTPUT_DIR / args.prompt_name
+    output_dir.mkdir(parents=True, exist_ok=True)
+    
+    output_file = output_dir / f"{domain}_{args.prompt_name}_rewrite.jsonl"
     
     # Check if exists
     if args.skip_existing and output_file.exists():
@@ -226,7 +216,8 @@ def process_domain(
             llm_client, 
             current_query, 
             history, 
-            model=args.llm_model
+            model=args.llm_model,
+            prompt_name=args.prompt_name
         )
         
         return {
@@ -256,7 +247,7 @@ def process_domain(
             f.write(json.dumps(output_obj) + "\n")
             
     # Save debug version with original query
-    debug_file = OUTPUT_DIR / f"{domain}_aggressive_rewrite_debug.jsonl"
+    debug_file = output_dir / f"{domain}_{args.prompt_name}_rewrite_debug.jsonl"
     with open(debug_file, 'w', encoding='utf-8') as f:
         for res in results:
             f.write(json.dumps(res) + "\n")
@@ -270,6 +261,8 @@ def main():
                         help="Skip if output file already exists")
     parser.add_argument("--workers", type=int, default=10,
                         help="Number of concurrent workers for LLM calls")
+    parser.add_argument("--prompt_name", type=str, default="aggressive",
+                        help="Name of the prompt strategy (used for output directory name)")
     args = parser.parse_args()
     
     # Check for Claude 4.5 specifically if requested
@@ -281,15 +274,16 @@ def main():
          pass
 
     print("="*80)
-    print("Aggressive Query Rewrite Strategy")
+    print(f"Query Rewrite Strategy: {args.prompt_name}")
     print("="*80)
     print(f"LLM model: {args.llm_model}")
     print(f"Concurrent workers: {args.workers}")
     print(f"Domains: {args.domains}")
+    print(f"Output Directory: {BASE_OUTPUT_DIR / args.prompt_name}")
     print("="*80)
     
-    # Create output directory
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    # Create base output directory
+    BASE_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     
     # Initialize client
     print("Initializing LLM client...")
