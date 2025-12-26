@@ -1,6 +1,13 @@
-# Two-Stage BM25 + BGE Reranking Experiment
+# Two-Stage Retrieval Experiments
 
-This experiment evaluates a two-stage retrieval approach that combines the efficiency of BM25 lexical search with the semantic understanding of BGE dense reranking.
+This experiment evaluates two-stage retrieval approaches that combine BM25 lexical search with neural reranking.
+
+## Variants
+
+| Script | Stage 1 | Stage 2 | Notes |
+|--------|---------|---------|-------|
+| `run_two_stage_retrieval.py` | BM25 (local) | BGE (local) | Fully local, no network |
+| `run_bm25_elser_rerank.py` | BM25 (local) | ELSER (ES cloud) | Requires ES credentials |
 
 ## Hypothesis
 
@@ -40,19 +47,37 @@ We compare against single-stage baselines:
 
 ## Usage
 
-### Run all experiments:
+### BM25 + BGE (Local)
+
 ```bash
+# Run all experiments
 python run_two_stage_retrieval.py
-```
 
-### Run for specific domain/query type:
-```bash
+# Run specific domain/query type
 python run_two_stage_retrieval.py --domain clapnq --query_type rewrite
+
+# Skip existing results
+python run_two_stage_retrieval.py --skip-existing
 ```
 
-### Run all combinations with shell script:
+### BM25 + ELSER (Requires ES Cloud)
+
 ```bash
-./run_all_experiments.sh
+# Ensure ES credentials are set in .env file:
+# ES_URL=https://your-es-cloud-url
+# ES_API_KEY=your-api-key
+
+# Run all experiments
+python run_bm25_elser_rerank.py
+
+# Run specific domain/query type
+python run_bm25_elser_rerank.py --domain clapnq --query_type rewrite
+
+# Adjust rate limiting delay (default 0.3s)
+python run_bm25_elser_rerank.py --delay 0.5
+
+# Skip existing results
+python run_bm25_elser_rerank.py --skip-existing
 ```
 
 ### Compare with baselines:
