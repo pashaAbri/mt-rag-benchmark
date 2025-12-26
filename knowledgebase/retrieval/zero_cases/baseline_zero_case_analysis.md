@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document analyzes **cases where all three baseline retrieval strategies fail to retrieve any relevant documents** (R@1 = R@3 = R@5 = R@10 = 0). These represent the "hardest" cases in the MT-RAG benchmark where standard approaches completely fail.
+This document analyzes **cases where all three query formulation strategies (Last Turn, Query Rewrite, Questions) fail to retrieve any relevant documents using ELSER** (R@1 = R@3 = R@5 = R@10 = 0). These represent the "hardest" cases in the MT-RAG benchmark where standard ELSER-based approaches completely fail.
 
 **Source**: Analysis from `scripts/ideas/retrieval_tasks/oracle-v2/new-strategies/`
 
@@ -10,14 +10,14 @@ This document analyzes **cases where all three baseline retrieval strategies fai
 
 ## Key Findings Summary
 
-| Metric                          | Value                                                        |
-| ------------------------------- | ------------------------------------------------------------ |
-| **Total Zero-Score Cases**      | 98 out of 777 tasks (12.6%)                                  |
-| **Retrievers Analyzed**         | ELSER, BM25, BGE                                             |
-| **Strategies Analyzed**         | Last Turn, Query Rewrite, Questions                          |
-| **Complete Failure Rate**       | All 9 retriever-strategy combinations return 0 relevant docs |
-| **MonoT5 Helps Zero Cases?**    | ❌ **No** — 0% recovery rate                                  |
-| **MonoT5 Hurts Some Cases?**    | ⚠️ **Yes** — 38 cases went from positive → zero              |
+| Metric                       | Value                                                    |
+| ---------------------------- | -------------------------------------------------------- |
+| **Total Zero-Score Cases**   | 98 out of 777 tasks (12.6%)                              |
+| **Retriever Analyzed**       | ELSER                                                    |
+| **Strategies Analyzed**      | Last Turn, Query Rewrite, Questions                      |
+| **Complete Failure Rate**    | All 3 ELSER strategy combinations return 0 relevant docs |
+| **MonoT5 Helps Zero Cases?** | **No** — 0% recovery rate                                |
+| **MonoT5 Hurts Some Cases?** | **Yes** — 38 cases went from positive → zero             |
 
 ---
 
@@ -240,10 +240,10 @@ Despite being zero-score cases, **88.8% are marked as ANSWERABLE**:
 
 **Short answer: No.** MonoT5 3-strategy fusion with reranking **cannot recover any of the 98 zero-score cases**.
 
-| Metric                        | Value           |
-| ----------------------------- | --------------- |
-| Zero cases helped by MonoT5   | **0 (0.0%)**    |
-| Zero cases still at zero      | **98 (100.0%)** |
+| Metric                      | Value           |
+| --------------------------- | --------------- |
+| Zero cases helped by MonoT5 | **0 (0.0%)**    |
+| Zero cases still at zero    | **98 (100.0%)** |
 
 #### Why Reranking Cannot Help
 
@@ -268,25 +268,25 @@ Zero-Score Case Pipeline:
 
 **Yes.** While MonoT5 provides a net positive effect overall, it **hurts 25.9% of cases** and even **creates 38 new zero-score cases** from previously successful retrievals.
 
-| Impact Category              | Count | Percentage |
-| ---------------------------- | ----- | ---------- |
-| **HELPED** (nDCG@5 > +0.01)  | 257   | 33.1%      |
-| **HURT** (nDCG@5 < -0.01)    | 201   | 25.9%      |
-| **SAME** (within ±0.01)      | 319   | 41.1%      |
+| Impact Category             | Count | Percentage |
+| --------------------------- | ----- | ---------- |
+| **HELPED** (nDCG@5 > +0.01) | 257   | 33.1%      |
+| **HURT** (nDCG@5 < -0.01)   | 201   | 25.9%      |
+| **SAME** (within ±0.01)     | 319   | 41.1%      |
 
 #### Overall Net Effect
 
-| Metric                          | Value                  |
-| ------------------------------- | ---------------------- |
-| Average nDCG@5 change           | **+0.027** (positive)  |
-| Average improvement (helped)    | +0.284 nDCG@5          |
-| Average degradation (hurt)      | -0.258 nDCG@5          |
-| **Cases that BECAME zero**      | **38** (from positive) |
+| Metric                       | Value                  |
+| ---------------------------- | ---------------------- |
+| Average nDCG@5 change        | **+0.027** (positive)  |
+| Average improvement (helped) | +0.284 nDCG@5          |
+| Average degradation (hurt)   | -0.258 nDCG@5          |
+| **Cases that BECAME zero**   | **38** (from positive) |
 
 #### Worst Hurt Cases (Perfect → Zero)
 
-| Task ID                               | Baseline nDCG@5 | Reranked nDCG@5 | Δ      |
-| ------------------------------------- | --------------- | --------------- | ------ |
+| Task ID                                 | Baseline nDCG@5 | Reranked nDCG@5 | Δ      |
+| --------------------------------------- | --------------- | --------------- | ------ |
 | `694e275f1a01ad0e8ac448ad809f7930<::>7` | 1.000           | 0.000           | -1.000 |
 | `fd99b316e5e64f19ff938598aea9b285<::>9` | 1.000           | 0.000           | -1.000 |
 | `1be66272113492407e814eaf21a761d4<::>4` | 1.000           | 0.000           | -1.000 |
@@ -311,7 +311,7 @@ Zero-Score Case Pipeline:
 
 3. **38 cases were destroyed** by fusion+reranking (went from successful to zero)
 
-4. **Strategy selection** may be more valuable than fusion — knowing *when* to use each strategy could avoid the hurt cases
+4. **Strategy selection** may be more valuable than fusion — knowing _when_ to use each strategy could avoid the hurt cases
 
 ---
 

@@ -20,8 +20,6 @@ Two-stage retrieval pipeline:
 
 ## Comprehensive Results
 
-_Note: Best result per domain in **bold**. ✅ = beats Baseline ELSER (targeted)._
-
 | Domain     | Method                      | nDCG@1    | nDCG@3    | nDCG@5    | nDCG@10      | R@1       | R@3       | R@5       | R@10      |
 | :--------- | :-------------------------- | :-------- | :-------- | :-------- | :----------- | :-------- | :-------- | :-------- | :-------- |
 | **ClapNQ** | BM25@500+ELSER (std)        | 0.519     | 0.467     | 0.507     | 0.563        | 0.210     | 0.422     | 0.542     | 0.669     |
@@ -59,46 +57,3 @@ _Note: Best result per domain in **bold**. ✅ = beats Baseline ELSER (targeted)
 |            | Baseline BGE (targeted)     | 0.388     | 0.389     | 0.413     | 0.455        | 0.175     | 0.377     | 0.449     | 0.546     |
 |            | Baseline BM25 (std)         | 0.274     | 0.275     | 0.295     | 0.342        | 0.120     | 0.270     | 0.328     | 0.436     |
 |            | Baseline BM25 (targeted)    | 0.279     | 0.276     | 0.326     | 0.362        | 0.122     | 0.268     | 0.381     | 0.466     |
-
----
-
-## Summary: nDCG@10 Comparison
-
-| Domain     | BM25+ELSER (targeted) | Baseline ELSER (targeted) | Gap       |
-| :--------- | :-------------------- | :------------------------ | :-------- |
-| **ClapNQ** | 0.603                 | **0.611**                 | -1.3%     |
-| **Cloud**  | 0.402                 | **0.425**                 | -5.4%     |
-| **FiQA**   | 0.429                 | **0.446**                 | -3.8%     |
-| **Govt**   | 0.536                 | **0.541**                 | -0.9%     |
-
----
-
-## Key Findings
-
-1. **Baseline ELSER (targeted) is the overall best** across all domains
-
-2. **BM25@500+ELSER (targeted) is competitive**:
-   - Within 1-2% on ClapNQ and Govt
-   - Larger gap on Cloud (-5.4%) and FiQA (-3.8%)
-
-3. **Targeted rewrite consistently helps** all retrievers except:
-   - Cloud ELSER (std > targeted)
-   - FiQA BM25 (minimal difference)
-
-4. **Trade-offs for two-stage approach**:
-   - ✅ Reduced ES API calls (filter query, not full corpus)
-   - ✅ BM25 stage is local/fast
-   - ❌ 1-5% quality gap vs full ELSER
-   - ❌ Still requires ES cloud for ELSER stage
-
----
-
-## Change Log
-
-| Date       | Change                                                      |
-| :--------- | :---------------------------------------------------------- |
-| 2024-12-25 | Initial results with BM25@50 and @200                       |
-| 2024-12-25 | Added BM25@500 results                                      |
-| 2024-12-25 | Added Targeted Rewrite - beats Baseline ELSER on 2 domains! |
-| 2024-12-25 | Consolidated into single comprehensive table                |
-| 2024-12-25 | Added targeted rewrite results for all baseline retrievers  |
