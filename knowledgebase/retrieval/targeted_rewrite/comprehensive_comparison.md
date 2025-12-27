@@ -67,56 +67,64 @@ This document provides a complete comparison of all four experimental conditions
 
 ---
 
-## Sonnet Filtered Context Filtering Statistics
+## Context Filtering Statistics
 
 **Note**: Statistics are for the **777 evaluable tasks** (tasks with relevance judgments).
 The full pipeline processed 842 tasks, but 65 unanswerable queries have no qrels.
 
-| Metric                              | Value     |
-| ----------------------------------- | --------- |
-| **Total evaluable tasks**           | 777       |
-| **Turn 1 (no history)**             | 102       |
-| **Multi-turn queries (Turn > 1)**   | 675       |
-| **Average history turns available** | 3.98      |
-| **Average turns SELECTED**          | 1.99      |
-| **Average turns FILTERED OUT**      | 1.99      |
-| **Average retention ratio**         | **59.6%** |
-| **Average filtering ratio**         | **40.4%** |
+### Overview
+
+| Metric                              | Sonnet Filtered | Mixtral Filtered |
+| ----------------------------------- | --------------- | ---------------- |
+| **Total evaluable tasks**           | 777             | 777              |
+| **Turn 1 (no history)**             | 102             | 102              |
+| **Multi-turn queries (Turn > 1)**   | 675             | 675              |
+| **Average history turns available** | 3.98            | 3.98             |
+| **Average turns SELECTED**          | 1.99            | 1.95             |
+| **Average turns FILTERED OUT**      | 1.99            | 2.03             |
+| **Average retention ratio**         | **59.6%**       | **59.1%**        |
+| **Average filtering ratio**         | **40.4%**       | **40.9%**        |
+
+The slight differences between Sonnet and Mixtral occur because filtering is based on semantic similarity between history turns and the LLM-generated response—different LLMs produce different responses, leading to different similarity scores.
 
 ## Key Findings
 
 ### Filtering Applied
 
-- **66.7%** of multi-turn queries had some context filtered out (450 of 675)
-- **33.3%** kept all context (225 of 675, mostly Turn 2 queries with only 1 history turn, always included per `include_last_turn=True`)
-- **0%** had all context filtered (because last turn is always kept)
+| Metric                      | Sonnet Filtered | Mixtral Filtered |
+| --------------------------- | --------------- | ---------------- |
+| Some context filtered       | 450 (66.7%)     | 442 (65.5%)      |
+| All context kept            | 225 (33.3%)     | 233 (34.5%)      |
+| All context filtered        | 0 (0%)          | 0 (0%)           |
+
+Queries that kept all context are mostly Turn 2 queries with only 1 history turn, which is always included per `include_last_turn=True`. No queries had all context filtered because the last turn is always kept.
 
 ### Retention Rate Distribution
 
-| Retention           | Cases | Percentage |
-| ------------------- | ----- | ---------- |
-| 100% (no filtering) | 225   | 33.3%      |
-| 75-99%              | 35    | 5.2%       |
-| 50-75%              | 147   | 21.8%      |
-| 25-50%              | 154   | 22.8%      |
-| 0-25%               | 114   | 16.9%      |
+| Retention           | Sonnet Cases | Sonnet % | Mixtral Cases | Mixtral % |
+| ------------------- | ------------ | -------- | ------------- | --------- |
+| 100% (no filtering) | 225          | 33.3%    | 233           | 34.5%     |
+| 75-99%              | 35           | 5.2%     | 30            | 4.4%      |
+| 50-75%              | 147          | 21.8%    | 133           | 19.7%     |
+| 25-50%              | 154          | 22.8%    | 155           | 23.0%     |
+| 0-25%               | 114          | 16.9%    | 124           | 18.4%     |
 
 ### Filtering by Conversation Depth
 
 As conversations get longer, more context gets filtered:
 
-| History Depth | Cases | Avg Selected | Retention          |
-| ------------- | ----- | ------------ | ------------------ |
-| 1 turn        | 106   | 1.0          | 100% (always kept) |
-| 2 turns       | 103   | 1.4          | 68.4%              |
-| 3 turns       | 99    | 1.7          | 56.2%              |
-| 4 turns       | 96    | 2.2          | 54.7%              |
-| 5 turns       | 87    | 2.6          | 52.9%              |
-| 6 turns       | 80    | 2.5          | 42.1%              |
-| 7 turns       | 65    | 2.7          | 38.7%              |
-| 8 turns       | 32    | 2.5          | 31.6%              |
+| History Depth | Cases | Sonnet Avg Sel | Sonnet Ret | Mixtral Avg Sel | Mixtral Ret |
+| ------------- | ----- | -------------- | ---------- | --------------- | ----------- |
+| 1 turn        | 106   | 1.0            | 100.0%     | 1.0             | 100.0%      |
+| 2 turns       | 103   | 1.4            | 68.4%      | 1.4             | 69.9%       |
+| 3 turns       | 99    | 1.7            | 56.2%      | 1.7             | 55.9%       |
+| 4 turns       | 96    | 2.2            | 54.7%      | 2.1             | 52.1%       |
+| 5 turns       | 87    | 2.6            | 52.9%      | 2.6             | 52.4%       |
+| 6 turns       | 80    | 2.5            | 42.1%      | 2.5             | 42.3%       |
+| 7 turns       | 65    | 2.7            | 38.7%      | 2.6             | 37.4%       |
+| 8 turns       | 32    | 2.5            | 31.6%      | 2.3             | 28.5%       |
 
-**Key insight**: On average, only ~2 turns are selected regardless of conversation length, suggesting the semantic similarity filtering is quite aggressive in keeping only the most relevant context.
+**Key insight**: On average, only ~2 turns are selected regardless of conversation length, suggesting the semantic similarity filtering is quite aggressive in keeping only the most relevant context. Both LLMs show similar filtering patterns, with Mixtral being slightly more aggressive (lower retention at deeper depths).
 
 ## Source
 
