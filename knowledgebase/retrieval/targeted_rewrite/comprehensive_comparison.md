@@ -64,7 +64,59 @@ This document provides a complete comparison of all four experimental conditions
 |        | **Mixtral Filtered** | 0.438  | 0.417  | 0.470  | 0.511     |
 |        | **Sonnet Full**      | 0.433  | 0.432  | 0.478  | 0.528     |
 |        | **Sonnet Filtered**  | 0.448  | 0.439  | 0.484  | 0.528     |
+
 ---
+
+## Sonnet Filtered Context Filtering Statistics
+
+**Note**: Statistics are for the **777 evaluable tasks** (tasks with relevance judgments).
+The full pipeline processed 842 tasks, but 65 unanswerable queries have no qrels.
+
+| Metric                              | Value     |
+| ----------------------------------- | --------- |
+| **Total evaluable tasks**           | 777       |
+| **Turn 1 (no history)**             | 102       |
+| **Multi-turn queries (Turn > 1)**   | 675       |
+| **Average history turns available** | 3.98      |
+| **Average turns SELECTED**          | 1.99      |
+| **Average turns FILTERED OUT**      | 1.99      |
+| **Average retention ratio**         | **59.6%** |
+| **Average filtering ratio**         | **40.4%** |
+
+## Key Findings
+
+### Filtering Applied
+
+- **66.7%** of multi-turn queries had some context filtered out (450 of 675)
+- **33.3%** kept all context (225 of 675, mostly Turn 2 queries with only 1 history turn, always included per `include_last_turn=True`)
+- **0%** had all context filtered (because last turn is always kept)
+
+### Retention Rate Distribution
+
+| Retention           | Cases | Percentage |
+| ------------------- | ----- | ---------- |
+| 100% (no filtering) | 225   | 33.3%      |
+| 75-99%              | 35    | 5.2%       |
+| 50-75%              | 147   | 21.8%      |
+| 25-50%              | 154   | 22.8%      |
+| 0-25%               | 114   | 16.9%      |
+
+### Filtering by Conversation Depth
+
+As conversations get longer, more context gets filtered:
+
+| History Depth | Cases | Avg Selected | Retention          |
+| ------------- | ----- | ------------ | ------------------ |
+| 1 turn        | 106   | 1.0          | 100% (always kept) |
+| 2 turns       | 103   | 1.4          | 68.4%              |
+| 3 turns       | 99    | 1.7          | 56.2%              |
+| 4 turns       | 96    | 2.2          | 54.7%              |
+| 5 turns       | 87    | 2.6          | 52.9%              |
+| 6 turns       | 80    | 2.5          | 42.1%              |
+| 7 turns       | 65    | 2.7          | 38.7%              |
+| 8 turns       | 32    | 2.5          | 31.6%              |
+
+**Key insight**: On average, only ~2 turns are selected regardless of conversation length, suggesting the semantic similarity filtering is quite aggressive in keeping only the most relevant context.
 
 ## Source
 
