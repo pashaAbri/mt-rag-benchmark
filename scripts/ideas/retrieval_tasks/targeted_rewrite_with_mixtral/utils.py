@@ -41,7 +41,7 @@ MIXTRAL_CONFIG = {
     "model_name": "mixtral_8x7b_instruct",
     "api_model_id": "mistralai/Mixtral-8x7B-Instruct-v0.1",
     "api_endpoint": "https://api.together.xyz/v1/chat/completions",
-    "max_tokens": 200,
+    "max_tokens": 2048,  # High limit to avoid truncation
     "temperature": 0.0,
     "top_p": 1.0,
 }
@@ -328,7 +328,7 @@ def generate_response_mixtral(
     payload = {
         "model": MIXTRAL_CONFIG['api_model_id'],
         "messages": [{"role": "user", "content": prompt}],
-        "max_tokens": 200,
+        "max_tokens": 2048,  # High limit to avoid truncation
         "temperature": 0.0,
         "top_p": 1.0,
     }

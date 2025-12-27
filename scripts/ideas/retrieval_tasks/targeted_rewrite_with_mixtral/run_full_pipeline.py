@@ -189,7 +189,7 @@ def process_conversation(
             "turn_id": turn_id,
             "original_query": current_query,
             "rewritten_query": rewritten,
-            "generated_response": generated_response[:200],  # Truncate for analysis
+            "generated_response": generated_response,
             **filter_analysis
         })
         
